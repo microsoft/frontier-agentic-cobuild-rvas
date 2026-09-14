@@ -1,0 +1,40 @@
+{
+  "description": "Example surface verification plan. Replace the request and response markers with values that match your deployed surface and approved test corpus.",
+  "request": {
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "input": "For a documented hardship request on day 31 to 45, what does a supervisor record?"
+    }
+  },
+  "callers": {
+    "anonymous": {
+      "expected_statuses": [
+        401,
+        403
+      ]
+    },
+    "authorized": {
+      "expected_statuses": [
+        200
+      ],
+      "response_must_contain": [
+        "RET-SUP-2026-01"
+      ]
+    },
+    "restricted": {
+      "expected_statuses": [
+        200,
+        403
+      ],
+      "response_must_not_contain": [
+        "RET-SUP-2026-01",
+        "supervisor exception playbook",
+        "hardship evidence",
+        "decision rationale"
+      ]
+    }
+  }
+}
