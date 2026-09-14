@@ -1,0 +1,14 @@
+{
+  "document_id": "rfq-1001",
+  "document_class": "request_for_quote",
+  "routing_decision": "route_procurement",
+  "requires_human_review": false,
+  "review_reasons": [],
+  "fields": {
+    "buyer": "sample organization Workshop Supplies",
+    "request_id": "RFQ-1001",
+    "requested_delivery_date": "2030-06-15",
+    "supplier": "Fabrikam Components"
+  },
+  "source_sha256": "26f0dcbfb957c7daa05c066ea5dd3a9bb2577638a0ab164c2b54f63dcd46c264"
+}
