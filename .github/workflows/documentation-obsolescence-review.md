@@ -13,9 +13,6 @@ permissions:
   issues: read
   actions: read
 
-sandbox:
-  agent:
-    sudo: false
 
 tools:
   cache-memory: true
