@@ -25,15 +25,16 @@ description: Co-build customer AI scenarios through architectural decisions and 
 
 ## Choose a scenario
 
-**Decompose the customer's use case before selecting sessions.** Map each part to lessons or
-reference activities, recording what needs adapting and what the kit does not cover. One customer
-scenario can draw on several tracks. If the opportunity is unclear, start with
+These playbooks provide architectural guidance. They are not standard solutions to build and
+deploy. Bring your business idea, break it into the capabilities it needs, and use the relevant
+lessons and reference activities as building blocks. Record the work the kit does not cover. If the
+opportunity is unclear, start with
 [Idea Forge]({{ '/idea-forge' | relative_url }}).
 
 | Scenario | Use it when | Start |
 |---|---|---|
-| AI Grounding / IQ | People need answers they can trust, based on content they are allowed to see. | [Open AI Grounding / IQ]({{ '/scenario.html?id=ai-grounding' | relative_url }}) |
 | Content Understanding and Document Workflow | A team needs to turn documents into structured data without removing human review. | [Open Content Understanding]({{ '/scenario.html?id=content-understanding-document-workflow' | relative_url }}) |
+| AI Grounding / IQ | People need answers they can trust, based on content they are allowed to see. | [Open AI Grounding / IQ]({{ '/scenario.html?id=ai-grounding' | relative_url }}) |
 | Avatar Scenario | A team wants an avatar-led experience whose script, approvals, and accessibility can be checked. | [Open Avatar Scenario]({{ '/scenario.html?id=avatar-scenario' | relative_url }}) |
 
 These are the initial tracks. Plan sessions from the mapping and keep lesson prerequisites.
