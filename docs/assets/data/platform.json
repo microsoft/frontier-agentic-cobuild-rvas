@@ -722,6 +722,223 @@
       "readme_path": "assets/data/scenarios/avatar-scenario/README.md",
       "slides_path": "assets/data/scenarios/avatar-scenario/slides.md",
       "accelerator_path": "assets/data/scenarios/avatar-scenario/accelerator/README.md"
+    },
+    {
+      "id": "operational-agents",
+      "name": "Operational Agents",
+      "tagline": "Carry out bounded work with approved tools and evidence of the result.",
+      "order": 4,
+      "customer_outcome": "A team can control an agent's tool execution, approve exact changes, and recover interrupted work without blindly repeating effects.",
+      "maturity": "initial",
+      "level": "guided",
+      "duration_minutes": 0,
+      "stage": "customer-build",
+      "owner": "RVAS field team",
+      "decision_prompts": [
+        "Which task is bounded enough to delegate, and when must the agent stop?",
+        "Which live facts and tool permissions does the task need?",
+        "Where does task state belong, and what must survive a restart?",
+        "Who approves an exact change, and how will the system reject stale approval?",
+        "How will an operator establish whether an interrupted operation committed?"
+      ],
+      "lessons": [
+        {
+          "id": "task-boundary",
+          "title": "Define the task boundary",
+          "path": "lessons/01-task-boundary.md",
+          "reused_with": [
+            "action-tools"
+          ],
+          "sequence": 1,
+          "content_path": "assets/data/scenarios/operational-agents/lessons/01-task-boundary.md",
+          "lesson_path": "lesson.html?scenario=operational-agents&lesson=task-boundary"
+        },
+        {
+          "id": "foundation",
+          "title": "Choose and verify the execution foundation",
+          "path": "lessons/02-foundation.md",
+          "reused_with": [
+            "foundations"
+          ],
+          "sequence": 2,
+          "content_path": "assets/data/scenarios/operational-agents/lessons/02-foundation.md",
+          "lesson_path": "lesson.html?scenario=operational-agents&lesson=foundation"
+        },
+        {
+          "id": "tool-contracts",
+          "title": "Define the tool contracts",
+          "path": "lessons/03-tool-contracts.md",
+          "reused_with": [
+            "action-tools"
+          ],
+          "sequence": 3,
+          "content_path": "assets/data/scenarios/operational-agents/lessons/03-tool-contracts.md",
+          "lesson_path": "lesson.html?scenario=operational-agents&lesson=tool-contracts"
+        },
+        {
+          "id": "task-state",
+          "title": "Separate context from task state",
+          "path": "lessons/04-task-state.md",
+          "reused_with": [
+            "ai-grounding"
+          ],
+          "sequence": 4,
+          "content_path": "assets/data/scenarios/operational-agents/lessons/04-task-state.md",
+          "lesson_path": "lesson.html?scenario=operational-agents&lesson=task-state"
+        },
+        {
+          "id": "bounded-execution",
+          "title": "Bound the execution loop",
+          "path": "lessons/05-bounded-execution.md",
+          "reused_with": [
+            "action-tools"
+          ],
+          "sequence": 5,
+          "content_path": "assets/data/scenarios/operational-agents/lessons/05-bounded-execution.md",
+          "lesson_path": "lesson.html?scenario=operational-agents&lesson=bounded-execution"
+        },
+        {
+          "id": "approval",
+          "title": "Approve an exact operation",
+          "path": "lessons/06-approval.md",
+          "reused_with": [
+            "action-tools"
+          ],
+          "sequence": 6,
+          "content_path": "assets/data/scenarios/operational-agents/lessons/06-approval.md",
+          "lesson_path": "lesson.html?scenario=operational-agents&lesson=approval"
+        },
+        {
+          "id": "recovery",
+          "title": "Recover without replaying uncertain writes",
+          "path": "lessons/07-recovery.md",
+          "reused_with": [
+            "operational-readiness"
+          ],
+          "sequence": 7,
+          "content_path": "assets/data/scenarios/operational-agents/lessons/07-recovery.md",
+          "lesson_path": "lesson.html?scenario=operational-agents&lesson=recovery"
+        },
+        {
+          "id": "evaluate-operate",
+          "title": "Prove behavior and prepare to operate",
+          "path": "lessons/08-evaluate-operate.md",
+          "reused_with": [
+            "agent-evaluation",
+            "observability"
+          ],
+          "sequence": 8,
+          "content_path": "assets/data/scenarios/operational-agents/lessons/08-evaluate-operate.md",
+          "lesson_path": "lesson.html?scenario=operational-agents&lesson=evaluate-operate"
+        }
+      ],
+      "build_modules": [
+        {
+          "id": "task-boundary",
+          "title": "Define scope and refusal",
+          "summary": "Bind a task to explicit record IDs and reject requests outside that scope.",
+          "outcome": "An out-of-scope request fails without changing a record.",
+          "implementation_paths": [
+            "accelerator/sample-data/out-of-scope.json",
+            "accelerator/runtime.py"
+          ],
+          "sequence": 1,
+          "activity_path": ""
+        },
+        {
+          "id": "foundation",
+          "title": "Select offline or live execution",
+          "summary": "Run deterministic local exercises or connect the same engine to a configured Foundry agent.",
+          "outcome": "The selected execution mode produces evidence without silently switching modes.",
+          "activity_id": "foundations",
+          "implementation_paths": [
+            "accelerator/cli.py",
+            "accelerator/foundry_client.py",
+            "accelerator/main.bicep",
+            "accelerator/scripts/deploy.sh"
+          ],
+          "sequence": 2,
+          "activity_path": "activity.html?id=foundations"
+        },
+        {
+          "id": "tool-contracts",
+          "title": "Validate tool requests",
+          "summary": "Define narrow schemas and a synthetic backend with conditional updates and operation IDs.",
+          "outcome": "Invalid arguments and duplicate operation conflicts are rejected.",
+          "implementation_paths": [
+            "accelerator/tools.py",
+            "accelerator/tests/test_runtime.py"
+          ],
+          "sequence": 3,
+          "activity_path": ""
+        },
+        {
+          "id": "task-state",
+          "title": "Persist task progress",
+          "summary": "Keep task progress separate from live records and load it in a fresh process.",
+          "outcome": "Pending approval and prior evidence survive a CLI restart.",
+          "implementation_paths": [
+            "accelerator/state.py",
+            "accelerator/cli.py"
+          ],
+          "sequence": 4,
+          "activity_path": ""
+        },
+        {
+          "id": "bounded-execution",
+          "title": "Enforce execution limits",
+          "summary": "Apply persisted call and time budgets around the shared execution loop.",
+          "outcome": "Exhausted work stops instead of receiving a fresh budget on resume.",
+          "implementation_paths": [
+            "accelerator/runtime.py",
+            "accelerator/validate.py"
+          ],
+          "sequence": 5,
+          "activity_path": ""
+        },
+        {
+          "id": "approval",
+          "title": "Bind approval to a proposal",
+          "summary": "Require a separate operator decision tied to the task, exact arguments, and expected record version.",
+          "outcome": "Only an unchanged approved proposal can reach the write boundary.",
+          "activity_id": "advanced-action-tools",
+          "implementation_paths": [
+            "accelerator/runtime.py",
+            "accelerator/tools.py"
+          ],
+          "sequence": 6,
+          "activity_path": "activity.html?id=advanced-action-tools"
+        },
+        {
+          "id": "recovery",
+          "title": "Reconcile interrupted operations",
+          "summary": "Interrupt the process around a tool commit and look up the operation before deciding what happened.",
+          "outcome": "A committed operation is recovered once; an unproven result remains unresolved.",
+          "implementation_paths": [
+            "accelerator/runtime.py",
+            "accelerator/tests/test_runtime.py"
+          ],
+          "sequence": 7,
+          "activity_path": ""
+        },
+        {
+          "id": "evaluate-operate",
+          "title": "Inspect behavioral evidence",
+          "summary": "Run failure cases and distinguish local runtime checks from live model and customer acceptance.",
+          "outcome": "A behavioral report and a named list of remaining pilot requirements.",
+          "activity_id": "advanced-evaluation-redteam",
+          "implementation_paths": [
+            "accelerator/validate.py",
+            "accelerator/sample-data/expected.json"
+          ],
+          "sequence": 8,
+          "activity_path": "activity.html?id=advanced-evaluation-redteam"
+        }
+      ],
+      "asset_base": "assets/data/scenarios/operational-agents/",
+      "readme_path": "assets/data/scenarios/operational-agents/README.md",
+      "slides_path": "assets/data/scenarios/operational-agents/slides.md",
+      "accelerator_path": "assets/data/scenarios/operational-agents/accelerator/README.md"
     }
   ],
   "activities": [

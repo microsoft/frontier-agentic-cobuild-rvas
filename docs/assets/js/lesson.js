@@ -143,6 +143,11 @@
         return;
       }
 
+      if (`${scenario.asset_base || ''}${resolved}` === scenario.accelerator_path) {
+        link.href = scenarioGuideUrl(scenario.id, 'accelerator') + (hash ? `#${hash}` : '');
+        return;
+      }
+
       const activityMatch = resolved.match(/^activities\/([^/]+)\/(README|FACILITATOR)\.md$/i);
       if (activityMatch && activityIds.has(activityMatch[1])) {
         link.href = FP.activityUrl(activityMatch[1]) + (hash ? `#${hash}` : '');

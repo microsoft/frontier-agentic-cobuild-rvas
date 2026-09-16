@@ -274,6 +274,10 @@ function transformMarkdown(markdown, activity) {
     .replace(/\]\(\.\.\/\.\.\/resources\//g, '](resources/')
     .replace(/\]\(\.\.\/\.\.\/docs\/activities\/([^)]+)\.md\)/g, (_m, slug) => `](activity.html?id=${slug})`)
     .replace(/\]\(\.\.\/([a-z0-9-]+)\/README\.md\)/g, (_m, slug) => `](activity.html?id=${slug})`)
+    .replace(/\]\(\.\.\/\.\.\/scenarios\/([^/)#]+)\/README\.md(#[^)]+)?\)/g, (match, folder, hash = '') => {
+      const scenario = loadScenarioRegistry().find((item) => path.basename(item.root) === folder);
+      return scenario ? `](scenario.html?id=${encodeURIComponent(scenario.id)}${hash})` : match;
+    })
     .replace(/\]\(assets\//g, `](${activityAssetBase}`)
     .replace(/\]\(([^):?#]+\.(?:py|sh|js|mjs|cjs|ps1))(#[^)]+)?\)/g, (_m, target, hash = '') => {
       if (!sourceDir) return _m;
@@ -407,11 +411,22 @@ function detectScenarioProblems(scenarios) {
     return problems;
 }
 
-function copyScenarioAssets(scenarios) {
-    const outputRoot = path.join(OUT_DATA_DIR, 'scenarios');
+function publishScenarioAsset(source) {
+    const name = path.basename(source);
+    if (['__pycache__', '.venv', 'venv', 'node_modules', '.git', '.azure',
+      '.foundry', '.runtime', '.pytest_cache', 'logs', 'journals'].includes(name)) return false;
+    if (/^\.env(?:\.|$)/u.test(name) && name !== '.env.sample') return false;
+    if (/^\.deployment/u.test(name)) return false;
+    return !/\.(?:py[co]|db|sqlite3?)(?:-(?:wal|shm|journal))?$|\.log$|\.journal$/u.test(name);
+}
+
+function copyScenarioAssets(scenarios, outputRoot = path.join(OUT_DATA_DIR, 'scenarios')) {
     fs.rmSync(outputRoot, { recursive: true, force: true });
     for (const scenario of scenarios) {
-      fs.cpSync(scenario.root, path.join(outputRoot, scenario.id), { recursive: true });
+      fs.cpSync(scenario.root, path.join(outputRoot, scenario.id), {
+        recursive: true,
+        filter: publishScenarioAsset,
+      });
       const readmePath = path.join(outputRoot, scenario.id, 'README.md');
       if (fs.existsSync(readmePath)) {
         const lessonByPath = new Map((scenario.lessons || []).map((lesson) => [lesson.path, lesson]));
@@ -585,4 +600,7 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { detectMissingReferences, detectScenarioProblems, loadScenarioRegistry, transformMarkdown };
+module.exports = {
+  copyScenarioAssets, detectMissingReferences, detectScenarioProblems,
+  loadScenarioRegistry, transformMarkdown,
+};

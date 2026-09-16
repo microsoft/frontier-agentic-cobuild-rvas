@@ -232,12 +232,12 @@
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const md = stripRedundantActivityMetadata(await res.text());
       FP.renderMd(md, body);
-      ensureGuideAnchors(body);
+      FP.ensureGuideAnchors(body);
       removeDuplicateGuideTitle(body);
       body.querySelectorAll('.next-panel').forEach((el) => el.remove());
       FP.applyGuideAccordions(body);
       renderActivityPager(body, c, allActivities);
-      scrollToGuideAnchor(body);
+      FP.scrollToGuideAnchor(body);
       FP.initDiagramZoom(body);
     } catch (e) {
       body.innerHTML = `<p class="text-dim" style="font-size:.875rem">Could not load guide: ${FP.esc(e.message)}</p>`;
@@ -272,26 +272,6 @@
       return output.join('\n');
     }
 
-    function ensureGuideAnchors(container) {
-      container.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((heading) => {
-        if (!heading.id) heading.id = guideHeadingId(heading.textContent || '');
-      });
-    }
-
-    function guideHeadingId(value) {
-      return String(value || '')
-        .trim()
-        .toLowerCase()
-        .replace(/[^\w\s-]/gu, '')
-        .replace(/\s+/gu, '-');
-    }
-
-    function scrollToGuideAnchor(container) {
-      const id = decodeURIComponent(window.location.hash.slice(1));
-      if (!id) return;
-      const target = container.querySelector('#' + CSS.escape(id));
-      if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
-    }
   }
 
   function removeDuplicateGuideTitle(container) {

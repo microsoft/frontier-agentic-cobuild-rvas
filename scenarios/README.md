@@ -4,8 +4,9 @@ A scenario is a playbook for co-building a customer's AI use case. It breaks dow
 decisions and guides implementation with reusable building blocks. Lessons include observable
 checks, and source-controlled slides support customer discussions.
 
-The initial tracks cover grounding, document workflows, and avatar experiences. They are starting
-points for customer-specific work. Add new tracks when the existing patterns do not fit.
+The initial tracks cover grounding, document workflows, avatar experiences, and controlled agent
+execution. They are starting points for customer-specific work. Add new tracks when the existing
+patterns do not fit.
 
 **State what the playbook implements and what the customer team must add.** An accelerator supplies
 sample assets and code, with optional demo deployment templates. It is not a complete customer

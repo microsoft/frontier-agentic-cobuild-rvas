@@ -15,13 +15,14 @@ AI scenario**. Each playbook breaks down the architectural decisions and guides 
 reusable building blocks. Teams adapt the code and work through the relevant lessons in their
 approved environment. Customer-facing slides support the design discussions.
 
-**The initial tracks cover three reusable patterns:**
+**The initial tracks cover four reusable patterns:**
 
 | Track | What you build |
 |---|---|
 | [AI Grounding / IQ](https://microsoft.github.io/frontier-ai-starter-kit-rvas/scenario.html?id=ai-grounding) | An assistant that answers from approved content and respects access boundaries. |
 | [Content Understanding and Document Workflow](https://microsoft.github.io/frontier-ai-starter-kit-rvas/scenario.html?id=content-understanding-document-workflow) | A document workflow with evidence-backed extraction and human review. |
 | [Avatar Scenario](https://microsoft.github.io/frontier-ai-starter-kit-rvas/scenario.html?id=avatar-scenario) | An avatar-led experience with approved content and publication controls. |
+| [Operational Agents](https://microsoft.github.io/frontier-ai-starter-kit-rvas/scenario.html?id=operational-agents) | Bounded tool execution with exact approvals and evidence for recovering interrupted work. |
 
 These are starting points, not a complete catalog of AI use cases. **A customer's scenario may
 combine parts from several tracks.** New tracks can follow the same contribution contract.

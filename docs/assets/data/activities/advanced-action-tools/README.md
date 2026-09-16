@@ -17,6 +17,10 @@ Actions have consequences. Build a human-approval loop so the agent *asks before
 the requested function, arguments, human decision, result, and request correlation with each action.
 Other activities reuse this pattern; they do not define a competing action policy.
 
+For work that must retain approval across a restart or reconcile an interrupted write, continue
+with the [Operational Agents scenario](scenario.html?id=operational-agents).
+It adds a runnable, domain-neutral local reference without changing this activity's approval policy.
+
 You will wire a provided backend — you do not build it. The Action Tools REST API ships in
 [`scripts/action-backend/`](https://github.com/microsoft/frontier-ai-starter-kit-rvas/blob/main/scripts/action-backend/README.md) and exposes three action
 endpoints your `FunctionTool` callables hit directly:

@@ -65,7 +65,7 @@ jobs:
         run: npm run build
 
       - name: Validate scenarios and build regressions
-        run: npm run validate:scenarios && npm test
+        run: npm run validate:scenarios && npm test && npm run test:scenarios
 
       - name: Verify generated guides are committed
         run: |
@@ -89,7 +89,7 @@ jobs:
         run: npm run build
 
       - name: Validate scenarios and build regressions
-        run: npm run validate:scenarios && npm test
+        run: npm run validate:scenarios && npm test && npm run test:scenarios
 
       - name: Verify generated guides are committed
         run: |
@@ -175,7 +175,7 @@ jobs:
         working-directory: preview
 
       - name: Validate preview scenarios and build regressions
-        run: npm run validate:scenarios && npm test
+        run: npm run validate:scenarios && npm test && npm run test:scenarios
         working-directory: preview
 
       - name: Verify generated preview assets are committed

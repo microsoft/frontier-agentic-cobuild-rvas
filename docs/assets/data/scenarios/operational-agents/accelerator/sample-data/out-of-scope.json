@@ -1,0 +1,3 @@
+[
+  {"calls": [{"name": "inspect_record", "arguments": {"record_id": "record-002"}, "call_id": "read-1"}], "text": ""}
+]

@@ -133,6 +133,25 @@
     }
   };
 
+  FP.ensureGuideAnchors = function (container) {
+    container.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((heading) => {
+      if (!heading.id) {
+        heading.id = String(heading.textContent || '')
+          .trim()
+          .toLowerCase()
+          .replace(/[^\w\s-]/gu, '')
+          .replace(/\s+/gu, '-');
+      }
+    });
+  };
+
+  FP.scrollToGuideAnchor = function (container) {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id) return;
+    const target = container.querySelector('#' + CSS.escape(id));
+    if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+  };
+
   FP.applyGuideAccordions = function (container, options) {
     if (!container) return;
     const settings = { collapseOptionChapters: false, ...(options || {}) };

@@ -20,6 +20,7 @@
       'content-understanding-document-workflow',
       'ai-grounding',
       'avatar-scenario',
+      'operational-agents',
     ];
     const orderedScenarios = scenarioOrder
       .map((id) => scenarios.find((scenario) => scenario.id === id))

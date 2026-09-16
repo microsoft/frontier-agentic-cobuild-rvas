@@ -46,6 +46,7 @@ its parts to the available material. The initial tracks are:
 - AI Grounding / IQ
 - Content Understanding and Document Workflow
 - Avatar Scenario
+- Operational Agents
 
 These tracks are reusable starting points, not a complete catalog of AI use cases. Add tracks as
 customer needs justify them, using the same contribution contract.

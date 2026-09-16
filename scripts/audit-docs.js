@@ -381,6 +381,7 @@ function auditLessonRouting(scenario, lesson, activityIds, failures) {
 
     const resolved = resolveRelativePath(lesson.path, target);
     if (lessonPaths.has(resolved)) continue;
+    if (`${scenario.asset_base || ''}${resolved}` === scenario.accelerator_path) continue;
 
     const activityMatch = resolved.match(/^activities\/([^/]+)\/(?:README|FACILITATOR)\.md$/iu);
     if (activityMatch && activityIds.has(activityMatch[1])) continue;
