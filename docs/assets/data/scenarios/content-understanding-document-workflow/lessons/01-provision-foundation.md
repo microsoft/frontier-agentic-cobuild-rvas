@@ -116,7 +116,7 @@ az deployment group create \
 
 ### Option B — `azd up` (kit root infra)
 
-Use when you want the shared footprint every activity in the kit uses. It provisions Foundry +
+Use when you already use the root deployment. It provisions Foundry +
 project + a **chat** deployment + AI Search + observability, but **not** the document storage or the
 embedding deployment. Add them before module 2:
 
@@ -145,7 +145,7 @@ Then append `AZURE_AI_EMBEDDING_DEPLOYMENT_NAME`, `AZURE_STORAGE_ACCOUNT_NAME`,
 `AZURE_DOCUMENTS_CONTAINER_NAME`, `AZURE_QUARANTINE_CONTAINER_NAME`,
 `AZURE_CONTENT_UNDERSTANDING_ENDPOINT`, and `AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT` to the `.env`.
 
-This module maps to **Foundations Step 1** — see [the canonical activity](../../../activities/foundations/README.md).
+Continue with this scenario's environment contract; no separate setup exercise is needed.
 
 ### Option C — Foundry portal / Content Understanding Studio
 

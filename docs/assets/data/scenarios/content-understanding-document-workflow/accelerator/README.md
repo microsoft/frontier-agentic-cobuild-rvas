@@ -20,9 +20,10 @@ The lessons also use `jq` and `curl`. Sign in with an Azure user account in the 
 subscription. You need permission to create resources and role assignments, plus model quota
 in the chosen region. The deployment script does not support service-principal sign-in.
 
-**This package contains infrastructure and teaching fixtures, not a runnable workflow.**
-The lessons leave the intake checks, normalizer, review queue, and deployment adapter for you
-to implement. The default Bicep deployment does not configure Content Understanding model
+**This package supplies infrastructure, an invoice normalizer, and a result-comparison gate.**
+The lessons show how to use them with actual extraction results. Customer intake controls,
+the review UI, and the posting/deployment adapters still need integration.
+The default Bicep deployment does not configure Content Understanding model
 mappings. Check the selected analyzer's supported models and
 [configure its deployment mappings](https://learn.microsoft.com/azure/ai-services/content-understanding/concepts/models-deployments)
 before calling it.
@@ -98,18 +99,21 @@ Each lesson's **Verify** section gives the command and signal for that module.
 - Keep source evidence with every result. Reject values without usable grounding.
 - Surface missing values and low-confidence results for review. Do not guess.
 - Preserve the original expected result when a reviewer corrects a value.
-- Prompt Flow is outside this curriculum. Use agents, tools, and MCP for the handoff patterns.
+- Prompt Flow is outside this scenario. Use agents and tools for agent-based handoffs.
 
-## Related implementation activities
+## Continue in the scenario
 
-- [Foundations](../../../activities/foundations/README.md) for provisioning and the `.env` contract.
-- [Document Workflow](../../../activities/extra-document-workflow/README.md) for extraction
-  implementation.
-- [Action Tools](../../../activities/advanced-action-tools/README.md) for the governed handoff.
-- [Evaluation & Red Teaming](../../../activities/advanced-evaluation-redteam/README.md) and
-  [Tracing & Observability](../../../activities/advanced-tracing-observability/README.md) for
-  quality gates and traces.
-- [Deploy as a Hosted Agent](../../../activities/advanced-deploy-hosted-agent/README.md) for the
-  pilot endpoint.
+[Module 4](../lessons/04-typed-extraction.md) runs `normalize.py` over a completed invoice
+analysis. [Module 6](../lessons/06-prove-and-observe.md) uses `evaluate_results.py` against
+reviewed labels. Both keep runtime outputs in the ignored `.runtime/` directory.
+
+Run their offline behavioral checks without Azure:
+
+```bash
+python3 -m unittest discover -s scenarios/content-understanding/accelerator -p test_normalize.py
+```
+
+These exercise normalization and comparison logic; they do not establish live extraction
+accuracy, reviewer authentication, or a customer-system handoff.
 
 See [solution.md](solution.md) for the facilitator reference and integration boundaries.

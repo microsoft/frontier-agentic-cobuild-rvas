@@ -10,10 +10,12 @@ import tempfile
 import unittest
 from pathlib import Path
 from types import ModuleType, SimpleNamespace
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 import _shared
 import compare_models
+import capture_answers
+import evaluate_answers
 import grounded_answer
 import probe_permissions
 import probe_surface
@@ -115,6 +117,111 @@ class GroundedAnswerTests(unittest.TestCase):
                     None, 1.0, failures,
                 )
                 self.assertEqual(bool(failures), expected_failure)
+
+
+class AnswerEvaluationTests(unittest.TestCase):
+    def setUp(self):
+        self.cases = [
+            {"id": "policy", "expected_behavior": "answer", "expected_citations": ["POLICY"],
+             "forbidden_citations": ["OLD"]},
+            {"id": "denied", "expected_behavior": "refuse"},
+        ]
+        self.responses = [
+            {"id": "policy", "response": "Approved answer [POLICY]"},
+            {"id": "denied", "response": compare_models.ABSTENTION},
+        ]
+
+    def test_actual_responses_pass_and_regressions_fail(self):
+        self.assertTrue(evaluate_answers.evaluate(self.cases, self.responses)["passed"])
+        self.responses[0]["response"] = "An unsupported answer"
+        self.assertFalse(evaluate_answers.evaluate(self.cases, self.responses)["passed"])
+        self.assertTrue(evaluate_answers.evaluate(self.cases, self.responses, 0.5)["passed"])
+
+    def test_boundary_failures_cannot_be_averaged_away(self):
+        for index, text in ((0, "[POLICY] [OLD]"), (1, "The restricted document exists.")):
+            with self.subTest(text=text):
+                rows = [dict(row) for row in self.responses]
+                rows[index]["response"] = text
+                self.assertFalse(evaluate_answers.evaluate(self.cases, rows, 0.5)["passed"])
+
+    def test_missing_duplicate_unknown_and_empty_responses_fail(self):
+        invalid = [
+            [], self.responses[:1], self.responses + self.responses[:1],
+            self.responses + [{"id": "unknown", "response": "x"}],
+            [self.responses[0], {"id": "denied", "response": ""}],
+        ]
+        for rows in invalid:
+            with self.subTest(rows=rows), self.assertRaises(ValueError):
+                evaluate_answers.evaluate(self.cases, rows)
+
+    def test_invalid_thresholds_and_datasets_fail(self):
+        for minimum in (float("nan"), float("inf"), 0, -1, 1.1):
+            with self.subTest(minimum=minimum), self.assertRaises(ValueError):
+                evaluate_answers.evaluate(self.cases, self.responses, minimum)
+        for cases in ([], self.cases + self.cases[:1], [{"id": "x", "expected_behavior": "other"}]):
+            with self.subTest(cases=cases), self.assertRaises(ValueError):
+                evaluate_answers.evaluate(cases, self.responses)
+
+
+class AnswerCaptureTests(unittest.TestCase):
+    def test_captures_actual_retrieval_answers_for_only_the_selected_role(self):
+        identity = ModuleType("azure.identity")
+        identity.DefaultAzureCredential = MagicMock()
+        knowledgebases = ModuleType("azure.search.documents.knowledgebases")
+        client = MagicMock()
+        knowledgebases.KnowledgeBaseRetrievalClient = MagicMock(return_value=client)
+        cases = [
+            {"id": "coordinator", "question": "policy?", "role_groups": ["returns-coordinators"]},
+            {"id": "supervisor", "question": "private?", "role_groups": ["returns-supervisors"]},
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "answers.jsonl"
+            with patch.dict("sys.modules", {
+                "azure.identity": identity, "azure.search.documents.knowledgebases": knowledgebases,
+            }), patch.dict(os.environ, {"PROBE_USER_TOKEN": "test-token"}), patch.object(
+                capture_answers, "load_env",
+                return_value={"AZURE_SEARCH_ENDPOINT": "https://unused.invalid", "AZURE_KNOWLEDGE_BASE_NAME": "kb"},
+            ), patch.object(capture_answers, "load_golden_cases", return_value=cases), patch.object(
+                capture_answers, "answer", return_value="actual service answer",
+            ) as invoke, patch("sys.argv", ["capture", "--target", "retrieval", "--role",
+                                          "returns-coordinators", "--output", str(output)]), contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(capture_answers.main(), 0)
+            rows = [json.loads(line) for line in output.read_text().splitlines()]
+            self.assertEqual(len(rows), 1)
+            self.assertEqual(rows[0]["id"], "coordinator")
+            self.assertEqual(rows[0]["response"], "actual service answer")
+            self.assertNotIn("test-token", output.read_text())
+            invoke.assert_called_once_with(client, "policy?", "test-token")
+            client.close.assert_called_once()
+
+    def test_agent_capture_pins_version_and_does_not_fall_back(self):
+        identity = ModuleType("azure.identity")
+        identity.DefaultAzureCredential = MagicMock()
+        projects = ModuleType("azure.ai.projects")
+        project = MagicMock()
+        projects.AIProjectClient = MagicMock(return_value=project)
+        openai = project.get_openai_client.return_value
+        openai.responses.create.return_value.output_text = "actual agent answer"
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "answers.jsonl"
+            with patch.dict("sys.modules", {"azure.identity": identity, "azure.ai.projects": projects}), patch.object(
+                capture_answers, "load_env", return_value={
+                    "AZURE_AI_PROJECT_ENDPOINT": "https://unused.invalid",
+                    "AZURE_FOUNDRY_AGENT_NAME": "scenario-agent", "AZURE_FOUNDRY_AGENT_VERSION": "7",
+                },
+            ), patch.object(capture_answers, "load_golden_cases", return_value=[
+                {"id": "one", "question": "policy?", "role_groups": ["returns-coordinators"]},
+            ]), patch("sys.argv", ["capture", "--target", "agent", "--role", "returns-coordinators",
+                                  "--output", str(output)]), contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(capture_answers.main(), 0)
+                reference = openai.responses.create.call_args.kwargs["extra_body"]["agent_reference"]
+                self.assertEqual(reference["version"], "7")
+                self.assertEqual(json.loads(output.read_text())["response"], "actual agent answer")
+                output.unlink()
+                openai.responses.create.side_effect = RuntimeError("service unavailable")
+                with self.assertRaisesRegex(RuntimeError, "service unavailable"):
+                    capture_answers.main()
+                self.assertFalse(output.exists())
 
 
 class FixtureTests(unittest.TestCase):

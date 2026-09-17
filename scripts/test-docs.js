@@ -6,8 +6,8 @@ const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
 const vm = require('node:vm');
-const { sourceDocs, resolveScript, auditScriptReferences } = require('./audit-docs');
-const { copyScenarioAssets, detectMissingReferences, detectScenarioProblems, loadScenarioRegistry, transformMarkdown } = require('../docs/build');
+const { sourceDocs, resolveScript, auditScriptReferences, auditRetiredReferences } = require('./audit-docs');
+const { copyScenarioAssets, detectScenarioProblems, loadScenarioRegistry, scenarioOutput } = require('../docs/build');
 const ROOT = path.resolve(__dirname, '..');
 
 test('guide anchors retain explicit IDs and support section deep links', () => {
@@ -43,7 +43,6 @@ test('documentation audit includes every scenario and the shared guidance', () =
   }
   assert.ok(files.has('PRODUCT.md'));
   assert.ok(files.has('scenarios/README.md'));
-  assert.ok(files.has('resources/sample-data/university-faq/README.md'));
 });
 
 test('root-relative scenario scripts resolve from nested guides, with or without ./', () => {
@@ -71,35 +70,80 @@ test('scenario validation rejects missing, reordered and mismatched module IDs',
   }
 });
 
-test('generated activity guides route activity and source-code links', () => {
-  const output = transformMarkdown(
-    '[Code](validate.py)\n[Activity](../foundations/README.md)\n[Environment](../../.env.sample)',
-    { id: 'advanced-action-tools', participant: 'activities/advanced-action-tools/README.md' },
-  );
-  assert.ok(output.includes('/blob/main/activities/advanced-action-tools/validate.py'));
-  assert.ok(output.includes('activity.html?id=foundations'));
-  assert.ok(output.includes('/blob/main/.env.sample'));
-});
-
-test('activity links to scenarios use manifest IDs rather than folder names', () => {
-  const output = transformMarkdown(
-    '[Operations](../../scenarios/operational-agents/README.md)\n' +
-    '[Avatar](../../scenarios/avatar-onboarding/README.md#working-contract)',
-    { id: 'advanced-action-tools', participant: 'activities/advanced-action-tools/README.md' },
-  );
-  assert.ok(output.includes('](scenario.html?id=operational-agents)'));
-  assert.ok(output.includes('](scenario.html?id=avatar-scenario#working-contract)'));
-});
-
-test('build rejects a missing guide before writing generated output', () => {
-  assert.deepEqual(detectMissingReferences([
-    { id: 'example', participant: 'README.md' },
-  ], [], []), []);
-  for (const participant of [undefined, 'activities/does-not-exist/README.md']) {
-    const errors = detectMissingReferences([{ id: 'example', participant }], [], []);
-    assert.equal(errors.length, 1);
-    assert.match(errors[0], /missing or empty guide/);
+test('scenario modules cannot declare activity prerequisites', () => {
+  for (const scenario of loadScenarioRegistry()) {
+    assert.ok(scenario.build_modules.every((module) => !Object.hasOwn(module, 'activity_id')));
+    const build_modules = scenario.build_modules.map((module, index) =>
+      index ? module : { ...module, activity_id: 'foundations' });
+    assert.ok(detectScenarioProblems([{ ...scenario, build_modules }])
+      .some((problem) => problem.includes('references a retired activity')));
   }
+});
+
+test('lessons cannot link to retired activities, including optional sections', () => {
+  const original = loadScenarioRegistry()[0];
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'scenario-continuity-'));
+  try {
+    const lesson = original.lessons[0];
+    const target = path.join(dir, lesson.path);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    const scenario = { ...original, root: dir, lessons: [lesson], build_modules: [original.build_modules[0]] };
+    const link = '[Required build](../../../activities/foundations/README.md)';
+    const errors = () => detectScenarioProblems([scenario]).filter((problem) =>
+      problem.includes('links to a retired activity'));
+    fs.writeFileSync(target, `## Implementation\n${link}\n`);
+    assert.equal(errors().length, 1);
+    fs.writeFileSync(target, `## Optional reference\n${link}\n## Next module\nContinue.`);
+    assert.equal(errors().length, 1);
+    fs.writeFileSync(target, `## Optional reference\nBackground.\n## Implementation\n${link}\n`);
+    assert.equal(errors().length, 1);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('retired workshop files and published routes stay removed', () => {
+  for (const retired of [
+    'activities', 'resources', 'scripts/action-backend',
+    'scripts/setup-foundations.sh', 'scripts/validate-foundations.py', 'scripts/cleanup.sh',
+    'docs/activities', 'docs/activity.html', 'docs/reference.html', 'docs/assets/js/activity.js',
+    'docs/assets/js/catalog.js', 'docs/assets/data/activities',
+    'docs/assets/data/dependency-graph.json', 'docs/resources',
+    'docs/index.md', 'docs/idea-forge.md', 'docs/resources.md',
+    'docs/assets/css/just-the-docs-default.scss',
+  ]) {
+    assert.equal(fs.existsSync(path.join(ROOT, retired)), false, retired);
+  }
+  const platform = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/assets/data/platform.json'), 'utf8'));
+  assert.deepEqual(Object.keys(platform), ['scenarios']);
+  assert.deepEqual(platform.scenarios, loadScenarioRegistry().map(scenarioOutput));
+  assert.ok(platform.scenarios.every((scenario) => scenario.build_modules.every((module) =>
+    !Object.hasOwn(module, 'activity_path'))));
+});
+
+test('documentation audit rejects retired links and bootstrap commands', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'retired-docs-'));
+  const doc = path.join(dir, 'README.md');
+  try {
+    for (const text of [
+      '[Library](reference.html)', '[Example](activities/foundations/README.md)',
+      'bash scripts/setup-foundations.sh', 'npm run test:activities',
+    ]) {
+      fs.writeFileSync(doc, text);
+      const failures = [];
+      auditRetiredReferences([doc], failures);
+      assert.equal(failures.length, 1, text);
+    }
+  } finally {
+    fs.unlinkSync(doc);
+    fs.rmdirSync(dir);
+  }
+});
+
+test('build rejects missing scenario guides', () => {
+  const scenario = loadScenarioRegistry()[0];
+  const failures = detectScenarioProblems([{ ...scenario, accelerator: 'missing.md' }]);
+  assert.ok(failures.some((problem) => problem.includes('accelerator missing.md missing')));
 });
 
 test('source script checks reject undocumented flags', () => {
@@ -158,7 +202,5 @@ test('Operational Agents has eight linked modules and all public entry points', 
       assert.ok(slides.includes(`slide:id=lesson-${lesson.id}-${kind}`));
     }
   }
-  for (const page of ['docs/index.html', 'docs/reference.html']) {
-    assert.ok(fs.readFileSync(path.join(ROOT, page), 'utf8').includes('scenario.html?id=operational-agents'));
-  }
+  assert.ok(fs.readFileSync(path.join(ROOT, 'docs/index.html'), 'utf8').includes('scenario.html?id=operational-agents'));
 });

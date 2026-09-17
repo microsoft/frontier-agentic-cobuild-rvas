@@ -5,10 +5,10 @@ Checks the following output markers:
   * citations on every answerable question
   * abstention on questions the corpus cannot answer
   * the current service notice, not the superseded one
-  * answer citation hit rate (currently mislabeled recall@5)
+  * answer citation hit rate
 
-This does not measure retrieved passages. All cases use one caller token; role_groups
-does not select a different identity. See the accelerator README before using this as a gate.
+This does not measure retrieved passages. Use --role to select questions for the actual
+caller; role_groups does not select a different identity.
 
 Point it at your own golden set in golden-questions.json.
 
@@ -31,7 +31,6 @@ from _shared import check, load_env, load_golden_cases  # noqa: E402
 REQUIRED_ENV = ("AZURE_SEARCH_ENDPOINT",)
 ABSTENTION = "I don't have approved information on that."
 SUPERSEDED_CITATION = "SVC-ALPINE-2026-01-28"
-RECALL_K = 5
 
 
 def answer(client: Any, question: str, user_token: str | None) -> str:
@@ -117,10 +116,10 @@ def verify_live(
 
     if answerable:
         recall = hits / answerable
-        print(f"\nrecall@{RECALL_K} = {recall:.2f}  ({hits}/{answerable})")
+        print(f"\nanswer citation hit rate = {recall:.2f}  ({hits}/{answerable})")
         check(
             recall >= minimum_recall,
-            f"recall@{RECALL_K} {recall:.2f} meets minimum {minimum_recall:.2f}",
+            f"answer citation hit rate {recall:.2f} meets minimum {minimum_recall:.2f}",
             failures,
         )
 
@@ -132,18 +131,23 @@ def main() -> int:
         default=os.environ.get("AZURE_KNOWLEDGE_BASE_NAME", "grounding-kb"),
     )
     parser.add_argument(
-        "--min-recall",
+        "--min-citation-rate", "--min-recall",
+        dest="min_recall",
         type=float,
         default=1.0,
-        help="Minimum recall@5 required for success (0.0 to 1.0; default: 1.0).",
+        help="Minimum answer citation hit rate (0.0 to 1.0; default: 1.0). --min-recall is a legacy alias.",
     )
+    parser.add_argument("--role", choices=("returns-coordinators", "returns-supervisors"),
+                        help="Select cases for the actual caller's fixture role; does not authenticate.")
     args = parser.parse_args()
     if not 0.0 <= args.min_recall <= 1.0:
-        parser.error("--min-recall must be between 0.0 and 1.0")
+        parser.error("--min-citation-rate must be between 0.0 and 1.0")
 
     failures: list[str] = []
     env = load_env(REQUIRED_ENV)
     cases = load_golden_cases()
+    if args.role:
+        cases = [case for case in cases if args.role in case.get("role_groups", [])]
 
     if not cases:
         print("No golden questions found. Add them to golden-questions.json first.")
@@ -174,7 +178,7 @@ def main() -> int:
     refusals = len(cases) - answerable
     print(
         f"\nAll {len(cases)} questions behaved as expected — {answerable} cited, "
-        f"{refusals} abstained. Write down the recall@{RECALL_K} above before you add an agent."
+        f"{refusals} abstained. Record the citation hit rate above before you add an agent."
     )
     return 0
 

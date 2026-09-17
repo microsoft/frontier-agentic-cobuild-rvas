@@ -81,6 +81,10 @@ def main() -> int:
             module_id = module.get("id", "<missing>")
             complete = all(module.get(field) for field in ("id", "title", "summary", "outcome"))
             check(complete, f"build module {module_id} declares id, title, summary, and outcome", failures)
+            check("activity_id" not in module,
+                  f"build module {module_id} does not reference a retired activity", failures)
+            check(not re.search(r"foundations?\s+steps?|tier\s+[123]", module.get("outcome", ""), re.I),
+                  f"build module {module_id} names a scenario outcome rather than a workshop tier", failures)
             check(module_id not in module_ids, f"build module {module_id} is unique", failures)
             module_ids.add(module_id)
             for implementation_path in module.get("implementation_paths", []):

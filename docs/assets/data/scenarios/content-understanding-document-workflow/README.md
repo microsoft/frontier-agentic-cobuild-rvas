@@ -4,15 +4,15 @@ Build a controlled path from an invoice, RFQ, or specification to a typed result
 The workflow retains source evidence and never makes a business decision by itself. Each module
 compares Microsoft options, recommends a default, and shows when to choose another approved service.
 
-The quality bar and reference format are the [Foundations activity](activity.html?id=foundations)
-and the AI Grounding scenario lessons. The scenario reference contract lives in
+The default path stays within these lessons and uses this scenario's document pack.
+The scenario reference contract lives in
 [`accelerator/solution.md`](accelerator/solution.md).
 
 ## The seven modules
 
 | Module | You decide | Outcome |
 |---|---|---|
-| [1. Provision the foundation](lesson.html?scenario=content-understanding-document-workflow&lesson=foundation) | How to stand up a keyless Foundry account with Content Understanding, Document Intelligence, models, and document storage | Foundations Step 1 |
+| [1. Provision the foundation](lesson.html?scenario=content-understanding-document-workflow&lesson=foundation) | How to stand up a keyless Foundry account with Content Understanding, Document Intelligence, models, and document storage | Document resources and a usable environment contract |
 | [2. Connect an approved source](lesson.html?scenario=content-understanding-document-workflow&lesson=document-source) | Azure Blob, ADLS Gen2, SharePoint, or OneLake — and the intake/quarantine controls | Approved intake and document-retention design |
 | [3. Select the extraction capability](lesson.html?scenario=content-understanding-document-workflow&lesson=extraction-selection) | CU prebuilt/custom analyzer, DI prebuilt/custom model, LLM structured outputs, or multimodal | Document capability and implementation decision |
 | [4. Typed extraction with evidence](lesson.html?scenario=content-understanding-document-workflow&lesson=typed-extraction) | How to normalize output into one validated contract with confidence + grounding | Structured extraction result and low-confidence failure path |
@@ -25,7 +25,7 @@ inspect. Complete the modules in order.
 
 ## Decision gates to carry into the customer conversation
 
-Answer these questions before you open the reference library:
+Answer these questions before building:
 
 | Gate | Decide before building |
 |---|---|
@@ -35,17 +35,12 @@ Answer these questions before you open the reference library:
 | Handoff boundary | Which downstream action is allowed, approval-gated, queued, or explicitly out of scope? |
 | Trust boundary | Which extraction, prompt-injection, review-routing, and deployment-access failures block a pilot? |
 
-## Canonical activities
+## Follow one path
 
-This scenario covers document-specific decisions. It links to shared implementation activities rather
-than repeating them:
-
-- [Foundations](activity.html?id=foundations) — provisioning and the `.env` contract.
-- [Document Workflow](activity.html?id=extra-document-workflow) — extraction implementation.
-- [Action Tools](activity.html?id=advanced-action-tools) — the governed handoff seam.
-- [Evaluation & Red Teaming](activity.html?id=advanced-evaluation-redteam) and
-  [Tracing & Observability](activity.html?id=advanced-tracing-observability) — the gate and traces.
-- [Deploy as a Hosted Agent](activity.html?id=advanced-deploy-hosted-agent) — the pilot endpoint.
+The lessons contain the extraction and review instructions, including evaluation and deployment
+steps. Keep the same documents and result contract throughout. A customer-system posting API
+and a production review UI remain customer-specific integrations; a sample approval record
+does not supply either.
 
 ## Get started
 
@@ -70,4 +65,4 @@ before writing SDK code.
   or Bicep.
 - **Evidence, never inference.** Every extracted value keeps its confidence and grounding; a value
   without evidence is rejected and a missing value is surfaced for review, never guessed.
-- **Prompt Flow is banned** in this curriculum — use agents + tools + MCP instead.
+- Use agents and tools for agent-based handoffs; Prompt Flow is outside this scenario.

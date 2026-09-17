@@ -18,15 +18,34 @@ the task ID to the exact tool call, including its expected record version.
 | Authenticated approval service | A customer pilot with real effects. | Requires approver authorization and policy rules. |
 | Existing workflow approval | The customer already has an approval system. | Its decision must bind to the exact proposal. |
 
-The shared [Action Tools contract](../../../activities/advanced-action-tools/README.md)
-requires the requested function, arguments, human decision, and result to remain
-traceable. This track adds persistence without replacing that policy.
+Retain the requested function and arguments with the human decision and result.
+The task ID and proposal digest connect these records across a restart.
 
 ## Implementation
 
-Follow the [accelerator's exact-update commands](../accelerator/README.md#approve-one-exact-update).
-Inspect the proposal before approving it. The `approve` command records a
-decision; `resume` performs the separately gated operation.
+Run from the repository root with fresh synthetic state:
+
+```bash
+STATE="$(mktemp -d)"
+python3 -B scenarios/operational-agents/accelerator/cli.py --state-dir "$STATE" start \
+  --allow-writes --fixture scenarios/operational-agents/accelerator/sample-data/update.json
+```
+
+Expect `waiting_approval`. Copy the returned `id` and `pending.digest` into `TASK_ID` and
+`DIGEST`. Inspect the proposal before approving it:
+
+```bash
+TASK_ID="paste-the-task-id"
+DIGEST="paste-the-pending-digest"
+python3 -B scenarios/operational-agents/accelerator/cli.py --state-dir "$STATE" show "$TASK_ID"
+python3 -B scenarios/operational-agents/accelerator/cli.py --state-dir "$STATE" approve "$TASK_ID" --digest "$DIGEST"
+python3 -B scenarios/operational-agents/accelerator/cli.py --state-dir "$STATE" resume "$TASK_ID"
+python3 -B scenarios/operational-agents/accelerator/cli.py --state-dir "$STATE" records
+```
+
+The record must be `reviewed` at version `2`. Repeat `resume`; the version must remain `2`.
+Use `deny` instead of `approve` on a fresh task to test refusal. The `approve` command
+records a decision; `resume` performs the separately gated operation.
 
 `propose_update` cannot call `Backend.apply` directly. The engine validates the
 digest again and fetches the current record version before dispatch. The backend

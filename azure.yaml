@@ -7,14 +7,12 @@
 # This file intentionally has NO `services:` block. The session does not deploy app code
 # through azd at provision time — `azd up` only stands up the shared Foundry footprint
 # (Foundry resource + project + model deployment + AI Search + App Insights + ACR).
-# The Foundations end-state (agent + index + Azure AI Search grounding) is materialized afterward by
-# scripts/setup-foundations.sh. The hosted-agent Advanced activity scaffolds a separate unified
-# azure.yaml under activities/advanced-deploy-hosted-agent/hosted/.
+# Follow the selected scenario's lessons to add application code and data.
 name: ai-starter-kit-rvas
 metadata:
   template: ai-starter-kit-rvas-foundry@2.0.0
 
-# Lifecycle hooks: after provisioning, remind the operator how to reach the Foundations end-state.
+# Return to the selected scenario after provisioning.
 hooks:
   postprovision:
     posix:
@@ -25,7 +23,5 @@ hooks:
         echo "✅ Infrastructure provisioned. Outputs are in the azd environment."
         echo "   Export them to a .env with:   azd env get-values > .env"
         echo ""
-        echo "   Next (Path B bootstrap / Foundations end-state):"
-        echo "     ./scripts/setup-foundations.sh"
-        echo "     python scripts/validate-foundations.py"
+        echo "   Next: follow your scenario's accelerator guide under scenarios/."
         echo ""

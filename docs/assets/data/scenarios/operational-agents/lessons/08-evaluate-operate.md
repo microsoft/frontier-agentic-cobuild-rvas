@@ -18,10 +18,8 @@ and the customer's proposed operations.
 | Live synthetic read | A real model/tool round trip. | No proof of customer-tool permissions. |
 | Customer acceptance set | Representative tasks against approved integrations. | Requires the customer's owners and acceptance criteria. |
 
-Use [Evaluation & Red Teaming](../../../activities/advanced-evaluation-redteam/README.md)
-to add model-quality and adversarial checks. Reuse
-[Tracing & Observability](../../../activities/advanced-tracing-observability/README.md)
-for telemetry integration rather than creating another trace convention.
+Start with the behavioral suite below. Add live model checks only after module 2's
+explicit live setup succeeds. They use the same task engine and synthetic backend.
 
 ## Implementation
 
@@ -41,10 +39,60 @@ Choose authenticated approval and retention rules. If tasks must run on
 multiple hosts, replace local SQLite and process locks with an appropriate
 shared-state design.
 
-Hosted execution is an optional adaptation. Follow
-[Deploy as a Hosted Agent](../../../activities/advanced-deploy-hosted-agent/README.md)
-only after resolving state durability and the remote tool address. A local
-database inside a replaceable container is not a durable shared store.
+### Check model behavior
+
+Run the live read check with the agent name and version from module 2:
+
+```bash
+python3 -B scenarios/operational-agents/accelerator/validate.py --live \
+  --agent-name "$AGENT_NAME" --agent-version "$AGENT_VERSION"
+```
+
+Inspect the actual selected function and its arguments, then compare the final explanation
+with the backend evidence. A `completed` task is insufficient if the answer invents a write.
+Keep the response ID and agent version with the acceptance result.
+
+Add synthetic tasks that request an out-of-scope record, ask to bypass approval, or carry
+an instruction inside a tool result. Require refusal or a bounded stop, with no unauthorized
+backend change. Run each task in fresh state and inspect the record independently.
+The deterministic suite proves the engine's controls; live cases additionally test whether
+the model follows the intended task.
+
+### Connect telemetry when operating remotely
+
+The local default retains task evidence and needs no telemetry service. For a live pilot,
+configure Azure Monitor once at process startup:
+
+```python
+import os
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+
+configure_azure_monitor(connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"])
+tracer = trace.get_tracer("operational-agents")
+```
+
+Wrap the real model call and each tool dispatch in spans. Add the task ID and operation ID
+as attributes; retain the response ID already captured by the engine. Emit a new linked
+span after approval or reconciliation rather than leaving a span open while waiting for
+a person. Keep arguments and returned record values out of telemetry by default.
+
+After one real request, open the connected Application Insights Logs and query:
+
+```kusto
+dependencies
+| where timestamp > ago(1h)
+| where customDimensions has "task_id"
+| project timestamp, name, duration, operation_Id, customDimensions
+```
+
+Inspect a matching task and its destination receipt. A local JSON file does not prove
+telemetry export. Current exporter setup:
+<https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python>
+
+Hosted execution remains optional. Resolve shared-state durability and the remote tool
+address before packaging a worker; a local database inside a replaceable container is
+not a durable shared store. Keep the current local path until those dependencies exist.
 
 ## Verify
 

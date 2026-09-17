@@ -14,7 +14,7 @@
       const body = document.getElementById('scenarioBody');
       FP.renderMd(await response.text(), body);
       FP.applyGuideAccordions(body);
-      rewriteScenarioLinks(body, scenario, data.activities || []);
+      rewriteScenarioLinks(body, scenario);
       FP.initDiagramZoom(body);
     } catch (error) {
       showError(error.message);
@@ -104,7 +104,7 @@
   }
 
   function routeAppPage(path, hash) {
-    const match = path.match(/(?:^|\/)(lesson|activity|scenario|slides|guide)\.html(\?.*)?$/i);
+    const match = path.match(/(?:^|\/)(lesson|scenario|slides|guide)\.html(\?.*)?$/i);
     return match ? `${match[1].toLowerCase()}.html${match[2] || ''}${hash ? `#${hash}` : ''}` : '';
   }
 
@@ -112,9 +112,8 @@
     return `guide.html?scenario=${encodeURIComponent(scenarioId)}&guide=${encodeURIComponent(guideId)}`;
   }
 
-  function rewriteScenarioLinks(container, scenario, activities) {
+  function rewriteScenarioLinks(container, scenario) {
     const lessonRoutes = new Map((scenario.lessons || []).map((lesson) => [lesson.path, lesson.lesson_path]));
-    const activityIds = new Set((activities || []).map((activity) => activity.id));
 
     container.querySelectorAll('a[href]').forEach((link) => {
       const raw = link.getAttribute('href') || '';
@@ -133,23 +132,8 @@
         return;
       }
 
-      const activityMatch = resolved.match(/^activities\/([^/]+)\/(?:README|FACILITATOR)\.md$/i);
-      if (activityMatch && activityIds.has(activityMatch[1])) {
-        link.href = FP.activityUrl(activityMatch[1]) + (hash ? `#${hash}` : '');
-        markReferenceActivityLink(link);
-        return;
-      }
-
       link.href = `${scenario.asset_base}${resolved}${hash ? `#${hash}` : ''}`;
     });
-  }
-
-  function markReferenceActivityLink(link) {
-    link.classList.add('reference-activity-link');
-    link.dataset.route = 'activity';
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.title = link.title || 'Open reference activity in a new tab';
   }
 
   function showError(message) {

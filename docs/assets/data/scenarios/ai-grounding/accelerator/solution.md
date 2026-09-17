@@ -124,12 +124,12 @@ changing the embedding model invalidates every vector and forces a full reingest
 
 ```bash
 python3 scenarios/ai-grounding/accelerator/scripts/grounded_answer.py \
-  --knowledge-base grounding-kb --min-recall 0.95
+  --knowledge-base grounding-kb --role returns-coordinators --min-citation-rate 1.0
 ```
 
-The script checks citation strings on four answerable cases and exact abstention on three refusal
-cases. Its `recall@5` label is an answer citation hit rate, not retrieval recall. All cases use one
-identity, so the mixed-role dataset also needs identity-aware execution before it can test permissions.
+The script checks citation strings and exact abstention for the selected role. Its metric is
+answer citation hit rate, not retrieval recall. Run with the actual coordinator identity and
+query-source token from module 5, then repeat under the supervisor identity with its role flag.
 
 If a group insists on adding an agent before this passes, show why: an agent over weak retrieval
 produces an articulate wrong answer instead of an obvious one.
@@ -178,9 +178,15 @@ appear in Application Insights.
 Evaluation with a gate:
 
 ```bash
-python3 activities/advanced-evaluation-redteam/evaluate.py \
-  --dataset scenarios/ai-grounding/accelerator/golden-questions.json --gate 3.5
+python3 scenarios/ai-grounding/accelerator/scripts/evaluate_answers.py \
+  --responses scenarios/ai-grounding/accelerator/.runtime/coordinator-answers.jsonl \
+  --role returns-coordinators --minimum 1.0 \
+  --report scenarios/ai-grounding/accelerator/.runtime/coordinator-report.json
 ```
+
+Capture the actual responses first with [module 7](../lessons/07-evaluate-and-trace.md).
+Repeat for the supervisor identity. This is a citation/refusal contract gate, not an
+LLM-judge groundedness score; review answer meaning separately.
 
 Red-teaming must include **indirect prompt injection**: a malicious instruction hidden in a retrieved
 document instead of the user's message. Retrieval imports untrusted text into model context by

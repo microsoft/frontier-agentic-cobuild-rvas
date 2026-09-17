@@ -29,4 +29,4 @@
 
 ## Fixes applied
 
-- <list of files edited + re-validation result, e.g. `activities/foundations/validate.py --all` → PASS>
+- <list of files edited + re-validation result, e.g. `python3 scenarios/operational-agents/accelerator/validate.py` → PASS>

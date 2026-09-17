@@ -101,12 +101,11 @@ Each lesson's **Verify** section gives the command and signal for that module.
 - Keep a withdrawal path one action away when a source changes, consent is withdrawn, or a defect
   appears.
 
-## Related implementation activities
+## Continue in the scenario
 
-- [Foundations](../../../activities/foundations/README.md) for the Foundry and grounding baseline.
-- [Voice & Live](../../../activities/extra-voice-live/README.md) for speech and voice patterns.
-- [Evaluation & Red Teaming](../../../activities/advanced-evaluation-redteam/README.md) and
-  [Tracing & Observability](../../../activities/advanced-tracing-observability/README.md) for
-  release evidence and traces.
+[Module 4](../lessons/04-grounded-assistant.md) contains the approved-claim drafting path.
+Use [module 5](../lessons/05-experience-generation.md) to render it and
+[module 7](../lessons/07-prove-and-operate.md) to collect release evidence.
+The batch-video default needs no separate agent or voice exercise.
 
 See [solution.md](solution.md) for the facilitator reference and integration boundaries.

@@ -20,9 +20,9 @@ unauthenticated calls.
 | C. API behind API Management | Your API | Entra-validated via APIM | Deployment slots | You are fronting an existing API estate |
 | D. Hosted long-running workflow | Background job handle + later retrieval | Managed identity, authenticated submit/poll | Pin/swap revision | Document processing outlives an interactive request |
 
-**Default: Option A.** The workflow is already a Foundry agent with an approved action-tool seam. A
-hosted agent retains its managed identity, auth, and tracing wiring. It is the shortest route from a
-passed gate to an authenticated service.
+**Default hosting choice: Option A for an agent-based workflow.** The preceding modules do not
+automatically create an agent or a hosted adapter. Package the workflow you actually built;
+keep any unimplemented posting integration disabled. For an existing API, use option C.
 
 **Choose B** when you need a custom runtime, specific scaling, or network isolation unavailable from
 hosting. **Choose C** when the workflow belongs behind an existing API Management estate and its
@@ -30,9 +30,8 @@ policies. Every option follows the same rule: **no keys**, managed identity, aut
 monitoring enabled, rollback ready.
 
 **Choose D** only for naturally asynchronous work: overnight intake, a file backlog, or a review
-process users submit and check later. The
-[Hosted Long-Running Agents activity](../../../activities/extra-hosted-longrunning/README.md)
-covers the background-run contract, response handle, later retrieval, and trace review. Do not add
+process users submit and check later. Return an opaque job handle, authorize every later
+status/result read, and persist state outside the container. Do not add
 this complexity when a reviewer expects one document to return while waiting.
 
 **Migration cost.** Moving from A to B or C rehosts the same container and identity model. The
@@ -44,15 +43,53 @@ and reverse it.
 ### Option A — Hosted agent (default)
 
 Deploy the reviewed workflow as a hosted agent with managed identity and an authenticated endpoint.
-Keep GenAI tracing enabled. Build and deploy it with the canonical
-[Deploy as a Hosted Agent activity](../../../activities/advanced-deploy-hosted-agent/README.md), which
-covers `agent.yaml`, `azd ai agent`, per-agent Entra identity, and the dedicated endpoint. Carry the
-same tracing env into the deployment:
+Keep module 6's tracing setup in the runtime. Run the following in a new working directory
+outside the repository so the generated project cannot replace this kit's root `azure.yaml`:
 
 ```bash
-export AZURE_EXPERIMENTAL_ENABLE_GENAI_TRACING=true
-export OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true
+azd auth login
+azd ext install microsoft.foundry
+HOSTED_DIR="$(mktemp -d)"
+cd "$HOSTED_DIR"
+azd ai agent init \
+  -m https://github.com/microsoft-foundry/foundry-samples/blob/main/samples/python/hosted-agents/agent-framework/responses/01-basic/azure.yaml \
+  --deploy-mode code
 ```
+
+Choose **Use an existing Foundry project**, then select module 1's project and model.
+Change into the generated agent directory printed by the wizard.
+
+Replace the sample handler with your extraction and review workflow from modules 3–5.
+Keep the generated protocol host and Dockerfile. Expose a narrow document-processing
+request, validate its input location, and return the normalized result or review handle.
+Never let a prompt call the posting function without the application's approval check.
+A basic chat response is not a deployed document workflow.
+
+Review the generated `azure.yaml`: the service must be hosted, point to your source, and
+declare its supported protocol. Set the scenario endpoint variables and telemetry connection
+in its runtime configuration. Use the per-agent identity for source reads and the separately
+scoped destination operation. Keep raw document content out of telemetry.
+
+From that generated directory:
+
+```bash
+azd provision
+azd ai agent run
+```
+
+Submit the same synthetic invoice through the local inspector. Confirm the conflicting
+total still reaches review and an approval cannot be replaced by model text. Stop the
+local process, then deploy:
+
+```bash
+azd deploy
+azd ai agent monitor --follow
+```
+
+Record the reported endpoint, deployed version, and agent identity. Grant only the required
+source/destination roles. Pin the tested version and retain the preceding version for rollback.
+Current hosting setup:
+<https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent>
 
 ### Option B — Container app / managed online endpoint
 
@@ -113,13 +150,13 @@ Send one authenticated request, then query the workspace behind `APPLICATIONINSI
 ```kusto
 dependencies
 | where timestamp > ago(15m)
-| where customDimensions has "gen_ai"
+| where name startswith "document."
 | project timestamp, name, duration, operation_Id
 | order by timestamp desc
 ```
 
-Rows for your request mean tracing survived deployment. No rows mean the runtime did not receive the
-GenAI environment variables, so you cannot observe the workflow in production.
+Rows for your request mean those spans survived deployment. No rows require checking the
+exporter, destination, runtime configuration, and query window.
 
 ## Troubleshooting
 
@@ -134,6 +171,7 @@ GenAI environment variables, so you cannot observe the workflow in production.
 
 ## Next module
 
-You have completed the seven-module path: a reviewable, evidence-backed document workflow. Start the
+If the deployed checks pass, the seven-module path has produced a reviewable document workflow.
+Any disabled customer posting integration remains unfinished work. Start the
 next document decision at [Module 1](01-provision-foundation.md), or extend this workflow with
 deployment and operations patterns that fit the next customer decision.

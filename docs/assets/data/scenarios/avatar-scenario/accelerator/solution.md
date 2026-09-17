@@ -81,8 +81,8 @@ affected publications. The local validator does not implement those controls.
 
 ## 4. Build the grounded assistant (Module 4)
 
-Follow [Foundations Steps 3–4](../../../activities/foundations/README.md) to build the grounded,
-citing agent. The onboarding contract is simple: on-claim asks return the **exact approved wording** and the
+Use [module 4's drafting function](../lessons/04-grounded-assistant.md) with the approved claim set
+and existing chat deployment. An agent is optional. On-claim asks return the **exact approved wording** and the
 `claim_id`; off-claim asks return `NO_APPROVED_CLAIM` plus a human-help path. The assistant provides
 interactive help; it must **not** silently add claims to a published script.
 
@@ -125,9 +125,11 @@ p.write_text(json.dumps(r, indent=2))   # renderer now rejects the pack — publ
 ```bash
 export AZURE_EXPERIMENTAL_ENABLE_GENAI_TRACING=true
 export OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true   # BEFORE importing the Foundry SDK
-python  activities/advanced-evaluation-redteam/validate.py
+python3 -m unittest discover -s scenarios/avatar-onboarding/accelerator -p test_content_pack.py
 ```
 
+The command above checks the local pack only. Follow [module 7](../lessons/07-prove-and-operate.md)
+to capture actual model responses and inspect the rendered media.
 Evaluate grounding, refusal, disclosure, and accessibility on a golden set. Run the AI Red Teaming
 Agent and the synthetic-media probes (impersonation, "skip the disclosure", unapproved claims).
 Review a trace for a failed case. Ship only when every gate is green. Measure

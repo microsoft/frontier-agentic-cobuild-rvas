@@ -1,6 +1,6 @@
 ---
 name: foundry-observability
-description: Trace, monitor, and evaluate Microsoft Foundry agents — OpenTelemetry GenAI traces in Application Insights (KQL), eval↔trace correlation, azd ai agent monitor, dataset curation from prod traces, built-in quality + safety/RAI evaluators, batch evals, regression detection. Use for Advanced Tracing & Observability and Evaluation & Red Teaming.
+description: Trace, monitor, and evaluate Microsoft Foundry agents — OpenTelemetry GenAI traces in Application Insights (KQL), eval↔trace correlation, azd ai agent monitor, dataset curation from prod traces, built-in quality + safety/RAI evaluators, batch evals, regression detection. Use for scenario evaluation and tracing.
 ---
 
 # foundry-observability (stub)
@@ -14,7 +14,7 @@ description: Trace, monitor, and evaluate Microsoft Foundry agents — OpenTelem
 npx skills add microsoft/skills --skill foundry-observability
 ```
 
-**Maps to:** Advanced · Tracing & Observability **and** Advanced · Evaluation & Red Teaming.
+**Maps to:** Each scenario's evaluation and tracing lessons.
 
 **Before implementing:** query `microsoft-docs` for current `AIProjectInstrumentor` /
 `configure_azure_monitor` and `azure-ai-evaluation` signatures. **Gotcha:** set

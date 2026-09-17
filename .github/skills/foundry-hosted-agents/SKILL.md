@@ -1,6 +1,6 @@
 ---
 name: foundry-hosted-agents
-description: Build, deploy, and manage Microsoft Foundry hosted (containerized) agents — Responses + Invocations protocols, agent.yaml, azd ai agent, per-agent Entra identity, dedicated endpoints, ACR. Use for Advanced Deploy as a Hosted Agent.
+description: Build, deploy, and manage Microsoft Foundry hosted (containerized) agents — Responses + Invocations protocols, agent.yaml, azd ai agent, per-agent Entra identity, dedicated endpoints, ACR. Use for optional hosted-agent paths in scenario deployment lessons.
 ---
 
 # foundry-hosted-agents (stub)
@@ -14,7 +14,7 @@ description: Build, deploy, and manage Microsoft Foundry hosted (containerized) 
 npx skills add microsoft/skills --skill foundry-hosted-agents
 ```
 
-**Maps to:** Advanced · Deploy as a Hosted Agent.
+**Maps to:** Optional hosted-agent paths in scenario deployment lessons.
 
 **Before implementing:** query `foundry-mcp` and `microsoft-docs` for the current `azd ai agent`
 (create → deploy → invoke) flow and `agent.yaml` schema. ACR is provisioned by `azd up`

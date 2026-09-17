@@ -71,8 +71,8 @@ assume equivalent behavior.
 
 **Observability:** correlate task ID, operation ID, and the live response ID with
 customer traces. This sample emits local JSON evidence; it does not export
-OpenTelemetry spans to Application Insights. Use the shared
-[Tracing & Observability activity](../../../activities/advanced-tracing-observability/README.md)
+OpenTelemetry spans to Application Insights. Use
+[module 8's telemetry setup](../lessons/08-evaluate-operate.md)
 for that integration. Exclude secrets and choose retention before logging
 customer tool arguments.
 

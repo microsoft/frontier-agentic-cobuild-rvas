@@ -33,7 +33,7 @@ Discuss each lesson through three lenses:
 | Choices | Which path fits the source, access model, and experience? |
 | Evidence | What must be true before we move on? |
 
-Keep implementation details in the lesson and activity pages.
+Keep implementation details in the scenario lessons.
 
 ---
 <!-- slide:id=lesson-foundation-context -->

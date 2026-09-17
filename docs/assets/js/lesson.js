@@ -12,7 +12,7 @@
       const lesson = scenario && (scenario.lessons || []).find((item) => item.id === lessonId);
       if (!scenario || !lesson) return showError('This lesson was not found in the scenario course.');
       renderCourse(scenario, lesson);
-      await renderLesson(scenario, lesson, data.activities || []);
+      await renderLesson(scenario, lesson);
     } catch (error) {
       showError(error.message);
     }
@@ -106,13 +106,13 @@
     `;
   }
 
-  async function renderLesson(scenario, lesson, activities) {
+  async function renderLesson(scenario, lesson) {
     const target = document.getElementById('lessonBody');
     const response = await fetch(lesson.content_path, { cache: 'no-cache' });
     if (!response.ok) throw new Error(`Could not load lesson (${response.status})`);
     FP.renderMd(await response.text(), target);
     FP.applyGuideAccordions(target, { collapseOptionChapters: true });
-    rewriteLessonLinks(target, scenario, lesson, activities);
+    rewriteLessonLinks(target, scenario, lesson);
     rewriteLessonImages(target, scenario, lesson);
     FP.initDiagramZoom(target);
   }
@@ -127,9 +127,8 @@
     return segments.join('/');
   }
 
-  function rewriteLessonLinks(container, scenario, lesson, activities) {
+  function rewriteLessonLinks(container, scenario, lesson) {
     const lessonRoutes = new Map((scenario.lessons || []).map((item) => [item.path, item.lesson_path]));
-    const activityIds = new Set((activities || []).map((item) => item.id));
 
     container.querySelectorAll('a[href]').forEach((link) => {
       const raw = link.getAttribute('href') || '';
@@ -148,14 +147,6 @@
         return;
       }
 
-      const activityMatch = resolved.match(/^activities\/([^/]+)\/(README|FACILITATOR)\.md$/i);
-      if (activityMatch && activityIds.has(activityMatch[1])) {
-        link.href = FP.activityUrl(activityMatch[1]) + (hash ? `#${hash}` : '');
-        link.dataset.route = 'activity';
-        markReferenceActivityLink(link);
-        return;
-      }
-
       if (/\.md$/i.test(path)) {
         link.classList.add('is-source-link');
         return;
@@ -163,13 +154,6 @@
 
       link.href = `${scenario.asset_base || ''}${resolved}${hash ? `#${hash}` : ''}`;
     });
-  }
-
-  function markReferenceActivityLink(link) {
-    link.classList.add('reference-activity-link');
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.title = link.title || 'Open reference activity in a new tab';
   }
 
   function rewriteLessonImages(container, scenario, lesson) {

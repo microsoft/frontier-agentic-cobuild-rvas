@@ -193,9 +193,9 @@ an hour stale, a nightly indexer breaks that promise.
 
 ### Option B — Azure AI Search indexer (pull)
 
-You define the index, skillset, and indexer explicitly. This is the path
-[`activities/foundations`](../../../activities/foundations/README.md) Step 4 walks in full, against
-the university FAQ corpus — build it there first if this is new, then bring the pattern here.
+You define the index, skillset, and indexer explicitly, using the source and access rules from
+module 2. This alternative needs a custom ingestion configuration; the default above uses
+the scenario's knowledge-source script and does not require this work.
 
 The shape that matters:
 

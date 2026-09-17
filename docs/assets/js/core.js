@@ -15,29 +15,6 @@
     return FP._cache;
   };
 
-  /* Module accent CSS variable resolving */
-  FP.moduleColor = function (moduleId) {
-    const map = {
-      foundry: 'var(--c-ghec)',
-      ghec: 'var(--c-ghec)',
-      ghas: 'var(--c-ghas)',
-      ghaw: 'var(--c-ghaw)',
-      'sre-agent': 'var(--c-agentic)',
-      'agentic-devops': 'var(--c-agentic)',
-    };
-    return map[moduleId] || 'var(--c-gold)';
-  };
-
-  FP.moduleName = function (moduleId, modules) {
-    const m = (modules || []).find((x) => x.id === moduleId);
-    return m ? m.name : moduleId;
-  };
-
-  FP.applyModuleColor = function (el, moduleId) {
-    el.style.setProperty('--mod-color', FP.moduleColor(moduleId));
-    el.classList.add('mod-' + moduleId);
-  };
-
   /* ─────────────────────────── Escape ───────────────────────────── */
   FP.esc = function (s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
@@ -46,11 +23,6 @@
   };
 
   /* ─────────────────────────── Badges ───────────────────────────── */
-  FP.diffBadge = function (diff) {
-    diff = (diff || 'beginner').toLowerCase();
-    return `<span class="badge badge-difficulty-${FP.esc(diff)}">${FP.esc(diff)}</span>`;
-  };
-
   FP.durBadge = function (mins) {
     if (!mins) return '';
     const h = Math.floor(mins / 60);
@@ -68,18 +40,6 @@
   function formatLabel(value) {
     return String(value || '').replace(/[-_]+/g, ' ');
   }
-
-  /* ─────────────────────────── URL helpers ───────────────────────── */
-  FP.activityUrl = function (id) {
-    return 'activity.html?id=' + encodeURIComponent(id);
-  };
-  FP.referenceUrl = function (capability) {
-    return capability ? 'reference.html?capability=' + encodeURIComponent(capability) : 'reference.html';
-  };
-  FP.outcomeName = function (outcomeId, outcomes) {
-    const o = (outcomes || []).find((x) => x.id === outcomeId);
-    return o ? o.name : outcomeId;
-  };
 
   /* ─────────────────────────── Query params ─────────────────────── */
   FP.qp = function (name) {

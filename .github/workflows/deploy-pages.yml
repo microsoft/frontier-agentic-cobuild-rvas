@@ -8,10 +8,7 @@ on:
       - README.md
       - CONTRIBUTING.md
       - docs/**
-      - activities/**
-      - resources/**
       - scenarios/**
-      - scripts/action-backend/README.md
       - scripts/audit-docs.js
       - scripts/validate-scenarios.py
       - scripts/audit-diagrams.py
@@ -28,10 +25,7 @@ on:
       - README.md
       - CONTRIBUTING.md
       - docs/**
-      - activities/**
-      - resources/**
       - scenarios/**
-      - scripts/action-backend/README.md
       - scripts/audit-docs.js
       - scripts/validate-scenarios.py
       - scripts/audit-diagrams.py
@@ -70,8 +64,7 @@ jobs:
       - name: Verify generated guides are committed
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/assets/data/activities docs/assets/data/scenarios docs/assets/data/platform.json \
-            docs/assets/data/dependency-graph.json docs/resources)"
+            docs/assets/data)"
 
   build-production:
     if: github.ref == 'refs/heads/main'
@@ -94,8 +87,7 @@ jobs:
       - name: Verify generated guides are committed
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/assets/data/activities docs/assets/data/scenarios docs/assets/data/platform.json \
-            docs/assets/data/dependency-graph.json docs/resources)"
+            docs/assets/data)"
 
       - name: Checkout preview state
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -182,7 +174,7 @@ jobs:
         working-directory: preview
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/assets/data docs/resources)"
+            docs/assets/data)"
 
       - name: Set preview path
         id: preview_path

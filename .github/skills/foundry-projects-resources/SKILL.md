@@ -1,6 +1,6 @@
 ---
 name: foundry-projects-resources
-description: Provision Microsoft Foundry resources and projects; wire connections (key / OAuth / managed identity / agent identity); standard vs private-network infra. Use for Foundations Step 1 (Setup & Provisioning).
+description: Provision Microsoft Foundry resources and projects; wire connections (key / OAuth / managed identity / agent identity); standard vs private-network infra. Use for scenario setup and provisioning.
 ---
 
 # foundry-projects-resources (stub)
@@ -15,7 +15,7 @@ description: Provision Microsoft Foundry resources and projects; wire connection
 npx skills add microsoft/skills --skill foundry-projects-resources
 ```
 
-**Maps to:** Foundations · Step 1 — Setup & Provisioning (Foundry + AI Search).
+**Maps to:** Scenario setup lessons and accelerator deployment templates.
 
 **Before implementing:** query the `microsoft-docs` and `foundry-mcp` MCP servers for the current
 provisioning API surface (Foundry resource `kind=AIServices`, `allowProjectManagement: true`, projects,

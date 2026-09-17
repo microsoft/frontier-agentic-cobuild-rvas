@@ -59,8 +59,6 @@ approval service, and shared storage if multiple hosts must operate tasks.
 Choose trace retention and validate the customer's actual operations before a
 pilot. Local checks do not prove Azure permissions or model quality.
 
-The shared [Action Tools activity](activity.html?id=advanced-action-tools)
-owns the approval and provenance policy. This track adds task state and
-reconciliation without changing that policy. Reuse
-[Tracing & Observability](activity.html?id=advanced-tracing-observability)
-when connecting operational evidence to the customer's telemetry.
+**The default build stays in this scenario.** Module 6 binds approval to an exact operation;
+module 8 explains the behavioral checks and telemetry integration. Keep the same local
+records and task state throughout.

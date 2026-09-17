@@ -28,7 +28,7 @@ For each lesson, discuss:
 - **Choices and trade-offs:** Which path fits the environment.
 - **Evidence:** What must be true before moving forward.
 
-The practical steps live in the lesson and activity pages.
+The practical steps live in the scenario lessons.
 
 ---
 <!-- slide:id=lesson-foundation-context -->

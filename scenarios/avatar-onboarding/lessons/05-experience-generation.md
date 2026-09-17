@@ -104,8 +104,9 @@ avatar speaks, render live captions, and keep the Option D fallback one click aw
 ### Option C — Voice Live (avatar or audio)
 
 Voice Live is the managed speech-to-speech path and can emit avatar visuals. Bind it to the module-4
-agent (agent mode, Entra auth) so spoken answers stay grounded. Build it in the
-[Voice Live activity](../../../activities/extra-voice-live/README.md). Disclose the synthetic voice
+agent (agent mode, Entra auth) so spoken answers stay grounded. This optional extension needs
+a client that handles session setup, streamed audio, cancellation, and authentication renewal.
+Disclose the synthetic voice
 at session start, both spoken and on-screen, and offer the transcript/fallback.
 <https://learn.microsoft.com/azure/ai-services/speech-service/voice-live>
 

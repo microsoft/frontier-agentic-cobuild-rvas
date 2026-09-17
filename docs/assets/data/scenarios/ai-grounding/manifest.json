@@ -20,81 +20,42 @@
     {
       "id": "foundation",
       "title": "Provision the grounding foundation",
-      "path": "lessons/01-provision-foundation.md",
-      "reused_with": [
-        "foundations",
-        "governance"
-      ]
+      "path": "lessons/01-provision-foundation.md"
     },
     {
       "id": "source-selection",
       "title": "Select the source and permission architecture",
-      "path": "lessons/02-source-and-permission-architecture.md",
-      "reused_with": [
-        "foundry-iq",
-        "copilot-studio",
-        "fabric-iq",
-        "work-iq",
-        "governance"
-      ]
+      "path": "lessons/02-source-and-permission-architecture.md"
     },
     {
       "id": "ingestion",
       "title": "Ingest and index approved content",
-      "path": "lessons/03-ingest-and-index.md",
-      "reused_with": [
-        "foundry-iq",
-        "ai-search",
-        "content-understanding"
-      ]
+      "path": "lessons/03-ingest-and-index.md"
     },
     {
       "id": "model-selection",
       "title": "Compare chat and embedding choices",
-      "path": "lessons/04-model-selection.md",
-      "reused_with": [
-        "foundations",
-        "capacity-planning"
-      ]
+      "path": "lessons/04-model-selection.md"
     },
     {
       "id": "grounded-app",
       "title": "Build retrieval before adding an agent",
-      "path": "lessons/05-grounded-retrieval.md",
-      "reused_with": [
-        "foundations",
-        "foundry-iq",
-        "agent-evaluation"
-      ]
+      "path": "lessons/05-grounded-retrieval.md"
     },
     {
       "id": "agent-routing",
       "title": "Add agent and live-data routing only when justified",
-      "path": "lessons/06-agent-and-routing.md",
-      "reused_with": [
-        "foundry-agents",
-        "fabric-iq",
-        "action-tools"
-      ]
+      "path": "lessons/06-agent-and-routing.md"
     },
     {
       "id": "evaluate-and-trace",
       "title": "Evaluate and trace",
-      "path": "lessons/07-evaluate-and-trace.md",
-      "reused_with": [
-        "agent-evaluation",
-        "observability"
-      ]
+      "path": "lessons/07-evaluate-and-trace.md"
     },
     {
       "id": "deploy-and-surface",
       "title": "Deploy and surface it to users",
-      "path": "lessons/08-deploy-and-surface.md",
-      "reused_with": [
-        "foundry-agents",
-        "copilot-studio",
-        "operational-readiness"
-      ]
+      "path": "lessons/08-deploy-and-surface.md"
     }
   ],
   "build_modules": [
@@ -102,8 +63,7 @@
       "id": "foundation",
       "title": "Provision Foundry, AI Search, and observability",
       "summary": "Create the shared keyless foundation and verify its generated environment contract before adding customer data.",
-      "activity_id": "foundations",
-      "outcome": "Foundations Step 1",
+      "outcome": "Grounding resources and a usable environment contract",
       "implementation_paths": [
         "accelerator/main.bicep",
         "accelerator/scripts/deploy.sh"
@@ -133,8 +93,7 @@
       "id": "model-selection",
       "title": "Compare chat and embedding choices",
       "summary": "Compare supported deployments on the answer quality the pilot needs, then check latency, cost, and regional capacity.",
-      "activity_id": "foundations",
-      "outcome": "Foundations Step 2",
+      "outcome": "A model choice backed by the scenario's question set",
       "implementation_paths": [
         "accelerator/scripts/compare_models.py"
       ]
@@ -143,8 +102,7 @@
       "id": "grounded-app",
       "title": "Build retrieval before adding an agent",
       "summary": "Implement citations, abstention, access-denied behavior, and source freshness before deciding whether Foundry IQ or an agent adds value.",
-      "activity_id": "foundations",
-      "outcome": "Foundations Step 4",
+      "outcome": "Cited answers and correct refusals from approved sources",
       "implementation_paths": [
         "accelerator/scripts/grounded_answer.py",
         "accelerator/golden-questions.json"
@@ -160,17 +118,17 @@
       "id": "evaluate-and-trace",
       "title": "Evaluate and trace",
       "summary": "Test citations, access rules, prompt injection, and stale sources. Trace one request from question to answer so you can explain a failure.",
-      "activity_id": "advanced-evaluation-redteam",
       "outcome": "Evaluation gate passed with trace and red-team evidence",
       "implementation_paths": [
-        "accelerator/golden-questions.json"
+        "accelerator/golden-questions.json",
+        "accelerator/scripts/capture_answers.py",
+        "accelerator/scripts/evaluate_answers.py"
       ]
     },
     {
       "id": "deploy-and-surface",
       "title": "Deploy and surface it to users",
       "summary": "Choose where people will use the agent, pin the version, and verify anonymous, authorized, and restricted calls through that deployed HTTP surface.",
-      "activity_id": "advanced-deploy-hosted-agent",
       "outcome": "Deployed surface passes anonymous, authorized, and restricted HTTP checks",
       "implementation_paths": [
         "accelerator/surface-probe.json",

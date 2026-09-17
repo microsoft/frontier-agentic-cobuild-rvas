@@ -21,8 +21,8 @@ This module follows the kit's working `infra/resources.bicep` and current Micros
 | Log Analytics + Application Insights | Traces and evaluation correlation (module 7) |
 | Role assignments | Keyless access between search, project, models, storage, **and the Speech data plane** |
 
-The output is an `.env` contract with **no secrets** that every later module consumes. This maps to
-**Foundations Steps 1–2** — [Foundations activity](../../../activities/foundations/README.md).
+The output is the scenario's `.env` contract that every later module consumes.
+Use the deployment instructions below; no separate foundation exercise is required.
 
 ## Choose your path
 

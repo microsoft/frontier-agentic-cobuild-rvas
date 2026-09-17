@@ -1,8 +1,9 @@
 # Content Understanding document workflow — reference implementation
 
-This reference contains infrastructure and extraction snippets for the seven modules. It is not a
-runnable workflow. The normalizer, review queue, evaluation harness, and hosted adapter still need
-implementation. The lessons under [`../lessons/`](../lessons/) explain those decisions.
+This reference contains infrastructure and extraction snippets for the seven modules.
+`normalize.py` and `evaluate_results.py` supply the invoice mapping and comparison gate.
+The review UI and customer posting/hosting adapters still need integration.
+The lessons under [`../lessons/`](../lessons/) contain the required instructions.
 Run shell commands from the repository root.
 
 > Keyless-first throughout: `DefaultAzureCredential` + managed identity + Entra RBAC. No keys
@@ -74,7 +75,7 @@ else:
     raise TimeoutError("Analysis did not complete within the five-minute polling window")
 
 fields = result["result"]["contents"][0]["fields"]
-total = fields["InvoiceTotal"]["valueObject"]["Amount"]
+total = fields["AmountDue"]["valueObject"]["Amount"]
 print(total["valueNumber"], total["confidence"], total["source"])  # value, 0..1, grounding polygon
 ```
 
@@ -153,8 +154,8 @@ text. A high-confidence field with no usable span still needs review.
 
 The trace records the reviewer identity, timestamp, before-and-after values, and approved downstream
 seam (an action tool). Corrections remain evaluation evidence and never overwrite the original
-expected result. See [`../lessons/05-human-review.md`](../lessons/05-human-review.md) and the canonical
-[Action Tools activity](../../../activities/advanced-action-tools/README.md).
+expected result. See [`../lessons/05-human-review.md`](../lessons/05-human-review.md) for
+the exact-payload approval and destination receipt contract.
 
 Submit a document you know is ambiguous and confirm that it reaches the review queue. If nothing
 routes to a person, the threshold is wrong.
@@ -171,7 +172,7 @@ export OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true
 
 Confirm that Application Insights receives traces before you rely on them.
 
-Canonical activity: [Evaluation & Red Teaming](../../../activities/advanced-evaluation-redteam/README.md).
+Use [module 6's comparison command and trace setup](../lessons/06-prove-and-observe.md).
 
 ## 7. Deploy the reviewable workflow
 
@@ -184,7 +185,8 @@ curl -s -o /dev/null -w '%{http_code}\n' "$WORKFLOW_ENDPOINT"
 
 A `401` or `403` is the answer you want.
 
-Canonical activity: [Deploy as a Hosted Agent](../../../activities/advanced-deploy-hosted-agent/README.md).
+Use [module 7's hosting steps](../lessons/07-deploy.md). A generic hosted sample is not
+a deployed document workflow; adapt and test the handler before release.
 
 ## Offline validation pack
 

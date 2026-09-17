@@ -24,8 +24,8 @@ overwrite extraction, and send corrections to module 6's evaluation.
 
 **Default: Option A.** The correction UI can be simple. The **handoff seam** must be correct: one
 approved action tool posts an approved result as the workflow identity and records a trace. Action
-tools are the canonical kit pattern, so they provide auth, schema, and observability without a custom
-integration.
+tools keep the write boundary narrow. The customer's posting adapter still needs authorization
+and idempotency; an MCP schema alone supplies neither.
 
 **Choose B** when reviewers need a rich correction experience (side-by-side document and fields,
 bounding-box overlays). The handoff still uses the approved seam. **Choose C** when this workflow is
@@ -43,7 +43,11 @@ Route exceptions to a queue, let a reviewer correct them, then post the approved
 action tool. Record the correction **before** handoff and never mutate the original result:
 
 ```python
+from datetime import datetime, timezone
+
 def apply_correction(result, field, corrected_value, reviewer_id, reason):
+    if not reviewer_id.strip() or not reason.strip():
+        raise ValueError("A reviewer and correction reason are required")
     original = result["fields"][field]["value"]
     correction = {"field": field, "original_value": original,
                   "corrected_value": corrected_value, "reason": reason}
@@ -51,15 +55,34 @@ def apply_correction(result, field, corrected_value, reviewer_id, reason):
     reviewed = {**result, "fields": {**result["fields"],
                 field: {**result["fields"][field], "value": corrected_value, "corrected": True}}}
     trace = {"document_id": result["document_id"], "reviewer_id": reviewer_id,
-             "reviewed_at": _utcnow(), "review_outcome": "approved_with_correction",
+             "reviewed_at": datetime.now(timezone.utc).isoformat(),
+             "source_sha256": result["source_sha256"],
+             "review_outcome": "approved_with_correction",
              "corrections": [correction],
              "handoff": {"target_seam": "procurement_posting_action_tool", "approved": True}}
     return reviewed, trace
 ```
 
-Then hand off through the approved tool as the workflow identity, using keyless access. Build and
-register the tool in the canonical [Action Tools activity](../../../activities/advanced-action-tools/README.md).
-The agent calls one posting tool and cannot write elsewhere.
+Save the function in your workflow module and apply it to module 4's `result.json` after the
+reviewer checks the document. Write the returned copy to `reviewed-result.json` and the trace
+to `trace.json`; retain the original. Resolve every review reason before creating an approval.
+The example records one correction; repeat the review for each flagged field.
+
+**Build the handoff against one approved destination contract.** Use these steps here:
+
+1. Define `post-approved-result` to accept the document ID, source hash, reviewed values,
+   and a unique operation ID. Reject unknown fields and an unapproved result.
+2. Authenticate the reviewer separately. Bind their decision to the exact reviewed payload
+   and hash; reject changed or expired approvals at dispatch.
+3. Give the workflow identity only the permission needed for that operation. The model
+   may propose a handoff, but application code checks approval before calling the destination.
+4. Make the destination reject conflicting reuse of an operation ID and return a durable
+   receipt. Keep that receipt with the review trace. A retry must not post a second result.
+
+The customer-specific posting API and reviewer UI are integration work. For a synthetic
+walkthrough without that API, stop at the reviewed result and approval trace. Mark the
+handoff unimplemented; do not claim that a local JSON record changed a business system.
+Modules 6 and 7 must retain that boundary.
 
 ### Option B — Human-in-the-loop review app
 
@@ -72,9 +95,8 @@ experience changes.
 
 If this workflow is one agent among several, use an explicit handoff. An agent can prepare the
 typed result and correction record, but a **named human** must approve the result before the
-workflow calls the action tool. Use the
-[Deploy as a Hosted Agent activity](../../../activities/advanced-deploy-hosted-agent/README.md)
-when the workflow ships.
+workflow calls the action tool. Module 7 contains the hosting steps; orchestration does
+not replace the approval check at the destination.
 
 ## Verify
 

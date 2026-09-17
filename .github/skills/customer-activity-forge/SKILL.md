@@ -11,7 +11,7 @@ bridges “we should do something with AI” and a useful customer conversation:
 propose approximately ten achievable ideas, and map the best candidates to a scenario playbook.
 
 This is an intake tool, not an architecture approval or delivery commitment. After choosing an idea,
-decompose the use case into parts and map those parts to relevant lessons or reference activities.
+decompose the use case into parts and map those parts to relevant scenario lessons.
 Use that mapping to agree the first implementation scope with the customer, including acceptance
 criteria. Confirm data access and the approved environment before building.
 
@@ -134,7 +134,7 @@ For the top idea, pre-fill this handoff. Clearly mark information the customer m
 
 Include a session-planning map for the top idea:
 
-| Part of the customer use case | Relevant lessons or reference activities | Adaptation or uncovered work |
+| Part of the customer use case | Relevant scenario lessons | Adaptation or uncovered work |
 |---|---|---|
 | … | … | … |
 

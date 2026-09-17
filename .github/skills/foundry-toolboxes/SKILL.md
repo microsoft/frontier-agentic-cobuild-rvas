@@ -1,6 +1,6 @@
 ---
 name: foundry-toolboxes
-description: Curate intent-based Microsoft Foundry Toolboxes (preview) — one MCP-compatible endpoint bundling MCP, Web Search, Azure AI Search, Code Interpreter, File Search, OpenAPI, A2A, Browser Automation, and Computer Use tools. Build once, consume everywhere. Use for Advanced Action Tools.
+description: Curate intent-based Microsoft Foundry Toolboxes (preview) — one MCP-compatible endpoint bundling MCP, Web Search, Azure AI Search, Code Interpreter, File Search, OpenAPI, A2A, Browser Automation, and Computer Use tools. Use when a scenario needs a toolbox integration.
 ---
 
 # foundry-toolboxes (stub)
@@ -14,12 +14,10 @@ description: Curate intent-based Microsoft Foundry Toolboxes (preview) — one M
 npx skills add microsoft/skills --skill foundry-toolboxes
 ```
 
-**Maps to:** Advanced · Action Tools — Make the Agent Do Work.
+**Maps to:** Scenario tool integrations and the Operational Agents approval contract.
 
-**Before implementing:** query `foundry-mcp` for the current Toolboxes (preview) surface. In this repo
-the action backend + FastMCP server live in `scripts/action-backend/` (env contract in `.env.sample`:
-`ACTION_API_URL`, `ACTION_MCP_URL`, `ACTION_API_KEY`). Use this skill to bundle the action MCP tool with
-AI Search and consume it from the agent, including the `RequiredMcpToolCall` → `SubmitToolApprovalAction`
-human-approval loop.
+**Before implementing:** query `foundry-mcp` and `microsoft-docs` for the current toolbox API.
+The local execution and approval example is in `scenarios/operational-agents/accelerator/`.
+A toolbox adapter is separate integration work; preserve the scenario's exact-operation approval rules.
 
 **Upstream source:** `.github/plugins/microsoft-foundry/skills/foundry-toolboxes/`

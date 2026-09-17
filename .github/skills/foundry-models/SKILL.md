@@ -1,6 +1,6 @@
 ---
 name: foundry-models
-description: Discover, deploy, and manage Microsoft Foundry models; preset vs customized deployments; capacity discovery across regions; quota; PTU vs PAYG; RAI policy. Use for Foundations Step 2 (Model Selection & the Playground).
+description: Discover, deploy, and manage Microsoft Foundry models; preset vs customized deployments; capacity discovery across regions; quota; PTU vs PAYG; RAI policy. Use for scenario model selection.
 ---
 
 # foundry-models (stub)
@@ -14,7 +14,7 @@ description: Discover, deploy, and manage Microsoft Foundry models; preset vs cu
 npx skills add microsoft/skills --skill foundry-models
 ```
 
-**Maps to:** Foundations · Step 2 — Model Selection & the Playground.
+**Maps to:** Scenario model selection and the AI Grounding model-comparison scripts.
 
 **Before implementing:** use the `foundry-mcp` MCP server to browse the live model catalog and the
 `azure` MCP server for capacity/quota in your region. Compare model families on cost/latency/quality,

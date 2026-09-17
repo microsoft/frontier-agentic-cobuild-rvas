@@ -1,6 +1,6 @@
 ---
 name: foundry-workflows
-description: Multi-agent orchestration in Microsoft Foundry — declarative workflow vs A2A tool call vs Connected Agents pattern; Microsoft Agent Framework (MAF) patterns including Magentic manager/planner. Use for the Magentic Workflows and MAF Extras.
+description: Multi-agent orchestration in Microsoft Foundry — declarative workflow vs A2A tool call vs Connected Agents pattern; Microsoft Agent Framework (MAF) patterns including Magentic manager/planner. Use when adapting a scenario to multi-agent orchestration.
 ---
 
 # foundry-workflows (stub)
@@ -14,7 +14,7 @@ description: Multi-agent orchestration in Microsoft Foundry — declarative work
 npx skills add microsoft/skills --skill foundry-workflows
 ```
 
-**Maps to:** Extras · Magentic Workflows (MAF) and MAF + Hosted Long-Running Agents.
+**Maps to:** Optional multi-agent adaptations. The scenario lessons identify the required integration work.
 
 **Before implementing:** query `foundry-mcp` for the current workflow/Connected-Agents surface and the
 `agent-framework` SDK docs via `microsoft-docs`. Compose specialized agents (Triage / Knowledge / Action /

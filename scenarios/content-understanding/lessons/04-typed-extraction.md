@@ -1,178 +1,101 @@
 # Module 4 — Implement typed extraction with evidence
 
-A demo that prints fields is insufficient. This module turns the capability from module 3 into **one
-validated result contract**. Each value has confidence and grounding evidence. Missing or
-low-confidence fields route to review, and the model never invents a value.
+Normalize the completed analysis from module 3. **A value without source evidence cannot
+proceed.** Keep the original response so a reviewer can inspect what was rejected.
 
 ![Typed extraction with evidence](../diagrams/04-typed-extraction-evidence.png)
 
 ## What you build
 
-A normalizer maps raw capability output into the typed result contract and enforces four invariants.
-A validation step rejects any result that violates one.
-
-The four invariants:
-
-1. Every field with a value has `confidence` and non-empty grounding `evidence`. **A value without
-   evidence is inferred and rejected.**
-2. Any field below the confidence threshold is flagged `low_confidence:<field>` and forces review.
-3. A missing/uncertain field is surfaced for review, never guessed.
-4. `requires_human_review` and `routing_decision` agree with the flags.
+A result tied to the original document hash, with field confidence and source spans.
+Missing values and conflicting invoice totals produce explicit review reasons.
 
 ## Choose your path
 
-| Option | Source of confidence + evidence | Normalizer effort | Best when |
-| --- | --- | --- | --- |
-| **A. Map a Content Understanding result** *(default)* | `confidence` + `source`/`spans` per field | Low — evidence is already there | You chose CU prebuilt or custom (module 3 A/B/F) |
-| B. Map a Document Intelligence result | `field.confidence` + `bounding_regions` | Low | You chose a DI prebuilt or custom model (module 3 C/D) |
-| C. LLM output + self-reported grounding | You require a span per field and verify it | High — you build evidence + validation | You chose LLM structured outputs (module 3 E) |
+| Path | Implementation | Boundary |
+| --- | --- | --- |
+| **Content Understanding invoice** (default) | Supplied `normalize.py` | One invoice, using the synthetic USD field mapping |
+| Custom document or RFQ | Adapt `FIELD_PATHS` and document-specific rules | Requires a reviewed mapping for the chosen analyzer |
+| Document Intelligence or LLM output | Write a mapper to the same evidence contract | Do not invent confidence or source evidence |
 
-**Default: Option A.** Content Understanding already returns confidence and a grounding source for
-each field. The normalizer is a thin mapping, and the invariants are easy to enforce.
+The default maps invoice number, purchase order, supplier, and the invoice amounts. It
+preserves zero values and reads nested `valueObject.Amount` fields. Missing or non-USD
+currency codes clear the accepted USD value and force review; the mapper does not convert currencies.
 
-**Choose B** when you standardized on Document Intelligence models. Its shape differs, but it includes
-the same evidence. **Choose C** only if you accepted module 3's build-your-own trade. You must then
-implement evidence and validation.
-
-**Migration cost.** Moving between A and B changes only the mapping. The contract and downstream
-modules are identical. Moving from A or B to C adds a validation layer that needs the same care as
-extraction.
+The mapping follows the [Content Understanding invoice schema](https://github.com/Azure/content-understanding-toolkit/blob/main/prebuilt-schema/2025-11-01/procurement/invoice.md).
+Prebuilt generated amounts can lack source evidence or confidence. Those fields require
+review; do not manufacture either to make the normalizer pass.
 
 ## Implementation
 
-**The snippets below are incomplete sketches, not a validated normalizer.** They do not yet
-handle all required fields, nested values, missing confidence, or the full fixture contract.
-Option A also needs a `_page` parser. Implement and test those pieces before allowing any
-downstream handoff.
+Run from the repository root. `--source` must identify the exact file submitted in module 3,
+not a later transcription or converted copy.
 
-### Option A — Map a Content Understanding result
-
-```python
-def to_contract(document_id, cu_fields, threshold):
-    fields, review_reasons = {}, []
-    for name, raw in cu_fields.items():
-        value = raw.get("valueString") or raw.get("valueNumber") or raw.get("valueDate")
-        confidence = raw.get("confidence")
-        spans = raw.get("spans") or []
-        if value is None:
-            review_reasons.append(f"missing_field:{name}")
-            continue
-        if not spans or raw.get("source") is None:          # invariant 1: no inferred values
-            review_reasons.append(f"no_evidence:{name}")
-        if confidence is not None and confidence < threshold:  # invariant 2
-            review_reasons.append(f"low_confidence:{name}")
-        fields[name] = {"value": value, "confidence": confidence,
-                        "evidence": {"page": _page(raw.get("source")), "spans": spans}}
-    requires_review = bool(review_reasons)                    # invariants 3 + 4
-    return {"document_id": document_id, "confidence_threshold": threshold,
-            "fields": fields, "review_reasons": review_reasons,
-            "requires_human_review": requires_review,
-            "routing_decision": "route_human_review" if requires_review else "auto_post"}
+```bash
+python3 scenarios/content-understanding/accelerator/normalize.py \
+  --analysis scenarios/content-understanding/accelerator/.runtime/analysis.json \
+  --source "/absolute/path/to/the-analyzed-synthetic-invoice.pdf" \
+  --document-id invoice-2002 --threshold 0.85 \
+  --output scenarios/content-understanding/accelerator/.runtime/result.json
 ```
 
-### Option B — Map a Document Intelligence result
+The normalizer rejects incomplete service operations. It walks the declared fields rather
+than only the fields returned, so an omitted field cannot disappear silently.
 
-Same contract, different source shape — `field.confidence` and `field.bounding_regions`:
+Each field retains `value`, `confidence`, and `evidence`. Evidence includes the page parsed
+from `D(page,...)`, the original region string, and text spans. A missing region or invalid
+span clears the accepted value and adds `no_evidence:<field>`. The original analysis still
+contains the rejected candidate.
 
-```python
-def di_to_contract(document_id, di_document, threshold):
-    fields, review_reasons = {}, []
-    for name, field in di_document.fields.items():
-        value = field.get("content")
-        confidence = field.get("confidence")
-        regions = field.get("boundingRegions") or []
-        if value is None:
-            review_reasons.append(f"missing_field:{name}"); continue
-        if not regions:
-            review_reasons.append(f"no_evidence:{name}")
-        if confidence is not None and confidence < threshold:
-            review_reasons.append(f"low_confidence:{name}")
-        page = regions[0]["pageNumber"] if regions else None
-        fields[name] = {"value": value, "confidence": confidence,
-                        "evidence": {"page": page, "spans": [{"polygon": r["polygon"]} for r in regions]}}
-    requires_review = bool(review_reasons)
-    return {"document_id": document_id, "confidence_threshold": threshold, "fields": fields,
-            "review_reasons": review_reasons, "requires_human_review": requires_review,
-            "routing_decision": "route_human_review" if requires_review else "auto_post"}
-```
+Missing confidence forces review; it is never treated as a high score. A confidence below
+the chosen threshold adds `low_confidence:<field>`. The invoice rule also checks whether
+subtotal plus tax equals the total.
 
-### Option C — LLM output + self-reported grounding
+**Normalization never approves payment.** Clean results become `ready_for_approval`.
+Exceptions become `route_human_review`. Module 5 handles the human decision separately.
+The older plain-value files in `sample-data/expected/` are comparison labels, not service
+responses or authorization to post.
 
-There is no confidence score, so create and validate the evidence. Require the model to return the
-exact source substring for each field. Confirm that substring exists in the document and reject a
-field it cannot locate:
-
-```python
-def validate_llm_field(name, value, quoted_span, document_text, review_reasons):
-    if value is None:
-        review_reasons.append(f"missing_field:{name}"); return None
-    offset = document_text.find(quoted_span or "")
-    if not quoted_span or offset < 0:            # invariant 1: reject unlocatable = inferred
-        review_reasons.append(f"no_evidence:{name}")
-        return {"value": value, "confidence": None, "evidence": {"page": 1, "spans": []}}
-    return {"value": value, "confidence": None,
-            "evidence": {"page": 1, "spans": [{"offset": offset, "length": len(quoted_span)}]}}
-```
-
-Any field with `spans: []` must route to review. Without grounding, you cannot claim the value came
-from the document.
-
-Modules 3 and 4 are the canonical
-[Document Workflow activity](../../../activities/extra-document-workflow/README.md).
+For a custom analyzer, edit the field mapping and its business rules together. Carry the
+same document hash and review behavior into the adapted mapper. For LLM output, verify
+each quoted span against the source; absent confidence still requires review.
 
 ## Verify
 
-Run the normalizer on a real extraction result. Check its invariants against the source document, not
-a fixture. Write the result contract to `result.json` and inspect it.
-
-**1. No value carries an empty evidence set, and routing agrees with the flags.**
+Run the local behavioral checks:
 
 ```bash
-jq '[.fields | to_entries[]
-     | select(.value.value != null and ((.value.evidence.spans // []) | length) == 0) | .key]' result.json
-
-jq 'if (.review_reasons | length) > 0
-     then (.requires_human_review == true and .routing_decision == "route_human_review")
-     else true end' result.json
+python3 -m unittest discover -s scenarios/content-understanding/accelerator -p test_normalize.py
 ```
 
-The first query must return `[]`. Any field name it prints has a value without grounding, which
-invariant 1 forbids. The second must return `true`. `false` means routing conflicts with review
-reasons and could auto-post a flagged result.
+They exercise missing evidence and confidence, zero values, and conflicting totals. They
+do not call Azure or establish extraction accuracy.
 
-**2. A high-value field's evidence actually points at the source.**
-
-Take the span for a field that moves money (invoice total, amount due), open the source document at
-that page, and read the characters at that offset.
-
-If the text differs from the returned value, the workflow accepted a field without comparing it to the
-document. Fix that before an auditor or an incorrect payment exposes it.
-
-**3. The review gate actually trips.**
+Inspect the result from your actual analysis:
 
 ```bash
-jq '.confidence_threshold as $threshold
-    | [.fields | to_entries[]
-       | select(.value.confidence != null and .value.confidence < $threshold) | .key] as $low
-    | {low_confidence_fields: $low, routing_decision: .routing_decision}' result.json
+jq '{document_id, source_sha256, routing_decision, review_reasons, fields}' \
+  scenarios/content-understanding/accelerator/.runtime/result.json
 ```
 
-Run this on a messy document, not the clean sample. If `low_confidence_fields` is non-empty,
-`routing_decision` must be `route_human_review`. If no document ever produces a low-confidence field,
-the threshold is too low. Calibrate it in module 6.
+Open the original document at an amount's page and region. Confirm the returned value
+matches what a person sees. A plausible region string alone does not establish grounding.
+
+Then copy the analysis, remove one field's confidence, and normalize the copy. It must
+route to review. Remove its source region too: the accepted value must become `null`.
+Keep this damaged copy out of the approved input set.
 
 ## Troubleshooting
 
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Validation fails on `no_evidence` | Mapped a value but dropped its span/region | Carry `spans`/`bounding_regions`; for LLM, require and verify a source span |
-| Everything routes to review | Threshold too high for this document class | Recalibrate the threshold per class; measure it in module 6, don't guess |
-| Low-confidence field auto-posts | Gate not applied, or `requires_human_review` hard-coded | Derive `requires_human_review` from `review_reasons`, never set it manually |
-| CU `source` is a polygon, not a page | Grounding is a region string `D(page, …)` | Parse the leading page index; keep the polygon as the span payload |
-| DI field has no `boundingRegions` | Field was inferred from key-value pairing, not located | Treat as `no_evidence` and route to review |
-| Missing field silently omitted | Normalizer skipped `None` values without flagging | Emit `missing_field:<name>` so the reviewer sees the gap |
+| Failure | Action |
+| --- | --- |
+| Analysis is not `Succeeded` | Finish module 3's polling or inspect the service error |
+| All fields are missing | Inspect the analyzer's field names and adapt `FIELD_PATHS` |
+| Amount has no evidence | Inspect the nested `Amount` field and analyzer evidence configuration |
+| Every document needs review | Inspect confidence and mapping before changing the threshold |
+| Source hash differs from the label | Review the exact submitted file; do not copy a fixture hash |
 
 ## Next module
 
-[Module 5 — Build review, correction, and handoff](05-human-review.md) routes the exceptions this
-module raised to a named reviewer and captures the outcome.
+[Module 5 — Build review, correction, and handoff](05-human-review.md). Present the result
+and original analysis to the reviewer without overwriting either.

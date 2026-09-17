@@ -16,21 +16,22 @@ implementation. Start deployment in
 
 ## The 7 modules
 
-| Module | You build | Default path | Canonical activity |
-| --- | --- | --- | --- |
-| [1. Select the experience capability](lessons/01-experience-selection.md) | A dated, evidence-backed capability decision (batch avatar vs real-time vs Voice Live vs video translation vs audio) | Speech **batch avatar**, standard voice | Current Microsoft docs |
-| [2. Provision the foundation](lessons/02-foundation.md) | Keyless Foundry + model + Search + Speech data plane + observability | `azd`/Bicep, managed identity | [Foundations](../../activities/foundations/README.md) |
-| [3. Governed content pipeline](lessons/03-content-pipeline.md) | Versioned claims with owner/version/expiry that gate everything downstream | Blob + typed claim set | This scenario's accelerator |
-| [4. Grounded assistant](lessons/04-grounded-assistant.md) | A citing assistant that refuses on unapproved claims and hands off | Model + approved claim set; Foundry agent optional | [Foundations, Steps 3–4](../../activities/foundations/README.md) |
-| [5. Generate the accessible experience](lessons/05-experience-generation.md) | Avatar render from an approved revision with disclosure, captions, transcript, fallback | Batch synthesis + accessibility outputs | [Voice & Live](../../activities/extra-voice-live/README.md) |
-| [6. Gate publication behind human approval](lessons/06-approval-gating.md) | A versioned four-role approval gate and a withdrawal path | Demo approval record checked in code | This scenario's accelerator |
-| [7. Evaluate, red-team, trace, operate](lessons/07-prove-and-operate.md) | Evaluation + red-team + tracing + release scorecard | Foundry evaluations + AI Red Teaming Agent | [Evaluation](../../activities/advanced-evaluation-redteam/README.md) |
+| Module | You build | Default path |
+| --- | --- | --- |
+| [1. Select the experience capability](lessons/01-experience-selection.md) | An evidence-backed capability decision | Speech **batch avatar**, standard voice |
+| [2. Provision the foundation](lessons/02-foundation.md) | Foundry and Speech resources with observability | Scenario Bicep, managed identity |
+| [3. Governed content pipeline](lessons/03-content-pipeline.md) | Versioned, owned claims | Blob + typed claim set |
+| [4. Grounded assistant](lessons/04-grounded-assistant.md) | Cited answers and unsupported-claim refusals | Model + approved claim set; agent optional |
+| [5. Generate the accessible experience](lessons/05-experience-generation.md) | Approved avatar video with disclosure and text alternatives | Batch synthesis |
+| [6. Gate publication behind human approval](lessons/06-approval-gating.md) | Exact-revision approval and withdrawal | Demo approval record checked in code |
+| [7. Evaluate, red-team, trace, operate](lessons/07-prove-and-operate.md) | Release evidence and a scorecard | Scenario checks plus managed evaluation |
 
-Work through the modules in order. Your first choice shapes the later modules.
+**Work through these modules in order.** The default path includes its required steps and
+uses one claim set throughout. You do not need a separate grounding or voice curriculum.
 
 ## Decision gates to carry into the customer conversation
 
-Answer these questions before you open the reference library:
+Answer these questions before building:
 
 | Gate | Decide before building |
 |---|---|

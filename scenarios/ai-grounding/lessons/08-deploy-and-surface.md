@@ -3,8 +3,8 @@
 Module 7 proved the assistant is good enough. This module decides whether anyone uses it: **where do
 people meet it, and who runs it?**
 
-The question is smaller than it looks. The agent has had a stable endpoint since module 6. You are
-choosing a doorway and documenting who owns it.
+Carry forward the path tested in module 7. If you skipped the agent, keep the retrieval
+function in your application; do not create an agent merely to expose it.
 
 ![Surface decision](../diagrams/08-surface-decision.png)
 
@@ -68,18 +68,31 @@ Whichever doorway you choose, these five rules stay fixed:
 
 ### Option A — Call the agent from your own app or API
 
-The agent already exists and is versioned. Your application calls it:
+If module 6 created an agent, your application calls that pinned version:
 
 ```python
 resp = openai.responses.create(
     input=question,
-    extra_body={"agent_reference": {"name": "grounding-assistant", "type": "agent_reference"}},
+    extra_body={"agent_reference": {
+        "name": os.environ["AZURE_FOUNDRY_AGENT_NAME"],
+        "version": os.environ["AZURE_FOUNDRY_AGENT_VERSION"],
+        "type": "agent_reference",
+    }},
 )
 ```
 
 Pin the agent version in application configuration, not just its name. Otherwise a debugging version
 can silently become production. Your app authenticates users and the agent authenticates your app.
 Define both before this counts as a surface.
+
+For the no-agent path, call module 5's `grounded_answer.answer` function from your existing
+backend with the caller's verified search token. Keep the `KnowledgeBaseRetrievalClient`
+and knowledge-base name from module 7's retrieval capture. Return the answer and citations;
+do not replace the user's identity with one shared privileged identity.
+
+The customer application adapter is integration work. The capture script can demonstrate
+answers locally, but a script alone is not an authenticated deployed surface. Complete the
+HTTP checks below before describing this path as deployed.
 
 ### Option B — Publish the Foundry agent to Teams and Microsoft 365 Copilot
 
@@ -124,8 +137,37 @@ goes through Microsoft 365 admin approval, same as option B.
 
 Package the agent as a container with its own Entra identity and a dedicated endpoint. Take this
 route when another team needs to call the agent as a service, or when you need control over the
-runtime. The [Deploy as a Hosted Agent activity](../../../activities/advanced-deploy-hosted-agent/README.md)
-covers `agent.yaml`, `azd ai agent`, per-agent managed identity, and the endpoint contract.
+runtime. This is an optional packaging change; retain the scenario corpus and evaluated behavior.
+
+In a new working directory outside this repository, initialize the official Responses host:
+
+```bash
+azd auth login
+azd ext install microsoft.foundry
+HOSTED_DIR="$(mktemp -d)"
+cd "$HOSTED_DIR"
+azd ai agent init \
+  -m https://github.com/microsoft-foundry/foundry-samples/blob/main/samples/python/hosted-agents/agent-framework/responses/01-basic/azure.yaml \
+  --deploy-mode code
+```
+
+Select the existing scenario project and model. Change into the generated directory printed
+by the wizard. Replace the sample handler with this scenario's evaluated answer path; keep
+the generated protocol host and Dockerfile. Configure its existing knowledge source and
+preserve the caller's access checks. A generic chat sample is not the grounding application.
+
+Review the hosted service in the generated `azure.yaml`, then run:
+
+```bash
+azd provision
+azd ai agent run
+```
+
+Try the coordinator and supervisor questions locally. Stop the local server, run `azd deploy`,
+and record the deployed version and per-agent principal ID. Assign only the required source
+permissions and repeat the surface checks below against the reported endpoint.
+Current setup:
+<https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent>
 
 Carry the tracing env into the deployment or you lose the observability you built in module 7:
 
@@ -137,8 +179,9 @@ export OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true
 ### Option E — Custom web UI
 
 A purpose-built front end over option A. Use it for a stakeholder demo where the interface matters,
-or when you need a response contract Teams cannot express. The
-[Build a UI activity](../../../activities/extra-build-ui/README.md) is the reference. The trap is
+or when you need a response contract Teams cannot express. Build the minimum UI over option A:
+question input, answer with source links, visible refusal, and an explicit request-error state.
+Keep tokens on the server and preserve the caller's identity. The trap is
 authentication: a demo UI that calls the agent with a service identity has quietly deleted module 2's
 permission boundary, because every user now looks like the same identity. Pass the signed-in user
 through, or say out loud that the demo is not permission-accurate.
@@ -146,10 +189,10 @@ through, or say out loud that the demo is not permission-accurate.
 ### Option F — Hosted long-running workflow
 
 Use this only when the task is genuinely asynchronous: batch review, overnight queue processing,
-large corpus refresh, or a workflow a user should submit and check later. The
-[Hosted Long-Running Agents activity](../../../activities/extra-hosted-longrunning/README.md)
-shows the pattern: hosted workflow, background run, response handle, later retrieval, and trace
-review. Do not use it for normal chat latency problems; make the interaction faster instead.
+large corpus refresh, or a workflow a user should submit and check later. It needs persisted
+job state, an opaque handle, and authorization on every status/result read. Add cancellation
+and a bounded retry policy before exposing it. This extension is outside the interactive
+default; do not use it to hide ordinary chat latency.
 
 ### Re-prove the permission boundary here
 
@@ -236,13 +279,6 @@ Adjust the commands for the surface you deployed (Container Apps, Function App, 
 
 ## Next module
 
-There isn't one. You have a grounded, permission-aware pilot with evaluation and tracing that real
-users can reach.
-
-Extend the build with the [action tools](../../../activities/advanced-action-tools/README.md),
-[hosted deployment](../../../activities/advanced-deploy-hosted-agent/README.md), or
-[Fabric IQ](../../../activities/extra-fabric-iq/README.md) activities. If the workload is
-asynchronous, use the
-[Hosted Long-Running Agents activity](../../../activities/extra-hosted-longrunning/README.md).
-Otherwise start
-[module 1](01-provision-foundation.md) again with the customer's own corpus.
+There is no required next module. If the deployed surface passes these checks, review the
+pilot with its owners. Keep unresolved integrations and operating requirements explicit.
+Return to [module 1](01-provision-foundation.md) when the approved corpus or scope changes.

@@ -26,11 +26,9 @@ claim you confirm or refute.
 
 ## 3. Environment variables
 
-- [ ] Var names are **identical** across `.env.sample`, `docs/`, `activities/`, `infra/` outputs,
-      and `scripts/`. Any drift is **Inconsistent / Medium**.
-- [ ] Authoritative Action Tools names match `.env.sample`: `ACTION_API_URL`, `ACTION_MCP_URL`,
-      `ACTION_API_KEY`.
-- [ ] Foundations vars referenced by validators exist (`AZURE_SEARCH_ENDPOINT`,
+- [ ] Var names match the selected scenario's `.env.sample`, deployment outputs, and code.
+      The root `.env.sample` covers only shared infrastructure.
+- [ ] Environment vars referenced by checks exist (`AZURE_SEARCH_ENDPOINT`,
       `AZURE_SEARCH_INDEX_NAME`, `AZURE_AI_PROJECT_ENDPOINT`, `AZURE_AI_MODEL_DEPLOYMENT_NAME`,
       `APPLICATIONINSIGHTS_CONNECTION_STRING`, etc.).
 - [ ] No real secrets are committed anywhere (`.env` must not be in the repo).
@@ -42,7 +40,7 @@ claim you confirm or refute.
 - [ ] Bash fallback (`scripts/deploy.sh`) produces the same `.env` contract as `azd up`.
 - [ ] Region / SKU / model deployment names referenced in docs exist and are available.
 
-## 5. Dependencies (`requirements.txt`, backend `requirements.txt`)
+## 5. Dependencies (`requirements.txt`, scenario requirements)
 
 - [ ] Every package referenced in code is pinned and present.
 - [ ] Pinned versions are real and not yanked; flag suspiciously old/preview pins.
@@ -58,13 +56,13 @@ claim you confirm or refute.
 - [ ] Internal links resolve (file paths, `#anchors`, "see Step N" still points to that step).
 - [ ] File paths named in prose exist at that path.
 - [ ] `solution.md` step order matches `README.md` and the `validate.py` checks.
-- [ ] `_site/` / `docs/_site/` content matches source `docs/` (report drift; don't hand-edit).
+- [ ] `docs/assets/data/` matches source scenarios (report drift; don't hand-edit).
 
 ## 8. Pacing & pedagogy
 
-- [ ] Each activity states prerequisites and learning objectives.
+- [ ] Each lesson states prerequisites and what the reader builds.
 - [ ] Difficulty progresses without unexplained jumps; new concepts are introduced before use.
-- [ ] Scenario lessons and activity guides carry the information a participant needs; no parallel facilitator-only content is required.
+- [ ] Scenario lessons carry the information a participant needs; no parallel curriculum is required.
 - [ ] Time/effort estimates (if present) are plausible for the stated steps.
 
 ## Severity reference

@@ -1,6 +1,6 @@
 ---
 name: foundry-iq-knowledge-bases
-description: Build Microsoft Foundry IQ knowledge bases (preview) — multi-source, permission-aware grounding with agentic retrieval (query decomposition + parallel search + reranking); expose to agents via MCP. Use for Foundations Step 4 (Knowledge Base — Index + Foundry IQ).
+description: Build Microsoft Foundry IQ knowledge bases (preview) — multi-source, permission-aware grounding with agentic retrieval (query decomposition + parallel search + reranking); expose to agents via MCP. Use for AI Grounding knowledge-base lessons.
 ---
 
 # foundry-iq-knowledge-bases (stub)
@@ -14,12 +14,10 @@ description: Build Microsoft Foundry IQ knowledge bases (preview) — multi-sour
 npx skills add microsoft/skills --skill foundry-iq-knowledge-bases
 ```
 
-**Maps to:** Foundations · Step 4 — Knowledge Base (Index + Foundry IQ) — the Foundations **end-state**.
+**Maps to:** AI Grounding ingestion, retrieval, and knowledge-base lessons.
 
-**Before implementing:** query `microsoft-docs` for the current (preview) knowledge-base API and the
-Azure AI Search tool query types (`VECTOR_SEMANTIC_HYBRID` is the recommended default). The index over
-`resources/sample-data/university-faq/` is built by `scripts/setup-foundations.sh`; use this skill to
-build the IQ knowledge base over it and attach it to the agent as an MCP/tool. RBAC: *Search Index Data
-Contributor* + *Search Service Contributor*, keyless via the project managed identity.
+**Before implementing:** query `microsoft-docs` and `foundry-mcp` for the current knowledge-base API.
+Reuse the scripts and scenario data under `scenarios/ai-grounding/accelerator/`.
+Follow the lesson's identity and permission checks when adapting retrieval.
 
 **Upstream source:** `.github/plugins/microsoft-foundry/skills/foundry-iq-knowledge-bases/`

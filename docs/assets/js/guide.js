@@ -7,14 +7,11 @@
 
   async function init() {
     const scenarioId = FP.qp('scenario');
-    const activityId = FP.qp('activity');
     const guideId = FP.qp('guide');
     if (!guideId) return showError('Select a guide.');
-    if (/facilitator/i.test(guideId)) return showError('This guide no longer exists. Use the scenario lessons, activity guide, or solution path.');
 
     try {
       const data = await FP.loadData();
-      if (activityId) return showError('This activity guide was not found. Use the activity page and solution path.');
       if (!scenarioId) return showError('Select a scenario and guide.');
 
       await renderScenarioGuide(data, scenarioId, guideId);
@@ -42,7 +39,7 @@
         FP.renderMd(content, body);
         FP.ensureGuideAnchors(body);
         FP.applyGuideAccordions(body);
-        rewriteGuideLinks(body, scenario, sourcePath, data.activities || []);
+        rewriteGuideLinks(body, scenario, sourcePath);
         FP.scrollToGuideAnchor(body);
         FP.initDiagramZoom(body);
       } else {
@@ -89,13 +86,12 @@
   }
 
   function routeAppPage(path, hash) {
-    const match = path.match(/(?:^|\/)(lesson|activity|scenario|slides|guide)\.html(\?.*)?$/i);
+    const match = path.match(/(?:^|\/)(lesson|scenario|slides|guide)\.html(\?.*)?$/i);
     return match ? `${match[1].toLowerCase()}.html${match[2] || ''}${hash ? `#${hash}` : ''}` : '';
   }
 
-  function rewriteGuideLinks(container, scenario, sourcePath, activities) {
+  function rewriteGuideLinks(container, scenario, sourcePath) {
     const lessonRoutes = new Map((scenario.lessons || []).map((lesson) => [lesson.content_path, lesson.lesson_path]));
-    const activityIds = new Set((activities || []).map((activity) => activity.id));
 
     container.querySelectorAll('a[href]').forEach((link) => {
       const raw = link.getAttribute('href') || '';
@@ -111,12 +107,6 @@
       const resolved = resolveRelative(sourcePath, path);
       if (lessonRoutes.has(resolved)) {
         link.href = lessonRoutes.get(resolved) + (hash ? `#${hash}` : '');
-        return;
-      }
-
-      const activityMatch = resolved.match(/^assets\/data\/activities\/([^/]+)\/README\.md$/i);
-      if (activityMatch && activityIds.has(activityMatch[1])) {
-        link.href = FP.activityUrl(activityMatch[1]) + (hash ? `#${hash}` : '');
         return;
       }
 

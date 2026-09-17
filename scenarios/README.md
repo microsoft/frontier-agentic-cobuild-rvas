@@ -50,8 +50,7 @@ scenarios/<folder-name>/
     {
       "id": "lesson-id",
       "title": "Customer decision",
-      "path": "lessons/lesson-id.md",
-      "reused_with": ["other-scenario-id"]
+      "path": "lessons/lesson-id.md"
     }
   ],
   "build_modules": [
@@ -93,9 +92,13 @@ roadmap displays it alongside the module summary.
 - The playbook helps teams map parts of a customer use case to its lessons, including references to
   other tracks where useful. A partial match must not imply coverage of the whole use case.
 - Every lesson names the decision, inputs, proof, and next decision.
-- Every scenario names the decision gates that determine which reference-library mechanics are
-  needed. Do not revive legacy application paths; extract only the source, access, action, trust,
-  operating, and deployment decisions that help the customer choose what to build next.
+- **Every default path is self-contained.** Include the required commands, inputs, and checks in
+  the lesson, using the scenario's resources and data. Keep implementation code in its accelerator;
+  extract shared code only when multiple scenarios need it.
+- Link to official technical references where useful, but include every required step in the lesson.
+  Do not add a separate activity catalogue or an `activity_id` prerequisite.
+- State when a non-default option needs additional engineering. Do not present an unimplemented
+  alternative as a working default or send readers to another sample to fill the gap.
 - Every lesson follows the practical build-module contract: visible inputs, implementation steps,
   expected evidence, an observable Verify step, and the next customer decision.
 - Every lesson's **Verify** section is observable against the reader's own resources: a real command,

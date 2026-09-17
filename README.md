@@ -33,7 +33,7 @@ Begin with the customer's outcome and data constraints. If the opportunity is un
 ## Break the use case into parts
 
 Before selecting sessions, decompose the customer's end-to-end use case into the parts it needs.
-Map each part to the relevant lessons or reference activities. Record what the material covers,
+Map each part to the relevant scenario lessons. Record what the material covers,
 what needs adapting, and what requires additional engineering. Keep uncovered work visible even
 when it falls outside the engagement.
 
@@ -43,7 +43,7 @@ For example, a supplier-request process could draw on several parts of the kit:
 |---|---|---|
 | Extract fields from a submitted document | Content Understanding extraction lessons | Define the fields and evaluate representative documents. |
 | Answer a related policy question | AI Grounding lessons | Connect approved policy content and prove access boundaries. |
-| Create a record in the customer's business system | Action Tools reference for an approval-gated handoff | Build the system-specific integration; the generic action pattern does not supply it. |
+| Create a record in the customer's business system | Operational Agents lessons on tool contracts and exact approval | Build the system-specific integration; the local sample does not supply it. |
 
 **Plan sessions around this mapping.** Combine the relevant lessons across tracks, keeping their
 prerequisites. Agree which parts the engagement will build and assign owners to the remaining work.
@@ -78,11 +78,8 @@ Scenarios live in [`scenarios/`](scenarios/). `npm run build` regenerates their 
 run `npm run validate:scenarios` to validate scenario packs. Read the [scenario contribution
 contract](scenarios/README.md) before proposing a scenario or lesson.
 
-## Reusable technical reference
-
-The Northfield activities provide a fictional reference implementation and guided practice.
-Use the scenario playbook to choose the relevant implementation activities, then adapt them to
-the customer's requirements. You do not need to complete the whole reference curriculum.
+**Stay in your scenario's lessons.** Each default path includes its implementation steps and
+checks. Its accelerator contains the code and sample data used along the way.
 
 ---
 
@@ -142,86 +139,6 @@ az login
 Follow the selected scenario's accelerator guide for a clean demo subscription or an existing
 customer environment. Deploy demo resources only where approved.
 
-### Optional: bootstrap the reference implementation
-
-When you need the Northfield reference for an Advanced activity, the bootstrap creates the
-Foundations sample end-state. This deploys sample infrastructure; it does not implement the
-customer's scenario.
-
-Run these commands from the repository root:
-
-```bash
-azd up                                   # provision Foundry + AI Search + App Insights + ACR
-./scripts/setup-foundations.sh           # build the agent + index + IQ knowledge base
-python scripts/validate-foundations.py   # ✅ asserts the Foundations end-state
-```
-
----
-
-## Activities
-
-The reference curriculum has two activity layers. **Foundations** is one guided activity with four
-ordered steps. **Advanced** activities are modular and can be completed in **any order** after
-Foundations. Use the parts required by your selected scenario.
-
-For customer engagements, treat every tier as an outcome checkpoint:
-
-| Tier | Technical checkpoint | Customer-outcome checkpoint |
-|---|---|---|
-| Foundations | Grounded agent with citations | Answers real scenario questions from trusted data |
-| Action Tools | Governed MCP action loop | Completes one valuable workflow with human approval |
-| Evaluation | Quality + safety tests | Produces a trust scorecard the customer can review |
-| Tracing / Deploy / UI | Observable, hosted app | Stakeholders can try it and inspect failures |
-| Capstone | Multi-agent orchestration | Specialist agents handle a realistic business request |
-
-```text
-  TIER 1  FOUNDATIONS (guided, linear)
-    Step1 --> Step2 --> Step3 --> Step4  <-- Foundations end-state
-           |
-           v
-  TIER 2  ADVANCED (modular, pick any order)
-    Action Tools | Evaluation+RedTeam | Tracing | Deploy
-    deepeners: Fabric IQ | Document Workflow | Visual Multimodal | Governed Data Copilot | Voice Live | Build a UI
-           |
-           v
-  TIER 3  CAPSTONE (open-ended design activity)
-    Northfield IQ multi-agent: triage/router fans out to specialists
-    (knowledge, actions), then converges.
-```
-
-### Tier 1 — Foundations (`activities/foundations/`)
-
-| Step | Title | Duration | Difficulty | Builds toward end-state |
-|---|-----------|----------|------------|------------|
-| 1 | [Setup & Provisioning (Foundry + AI Search)](activities/foundations/README.md#step-1--setup--provisioning-foundry--ai-search) | 30 min | ⭐ | Infra live; `.env` contract |
-| 2 | [Model Selection & the Playground](activities/foundations/README.md#step-2--model-selection--the-playground) | 45 min | ⭐ | A chosen model + system instructions |
-| 3 | [Your First Agent](activities/foundations/README.md#step-3--your-first-agent) | 45 min | ⭐⭐ | A named, versioned agent |
-| 4 | [Knowledge Base — Index + Foundry IQ](activities/foundations/README.md#step-4--knowledge-base-index--foundry-iq---foundations-end-state) | 1.5 hr | ⭐⭐⭐ | **Grounded agent w/ citations (END-STATE)** |
-
-### Tier 2 — Advanced (modular · any order)
-
-Each Advanced activity offers a **Guided** path and a longer **Build-from-scratch** path.
-Both use the same `validate.py` checkpoint.
-
-| Activity | Guided | Build-from-scratch | Difficulty | Key Skills |
-|-----------|--------|--------------------|------------|------------|
-| [Action Tools — Make the Agent Do Work](activities/advanced-action-tools/README.md) | ~45 min | ~1.5 hr | ⭐⭐⭐ | MCP tool, tool-approval loop |
-| [Evaluation & Red Teaming](activities/advanced-evaluation-redteam/README.md) | ~1.25 hr | ~2 hr | ⭐⭐⭐⭐ | NLP metrics + adversarial safety |
-| [Tracing & Observability](activities/advanced-tracing-observability/README.md) | ~1 hr | ~1.5 hr | ⭐⭐⭐⭐ | OTel GenAI → App Insights → KQL |
-| [Deploy as a Hosted Agent](activities/advanced-deploy-hosted-agent/README.md) | ~60–90 min | ~1.5 hr | ⭐⭐⭐⭐⭐ | `azd ai agent`, hosted endpoint |
-
-**Extras** (optional, modular) — pick only the ones that support the scenario you are building:
-Fabric IQ, Document Workflow, Visual Multimodal, Governed Data Copilot, Give It a Voice (Voice Live),
-Build a UI, Magentic Workflows, and Hosted Long-Running Agents.
-
-See the `activities/extra-*` folders.
-
-**Reference workshop time (Foundations + all four Advanced): ~7.5–8 hours.** For a one-day workshop,
-choose Foundations and two or three Advanced activities. Customer-specific implementation work
-needs a separate estimate.
-
----
-
 ## Publishing the documentation site
 
 Before the first deployment, a repository administrator must:
@@ -240,18 +157,11 @@ Push a site change to another branch to publish a preview under `/previews/`. Th
 ```
 ai-starter-kit-rvas/
 ├── README.md                          # ← You are here
-├── azure.yaml                         # azd project (golden-path provisioning)
-├── infra/                             # Bicep — Foundry + AI Search + App Insights + ACR
-├── scripts/                           # deploy.sh, setup-foundations.sh, validate-foundations.py, cleanup.sh
-│   └── action-backend/                # Action Tools REST API + FastMCP server (provided)
-├── activities/                        # Activity content and solutions
-│   ├── foundations/                   # Tier 1 — guided, Steps 1–4
-│   ├── advanced-action-tools/         # Tier 2 — modular, any order
-│   ├── advanced-evaluation-redteam/
-│   ├── advanced-tracing-observability/
-│   ├── advanced-deploy-hosted-agent/
-│   └── extra-*/                       # Tier 2 — Extras (optional)
-├── resources/sample-data/             # Northfield University FAQ corpus (knowledge base source)
+├── scenarios/                         # Self-contained scenario playbooks
+│   └── <scenario>/                    # Lessons, slides, diagrams, and accelerator code
+├── azure.yaml                         # Optional shared-infrastructure azd project
+├── infra/                             # Shared Foundry infrastructure templates
+├── scripts/                           # Site checks and shared-infrastructure deploy.sh
 ├── docs/                              # Static documentation site (Node.js build / GitHub Pages)
 ├── .devcontainer/                     # Dev environment config (Python, Azure CLI, azd)
 ├── .github/                           # Copilot enablement (skills, copilot-instructions) + workflows
@@ -259,20 +169,15 @@ ai-starter-kit-rvas/
 └── .env.sample                        # The .env variable contract (never commit a real .env)
 ```
 
-Each activity folder contains:
-- `README.md`: the activity brief (what to build)
-- `solution.md`: the reference solution guide for delivery teams and facilitators
-- Sample data or starter code (if needed)
+Each scenario keeps its implementation code and sample data under `accelerator/`.
+Its manifest defines the lesson order and published assets.
 
 ---
 
 ## Solution Guides
 
-Solution guides under `activities/*/solution.md` support delivery preparation. Use them to understand
-and adapt the reference implementation. In a learning workshop, facilitators can use them to help
-participants work through a problem.
-
-Clone or access this repo locally and navigate to the activity solution you need.
+Solution guides under `scenarios/*/accelerator/solution.md` support delivery preparation.
+Use the guide for the scenario you are building to understand its implementation and adaptation needs.
 
 ### Quick-Start Facilitation Checklist
 

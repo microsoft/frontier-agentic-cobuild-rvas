@@ -25,7 +25,7 @@ against its acceptance criteria. Any remaining work has a named owner.
 ## Positioning
 
 Start with the customer's outcome and constraints. **Decompose the end-to-end use case before
-selecting sessions.** Map each part to relevant lessons or reference activities, recording the
+selecting sessions.** Map each part to relevant scenario lessons, recording the
 adaptation needed and any work the kit does not cover. A customer scenario can combine several
 tracks. Plan sessions from that mapping, preserving lesson prerequisites.
 
@@ -54,7 +54,9 @@ customer needs justify them, using the same contribution contract.
 Each playbook includes implementation lessons and source-controlled slides. Accelerators supply
 sample assets and reusable code; their guides distinguish local exercises from live Azure work.
 Teams can use an approved existing environment or the optional clean-demo foundations.
-Reference-library activities provide shared implementation patterns.
+**Scenario lessons are the only guided journey.** Each default path includes the required steps
+and checks with its own data and resources. Keep implementation code in the scenario accelerator.
+Share code only when multiple scenarios use it. There is no separate activity catalogue or curriculum.
 
 The repository is also a GitHub Pages documentation site. Scenario assets are source-controlled under `scenarios/`, generated site data is built under `docs/assets/data/`, and validation is expected through the existing scenario and diagram checks.
 
@@ -65,7 +67,6 @@ The kit includes:
 - customer-facing scenario pages and printable slide decks;
 - practical lessons that identify decisions, inputs, proof, verification, and the next decision;
 - sample assets, reusable code, and optional demo deployment templates, with bring-your-own-environment guidance;
-- reusable technical reference activities for Foundry setup, grounding, action tools, evaluation, tracing, deployment, UI, voice, Fabric IQ, document workflow, visual multimodal, governed data, and orchestration;
 - repository skills that help generate customer ideas and work with Microsoft Foundry patterns.
 
 Preserve the RVAS / RVAP identity, customer-specific co-building approach, Microsoft Foundry focus,

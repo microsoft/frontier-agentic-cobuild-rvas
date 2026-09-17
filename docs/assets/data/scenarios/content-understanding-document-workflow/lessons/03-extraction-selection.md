@@ -40,9 +40,8 @@ so you can specialize without changing stacks.
 - **E** — you need control of the model, prompt, and infrastructure, and will implement confidence
   and grounding yourself. Select this build-your-own path deliberately.
 - **F** — value lives in a chart, diagram, photo, or handwriting. Use a multimodal analyzer. Do not
-  force visual content through a text-only pipeline. If that is your problem shape, use the
-  [Visual Multimodal activity](../../../activities/extra-visual-multimodal/README.md) as the
-  implementation reference before you commit to a document-only pipeline.
+  force visual content through a text-only pipeline. Scope image-input validation and
+  reviewer-visible regions before choosing this alternative.
 
 **Migration cost.** Moving between A and C is cheap: both are Foundry Tools on the same account and
 return module 4's typed result contract. Swap the analyzer or model ID, then verify again. Moving
@@ -71,9 +70,37 @@ curl -s -D - -X POST \
 # → 202; copy the Operation-Location header, then GET it until "status":"Succeeded"
 ```
 
-Each field comes back with `valueString`/`valueNumber`/`valueDate`, `spans` (offset/length),
-`confidence`, and `source` (the grounding polygon). The full poll loop is in the scenario's
-`accelerator/solution.md` reference implementation.
+The URL must be readable by the service through an approved access path; a private Blob URL
+does not become readable because your caller has an Entra token. For a local synthetic PDF,
+use Content Understanding Studio to upload it and export the completed JSON response.
+Keep the original PDF bytes for module 4's source hash.
+
+Before the first call, configure the selected analyzer's model deployment mappings in
+Content Understanding Studio using this scenario's account. The deployment script does not
+set those mappings. Confirm that the selected analyzer returns field confidence and source
+evidence; otherwise use a custom analyzer with `estimateFieldSourceAndConfidence: true`.
+Current setup:
+<https://learn.microsoft.com/azure/ai-services/content-understanding/concepts/models-deployments>
+
+**Wait for completion before normalizing.** Capture the `Operation-Location` header as `OP`.
+This loop saves a completed result or fails after five minutes:
+
+```bash
+mkdir -p scenarios/content-understanding/accelerator/.runtime
+ANALYSIS=scenarios/content-understanding/accelerator/.runtime/analysis.json
+for attempt in $(seq 1 150); do
+  curl --fail-with-body -sS -H "Authorization: Bearer $TOKEN" "$OP" -o "$ANALYSIS" || break
+  STATUS=$(jq -r '.status' "$ANALYSIS")
+  if [ "$STATUS" = Succeeded ] || [ "$STATUS" = Failed ]; then break; fi
+  sleep 2
+done
+jq -e '.status == "Succeeded"' "$ANALYSIS"
+```
+
+Do not continue if the final check fails. Refresh an expired token; inspect a failed operation's
+error rather than treating an empty field set as a successful extraction.
+Scalar values use `valueString`, `valueNumber`, or `valueDate`. Amounts can be nested under
+`valueObject.Amount`; module 4's normalizer handles the invoice mapping.
 
 ### Option B — Content Understanding custom analyzer
 
@@ -163,11 +190,10 @@ analyzer (`prebuilt-imageSearch`, or a custom analyzer with `generate` fields) s
 confidence and grounding, or a vision-capable LLM over rendered page images if you are on Option E.
 Do not push visual content through a text-only OCR path and hope.
 
-This module and module 4 are the canonical
-[Document Workflow activity](../../../activities/extra-document-workflow/README.md) — link to it
-rather than duplicating its walkthrough. If Option F is the selected path, pair it with the
-[Visual Multimodal activity](../../../activities/extra-visual-multimodal/README.md) so the team
-handles safe image input, bounded observations, and human review explicitly.
+For a visual-input extension, accept only approved file types and sizes, preserve the page/image
+reference for each observation, and route uncertain observations to a person. Treat image text
+as untrusted content. This alternative needs a mapping into module 4's result contract;
+the invoice default does not require it.
 
 ## Verify
 

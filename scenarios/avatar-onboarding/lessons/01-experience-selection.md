@@ -23,7 +23,7 @@ different needs.
 | --- | --- | --- | --- | --- | --- |
 | **A. Speech TTS avatar — batch synthesis** *(default)* | Async REST job renders a talking-avatar **video file** from text/SSML | Pre-produced, reviewable onboarding videos you approve once and replay | No (async job) | Standard avatar+voice = none; custom = limited access | GA (`api-version=2024-08-01`) |
 | B. Speech TTS avatar — real-time synthesis | Speech SDK streams avatar video over **WebRTC** live | A live, interactive kiosk/agent that shows a face | Yes | Same as A | GA |
-| C. Voice Live API | Fully-managed **speech-to-speech** voice agent; can also emit **avatar visuals** | A conversational onboarding assistant you speak to | Yes | Same as A when avatar is on | See docs (maps to `extra-voice-live`) |
+| C. Voice Live API | Fully-managed **speech-to-speech** voice agent; can also emit **avatar visuals** | A conversational onboarding assistant you speak to | Yes | Same as A when avatar is on | Check current documentation |
 | D. Video translation | Localises an **existing** onboarding video into other languages, preserving the speaker's voice | You already have approved video and need many locales | No (batch) | Voice replication of a real speaker — treat as consent-bearing | Check current documentation |
 | E. Plain audio (TTS / Voice Live audio-only) | Natural-voice narration, **no face** | Accessibility-first, lowest cost/risk, no likeness | Either | Standard voice = none | GA |
 
@@ -38,7 +38,7 @@ Verified overview:
 - **A → B** (batch → real-time) is moderate. Keep the avatars/voices, swap the REST poll for a
   Speech-SDK WebRTC client, and add TURN/firewall and per-session-latency work.
 - **A → C** (batch → Voice Live) is a larger rebuild. You move from rendering a video to running a
-  live speech-to-speech agent. See the `extra-voice-live` activity.
+  live speech-to-speech agent. Scope the client and session controls as additional engineering.
 - **A → E** (drop the avatar) is trivial and always available as your accessibility fallback.
 - **Anything → custom avatar or custom/personal voice** is the expensive jump. It triggers
   **limited-access registration** and talent consent (see Implementation → RAI). Budget weeks.
@@ -88,7 +88,7 @@ returns audio, **avatar visuals**, and action triggers — no manual STT→LLM�
 Entra ID** (not a Speech key).
 <https://learn.microsoft.com/azure/ai-services/speech-service/voice-live>
 
-Build this in the [Voice Live activity](../../../activities/extra-voice-live/README.md). Record
+This is an optional extension; the batch-avatar default does not need a live client. Record
 `"selected_capability": "voice-live-realtime-avatar"` (or
 `voice-live-audio`) and note that a live agent needs module 4's grounded agent first.
 

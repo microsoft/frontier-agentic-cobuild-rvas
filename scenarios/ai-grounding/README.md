@@ -31,11 +31,11 @@ retrieval recall, or agent-level evaluation. Read the
 
 | Module | What you build | Outcome |
 |---|---|---|
-| [1. Provision the foundation](lessons/01-provision-foundation.md) | Foundry account and project, chat + embedding deployments, AI Search, storage, observability, and the `.env` contract | Foundations Step 1 |
+| [1. Provision the foundation](lessons/01-provision-foundation.md) | Foundry account and project, chat + embedding deployments, AI Search, storage, observability, and the `.env` contract | Grounding resources and a usable environment contract |
 | [2. Source and permission architecture](lessons/02-source-and-permission-architecture.md) | The source decision, the identity evaluated at query time, and a probe proving a restricted identity retrieves nothing | Signed source, access, freshness, and system-of-record decision |
 | [3. Ingest and index approved content](lessons/03-ingest-and-index.md) | Ingestion, chunking, citation metadata, ACL carry-forward, and a refresh schedule | Approved documents are discoverable with source metadata |
-| [4. Compare chat and embedding choices](lessons/04-model-selection.md) | A comparison harness over your own golden set: accuracy, abstention, latency, tokens | Foundations Step 2 |
-| [5. Build retrieval before adding an agent](lessons/05-grounded-retrieval.md) | Citations, abstention, access-denied silence, recency — with no agent | Foundations Step 4 |
+| [4. Compare chat and embedding choices](lessons/04-model-selection.md) | A comparison harness over your own golden set: accuracy, abstention, latency, tokens | A model choice backed by the scenario's question set |
+| [5. Build retrieval before adding an agent](lessons/05-grounded-retrieval.md) | Citations, abstention, access-denied silence, recency — with no agent | Cited answers and correct refusals |
 | [6. Add agent and routing only when justified](lessons/06-agent-and-routing.md) | A justification, an agent with explicit routing rules, and a routing test | Policy and live-data questions route to the correct source |
 | [7. Evaluate and trace](lessons/07-evaluate-and-trace.md) | Evaluation gate, red-team evidence, end-to-end traces | Evaluation gate passed with trace and red-team evidence |
 | [8. Deploy and surface it to users](lessons/08-deploy-and-surface.md) | A pinned agent version and permission-aware surface | Deployed surface passes anonymous, authorized, and restricted HTTP checks |
@@ -46,7 +46,7 @@ the final app must preserve the retrieval layer's permission boundary.
 
 ## Decision gates to carry into the customer conversation
 
-Answer these questions before opening the reference library:
+Answer these questions before building:
 
 | Gate | Decide before building |
 |---|---|
@@ -93,8 +93,9 @@ python3 scenarios/ai-grounding/accelerator/scripts/probe_permissions.py --knowle
 # Compare candidate models on your own golden questions
 python3 scenarios/ai-grounding/accelerator/scripts/compare_models.py --deployments chat chat-candidate
 
-# Run the golden questions and read citations, abstention, and recall@5
-python3 scenarios/ai-grounding/accelerator/scripts/grounded_answer.py --knowledge-base grounding-kb
+# Use the coordinator identity and query-source token configured in module 5.
+python3 scenarios/ai-grounding/accelerator/scripts/grounded_answer.py \
+  --knowledge-base grounding-kb --role returns-coordinators
 
 # Verify the deployed surface with tokens held only in environment variables
 python3 scenarios/ai-grounding/accelerator/scripts/probe_surface.py \
@@ -105,21 +106,11 @@ python3 scenarios/ai-grounding/accelerator/scripts/probe_surface.py \
 
 Each lesson's **Verify** section lists the specific commands and signals for that module.
 
-## Reused activities
+## Follow one path
 
-These lessons reuse the kit's implementation activities:
-
-- [Foundations](../../activities/foundations/README.md) — provisioning, model selection, and
-  Azure AI Search grounding baseline
-- [Evaluation & Red Teaming](../../activities/advanced-evaluation-redteam/README.md) — the harness,
-  custom evaluators, and adversarial seed set used in module 7
-- [Tracing & Observability](../../activities/advanced-tracing-observability/README.md) — GenAI
-  spans, the instrumentation ordering gotcha, and the KQL correlation queries
-- [Action Tools](../../activities/advanced-action-tools/README.md) and
-  [Fabric IQ](../../activities/extra-fabric-iq/README.md) — live-data and action routing in module 6
-- [Deploy as a Hosted Agent](../../activities/advanced-deploy-hosted-agent/README.md) — the hosted
-  endpoint option in module 8
-- [Build a UI](../../activities/extra-build-ui/README.md) — the custom surface option in module 8
+**Stay in these lessons for the default build.** They use this scenario's returns corpus,
+scripts, and environment contract. Module 7 captures actual answers and evaluates the native
+golden-question format. Optional architecture extensions are marked where they change the scope.
 
 ## Non-negotiables
 

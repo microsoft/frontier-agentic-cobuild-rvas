@@ -28,30 +28,18 @@ else
   warn "requirements.txt was not found; skipping pip install."
 fi
 
-if [[ ! -f .env && -f .env.sample ]]; then
-  cp .env.sample .env
-  success "Created .env from .env.sample (placeholder values — fill in after 'azd up')."
-elif [[ -f .env ]]; then
-  warn ".env already exists; leaving it unchanged."
-else
-  warn ".env.sample was not found; skipping environment bootstrap."
-fi
-
 printf "\n%b==============================================%b\n" "$GREEN" "$RESET"
 printf "%b  Welcome to the AI Foundry Session!  %b\n" "$GREEN" "$RESET"
 printf "%b==============================================%b\n\n" "$GREEN" "$RESET"
 
-printf "%bActivity quick links%b\n" "$CYAN" "$RESET"
-printf "  • Foundations (Steps 1–4): activities/foundations/\n"
-printf "  • Advanced — Action Tools: activities/advanced-action-tools/\n"
-printf "  • Advanced — Evaluation & Red Teaming: activities/advanced-evaluation-redteam/\n"
-printf "  • Advanced — Tracing & Observability: activities/advanced-tracing-observability/\n"
-printf "  • Advanced — Deploy as a Hosted Agent: activities/advanced-deploy-hosted-agent/\n"
-printf "  • Extras: activities/extra-*/\n"
+printf "%bScenario quick links%b\n" "$CYAN" "$RESET"
+printf "  • AI Grounding: scenarios/ai-grounding/\n"
+printf "  • Content Understanding: scenarios/content-understanding/\n"
+printf "  • Avatar: scenarios/avatar-onboarding/\n"
+printf "  • Operational Agents: scenarios/operational-agents/\n"
 printf "  • Docs site: docs/\n\n"
 
 warn "Next steps:"
-printf "  1. Run: az login\n"
-printf "  2. Provision: azd up   (or ./scripts/deploy.sh)\n"
-printf "  3. After azd up, export: azd env get-values > .env   (deploy.sh writes .env itself)\n"
-printf "  4. Bootstrap end-state: ./scripts/setup-foundations.sh && python scripts/validate-foundations.py\n"
+printf "  1. Choose a scenario and open its README.md.\n"
+printf "  2. Follow its accelerator guide for environment setup and credentials.\n"
+printf "  3. Use the scenario lessons for implementation and checks.\n"

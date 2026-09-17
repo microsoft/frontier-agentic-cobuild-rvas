@@ -31,7 +31,7 @@ param chatModelSkuName string
 param chatModelCapacity int
 
 @description('Name of the AI Search index the knowledge base will use.')
-param searchIndexName string = 'university-faq'
+param searchIndexName string = 'scenario-content'
 
 // Built-in role definition IDs (subscription-scoped resourceIds).
 var roleCognitiveServicesUser = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'a97b65f3-24c7-4388-baec-2e87135dc908')

@@ -68,11 +68,9 @@ Review only source documentation:
 
 - `README.md`
 - `CONTRIBUTING.md`
-- `docs/**/*.md`, excluding generated files under `docs/assets/data/**` and `docs/resources/**`
-- `activities/**/README.md`
-- `activities/**/solution.md`
+- `PRODUCT.md`
+- `docs/*.html` and `docs/**/*.md`, excluding generated files under `docs/assets/data/**` and dependencies under `docs/vendor/**`
 - `scenarios/**/*.md`
-- `scripts/action-backend/README.md`
 
 Use generated docs only as consistency evidence when a source-doc change would require `npm run build`.
 

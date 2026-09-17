@@ -43,24 +43,68 @@ export AZURE_EXPERIMENTAL_ENABLE_GENAI_TRACING=true
 export OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true
 ```
 
-Build the graded run and the evaluators in the canonical
-[Evaluation & Red Teaming activity](../../../activities/advanced-evaluation-redteam/README.md); wire
-the traces in [Tracing & Observability](../../../activities/advanced-tracing-observability/README.md).
-Write the measured metrics to `eval-report.json` and use them to grade the gate.
+Capture the actual extraction response for each document before scoring it. In Foundry,
+create a dataset evaluation with a row per document: `query` describes the requested fields,
+`response` contains the extracted values, and `context` contains approved source text.
+Map these columns to Groundedness and Relevance, choose the judge deployment, and inspect
+each failed row. Keep source permissions on this evaluation dataset.
+These managed scores supplement the field checks below; they cannot approve a handoff.
+Current dataset setup:
+<https://learn.microsoft.com/azure/foundry/observability/how-to/cloud-evaluation-datasets>
 
-The environment variables alone do not configure an exporter or instrument extraction and review.
-Complete that wiring in the tracing activity. Message-content capture is for synthetic fixtures
-here; do not enable it for customer documents without approval for collection and retention.
+The environment variables alone do not configure an exporter. Add this setup at process
+startup, then wrap the actual operations in your workflow:
+
+```python
+import os
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+
+configure_azure_monitor(connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"])
+tracer = trace.get_tracer("document-workflow")
+
+# Place each real operation inside its corresponding span.
+# with tracer.start_as_current_span("document.extract"):
+#     analysis = extract_document(source)
+# with tracer.start_as_current_span("document.review"):
+#     reviewed, approval = review_result(analysis)
+# with tracer.start_as_current_span("document.handoff"):
+#     receipt = post_approved_result(reviewed, approval)
+```
+
+Use a parent span for an uninterrupted request. For a later human review, propagate the
+stored trace context or link the new trace, and correlate with the non-sensitive document
+ID. Do not hold an HTTP request open while a person decides. Export metadata only by
+default; source text and amounts do not belong in span attributes.
 
 ### Option B — Custom offline harness
 
 Compare extracted fields with expected results without a network. This is deterministic and CI-friendly.
 The scenario's `accelerator/sample-data/expected/` records and
 [`result-contract.json`](../accelerator/sample-data/result-contract.json) give you the shape to
-compare against. Write a small harness that loads each expected record, runs your normalizer over the
-matching extraction, and counts field matches. Confirm the correction record changes a known field
-without overwriting the expected result, and roll the field-match rate up into `field_accuracy` in
-your report.
+compare against. `evaluate_results.py` compares a normalized result with a reviewed label,
+checks the source hash, and rejects missed review reasons.
+
+Run from the repository root:
+
+```bash
+python3 scenarios/content-understanding/accelerator/evaluate_results.py \
+  --actual scenarios/content-understanding/accelerator/.runtime/result.json \
+  --expected scenarios/content-understanding/accelerator/.runtime/expected.json \
+  --minimum 1.0 \
+  --report scenarios/content-understanding/accelerator/.runtime/eval-report.json
+```
+
+Create `expected.json` by reviewing the exact source submitted in module 3. Use the plain-value
+shape in `sample-data/expected/invoice-2002.json`, including its required review reasons.
+The supplied label is usable unchanged only for its original text fixture; converting that
+fixture to PDF changes the hash. Review the converted source rather than copying its hash
+onto an unrelated result. Do not generate labels from the output being graded.
+
+Run the command once per labeled document and retain the per-document reports. Any exit `1`
+blocks the gate; exit `2` is an invalid-input failure. Compute aggregate field accuracy
+from total matching fields, and false approvals from the expected review cases. Keep
+module-5 corrections as additional labels, with the original extraction retained.
 
 ### Option C — Adversarial / red-team pass
 
@@ -68,8 +112,8 @@ Add cases where document text tries to steer the decision: an invoice with "APPR
 review", a total that contradicts subtotal + tax, or an instruction in a description field. Treat
 document text as **untrusted input**. Extract it, ground it, and route it to review. Never obey it.
 `injection_resistance` is the fraction of attack cases that avoid false approval; the gate requires
-`1.0`. This follows the same discipline as the
-[Evaluation & Red Teaming activity](../../../activities/advanced-evaluation-redteam/README.md).
+`1.0`. Record actual outcomes for these attack cases separately; the field-comparison
+script does not measure injection resistance or live latency.
 
 ## Verify
 
@@ -107,7 +151,7 @@ Open the workspace behind `APPLICATIONINSIGHTS_RESOURCE_ID` in the portal (Monit
 ```kusto
 dependencies
 | where timestamp > ago(1h)
-| where customDimensions has "gen_ai"
+| where name startswith "document."
 | project timestamp, name, duration, operation_Id
 | order by timestamp desc
 ```
@@ -124,7 +168,7 @@ window; also set the environment variables before the first SDK import. Referenc
 | `false_approval_rate` above the gate | Confidence threshold too low, or a class auto-posts that shouldn't | Raise the threshold for that class; require review for high-impact fields |
 | `review_rate` above the gate | Threshold too high or the model is weak on this class | Recalibrate per class, or change capability (module 3) for that class |
 | `injection_resistance` below `1.0` | Workflow obeyed embedded instructions | Treat document text as data; never route it into a system prompt |
-| No traces in Application Insights | Missing instrumentation/exporter, wrong destination, or late configuration | Complete the tracing activity and inspect a single request |
+| No traces in Application Insights | Missing instrumentation/exporter, wrong destination, or late configuration | Check the setup above and inspect one real request |
 | Metrics look great, pilot still fails | Evaluation set unrepresentative | Add the module-5 corrections and real edge cases to the dataset |
 | Latency gate breached | Synchronous polling or oversized documents | Batch, pre-segment, or move stable forms to a DI prebuilt model |
 

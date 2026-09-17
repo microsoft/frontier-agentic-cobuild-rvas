@@ -5,9 +5,8 @@ script text **only** from the approved claim set, **cites** every claim, **refus
 cannot ground, and **hands off** to a human help path. If the assistant invents a benefit, the avatar
 will repeat it.
 
-This module applies [Foundations](../../../activities/foundations/README.md) **Steps 3–4** to
-onboarding. Build the mechanics there, then apply the onboarding rules below. Prompt Flow is outside
-this curriculum; use agents + tools + retrieval.
+Continue with module 2's chat deployment and module 3's approved claim set. The default
+drafting path below needs no new agent or sample corpus.
 
 ![Grounded assistant boundary](../diagrams/04-grounded-assistant-boundary.png)
 
@@ -96,11 +95,13 @@ first gate; the renderer is the backstop.
 
 ### Option B — Foundry agent + knowledge base
 
-Build the agent in [Foundations Step 4](../../../activities/foundations/README.md). Use a named,
-versioned agent with a knowledge tool over module 3's corpus, the "onboarding script drafter"
-persona, and the same refusal instruction. Store its name in `.env` (`AZURE_FOUNDRY_AGENT_NAME`) so
-module 5 Option C (Voice Live agent mode) and module 7 (evaluation) can reuse it. The agent returns
-knowledge-base citations; confirm that they map to approved claim ids.
+This optional path needs a named, versioned agent with a knowledge tool over module 3's
+corpus. In the existing Foundry project, create the agent with the drafting instructions above,
+select module 2's model deployment, and connect only approved claims. Test one supported
+question and one unsupported question in the playground before saving the version.
+Store its name and version in the scenario `.env` as `AZURE_FOUNDRY_AGENT_NAME` and
+`AZURE_FOUNDRY_AGENT_VERSION`. Confirm that knowledge citations map to approved claim IDs.
+Do not switch the batch-video default to an agent merely to finish this lesson.
 
 ### Option C — Foundry agent + agentic retrieval (Foundry IQ)
 

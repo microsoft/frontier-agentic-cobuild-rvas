@@ -21,67 +21,37 @@
     {
       "id": "experience-selection",
       "title": "Module 1 — Select the avatar/experience capability",
-      "path": "lessons/01-experience-selection.md",
-      "reused_with": [
-        "policy communications",
-        "learning content",
-        "multilingual video"
-      ]
+      "path": "lessons/01-experience-selection.md"
     },
     {
       "id": "foundation",
       "title": "Module 2 — Provision the Foundry + Speech foundation",
-      "path": "lessons/02-foundation.md",
-      "reused_with": [
-        "any Foundry app",
-        "speech experiences"
-      ]
+      "path": "lessons/02-foundation.md"
     },
     {
       "id": "content-pipeline",
       "title": "Module 3 — Build the governed content pipeline",
-      "path": "lessons/03-content-pipeline.md",
-      "reused_with": [
-        "policy communications",
-        "knowledge-grounded experiences"
-      ]
+      "path": "lessons/03-content-pipeline.md"
     },
     {
       "id": "grounded-assistant",
       "title": "Module 4 — Build the grounded assistant behind the experience",
-      "path": "lessons/04-grounded-assistant.md",
-      "reused_with": [
-        "employee help desk",
-        "grounded chat"
-      ]
+      "path": "lessons/04-grounded-assistant.md"
     },
     {
       "id": "experience-generation",
       "title": "Module 5 — Generate the accessible avatar experience",
-      "path": "lessons/05-experience-generation.md",
-      "reused_with": [
-        "learning content",
-        "employee communications",
-        "multilingual video"
-      ]
+      "path": "lessons/05-experience-generation.md"
     },
     {
       "id": "approval-gating",
       "title": "Module 6 — Gate publication behind human approval",
-      "path": "lessons/06-approval-gating.md",
-      "reused_with": [
-        "brand-governed generation",
-        "regulated communications"
-      ]
+      "path": "lessons/06-approval-gating.md"
     },
     {
       "id": "prove-and-operate",
       "title": "Module 7 — Evaluate, red-team, trace, and operate",
-      "path": "lessons/07-prove-and-operate.md",
-      "reused_with": [
-        "employee experience",
-        "operational measurement"
-      ]
+      "path": "lessons/07-prove-and-operate.md"
     }
   ],
   "build_modules": [
@@ -95,12 +65,11 @@
       "id": "foundation",
       "title": "Provision the shared Foundry + Speech foundation",
       "summary": "Deploy the keyless Foundry, model, Azure AI Search, Speech data plane, and observability baseline the avatar experience uses, with managed-identity RBAC and no secrets.",
-      "activity_id": "foundations",
       "implementation_paths": [
         "accelerator/main.bicep",
         "accelerator/scripts/deploy.sh"
       ],
-      "outcome": "Foundations Steps 1 and 2 plus a keyless .env contract"
+      "outcome": "Foundry and Speech resources with a usable environment contract"
     },
     {
       "id": "content-pipeline",
@@ -115,8 +84,7 @@
       "id": "grounded-assistant",
       "title": "Build the grounded assistant behind the experience",
       "summary": "Build a model or Foundry agent that drafts from approved content, cites its sources, refuses unsupported claims, and hands uncertain cases to a person.",
-      "activity_id": "foundations",
-      "outcome": "Foundations Steps 3 and 4 — grounded, citing, refusing agent"
+      "outcome": "Approved-claim answers with citations and a refusal path"
     },
     {
       "id": "experience-generation",
@@ -140,7 +108,6 @@
       "id": "prove-and-operate",
       "title": "Evaluate, red-team, trace, and operate",
       "summary": "Test whether the experience stays grounded, discloses synthetic media, remains accessible, and hands off correctly. Trace failures before deciding whether to release the pilot.",
-      "activity_id": "advanced-evaluation-redteam",
       "implementation_paths": [
         "accelerator/sample-data/feedback-fixture.json"
       ],

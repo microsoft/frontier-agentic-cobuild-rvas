@@ -7,9 +7,9 @@ const { TextDecoder } = require('util');
 
 const ROOT = path.resolve(__dirname, '..');
 const SCRIPT_EXTENSIONS = '(?:py|sh|js|mjs|cjs|ps1)';
-const ROOT_SCRIPT_PREFIXES = ['activities/', 'scenarios/', 'docs/', 'resources/', 'scripts/', '.devcontainer/'];
-const GENERATED_PREFIXES = ['docs/assets/data/activities/', 'docs/resources/'];
-const SKIP_PREFIXES = ['docs/assets/data/', 'docs/resources/', 'docs/vendor/'];
+const ROOT_SCRIPT_PREFIXES = ['scenarios/', 'docs/', 'scripts/', '.devcontainer/'];
+const GENERATED_PREFIXES = ['docs/assets/data/scenarios/'];
+const SKIP_PREFIXES = ['docs/assets/data/', 'docs/vendor/', 'docs/_site/'];
 const SITE_CHROME_DENY = /[▸◆▣›↗]/gu;
 const MOJIBAKE = /(?:Ã[\u0080-\u00BF]|Â[\u0080-\u00BF]?|â(?:€|€™|€œ|€|€“|€”|†’|œ|š)|ðŸ|ï¸|ï¿½)/gu;
 const LEARNER_CONTEXT = /\b(?:add|append|author|build|create|creates|creating|implement|save|scaffold|write|your)\b/i;
@@ -44,16 +44,7 @@ function sourceDocs() {
     return file.endsWith('.md') && !isSkipped(rel);
   }, files);
 
-  walk(path.join(ROOT, 'activities'), (file) => {
-    const name = path.basename(file);
-    return name === 'README.md' || name === 'solution.md';
-  }, files);
-  for (const dir of ['scenarios', 'resources']) {
-    walk(path.join(ROOT, dir), (file) => file.endsWith('.md'), files);
-  }
-
-  const backendReadme = path.join(ROOT, 'scripts/action-backend/README.md');
-  if (fs.existsSync(backendReadme)) files.push(backendReadme);
+  walk(path.join(ROOT, 'scenarios'), (file) => file.endsWith('.md'), files);
   return [...new Set(files)].sort();
 }
 
@@ -348,7 +339,7 @@ function resolveRelativePath(basePath, href) {
   return segments.join('/');
 }
 
-function auditLessonRouting(scenario, lesson, activityIds, failures) {
+function auditLessonRouting(scenario, lesson, failures) {
   const source = path.join(ROOT, 'docs', lesson.content_path);
   if (!fs.existsSync(source)) {
     failures.push(`scenario ${scenario.id} lesson ${lesson.id}: generated lesson source is missing`);
@@ -383,14 +374,11 @@ function auditLessonRouting(scenario, lesson, activityIds, failures) {
     if (lessonPaths.has(resolved)) continue;
     if (`${scenario.asset_base || ''}${resolved}` === scenario.accelerator_path) continue;
 
-    const activityMatch = resolved.match(/^activities\/([^/]+)\/(?:README|FACILITATOR)\.md$/iu);
-    if (activityMatch && activityIds.has(activityMatch[1])) continue;
-
-    failures.push(`${label}: Markdown link "${raw}" does not resolve to an in-site course or activity route`);
+    failures.push(`${label}: Markdown link "${raw}" does not resolve to an in-site scenario route`);
   }
 }
 
-function auditBuildModules(scenario, activityIds, failures) {
+function auditBuildModules(scenario, failures) {
   const modules = scenario.build_modules || [];
   if (!modules.length) {
     failures.push(`scenario ${scenario.id}: no build modules are published to the course roadmap`);
@@ -405,9 +393,6 @@ function auditBuildModules(scenario, activityIds, failures) {
     }
     if (module.id && seen.has(module.id)) failures.push(`${label}: duplicate module id`);
     if (module.id) seen.add(module.id);
-    if (module.activity_id && !activityIds.has(module.activity_id)) {
-      failures.push(`${label}: references unknown activity "${module.activity_id}"`);
-    }
   }
 }
 
@@ -435,8 +420,6 @@ function auditScenarioCourseRoutes(failures) {
     return;
   }
 
-  const activityIds = new Set((platform.activities || []).map((activity) => activity.id));
-
   for (const scenario of platform.scenarios || []) {
     const readme = path.join(ROOT, 'docs', 'assets', 'data', 'scenarios', scenario.id, 'README.md');
     if (!fs.existsSync(readme)) {
@@ -450,19 +433,28 @@ function auditScenarioCourseRoutes(failures) {
     if (/\]\(\.\.\/[^)]+\)/u.test(playbook)) {
       failures.push(`scenario ${scenario.id}: generated playbook contains parent-relative links that 404 from scenario.html`);
     }
-    if (/\]\((?:\.\.\/)+(?:lesson|activity|scenario|slides)\.html/u.test(playbook)) {
+    if (/\]\((?:\.\.\/)+(?:lesson|scenario|slides)\.html/u.test(playbook)) {
       failures.push(`scenario ${scenario.id}: generated playbook must use root-relative app routes, not parent-relative app links`);
     }
 
-    auditBuildModules(scenario, activityIds, failures);
+    auditBuildModules(scenario, failures);
 
     for (const lesson of scenario.lessons || []) {
       if (!lesson.lesson_path || !lesson.content_path) {
         failures.push(`scenario ${scenario.id} lesson ${lesson.id}: missing in-site lesson route metadata`);
         continue;
       }
-      auditLessonRouting(scenario, lesson, activityIds, failures);
+      auditLessonRouting(scenario, lesson, failures);
     }
+  }
+}
+
+function auditRetiredReferences(files, failures) {
+  for (const file of files) {
+    const text = fs.readFileSync(file, 'utf8');
+    findMatches(file, text,
+      /\bactivities\/|(?:activity|reference)\.html|\btest:activities\b|scripts\/(?:setup-foundations\.sh|validate-foundations\.py|action-backend\/)/gu,
+      'references retired workshop content', failures);
   }
 }
 
@@ -477,17 +469,18 @@ function main() {
     const docs = sourceDocs();
     auditCharacters(docs, failures);
     auditCharacters(siteChromeFiles(), failures, { chrome: true });
+    auditRetiredReferences([...docs, ...siteChromeFiles()], failures);
+    referenceCount += auditGeneratedLinks(siteChromeFiles().filter((file) => file.endsWith('.html')), failures);
     referenceCount += auditScriptReferences(docs, failures);
     console.log(`Audited ${docs.length} authoritative documentation files.`);
   }
 
   if (runGenerated) {
     const docs = generatedDocs();
-    if (!docs.length) failures.push('No generated activity/resource Markdown found; run npm run build.');
+    if (!docs.length) failures.push('No generated scenario Markdown found; run npm run build.');
     auditCharacters(docs, failures);
-    auditCharacters(walk(path.join(ROOT, 'docs/assets/data/scenarios'), (file) => file.endsWith('.md')), failures);
+    auditRetiredReferences(docs, failures);
     referenceCount += auditScriptReferences(docs, failures);
-    referenceCount += auditGeneratedLinks(docs, failures);
     auditScenarioCourseRoutes(failures);
     console.log(`Audited ${docs.length} generated documentation files.`);
   }
@@ -503,4 +496,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { sourceDocs, resolveScript, auditScriptReferences };
+module.exports = { sourceDocs, resolveScript, auditScriptReferences, auditRetiredReferences };

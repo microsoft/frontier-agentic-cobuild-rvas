@@ -1,7 +1,7 @@
 ---
 name: content-accuracy-audit
-description: 'Audit session content (activity guides, scenario lessons, READMEs, validate.py, solution.md, the rendered _site/, docs/, skills, infra, scripts) for correctness, currency, hallucinations, broken cross-references, and pacing. Cross-checks every Azure / Microsoft Foundry SDK signature, CLI command, env var, and API surface against official Microsoft Learn docs via the microsoft-docs MCP and the live web. USE WHEN: review content for errors, fact-check the docs, find hallucinations, check if the docs are up to date, verify API signatures, validate activity instructions, spot outdated SDK calls, check pacing/difficulty, audit the site, find broken links or stale references. Produces a ranked findings report and applies safe fixes.'
-argument-hint: '[optional: path or area to audit, e.g. activities/foundations or docs/]'
+description: 'Audit scenario lessons, READMEs, accelerator code, solution guides, docs, skills, infrastructure, and scripts for correctness, currency, hallucinations, broken cross-references, and pacing. Cross-check Azure / Microsoft Foundry SDK signatures, CLI commands, environment variables, and API surfaces against official Microsoft Learn docs via the microsoft-docs MCP and the live web. USE WHEN: review content for errors, fact-check docs, check currency, verify API signatures, validate scenario instructions, check pacing, or find broken links. Produces a ranked findings report and applies confirmed fixes.'
+argument-hint: '[optional: path or area to audit, e.g. scenarios/ai-grounding or docs/]'
 disable-model-invocation: true
 user-invocable: true
 ---
@@ -18,29 +18,30 @@ SDK call, CLI command, env var, and preview-feature claim must be verified again
 
 - "Review/audit all our content for errors of any kind"
 - "Check the docs for hallucinations / outdated SDK calls / wrong API signatures"
-- "Are the activity instructions still accurate and up to date?"
+- "Are the scenario instructions still accurate and up to date?"
 - "Verify the env vars, CLI commands, and code snippets actually work"
-- "Check pacing and difficulty progression across activities"
+- "Check pacing and difficulty progression across lessons"
 - "Find broken cross-references / dead links / stale file paths"
 
 ## Inputs
 
-- **Scope** (optional argument): a path or area (e.g. `activities/foundations`, `docs/`,
-  `_site/`, `.github/skills/`). If omitted, audit the whole repo content surface (below).
+- **Scope** (optional argument): a path or area (e.g. `scenarios/ai-grounding`, `docs/`,
+  `.github/skills/`). If omitted, audit the whole repo content surface (below).
 - The audit is **read-heavy**; fixes are applied only after findings are confirmed.
 
 ## Content surface to audit
 
 | Area | What to check |
 |---|---|
-| `docs/activities/*.md` | Instructions, code snippets, env vars, pacing, learning objectives |
-| `activities/*/README.md`, `solution.md` | Steps match the validator; solution actually satisfies `validate.py` |
-| `activities/*/validate.py`, `*.py` | Imports/signatures exist; checks match the stated steps |
-| `_site/` and `docs/_site/` | **Generated** — flag drift vs source `docs/`, do NOT hand-edit (see Pitfalls) |
+| `scenarios/*/lessons/*.md` | Instructions, code snippets, environment variables, and lesson order |
+| `scenarios/*/accelerator/README.md`, `solution.md` | Commands match the implementation and its checks |
+| `scenarios/*/accelerator/**/*.py` | Imports and signatures exist; checks match the stated behavior |
+| `docs/*.html` | Navigation and user-facing explanations match the scenarios |
+| `docs/assets/data/` | **Generated** — compare with `scenarios/`; do not hand-edit |
 | `.github/skills/*/SKILL.md` | Stub install commands, env-var names, "gotcha" claims still valid |
 | `infra/*.bicep`, `azure.yaml`, `scripts/*.sh` | Resource/API versions, command flags, output→`.env` contract |
 | `.env.sample`, `requirements.txt` | Var names authoritative & consistent everywhere; pinned versions exist |
-| `README.md`, `decisions.md`, `setup.md`, `resources.md` | Cross-links resolve; claims match current Azure/Foundry reality |
+| `README.md`, `CONTRIBUTING.md`, `PRODUCT.md`, `scenarios/README.md` | Cross-links resolve; claims match the implementation |
 
 ## Procedure
 
@@ -92,8 +93,8 @@ file+line link, category, severity, the verified source, and the proposed fix.
 **Present findings before mass-editing.**
 
 ### 6. Apply fixes (after confirmation)
-- Fix **source** files (`docs/`, `activities/`, `.github/skills/`), never the generated
-  `_site/` by hand.
+- Fix **source** files (`scenarios/`, site HTML/JS/CSS, `.github/skills/`), then run
+  `npm run build` to regenerate `docs/assets/data/`.
 - Make minimal, targeted edits — correct the inaccuracy, don't rewrite surrounding prose.
 - When a fix changes an env var / path / version, update **every** occurrence repo-wide.
 - After fixing code or validators, re-run the relevant `validate.py` to confirm green.
@@ -105,13 +106,12 @@ file+line link, category, severity, the verified source, and the proposed fix.
 - [ ] No fix introduces a signature you did not verify this session.
 - [ ] Env-var names, file paths, and pinned versions are consistent across all files.
 - [ ] `solution.md` steps still satisfy the matching `validate.py` (re-run where feasible).
-- [ ] Generated `_site/` drift is reported, not hand-patched.
+- [ ] Generated `docs/assets/data/` drift is reported, not hand-patched.
 - [ ] Findings report lists residual/unverifiable items explicitly (don't silently drop them).
 
 ## Pitfalls
 
-- **Don't hand-edit `_site/` or `docs/_site/`.** They are generated (Jekyll). Fix the source
-  in `docs/` and note that the site must be rebuilt.
+- **Don't hand-edit `docs/assets/data/`.** Fix the source and rebuild with `npm run build`.
 - **Don't guess preview status.** Foundry features move fast and many are preview — confirm
   GA/preview wording against current docs every time.
 - **Don't invent or "fix" URLs.** Only verify URLs already present; never fabricate links.

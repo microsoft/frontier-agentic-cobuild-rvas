@@ -31,11 +31,11 @@ retrieval recall, or agent-level evaluation. Read the
 
 | Module | What you build | Outcome |
 |---|---|---|
-| [1. Provision the foundation](lesson.html?scenario=ai-grounding&lesson=foundation) | Foundry account and project, chat + embedding deployments, AI Search, storage, observability, and the `.env` contract | Foundations Step 1 |
+| [1. Provision the foundation](lesson.html?scenario=ai-grounding&lesson=foundation) | Foundry account and project, chat + embedding deployments, AI Search, storage, observability, and the `.env` contract | Grounding resources and a usable environment contract |
 | [2. Source and permission architecture](lesson.html?scenario=ai-grounding&lesson=source-selection) | The source decision, the identity evaluated at query time, and a probe proving a restricted identity retrieves nothing | Signed source, access, freshness, and system-of-record decision |
 | [3. Ingest and index approved content](lesson.html?scenario=ai-grounding&lesson=ingestion) | Ingestion, chunking, citation metadata, ACL carry-forward, and a refresh schedule | Approved documents are discoverable with source metadata |
-| [4. Compare chat and embedding choices](lesson.html?scenario=ai-grounding&lesson=model-selection) | A comparison harness over your own golden set: accuracy, abstention, latency, tokens | Foundations Step 2 |
-| [5. Build retrieval before adding an agent](lesson.html?scenario=ai-grounding&lesson=grounded-app) | Citations, abstention, access-denied silence, recency — with no agent | Foundations Step 4 |
+| [4. Compare chat and embedding choices](lesson.html?scenario=ai-grounding&lesson=model-selection) | A comparison harness over your own golden set: accuracy, abstention, latency, tokens | A model choice backed by the scenario's question set |
+| [5. Build retrieval before adding an agent](lesson.html?scenario=ai-grounding&lesson=grounded-app) | Citations, abstention, access-denied silence, recency — with no agent | Cited answers and correct refusals |
 | [6. Add agent and routing only when justified](lesson.html?scenario=ai-grounding&lesson=agent-routing) | A justification, an agent with explicit routing rules, and a routing test | Policy and live-data questions route to the correct source |
 | [7. Evaluate and trace](lesson.html?scenario=ai-grounding&lesson=evaluate-and-trace) | Evaluation gate, red-team evidence, end-to-end traces | Evaluation gate passed with trace and red-team evidence |
 | [8. Deploy and surface it to users](lesson.html?scenario=ai-grounding&lesson=deploy-and-surface) | A pinned agent version and permission-aware surface | Deployed surface passes anonymous, authorized, and restricted HTTP checks |
@@ -46,7 +46,7 @@ the final app must preserve the retrieval layer's permission boundary.
 
 ## Decision gates to carry into the customer conversation
 
-Answer these questions before opening the reference library:
+Answer these questions before building:
 
 | Gate | Decide before building |
 |---|---|
@@ -93,8 +93,9 @@ python3 scenarios/ai-grounding/accelerator/scripts/probe_permissions.py --knowle
 # Compare candidate models on your own golden questions
 python3 scenarios/ai-grounding/accelerator/scripts/compare_models.py --deployments chat chat-candidate
 
-# Run the golden questions and read citations, abstention, and recall@5
-python3 scenarios/ai-grounding/accelerator/scripts/grounded_answer.py --knowledge-base grounding-kb
+# Use the coordinator identity and query-source token configured in module 5.
+python3 scenarios/ai-grounding/accelerator/scripts/grounded_answer.py \
+  --knowledge-base grounding-kb --role returns-coordinators
 
 # Verify the deployed surface with tokens held only in environment variables
 python3 scenarios/ai-grounding/accelerator/scripts/probe_surface.py \
@@ -105,21 +106,11 @@ python3 scenarios/ai-grounding/accelerator/scripts/probe_surface.py \
 
 Each lesson's **Verify** section lists the specific commands and signals for that module.
 
-## Reused activities
+## Follow one path
 
-These lessons reuse the kit's implementation activities:
-
-- [Foundations](activity.html?id=foundations) — provisioning, model selection, and
-  Azure AI Search grounding baseline
-- [Evaluation & Red Teaming](activity.html?id=advanced-evaluation-redteam) — the harness,
-  custom evaluators, and adversarial seed set used in module 7
-- [Tracing & Observability](activity.html?id=advanced-tracing-observability) — GenAI
-  spans, the instrumentation ordering gotcha, and the KQL correlation queries
-- [Action Tools](activity.html?id=advanced-action-tools) and
-  [Fabric IQ](activity.html?id=extra-fabric-iq) — live-data and action routing in module 6
-- [Deploy as a Hosted Agent](activity.html?id=advanced-deploy-hosted-agent) — the hosted
-  endpoint option in module 8
-- [Build a UI](activity.html?id=extra-build-ui) — the custom surface option in module 8
+**Stay in these lessons for the default build.** They use this scenario's returns corpus,
+scripts, and environment contract. Module 7 captures actual answers and evaluates the native
+golden-question format. Optional architecture extensions are marked where they change the scope.
 
 ## Non-negotiables
 

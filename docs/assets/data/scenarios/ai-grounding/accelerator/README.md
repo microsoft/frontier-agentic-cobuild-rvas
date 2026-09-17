@@ -16,10 +16,11 @@ enterprise landing zone or approve a production deployment.
 ## Known implementation gaps
 
 **Do not treat the shipped scripts as a complete release gate.** The blob path does not map the
-fictional role labels to per-document Azure permissions. `grounded_answer.py` uses one identity for
-all cases and labels answer citation matches as `recall@5`; it does not measure retrieved passages.
-The module 6 and 7 probe commands still call the knowledge base, not the agent. Module 7's shared
-evaluation harness expects JSONL rows, while this scenario supplies a JSON object of cases.
+fictional role labels to per-document Azure permissions. `grounded_answer.py --role` selects
+questions for one caller and reports citation hit rate; it does not measure retrieved passages.
+Module 7 uses `capture_answers.py` to select a role's questions and invoke retrieval or a pinned
+agent, then `evaluate_answers.py` to grade the captured answers against the native JSON case set.
+The role flag selects questions only; callers still need actual test identities and access mappings.
 
 These need implementation work before a permission-aware pilot can pass the stated gates.
 The model comparison only scopes local prompt context by fixture role. Neither probe can prove
@@ -113,16 +114,11 @@ These checks do not verify Azure retrieval or permissions.
 - A denial must not reveal that a protected document exists.
 - Pin the agent version in application configuration. Do not send users to a debugging version.
 
-## Related implementation activities
+## Continue in the scenario
 
-- [Foundations](../../../activities/foundations/README.md) for provisioning, model selection, and
-  the grounding baseline.
-- [Evaluation & Red Teaming](../../../activities/advanced-evaluation-redteam/README.md) and
-  [Tracing & Observability](../../../activities/advanced-tracing-observability/README.md) for the
-  release gate and traces.
-- [Action Tools](../../../activities/advanced-action-tools/README.md) and
-  [Fabric IQ](../../../activities/extra-fabric-iq/README.md) for live-data routing.
-- [Deploy as a Hosted Agent](../../../activities/advanced-deploy-hosted-agent/README.md) and
-  [Build a UI](../../../activities/extra-build-ui/README.md) for the user surface.
+[Module 7](../lessons/07-evaluate-and-trace.md) contains the capture and gate commands.
+It keeps coordinator and supervisor outputs separate under the ignored `.runtime/` directory.
+The reports check response contracts, not semantic correctness or retrieval recall.
+Use [module 8](../lessons/08-deploy-and-surface.md) for the surface and hosting steps.
 
 See [solution.md](solution.md) for the facilitator reference.

@@ -37,9 +37,9 @@ python3 -B scenarios/operational-agents/accelerator/validate.py
 ```
 
 When adapting a tool, retain this distinction: the model sees a proposal
-function; the application owns the actual write. Use the shared
-[Action Tools activity](../../../activities/advanced-action-tools/README.md)
-for the approval and provenance contract.
+function; the application owns the actual write. Persist the requested function and arguments
+with the task ID, then retain the human decision and destination receipt. Module 6 applies
+that contract to the exact proposal; no separate tool exercise is required.
 
 ## Verify
 

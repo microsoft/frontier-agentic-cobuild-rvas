@@ -156,9 +156,9 @@ People most often get these three things wrong:
    search service must be provisioned with semantic search enabled — module 1's Bicep sets
    `semanticSearch: 'standard'`.
 
-The [foundations activity](../../../activities/foundations/README.md) Step 4 builds this path
-end-to-end against the university FAQ corpus, including attaching the index to an agent with
-`AzureAISearchQueryType.SEMANTIC` and `top_k=5`. Use it as the working reference.
+Keep the index and source IDs from module 3. Do not create a second sample index.
+The default knowledge-base path above already has its scenario runner; this custom hybrid
+alternative requires an answer-generation step over the returned passages.
 
 ### The four behaviours you must implement
 
@@ -178,9 +178,17 @@ conflicting versions. The answer must cite the current notice.
 
 ## Verify
 
-**Harness limit:** this script's `recall@5` label counts source IDs in answers, not relevant passages
-among five retrieved results. It also uses one caller identity for all cases, ignoring `role_groups`.
-Do not use that output as proof of retrieval recall or coordinator-versus-supervisor permissions.
+**Harness limit:** this script counts source IDs in answers, not relevant retrieved passages.
+`--role` selects the questions for one fixture role; it does not select the caller's identity.
+Sign in as the coordinator test identity from module 2 and supply its query-source token:
+
+```bash
+export PROBE_USER_TOKEN="$(az account get-access-token \
+  --scope https://search.azure.com/.default --query accessToken -o tsv)"
+```
+
+The source's access mapping must already enforce module 2's boundary. Fixture role labels
+are not Azure permissions.
 
 Do not skip recall. Without a recorded baseline, module 6's agent can quietly worsen retrieval.
 
@@ -190,7 +198,8 @@ Run commands from the repository root.
 
 ```bash
 python3 scenarios/ai-grounding/accelerator/scripts/grounded_answer.py \
-  --knowledge-base "$AZURE_KNOWLEDGE_BASE_NAME" --min-recall 0.95
+  --knowledge-base "$AZURE_KNOWLEDGE_BASE_NAME" \
+  --role returns-coordinators --min-citation-rate 1.0
 ```
 
 Each answerable question should print `PASS  ...: answer cites [...]`. Unanswerable questions should
@@ -198,9 +207,13 @@ abstain, not produce a plausible paragraph. The Alpine notice case should cite t
 not `SVC-ALPINE-2026-01-28`. A citation `FAIL` often means a vector-only query missed an exact ID.
 Send `search_text` with the vector query. An abstention `FAIL` means the prompt still permits inference.
 
-**2. Record what the metric actually measures.** The script prints, for example,
-`recall@5 = 1.00  (4/4)`. Its `--min-recall` argument gates answer citation hit rate.
-Build a passage-level recall check before comparing retrieval quality with the agent.
+**2. Record what the metric actually measures.** The script prints the answer citation hit
+rate. It does not measure passage-level recall or answer meaning. Review each answer
+against its acceptance criteria.
+
+Repeat with the supervisor test identity, refresh `PROBE_USER_TOKEN`, and use
+`--role returns-supervisors`. The supervisor-only case must now answer. Unset the token
+when finished. Module 7 captures these role-specific responses for a repeatable gate.
 
 ## Troubleshooting
 
