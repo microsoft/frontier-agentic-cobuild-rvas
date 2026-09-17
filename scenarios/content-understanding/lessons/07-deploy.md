@@ -3,8 +3,6 @@
 The workflow passed the gate. Deploy it without losing the controls that made it safe. Deployment
 makes keyless auth, monitoring, and rollback operational rather than aspirational.
 
-![Controlled deployment boundary](../diagrams/07-controlled-deployment.png)
-
 ## What you build
 
 An authenticated endpoint that runs the reviewed workflow with a managed identity, Application

@@ -7,8 +7,6 @@ an evidence-backed release decision. "It demoed well" is not a release decision.
 Use the claim set and generated media from modules 3–6. The checks below stay within
 this scenario. Set tracing configuration before the first model request.
 
-![Avatar experience operating loop](../diagrams/07-operate-avatar-experience.png)
-
 ## What you build
 
 1. An **evaluation** of grounding, disclosure presence, accessibility, and refusal behavior against

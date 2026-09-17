@@ -8,7 +8,7 @@ will repeat it.
 Continue with module 2's chat deployment and module 3's approved claim set. The default
 drafting path below needs no new agent or sample corpus.
 
-![Grounded assistant boundary](../diagrams/04-grounded-assistant-boundary.png)
+![Supported requests get approved wording and a claim citation; unsupported requests get NO_APPROVED_CLAIM and a help path.](../diagrams/04-grounded-assistant-boundary.png)
 
 ## What you build
 

@@ -4,7 +4,7 @@ Module 4 raises exceptions; this module resolves them. A reviewer sees missing a
 fields, corrects them, and approves the result. Retain every correction as evidence. Never silently
 overwrite extraction, and send corrections to module 6's evaluation.
 
-![Human review handoff](../diagrams/05-human-review-handoff.png)
+![Results with review reasons need correction. Both corrected and clean results require authorized approval before handoff.](../diagrams/05-human-review-handoff.png)
 
 ## What you build
 

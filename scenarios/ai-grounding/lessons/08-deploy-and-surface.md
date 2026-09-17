@@ -6,7 +6,7 @@ people meet it, and who runs it?**
 Carry forward the path tested in module 7. If you skipped the agent, keep the retrieval
 function in your application; do not create an agent merely to expose it.
 
-![Surface decision](../diagrams/08-surface-decision.png)
+![Either the no-agent retrieval path or a pinned agent connects through a caller-aware adapter to the chosen user interface.](../diagrams/08-surface-decision.png)
 
 ## What you build
 

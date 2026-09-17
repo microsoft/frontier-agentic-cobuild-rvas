@@ -3,8 +3,6 @@
 Use the returns questions and resources from the preceding modules. **Keep the same answer
 path:** retrieval if you skipped the agent, or the pinned agent version if you added one.
 
-![Operating evidence gate](../diagrams/07-operating-gate.png)
-
 ## What you build
 
 A repeatable response-contract gate, reviewed answers, and a trace that helps explain one

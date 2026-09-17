@@ -3,8 +3,6 @@
 Later modules use this footprint. Check resource access before adding content; per-user permissions
 and the application still need implementation.
 
-![Grounding foundation footprint](../diagrams/01-foundation-footprint.png)
-
 ## What you build
 
 A resource group containing:

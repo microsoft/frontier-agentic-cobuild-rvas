@@ -204,3 +204,20 @@ test('Operational Agents has eight linked modules and all public entry points', 
   }
   assert.ok(fs.readFileSync(path.join(ROOT, 'docs/index.html'), 'utf8').includes('scenario.html?id=operational-agents'));
 });
+
+test('diagram branches keep refusals separate and require approval after review', () => {
+  const edges = (file) => JSON.parse(fs.readFileSync(path.join(ROOT, 'scenarios', file), 'utf8'))
+    .elements.filter((element) => element.type === 'arrow')
+    .map((element) => [element.startBinding?.elementId, element.endBinding?.elementId].join('->'));
+  const claims = edges('avatar-onboarding/diagrams/04-grounded-assistant-boundary.excalidraw');
+  assert.ok(claims.includes('gate->answer'));
+  assert.ok(claims.includes('gate->refuse'));
+  assert.ok(!claims.includes('answer->refuse'));
+  const review = edges('content-understanding/diagrams/05-human-review-handoff.excalidraw');
+  for (const edge of ['gate->review', 'gate->clean', 'review->approval', 'clean->approval']) {
+    assert.ok(review.includes(edge), edge);
+  }
+  const surface = edges('ai-grounding/diagrams/08-surface-decision.excalidraw');
+  assert.ok(surface.includes('plain->adapter'));
+  assert.ok(surface.includes('agent->adapter'));
+});

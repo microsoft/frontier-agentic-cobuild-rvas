@@ -4,8 +4,6 @@ Every later module uses the foundation you create here. Content Understanding an
 are **Foundry Tools on a Microsoft Foundry (AIServices) resource**, the account that also hosts model
 deployments. Choose the identity model and region now. A wrong choice means redeploying later.
 
-![Shared document workflow foundation](../diagrams/01-shared-foundation.png)
-
 ## What you build
 
 A resource group containing:

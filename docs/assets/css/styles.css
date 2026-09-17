@@ -1769,9 +1769,12 @@ body.diagram-lightbox-open { overflow: hidden; }
   -webkit-backdrop-filter: blur(8px);
 }
 .diagram-lightbox__panel {
+  display: flex;
+  flex-direction: column;
   position: relative;
   z-index: 1;
-  width: min(96vw, 1400px);
+  width: min(100%, 1400px);
+  min-width: 0;
   max-height: 92vh;
   margin: 0;
   padding: clamp(0.75rem, 2vw, 1.25rem);
@@ -1780,14 +1783,43 @@ body.diagram-lightbox-open { overflow: hidden; }
   background: #fff;
   box-shadow: 0 30px 90px -24px rgba(0, 0, 0, 0.55);
 }
+.diagram-lightbox__viewport {
+  min-height: 0;
+  max-height: calc(92vh - 10rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.diagram-lightbox__viewport:focus-visible,
+.diagram-lightbox__zoom:focus-visible {
+  outline: 3px solid var(--c-accent, var(--c-gold));
+  outline-offset: 3px;
+}
 .diagram-lightbox__image {
+  display: block;
   width: 100%;
-  max-height: calc(92vh - 7rem);
+  max-height: calc(92vh - 10rem);
   object-fit: contain;
   border-radius: var(--r);
   background: #fff;
 }
+.diagram-lightbox__viewport.is-zoomed .diagram-lightbox__image {
+  max-width: none;
+  max-height: none;
+}
+.diagram-lightbox__zoom {
+  align-self: flex-start;
+  flex-shrink: 0;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid #324155;
+  border-radius: var(--r-sm);
+  background: #fff;
+  color: #324155;
+  font: inherit;
+  cursor: pointer;
+}
 .diagram-lightbox__caption {
+  flex-shrink: 0;
   margin-top: 0.75rem;
   color: #324155;
   font-size: 0.95rem;

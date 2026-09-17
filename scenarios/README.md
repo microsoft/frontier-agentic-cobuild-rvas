@@ -108,6 +108,10 @@ roadmap displays it alongside the module summary.
 - Every lesson considers Excalidraw diagrams. Include one or more when a diagram conveys important
   visual information the learner should understand or retain; include zero when a diagram would be
   decorative or redundant.
+- Label decision branches and show both the allowed and blocked outcomes. Use actual fixture
+  fields for data examples, label illustrative results, and keep examples aligned with the code.
+- Regenerate each PNG after changing its Excalidraw source. Inspect the image in a lesson at desktop
+  and mobile widths; readers can use **Zoom in** to scroll a detailed diagram.
 - Diagrams must pass `npm run validate:diagrams`. Arrows that visibly connect two shapes should
   stop outside each shape, use a small gap (2px is the house default), and avoid crossing through
   unrelated boxes or ellipses. Clean straight-line diagrams may retain unbound arrows, but arrows

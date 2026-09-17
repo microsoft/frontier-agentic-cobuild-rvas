@@ -4,8 +4,6 @@ Prove the workflow before it affects a real decision. “It worked on the demo d
 evidence. This module measures representative cases against a gate and traces every run so you can
 diagnose failures.
 
-![Evaluation and trace loop](../diagrams/06-eval-trace-loop.png)
-
 ## What you build
 
 1. A labeled evaluation set from module-1 fixtures **and** module-5 corrections. Real mistakes make

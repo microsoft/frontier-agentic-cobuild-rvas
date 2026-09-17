@@ -154,6 +154,8 @@ python3 scenarios/ai-grounding/accelerator/scripts/compare_models.py \
   --deployments chat chat-candidate
 ```
 
+**Illustrative output, not measured benchmark results:**
+
 ```
 deployment          grounded  abstained  p50(ms)  p95(ms)   tok_in  tok_out
 chat                     4/4        3/3      820     1310     4912      611

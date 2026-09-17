@@ -7,8 +7,6 @@ model right now. Then modules 3–7 become configuration.
 
 This module follows the kit's working `infra/resources.bicep` and current Microsoft Learn guidance.
 
-![Foundry and Speech foundation](../diagrams/02-foundry-speech-foundation.png)
-
 ## What you build
 
 | Resource | Why this scenario needs it |

@@ -259,6 +259,7 @@
     modal._returnFocus = sourceImage;
     image.src = sourceImage.currentSrc || sourceImage.src;
     image.alt = alt || 'Zoomed diagram';
+    setDiagramScale(modal, false);
     caption.textContent = alt || '';
     caption.hidden = !alt;
 
@@ -282,6 +283,20 @@
     modal._returnFocus = null;
   }
 
+  function setDiagramScale(modal, zoomed) {
+    const viewport = modal.querySelector('[data-diagram-lightbox-viewport]');
+    const image = modal.querySelector('[data-diagram-lightbox-image]');
+    const button = modal.querySelector('[data-diagram-lightbox-zoom]');
+    viewport.classList.toggle('is-zoomed', zoomed);
+    image.style.width = zoomed ? `${Math.min(1600, Math.max(1000, viewport.clientWidth * 1.5))}px` : '';
+    button.textContent = zoomed ? 'Fit diagram' : 'Zoom in';
+    button.setAttribute('aria-pressed', String(zoomed));
+    viewport.scrollTo(
+      zoomed ? (viewport.scrollWidth - viewport.clientWidth) / 2 : 0,
+      zoomed ? (viewport.scrollHeight - viewport.clientHeight) / 2 : 0,
+    );
+  }
+
   function ensureDiagramZoomModal() {
     let modal = document.querySelector('[data-diagram-lightbox]');
     if (modal) return modal;
@@ -297,15 +312,34 @@
       <button class="diagram-lightbox__backdrop" type="button" aria-label="Close diagram preview" data-diagram-lightbox-backdrop></button>
       <figure class="diagram-lightbox__panel">
         <button class="diagram-lightbox__close" type="button" aria-label="Close diagram preview" data-diagram-lightbox-close>&times;</button>
-        <img class="diagram-lightbox__image" alt="" data-diagram-lightbox-image>
+        <div class="diagram-lightbox__viewport" tabindex="0" role="region" aria-label="Diagram viewport; scroll to explore when zoomed" data-diagram-lightbox-viewport>
+          <img class="diagram-lightbox__image" alt="" data-diagram-lightbox-image>
+        </div>
+        <button class="diagram-lightbox__zoom" type="button" aria-pressed="false" data-diagram-lightbox-zoom>Zoom in</button>
         <figcaption class="diagram-lightbox__caption" data-diagram-lightbox-caption></figcaption>
       </figure>`;
     document.body.appendChild(modal);
 
     modal.querySelector('[data-diagram-lightbox-backdrop]').addEventListener('click', closeDiagramZoom);
     modal.querySelector('[data-diagram-lightbox-close]').addEventListener('click', closeDiagramZoom);
+    modal.querySelector('[data-diagram-lightbox-zoom]').addEventListener('click', () => {
+      const zoomed = modal.querySelector('[data-diagram-lightbox-viewport]').classList.contains('is-zoomed');
+      setDiagramScale(modal, !zoomed);
+    });
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') closeDiagramZoom();
+      if (event.key === 'Tab' && !modal.hidden) {
+        const controls = modal.querySelector('.diagram-lightbox__panel').querySelectorAll('button, [tabindex="0"]');
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     });
     return modal;
   }
