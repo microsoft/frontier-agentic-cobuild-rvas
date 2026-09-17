@@ -233,17 +233,6 @@ grep -iE 'api_key|account_key|connection_string|sas_token' scenarios/content-und
 
 You want no output. Any match means an upstream step provided a key and broke the keyless chain.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| `401` / `403` from the account | Missing data-plane roles; RBAC takes minutes to propagate | Assign **Cognitive Services User** + **Cognitive Services OpenAI User**, wait ~5 min, re-run |
-| Deployment fails on the model | Model or capacity unavailable in the region | Check `az cognitiveservices model list --location <region>` and subscription quota, then change region or capacity |
-| Both deployments fail together | Deployments on one account serialize | The template sets `dependsOn` on the embedding deployment; do not remove it |
-| `StorageAccountAlreadyTaken` | `resourceToken` collides globally | Pass a different `resourceToken` (5–12 lowercase chars) |
-| Content Understanding calls 404 | Wrong endpoint host or unsupported region | Use `AZURE_CONTENT_UNDERSTANDING_ENDPOINT` from the outputs; confirm the region supports the service |
-| `.env` written but empty | Deployment succeeded with no outputs | Check `accelerator/.deployment-outputs.json`; re-run the deployment |
-
 ## Next module
 
 [Module 2 — Connect an approved document source](02-document-source.md) decides where trusted

@@ -231,17 +231,6 @@ for. Compare the returned fields to what you can see in the source document.
 If obvious fields come back empty, or confidence collapses across the document, use the fallback.
 Do not lower the threshold until results look acceptable.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Fields empty on a "simple" document | Deterministic model on a non-standard layout | Switch to a CU analyzer (A/B) that reasons over variable layouts |
-| Confidence/grounding missing from a custom analyzer | `estimateFieldSourceAndConfidence` not set | Add it to the analyzer `config` and recreate the analyzer |
-| `404` on the analyze call | Preview API version or wrong host | Pin `api-version=2025-11-01` (CU GA) and use the CU endpoint from `.env` |
-| Costs spike per page | LLM path (E) on high-volume stable forms | Move to a DI prebuilt model (C) for those classes |
-| Values look plausible but are wrong | LLM inferred a value (E) with no grounding | Require a source span per field and reject unlocatable fields |
-| Handwriting/chart data dropped | Text-only pipeline over visual content | Use a multimodal analyzer (F) |
-
 ## Next module
 
 [Module 4 — Implement typed extraction with evidence](04-typed-extraction.md) turns the chosen

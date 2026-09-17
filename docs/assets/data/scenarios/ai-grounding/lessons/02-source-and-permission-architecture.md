@@ -256,17 +256,6 @@ queries the supervisor playbook by title. Confirm the restricted identity gets n
 and no count. An access-denied response has to be indistinguishable from "no such document" — a
 title or a hit count is itself a leak.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Restricted identity sees protected content | Missing or incorrect source permissions, permission fields, or user identity | Inspect all three; the header alone does not configure document permissions |
-| `5xx` on every filtered query | ACL evaluation failed (often Graph unavailable) | This is by design: it fails closed rather than returning partial results. Fix Graph access; do not "handle" it by dropping the filter |
-| Revoked user still gets results | ACL staleness | Resync the indexer; parent-scope changes in SharePoint need a full resync |
-| Group membership ignored | Group IDs not ingested, or not stored as Entra object IDs | Set `ingestion_permission_options` to include `group_ids`; store GUIDs, not display names |
-| Permission filtering silently absent | Using the GA API version | Query-time ACL filtering requires the preview API/SDK |
-| Works for 30 docs, leaks at scale | ACL entry limits exceeded (32 ADLS Gen2, 1,000 SharePoint) | Redesign to group-based permissions rather than per-user entries |
-
 ## Next module
 
 [Module 3 — Ingest and index approved content](03-ingest-and-index.md) implements the source you

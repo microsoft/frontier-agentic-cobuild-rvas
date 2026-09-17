@@ -231,18 +231,6 @@ grep -iE 'api_key|account_key|connection_string|sas_token|subscription_key' \
 No output is the expected result. Any match means something supplied a key and the keyless chain is
 already broken.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| `401`/`403` from Search | Missing data-plane roles; RBAC propagation lag | Assign Search Service Contributor + Search Index Data Contributor, wait ~5 min |
-| `401` from `avatar/batchsyntheses` with a token | Invalid/expired token or wrong endpoint | Refresh the token; check its audience and the custom-subdomain endpoint |
-| `403` from Speech though you're Owner | Generic Owner/Contributor grants no Speech data access | Assign **Cognitive Services Speech User** (`f2dc8367-…`) |
-| Model deployment fails | Model/capacity unavailable in region | Check `az cognitiveservices model list --location <region>` and subscription quota; change region or capacity |
-| Avatar features missing in region | Region not on the avatar list | Redeploy in a region from the `?tabs=ttsavatar` table |
-| `StorageAccountAlreadyTaken` | `resourceToken` collides globally | Pass a different `resourceToken` (5–12 lowercase chars) |
-| `.env` written but empty | Deployment produced no outputs | Check `accelerator/.deployment-outputs.json`; re-run |
-
 ## Next module
 
 [Module 3 — Build the governed content pipeline](03-content-pipeline.md) turns approved HR/onboarding

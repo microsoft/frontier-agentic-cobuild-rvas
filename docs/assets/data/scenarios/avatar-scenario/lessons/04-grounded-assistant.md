@@ -159,17 +159,6 @@ confident, replayable, made-up number spoken by a face. If you get one, do not r
 A `401`/`403` means you are missing the **Cognitive Services OpenAI User** role on the account.
 Grant it and stay keyless.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Assistant invents a benefit/amount | Weak system prompt or content not constrained to claims | Enforce "approved claims only", `temperature=0`, and the exact refusal token |
-| Cites a claim id that doesn't exist | Model hallucinated a citation | Validate every returned `claim_id` against `claims.json`; drop unknown citations |
-| Refuses valid on-claim questions | Approved context omitted the claim | For A, inspect the loaded `claims.json`; for B/C, check retrieval and index contents |
-| `401`/`403` calling the model | Missing Cognitive Services OpenAI User role or wrong endpoint | Assign the role; use `AZURE_AI_FOUNDRY_ENDPOINT`; keyless via `DefaultAzureCredential` |
-| Agent answers from outside the corpus | Knowledge tool scope too broad | Scope the knowledge tool to the approved corpus only |
-| Paraphrased policy reaches the script | Free-text drafting | The renderer requires exact-claim spoken text; author claims, not prose |
-
 ## Next module
 
 [Module 5 — Generate the accessible avatar experience](05-experience-generation.md) turns an approved

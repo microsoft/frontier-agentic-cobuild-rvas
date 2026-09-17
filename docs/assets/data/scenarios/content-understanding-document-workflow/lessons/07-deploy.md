@@ -158,17 +158,6 @@ dependencies
 Rows for your request mean those spans survived deployment. No rows require checking the
 exporter, destination, runtime configuration, and query window.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Live probe returns `200` unauthenticated | Endpoint not protected | Require Entra auth on ingress; never expose the workflow anonymously |
-| Deployment can't reach models or storage | Managed identity missing roles | Re-assign **Cognitive Services User** / **Storage Blob Data Reader** to the deployment identity |
-| No traces after deploy | Tracing env not carried into the runtime | Set both GenAI env vars in the deployment, before the SDK loads |
-| Rollback means a full redeploy | No revision/slot retained | Keep the previous revision pinned; make rollback a swap |
-| Manifest still lists module 6 as not passed | Shipping before module 6 passed | Do not deploy until the gate is green; it is a release prerequisite |
-| Secrets appear in the deployment config | Key-based auth crept back in | Return to managed identity; scan config for `*_KEY` / connection strings |
-
 ## Next module
 
 If the deployed checks pass, the seven-module path has produced a reviewable document workflow.

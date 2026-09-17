@@ -263,20 +263,6 @@ Application Insights connection string for telemetry, including in its project c
 Use managed identity for resource access and review telemetry authentication separately.
 Adjust the commands for the surface you deployed (Container Apps, Function App, or Bot Service).
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Answers changed after go-live | Version selector left on always-latest | Pin the version; log it in every evaluation run |
-| Publishing fails with `403` on `Microsoft.BotService/botServices/write` | Foundry roles do not grant bot permissions | Assign **Azure Bot Service Contributor** on the resource group, then reopen the publish flow |
-| Publish dialog says the agent uses an older format | Agent predates the current agent model | Migrate the agent to the new format, then publish |
-| Agent published but nobody else can find it | Published to "just you" | Share the link, or republish to the organization and get admin approval |
-| Every user sees the same results regardless of permissions | The surface calls the agent with one service identity | Pass the signed-in user through; re-run `probe_surface.py` with caller-specific tokens |
-| No traces after go-live | Tracing env not carried into the deployed runtime | Set both GenAI env vars in the deployment, before the SDK loads |
-| Rollback means a full redeploy | Previous version not retained | Keep the previous agent version; make rollback a version repoint |
-| Surface probe returns `200` anonymously | The surface is open | Require Entra auth on ingress before anyone else sees the URL |
-| Secrets appear in the deployment config | Key-based auth crept back in | Return to managed identity; scan config for `*_KEY` and connection strings |
-
 ## Next module
 
 There is no required next module. If the deployed surface passes these checks, review the

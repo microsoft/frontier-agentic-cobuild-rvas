@@ -241,19 +241,6 @@ This command only rechecks raw retrieval. For the agent, use module 7's `capture
 with `--target agent` and the pinned name and version. Compare its actual responses with the
 retrieval captures. These answer checks do not measure passage-level recall.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Agent answers live-data questions from the index | Routing instructions too vague, or live data was indexed | Name the trigger conditions explicitly; remove live data from the index |
-| Tool never called | Tool description too abstract for the model to match | Rewrite the description around user phrasing, not internal system names |
-| Tool called for everything | No negative condition in the instructions | State when *not* to call it |
-| `403` from the agent to Search | Project managed identity lacks **Search Index Data Contributor** and **Search Service Contributor** | Assign both on the search service; module 1's Bicep does this |
-| Answers changed after a redeploy | New agent version, silently | Pin and log `agent.version` in every run and every evaluation |
-| Latency doubled | Multiple tool round trips per question | Reduce sources, lower reasoning effort, or drop back to the module 5 path |
-| Citations vanish once the agent is added | Agent instructions did not restate the citation rule | Restate it; the tool's behaviour does not carry into the agent's output contract |
-| Agent reveals restricted document titles | Retrieval passed metadata the instructions did not suppress | Re-run module 2's permission probe against the *agent*, not just retrieval |
-
 ## Next module
 
 [Module 7 — Evaluate and trace](07-evaluate-and-trace.md) proves the whole thing with

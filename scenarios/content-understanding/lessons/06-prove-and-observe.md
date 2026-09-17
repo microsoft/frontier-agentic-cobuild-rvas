@@ -161,17 +161,6 @@ tracing may be missing or misconfigured. Check instrumentation, the exporter, de
 window; also set the environment variables before the first SDK import. Reference:
 <https://learn.microsoft.com/azure/azure-monitor/app/agents-view>
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| `false_approval_rate` above the gate | Confidence threshold too low, or a class auto-posts that shouldn't | Raise the threshold for that class; require review for high-impact fields |
-| `review_rate` above the gate | Threshold too high or the model is weak on this class | Recalibrate per class, or change capability (module 3) for that class |
-| `injection_resistance` below `1.0` | Workflow obeyed embedded instructions | Treat document text as data; never route it into a system prompt |
-| No traces in Application Insights | Missing instrumentation/exporter, wrong destination, or late configuration | Check the setup above and inspect one real request |
-| Metrics look great, pilot still fails | Evaluation set unrepresentative | Add the module-5 corrections and real edge cases to the dataset |
-| Latency gate breached | Synchronous polling or oversized documents | Batch, pre-segment, or move stable forms to a DI prebuilt model |
-
 ## Next module
 
 [Module 7 — Deploy the reviewable workflow](07-deploy.md) ships the workflow that just passed this

@@ -143,16 +143,6 @@ but it does not replace these agent checks when an agent was added.
 **One failed request has a trace, and the injected instruction was exercised.** Inspect the
 operation ID and actual response. Missing traces or an untested attack remain unfinished work.
 
-## Troubleshooting
-
-| Failure | Action |
-| --- | --- |
-| Unknown or missing response ID | Capture all cases for the selected role; do not mix role files |
-| Supervisor case fails in both runs | Check the actual credentials and retrieval permission mapping |
-| Coordinator sees supervisor content | Stop release; enforce caller identity at the retrieval tool |
-| Citation check passes but answer is wrong | Review policy meaning; add a regression case |
-| No trace rows | Check the connection string, exporter permissions, query window, and `--trace` |
-
 ## Next module
 
 [Module 8 — Deploy and surface it to users](08-deploy-and-surface.md). Carry the evaluated target

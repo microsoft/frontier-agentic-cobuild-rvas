@@ -294,19 +294,6 @@ A non-zero chunk count confirms indexed content exists; it need not equal the so
 Check source coverage separately. Zero after a successful run means re-run the indexer once content
 is in the container.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| `403` creating a knowledge source | Missing **Search Service Contributor**, or **Search Index Data Contributor** when the source generates an indexer pipeline | Assign both on the search service; the Bicep from module 1 does this for the deployer principal |
-| `403` when the source uses a model | The **search service managed identity** lacks **Cognitive Services User** on the Foundry resource | Assign it; note this also requires search tier **Basic or higher** — the free tier cannot use a managed identity for model access |
-| Ingestion succeeds, retrieval returns nothing | Indexer ran before the blobs were uploaded | Re-run the indexer; check `createdResources.indexer` execution history in the portal |
-| Answers cite a superseded document | No effective-date field, or no `retrieval_instructions` preferring recency | Add the date as a retrievable field and say so in `retrieval_instructions`; archive superseded content out of the container |
-| `ImportError` on `KnowledgeSourceIngestionParameters` | GA vs preview module split | Preview: `azure.search.documents.indexes.models`. GA: `azure.search.documents.knowledgebases.models`. Confirm with `pip show azure-search-documents` |
-| Cannot delete a knowledge source | A knowledge base still references it | Update or delete the knowledge base first |
-| Chunks return fragments with no context | Chunking split mid-rule, or no section title carried into the chunk | Prepend the heading path to each chunk (Option C), or raise chunk size and overlap (Option B) |
-| Ingestion cost is higher than expected | Embeddings are billed at index time *and* query time | Reduce reingestion frequency; do not reingest unchanged documents |
-
 ## Next module
 
 [Module 4 — Compare chat and embedding choices](04-model-selection.md) picks the models, now that

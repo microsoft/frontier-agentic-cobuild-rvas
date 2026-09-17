@@ -171,17 +171,6 @@ The first command must print `true`. Module 6 cannot approve a claim without an 
 and a pack without `review_by` never expires. The second must not print `EXPIRED`. An expired claim
 presented as current policy is the failure this pipeline prevents.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| `403` on blob upload | Shared-key access is off (by design) and you're not using `--auth-mode login` | Sign in with `az login`; ensure Storage Blob Data Contributor; add `--auth-mode login` |
-| Claim rejected: missing owner | An unowned fact | Assign a named owner; unowned claims can't be approved |
-| Duplicate claim id | Copy-paste | Ids must be unique; the check fails on duplicates |
-| Expired content still publishable | `review_by` in the past ignored | Treat `review_by` as a hard gate; invalidate and re-approve |
-| Avatar paraphrases policy | Free-text drafting instead of exact claims | The renderer requires spoken text to equal an approved claim; author claims, not prose |
-| Source changed, experience stale | No invalidation path | Wire the module-6 withdrawal path: source change → claim invalid → pause |
-
 ## Next module
 
 [Module 4 — Build the grounded assistant behind the experience](04-grounded-assistant.md) turns this

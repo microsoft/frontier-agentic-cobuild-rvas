@@ -170,18 +170,6 @@ The harness uses role-scoped local context, not live retrieval. It does not comp
 enforce Azure permissions. The corpus has no separate superseded-notice document, so it does not
 test choosing between competing notices.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| `429` on every call | Deployment capacity too low, or shared with another workload | Raise `--sku-capacity`, add exponential-backoff retries, reduce concurrency in the harness |
-| Deployment create fails with a conflict | Concurrent deployments on one account | Create them serially |
-| `InsufficientQuota` | Regional quota exhausted for that SKU family | Check `az cognitiveservices usage list`; request an increase or pick another region |
-| Model not available in your region | Regional model availability differs | Check the model availability table on Learn before committing to a region |
-| `401` / `403` from the SDK | Missing **Cognitive Services OpenAI User** on the Foundry resource, or no `az login` | Run `az login`; confirm the role assignment from module 1 landed |
-| Candidate wins on quality but the harness is not reproducible | Temperature or prompt varied between runs | Fix the prompt, pin sampling parameters, re-run |
-| Every candidate scores identically | Golden set is too easy | Add the hard cases: ambiguity, superseded documents, questions the corpus cannot answer |
-
 ## Next module
 
 [Module 5 — Build retrieval before adding an agent](05-grounded-retrieval.md) turns the corpus and

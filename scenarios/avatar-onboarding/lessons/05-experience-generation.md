@@ -180,18 +180,6 @@ fallback without the approved wording or a `lang` attribute excludes screen-read
 users. Ship captions, a transcript, and the non-avatar page for every option.
 <https://learn.microsoft.com/azure/foundry/responsible-ai/speech-service/text-to-speech/concepts-disclosure-guidelines>
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Renderer rejects the pack | A segment's spoken text isn't an exact approved claim, or an approval/disclosure is missing | Fix the script to use exact claims; complete approvals (module 6) |
-| `401` submitting the batch job | No custom subdomain / wrong role | Module 2 sets the subdomain; assign **Cognitive Services Speech User** |
-| `400 unsupported voice/locale` | Voice not available for the input language | Pick a voice that supports the locale; verify in language-and-voice support |
-| Custom avatar/voice rejected | Limited access not approved | File <https://aka.ms/customneural>; ship a **standard** avatar until approved |
-| Real-time avatar won't stream | WebRTC/TURN egress blocked | Allow `relay.communication.microsoft.com` UDP 3478 / TCP 443 |
-| Job exceeds limits | > 20 min output or > 500 KB payload | Split into segments; keep each job within limits |
-| Captions present but no transcript | Relied on embedded subtitles only | Ship the standalone transcript + HTML fallback too |
-
 ## Next module
 
 [Module 6 — Gate publication behind human approval](06-approval-gating.md) requires named human

@@ -147,17 +147,6 @@ az role assignment list --assignee "$MI" --scope "$STORAGE_ID" \
 You need **Storage Blob Data Reader** in that list. Without it, module 3's analyze-by-URL call fails
 against the blob.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| `403` on `az storage blob upload` | Missing **Storage Blob Data Contributor** on your identity | Assign it at the storage scope; wait ~5 min; use `--auth-mode login` |
-| Analyzer can't read the blob later | Account MI lacks **Storage Blob Data Reader** | Module 1's role assignment covers this; confirm it exists |
-| `AuthorizationFailure` with `--account-key` | Shared key access is disabled by design | Use `--auth-mode login`, never a key |
-| SharePoint returns nothing for some users | Inherited site permissions differ from intent | Fix permissions in SharePoint; retest with a low-privilege account |
-| Revoked user still reaches indexed content | ACL staleness after ingestion | Resync the indexer; parent-scope changes need a full resync |
-| Documents pile up unprocessed | No quarantine rule caught an unapproved class | Add the rule to the ingestion pipeline; route failures to `documents-quarantine` |
-
 ## Next module
 
 [Module 3 — Select the extraction capability](03-extraction-selection.md) chooses how these

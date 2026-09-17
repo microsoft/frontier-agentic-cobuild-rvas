@@ -172,17 +172,6 @@ jq -e '[.. | strings] | any(test("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,
 `true` means no address-shaped strings are present. Any match means you are tracking people in an
 onboarding tool. Keep counts only.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Traces empty | Exporter/instrumentation missing, wrong destination, or late configuration | Apply the setup above in the drafting process; inspect one request |
-| Groundedness passes but avatar still wrong | Golden set too small / not onboarding-specific | Add the off-claim, impersonation, and disclosure probes above |
-| Red-team finds impersonation | Prompt allows role-play as real people | Forbid impersonation; keep disclosure mandatory in the system prompt |
-| Accessibility defect slips to pilot | Fallback/transcript not evaluated | Gate on captions + transcript + fallback presence (module 5) |
-| Feedback contains PII | Collecting per-user events/free-text | Aggregate only; the check fails on identifiers/emails/free-text |
-| Ship decision recorded despite a red gate | Thresholds not enforced | The release check blocks `ship-pilot` unless every gate is green |
-
 ## Next module
 
 This is the final module. Release only after the actual media and publication checks pass;

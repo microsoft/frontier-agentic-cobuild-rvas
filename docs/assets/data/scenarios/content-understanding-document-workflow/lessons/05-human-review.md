@@ -138,17 +138,6 @@ In the downstream system (or Application Insights traces), confirm the approved 
 with the workflow identity and `document_id`, rather than the reviewer's personal account.
 Keep `reviewer_id` in the approval record so the service identity does not hide who approved it.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Correction overwrote the original result | Mutated the extraction in place | Keep the original; write a separate correction record and a reviewed copy |
-| Handoff posts as the app for everyone | Service identity used instead of the workflow identity with a scoped tool | Post through one approved action tool; scope its permissions |
-| Approval has no reviewer identity | Trace built without the signed-in reviewer | Require reviewer id + timestamp before the handoff is allowed |
-| Reviewer approves without seeing evidence | Queue shows values but not grounding | Surface the grounding span/region beside each flagged field |
-| Corrections never reach evaluation | Records discarded after handoff | Persist correction records; module 6 reads them as evaluation evidence |
-| Anyone can trigger the handoff | Seam not access-controlled | Restrict the action tool to approver identities |
-
 ## Next module
 
 [Module 6 — Evaluate and trace the workflow](06-prove-and-observe.md) turns the corrections you just

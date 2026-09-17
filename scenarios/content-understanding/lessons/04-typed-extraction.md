@@ -85,16 +85,6 @@ Then copy the analysis, remove one field's confidence, and normalize the copy. I
 route to review. Remove its source region too: the accepted value must become `null`.
 Keep this damaged copy out of the approved input set.
 
-## Troubleshooting
-
-| Failure | Action |
-| --- | --- |
-| Analysis is not `Succeeded` | Finish module 3's polling or inspect the service error |
-| All fields are missing | Inspect the analyzer's field names and adapt `FIELD_PATHS` |
-| Amount has no evidence | Inspect the nested `Amount` field and analyzer evidence configuration |
-| Every document needs review | Inspect confidence and mapping before changing the threshold |
-| Source hash differs from the label | Review the exact submitted file; do not copy a fixture hash |
-
 ## Next module
 
 [Module 5 — Build review, correction, and handoff](05-human-review.md). Present the result

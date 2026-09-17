@@ -164,17 +164,6 @@ jq -n \
 different revision, so a policy edit could ship without a fresh human decision. Re-approve every
 revision.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Pack publishes with a missing role | Gate checks presence, not completeness | Enforce all four `REQUIRED_APPROVER_ROLES`; the check fails if any is absent |
-| Old revision still publishes | Approval not bound to `script_version` | Match `script_id` + `script_version` exactly; re-approve every revision |
-| Withdrawn content still served | Only future builds are blocked | Withdraw the served version through the channel adapter as well as changing `approval_status` |
-| Approver name blank | Unattributed approval | Require a named `approver` and `decided_at` per row |
-| Source changed, nobody notified | Missing invalidation wiring | Wire module 3's expiry/source-change to auto-withdraw |
-| "Approved" but no audit trail | Approval outside the versioned record | Keep the versioned record even with a workflow tool (B/C/D) |
-
 ## Next module
 
 [Module 7 — Evaluate, red-team, trace, and operate](07-prove-and-operate.md) proves the experience is

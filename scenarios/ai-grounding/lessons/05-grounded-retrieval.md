@@ -215,20 +215,6 @@ Repeat with the supervisor test identity, refresh `PROBE_USER_TOKEN`, and use
 `--role returns-supervisors`. The supervisor-only case must now answer. Unset the token
 when finished. Module 7 captures these role-specific responses for a repeatable gate.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Empty results for questions you know are answerable | Ingestion incomplete, or querying the wrong knowledge base / index name | Re-run module 3's verification; confirm the indexer finished |
-| Exact ids like `RET-POL-2026-01` never found | Vector-only query | Send `search_text` alongside `vector_queries` |
-| Good passages retrieved, bad answer | Answer prompt permits inference | Add "answer only from the context; do not infer" and re-test the abstention case |
-| Model answers the unanswerable question | No abstention rule, or a rule the model can rationalise around | Specify the exact refusal string and assert on it |
-| Superseded document cited | No recency filter or instruction | Filter on effective date; state the recency preference in `retrieval_instructions` |
-| `semantic` query type rejected | Semantic ranker not enabled on the service | Provision with `semanticSearch: 'standard'`; the free tier is also limited |
-| `401` / `403` on retrieve | Missing data-plane role, or no `az login` | Assign **Search Index Data Reader** to the caller; run `az login` |
-| Latency far above expectation | `medium` reasoning effort, or a remote knowledge source in the base | Drop to `low`; remote sources are fetched live at query time and are inherently slower |
-| Everything passes but real users complain | Golden set reflects what you built, not what they ask | Collect 20 real questions and add the ones that fail |
-
 ## Next module
 
 [Module 6 — Add agent and live-data routing only when justified](06-agent-and-routing.md) adds an

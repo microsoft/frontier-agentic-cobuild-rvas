@@ -230,17 +230,6 @@ grep -iE 'api_key|account_key|connection_string|sas_token' scenarios/ai-groundin
 No output is the expected result. Any match means something upstream handed you a key and broke the
 keyless chain.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| `401` / `403` from Search | Your identity lacks data-plane roles; RBAC takes a few minutes to propagate | Assign **Search Service Contributor** + **Search Index Data Contributor**, wait ~5 min, re-run |
-| Deployment fails on the model | Model or capacity unavailable in the region | Check model availability and quota for the selected region and deployment SKU before changing capacity |
-| Both deployments fail together | Deployments on one account serialize | The template already sets `dependsOn` on the embedding deployment; do not remove it |
-| `StorageAccountAlreadyTaken` | `resourceToken` collides globally | Pass a different `resourceToken` (5–12 lowercase chars) |
-| Search MI can't reach models later | Free tier, or missing **Cognitive Services User** | Move to Basic+, assign the role |
-| `.env` written but empty | Deployment succeeded with no outputs | Check `accelerator/.deployment-outputs.json`; re-run the deployment |
-
 ## Next module
 
 [Module 2 — Select the source and permission architecture](02-source-and-permission-architecture.md)
