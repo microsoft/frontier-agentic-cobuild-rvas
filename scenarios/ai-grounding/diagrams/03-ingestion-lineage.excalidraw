@@ -172,7 +172,7 @@
       "locked": false
     },
     {
-      "width": 276,
+      "width": 264,
       "height": 100,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -189,7 +189,7 @@
       "type": "text",
       "x": 490,
       "y": 125,
-      "text": "Each indexed chunk\nKeeps source reference\nKeeps version metadata\nCarries access metadata",
+      "text": "Each indexed chunk\nStore source reference\nand version metadata\nKeep access metadata",
       "containerId": "chunk",
       "version": 2,
       "versionNonce": 633184820,
@@ -206,7 +206,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Each indexed chunk\nKeeps source reference\nKeeps version metadata\nCarries access metadata",
+      "originalText": "Each indexed chunk\nStore source reference\nand version metadata\nKeep access metadata",
       "autoResize": true
     },
     {
@@ -366,7 +366,7 @@
       "type": "text",
       "x": 490,
       "y": 395,
-      "text": "Retrieve as the caller\nExclude content the\ncaller cannot access\nbefore answer synthesis",
+      "text": "Retrieve as the caller\nExclude content the\ncaller cannot access\nbefore drafting answers",
       "containerId": "query",
       "version": 2,
       "versionNonce": 985244980,
@@ -383,7 +383,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Retrieve as the caller\nExclude content the\ncaller cannot access\nbefore answer synthesis",
+      "originalText": "Retrieve as the caller\nExclude content the\ncaller cannot access\nbefore drafting answers",
       "autoResize": true
     },
     {
@@ -484,8 +484,8 @@
       "locked": false
     },
     {
-      "width": 252,
-      "height": 100,
+      "width": 288,
+      "height": 75,
       "fillStyle": "solid",
       "strokeWidth": 2,
       "roughness": 0,
@@ -501,7 +501,7 @@
       "type": "text",
       "x": 40,
       "y": 400,
-      "text": "Cited answer\nReader can trace each\nclaim back to the\napproved source",
+      "text": "Cited answer\nReaders can trace claims\nto the approved source",
       "containerId": "answer",
       "version": 2,
       "versionNonce": 372414092,
@@ -518,7 +518,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Cited answer\nReader can trace each\nclaim back to the\napproved source",
+      "originalText": "Cited answer\nReaders can trace claims\nto the approved source",
       "autoResize": true
     },
     {
@@ -577,7 +577,7 @@
       "startArrowhead": null
     },
     {
-      "width": 636,
+      "width": 588,
       "height": 75,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -594,7 +594,7 @@
       "type": "text",
       "x": 20,
       "y": 570,
-      "text": "A source change must reach its chunks.\nA permission change must reach retrieval enforcement.\nMetadata alone does not enforce either rule.",
+      "text": "Refresh chunks when the source changes.\nUpdate retrieval permissions when access changes.\nMetadata alone does not enforce these rules.",
       "version": 2,
       "versionNonce": 322430220,
       "index": "aD",
@@ -611,7 +611,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "A source change must reach its chunks.\nA permission change must reach retrieval enforcement.\nMetadata alone does not enforce either rule.",
+      "originalText": "Refresh chunks when the source changes.\nUpdate retrieval permissions when access changes.\nMetadata alone does not enforce these rules.",
       "autoResize": true
     }
   ]

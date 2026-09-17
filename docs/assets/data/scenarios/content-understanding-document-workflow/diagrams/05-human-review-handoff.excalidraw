@@ -370,7 +370,7 @@
       "type": "text",
       "x": 40,
       "y": 625,
-      "text": "route_human_review\nShow original evidence\nKeep corrections separate\nCreate reviewed result",
+      "text": "route_human_review\nShow original evidence\nKeep corrections separate\nCreate a reviewed result",
       "containerId": "review",
       "version": 2,
       "versionNonce": 509498636,
@@ -387,7 +387,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "route_human_review\nShow original evidence\nKeep corrections separate\nCreate reviewed result",
+      "originalText": "route_human_review\nShow original evidence\nKeep corrections separate\nCreate a reviewed result",
       "autoResize": true
     },
     {
@@ -715,7 +715,7 @@
       "locked": false
     },
     {
-      "width": 300,
+      "width": 288,
       "height": 100,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -732,7 +732,7 @@
       "type": "text",
       "x": 235,
       "y": 875,
-      "text": "Authorized approval\nReviewer identity + time\nBound to the exact result\nOnly then allow handoff",
+      "text": "Authorized approver\nRecord identity + time\nApprove the exact result\nThen allow the handoff",
       "containerId": "approval",
       "version": 2,
       "versionNonce": 519401228,
@@ -749,7 +749,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Authorized approval\nReviewer identity + time\nBound to the exact result\nOnly then allow handoff",
+      "originalText": "Authorized approver\nRecord identity + time\nApprove the exact result\nThen allow the handoff",
       "autoResize": true
     },
     {
@@ -879,7 +879,7 @@
       "startArrowhead": null
     },
     {
-      "width": 696,
+      "width": 480,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -896,7 +896,7 @@
       "type": "text",
       "x": 20,
       "y": 1045,
-      "text": "Reviewer UI and posting API are customer integration work.\nA clean extraction is never permission to post.",
+      "text": "Provide the reviewer UI and posting API.\nA clean extraction still needs approval.",
       "version": 2,
       "versionNonce": 1794687284,
       "index": "aJ",
@@ -913,7 +913,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Reviewer UI and posting API are customer integration work.\nA clean extraction is never permission to post.",
+      "originalText": "Provide the reviewer UI and posting API.\nA clean extraction still needs approval.",
       "autoResize": true
     }
   ]

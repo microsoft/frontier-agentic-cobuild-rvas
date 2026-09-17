@@ -8,7 +8,7 @@
   "files": {},
   "elements": [
     {
-      "width": 640,
+      "width": 656,
       "height": 35,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -25,7 +25,7 @@
       "type": "text",
       "x": 20,
       "y": 20,
-      "text": "A supported answer and a refusal diverge",
+      "text": "Use approved claims or refuse the request",
       "version": 2,
       "versionNonce": 226550857,
       "index": "a0",
@@ -42,7 +42,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "A supported answer and a refusal diverge",
+      "originalText": "Use approved claims or refuse the request",
       "autoResize": true
     },
     {
@@ -88,7 +88,7 @@
       "locked": false
     },
     {
-      "width": 264,
+      "width": 252,
       "height": 75,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -105,7 +105,7 @@
       "type": "text",
       "x": 260,
       "y": 125,
-      "text": "User ask + claims.json\nApproved claims only\nNo agent required",
+      "text": "Request + claims.json\nApproved claims only\nNo agent required",
       "containerId": "claims",
       "version": 2,
       "versionNonce": 240087849,
@@ -122,7 +122,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "User ask + claims.json\nApproved claims only\nNo agent required",
+      "originalText": "Request + claims.json\nApproved claims only\nNo agent required",
       "autoResize": true
     },
     {
@@ -623,7 +623,7 @@
       "autoResize": true
     },
     {
-      "width": 684,
+      "width": 600,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -640,7 +640,7 @@
       "type": "text",
       "x": 20,
       "y": 800,
-      "text": "A cited draft still needs exact-claim and approval checks\nbefore it becomes a published experience.",
+      "text": "Check the draft against the exact approved claims.\nGet approval before publishing.",
       "version": 2,
       "versionNonce": 1998798953,
       "index": "aE",
@@ -657,7 +657,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "A cited draft still needs exact-claim and approval checks\nbefore it becomes a published experience.",
+      "originalText": "Check the draft against the exact approved claims.\nGet approval before publishing.",
       "autoResize": true
     }
   ]

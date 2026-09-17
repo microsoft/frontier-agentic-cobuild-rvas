@@ -8,7 +8,7 @@
   "files": {},
   "elements": [
     {
-      "width": 640,
+      "width": 448,
       "height": 35,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -25,7 +25,7 @@
       "type": "text",
       "x": 20,
       "y": 20,
-      "text": "Keep the evaluated path when adding a UI",
+      "text": "Add a UI to the tested build",
       "version": 2,
       "versionNonce": 379825676,
       "index": "a0",
@@ -42,7 +42,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Keep the evaluated path when adding a UI",
+      "originalText": "Add a UI to the tested build",
       "autoResize": true
     },
     {
@@ -105,7 +105,7 @@
       "type": "text",
       "x": 40,
       "y": 135,
-      "text": "No-agent path\nRetrieval + grounded model\nKeep tested configuration",
+      "text": "No-agent path\nRetrieval + grounded model\nKeep the tested settings",
       "containerId": "plain",
       "version": 2,
       "versionNonce": 614075532,
@@ -122,7 +122,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "No-agent path\nRetrieval + grounded model\nKeep tested configuration",
+      "originalText": "No-agent path\nRetrieval + grounded model\nKeep the tested settings",
       "autoResize": true
     },
     {
@@ -168,7 +168,7 @@
       "locked": false
     },
     {
-      "width": 264,
+      "width": 288,
       "height": 100,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -185,7 +185,7 @@
       "type": "text",
       "x": 480,
       "y": 135,
-      "text": "Optional agent path\nPin name + version\nKeep tested tools and\ncaller-access behavior",
+      "text": "Optional agent path\nPin the name and version\nKeep the tested tools\nand caller permissions",
       "containerId": "agent",
       "version": 2,
       "versionNonce": 289446668,
@@ -202,7 +202,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Optional agent path\nPin name + version\nKeep tested tools and\ncaller-access behavior",
+      "originalText": "Optional agent path\nPin the name and version\nKeep the tested tools\nand caller permissions",
       "autoResize": true
     },
     {
@@ -294,7 +294,7 @@
       "locked": false
     },
     {
-      "width": 324,
+      "width": 312,
       "height": 100,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -311,7 +311,7 @@
       "type": "text",
       "x": 250,
       "y": 375,
-      "text": "Customer-owned adapter\nAuthenticate the caller\nPreserve access enforcement\nReturn answer + citations",
+      "text": "Customer-owned adapter\nAuthenticate the caller\nEnforce caller permissions\nReturn answer + citations",
       "containerId": "adapter",
       "version": 2,
       "versionNonce": 1081333044,
@@ -328,7 +328,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Customer-owned adapter\nAuthenticate the caller\nPreserve access enforcement\nReturn answer + citations",
+      "originalText": "Customer-owned adapter\nAuthenticate the caller\nEnforce caller permissions\nReturn answer + citations",
       "autoResize": true
     },
     {
@@ -517,7 +517,7 @@
       "type": "text",
       "x": 250,
       "y": 595,
-      "text": "Chosen user interface\nWeb app or Teams integration\nRetest with actual callers",
+      "text": "User interface\nWeb app or Teams integration\nTest with actual callers",
       "containerId": "channel",
       "version": 2,
       "versionNonce": 767498292,
@@ -534,7 +534,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Chosen user interface\nWeb app or Teams integration\nRetest with actual callers",
+      "originalText": "User interface\nWeb app or Teams integration\nTest with actual callers",
       "autoResize": true
     },
     {
@@ -593,7 +593,7 @@
       "startArrowhead": null
     },
     {
-      "width": 612,
+      "width": 528,
       "height": 25,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -610,7 +610,7 @@
       "type": "text",
       "x": 20,
       "y": 735,
-      "text": "Hosting the adapter is a separate runtime decision.",
+      "text": "Choose where to host the adapter separately.",
       "version": 2,
       "versionNonce": 202764724,
       "index": "aD",
@@ -627,12 +627,12 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Hosting the adapter is a separate runtime decision.",
+      "originalText": "Choose where to host the adapter separately.",
       "autoResize": true
     },
     {
-      "width": 696,
-      "height": 50,
+      "width": 636,
+      "height": 25,
       "fillStyle": "solid",
       "strokeWidth": 2,
       "roughness": 0,
@@ -648,7 +648,7 @@
       "type": "text",
       "x": 20,
       "y": 785,
-      "text": "If you chose Copilot Studio earlier, keep that platform's\npublishing path. It is not another UI for this same agent.",
+      "text": "Copilot Studio has its own build and publishing path.",
       "version": 2,
       "versionNonce": 1573008268,
       "index": "aE",
@@ -665,7 +665,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "If you chose Copilot Studio earlier, keep that platform's\npublishing path. It is not another UI for this same agent.",
+      "originalText": "Copilot Studio has its own build and publishing path.",
       "autoResize": true
     }
   ]

@@ -8,7 +8,7 @@
   "files": {},
   "elements": [
     {
-      "width": 480,
+      "width": 368,
       "height": 35,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -25,7 +25,7 @@
       "type": "text",
       "x": 20,
       "y": 20,
-      "text": "Choose where retrieval belongs",
+      "text": "Choose a retrieval path",
       "version": 2,
       "versionNonce": 195505804,
       "index": "a0",
@@ -42,7 +42,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Choose where retrieval belongs",
+      "originalText": "Choose a retrieval path",
       "autoResize": true
     },
     {
@@ -606,7 +606,7 @@
       "locked": false
     },
     {
-      "width": 240,
+      "width": 264,
       "height": 75,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -623,7 +623,7 @@
       "type": "text",
       "x": 510,
       "y": 540,
-      "text": "Direct AI Search\nOwn index, refresh,\nand access filtering",
+      "text": "Direct AI Search\nManage index + refresh\nApply access filtering",
       "containerId": "direct",
       "version": 2,
       "versionNonce": 307446796,
@@ -640,7 +640,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Direct AI Search\nOwn index, refresh,\nand access filtering",
+      "originalText": "Direct AI Search\nManage index + refresh\nApply access filtering",
       "autoResize": true
     },
     {
@@ -842,8 +842,8 @@
       "autoResize": true
     },
     {
-      "width": 732,
-      "height": 50,
+      "width": 528,
+      "height": 75,
       "fillStyle": "solid",
       "strokeWidth": 2,
       "roughness": 0,
@@ -859,7 +859,7 @@
       "type": "text",
       "x": 20,
       "y": 690,
-      "text": "For the chosen path, record caller identity and source owner.\nTest allowed access, denial, and permission revocation.",
+      "text": "Record the caller identity and source owner.\nTest allowed access and denial.\nThen test permission revocation.",
       "version": 2,
       "versionNonce": 1493546420,
       "index": "aJ",
@@ -876,11 +876,11 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "For the chosen path, record caller identity and source owner.\nTest allowed access, denial, and permission revocation.",
+      "originalText": "Record the caller identity and source owner.\nTest allowed access and denial.\nThen test permission revocation.",
       "autoResize": true
     },
     {
-      "width": 748,
+      "width": 495,
       "height": 45,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -897,7 +897,7 @@
       "type": "text",
       "x": 20,
       "y": 770,
-      "text": "Fabric, Work IQ, and web can supply context.\nThey are source choices, not substitutes for this platform decision.",
+      "text": "Fabric, Work IQ, and web are context sources.\nChoose the platform first.",
       "version": 2,
       "versionNonce": 1805692812,
       "index": "aK",
@@ -914,7 +914,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Fabric, Work IQ, and web can supply context.\nThey are source choices, not substitutes for this platform decision.",
+      "originalText": "Fabric, Work IQ, and web are context sources.\nChoose the platform first.",
       "autoResize": true
     }
   ]

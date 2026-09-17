@@ -496,7 +496,7 @@
       "locked": false
     },
     {
-      "width": 288,
+      "width": 312,
       "height": 75,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -513,7 +513,7 @@
       "type": "text",
       "x": 40,
       "y": 715,
-      "text": "Demo rendering permitted\napproved-for-demo-only\nLive release is separate",
+      "text": "You can render the demo\napproved-for-demo-only\nGet separate live approval",
       "containerId": "ready",
       "version": 2,
       "versionNonce": 481624972,
@@ -530,7 +530,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Demo rendering permitted\napproved-for-demo-only\nLive release is separate",
+      "originalText": "You can render the demo\napproved-for-demo-only\nGet separate live approval",
       "autoResize": true
     },
     {
@@ -593,7 +593,7 @@
       "type": "text",
       "x": 470,
       "y": 715,
-      "text": "Block generation\nFix the pack or obtain\napproval for this revision",
+      "text": "Do not generate\nFix the pack or get\napproval for this revision",
       "containerId": "blocked",
       "version": 2,
       "versionNonce": 1491382796,
@@ -610,7 +610,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Block generation\nFix the pack or obtain\napproval for this revision",
+      "originalText": "Do not generate\nFix the pack or get\napproval for this revision",
       "autoResize": true
     },
     {
@@ -816,7 +816,7 @@
       "autoResize": true
     },
     {
-      "width": 704,
+      "width": 682,
       "height": 67.5,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -833,7 +833,7 @@
       "type": "text",
       "x": 20,
       "y": 875,
-      "text": "Live publication needs channel-owner release checks.\nAfter a source change or withdrawn approval, the channel adapter\nmust pause or withdraw the served version.",
+      "text": "The channel owner checks the live release.\nIf the source changes or approval is withdrawn,\nthe channel adapter must pause or withdraw the served version.",
       "version": 2,
       "versionNonce": 739616692,
       "index": "aI",
@@ -850,7 +850,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Live publication needs channel-owner release checks.\nAfter a source change or withdrawn approval, the channel adapter\nmust pause or withdraw the served version.",
+      "originalText": "The channel owner checks the live release.\nIf the source changes or approval is withdrawn,\nthe channel adapter must pause or withdraw the served version.",
       "autoResize": true
     }
   ]

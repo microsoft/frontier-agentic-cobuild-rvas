@@ -46,7 +46,7 @@
       "autoResize": true
     },
     {
-      "width": 671,
+      "width": 638,
       "height": 22.5,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -63,7 +63,7 @@
       "type": "text",
       "x": 20,
       "y": 70,
-      "text": "Illustrative requests; define and test your route predicates.",
+      "text": "Example requests. Write and test rules for choosing tools.",
       "version": 2,
       "versionNonce": 2119992116,
       "index": "a1",
@@ -80,7 +80,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Illustrative requests; define and test your route predicates.",
+      "originalText": "Example requests. Write and test rules for choosing tools.",
       "autoResize": true
     },
     {
@@ -653,7 +653,7 @@
       "type": "text",
       "x": 510,
       "y": 505,
-      "text": "Workflow, if justified\nKeep write approval in\nthe application boundary",
+      "text": "Workflow, if needed\nThe application enforces\nwrite approval",
       "containerId": "workflow",
       "version": 2,
       "versionNonce": 467527092,
@@ -670,7 +670,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Workflow, if justified\nKeep write approval in\nthe application boundary",
+      "originalText": "Workflow, if needed\nThe application enforces\nwrite approval",
       "autoResize": true
     },
     {
@@ -729,7 +729,7 @@
       "startArrowhead": null
     },
     {
-      "width": 612,
+      "width": 516,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -746,7 +746,7 @@
       "type": "text",
       "x": 20,
       "y": 670,
-      "text": "Test the selected tool, not just the final wording.\nA policy request must not trigger a live write.",
+      "text": "Check which tool ran.\nA policy question must not trigger a write.",
       "version": 2,
       "versionNonce": 939462452,
       "index": "aH",
@@ -763,7 +763,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Test the selected tool, not just the final wording.\nA policy request must not trigger a live write.",
+      "originalText": "Check which tool ran.\nA policy question must not trigger a write.",
       "autoResize": true
     }
   ]

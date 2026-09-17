@@ -391,7 +391,7 @@
       "locked": false
     },
     {
-      "width": 276,
+      "width": 288,
       "height": 100,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -408,7 +408,7 @@
       "type": "text",
       "x": 480,
       "y": 605,
-      "text": "Abstain\nUse the case's refusal\ncontract; do not expose\nrestricted source names",
+      "text": "Abstain\nUse the refusal contract\nDo not reveal restricted\nsource names",
       "containerId": "abstain",
       "version": 2,
       "versionNonce": 1124982796,
@@ -425,7 +425,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Abstain\nUse the case's refusal\ncontract; do not expose\nrestricted source names",
+      "originalText": "Abstain\nUse the refusal contract\nDo not reveal restricted\nsource names",
       "autoResize": true
     },
     {
@@ -623,8 +623,8 @@
       "autoResize": true
     },
     {
-      "width": 744,
-      "height": 50,
+      "width": 552,
+      "height": 75,
       "fillStyle": "solid",
       "strokeWidth": 2,
       "roughness": 0,
@@ -640,7 +640,7 @@
       "type": "text",
       "x": 20,
       "y": 765,
-      "text": "This path needs no agent.\nTest permitted, denied, and unanswerable questions separately.",
+      "text": "This path needs no agent.\nTest permitted and denied access.\nAlso test questions the sources cannot answer.",
       "version": 2,
       "versionNonce": 500816308,
       "index": "aE",
@@ -657,7 +657,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "This path needs no agent.\nTest permitted, denied, and unanswerable questions separately.",
+      "originalText": "This path needs no agent.\nTest permitted and denied access.\nAlso test questions the sources cannot answer.",
       "autoResize": true
     }
   ]

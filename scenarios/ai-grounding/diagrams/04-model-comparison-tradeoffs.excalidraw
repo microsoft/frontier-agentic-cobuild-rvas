@@ -8,7 +8,7 @@
   "files": {},
   "elements": [
     {
-      "width": 608,
+      "width": 560,
       "height": 35,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -25,7 +25,7 @@
       "type": "text",
       "x": 20,
       "y": 20,
-      "text": "Compare cost only after quality passes",
+      "text": "Check quality before comparing cost",
       "version": 2,
       "versionNonce": 1215152564,
       "index": "a0",
@@ -42,7 +42,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Compare cost only after quality passes",
+      "originalText": "Check quality before comparing cost",
       "autoResize": true
     },
     {
@@ -172,8 +172,8 @@
       "locked": false
     },
     {
-      "width": 276,
-      "height": 100,
+      "width": 300,
+      "height": 75,
       "fillStyle": "solid",
       "strokeWidth": 2,
       "roughness": 0,
@@ -189,7 +189,7 @@
       "type": "text",
       "x": 480,
       "y": 125,
-      "text": "Check actual answers\nCitation/refusal checks\nHuman review against\napproved policy meaning",
+      "text": "Check citations/refusals\nA reviewer checks answers\nagainst approved policy",
       "containerId": "checks",
       "version": 2,
       "versionNonce": 277341364,
@@ -206,7 +206,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Check actual answers\nCitation/refusal checks\nHuman review against\napproved policy meaning",
+      "originalText": "Check citations/refusals\nA reviewer checks answers\nagainst approved policy",
       "autoResize": true
     },
     {
@@ -315,7 +315,7 @@
       "locked": false
     },
     {
-      "width": 84,
+      "width": 72,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -330,9 +330,9 @@
       "endArrowhead": null,
       "id": "gate-label",
       "type": "text",
-      "x": 588,
+      "x": 594,
       "y": 375,
-      "text": "Quality\npasses?",
+      "text": "Checks\npass?",
       "containerId": "gate",
       "version": 2,
       "versionNonce": 1384578828,
@@ -349,7 +349,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Quality\npasses?",
+      "originalText": "Checks\npass?",
       "autoResize": true
     },
     {

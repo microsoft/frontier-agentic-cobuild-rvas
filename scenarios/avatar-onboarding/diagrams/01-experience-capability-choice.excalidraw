@@ -8,7 +8,7 @@
   "files": {},
   "elements": [
     {
-      "width": 640,
+      "width": 656,
       "height": 35,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -25,7 +25,7 @@
       "type": "text",
       "x": 20,
       "y": 20,
-      "text": "Choose the experience, then gate its use",
+      "text": "Check the experience before generating it",
       "version": 2,
       "versionNonce": 2102762292,
       "index": "a0",
@@ -42,7 +42,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Choose the experience, then gate its use",
+      "originalText": "Check the experience before generating it",
       "autoResize": true
     },
     {
@@ -475,7 +475,7 @@
       "type": "text",
       "x": 355,
       "y": 485,
-      "text": "Permitted\nand ready?",
+      "text": "All checks\npass?",
       "containerId": "gate",
       "version": 2,
       "versionNonce": 174135948,
@@ -492,7 +492,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Permitted\nand ready?",
+      "originalText": "All checks\npass?",
       "autoResize": true
     },
     {
@@ -749,7 +749,7 @@
       "locked": false
     },
     {
-      "width": 312,
+      "width": 300,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -766,7 +766,7 @@
       "type": "text",
       "x": 40,
       "y": 755,
-      "text": "Proceed with selected path\nUse approved content only",
+      "text": "Generate the experience\nUse approved content only",
       "containerId": "ready",
       "version": 2,
       "versionNonce": 411047436,
@@ -783,7 +783,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Proceed with selected path\nUse approved content only",
+      "originalText": "Generate the experience\nUse approved content only",
       "autoResize": true
     },
     {
@@ -1069,7 +1069,7 @@
       "autoResize": true
     },
     {
-      "width": 744,
+      "width": 720,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -1086,7 +1086,7 @@
       "type": "text",
       "x": 20,
       "y": 890,
-      "text": "No avatar needed? Plain audio or text can be the primary path.\nAccessible alternatives still accompany any avatar experience.",
+      "text": "Use plain audio or text when an avatar adds no value.\nEvery avatar experience still needs accessible alternatives.",
       "version": 2,
       "versionNonce": 2106125620,
       "index": "aO",
@@ -1103,7 +1103,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "No avatar needed? Plain audio or text can be the primary path.\nAccessible alternatives still accompany any avatar experience.",
+      "originalText": "Use plain audio or text when an avatar adds no value.\nEvery avatar experience still needs accessible alternatives.",
       "autoResize": true
     }
   ]

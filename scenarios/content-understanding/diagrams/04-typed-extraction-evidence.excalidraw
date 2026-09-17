@@ -46,7 +46,7 @@
       "autoResize": true
     },
     {
-      "width": 715,
+      "width": 473,
       "height": 22.5,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -63,7 +63,7 @@
       "type": "text",
       "x": 20,
       "y": 70,
-      "text": "Contract example from test_normalize.py, not an analyzed invoice.",
+      "text": "Synthetic test data from test_normalize.py.",
       "version": 2,
       "versionNonce": 1789420212,
       "index": "a1",
@@ -80,7 +80,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Contract example from test_normalize.py, not an analyzed invoice.",
+      "originalText": "Synthetic test data from test_normalize.py.",
       "autoResize": true
     },
     {
@@ -354,7 +354,7 @@
       "type": "text",
       "x": 20,
       "y": 700,
-      "text": "For the complete passing fixture:\nrequires_human_review: false\nrouting_decision: ready_for_approval",
+      "text": "Complete test result:\nrequires_human_review: false\nrouting_decision: ready_for_approval",
       "version": 2,
       "versionNonce": 1127566860,
       "index": "a8",
@@ -371,7 +371,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "For the complete passing fixture:\nrequires_human_review: false\nrouting_decision: ready_for_approval",
+      "originalText": "Complete test result:\nrequires_human_review: false\nrouting_decision: ready_for_approval",
       "autoResize": true
     },
     {
@@ -413,7 +413,7 @@
       "locked": false
     },
     {
-      "width": 636,
+      "width": 588,
       "height": 100,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -430,7 +430,7 @@
       "type": "text",
       "x": 45,
       "y": 850,
-      "text": "If this field loses its source region or valid spans:\nvalue: null\nreview_reasons includes no_evidence:total_due_usd\nrouting_decision: route_human_review",
+      "text": "Missing source region or valid spans:\nvalue: null\nreview_reasons includes no_evidence:total_due_usd\nrouting_decision: route_human_review",
       "containerId": "missing",
       "version": 2,
       "versionNonce": 234335372,
@@ -447,11 +447,11 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "If this field loses its source region or valid spans:\nvalue: null\nreview_reasons includes no_evidence:total_due_usd\nrouting_decision: route_human_review",
+      "originalText": "Missing source region or valid spans:\nvalue: null\nreview_reasons includes no_evidence:total_due_usd\nrouting_decision: route_human_review",
       "autoResize": true
     },
     {
-      "width": 708,
+      "width": 660,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -468,7 +468,7 @@
       "type": "text",
       "x": 20,
       "y": 1015,
-      "text": "The result also retains source_sha256 of the original file.\nNo route automatically posts an invoice.",
+      "text": "The result includes source_sha256 of the original file.\nNo route automatically posts an invoice.",
       "version": 2,
       "versionNonce": 806367796,
       "index": "aB",
@@ -485,7 +485,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "The result also retains source_sha256 of the original file.\nNo route automatically posts an invoice.",
+      "originalText": "The result includes source_sha256 of the original file.\nNo route automatically posts an invoice.",
       "autoResize": true
     }
   ]

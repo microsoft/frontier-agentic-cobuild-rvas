@@ -25,7 +25,7 @@
       "type": "text",
       "x": 20,
       "y": 20,
-      "text": "Keep claim identity through drafting",
+      "text": "Keep claim IDs when drafting scripts",
       "version": 2,
       "versionNonce": 766423052,
       "index": "a0",
@@ -42,7 +42,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Keep claim identity through drafting",
+      "originalText": "Keep claim IDs when drafting scripts",
       "autoResize": true
     },
     {
@@ -303,7 +303,7 @@
       "startArrowhead": null
     },
     {
-      "width": 308,
+      "width": 286,
       "height": 45,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -320,7 +320,7 @@
       "type": "text",
       "x": 440,
       "y": 265,
-      "text": "Owner + required reviewers\nPack review_by stays current",
+      "text": "Owner + required reviewers\nCheck the pack's review_by",
       "version": 2,
       "versionNonce": 1528738612,
       "index": "a7",
@@ -337,7 +337,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Owner + required reviewers\nPack review_by stays current",
+      "originalText": "Owner + required reviewers\nCheck the pack's review_by",
       "autoResize": true
     },
     {
@@ -476,7 +476,7 @@
       "startArrowhead": null
     },
     {
-      "width": 264,
+      "width": 242,
       "height": 45,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -493,7 +493,7 @@
       "type": "text",
       "x": 440,
       "y": 565,
-      "text": "Copy approved wording;\nretain source_references",
+      "text": "Copy approved wording\nKeep source_references",
       "version": 2,
       "versionNonce": 634025524,
       "index": "aB",
@@ -510,12 +510,12 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Copy approved wording;\nretain source_references",
+      "originalText": "Copy approved wording\nKeep source_references",
       "autoResize": true
     },
     {
-      "width": 756,
-      "height": 50,
+      "width": 588,
+      "height": 75,
       "fillStyle": "solid",
       "strokeWidth": 2,
       "roughness": 0,
@@ -531,7 +531,7 @@
       "type": "text",
       "x": 20,
       "y": 820,
-      "text": "Changed source or expired review -> invalidate affected claims.\nRe-approve the script before generating a replacement.",
+      "text": "If the source changes or its review expires,\ninvalidate affected claims. Re-approve the script\nbefore generating a replacement.",
       "version": 2,
       "versionNonce": 1256601356,
       "index": "aC",
@@ -548,7 +548,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Changed source or expired review -> invalidate affected claims.\nRe-approve the script before generating a replacement.",
+      "originalText": "If the source changes or its review expires,\ninvalidate affected claims. Re-approve the script\nbefore generating a replacement.",
       "autoResize": true
     }
   ]

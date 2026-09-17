@@ -8,7 +8,7 @@
   "files": {},
   "elements": [
     {
-      "width": 688,
+      "width": 624,
       "height": 35,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -25,7 +25,7 @@
       "type": "text",
       "x": 20,
       "y": 20,
-      "text": "Select extraction with representative files",
+      "text": "Test extractors on representative files",
       "version": 2,
       "versionNonce": 94474636,
       "index": "a0",
@@ -42,7 +42,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Select extraction with representative files",
+      "originalText": "Test extractors on representative files",
       "autoResize": true
     },
     {
@@ -84,7 +84,7 @@
       "autoResize": true
     },
     {
-      "width": 192,
+      "width": 204,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -101,7 +101,7 @@
       "type": "text",
       "x": 300,
       "y": 110,
-      "text": "Variable layout;\ncustom meaning",
+      "text": "Variable layouts;\ncustom fields",
       "version": 2,
       "versionNonce": 1359970316,
       "index": "a2",
@@ -118,7 +118,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Variable layout;\ncustom meaning",
+      "originalText": "Variable layouts;\ncustom fields",
       "autoResize": true
     },
     {
@@ -467,7 +467,7 @@
       "type": "text",
       "x": 250,
       "y": 495,
-      "text": "Compare the same samples\nField values + evidence\nMissing-field behavior\nReview burden and cost",
+      "text": "Compare the same samples\nField values + evidence\nMissing-field behavior\nReview effort and cost",
       "containerId": "proof",
       "version": 2,
       "versionNonce": 956718260,
@@ -484,7 +484,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Compare the same samples\nField values + evidence\nMissing-field behavior\nReview burden and cost",
+      "originalText": "Compare the same samples\nField values + evidence\nMissing-field behavior\nReview effort and cost",
       "autoResize": true
     },
     {
@@ -661,7 +661,7 @@
       "startArrowhead": null
     },
     {
-      "width": 209,
+      "width": 220,
       "height": 67.5,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -678,7 +678,7 @@
       "type": "text",
       "x": 165,
       "y": 350,
-      "text": "Visual evidence?\nKeep page images\nand source regions.",
+      "text": "For visual evidence,\nkeep page images\nand source regions.",
       "version": 2,
       "versionNonce": 1106624436,
       "index": "aF",
@@ -695,11 +695,11 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Visual evidence?\nKeep page images\nand source regions.",
+      "originalText": "For visual evidence,\nkeep page images\nand source regions.",
       "autoResize": true
     },
     {
-      "width": 732,
+      "width": 564,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -716,7 +716,7 @@
       "type": "text",
       "x": 20,
       "y": 685,
-      "text": "Record the selected capability and the measured evidence.\nA plausible field value without usable evidence needs review.",
+      "text": "Record your choice and the test results.\nSend values without usable evidence for review.",
       "version": 2,
       "versionNonce": 1359889804,
       "index": "aG",
@@ -733,11 +733,11 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Record the selected capability and the measured evidence.\nA plausible field value without usable evidence needs review.",
+      "originalText": "Record your choice and the test results.\nSend values without usable evidence for review.",
       "autoResize": true
     },
     {
-      "width": 612,
+      "width": 708,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -754,7 +754,7 @@
       "type": "text",
       "x": 20,
       "y": 765,
-      "text": "The supplied normalizer handles CU invoices only.\nOther output formats need a customer-owned adapter.",
+      "text": "The normalizer handles Content Understanding invoices only.\nYou must adapt other output formats.",
       "version": 2,
       "versionNonce": 1108060468,
       "index": "aH",
@@ -771,7 +771,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "The supplied normalizer handles CU invoices only.\nOther output formats need a customer-owned adapter.",
+      "originalText": "The normalizer handles Content Understanding invoices only.\nYou must adapt other output formats.",
       "autoResize": true
     }
   ]

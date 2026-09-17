@@ -818,7 +818,7 @@
       "updated": 1789658458478
     },
     {
-      "width": 693,
+      "width": 737,
       "height": 45,
       "fillStyle": "solid",
       "strokeWidth": 1,
@@ -835,8 +835,8 @@
       "type": "text",
       "x": 60,
       "y": 592,
-      "text": "digest = hash(task ID + exact call)\nexpected_version is checked again inside the write transaction.",
-      "originalText": "digest = hash(task ID + exact call)\nexpected_version is checked again inside the write transaction.",
+      "text": "digest = hash(task ID + exact call)\nThe backend rechecks expected_version inside the write transaction.",
+      "originalText": "digest = hash(task ID + exact call)\nThe backend rechecks expected_version inside the write transaction.",
       "verticalAlign": "top",
       "containerId": null,
       "strokeStyle": "solid",

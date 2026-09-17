@@ -8,7 +8,7 @@
   "files": {},
   "elements": [
     {
-      "width": 576,
+      "width": 624,
       "height": 35,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -25,7 +25,7 @@
       "type": "text",
       "x": 20,
       "y": 20,
-      "text": "Every output belongs to one revision",
+      "text": "Generate every output from one revision",
       "version": 2,
       "versionNonce": 1728417716,
       "index": "a0",
@@ -42,7 +42,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Every output belongs to one revision",
+      "originalText": "Generate every output from one revision",
       "autoResize": true
     },
     {
@@ -479,7 +479,7 @@
       "type": "text",
       "x": 240,
       "y": 625,
-      "text": "Check the complete set\nAI disclosure is present\nLanguage and revision agree",
+      "text": "Check every output\nInclude the AI disclosure\nMatch language and revision",
       "containerId": "disclosure",
       "version": 2,
       "versionNonce": 194068276,
@@ -496,7 +496,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Check the complete set\nAI disclosure is present\nLanguage and revision agree",
+      "originalText": "Check every output\nInclude the AI disclosure\nMatch language and revision",
       "autoResize": true
     },
     {
@@ -626,7 +626,7 @@
       "startArrowhead": null
     },
     {
-      "width": 708,
+      "width": 540,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -643,7 +643,7 @@
       "type": "text",
       "x": 20,
       "y": 770,
-      "text": "A script change invalidates the old approval.\nRegenerate and review the complete set, not just the video.",
+      "text": "A script change invalidates the old approval.\nRegenerate and review every output.",
       "version": 2,
       "versionNonce": 417913996,
       "index": "aD",
@@ -660,7 +660,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "A script change invalidates the old approval.\nRegenerate and review the complete set, not just the video.",
+      "originalText": "A script change invalidates the old approval.\nRegenerate and review every output.",
       "autoResize": true
     }
   ]

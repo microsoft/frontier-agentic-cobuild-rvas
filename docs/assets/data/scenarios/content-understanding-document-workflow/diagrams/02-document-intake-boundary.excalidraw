@@ -8,7 +8,7 @@
   "files": {},
   "elements": [
     {
-      "width": 688,
+      "width": 608,
       "height": 35,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -25,7 +25,7 @@
       "type": "text",
       "x": 20,
       "y": 20,
-      "text": "Quarantine is a gate, not a processing step",
+      "text": "Release files only after intake checks",
       "version": 2,
       "versionNonce": 121691532,
       "index": "a0",
@@ -42,7 +42,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Quarantine is a gate, not a processing step",
+      "originalText": "Release files only after intake checks",
       "autoResize": true
     },
     {
@@ -88,7 +88,7 @@
       "locked": false
     },
     {
-      "width": 288,
+      "width": 264,
       "height": 75,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -105,7 +105,7 @@
       "type": "text",
       "x": 260,
       "y": 135,
-      "text": "Owner approves use\nUpload into quarantine\nRetain the original file",
+      "text": "Owner approves use\nUpload into quarantine\nKeep the original file",
       "containerId": "source",
       "version": 2,
       "versionNonce": 2028293132,
@@ -122,7 +122,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Owner approves use\nUpload into quarantine\nRetain the original file",
+      "originalText": "Owner approves use\nUpload into quarantine\nKeep the original file",
       "autoResize": true
     },
     {
@@ -349,8 +349,8 @@
       "locked": false
     },
     {
-      "width": 312,
-      "height": 100,
+      "width": 288,
+      "height": 75,
       "fillStyle": "solid",
       "strokeWidth": 2,
       "roughness": 0,
@@ -366,7 +366,7 @@
       "type": "text",
       "x": 40,
       "y": 625,
-      "text": "Hold or reject\nRetain the intake decision\nDo not send this file\nto extraction",
+      "text": "Hold or reject\nKeep the intake decision\nDo not extract this file",
       "containerId": "hold",
       "version": 2,
       "versionNonce": 1745860492,
@@ -383,7 +383,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Hold or reject\nRetain the intake decision\nDo not send this file\nto extraction",
+      "originalText": "Hold or reject\nKeep the intake decision\nDo not extract this file",
       "autoResize": true
     },
     {
@@ -429,7 +429,7 @@
       "locked": false
     },
     {
-      "width": 300,
+      "width": 276,
       "height": 100,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -446,7 +446,7 @@
       "type": "text",
       "x": 480,
       "y": 625,
-      "text": "Release for processing\nPreserve file identity,\nversion, and access scope\nThen run extraction",
+      "text": "Release the file\nKeep identity + version\nPreserve access scope\nRun extraction",
       "containerId": "process",
       "version": 2,
       "versionNonce": 1321788940,
@@ -463,7 +463,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Release for processing\nPreserve file identity,\nversion, and access scope\nThen run extraction",
+      "originalText": "Release the file\nKeep identity + version\nPreserve access scope\nRun extraction",
       "autoResize": true
     },
     {
@@ -661,7 +661,7 @@
       "autoResize": true
     },
     {
-      "width": 720,
+      "width": 696,
       "height": 50,
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -678,7 +678,7 @@
       "type": "text",
       "x": 20,
       "y": 790,
-      "text": "Normalization records source_sha256 from the original bytes.\nA corrected result must not overwrite the original analysis.",
+      "text": "normalize.py records source_sha256 from the original file.\nKeep the original analysis when correcting results.",
       "version": 2,
       "versionNonce": 1995158452,
       "index": "aF",
@@ -695,7 +695,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Normalization records source_sha256 from the original bytes.\nA corrected result must not overwrite the original analysis.",
+      "originalText": "normalize.py records source_sha256 from the original file.\nKeep the original analysis when correcting results.",
       "autoResize": true
     }
   ]
