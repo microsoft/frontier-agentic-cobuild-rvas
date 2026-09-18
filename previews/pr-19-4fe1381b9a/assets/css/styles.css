@@ -601,13 +601,10 @@ main { flex: 1 0 auto; }
   line-height: 1.55;
 }
 .outcome-card-custom {
-  grid-column: 1 / -1;
-  min-height: 0;
   background:
-    radial-gradient(circle at 92% 12%, rgba(26, 119, 227, 0.13), transparent 28%),
-    linear-gradient(135deg, #eaf4ff 0%, #f7fbff 68%, #eef6ff 100%);
+    radial-gradient(circle at 92% 12%, rgba(26, 119, 227, 0.10), transparent 30%),
+    linear-gradient(180deg, #edf6ff, #f7fbff);
   border-color: #a8cef5;
-  padding: 28px 30px;
 }
 .outcome-card-custom::before {
   background: var(--c-accent);
@@ -618,10 +615,9 @@ main { flex: 1 0 auto; }
   box-shadow: var(--shadow-card);
 }
 .outcome-card-custom h3 {
-  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  font-size: 1.12rem;
 }
 .outcome-card-custom > p {
-  max-width: 72ch;
   color: #25466f;
 }
 .outcome-card-label {
@@ -633,14 +629,6 @@ main { flex: 1 0 auto; }
   text-transform: uppercase;
   color: #075da8;
 }
-.outcome-card-next {
-  padding-top: 14px;
-  border-top: 1px solid rgba(26, 119, 227, 0.24);
-}
-.outcome-card-next strong {
-  color: var(--c-heading);
-}
-
 .mod-card {
   background: var(--c-800);
   border: 1px solid var(--c-line);
