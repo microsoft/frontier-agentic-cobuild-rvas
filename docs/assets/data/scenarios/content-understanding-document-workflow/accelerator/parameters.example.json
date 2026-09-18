@@ -14,7 +14,7 @@
     "inboundContainerName": { "value": "documents-inbound" },
     "quarantineContainerName": { "value": "documents-quarantine" },
     "tags": {
-      "value": { "workload": "content-understanding", "managedBy": "ai-starter-kit" }
+      "value": { "workload": "content-understanding", "managedBy": "agentic-cobuild" }
     }
   }
 }

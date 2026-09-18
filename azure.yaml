@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 #
-# azd project for the AI Starter Kit session (Microsoft Foundry).
+# azd project for the Agentic Co-build session (Microsoft Foundry).
 # Golden path:  azd up   ->  provisions infra/ (Bicep)  ->  writes outputs into the azd env,
 # which scripts/*  read back as a .env contract (see .env.sample).
 #
@@ -8,9 +8,9 @@
 # through azd at provision time — `azd up` only stands up the shared Foundry footprint
 # (Foundry resource + project + model deployment + AI Search + App Insights + ACR).
 # Follow the selected scenario's lessons to add application code and data.
-name: ai-starter-kit-rvas
+name: agentic-cobuild
 metadata:
-  template: ai-starter-kit-rvas-foundry@2.0.0
+  template: agentic-cobuild-foundry@2.0.0
 
 # Return to the selected scenario after provisioning.
 hooks:

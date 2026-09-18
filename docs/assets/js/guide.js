@@ -51,7 +51,7 @@
   }
 
   function renderScenarioShell(scenario, guide) {
-    document.title = `${guide.title} — ${scenario.name} — AI Starter Kit`;
+    document.title = `${guide.title} — ${scenario.name} — Agentic Co-build`;
     document.getElementById('guideTitle').textContent = guide.title;
     document.getElementById('guideEyebrow').textContent = scenario.name;
     document.getElementById('guideSummary').textContent = guide.summary;

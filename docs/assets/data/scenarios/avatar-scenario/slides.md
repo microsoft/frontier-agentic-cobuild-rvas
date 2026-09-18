@@ -391,4 +391,4 @@ We will align on:
 - first scorecard for operating evidence
 
 **Working outcome:** a narrow, governed pilot that teams can build, review, and measure. The
-starter kit is not the full production solution.
+Agentic Co-build is not the full production solution.

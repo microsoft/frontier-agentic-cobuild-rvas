@@ -15,7 +15,7 @@ Account teams use the playbooks to qualify the work and agree a scope before del
 
 ## Product Purpose
 
-The AI Starter Kit helps teams build customer AI scenarios using reusable implementation patterns.
+Agentic Co-build helps teams build customer AI scenarios using reusable implementation patterns.
 Each playbook breaks down architectural decisions and guides implementation with code and
 observable checks. Customer-facing slides support the design discussions.
 
@@ -79,7 +79,7 @@ to current Microsoft documentation and tools before SDK code is written.
 
 ## Brand Commitments
 
-The public identity is RVAS / AI Starter Kit with RVAP visual alignment. Existing assets include the RVAP/RVAS logo mark, full logo, white logo mark, and Foundry icon under `docs/assets/img/`.
+The public identity is Agentic Co-build with RVAP visual alignment. Existing assets include the RVAP/RVAS logo mark, full logo, white logo mark, and Foundry icon under `docs/assets/img/`.
 
 The voice should be customer-outcome first, plainspoken, practical, and decision-oriented. Product-first jargon and over-specific architecture claims should be avoided unless they help the customer make a decision.
 

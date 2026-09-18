@@ -1,5 +1,5 @@
 /* =====================================================================
-   RVAS AI Starter Kit visual system
+   Agentic Co-build visual system
    Guided Foundry Atlas: RVAP light canvas, Deep Navy gateway moments,
    coordinate labels, route cards, and customer-decision rails.
    Keep shared shell primitives aligned with docs/assets/css/shell.css.
@@ -599,6 +599,46 @@ main { flex: 1 0 auto; }
   color: var(--c-dim);
   font-size: 0.78rem;
   line-height: 1.55;
+}
+.outcome-card-custom {
+  grid-column: 1 / -1;
+  min-height: 0;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(26, 119, 227, 0.13), transparent 28%),
+    linear-gradient(135deg, #eaf4ff 0%, #f7fbff 68%, #eef6ff 100%);
+  border-color: #a8cef5;
+  padding: 28px 30px;
+}
+.outcome-card-custom::before {
+  background: var(--c-accent);
+}
+.outcome-card-custom:hover {
+  transform: none;
+  border-color: #7db7ef;
+  box-shadow: var(--shadow-card);
+}
+.outcome-card-custom h3 {
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+}
+.outcome-card-custom > p {
+  max-width: 72ch;
+  color: #25466f;
+}
+.outcome-card-label {
+  width: fit-content;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #075da8;
+}
+.outcome-card-next {
+  padding-top: 14px;
+  border-top: 1px solid rgba(26, 119, 227, 0.24);
+}
+.outcome-card-next strong {
+  color: var(--c-heading);
 }
 
 .mod-card {
