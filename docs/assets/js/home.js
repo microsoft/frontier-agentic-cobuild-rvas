@@ -44,8 +44,7 @@
       <article class="outcome-card outcome-card-custom reveal">
         <span class="outcome-card-label">Custom route</span>
         <h3>Fully custom scenario</h3>
-        <p>If your use case does not fit these playbooks, contact your Microsoft Cloud Solution Architect. They can help shape a co-build around your goals, constraints, and environment.</p>
-        <p class="outcome-card-next"><strong>Next step:</strong> Contact your Cloud Solution Architect at Microsoft.</p>
+        <p>If your use case does not fit these playbooks, contact your Microsoft Cloud Solution Architect to shape a custom co-build.</p>
       </article>`;
     FP.initReveal();
   }
