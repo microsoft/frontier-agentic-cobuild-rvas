@@ -25,7 +25,7 @@ This produces a `.env` contract with **no secrets**, used by every later module.
 | Option | Reproducible | Creates storage + embedding | Best when | Cost while idle |
 | --- | --- | --- | --- | --- |
 | **A. Scenario Bicep** *(default)* | Yes, reviewable IaC | Yes | You are building this workflow for a customer | Idle model deployments + Log Analytics; storage is pennies |
-| B. `azd up` (kit root infra) | Yes | No — chat + Search only, no doc storage/embedding | You are running the whole starter kit end to end | Same, plus AI Search + ACR |
+| B. `azd up` (kit root infra) | Yes | No — chat + Search only, no doc storage/embedding | You are running the whole Agentic Co-build repository end to end | Same, plus AI Search + ACR |
 | C. Foundry portal / Content Understanding Studio | No | Manual | A throwaway demo of an analyzer | Lowest |
 | D. Bring your own landing zone | Customer's IaC | Depends on what exists | The customer already has a governed Foundry resource | Already owned |
 

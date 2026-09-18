@@ -22,7 +22,7 @@
   }
 
   function renderScenario(scenario) {
-    document.title = `${scenario.name} — AI Starter Kit`;
+    document.title = `${scenario.name} — Agentic Co-build`;
     document.getElementById('title').textContent = scenario.name;
     document.getElementById('tagline').textContent = scenario.tagline;
     document.getElementById('scenarioMaturity').textContent = `${scenario.maturity} scenario playbook`;

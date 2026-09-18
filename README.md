@@ -1,8 +1,8 @@
-# AI Starter Kit — Co-build customer AI scenarios
+# Agentic Co-build
 
-[![Deploy GitHub Pages](https://github.com/microsoft/frontier-ai-starter-kit-rvas/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/microsoft/frontier-ai-starter-kit-rvas/actions/workflows/deploy-pages.yml)
+[![Deploy GitHub Pages](https://github.com/microsoft/agentic-cobuild/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/microsoft/agentic-cobuild/actions/workflows/deploy-pages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/frontier-ai-starter-kit-rvas)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/agentic-cobuild)
 
 *Build with the customer, using reusable implementation patterns.*
 
@@ -10,7 +10,7 @@
 
 ## Start with the customer's scenario
 
-The AI Starter Kit helps customer teams and their technical advisers **co-build the customer's own
+Agentic Co-build helps customer teams and their technical advisers **co-build the customer's own
 AI scenario**. Each playbook breaks down the architectural decisions and guides implementation with
 reusable building blocks. Teams adapt the code and work through the relevant lessons in their
 approved environment. Customer-facing slides support the design discussions.
@@ -19,10 +19,10 @@ approved environment. Customer-facing slides support the design discussions.
 
 | Track | What you build |
 |---|---|
-| [AI Grounding / IQ](https://microsoft.github.io/frontier-ai-starter-kit-rvas/scenario.html?id=ai-grounding) | An assistant that answers from approved content and respects access boundaries. |
-| [Content Understanding and Document Workflow](https://microsoft.github.io/frontier-ai-starter-kit-rvas/scenario.html?id=content-understanding-document-workflow) | A document workflow with evidence-backed extraction and human review. |
-| [Avatar Scenario](https://microsoft.github.io/frontier-ai-starter-kit-rvas/scenario.html?id=avatar-scenario) | An avatar-led experience with approved content and publication controls. |
-| [Operational Agents](https://microsoft.github.io/frontier-ai-starter-kit-rvas/scenario.html?id=operational-agents) | Bounded tool execution with exact approvals and evidence for recovering interrupted work. |
+| [AI Grounding / IQ](https://microsoft.github.io/agentic-cobuild/scenario.html?id=ai-grounding) | An assistant that answers from approved content and respects access boundaries. |
+| [Content Understanding and Document Workflow](https://microsoft.github.io/agentic-cobuild/scenario.html?id=content-understanding-document-workflow) | A document workflow with evidence-backed extraction and human review. |
+| [Avatar Scenario](https://microsoft.github.io/agentic-cobuild/scenario.html?id=avatar-scenario) | An avatar-led experience with approved content and publication controls. |
+| [Operational Agents](https://microsoft.github.io/agentic-cobuild/scenario.html?id=operational-agents) | Bounded tool execution with exact approvals and evidence for recovering interrupted work. |
 
 These are starting points, not a complete catalog of AI use cases. **A customer's scenario may
 combine parts from several tracks.** New tracks can follow the same contribution contract.
@@ -124,7 +124,7 @@ engagement will build and how to judge the result. Check prerequisites before pr
 Click the badge below to open the development environment. Follow the selected lesson's setup
 steps for credentials and any additional tools:
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/frontier-ai-starter-kit-rvas)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/agentic-cobuild)
 
 **Alternative**: Open locally with [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) in VS Code.
 
@@ -155,7 +155,7 @@ Push a site change to another branch to publish a preview under `/previews/`. Th
 ## Repository Structure
 
 ```
-ai-starter-kit-rvas/
+agentic-cobuild/
 ├── README.md                          # ← You are here
 ├── scenarios/                         # Self-contained scenario playbooks
 │   └── <scenario>/                    # Lessons, slides, diagrams, and accelerator code
@@ -197,4 +197,4 @@ Use the guide for the scenario you are building to understand its implementation
 
 ---
 
-Choose a [scenario playbook](https://microsoft.github.io/frontier-ai-starter-kit-rvas/index.html#outcomes).
+Choose a [scenario playbook](https://microsoft.github.io/agentic-cobuild/index.html#outcomes).

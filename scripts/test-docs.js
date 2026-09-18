@@ -147,7 +147,7 @@ test('build rejects missing scenario guides', () => {
 });
 
 test('source script checks reject undocumented flags', () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'starter-kit-docs-test-'));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'agentic-cobuild-docs-test-'));
   const doc = path.join(dir, 'README.md');
   try {
     fs.writeFileSync(doc, 'Run from the repository root.\n```bash\npython scripts/audit-diagrams.py --strict-bindings\n```\n');
@@ -203,6 +203,13 @@ test('Operational Agents has eight linked modules and all public entry points', 
     }
   }
   assert.ok(fs.readFileSync(path.join(ROOT, 'docs/index.html'), 'utf8').includes('scenario.html?id=operational-agents'));
+});
+
+test('home page offers a distinct custom co-build route', () => {
+  const homeScript = fs.readFileSync(path.join(ROOT, 'docs/assets/js/home.js'), 'utf8');
+  assert.match(homeScript, /Fully custom scenario/);
+  assert.match(homeScript, /Microsoft Cloud Solution Architect/);
+  assert.match(homeScript, /outcome-card-custom/);
 });
 
 test('diagram branches keep refusals separate and require approval after review', () => {

@@ -1,5 +1,5 @@
 /* =====================================================================
-   RVAS AI Starter Kit visual system
+   Agentic Co-build visual system
    Guided Foundry Atlas: RVAP light canvas, Deep Navy gateway moments,
    coordinate labels, route cards, and customer-decision rails.
    Keep shared shell primitives aligned with docs/assets/css/shell.css.
@@ -457,21 +457,10 @@ main { flex: 1 0 auto; }
   text-transform: uppercase;
 }
 
-/* Homepage route area: Idea Forge is intake; scenarios are equal choices. */
+/* Homepage route area: four equal scenario choices. */
 .hero-route-overview.hero-modules {
   grid-template-columns: 1fr;
   align-items: stretch;
-  gap: 16px;
-}
-.hero-route-overview .hero-intake-card {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: 14px;
-  row-gap: 6px;
-  border-style: dashed;
-}
-.hero-route-overview .hero-intake-card .mod-icon {
-  grid-row: span 3;
 }
 .hero-route-overview .hero-scenario-group {
   display: grid;
@@ -479,7 +468,7 @@ main { flex: 1 0 auto; }
   gap: 14px;
 }
 .hero-route-overview .hero-scenario-card {
-  min-height: 136px;
+  min-height: 190px;
 }
 .hero-route-overview .route-kicker {
   font-family: var(--font-mono);
@@ -502,9 +491,9 @@ main { flex: 1 0 auto; }
   white-space: normal;
 }
 
-@media (min-width: 620px) and (max-width: 899px) {
+@media (min-width: 620px) {
   .hero-route-overview .hero-scenario-group {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -600,7 +589,35 @@ main { flex: 1 0 auto; }
   font-size: 0.78rem;
   line-height: 1.55;
 }
-
+.outcome-card-custom {
+  background:
+    radial-gradient(circle at 92% 12%, rgba(26, 119, 227, 0.10), transparent 30%),
+    linear-gradient(180deg, #edf6ff, #f7fbff);
+  border-color: #a8cef5;
+}
+.outcome-card-custom::before {
+  background: var(--c-accent);
+}
+.outcome-card-custom:hover {
+  transform: none;
+  border-color: #7db7ef;
+  box-shadow: var(--shadow-card);
+}
+.outcome-card-custom h3 {
+  font-size: 1.12rem;
+}
+.outcome-card-custom > p {
+  color: #25466f;
+}
+.outcome-card-label {
+  width: fit-content;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #075da8;
+}
 .mod-card {
   background: var(--c-800);
   border: 1px solid var(--c-line);

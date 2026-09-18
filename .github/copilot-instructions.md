@@ -22,7 +22,7 @@ Azure / Foundry capability:
   in plain language so customers can follow and act.
 - Avoid product-first jargon, over-specific architecture labels, and unnecessary complexity. Start
   from the customer outcome, the decision they need to make, and the evidence they need to trust it.
-- Treat each scenario track as a starter kit for an AI scenario. A customer should be able to pick a
+- Treat each scenario track as a reusable starting point for an AI scenario. A customer should be able to pick a
   track, run the guided path, and adapt the result to their environment.
 - Do not bake a complete solution for the customer. Provide reusable building blocks, safe defaults,
   validation, and clear seams so teams can compose their own outcome.

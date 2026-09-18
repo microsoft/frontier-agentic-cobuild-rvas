@@ -27,7 +27,7 @@ Use the deployment instructions below; no separate foundation exercise is requir
 | Option | Reproducible | Provisions Speech + custom subdomain | Best when | Cost while idle |
 | --- | --- | --- | --- | --- |
 | **A. Scenario Bicep** *(default)* | Yes, reviewable IaC | Yes (AIServices account) | Building this scenario for a customer | Search basic + Log Analytics + idle model deployments |
-| B. `azd up` (kit root infra) | Yes | Yes (AIServices), but no `experience-output` container/embedding | Running the whole starter kit | Same, plus ACR |
+| B. `azd up` (kit root infra) | Yes | Yes (AIServices), but no `experience-output` container/embedding | Running the whole Agentic Co-build repository | Same, plus ACR |
 | C. Foundry portal + Speech resource | No | Manual | A throwaway demo | Lowest; free Search tier possible |
 | D. Bring your own landing zone | Customer's IaC | Verify it | Customer already has governed Foundry + Speech | Already owned |
 

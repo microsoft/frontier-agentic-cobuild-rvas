@@ -26,7 +26,7 @@
     const next = lessons[index + 1];
     const currentModule = (scenario.build_modules || []).find((module) => module.id === lesson.id);
 
-    document.title = `${lesson.title} — ${scenario.name} — AI Starter Kit`;
+    document.title = `${lesson.title} — ${scenario.name} — Agentic Co-build`;
     document.getElementById('lessonTitle').textContent = lesson.title;
     document.getElementById('lessonEyebrow').textContent = `${scenario.name} · lesson ${lesson.sequence}`;
     document.getElementById('lessonSummary').textContent =

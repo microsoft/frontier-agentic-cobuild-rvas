@@ -1,5 +1,5 @@
 // ============================================================================
-// AI Starter Kit — Microsoft Foundry golden-path infrastructure (azd entry).
+// Agentic Co-build — Microsoft Foundry golden-path infrastructure (azd entry).
 //
 // Subscription-scoped entry point. Creates (or reuses) the resource group, then
 // delegates all resource creation to ./resources.bicep. Outputs are surfaced back
@@ -54,7 +54,7 @@ param chatModelCapacity int = 30
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 var tags = {
   'azd-env-name': environmentName
-  project: 'ai-starter-kit-rvas-foundry'
+  project: 'agentic-cobuild-foundry'
 }
 
 resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {

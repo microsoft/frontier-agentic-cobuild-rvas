@@ -1,5 +1,5 @@
 ---
-name: "RVAS AI Starter Kit"
+name: "Agentic Co-build"
 description: "A customer-delivery web documentation system for choosing and proving the next useful AI decision."
 colors:
   rvap-blue: "#1A77E3"
@@ -93,7 +93,7 @@ components:
     typography: "{typography.label}"
 ---
 
-# Design System: RVAS AI Starter Kit
+# Design System: Agentic Co-build
 
 ## Overview
 

@@ -1,5 +1,5 @@
 // ============================================================================
-// AI Starter Kit — resource-group-scoped resources for the Foundry footprint.
+// Agentic Co-build — resource-group-scoped resources for the Foundry footprint.
 //
 // Provisions, keyless-by-default (managed identity + RBAC):
 //   • Microsoft Foundry resource (Cognitive Services kind=AIServices, project mgmt on)
@@ -146,8 +146,8 @@ resource project 'Microsoft.CognitiveServices/accounts/projects@2025-04-01-previ
   tags: tags
   identity: { type: 'SystemAssigned' }
   properties: {
-    displayName: 'RVAS AI Starter Kit'
-    description: 'RVAS AI Starter Kit Foundry project.'
+    displayName: 'Agentic Co-build'
+    description: 'Agentic Co-build Foundry project.'
   }
 }
 
