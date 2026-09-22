@@ -1,0 +1,68 @@
+# Content Understanding: turn documents into reviewable decisions
+
+Build a controlled path from an invoice, RFQ, or specification to a typed result a person can check.
+The workflow retains source evidence and never makes a business decision by itself. Each module
+compares Microsoft options, recommends a default, and shows when to choose another approved service.
+
+The default path stays within these lessons and uses this scenario's document pack.
+The scenario reference contract lives in
+[`accelerator/solution.md`](accelerator/solution.md).
+
+## The seven modules
+
+| Module | You decide | Outcome |
+|---|---|---|
+| [1. Provision the foundation](lesson.html?scenario=content-understanding-document-workflow&lesson=foundation) | How to stand up a keyless Foundry account with Content Understanding, Document Intelligence, models, and document storage | Document resources and a usable environment contract |
+| [2. Connect an approved source](lesson.html?scenario=content-understanding-document-workflow&lesson=document-source) | Azure Blob, ADLS Gen2, SharePoint, or OneLake — and the intake/quarantine controls | Approved intake and document-retention design |
+| [3. Select the extraction capability](lesson.html?scenario=content-understanding-document-workflow&lesson=extraction-selection) | CU prebuilt/custom analyzer, DI prebuilt/custom model, LLM structured outputs, or multimodal | Document capability and implementation decision |
+| [4. Typed extraction with evidence](lesson.html?scenario=content-understanding-document-workflow&lesson=typed-extraction) | How to normalize output into one validated contract with confidence + grounding | Structured extraction result and low-confidence failure path |
+| [5. Review, correction, and handoff](lesson.html?scenario=content-understanding-document-workflow&lesson=human-review) | Action-tool handoff, a review app, or a workflow handoff | Reviewer correction and approved handoff |
+| [6. Evaluate and trace](lesson.html?scenario=content-understanding-document-workflow&lesson=prove-and-observe) | Foundry evaluators, an offline harness, and an adversarial pass, against a gate | Scenario evaluation gate and trace review |
+| [7. Deploy the workflow](lesson.html?scenario=content-understanding-document-workflow&lesson=deploy) | Hosted agent, container app, or an API behind APIM | Controlled pilot deployment |
+
+Each lesson explains what to build, which path to choose, how to implement it, and what evidence to
+inspect. Complete the modules in order.
+
+## Decision gates to carry into the customer conversation
+
+Answer these questions before building:
+
+| Gate | Decide before building |
+|---|---|
+| Document boundary | Which document types are approved, who owns them, and what retention/access rules apply? |
+| Extraction boundary | Which fields need evidence, confidence, normalization, and missing-value behavior? |
+| Review boundary | Who corrects low-confidence or conflicting values, and what evidence must they see? |
+| Handoff boundary | Which downstream action is allowed, approval-gated, queued, or explicitly out of scope? |
+| Trust boundary | Which extraction, prompt-injection, review-routing, and deployment-access failures block a pilot? |
+
+## Follow one path
+
+The lessons contain the extraction and review instructions, including evaluation and deployment
+steps. Keep the same documents and result contract throughout. A customer-system posting API
+and a production review UI remain customer-specific integrations; a sample approval record
+does not supply either.
+
+## Get started
+
+```bash
+# Run from the repository root after checking accelerator/README.md prerequisites.
+./scenarios/content-understanding/accelerator/scripts/deploy.sh rg-content-understanding eastus2
+```
+
+Then work through the modules in order. Each **Verify** section provides a command and explains its
+output.
+
+API facts (API versions, model ids, SDK packages) are cited inline in each lesson and in
+[`accelerator/solution.md`](accelerator/solution.md). Re-check current Microsoft Learn guidance
+before writing SDK code.
+
+## Non-negotiable boundaries
+
+- **Synthetic data only.** The fixtures under [`accelerator/sample-data/README.md`](accelerator/sample-data/README.md)
+  are fictional. You can deploy real infrastructure. Do not use customer documents until a source
+  owner, security owner, and retention policy approve a separate path.
+- **Keyless-first.** `DefaultAzureCredential` + managed identity + Entra RBAC. No keys in code, `.env`,
+  or Bicep.
+- **Evidence, never inference.** Every extracted value keeps its confidence and grounding; a value
+  without evidence is rejected and a missing value is surfaced for review, never guessed.
+- Use agents and tools for agent-based handoffs; Prompt Flow is outside this scenario.

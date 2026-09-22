@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceToken": {"value": "REPLACE"},
+    "modelName": {"value": "REPLACE_WITH_AVAILABLE_MODEL"},
+    "modelVersion": {"value": "REPLACE_WITH_EXPLICIT_VERSION"},
+    "modelDeploymentName": {"value": "operational-chat"},
+    "modelSkuName": {"value": "REPLACE_WITH_SUPPORTED_SKU"},
+    "modelCapacity": {"value": 10}
+  }
+}

@@ -1,0 +1,221 @@
+# Module 5 — Build retrieval before adding an agent
+
+Most grounding projects fail here, then discover it three modules later. An agent cannot fix weak
+retrieval. It makes the failure fluent and harder to spot.
+
+This module ships a grounded answer path with citations, abstention, access-denied behavior, and
+freshness. It has **no agent**. If it fails here, an agent will not save it.
+
+![Retrieval before agent orchestration](../diagrams/05-retrieval-before-agent.png)
+
+## What you build
+
+1. A retrieval call that returns passages with citations.
+2. An answer path that cites, abstains when the corpus is silent, and stays silent about documents
+   the caller cannot see.
+3. A measured retrieval baseline, recall@k on the golden set, that later modules must not regress.
+
+## Choose your path
+
+| Option | Retrieval intelligence | Where the answer is composed | Best for |
+| --- | --- | --- | --- |
+| **A. Knowledge base retrieval with `answerSynthesis`** *(default)* | Query planning, parallel subqueries, semantic reranking, answer synthesis — all managed | Inside the knowledge base | Multi-source, ambiguous, multi-part questions |
+| B. Knowledge base retrieval, extractive only | Managed retrieval and ranking | Your code | You want the passages and full control of the prompt |
+| C. Direct hybrid query against an AI Search index | Whatever you configure: vector + keyword + semantic reranker | Your code | Maximum control; a single well-understood index |
+| D. Keyword-only search | None | Your code | Exact-match lookups: ids, codes, SKUs |
+
+**Default: Option A.** The knowledge base from module 3 returns a cited answer with
+`output_mode="answerSynthesis"`. Query planning breaks compound questions into parallel subqueries,
+then reranks them together. A naive single-vector query gets this wrong.
+
+**Choose B when** you need to own the answer prompt, such as for a required response format,
+regulated disclaimer, or domain-specific abstention rule. You still get managed retrieval and ranking.
+
+**Choose C when** you are on the direct-Search path from module 2, or when you need a scoring
+profile or filter the knowledge base does not expose. Use **hybrid** (vector + keyword) with the
+semantic reranker on. Vector-only search silently fails on exact identifiers; keyword-only fails on
+paraphrase. Nearly every real corpus needs both.
+
+**D is not a full solution.** It is the right tool for looking up a known identifier.
+`RET-POL-2026-01` should match directly, not by embedding similarity.
+
+**Reasoning effort is a real dial.** `minimal` skips query planning and issues
+queries directly, `low` is the default, `medium` plans harder. Start at `low`, and only move to
+`medium` if the golden set shows compound questions failing. `minimal` is for latency-critical paths
+where questions are simple and singular.
+
+**Migration cost.** A ↔ B is a parameter change. A/B → C rewrites the retrieval layer, though the
+evaluation set and corpus survive. Any change re-baselines metrics, so lock this before module 7.
+
+## Implementation
+
+Use the current Microsoft Learn guidance for the active retrieval surface.
+
+### Option A — Knowledge base retrieval with answer synthesis
+
+The script is `scenarios/ai-grounding/accelerator/scripts/grounded_answer.py`:
+
+```python
+from azure.identity import DefaultAzureCredential
+from azure.search.documents.knowledgebases import KnowledgeBaseRetrievalClient
+from azure.search.documents.knowledgebases.models import (
+    KnowledgeBaseRetrievalRequest, KnowledgeBaseMessage, KnowledgeBaseMessageTextContent,
+)
+
+client = KnowledgeBaseRetrievalClient(
+    endpoint=os.environ["AZURE_SEARCH_ENDPOINT"],
+    knowledge_base_name=os.environ["AZURE_KNOWLEDGE_BASE_NAME"],
+    credential=DefaultAzureCredential(),
+)
+
+request = KnowledgeBaseRetrievalRequest(
+    messages=[KnowledgeBaseMessage(
+        role="user",
+        content=[KnowledgeBaseMessageTextContent(text=question)],
+    )],
+)
+
+result = client.retrieve(request)
+print(result.response[0].content[0].text)
+```
+
+To enforce the module 2 permission boundary, pass the end user's token. Never skip this in an app
+that serves more than one person:
+
+```python
+result = client.retrieve(
+    request,
+    headers={"x-ms-query-source-authorization": user_token},
+)
+```
+
+`answer_instructions` on the knowledge base (module 3), rather than a prompt here, steers answer
+behavior. Make the abstention rule explicit there:
+
+```
+Answer only from retrieved documents and cite the document id.
+If the retrieved documents do not contain the answer, reply exactly:
+"I don't have approved information on that." Do not infer, and do not use general knowledge.
+```
+
+"Do not infer" matters. Without it, a model may bridge two adjacent policy rules into a third rule
+that does not exist.
+
+### Option B — Extractive retrieval, your own answer prompt
+
+Same client, no synthesis. Set `output_mode` to extractive on the knowledge base, take the retrieved
+passages, and compose the answer yourself:
+
+```python
+passages = [ref for ref in result.references]
+context = "\n\n".join(f"[{p.source_data['source']}] {p.source_data['content']}" for p in passages)
+
+answer = openai.responses.create(
+    model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
+    instructions=(
+        "Answer only from the numbered context. Cite the bracketed source id for every claim. "
+        "If the context does not answer the question, say you have no approved information."
+    ),
+    input=f"Context:\n{context}\n\nQuestion: {question}",
+)
+```
+
+Inspect the actual shape of `result.references` in your SDK version before relying on field names —
+the response model differs between the GA and preview surfaces.
+
+### Option C — Direct hybrid query against the index
+
+```python
+from azure.search.documents import SearchClient
+from azure.search.documents.models import VectorizableTextQuery
+
+search = SearchClient(
+    endpoint=os.environ["AZURE_SEARCH_ENDPOINT"],
+    index_name=os.environ["AZURE_SEARCH_INDEX_NAME"],
+    credential=DefaultAzureCredential(),
+)
+
+results = search.search(
+    search_text=question,                     # keyword half of the hybrid query
+    vector_queries=[VectorizableTextQuery(    # vector half, embedded server-side
+        text=question, k_nearest_neighbors=50, fields="contentVector",
+    )],
+    query_type="semantic",                    # semantic reranker over the merged set
+    semantic_configuration_name="default",
+    top=5,
+    select=["content", "source", "effectiveDate"],
+)
+```
+
+People most often get these three things wrong:
+
+1. **Vector-only retrieval.** It cannot find `RET-POL-2026-01`. Always send `search_text` too.
+2. **`top` used as the retrieval depth.** Retrieve wide (`k_nearest_neighbors=50`), rerank, then
+   return `top=5`. Retrieving 5 and reranking 5 reranks nothing.
+3. **Semantic ranking left off.** It is the single largest quality lever in the pipeline, and the
+   search service must be provisioned with semantic search enabled — module 1's Bicep sets
+   `semanticSearch: 'standard'`.
+
+Keep the index and source IDs from module 3. Do not create a second sample index.
+The default knowledge-base path above already has its scenario runner; this custom hybrid
+alternative requires an answer-generation step over the returned passages.
+
+### The four behaviours you must implement
+
+**Citations.** Every claim needs a source ID. Enforce it in the instruction and assert it in the
+test. A model told to cite will usually cite, and "usually" is not a control.
+
+**Abstention.** The golden set has a question the corpus cannot answer. The correct response is a
+plain refusal. An assistant that never says "I don't know" is not grounded.
+
+**Access-denied silence.** When retrieval returns nothing because the caller lacks permission, the
+answer must be indistinguishable from "no information exists." Do not return a title, snippet, or
+"there is a supervisor document but you cannot see it." Each reveals information.
+
+**Freshness.** The corpus's current Alpine District notice names the notice it supersedes, but the
+older document is absent. Add an approved superseded fixture before claiming to test ranking between
+conflicting versions. The answer must cite the current notice.
+
+## Verify
+
+**Harness limit:** this script counts source IDs in answers, not relevant retrieved passages.
+`--role` selects the questions for one fixture role; it does not select the caller's identity.
+Sign in as the coordinator test identity from module 2 and supply its query-source token:
+
+```bash
+export PROBE_USER_TOKEN="$(az account get-access-token \
+  --scope https://search.azure.com/.default --query accessToken -o tsv)"
+```
+
+The source's access mapping must already enforce module 2's boundary. Fixture role labels
+are not Azure permissions.
+
+Do not skip recall. Without a recorded baseline, module 6's agent can quietly worsen retrieval.
+
+**1. Run the golden questions against the knowledge base and read every case.**
+
+Run commands from the repository root.
+
+```bash
+python3 scenarios/ai-grounding/accelerator/scripts/grounded_answer.py \
+  --knowledge-base "$AZURE_KNOWLEDGE_BASE_NAME" \
+  --role returns-coordinators --min-citation-rate 1.0
+```
+
+Each answerable question should print `PASS  ...: answer cites [...]`. Unanswerable questions should
+abstain, not produce a plausible paragraph. The Alpine notice case should cite the current notice,
+not `SVC-ALPINE-2026-01-28`. A citation `FAIL` often means a vector-only query missed an exact ID.
+Send `search_text` with the vector query. An abstention `FAIL` means the prompt still permits inference.
+
+**2. Record what the metric actually measures.** The script prints the answer citation hit
+rate. It does not measure passage-level recall or answer meaning. Review each answer
+against its acceptance criteria.
+
+Repeat with the supervisor test identity, refresh `PROBE_USER_TOKEN`, and use
+`--role returns-supervisors`. The supervisor-only case must now answer. Unset the token
+when finished. Module 7 captures these role-specific responses for a repeatable gate.
+
+## Next module
+
+[Module 6 — Add agent and live-data routing only when justified](06-agent-and-routing.md) adds an
+agent, but only after you have written down what it buys you that this module does not.
