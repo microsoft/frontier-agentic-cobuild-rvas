@@ -455,6 +455,12 @@ function auditRetiredReferences(files, failures) {
     findMatches(file, text,
       /\bactivities\/|(?:activity|reference)\.html|\btest:activities\b|scripts\/(?:setup-foundations\.sh|validate-foundations\.py|action-backend\/)/gu,
       'references retired workshop content', failures);
+    findMatches(file, text,
+      /(?:github\.com|codespaces\.new)\/microsoft\/agentic-cobuild(?!-rvas\b)/gu,
+      'references the retired repository name', failures);
+    findMatches(file, text,
+      /microsoft\.github\.io\/agentic-cobuild(?!-rvas\b)/gu,
+      'references the retired GitHub Pages path', failures);
   }
 }
 

@@ -150,7 +150,7 @@ Then append `AZURE_AI_EMBEDDING_DEPLOYMENT_NAME`, `AZURE_STORAGE_ACCOUNT_NAME`, 
 
 For a same-day demo or a zero-cost proof of concept.
 
-1. Open <https://ai.azure.com> and make sure the **New Foundry** toggle is on.
+1. Open the Foundry portal at <https://ai.azure.com>.
 2. Create a project. A Foundry account is created for you.
 3. **Build → Models** — deploy one chat model and one embedding model.
 4. **Build → Knowledge** — create or connect a search service that supports agentic retrieval.
