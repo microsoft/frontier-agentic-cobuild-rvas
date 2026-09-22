@@ -140,6 +140,26 @@ test('documentation audit rejects retired links and bootstrap commands', () => {
   }
 });
 
+test('documentation audit rejects retired repository and Pages links', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'retired-repository-docs-'));
+  const doc = path.join(dir, 'README.md');
+  try {
+    for (const text of [
+      'https://github.com/microsoft/agentic-cobuild',
+      'https://codespaces.new/microsoft/agentic-cobuild',
+      'https://microsoft.github.io/agentic-cobuild/index.html',
+    ]) {
+      fs.writeFileSync(doc, text);
+      const failures = [];
+      auditRetiredReferences([doc], failures);
+      assert.equal(failures.length, 1, text);
+    }
+  } finally {
+    fs.unlinkSync(doc);
+    fs.rmdirSync(dir);
+  }
+});
+
 test('build rejects missing scenario guides', () => {
   const scenario = loadScenarioRegistry()[0];
   const failures = detectScenarioProblems([{ ...scenario, accelerator: 'missing.md' }]);

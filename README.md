@@ -1,8 +1,8 @@
 # Agentic Co-build
 
-[![Deploy GitHub Pages](https://github.com/microsoft/agentic-cobuild/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/microsoft/agentic-cobuild/actions/workflows/deploy-pages.yml)
+[![Deploy GitHub Pages](https://github.com/microsoft/frontier-agentic-cobuild-rvas/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/microsoft/frontier-agentic-cobuild-rvas/actions/workflows/deploy-pages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/agentic-cobuild)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/frontier-agentic-cobuild-rvas)
 
 *Build with the customer, using reusable implementation patterns.*
 
@@ -19,10 +19,10 @@ approved environment. Customer-facing slides support the design discussions.
 
 | Track | What you build |
 |---|---|
-| [AI Grounding / IQ](https://microsoft.github.io/agentic-cobuild/scenario.html?id=ai-grounding) | An assistant that answers from approved content and respects access boundaries. |
-| [Content Understanding and Document Workflow](https://microsoft.github.io/agentic-cobuild/scenario.html?id=content-understanding-document-workflow) | A document workflow with evidence-backed extraction and human review. |
-| [Avatar Scenario](https://microsoft.github.io/agentic-cobuild/scenario.html?id=avatar-scenario) | An avatar-led experience with approved content and publication controls. |
-| [Operational Agents](https://microsoft.github.io/agentic-cobuild/scenario.html?id=operational-agents) | Bounded tool execution with exact approvals and evidence for recovering interrupted work. |
+| [AI Grounding / IQ](https://microsoft.github.io/frontier-agentic-cobuild-rvas/scenario.html?id=ai-grounding) | An assistant that answers from approved content and respects access boundaries. |
+| [Content Understanding and Document Workflow](https://microsoft.github.io/frontier-agentic-cobuild-rvas/scenario.html?id=content-understanding-document-workflow) | A document workflow with evidence-backed extraction and human review. |
+| [Avatar Scenario](https://microsoft.github.io/frontier-agentic-cobuild-rvas/scenario.html?id=avatar-scenario) | An avatar-led experience with approved content and publication controls. |
+| [Operational Agents](https://microsoft.github.io/frontier-agentic-cobuild-rvas/scenario.html?id=operational-agents) | Bounded tool execution with exact approvals and evidence for recovering interrupted work. |
 
 These are starting points, not a complete catalog of AI use cases. **A customer's scenario may
 combine parts from several tracks.** New tracks can follow the same contribution contract.
@@ -124,7 +124,7 @@ engagement will build and how to judge the result. Check prerequisites before pr
 Click the badge below to open the development environment. Follow the selected lesson's setup
 steps for credentials and any additional tools:
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/agentic-cobuild)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/frontier-agentic-cobuild-rvas)
 
 **Alternative**: Open locally with [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) in VS Code.
 
@@ -197,4 +197,4 @@ Use the guide for the scenario you are building to understand its implementation
 
 ---
 
-Choose a [scenario playbook](https://microsoft.github.io/agentic-cobuild/index.html#outcomes).
+Choose a [scenario playbook](https://microsoft.github.io/frontier-agentic-cobuild-rvas/index.html#outcomes).
