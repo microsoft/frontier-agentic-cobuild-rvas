@@ -1,7 +1,7 @@
 # Module 8 — Deploy and surface it to users
 
-Module 7 proved the assistant is good enough. This module decides whether anyone uses it: **where do
-people meet it, and who runs it?**
+Module 7 proved the assistant is good enough. This module decides **where people meet it and who
+runs it**.
 
 Carry forward the path tested in module 7. If you skipped the agent, keep the retrieval
 function in your application; do not create an agent merely to expose it.
@@ -19,15 +19,16 @@ function in your application; do not create an agent merely to expose it.
 
 | Option | Where users meet it | Effort | When it wins |
 | --- | --- | --- | --- |
-| **A. Call the agent from your own app or API** *(default)* | Whatever front end you already have | Lowest — the agent is already deployed | Pilots with one consumer, or an existing app to extend |
+| **A. Call the agent from your own app or API** *(default)* | Whatever front end you already have | Lowest: the agent is already deployed | Pilots with one consumer, or an existing app to extend |
 | B. Publish the Foundry agent to Teams and Microsoft 365 Copilot | Teams and the M365 Copilot app | Low | Users already work there and you want zero new app adoption |
 | C. Copilot Studio agent published to the same channel | Teams and the M365 Copilot app | Low | Module 2 chose the SharePoint/M365 path, so there is no Azure retrieval layer to front |
 | D. Foundry hosted agent | A dedicated authenticated endpoint | Medium | Per-agent identity, container control, or an endpoint other teams consume |
 | E. Custom web UI | A purpose-built app | Medium–high | Stakeholder demo, custom auth flow, or a required response contract |
 | F. Hosted long-running workflow | Background job handle + later retrieval | High | The work outlives an interactive request |
 
-**Default: option A.** A new surface for a one-consumer pilot does not show whether the pilot is
-valuable. If a Python script and stakeholder in a room answer "is this useful?", start there.
+**Start with the channel the customer selected in module 1.** Use A to extend an existing app.
+A local script can help inspect answers during development, but the delivery check must use the
+authenticated channel available to the intended users.
 
 **Choose B when users work in Teams.** Foundry can publish your existing agent directly to Teams and
 Microsoft 365 Copilot, build the Teams app package, and keep using the stable endpoint. You do not
@@ -67,6 +68,15 @@ Whichever doorway you choose, these five rules stay fixed:
 > signature from here.
 
 ### Option A — Call the agent from your own app or API
+
+Add an authenticated backend route in the customer's application. Accept the question and derive
+the caller from validated authentication, not a user ID supplied in the request body. Resolve the
+caller-aware source token through the approved identity flow, invoke the answer path tested in
+module 7, and return its answer with citations. Represent refusal and request failure separately.
+
+Keep source tokens on the server. Test this route with the allowed and restricted identities
+before connecting the UI. The snippet below is the agent invocation inside that route; it is
+not a complete authentication or application adapter.
 
 If module 6 created an agent, your application calls that pinned version:
 
@@ -139,22 +149,20 @@ Package the agent as a container with its own Entra identity and a dedicated end
 route when another team needs to call the agent as a service, or when you need control over the
 runtime. This is an optional packaging change; retain the scenario corpus and evaluated behavior.
 
-In a new working directory outside this repository, initialize the official Responses host:
+In the customer's application repository, add the protocol wrapper described in the
+[deploy-your-own-code guide](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-deploy-own-code).
+Its handler must invoke the same caller-aware answer path tested in module 7. Check that guide's
+runtime and role prerequisites, then initialize from your source directory:
 
 ```bash
 azd auth login
 azd ext install microsoft.foundry
-HOSTED_DIR="$(mktemp -d)"
-cd "$HOSTED_DIR"
-azd ai agent init \
-  -m https://github.com/microsoft-foundry/foundry-samples/blob/main/samples/python/hosted-agents/agent-framework/responses/01-basic/azure.yaml \
-  --deploy-mode code
+azd ai agent init --protocol responses --deploy-mode code
 ```
 
-Select the existing scenario project and model. Change into the generated directory printed
-by the wizard. Replace the sample handler with this scenario's evaluated answer path; keep
-the generated protocol host and Dockerfile. Configure its existing knowledge source and
-preserve the caller's access checks. A generic chat sample is not the grounding application.
+Select the approved existing project. Configure the existing knowledge source and preserve
+the caller's access checks in the handler. The hosting identity's source access must not
+replace the end user's permissions. A generic chat sample is not the grounding application.
 
 Review the hosted service in the generated `azure.yaml`, then run:
 
@@ -167,7 +175,7 @@ Try the coordinator and supervisor questions locally. Stop the local server, run
 and record the deployed version and per-agent principal ID. Assign only the required source
 permissions and repeat the surface checks below against the reported endpoint.
 Current setup:
-<https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent>
+<https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-deploy-own-code>
 
 Carry the tracing env into the deployment or you lose the observability you built in module 7:
 

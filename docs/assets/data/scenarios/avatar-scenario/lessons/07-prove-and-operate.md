@@ -1,15 +1,15 @@
 # Module 7 — Evaluate, red-team, trace, and operate
 
-The experience is grounded, accessible, and approved. This module uses an evaluation gate, a
-red-team pass for synthetic-media risks, a reviewable trace, and an operational scorecard to make
-an evidence-backed release decision. "It demoed well" is not a release decision.
+The experience is grounded, accessible, and approved. This module uses an evaluation gate,
+synthetic-media red-team probes, trace review, and an operational scorecard to make an
+evidence-backed release decision. "It demoed well" is not a release decision.
 
-Use the claim set and generated media from modules 3–6. The checks below stay within
-this scenario. Set tracing configuration before the first model request.
+Use the claim set and generated media from modules 3–6. The checks below stay within this scenario.
+Configure tracing before the first model request.
 
 ## What you build
 
-1. An **evaluation** of grounding, disclosure presence, accessibility, and refusal behavior against
+1. An **evaluation** of grounding, disclosure, accessibility, and refusal behavior against
    a golden set.
 2. A **red-team** pass that targets synthetic-presenter risks: off-source claims, undisclosed
    synthetic media, impersonation, and unsafe content.
@@ -24,7 +24,7 @@ this scenario. Set tracing configuration before the first model request.
 | B. Local golden-set harness (offline) | Your own scored assertions | Curated adversarial prompts run locally | CI gating, no Azure calls, fast feedback |
 | C. Content Safety–centred | Azure AI Content Safety on generated script + output | Safety-first probes | The dominant risk is unsafe/branded content |
 
-**Default: Option A** for the release gate. Managed evaluators and the AI Red Teaming Agent provide
+**Default: Option A** for the release gate. Managed evaluators and the AI Red Teaming Agent create
 repeatable, reviewable evidence. Keep a **B** offline harness in CI so it gates every change before
 it reaches A. **C** is part of both, not a substitute. Build the golden set once (module 4 seeded
 it); all three options reuse it.
@@ -35,10 +35,30 @@ them.
 
 ## Implementation
 
+### Prove the customer release
+
+Use the audience and acceptance statement from module 1. Ask an intended user to complete the
+task through the real channel, with both the media and text-only path. Verify the published
+revision against its source approval and repeat module 6's withdrawal check.
+
+Have the operating owner find the generation job and publication history for that revision. Then
+diagnose one failed render or denied release. Agree who responds to user feedback and when the
+content must be reviewed again. Store this evidence in the existing release or work-tracking system.
+
+**For content production, prove a complete source-update cycle.** Submit a revised source through
+the trigger agreed in module 1. Unapproved wording must not generate media. After wording approval,
+the workflow must create a private preview and request publication approval. Check that release
+replaces the intended revision only after that approval. Repeat the trigger and recover an
+interrupted job without duplicate publication. Then withdraw the source and check the user channel.
+One generated video is only an integration check.
+
+If you skipped model-assisted authoring, skip the model evaluations below. Check the approved
+wording against the actual media instead. For a live experience, use representative user questions
+through the client and include interruption, refusal, and human handoff.
+
 ### The onboarding evaluation set
 
-Beyond generic groundedness, evaluate four behaviors that a synthetic onboarding presenter must get
-right:
+Beyond generic groundedness, evaluate the behaviors a synthetic onboarding presenter must get right:
 
 | Dimension | Golden check | Fail = |
 | --- | --- | --- |
@@ -105,7 +125,7 @@ processes; correlate them using script version and publication ID, never employe
 Review a failed request in module 2's Application Insights resource.
 The wrapper records operation timing; it does not automatically expose model token usage.
 
-Message-content capture can include user prompts and employee data. Disable it outside the
+Message-content capture can include user prompts and employee data. Turn it off outside the
 synthetic exercise unless the data owner approves collection and retention.
 
 ### The release decision
@@ -131,10 +151,10 @@ use, support handoffs, and reported accessibility defects. The fixture
 aggregate data without identifiers or free text. Never collect per-employee event records to measure
 engagement in an onboarding tool.
 
-Release the approved batch artifact through module 6's controlled publication path for
-one cohort and locale. **The batch-video default needs no hosted agent.** A live assistant
-is a separate deployment choice; include its authentication and state requirements in that
-extension's scope. Keep the module-6 withdrawal path one action away.
+Deploy the selected application under its operating identity. **Content production needs a
+running workflow even when it needs no hosted agent.** Release its output through module 6's
+controlled publishing path. For an interactive assistant, deploy the authenticated client and
+answer service. Keep the module-6 withdrawal path one action away.
 
 ## Verify
 
@@ -153,8 +173,8 @@ az monitor app-insights query --ids "$APPLICATIONINSIGHTS_RESOURCE_ID" \
 ```
 
 A matching row shows the drafting span arrived. Inspect render and approval records too before
-claiming end-to-end coverage. For zero rows, check the exporter, instrumentation, destination, and query
-window as well as when the environment variables were set.
+claiming end-to-end coverage. For zero rows, check the exporter, instrumentation, destination,
+query window, and when the environment variables were set.
 
 **2. Ship only when every gate meets its threshold.** A red gate, such as an unapproved-claim leak
 or unresolved red-team finding, blocks the pilot.
@@ -172,7 +192,7 @@ onboarding tool. Keep counts only.
 
 ## Next module
 
-This is the final module. Release only after the actual media and publication checks pass;
-local pack checks alone do not establish a working pilot. Revisit
-[Module 1 — Select the avatar/experience capability](01-experience-selection.md) to re-scope for a
+This is the final module. Release only after the application acceptance checks and withdrawal
+checks pass. Local pack checks or a generated video alone do not establish a working application. Revisit
+[Module 1 — Choose the application your users need](01-experience-selection.md) to re-scope for a
 different cohort, locale, or capability.

@@ -1,16 +1,27 @@
 # AI Grounding: build answers people can trust
 
-Build toward a grounded, permission-aware assistant over approved content. Prove it before it ships.
+Build a grounded, permission-aware assistant over approved content. Prove it before it ships.
 
-The eight modules guide a pilot build. Each asks for evidence
-from your resources. You deploy Azure resources, index a synthetic
-corpus, compare models, and test the failures that matter before anyone uses the assistant.
+These eight modules help you deliver an assistant in **your tenant**, using approved sources
+and a channel your users can access. Start with one useful question set and agree how to
+check answers with its source owner. Reuse the customer's approved environment.
+
+## Define the first delivery
+
+Bring an authoritative source, its access owner, and a small set of representative questions
+with reviewed answers. Include one unanswered question and one a restricted user must not
+see. Choose the application or collaboration channel users already use.
+
+Keep the corpus and test identities in customer-controlled systems. Copy or adapt the reusable
+scripts in a private implementation repository; the fictional returns corpus is an optional
+smoke test. **Completion means the real user channel returns supported answers and preserves
+the source access boundary**, with an owner able to diagnose failures and roll back.
 
 ## Before you start
 
-**Verify the API surface before you write code.** Foundry and Azure AI Search move fast and several
-capabilities used here are preview. Re-check current Microsoft Learn guidance before writing SDK
-code; do not infer a signature from this course or from memory.
+**Verify the API surface before you write code.** Foundry and Azure AI Search move fast, and several
+features used here are preview. Re-check current Microsoft Learn guidance before writing SDK
+code. Do not infer a signature from the playbook or from memory.
 
 **Fictional data only.** The corpus in `accelerator/sample-data/` is a synthetic returns-policy set
 for a fictional retailer. Never copy customer content into this repository.
@@ -20,7 +31,7 @@ needs permission to create the resources and role assignments. Install the Pytho
 in [the facilitator reference](accelerator/solution.md#prerequisites).
 
 **Access.** The main data paths use `DefaultAzureCredential`, managed identity, and RBAC.
-The permission probe uses a separate client secret, and the template configures an Application
+The permission probe uses a separate client secret. The template also configures an Application
 Insights connection string. The storage account disables shared-key access.
 
 **Known implementation gaps:** the shipped path does not yet prove per-document permissions,
@@ -31,7 +42,7 @@ retrieval recall, or agent-level evaluation. Read the
 
 | Module | What you build | Outcome |
 |---|---|---|
-| [1. Provision the foundation](lesson.html?scenario=ai-grounding&lesson=foundation) | Foundry account and project, chat + embedding deployments, AI Search, storage, observability, and the `.env` contract | Grounding resources and a usable environment contract |
+| [1. Confirm scope and connect the foundation](lesson.html?scenario=ai-grounding&lesson=foundation) | Confirm the source/platform path before connecting or provisioning resources | Approved environment and working runtime access |
 | [2. Source and permission architecture](lesson.html?scenario=ai-grounding&lesson=source-selection) | The source decision, the identity evaluated at query time, and a probe proving a restricted identity retrieves nothing | Signed source, access, freshness, and system-of-record decision |
 | [3. Ingest and index approved content](lesson.html?scenario=ai-grounding&lesson=ingestion) | Ingestion, chunking, citation metadata, ACL carry-forward, and a refresh schedule | Approved documents are discoverable with source metadata |
 | [4. Compare chat and embedding choices](lesson.html?scenario=ai-grounding&lesson=model-selection) | A comparison harness over your own golden set: accuracy, abstention, latency, tokens | A model choice backed by the scenario's question set |
@@ -40,7 +51,7 @@ retrieval recall, or agent-level evaluation. Read the
 | [7. Evaluate and trace](lesson.html?scenario=ai-grounding&lesson=evaluate-and-trace) | Evaluation gate, red-team evidence, end-to-end traces | Evaluation gate passed with trace and red-team evidence |
 | [8. Deploy and surface it to users](lesson.html?scenario=ai-grounding&lesson=deploy-and-surface) | A pinned agent version and permission-aware surface | Deployed surface passes anonymous, authorized, and restricted HTTP checks |
 
-Most teams run into trouble in modules 5 through 7. They add an agent before retrieval works, copy
+Most teams get stuck in modules 5 through 7. They add an agent before retrieval works, copy
 live data into an index, or ship without a release gate. Module 8 checks another common failure:
 the final app must preserve the retrieval layer's permission boundary.
 
@@ -58,6 +69,10 @@ Answer these questions before building:
 
 ## Deploy the foundation
 
+Complete module 1's scope and environment check first. These commands create the optional
+reference footprint in an approved new resource group. Do not run them over existing customer
+resources just to follow the module numbering.
+
 Run commands from the repository root.
 
 ```bash
@@ -65,10 +80,10 @@ az login
 ./scenarios/ai-grounding/accelerator/scripts/deploy.sh rg-ai-grounding eastus2
 ```
 
-The deployment writes `accelerator/.env` from the template outputs. Later modules read that file,
-so keep it local and do not commit it.
+The deployment writes `accelerator/.env` from the template outputs. Later modules read that file.
+Keep it local and do not commit it.
 
-For shell commands in the lessons, load the generated values into your current shell:
+For shell commands in the modules, load the generated values into your current shell:
 
 ```bash
 set -a
@@ -80,7 +95,7 @@ export AZURE_KNOWLEDGE_BASE_NAME=grounding-kb
 ## Run the scripts
 
 These scripts call your Azure resources directly. They need a subscription and the `.env` file.
-There is no offline mode. An offline pass cannot tell you whether retrieval works.
+There is no offline mode. An offline pass cannot prove retrieval works.
 
 ```bash
 # Create the knowledge source and knowledge base
@@ -104,13 +119,14 @@ python3 scenarios/ai-grounding/accelerator/scripts/probe_surface.py \
   --restricted-token-env SURFACE_RESTRICTED_TOKEN
 ```
 
-Each lesson's **Verify** section lists the specific commands and signals for that module.
+Each module's **Verify** section lists the specific commands and signals for that module.
 
 ## Follow one path
 
-**Stay in these lessons for the default build.** They use this scenario's returns corpus,
-scripts, and environment contract. Module 7 captures actual answers and evaluates the native
-golden-question format. Optional architecture extensions are marked where they change the scope.
+Use the modules for the selected platform. Module 2 explains which steps apply to an Azure
+retrieval application and which apply to a Copilot Studio implementation. Adapt the questions
+and source mapping to the customer's use case before module 7. Resolve the reference script
+limits wherever the agreed delivery depends on them.
 
 ## Non-negotiables
 

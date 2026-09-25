@@ -2,7 +2,11 @@
 
 This is the central customer decision. Several Microsoft options fit different work. A deterministic
 model can miss fields in free-form documents; an LLM can waste tokens and invent values on stable
-forms. Record the choice and its fallback.
+forms. Record the choice and fallback.
+
+Bring the fields agreed in module 1 and representative documents from module 2. Include one
+ordinary document and one difficult case. **Choose by observed field quality and review effort
+on these inputs**, rather than by a product label.
 
 ![Extraction capability choice](../diagrams/03-extraction-capability-choice.png)
 
@@ -32,7 +36,7 @@ so you can specialize without changing stacks.
 **When each other option wins**
 
 - **B** — you need fields no prebuilt analyzer covers on documents too variable for a template.
-  Describe fields in plain language and iterate in minutes.
+  Describe fields in plain language and iterate quickly.
 - **C** — documents are standard structured forms (invoice, receipt, ID, W-2, 1003). Deterministic
   models lead on accuracy and latency here, and cost less than an LLM per page.
 - **D** — the form is organization-specific and highly structured, and you can label samples.
@@ -50,6 +54,21 @@ grounding. B and D add iteration or labeling but retain the contract. Prefer opt
 evidence.
 
 ## Implementation
+
+### Compare against the required fields
+
+Have the document owner mark the correct values and evidence before running an analyzer.
+For each required field, record whether the candidate returned the right value, located its
+source, or correctly left it empty. Compare latency and processing cost at the expected volume.
+
+Use a prebuilt analyzer when its fields fit. If important fields are missing, define a custom
+schema and compare it on the same documents. For a trained model, include the labeling and retraining work in the decision. For raw LLM output,
+assign evidence checking and missing-value handling before accepting that branch.
+
+The following requests show the service calls. Keep the selected analyzer/model ID and field
+mapping in your application configuration. All branches continue to module 4; only the supplied
+Content Understanding invoice mapper is implemented in the reference code. Other branches
+need a mapper that preserves the same evidence and review contract.
 
 Each option below produces the typed result that module 4 consumes. Set the confidence threshold once,
 then enforce it everywhere.
@@ -98,7 +117,7 @@ jq -e '.status == "Succeeded"' "$ANALYSIS"
 ```
 
 Do not continue if the final check fails. Refresh an expired token; inspect a failed operation's
-error rather than treating an empty field set as a successful extraction.
+error instead of treating an empty field set as a successful extraction.
 Scalar values use `valueString`, `valueNumber`, or `valueDate`. Amounts can be nested under
 `valueObject.Amount`; module 4's normalizer handles the invoice mapping.
 
@@ -151,9 +170,13 @@ Model ids include `prebuilt-invoice`, `prebuilt-receipt`, `prebuilt-idDocument`,
 
 ### Option D — Document Intelligence custom model
 
-Label 5+ samples of one org-specific form in Document Intelligence Studio, train, then call the model
-by its id exactly like Option C (`client.begin_analyze_document("<your-custom-model-id>", …)`). You
-own the labeling loop; you get template-grade accuracy and per-field confidence.
+Choose this when the organization can maintain labeled examples for its document class.
+Use Document Intelligence Studio to prepare and train the model under the current model's
+requirements. Keep separate examples for evaluation; training-file success is not acceptance.
+Call its ID through the option C client, then map its output in module 4.
+
+Assign ownership of new layouts and failed extractions. The ongoing labeling and evaluation
+work is part of this choice; do not promise accuracy before measuring it.
 
 ### Option E — LLM structured outputs (build your own)
 
@@ -228,7 +251,7 @@ read `field.confidence` and `field.bounding_regions` from the Python SDK result.
 Run the same call against a document with a different layout, a scan, or a vendor you did not design
 for. Compare the returned fields to what you can see in the source document.
 
-If obvious fields come back empty, or confidence collapses across the document, use the fallback.
+If obvious fields come back empty or confidence collapses across the document, use the fallback.
 Do not lower the threshold until results look acceptable.
 
 ## Next module

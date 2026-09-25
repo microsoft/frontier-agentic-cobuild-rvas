@@ -23,6 +23,18 @@ or background workers merely because one interactive response is slow.
 
 ## Implementation
 
+Set limits for the customer's actual task: maximum model turns, tool attempts,
+and active execution time. Include SDK and gateway retries in that budget.
+Persist the counters before dispatch so a restart cannot give the task a new
+allowance.
+
+Configure timeouts against the destination's contract. Test a slow read and an
+interrupted write in an approved non-production environment. A timeout after a
+write must enter reconciliation, not an automatic retry. Module 7 implements
+that destination check.
+
+### Reference budget check
+
 Read `_attempt` in `accelerator/runtime.py`. It persists counters and reserves
 time before a call. On return it refunds unused time. A crash retains the
 reservation. The live SDK disables its automatic retry loop.
@@ -42,6 +54,11 @@ Separate retryable reads from ambiguous writes using the API's actual error
 contract; do not infer that a failed response means nothing happened.
 
 ## Verify
+
+Exhaust a budget through the connected application and restart it. The task
+must remain stopped with its previous evidence and counters. Confirm in the
+destination that no hidden retry bypassed the limit. The local commands below
+demonstrate the same invariant without customer tools.
 
 The CLI exits nonzero with `turns: 1`. Resuming that task must leave its budget
 unchanged. The behavioral report must also show that read retries are capped

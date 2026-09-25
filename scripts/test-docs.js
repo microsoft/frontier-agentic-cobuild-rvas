@@ -232,6 +232,19 @@ test('home page offers a distinct custom co-build route', () => {
   assert.match(homeScript, /outcome-card-custom/);
 });
 
+test('intake skills cover every scenario track and the Start page links both', () => {
+  const forge = fs.readFileSync(path.join(ROOT, '.github/skills/customer-activity-forge/SKILL.md'), 'utf8');
+  for (const scenario of loadScenarioRegistry()) {
+    assert.ok(forge.includes(`**${scenario.name}**`), scenario.name);
+    assert.ok(forge.includes(`scenario.html?id=${scenario.id}`), scenario.id);
+  }
+  assert.match(forge, /use-case-mapper/);
+  assert.ok(fs.existsSync(path.join(ROOT, '.github/skills/use-case-mapper/SKILL.md')));
+  const start = fs.readFileSync(path.join(ROOT, 'docs/start.html'), 'utf8');
+  assert.ok(start.includes('id="idea-forge"') && start.includes('id="use-case-mapper"'));
+  assert.match(fs.readFileSync(path.join(ROOT, 'docs/idea-forge.html'), 'utf8'), /start\.html#idea-forge/);
+});
+
 test('diagram branches keep refusals separate and require approval after review', () => {
   const edges = (file) => JSON.parse(fs.readFileSync(path.join(ROOT, 'scenarios', file), 'utf8'))
     .elements.filter((element) => element.type === 'arrow')
@@ -247,4 +260,106 @@ test('diagram branches keep refusals separate and require approval after review'
   const surface = edges('ai-grounding/diagrams/08-surface-decision.excalidraw');
   assert.ok(surface.includes('plain->adapter'));
   assert.ok(surface.includes('agent->adapter'));
+});
+
+test('customer pages display modules while keeping existing routes and slide links', async () => {
+  const scenario = scenarioOutput(loadScenarioRegistry().find((item) => item.id === 'avatar-scenario'));
+  const lesson = scenario.lessons[1];
+  for (const page of ['lesson', 'scenario']) {
+    const elements = new Map();
+    let init;
+    const element = (id) => {
+      if (!elements.has(id)) elements.set(id, {
+        textContent: '', innerHTML: '', href: '',
+        querySelectorAll: () => [],
+      });
+      return elements.get(id);
+    };
+    vm.runInNewContext(fs.readFileSync(path.join(ROOT, `docs/assets/js/${page}.js`), 'utf8'), {
+      document: {
+        title: '',
+        addEventListener: (event, callback) => { if (event === 'DOMContentLoaded') init = callback; },
+        getElementById: element,
+      },
+      FP: {
+        qp: (key) => ({ scenario: scenario.id, lesson: lesson.id, id: scenario.id })[key],
+        loadData: async () => ({ scenarios: [scenario] }),
+        esc: String,
+        levelBadge: () => '',
+        durBadge: () => '',
+        renderMd() {},
+        applyGuideAccordions() {},
+        initDiagramZoom() {},
+      },
+      fetch: async () => ({ ok: true, text: async () => '# Module content' }),
+    });
+    await init();
+    if (page === 'lesson') {
+      assert.match(element('lessonEyebrow').textContent, /module 2/);
+      assert.match(element('lessonBreadcrumbs').innerHTML, /Module 2/);
+      assert.match(element('lessonBottomPager').innerHTML, /Previous module/);
+      assert.match(element('lessonBottomPager').innerHTML, /Next module/);
+      assert.ok(element('lessonBottomPager').innerHTML.includes(scenario.lessons[2].lesson_path));
+      assert.equal(element('lessonSlidesLink').href, `slides.html?id=${scenario.id}#lesson-${lesson.id}`);
+      assert.match(element('lessonSummary').textContent, /your tenant/);
+    } else {
+      assert.match(element('scenarioMeta').innerHTML, /7 modules/);
+      assert.match(element('scenarioPager').innerHTML, /Module 1:/);
+      assert.ok(element('scenarioPager').innerHTML.includes(scenario.lessons[0].lesson_path));
+    }
+  }
+});
+
+test('module prose keeps decision-first guidance and explicit tenant delivery boundaries', () => {
+  const avatar = path.join(ROOT, 'scenarios/avatar-onboarding/lessons');
+  const decision = fs.readFileSync(path.join(avatar, '01-experience-selection.md'), 'utf8');
+  assert.doesNotMatch(decision, /```|api-version=|batchsyntheses|AvatarConfig/);
+  assert.match(decision, /## What you build/);
+  assert.match(decision, /## Verify/);
+  const generation = fs.readFileSync(path.join(avatar, '05-experience-generation.md'), 'utf8');
+  assert.match(generation, /wording approved in module 3/);
+  assert.match(generation, /### Option E — Translate an existing video/);
+  const publication = fs.readFileSync(path.join(avatar, '06-approval-gating.md'), 'utf8');
+  assert.match(publication, /actual publishing operation and user channel/);
+  for (const scenario of loadScenarioRegistry()) {
+    for (const lesson of scenario.lessons) {
+      const body = fs.readFileSync(path.join(scenario.root, lesson.path), 'utf8');
+      assert.match(body, /^# Module \d+/);
+      assert.match(body, /## Next module/);
+      const prose = body.replace(/```[\s\S]*?```/g, '')
+        .replace(/`[^`]*`|\]\([^)]*\)|https?:\/\/\S+|<!--[\s\S]*?-->/g, '');
+      assert.doesNotMatch(prose, /\blessons?\b/i, lesson.path);
+    }
+  }
+});
+
+test('avatar guidance selects an application before rendering and requires a working delivery', () => {
+  const root = path.join(ROOT, 'scenarios/avatar-onboarding');
+  const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+  const decision = read('lessons/01-experience-selection.md');
+  const applicationHeading = decision.indexOf('### First choose the application goal');
+  const presentationHeading = decision.indexOf('### Then choose how the application presents content');
+  assert.ok(applicationHeading >= 0 && presentationHeading > applicationHeading);
+  for (const file of ['README.md', 'lessons/01-experience-selection.md', 'slides.md', 'accelerator/solution.md']) {
+    const body = read(file);
+    assert.match(body, /interactive assistant/i, file);
+    assert.match(body, /content-production application/i, file);
+    assert.doesNotMatch(body, /recommended starting path is.*prerecorded|batch.video default/i, file);
+  }
+  const manifest = JSON.parse(read('manifest.json'));
+  assert.match(manifest.decision_prompts[0], /interactive assistant.*content-production application/);
+  assert.match(manifest.build_modules[0].summary, /before selecting a media format/);
+  assert.match(manifest.build_modules.at(-1).outcome, /generated video alone is insufficient/);
+  const generation = read('lessons/05-experience-generation.md');
+  assert.doesNotMatch(generation, /Batch avatar synthesis[^\n]*default|Default: Option A/i);
+  assert.match(generation, /Retain its state across restarts/);
+  const operation = read('lessons/07-prove-and-operate.md');
+  assert.match(operation, /complete source-update cycle/);
+  assert.match(operation, /without duplicate publication/);
+  assert.match(operation, /One generated video is only an integration check/);
+  const diagram = JSON.parse(read('diagrams/01-experience-capability-choice.excalidraw'));
+  const batch = diagram.elements.find((element) => element.id === 'batch-label');
+  assert.match(batch.text, /Workflow jobs/);
+  assert.doesNotMatch(batch.text, /default/i);
+  assert.equal(batch.text, batch.originalText);
 });

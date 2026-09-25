@@ -1,9 +1,9 @@
 # Content Understanding document workflow — reference implementation
 
-This reference contains infrastructure and extraction snippets for the seven modules.
+This reference has infrastructure and extraction snippets for the seven modules.
 `normalize.py` and `evaluate_results.py` supply the invoice mapping and comparison gate.
 The review UI and customer posting/hosting adapters still need integration.
-The lessons under [`../lessons/`](../lessons/) contain the required instructions.
+The modules under [`../lessons/`](../lessons/) contain the required instructions.
 Run shell commands from the repository root.
 
 > Keyless-first throughout: `DefaultAzureCredential` + managed identity + Entra RBAC. No keys
@@ -116,7 +116,7 @@ Reference: <https://learn.microsoft.com/azure/ai-services/document-intelligence/
 
 ## 3. LLM structured outputs (build-your-own fallback)
 
-This gives you full control, but **no native confidence or grounding**. You must validate the result.
+This gives you full control, but **no native confidence or grounding**. You must validate every result.
 
 ```python
 from pydantic import BaseModel
@@ -148,12 +148,12 @@ value without grounding evidence is inferred and rejected.** Any field below the
 human review.
 
 Open the typed result beside the source document and check that each field span points to the claimed
-text. A high-confidence field with no usable span still needs review.
+text. A high-confidence field with no usable span still goes to review.
 
 ## 5. Human review, correction, and handoff
 
 The trace records the reviewer identity, timestamp, before-and-after values, and approved downstream
-seam (an action tool). Corrections remain evaluation evidence and never overwrite the original
+seam (an action tool). Corrections stay as evaluation evidence and never overwrite the original
 expected result. See [`../lessons/05-human-review.md`](../lessons/05-human-review.md) for
 the exact-payload approval and destination receipt contract.
 
@@ -191,5 +191,5 @@ a deployed document workflow; adapt and test the handler before release.
 ## Offline validation pack
 
 Run the workflow over the synthetic fixtures and compare every extracted field with the source
-document. That comparison is the evidence. A workflow can run without errors and still extract the
-wrong values.
+document. That comparison is the evidence. A workflow can run cleanly and still extract the wrong
+values.

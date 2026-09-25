@@ -1,13 +1,23 @@
-# Module 2 — Provision the Foundry + Speech foundation
+# Module 2 — Connect the required foundation
 
-Module 1 decided *what* you are building. This module provisions the keyless footprint used by
-later modules: Foundry + models, Azure AI Search, the Speech data plane (the same AIServices
-account), storage for approved content and rendered output, and observability. Get the identity
-model right now. Then modules 3–7 become configuration.
+Module 1 chose the application goal and delivery channel. **Connect approved tenant resources first.**
+Bring the environment owner and the resource access for the selected path. Provision
+missing components through the customer's infrastructure process.
 
 This module follows the kit's working `infra/resources.bicep` and current Microsoft Learn guidance.
 
 ## What you build
+
+A working connection from your implementation to its services, using the identity that will run it.
+For content production, include the workflow runtime, rendering, and private media storage. Use
+the customer's existing application host or workflow service when it fits.
+The runtime must accept the agreed trigger and retain job state across restarts. A model is
+needed only if module 4 includes assisted authoring or live answers; Search and embeddings are
+needed only if you choose indexed retrieval. A text-only assistant skips Speech but still needs
+its answer service.
+
+The reference template includes the full footprint below. **It is a provisioning example, not
+the minimum architecture for every experience.** Select the required components before deploying.
 
 | Resource | Why this scenario needs it |
 | --- | --- |
@@ -19,25 +29,23 @@ This module follows the kit's working `infra/resources.bicep` and current Micros
 | Log Analytics + Application Insights | Traces and evaluation correlation (module 7) |
 | Role assignments | Keyless access between search, project, models, storage, **and the Speech data plane** |
 
-The output is the scenario's `.env` contract that every later module consumes.
-Use the deployment instructions below; no separate foundation exercise is required.
+The output is the scenario's `.env` contract for later modules. Use the deployment instructions
+below; no separate foundation exercise is required.
 
 ## Choose your path
 
 | Option | Reproducible | Provisions Speech + custom subdomain | Best when | Cost while idle |
 | --- | --- | --- | --- | --- |
-| **A. Scenario Bicep** *(default)* | Yes, reviewable IaC | Yes (AIServices account) | Building this scenario for a customer | Search basic + Log Analytics + idle model deployments |
+| A. Scenario Bicep reference | Yes, reviewable IaC | Yes (AIServices account) | An approved new environment after adapting the full template | Review the selected services and deployment SKUs |
 | B. `azd up` (kit root infra) | Yes | Yes (AIServices), but no `experience-output` container/embedding | Running the whole Agentic Co-build repository | Same, plus ACR |
 | C. Foundry portal + Speech resource | No | Manual | A throwaway demo | Lowest; free Search tier possible |
-| D. Bring your own landing zone | Customer's IaC | Verify it | Customer already has governed Foundry + Speech | Already owned |
+| **D. Existing approved environment** *(preferred)* | Customer's IaC | Verify the selected capability | Customer already has governed resources | Confirm capacity and incremental usage cost |
 
-**Default: Option A.** It is the only path that provisions the embedding deployment and both
-storage containers this scenario needs, sets the Speech custom subdomain, and assigns the Speech
-data-plane role. It also produces a diff that a platform team can review.
-
-**Migration cost.** A → D is cheap: modules 3+ only read the `.env` contract, so you only change
-variables to point at customer resources. C → A is expensive because portal resources have generated
-names and no template. Do not demo from C then promise A.
+**Use D when approved resources exist.** Map the endpoints and identities to your application
+configuration, then prove access from its runtime network. Endpoint changes alone do not prove
+network access or permissions. For A, have the platform owner review the template, naming, and
+resource costs before deployment. B is a shared reference footprint; C is useful for a capability
+check, but the resulting configuration still needs to enter your normal deployment process.
 
 ### Region and capability availability come first
 
@@ -49,8 +57,8 @@ Check both **before** deploying:
 az cognitiveservices model list --location westus2 -o table
 ```
 
-This lists regional model offerings, not available deployment capacity. Confirm quota and
-the model's deployment SKU before deploying.
+This lists regional model offerings, not deployment capacity. Confirm quota and the model's
+deployment SKU before deploying.
 
 - Avatar/Voice Live region support:
   <https://learn.microsoft.com/azure/ai-services/speech-service/regions?tabs=ttsavatar>
@@ -63,7 +71,7 @@ the model's deployment SKU before deploying.
 
 ## Implementation
 
-### Option A — Scenario Bicep (default)
+### Option A — Scenario Bicep reference
 
 The template is [`accelerator/main.bicep`](../accelerator/main.bicep); defaults live in
 [`accelerator/parameters.example.json`](../accelerator/parameters.example.json).
@@ -80,8 +88,8 @@ bicep build scenarios/avatar-onboarding/accelerator/main.bicep --stdout > /dev/n
 ./scenarios/avatar-onboarding/accelerator/scripts/deploy.sh rg-avatar-onboarding westus2
 ```
 
-`deploy.sh` creates the resource group, first runs `az deployment group validate`, deploys, then
-writes `accelerator/.env` from the template outputs. It passes your signed-in object ID as
+`deploy.sh` creates the resource group, runs `az deployment group validate`, deploys, then writes
+`accelerator/.env` from the template outputs. It passes your signed-in object ID as
 `principalId`, giving you keyless data-plane access, including the **Speech** data plane, without
 issuing a key.
 
@@ -151,8 +159,8 @@ subdomain (it does when created by the kit infra).
 Use this for a same-day demo. Create a project (which creates a Foundry account), deploy a chat and
 an embedding model, and connect a Search service. For avatar, open **Build → Models → Azure Speech —
 Text to Speech Avatar** and try it in the playground. The **Code** tab gives you the request. Record
-endpoints and names in `accelerator/.env` by hand. This means generated names, no template, nothing
-to review, and no managed identity for model access on the free Search tier.
+endpoints and names in `accelerator/.env` by hand. This gives you generated names, no template, nothing to review, and no managed identity for model
+access on the free Search tier.
 <https://learn.microsoft.com/azure/ai-services/speech-service/text-to-speech-avatar/batch-synthesis-avatar>
 
 ### Option D — Bring your own landing zone
@@ -164,7 +172,8 @@ az cognitiveservices account list --query "[?kind=='AIServices'].{name:name,rg:r
 az search service list --query "[].{name:name,rg:resourceGroup,sku:sku.name,semantic:properties.semanticSearch}" -o table
 ```
 
-Confirm these five scenario dependencies:
+Confirm the dependencies your path uses. Search and its roles below apply only to indexed
+retrieval; a batch rendering path does not need them:
 
 1. Foundry account has `allowProjectManagement: true`.
 2. The account has a **custom subdomain** (required for keyless Speech).
@@ -183,7 +192,7 @@ az role assignment create --assignee "$(az ad signed-in-user show --query id -o 
 ## Verify
 
 Verify these three conditions before later modules use this footprint. Check each against your
-resources. Set `ACCOUNT` from the Speech endpoint and `RG` to the resource group you deployed to:
+resources. Set `ACCOUNT` from the Speech endpoint and `RG` to the resource group:
 
 ```bash
 set -a; source scenarios/avatar-onboarding/accelerator/.env; set +a
@@ -191,18 +200,22 @@ ACCOUNT=$(echo "$AZURE_SPEECH_ENDPOINT" | sed -E 's#https://([^.]+)\..*#\1#')
 RG=rg-avatar-onboarding   # the group you passed to deploy.sh
 ```
 
-**1. Both model deployments exist.**
+**1. The selected dependencies exist.** If module 4 needs models, check their deployments:
 
 ```bash
 az cognitiveservices account deployment list --name "$ACCOUNT" --resource-group "$RG" \
   --query "[].name" -o tsv
 ```
 
-You should see the names in `AZURE_AI_MODEL_DEPLOYMENT_NAME` and
+For the full reference footprint, you should see the names in `AZURE_AI_MODEL_DEPLOYMENT_NAME` and
 `AZURE_AI_EMBEDDING_DEPLOYMENT_NAME`. If either is missing, module 3 ingestion and module 4 drafting
 fail with a deployment-not-found error. The cause is provisioning, not code.
 
-**2. The Speech avatar data plane answers your Entra identity, with no key.** This is the keyless
+**2. The chosen rendering service accepts the runtime identity.** The following batch-avatar
+check is applicable only to that path. Repeat it from the customer application's network and
+identity; a successful developer sign-in does not prove runtime access.
+
+The Speech avatar data plane answers your Entra identity, with no key. This is the keyless
 proof for this scenario: the batch-synthesis endpoint accepts an Entra token only when the account
 has a custom subdomain. List synthesis jobs with a token, not a key:
 
@@ -213,7 +226,7 @@ curl -s -o /dev/null -w '%{http_code}\n' \
   "$AZURE_SPEECH_ENDPOINT/avatar/batchsyntheses?api-version=2024-08-01"
 ```
 
-`200` confirms this keyless list request succeeded. For `401`, check the token's expiry,
+`200` confirms this keyless list request. For `401`, check the token's expiry,
 audience, and custom-subdomain endpoint. For `403`, check **Cognitive Services Speech User**
 (`f2dc8367-1007-4938-bd23-fe263f013447`) and allow time for RBAC propagation. Do not fall back
 to a Speech key.

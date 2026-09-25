@@ -1,12 +1,18 @@
-# Module 1 — Provision the shared Foundry foundation
+# Module 1 — Confirm scope and connect the document foundation
 
-Every later module uses the foundation you create here. Content Understanding and Document Intelligence
-are **Foundry Tools on a Microsoft Foundry (AIServices) resource**, the account that also hosts model
-deployments. Choose the identity model and region now. A wrong choice means redeploying later.
+Start with one approved document class and the action its extracted fields will support.
+Bring representative files and the source owner. Review module 3's capability choices before
+provisioning so the platform team can identify the required services and model deployments.
+Module 3 will confirm the choice against the actual documents.
+
+**Reuse approved tenant resources first.** Agree the processing identity and network path with
+the environment owner. Create only missing components through the customer's deployment process.
 
 ## What you build
 
-A resource group containing:
+A connected environment for the selected extraction path. The reference template includes the
+resources below; it is broader than some paths need. Verify the selected analyzer's requirements
+before adapting or deploying it:
 
 | Resource | Why the document workflow needs it |
 | --- | --- |
@@ -18,23 +24,22 @@ A resource group containing:
 | Log Analytics + Application Insights | Workflow tracing and the evaluation gate in modules 6–7 |
 | Role assignments | Keyless access between the account identity, storage, and the engineer |
 
-This produces a `.env` contract with **no secrets**, used by every later module.
+This creates a `.env` contract with **no secrets**, used by every later module.
 
 ## Choose your path
 
 | Option | Reproducible | Creates storage + embedding | Best when | Cost while idle |
 | --- | --- | --- | --- | --- |
-| **A. Scenario Bicep** *(default)* | Yes, reviewable IaC | Yes | You are building this workflow for a customer | Idle model deployments + Log Analytics; storage is pennies |
+| A. Scenario Bicep reference | Yes, reviewable IaC | Yes | A new footprint reviewed by the platform owner | Review service tiers and deployment SKUs |
 | B. `azd up` (kit root infra) | Yes | No — chat + Search only, no doc storage/embedding | You are running the whole Agentic Co-build repository end to end | Same, plus AI Search + ACR |
 | C. Foundry portal / Content Understanding Studio | No | Manual | A throwaway demo of an analyzer | Lowest |
-| D. Bring your own landing zone | Customer's IaC | Depends on what exists | The customer already has a governed Foundry resource | Already owned |
+| **D. Existing approved environment** *(preferred)* | Customer's IaC | Confirm what exists | The customer already has governed resources | Confirm capacity and incremental usage |
 
-**Default: Option A.** It provisions the embedding deployment and inbound and quarantine containers
-that modules 2–4 need. It also produces a diff the platform team can review.
-
-**Migration cost.** Moving from A to D is cheap: modules 2+ only read the `.env` contract, so you
-change variables. Moving from C to A costs more because portal/Studio resources have generated names
-and no template. Do not demo with C and promise A.
+**Prefer D for an existing customer environment.** Map endpoints and deployment names to application
+configuration, then test identity and network access from the runtime. Use A for a new approved
+footprint after template review. B adds shared infrastructure you may not need. C helps compare analyzers on representative inputs;
+retain the chosen configuration in your deployment process rather than leaving it as an undocumented
+portal experiment.
 
 ### Region and model availability come first
 
@@ -45,8 +50,8 @@ deploy in the selected region. Check both **before** you deploy:
 az cognitiveservices model list --location eastus2 -o table
 ```
 
-This lists regional model offerings, not available capacity. Check subscription quota and the
-model's deployment SKU separately.
+This lists regional model offerings, not available capacity. Check subscription quota and the model's
+deployment SKU separately.
 
 - Content Understanding region support:
   <https://learn.microsoft.com/azure/ai-services/content-understanding/language-region-support>
@@ -64,7 +69,7 @@ model's deployment SKU separately.
 
 ## Implementation
 
-### Option A — Scenario Bicep (default)
+### Option A — Scenario Bicep reference
 
 The template is [`accelerator/main.bicep`](../accelerator/main.bicep); defaults live in
 [`accelerator/parameters.example.json`](../accelerator/parameters.example.json).
@@ -143,7 +148,7 @@ Then append `AZURE_AI_EMBEDDING_DEPLOYMENT_NAME`, `AZURE_STORAGE_ACCOUNT_NAME`,
 `AZURE_DOCUMENTS_CONTAINER_NAME`, `AZURE_QUARANTINE_CONTAINER_NAME`,
 `AZURE_CONTENT_UNDERSTANDING_ENDPOINT`, and `AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT` to the `.env`.
 
-Continue with this scenario's environment contract; no separate setup exercise is needed.
+Continue with this scenario's environment contract; you do not need a separate setup exercise.
 
 ### Option C — Foundry portal / Content Understanding Studio
 
@@ -152,8 +157,8 @@ Understanding Studio (<https://contentunderstanding.ai.azure.com>) and let it au
 required `gpt-4.1`, `gpt-4.1-mini`, and `text-embedding-3-large` models. Record the endpoint and
 deployment names into `accelerator/.env` by hand.
 
-This option has no template, uses generated names, and leaves no reviewable platform diff. Treat work
-here as disposable. Do not build the pilot on it.
+This option has no template, uses generated names, and leaves no reviewable platform diff. Treat the
+work as disposable. Do not build the pilot on it.
 
 ### Option D — Bring your own landing zone
 
@@ -209,7 +214,7 @@ curl -sS -o /dev/null -w '%{http_code}\n' -H "Authorization: Bearer $TOKEN" \
 
 A `200` means keyless data-plane access works. A `403` means your identity lacks **Cognitive Services
 User** on the account, or the assignment has not propagated. Check it instead of using a key.
-For `404`, check the endpoint, API version, and region support before considering redeployment.
+For `404`, check the endpoint, API version, and region support before redeploying.
 
 **3. The document containers are private and reachable without a key.**
 

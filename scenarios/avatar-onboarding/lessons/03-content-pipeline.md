@@ -1,11 +1,8 @@
-# Module 3 — Build the governed content pipeline
+# Module 3 — Connect content and approve wording
 
-An onboarding avatar that says something wrong becomes a confident, face-attached, replayable error.
-This module builds a pipeline that lets **only approved HR/onboarding content reach the experience**
-as a typed, versioned, owned, traceable claim set.
-
-You can improve retrieval quality later. A wrong or expired claim on a synthetic face ends the
-pilot.
+Connect the authoritative content for your user task. Identify the owner who can approve its
+wording and the audience allowed to receive it. **Approve the script content here before
+generating a private media preview.** Publication approval follows in module 6.
 
 ![Governed content pipeline](../diagrams/03-governed-content-pipeline.png)
 
@@ -22,7 +19,7 @@ pilot.
 
 ## Choose your path
 
-Where should the approved corpus live and how is it governed on the way in?
+Decide where the approved corpus lives and what governance travels with it.
 
 | Option | Where approved content lives | Governance carried forward | Build effort | Best when |
 | --- | --- | --- | --- | --- |
@@ -32,8 +29,8 @@ Where should the approved corpus live and how is it governed on the way in?
 | D. Customer system of record via export | Their HRIS/LMS export | Whatever the export preserves | Medium | Content is owned by an HR system and must stay authoritative there |
 
 **Default: Option A.** A small, explicit, typed claim set in a keyless blob container fits
-onboarding. There are few facts, each needs a named owner and expiry date, and module 6 must approve
-each one. The result is a corpus a customer can review, diff, and export. The grounded assistant
+onboarding. There are few facts. Each needs a named owner and expiry date, and module 6 must approve
+each one. The customer gets a corpus they can review, diff, and export. The grounded assistant
 (module 4) and renderer (module 5) both use the claim set as their contract.
 
 **Choose B** when onboarding content spans systems and needs permission-aware retrieval. The
@@ -43,9 +40,9 @@ D** when HR requires its system to remain authoritative. Export a versioned snap
 the avatar outrun it.
 
 **Migration cost.** A → B is cheap: retain the claim set and add a knowledge base. B → A is also
-cheap because you wrap the index. C → A/B is a rebuild. That makes A the default.
+cheap because you wrap the index. C → A/B is a rebuild. That is why A is the default.
 
-### Four questions to answer before writing claims
+### Four questions before writing claims
 
 1. **Who owns each fact?** Name the person who can approve the wording and is accountable for it.
 2. **What is the authoritative source?** Record the document + version that supplied the wording.
@@ -72,12 +69,12 @@ never paraphrase a policy:
 }
 ```
 
-The pack carries `version`, `content_owner`, and `review_by` (expiry). Use only synthetic/fictional
-data. Never use real employee data or a real person's likeness. The sample pack shows the expected
-shape.
+The pack carries `version`, `content_owner`, and `review_by` (expiry). The sample pack uses
+fictional data to show the expected shape. Keep real content and consent records in the customer's
+approved systems, outside this repository.
 
-**Upload the approved sources keylessly.** Shared-key access is disabled on the storage account, so
-you ingest with Entra ID:
+**Upload the approved sources keylessly.** Shared-key access is disabled on the storage account.
+Ingest with Entra ID:
 
 ```bash
 STORAGE=$(grep AZURE_STORAGE_ACCOUNT_NAME scenarios/avatar-onboarding/accelerator/.env | cut -d= -f2)
@@ -110,10 +107,15 @@ Verified knowledge-source and permission facts:
 
 ### Option C — SharePoint / M365
 
-This is configuration, not code. Connect the approved SharePoint library, scope it to the onboarding
-site, and let M365 permissions govern access. Still produce the claim set because the approval gate
-signs it. Confirm that site permissions match intent; inherited permissions on a public site are a
-common surprise. Test with a low-privilege account.
+Use this when content owners already review and version material in SharePoint. Select the approved
+library and published revision, then build an authorized read/export into your claim contract.
+Preserve the item's ID and version so an owner can trace each approved statement back to its source.
+An avatar renderer does not acquire access merely because the library is configured elsewhere.
+
+Decide whether readers all share one approved audience or need per-user checks. Restrict the
+published media to the same intended audience; an exported video does not inherit source
+permissions automatically. Test both an allowed and a denied user in the target channel.
+Continue to module 4 only if authoring or live answers are needed; otherwise go to module 5.
 
 ### Option D — Export from a system of record
 
@@ -121,10 +123,37 @@ Export a **versioned snapshot** (with the source system's version stamped into
 `source_reference`), load it as the claim set, and set `review_by` to the export's validity window.
 Never let the avatar speak content newer or older than the snapshot you approved.
 
+Implement the export under a scoped service identity. Record the source version and invalidate
+the affected publication when the source owner withdraws it. This adapter is customer work. Prove
+one update and one withdrawal before using scheduled exports.
+
+### Approve wording in the customer's content system
+
+Create the first script revision from the approved claims. Retain a link to each source and have
+the named content reviewer approve the exact wording in the existing content or approval system.
+Store its immutable revision or hash with the approval reference. Any edit requires a new
+decision. The fictional approvals in the repository are examples, not authorization.
+
+For translation, carry the approved source video and transcript instead of inventing new claims.
+Assign a reviewer for each target language. For live answers, approve the permitted source set
+and refusal policy; do not describe every future answer as individually human-approved.
+
+## Build with your content
+
+Keep the real content in customer-controlled storage. Adapt the claim contract in your private
+application, retaining source version, expiry, and approval references. Configure the renderer
+to load that approved revision rather than `accelerator/sample-data`.
+Try one expired source and one changed revision: neither should reach rendering.
+
+For content production, connect the trigger chosen in module 1 to this loader. Record the source
+revision and requested language with each job. A source change invalidates the previous approval;
+wait for approval of the replacement wording before generating its preview. Repeated notifications
+for the same revision and language must reuse the existing job or report its status.
+
 ## Verify
 
-Prove that the governed corpus is reachable without keys and that the claim set is approvable. Check
-each result against your storage account and claim file.
+Prove that the governed corpus is reachable without keys and that the claim set can be approved.
+Check each result against your storage account and claim file.
 
 **1. The approved content is in blob storage and reachable with your Entra identity, not a key.**
 
@@ -151,7 +180,7 @@ az storage blob metadata show \
 ```
 
 Expect `owner`, `version`, and `review_by`. If they are empty, set them in module 3 Implementation.
-A corpus without an owner or expiry cannot be governed or withdrawn.
+A corpus without an owner or expiry cannot be withdrawn on time.
 
 **3. Every claim is approvable, and nothing is already expired.** Read your own claim set and check
 the fields that module 6 signs and module 5 enforces:

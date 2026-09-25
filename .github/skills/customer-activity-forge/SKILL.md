@@ -7,13 +7,13 @@ argument-hint: "Company name and industry are required. Optional: region/segment
 ## Context
 
 Use this skill when a participant has a customer or industry but no bounded AI opportunity. It
-bridges “we should do something with AI” and a useful customer conversation: research public facts,
-propose approximately ten achievable ideas, and map the best candidates to a scenario playbook.
+turns “we should do something with AI” into a useful customer conversation: research public facts,
+propose about ten achievable ideas, and map the best candidates to a scenario playbook.
 
 This is an intake tool, not an architecture approval or delivery commitment. After choosing an idea,
-decompose the use case into parts and map those parts to relevant scenario lessons.
-Use that mapping to agree the first implementation scope with the customer, including acceptance
-criteria. Confirm data access and the approved environment before building.
+map its parts to scenario modules with the `use-case-mapper` skill. Use that map to agree the first
+implementation scope with the customer, including acceptance criteria. Confirm data access and the
+approved environment before building.
 
 ## Input
 
@@ -45,7 +45,7 @@ information.
 
 ### 2. Generate approximately ten ideas
 
-Every idea must be tied to the research, safe enough for a first demonstration, and described with:
+Every idea must tie to the research, be safe enough for a first demonstration, and include:
 
 | Field | Guidance |
 |---|---|
@@ -53,27 +53,32 @@ Every idea must be tied to the research, safe enough for a first demonstration, 
 | **Description** | What improves, how the experience works, and the first tangible output |
 | **Target user** | The role benefiting from the result |
 | **Business outcome** | What becomes faster, safer, cheaper, or more reliable |
-| **Scenario direction** | Break the idea into parts and identify relevant lessons across tracks; record uncovered work |
+| **Scenario direction** | The track or tracks the idea draws on, plus any part no track covers |
 | **First decision** | The scope or design question to resolve before planning the relevant sessions |
 | **Effort** | `Starter`, `Core`, or `Stretch` |
 | **Research fit** | Why the idea fits this customer, with citation |
 | **Safe representative context** | Candidate documents, data product, approved content, or sample to use in a demonstration |
 | **Evidence** | The routine, edge, refusal, review, or access case that proves the first outcome |
 
-Use these exact labels when a current track fits:
+**Read every `scenarios/*/manifest.json` before labelling ideas.** Use each manifest's `name` as the
+label and its `tagline` and `customer_outcome` to judge fit. A folder without a manifest is not a
+supported track yet. The current tracks are:
 
 | Scenario direction | Use when |
 |---|---|
 | **AI Grounding / IQ** | Trusted answers require the right mix of enterprise knowledge and operational context. This can include Foundry IQ, Fabric IQ, Work IQ, Web IQ, SharePoint, or a Copilot Studio discussion. |
 | **Content Understanding and Document Workflow** | Business content needs SME-authored understanding, extraction, review, and handoff into a process. |
 | **Avatar Scenario** | Approved learning, communications, onboarding, or support content needs an accessible, governed semi-automated avatar-led presentation. |
+| **Operational Agents** | An agent must carry out bounded work in a business system, with validated tool calls, exact human approval, and recovery from interrupted operations. |
 
-Visual input, structured data, actions, evaluation, tracing, and deployment are capabilities—not
-competing top-level scenarios. Mention them only when they are necessary to the proposed proof.
+If a manifest exists for a track not in this table, use it the same way.
 
-These are the initial tracks, not a complete catalog of customer use cases. One idea may draw on
-several tracks. Map its parts separately; a match for one part does not imply coverage of the whole
-use case. Where a part has no matching guidance, write `New pattern needed` and describe the gap.
+Visual input, structured data, evaluation, tracing, and deployment are capabilities, not
+separate scenarios. Mention them only when the proposed proof needs them.
+
+These tracks are starting points, not a complete catalog of customer use cases. One idea may draw on
+several tracks, and a match for one part does not cover the whole use case. When a part has no
+matching guidance, write `New pattern needed` and describe the gap.
 
 ### 3. Calibrate scope
 
@@ -86,7 +91,7 @@ use case. Where a part has no matching guidance, write `New pattern needed` and 
 Apply these guardrails:
 
 - Do not propose a generic chatbot, a broad autonomous workflow, or a production integration that
-  cannot be demonstrated safely.
+  cannot be shown safely.
 - Do not assume that every idea needs RAG, a new landing zone, or a Foundry-only implementation.
 - Do not use file counts as an architecture decision. Start with ownership, access, freshness,
   quality, and the evidence needed.
@@ -107,7 +112,7 @@ Three to five sentences with inline citations and explicit coverage gaps.
 |---|---|---|---|---|
 | 1 | … | Core | AI Grounding / IQ | … |
 
-Rank by customer fit, achievable first proof, and differentiation.
+Rank by customer fit, achievable first proof, and what makes the idea distinct.
 
 #### Part C — Idea details
 
@@ -132,22 +137,19 @@ For the top idea, pre-fill this handoff. Clearly mark information the customer m
 | Golden-dataset / evidence starter | … |
 | First customer decision | … |
 
-Include a session-planning map for the top idea:
+Then map the top idea to modules by following the `use-case-mapper` skill
+(`.github/skills/use-case-mapper/SKILL.md`), using the handoff above as its input. Include its
+**Map**, **Build order and first slice**, and **Gaps and open questions** sections. The customer
+must confirm the map before it becomes an agreed session plan.
 
-| Part of the customer use case | Relevant scenario lessons | Adaptation or uncovered work |
-|---|---|---|
-| … | … | … |
+End with the playbook URL for each matched track, `docs/scenario.html?id=<manifest id>`:
 
-Read the scenario manifests and relevant lesson content before assigning coverage. Name existing
-lessons rather than assuming an entire track covers a part. Keep uncovered work in the map and
-mark any coverage you cannot verify as unconfirmed. The customer must confirm the mapping before
-it becomes an agreed session plan.
-
-End with the relevant scenario-playbook URLs when there are matches:
-
-- `docs/scenario.html?id=ai-grounding`
-- `docs/scenario.html?id=content-understanding-document-workflow`
-- `docs/scenario.html?id=avatar-scenario`
+| Track | URL |
+|---|---|
+| AI Grounding / IQ | `docs/scenario.html?id=ai-grounding` |
+| Content Understanding and Document Workflow | `docs/scenario.html?id=content-understanding-document-workflow` |
+| Avatar Scenario | `docs/scenario.html?id=avatar-scenario` |
+| Operational Agents | `docs/scenario.html?id=operational-agents` |
 
 If a new pattern is needed, state that gap instead of inventing a playbook URL. Effort tags describe
 the initial proof only; they do not estimate the full customer implementation.

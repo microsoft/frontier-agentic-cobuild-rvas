@@ -14,8 +14,9 @@ measure a different workload.
 
 ## Choose your path
 
-Make these decisions independently. Decide embeddings first. That choice constrains ingestion, and
-changing it later means reindexing everything.
+Confirm the provisional choices made before module 3's ingestion. Compare answer models without
+changing the source context. If retrieval evidence justifies another embedding model, build a
+separate candidate index and compare it before replacing the accepted one.
 
 ### Chat / query-planning model
 
@@ -36,27 +37,33 @@ Query planning inside a knowledge base has its own supported list: `gpt-4o`,
 `gpt-5.4-nano` on `2026-05-01-preview` only.
 Source: <https://learn.microsoft.com/azure/search/agentic-retrieval-how-to-create-knowledge-base>
 
-Re-check that list at build time. Model availability moves faster than any lesson.
+Re-check that list at build time. Model availability moves faster than any module.
 
 ### Embedding model
 
 | Option | Trade-off |
 | --- | --- |
-| **`text-embedding-3-large`** *(default)* | Best retrieval quality; larger vectors, higher index size and cost |
-| `text-embedding-3-small` | Cheaper and smaller; measurably weaker on nuanced policy distinctions |
-| Reduced dimensions on `-3-large` | Cuts index size while keeping most of the quality — measure the loss on your own corpus |
+| **`text-embedding-3-large`** *(reference starting point)* | Candidate when retrieval quality justifies its index size and processing cost; measure on your corpus |
+| `text-embedding-3-small` | Candidate when storage or processing cost matters; check whether it still retrieves the required passages |
+| Reduced dimensions on `-3-large` | Cuts index size while keeping most of the quality; measure the loss on your own corpus |
 
 **Default: `text-embedding-3-large`.** Embedding costs occur at index and query time. For a policy
 corpus this size, they are not the dominant cost. Everything downstream depends on retrieval quality.
 
-**Migration cost.** Swapping the chat model is a config change plus an evaluation rerun: hours.
-Swapping the embedding model invalidates every vector and needs a full reingest and new retrieval
-baseline: days and a maintenance window. Choose embeddings deliberately, then leave them alone.
+Changing the answer model requires a comparison and regression run. Changing embeddings also
+requires a matching index and retrieval baseline. Plan that work against the actual corpus size
+and cutover requirements; do not replace a live index merely to try another candidate.
 
 ## Implementation
 
-Both models were already deployed by module 1's Bicep, named by `AZURE_AI_MODEL_DEPLOYMENT_NAME` and
-`AZURE_AI_EMBEDDING_DEPLOYMENT_NAME`. To compare, deploy a contrasting chat model alongside.
+Use the deployments connected in module 1. The reference template names them through
+`AZURE_AI_MODEL_DEPLOYMENT_NAME` and `AZURE_AI_EMBEDDING_DEPLOYMENT_NAME`. Compare a contrasting
+candidate only when the use case needs the evidence and the environment owner approves it.
+
+Replace the fictional questions and expected sources in your private comparison set with the
+customer's reviewed questions. Keep the same approved context for each answer-model candidate.
+Record which cases justify a change. For a Copilot Studio path, skip these Azure commands and
+evaluate the configured agent's answers in module 7.
 
 ### Deploy a contrasting candidate
 
@@ -124,7 +131,7 @@ difference between candidates appears when the right answer is "I don't know" or
 
 | Signal | Choose |
 | --- | --- |
-| Pilot, spiky or unknown volume | Pay-as-you-go standard — the default for everything in this scenario |
+| Pilot, spiky or unknown volume | Pay-as-you-go standard, the default for everything in this scenario |
 | Steady, predictable, high volume with a latency SLA | Provisioned throughput |
 | Latency spikes and `429`s under normal pilot load | Fix concurrency and retries first; PTU is not a fix for a burst pattern |
 
@@ -164,7 +171,7 @@ chat-candidate           4/4        3/3     1640     2900     4912      844
 
 `grounded` counts expected citation matches; it does not check that the answer states the policy
 correctly. `abstained` counts exact matches to the refusal string. Four of seven golden questions
-are answerable. Review answers against their acceptance criteria as well as reading these counts. If candidates
+are answerable. Review answers against their acceptance criteria as well as these counts. If candidates
 tie on quality but differ by 2× latency and 40% more output tokens, decide. Record the choice and
 what evidence would change it.
 
@@ -175,5 +182,5 @@ test choosing between competing notices.
 ## Next module
 
 [Module 5 — Build retrieval before adding an agent](05-grounded-retrieval.md) turns the corpus and
-the models into a grounded answer with citations, abstention, and access-denied behaviour — still
-with no agent in sight.
+the models into a grounded answer with citations, abstention, and access-denied behaviour. It still
+has no agent.

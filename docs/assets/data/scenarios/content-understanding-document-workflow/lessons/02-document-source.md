@@ -1,8 +1,11 @@
 # Module 2 — Connect an approved document source
 
 This module defines which documents can enter the workflow and how their identity, version, and
-permissions stay with them. You can tune extraction later. An unapproved document is a governance
-failure.
+permissions stay with them. You can tune extraction later. An unapproved document breaks governance.
+
+**Bring a representative file from the agreed document class.** Have its owner approve processing
+and retention in the tenant. If access is not approved yet, use a synthetic document to check the
+connector, but keep customer acceptance blocked. No PDF is supplied by this repository.
 
 ![Document intake boundary](../diagrams/02-document-intake-boundary.png)
 
@@ -51,26 +54,36 @@ Answer these before you write code:
 
 ### Option A — Azure Blob Storage (default)
 
-The template already created `documents-inbound` and `documents-quarantine` with shared-key access
-off. Upload approved documents keylessly and stamp intake metadata as blob metadata:
+Use the approved inbound and quarantine containers from module 1. The optional template creates
+them for a new environment. Set `SOURCE_FILE` to an actual approved PDF in your private workspace,
+or export a representative document to PDF from its source application. Retain the exact bytes
+for module 4's hash; do not substitute a later copy.
+
+The upload below uses an illustrative invoice identifier. Replace its metadata with your source
+reference and classification:
 
 ```bash
-# Run from the repository root. Supply an approved synthetic PDF; the pack contains no PDF.
+# Run from the repository root; keep the source outside this public repository.
+SOURCE_FILE="/absolute/path/to/approved-invoice.pdf"
 set -a; source scenarios/content-understanding/accelerator/.env; set +a
 ACCOUNT="$AZURE_STORAGE_ACCOUNT_NAME"
 
 az storage blob upload \
   --account-name "$ACCOUNT" --auth-mode login \
   --container-name documents-inbound \
-  --name invoice-2002.pdf --file ./invoice-2002.pdf \
+  --name invoice-2002.pdf --file "$SOURCE_FILE" \
   --metadata source_uri="procurement/2026/invoice-2002.pdf" source_version="1" \
              ingested_by="$(az ad signed-in-user show --query userPrincipalName -o tsv)" \
              sensitivity_label="Confidential"
 ```
 
-Route anything that fails a rule to `documents-quarantine`, never `documents-inbound`. The account's
-managed identity has **Storage Blob Data Reader** from module 1, so analyzers read
-`https://<account>.blob.core.windows.net/documents-inbound/<name>` by URL without a key.
+Implement the intake rule before admitting a file. Route a failed rule to `documents-quarantine`,
+never `documents-inbound`, and retain its rejection reason. Test an unapproved document class and
+an unauthorized source as well as the accepted input.
+
+Confirm the analyzer's supported input authorization as well as the storage role. A caller's
+access to a private URL does not automatically make that URL readable by the service. Module 3
+describes the approved upload path when analyze-by-URL is not available for your configuration.
 
 ### Option B — ADLS Gen2
 
@@ -84,7 +97,7 @@ az storage fs access set \
   --acl "user::rwx,group::r-x,other::---"
 ```
 
-Know the limit before you promise anything: **≤32 ACL entries per file/directory**. Past that,
+Know the limit before you commit to this path: **≤32 ACL entries per file/directory**. Past that,
 redesign to group-based permissions. Reference:
 <https://learn.microsoft.com/azure/search/search-indexer-access-control-lists-and-role-based-access>
 
@@ -95,19 +108,31 @@ user. As a knowledge source, SharePoint is available **indexed** (ingested befor
 **remote** (fetched at query time). For document extraction, you typically use Microsoft Graph to
 retrieve a specific file, then give its bytes or short-lived URL to the analyzer.
 
-Confirm that library permissions reflect intent. Inherited permissions on a "public" site are a
-common surprise. Test with a low-privilege account. Reference:
+Build that file-read adapter under an approved identity. Preserve the item ID and source version,
+then pass the exact bytes through the same intake rules as option A. Do not treat a retrieval
+knowledge-source connection as a document-processing connector. Check an allowed and denied item
+before continuing to module 3; the Blob commands do not verify this branch.
+
+Confirm that library permissions reflect intent. Inherited permissions on a "public" site often surprise teams. Test with a low-privilege account.
+Reference:
 <https://learn.microsoft.com/azure/search/agentic-knowledge-source-overview>
 
 ### Option D — OneLake (lakehouse)
 
-When documents are curated in a Fabric lakehouse, reference the OneLake path and let Fabric workspace
-RBAC govern access. OneLake is a GA knowledge source kind; permissions are enforced by Fabric, not
-copied into a separate store. Reference: <https://learn.microsoft.com/fabric/iq/overview>
+Use this when the source owner already manages the files in a Fabric lakehouse. Implement an
+authorized file read from the selected workspace and preserve the file reference and version.
+Submit those bytes through the chosen analyzer's supported input path. A knowledge-source
+connection alone does not perform this extraction handoff.
+
+Agree retention for any staging copy and prove that a denied source cannot reach analysis.
+Continue to module 3 with the same document identity and intake evidence. Reference:
+<https://learn.microsoft.com/fabric/onelake/onelake-access-api>
 
 ## Verify
 
-Check the source boundary against your own storage account, not against a plan file.
+Check one accepted and one rejected input through **your source adapter**. Confirm the exact
+document reaches analysis and retains its source identity. For SharePoint or OneLake, inspect
+those reads and intake results in the selected platform; the following checks apply to Blob.
 
 **1. Both containers exist and neither is public.**
 
@@ -144,8 +169,8 @@ az role assignment list --assignee "$MI" --scope "$STORAGE_ID" \
   --query "[].roleDefinitionName" -o tsv
 ```
 
-You need **Storage Blob Data Reader** in that list. Without it, module 3's analyze-by-URL call fails
-against the blob.
+Confirm the required role for the selected input path, then submit the document in module 3.
+A role listing does not prove the analyzer can read the private input.
 
 ## Next module
 

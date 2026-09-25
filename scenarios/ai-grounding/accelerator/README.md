@@ -3,7 +3,7 @@
 Build a grounded assistant that answers from approved content and respects the caller's access
 boundary. The accelerator includes a fictional corpus, reusable scripts, and an optional Bicep
 foundation for a clean Azure demo subscription. It supports a pilot. It does not create an
-enterprise landing zone or approve a production deployment.
+enterprise landing zone or approve production.
 
 ## What the pilot must prove
 
@@ -22,9 +22,9 @@ Module 7 uses `capture_answers.py` to select a role's questions and invoke retri
 agent, then `evaluate_answers.py` to grade the captured answers against the native JSON case set.
 The role flag selects questions only; callers still need actual test identities and access mappings.
 
-These need implementation work before a permission-aware pilot can pass the stated gates.
-The model comparison only scopes local prompt context by fixture role. Neither probe can prove
-the absence of every possible leak from a finite list of text markers.
+Close these gaps before a permission-aware pilot can pass the stated gates.
+The model comparison only scopes local prompt context by fixture role. A finite list of text markers
+cannot prove every leak is absent.
 
 **Surface probe transport:** `probe_surface.py` accepts HTTP and follows redirects with its
 authorization header. Do not send real tokens until HTTPS-only requests and safe redirect handling
@@ -33,7 +33,7 @@ are enforced. A redirect can forward a token to another origin.
 ## Before you start
 
 **Check the current API surface before writing SDK code.** Foundry and Azure AI Search change
-quickly, and several capabilities used here are preview. Search current Microsoft Learn guidance
+quickly, and several features used here are preview. Search current Microsoft Learn guidance
 and the relevant Foundry guidance. Do not infer a signature from this accelerator or from memory.
 
 **Use fictional data only.** `sample-data/` contains a synthetic returns-policy set for a fictional
@@ -47,14 +47,14 @@ Insights connection string. Storage shared-key access is disabled.
 
 ### Clean-subscription demo
 
-Use a disposable subscription after the customer agrees the pilot boundary. The deployment creates
-the demo foundation, then you replace the fictional corpus through the agreed source and permission
+Use a disposable subscription after the customer agrees to the pilot boundary. The deployment creates
+the demo foundation. Then replace the fictional corpus through the agreed source and permission
 process.
 
 ### Existing customer environment
 
 Record the approved resource IDs, source boundary, and access model. Do not redeploy this package
-into customer resources. Apply the lessons and validators to the approved environment instead.
+into customer resources. Apply the modules and checks to the approved environment instead.
 
 ## The build path
 
@@ -69,7 +69,7 @@ into customer resources. Apply the lessons and validators to the approved enviro
 | 7. Evaluate and trace | Release gate, red-team cases, and request traces | Evaluation result and trace for a failure |
 | 8. Deploy and surface | A pinned version behind a permission-aware endpoint | Anonymous, authorized, and restricted surface checks |
 
-Complete the modules in order. Do not add an agent until retrieval passes its tests.
+Complete the modules in order. Add an agent only after retrieval passes its tests.
 
 ## Decisions to make with the customer
 
@@ -91,7 +91,7 @@ az login
 ```
 
 The deployment writes `accelerator/.env`. Later modules use that local file. Do not commit it.
-Load it into your shell before running lesson commands that use `$AZURE_*` variables:
+Load it into your shell before running commands that use `$AZURE_*` variables:
 
 ```bash
 set -a
@@ -100,16 +100,16 @@ set +a
 export AZURE_KNOWLEDGE_BASE_NAME=grounding-kb
 ```
 
-Each lesson's **Verify** section gives the command and signal for that module.
+Each module's **Verify** section gives the command and signal for that module.
 
-For offline checks of the helpers and fixtures, run
+To check helpers and fixtures offline, run
 `python3 -B scenarios/ai-grounding/accelerator/scripts/test_offline.py`.
 These checks do not verify Azure retrieval or permissions.
 
 ## Scope and boundaries
 
 - Treat retrieved text as data, never as instructions. Module 7 tests indirect prompt injection.
-- Index knowledge. Route to live systems. An indexed snapshot can give a confidently cited stale
+- Index knowledge. Route to live systems. An indexed snapshot can give a confidently cited but stale
   answer.
 - A denial must not reveal that a protected document exists.
 - Pin the agent version in application configuration. Do not send users to a debugging version.
@@ -119,6 +119,6 @@ These checks do not verify Azure retrieval or permissions.
 [Module 7](../lessons/07-evaluate-and-trace.md) contains the capture and gate commands.
 It keeps coordinator and supervisor outputs separate under the ignored `.runtime/` directory.
 The reports check response contracts, not semantic correctness or retrieval recall.
-Use [module 8](../lessons/08-deploy-and-surface.md) for the surface and hosting steps.
+Use [module 8](../lessons/08-deploy-and-surface.md) for surface and hosting steps.
 
 See [solution.md](solution.md) for the facilitator reference.

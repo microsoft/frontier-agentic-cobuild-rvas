@@ -1,12 +1,14 @@
-# Module 4 — Build the grounded assistant behind the experience
+# Module 4 — Add grounded authoring or live answers when needed
 
-The avatar is a mouth. This module builds the brain: a grounded assistant that drafts onboarding
-script text **only** from the approved claim set, **cites** every claim, **refuses** requests it
-cannot ground, and **hands off** to a human help path. If the assistant invents a benefit, the avatar
-will repeat it.
+**Skip model-based drafting when the script is already approved.** A content-production application can
+render that wording directly in module 5. Use this module when authors need help selecting
+approved statements or when your live experience must answer questions.
 
-Continue with module 2's chat deployment and module 3's approved claim set. The default
-drafting path below needs no new agent or sample corpus.
+Bring module 3's approved source revision and representative questions from the intended users.
+For a live experience, include a question the user may not access and one the sources cannot answer.
+
+Use module 2's chat deployment and module 3's approved claim set. The default drafting path below
+needs no new agent or sample corpus.
 
 ![Supported requests get approved wording and a claim citation; unsupported requests get NO_APPROVED_CLAIM and a help path.](../diagrams/04-grounded-assistant-boundary.png)
 
@@ -14,8 +16,8 @@ drafting path below needs no new agent or sample corpus.
 
 1. A grounded generation path, model-with-retrieval **or** a Foundry agent, that produces script
    text traceable to approved claims.
-2. Guardrails: cite every claim, **abstain** when no approved claim covers the question, and
-   **escalate** to the claim's `help_path`.
+2. Guardrails: cite every claim and **abstain** when no approved claim covers the question. Route
+   the user to the claim's `help_path`.
 3. A retrieval boundary that limits the assistant to approved content (module 3's corpus / knowledge
    base).
 
@@ -28,7 +30,7 @@ drafting path below needs no new agent or sample corpus.
 | C. Foundry agent + agentic retrieval (Foundry IQ) | Agent over a permission-aware knowledge base | Query planning + answer synthesis + ACL enforcement | Medium/High | Content spans systems and needs permission-aware retrieval |
 
 **Default: Option A** for the pilot: a chat deployment retrieves from the small approved claim set,
-and its system prompt forbids ungrounded statements. It is the smallest setup with tight control
+and its system prompt forbids ungrounded statements. It is the smallest setup with direct control
 over the two behaviours that matter here: **cite** and **refuse**. Choose **B** when you want a
 named, versioned agent shared across channels (including module 5 Option C, Voice Live). Choose
 **C** when retrieval must be permission-aware across systems.
@@ -38,6 +40,17 @@ only the drafting call becomes an agent invocation. B → A is trivial. Build th
 set once because all three options use it.
 
 ## Implementation
+
+### Connect your approved content
+
+In your private application, replace the sample claim-file path with the approved content loader
+from module 3. Have it reject expired or unapproved revisions before calling the model. Keep
+source references with the response so the renderer or reviewer can check them.
+
+For assisted authoring, save a candidate script for review. Return changed wording to module 3's
+content approval before rendering. For live answers, enforce access on each request and connect
+the refusal to an actual support route. Test the answer path as an intended user, rather than only
+as the developer who owns the resources.
 
 ### Option A — Model + retrieval (default)
 
@@ -96,12 +109,12 @@ first gate; the renderer is the backstop.
 ### Option B — Foundry agent + knowledge base
 
 This optional path needs a named, versioned agent with a knowledge tool over module 3's
-corpus. In the existing Foundry project, create the agent with the drafting instructions above,
-select module 2's model deployment, and connect only approved claims. Test one supported
+corpus. In the existing Foundry project, create the agent with the drafting instructions above.
+Select module 2's model deployment and connect only approved claims. Test one supported
 question and one unsupported question in the playground before saving the version.
 Store its name and version in the scenario `.env` as `AZURE_FOUNDRY_AGENT_NAME` and
 `AZURE_FOUNDRY_AGENT_VERSION`. Confirm that knowledge citations map to approved claim IDs.
-Do not switch the batch-video default to an agent merely to finish this lesson.
+Do not add an agent to a content-production workflow merely to finish this module.
 
 ### Option C — Foundry agent + agentic retrieval (Foundry IQ)
 
@@ -112,7 +125,8 @@ from the AI Grounding stack:
 <https://learn.microsoft.com/azure/search/agentic-retrieval-how-to-create-knowledge-base>
 
 The assistant may draft *candidate* script text under any option. A **human still approves** the
-final wording in module 6. The assistant speeds authoring. It does not grant publication.
+final wording in module 3 before rendering. Module 6 approves publication. The assistant speeds
+authoring. It does not grant publication.
 
 ## Verify
 
@@ -155,7 +169,7 @@ ask "How much is the parking subsidy?"
 ```
 
 The only acceptable output is `NO_APPROVED_CLAIM` and the help path. A plausible dollar figure is a
-confident, replayable, made-up number spoken by a face. If you get one, do not render the assistant.
+confident made-up number spoken by a face. If you get one, do not render the assistant.
 A `401`/`403` means you are missing the **Cognitive Services OpenAI User** role on the account.
 Grant it and stay keyless.
 

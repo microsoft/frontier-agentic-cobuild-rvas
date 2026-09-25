@@ -24,11 +24,11 @@ keep multi-turn state. Otherwise, it is architecture for its own sake.
 
 | Option | What it adds | Cost | When it wins |
 | --- | --- | --- | --- |
-| No agent — module 5's retrieval path | Nothing; ships today | None | Single-source Q&A. Genuinely common; genuinely underused |
-| **A. Foundry agent + knowledge tool** *(default when an agent is justified)* | Multi-turn, versioned, traceable, tool-capable | Low — one API surface | The normal case |
+| No agent: module 5's retrieval path | Nothing; ships today | None | Single-source Q&A. Genuinely common; genuinely underused |
+| **A. Foundry agent + knowledge tool** *(default when an agent is justified)* | Multi-turn, versioned, traceable, tool-capable | Low: one API surface | The normal case |
 | B. Multi-source routing inside one knowledge base | Retrieval instructions steer across sources; one call, merged ranking | Low | Sources are all *knowledge*, not systems |
 | C. Agent + separate live-data tool (Fabric IQ, MCP, OpenAPI) | Explicit routing between "what the policy says" and "what is true right now" | Medium | Live operational data is in play |
-| D. Multi-agent workflow | Specialist agents with a planner | High — orchestration, latency, debugging | Genuinely distinct specialisations. Rarely justified in a pilot |
+| D. Multi-agent workflow | Specialist agents with a planner | High: orchestration, latency, debugging | Genuinely distinct specialisations. Rarely justified in a pilot |
 
 **Default: Option A**, extended with C when live data is required. Use B *inside* A when extra
 sources are documents rather than systems. One knowledge base with good `retrieval_instructions`
@@ -36,7 +36,7 @@ beats three tools the agent must choose between.
 
 **Avoid D in a pilot.** Multi-agent orchestration adds latency, cost, and failure modes. Customers
 rarely evaluate it honestly against one well-instructed agent. Treat it as a separately scoped
-extension, with its own comparison against this lesson's single-agent path.
+extension, with its own comparison against this module's single-agent path.
 
 **Use this rule:** index knowledge and route to systems. A policy document belongs in the knowledge
 base. Case status, inventory, and live metrics belong behind a tool called at question time. Indexing
@@ -108,8 +108,8 @@ print(resp.output_text)
 version, so you can attribute an evaluation result to one version. Record it in the decision record
 and every evaluation run, or you cannot explain last week's score changes.
 
-If you built a Foundry IQ knowledge base in module 3, attach that instead of the raw index — the
-agent then inherits query planning, multi-source merging, and permission-aware retrieval rather than
+If you built a Foundry IQ knowledge base in module 3, attach that instead of the raw index. The
+agent inherits query planning, multi-source merging, and permission-aware retrieval rather than
 querying one index directly.
 
 ### Writing routing instructions that actually route
@@ -163,15 +163,15 @@ when every source is a document, because the model does not have to guess before
 
 Implementation paths:
 
-1. **Fabric IQ as a remote knowledge source** — *Fabric Data Agent* (answers with embedded
+1. **Fabric IQ as a remote knowledge source**: *Fabric Data Agent* (answers with embedded
    resources) or *Fabric Ontology* (entity- and relationship-based answers), both preview. Fabric
    enforces its own permissions: semantic model RLS and workspace RBAC. Connect an approved
    endpoint and test the same query under an allowed and a denied identity.
-2. **Governed structured-data copilot** — use this when the live source is a semantic model or
+2. **Governed structured-data copilot**: use this when the live source is a semantic model or
    approved structured-data endpoint and the boundary is query allowlists, RLS/masking, and
    provenance. Allow only named queries and fields, reject unknown arguments, and return
    the query time and source identifier with each result.
-3. **An MCP or OpenAPI tool on the agent** — for a line-of-business system with an API. The
+3. **An MCP or OpenAPI tool on the agent**: for a line-of-business system with an API. The
    application must validate the tool name and arguments before dispatch. For writes, show
    the exact proposal to a human and bind approval to those unchanged arguments.
 
@@ -243,5 +243,5 @@ retrieval captures. These answer checks do not measure passage-level recall.
 
 ## Next module
 
-[Module 7 — Evaluate and trace](07-evaluate-and-trace.md) proves the whole thing with
-numbers, red-teams it, makes it observable, and decides whether it ships.
+[Module 7 — Evaluate and trace](07-evaluate-and-trace.md) uses evaluation and traces to decide
+whether this path ships.

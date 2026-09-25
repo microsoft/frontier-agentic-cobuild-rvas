@@ -1,8 +1,8 @@
 # Scenario contribution contract
 
-A scenario is a playbook for co-building a customer's AI use case. It breaks down architectural
-decisions and guides implementation with reusable building blocks. Lessons include observable
-checks, and source-controlled slides support customer discussions.
+A scenario is a playbook for co-building a customer's AI use case. It breaks architectural choices
+into reusable modules with observable checks. Source-controlled slides support customer
+discussions.
 
 The initial tracks cover grounding, document workflows, avatar experiences, and controlled agent
 execution. They are starting points for customer-specific work. Add new tracks when the existing
@@ -12,9 +12,13 @@ patterns do not fit.
 sample assets and code, with optional demo deployment templates. It is not a complete customer
 solution or production approval.
 
-Customers may combine parts from several tracks. Help delivery teams decompose the use case and
-map each part to relevant sessions. Identify reusable lessons and prerequisites, and make uncovered
+Customers may combine parts from several tracks. Help delivery teams split the use case and
+map each part to relevant modules. Identify reusable modules and prerequisites, and make uncovered
 work explicit.
+
+The `use-case-mapper` and `customer-activity-forge` skills read every `manifest.json` to map use
+cases to modules. **Write each build module's `summary` and `outcome` so a reader can tell what it
+builds without opening the lesson.** A new track appears in both skills once its manifest exists.
 
 ## Required files
 
@@ -57,7 +61,7 @@ scenarios/<folder-name>/
     {
       "id": "lesson-id",
       "title": "Customer decision",
-      "summary": "What the team implements in this lesson",
+      "summary": "What the team implements in this module",
       "outcome": "The result the team can check",
       "implementation_paths": ["accelerator/main.bicep"]
     }
@@ -78,51 +82,65 @@ The scenario header displays these labels:
   listing. Scenarios without an `order` sort last, alphabetically by name.
 
 Build modules may also store optional `level`, `duration_minutes`, and `stage` values for individual
-lessons. The current lesson page does not display these labels.
+modules. The current module page does not show these labels.
 
-**Include one build module per lesson, in the same order and with the same ID.** Each module declares
-an `outcome`: one short line naming what the reader should have when the module is done. The scenario
-roadmap displays it alongside the module summary.
+**Match each `build_modules` entry to its `lessons` entry, with the same ID and order.** Each module
+declares an `outcome`: one short line naming what the reader should have when the module is done.
+The scenario roadmap displays it alongside the module summary.
 
 ## Acceptance checklist
 
+**Call the customer-facing units modules.** The `lessons` manifest key, `lessons/` directory,
+`lesson.html` routes, and `lesson-` slide anchors remain stable implementation identifiers.
+Do not rename these when editing prose.
+
+Each module must help a team build the agreed use case in its tenant. State the inputs and
+the customer-owned system that changes. Explain a choice before showing the commands that
+implement it. For each alternative, name when to use it, the additional work, and the next
+applicable module. A list of products is insufficient decision guidance.
+
+Keep synthetic fixtures as optional checks of reusable code. Delivery evidence must come
+from the selected tenant integration and user channel. Record decisions in existing customer
+systems; do not require a parallel set of module-completion files.
+
 - The scenario starts from a customer outcome, not a product.
 - The playbook states its implementation scope and identifies customer-specific work. It does not
-  promise production readiness from lesson completion or a fixed engagement duration.
-- The playbook helps teams map parts of a customer use case to its lessons, including references to
-  other tracks where useful. A partial match must not imply coverage of the whole use case.
-- Every lesson names the decision, inputs, proof, and next decision.
-- **Every default path is self-contained.** Include the required commands, inputs, and checks in
-  the lesson, using the scenario's resources and data. Keep implementation code in its accelerator;
-  extract shared code only when multiple scenarios need it.
-- Link to official technical references where useful, but include every required step in the lesson.
+  promise production readiness from module completion or a fixed engagement duration.
+- The playbook helps teams map parts of a customer use case to its modules, including references to
+  other tracks when useful. A partial match must not imply coverage of the whole use case.
+- Every module names the decision, inputs, proof, and next decision.
+- **Make the selected build path actionable.** Include the required inputs, connection steps, and
+  checks against the customer's approved environment. Identify adapters the team must implement,
+  show how their contracts connect, and make missing integrations explicit blockers. Keep reusable
+  code in the accelerator; extract shared code only when multiple scenarios need it.
+- Link to official technical references where useful, but include every required step in the module.
   Do not add a separate activity catalogue or an `activity_id` prerequisite.
 - State when a non-default option needs additional engineering. Do not present an unimplemented
   alternative as a working default or send readers to another sample to fill the gap.
-- Every lesson follows the practical build-module contract: visible inputs, implementation steps,
+- Every module follows the practical build-module contract: visible inputs, implementation steps,
   expected evidence, an observable Verify step, and the next customer decision.
-- Every lesson's **Verify** section is observable against the reader's own resources: a real command,
+- Every module's **Verify** section is observable against the reader's own resources: a real command,
   a portal pane, a returned artifact, or a service response, plus what a specific failure means. Do
   not add scripts whose only job is to assert that files in this repo are well-formed, and never
   print a success banner for work that was not actually done.
-- Every lesson considers Excalidraw diagrams. Include one or more when a diagram conveys important
-  visual information the learner should understand or retain; include zero when a diagram would be
+- Every module considers Excalidraw diagrams. Include one or more when a diagram conveys important
+  visual information the learner should understand or remember; include zero when a diagram would be
   decorative or redundant.
 - Label decision branches and show both the allowed and blocked outcomes. Use actual fixture
   fields for data examples, label illustrative results, and keep examples aligned with the code.
-- Regenerate each PNG after changing its Excalidraw source. Inspect the image in a lesson at desktop
+- Regenerate each PNG after changing its Excalidraw source. Inspect the image in a module at desktop
   and mobile widths; readers can use **Zoom in** to scroll a detailed diagram.
 - Diagrams must pass `npm run validate:diagrams`. Arrows that visibly connect two shapes should
   stop outside each shape, use a small gap (2px is the house default), and avoid crossing through
   unrelated boxes or ellipses. Clean straight-line diagrams may retain unbound arrows, but arrows
   must not pierce a shape, point at nothing, overlap unrelated boxes, or leave text clipped.
 - Slides can be used with a customer without exposing internal implementation detail. Use one
-  scenario deck with lesson sections, not separate lesson decks.
+  scenario deck with module sections, not separate module decks.
 - Slides use Marp-compatible Markdown. Open the full deck through `docs/slides.html?id=<scenario-id>`
   and use the browser's **Print / save as PDF** action for a customer-deck export.
-- Each lesson section has three customer-facing slides: why the decision matters, options/trade-offs
+- Each module section has three customer-facing slides: why the decision matters, options/trade-offs
   to discuss, and the evidence the practical activity must produce. Add stable slide markers before
-  those slides so lesson pages can link directly into the deck:
+  those slides so module pages can link directly into the deck:
   `<!-- slide:id=lesson-<lesson-id>-context -->`,
   `<!-- slide:id=lesson-<lesson-id>-choices -->`, and
   `<!-- slide:id=lesson-<lesson-id>-evidence -->`.
@@ -132,7 +150,7 @@ roadmap displays it alongside the module summary.
 - No accelerator provisions an enterprise landing zone.
 - Preview and fast-moving services instruct the reader to search current Microsoft documentation
   and MCP tools before writing SDK code.
-- Data ownership, access, evaluation, and operating evidence are explicit from the first lesson.
+- Data ownership, access, evaluation, and operating evidence are explicit from the first module.
 - Synthetic sample data and expected outputs are present for every scenario; each is clearly
   replaceable by approved customer data.
 - A named owner and maturity label are present; describe material changes in the pull request.

@@ -1,7 +1,8 @@
 # Module 2 — Select the source and permission architecture
 
-This module decides whether your pilot is safe. You can fix retrieval quality later. A bad permission
-boundary is discovered by the wrong person.
+Use the source/platform choice from module 1 to connect the authoritative source for the
+customer's questions. Bring its access owner and two test users with different permissions.
+**Source access must remain intact through the final answer channel.**
 
 ![Source and permission decision](../diagrams/02-source-permission-decision.png)
 
@@ -9,19 +10,19 @@ boundary is discovered by the wrong person.
 
 1. A source decision: for each fact the assistant must know, which system is authoritative.
 2. A permission architecture: which identity is evaluated at query time, and where.
-3. A **runnable permission probe** that proves a restricted identity retrieves nothing — no content,
+3. A **runnable permission probe** that proves a restricted identity retrieves nothing: no content,
    no title, no snippet, no existence signal.
 
 ## Choose your path
 
 | Option | Sources it reaches | Permission enforcement | Build effort | Status |
 | --- | --- | --- | --- | --- |
-| **A. Foundry IQ knowledge base** *(default)* | Blob, ADLS Gen2, SharePoint, OneLake, Azure SQL, Fabric, Work IQ, MCP, web — one base, many sources | ACL sync + query-time enforcement under the caller's Entra identity; honours Purview sensitivity labels | Low: configure sources, no pipeline code | GA + preview mix |
+| **A. Foundry IQ knowledge base** *(default)* | Blob, ADLS Gen2, SharePoint, OneLake, Azure SQL, Fabric, Work IQ, MCP, web in one base | ACL sync + query-time enforcement under the caller's Entra identity; honours Purview sensitivity labels | Low: configure sources, no pipeline code | GA + preview mix |
 | B. Direct Azure AI Search index | Whatever you index yourself | You implement it: permission metadata in filterable fields + `x-ms-query-source-authorization` | High: you own chunking, embedding, refresh, security trimming | GA |
 | C. Copilot Studio + SharePoint/M365 | SharePoint, Teams, Graph-connected content | Inherited from M365; no Azure retrieval layer to secure | Lowest, but you are not building an Azure app | GA |
 | D. Fabric IQ | OneLake, lakehouses, semantic models, Power BI | Fabric RBAC / RLS on the semantic model | Medium; different skill set (data, not search) | See Fabric docs |
 | E. Work IQ | M365 collaboration signals: docs, meetings, chats | M365 permissions | Medium, as a remote knowledge source | Preview |
-| F. Web (Bing) | Public internet | None needed — public content only | Lowest | GA |
+| F. Web (Bing) | Public internet | None needed for public content | Lowest | GA |
 
 **Default: Option A.** Foundry IQ is the managed knowledge layer built on Azure AI Search agentic
 retrieval. It gives permission-aware retrieval across multiple sources without you writing an
@@ -46,11 +47,11 @@ A/B is a full rebuild. That is why A is the default: it is the cheapest option t
 
 Answer these four questions before writing code:
 
-1. **Whose identity is evaluated at query time** — the end user, or a service identity acting for
+1. **Whose identity is evaluated at query time**: the end user, or a service identity acting for
    everyone? If it is a service identity, every user gets the union of all permissions.
-2. **Where do permissions live** — source ACLs, Entra groups, Fabric RLS, or an application table?
-3. **How do permission changes propagate** — and how stale can they be before that is a breach?
-4. **What happens on a denial** — the correct answer is a normal "I don't have information on that",
+2. **Where do permissions live**: source ACLs, Entra groups, Fabric RLS, or an application table?
+3. **How do permission changes propagate**, and how stale can they be before that is a breach?
+4. **What happens on a denial**: the correct answer is a normal "I don't have information on that",
    not an error that confirms the document exists.
 
 ## Implementation
@@ -96,8 +97,8 @@ ingestion_parameters = KnowledgeSourceIngestionParameters(
 
 **Enforce at query time.** Document visibility requires *both* headers:
 
-- `Authorization` — the calling application's own RBAC role.
-- `x-ms-query-source-authorization` — the **end user's** token.
+- `Authorization`: the calling application's own RBAC role.
+- `x-ms-query-source-authorization`: the **end user's** token.
 
 ```python
 result = kb_client.retrieve(
@@ -112,7 +113,7 @@ permission filter. See the [query-time enforcement guidance](https://learn.micro
 
 **API version decides what you get.** `2026-04-01` is GA but offers minimal, extractive retrieval
 only: no query planning, no answer synthesis, no configurable reasoning effort, and GA source kinds
-only. `2026-05-01-preview` adds all of those. Choose deliberately and record it — this is the single
+only. `2026-05-01-preview` adds all of those. Choose deliberately and record it. This is the single
 most consequential version decision in the scenario.
 
 ### Option B — Direct Azure AI Search index
@@ -163,7 +164,7 @@ user keeps access for up to N hours" must be a decision.
 
 ### Option C — Copilot Studio + SharePoint / M365
 
-No Azure retrieval layer to secure — permissions are whatever SharePoint and Microsoft 365 already
+No Azure retrieval layer needs securing. Permissions are whatever SharePoint and Microsoft 365 already
 enforce, evaluated as the signed-in user.
 
 Implementation is configuration, not code: connect the SharePoint site as a knowledge source in
@@ -172,13 +173,28 @@ Copilot Studio, scope it to the approved libraries, and publish to Teams.
 The same governance work still matters. Confirm the site's permissions reflect intent (inherited
 permissions on a "public" site are a common surprise), then test with a low-privilege account.
 
-If you pick this, **stop building the Azure stack** and say why in the decision record. Choosing not
-to build is a legitimate, valuable outcome.
+For this path, build in the approved Power Platform environment:
+
+1. Create or select the customer's agent and configure end-user authentication.
+2. Add the approved SharePoint location as knowledge, limited to the agreed content.
+3. Test a supported question as an intended user, then the same restricted source as a user
+   without access. Review the cited source, not only the answer.
+4. Configure the no-answer behavior and publish first to the agreed test audience.
+
+Follow the [SharePoint knowledge setup](https://learn.microsoft.com/microsoft-copilot-studio/knowledge-add-sharepoint)
+for current prerequisites and supported content. Connecting a site does not establish that its
+existing permissions match the customer's intent.
+
+**Continue through the applicable checks, not the Azure commands.** Use module 3's source-version
+and refresh checks against the connected library; skip its index provisioning. Skip module 4's
+Azure model deployment comparison. In modules 5 and 7, test citations and refusal through this
+agent and retain actual answers. Module 6 is needed only for additional tools. Module 8 option C
+publishes to the chosen channel. The supplied Azure scripts do not implement this branch.
 
 ### Option D — Fabric IQ (analytics and live business data)
 
 Use when the question is "what are the numbers", not "what does the document say". Fabric IQ models
-business data — ontologies, semantic models, graphs, and data agents — over OneLake and Power BI.
+business data over OneLake and Power BI: ontologies, semantic models, graphs, and data agents.
 
 Two ways to reach it from this scenario:
 
@@ -194,7 +210,7 @@ values into a search index. You will serve stale numbers with a confident citati
 
 ### Option E — Work IQ (Microsoft 365 collaboration context)
 
-Work IQ is the contextual layer over M365 — documents, meetings, chats, workflows. Add it as a
+Work IQ is the contextual layer over M365: documents, meetings, chats, workflows. Add it as a
 **remote Work IQ knowledge source** (preview) when the pilot genuinely needs "how this organization
 works" rather than "what the policy says".
 
@@ -212,6 +228,10 @@ Public content needs no permission design, but it still needs an authority decis
 may be cited to this customer's users.
 
 ## Verify
+
+For Copilot Studio or a remote source, perform the allowed/denied checks through the selected
+platform with real test-user identities. Keep its response and source evidence in the customer's
+test record. The probe below is for the Azure knowledge-base implementation only.
 
 This module prevents a retrieval path that looks perfect in an administrator demo but leaks to a real
 user with fewer permissions. Prove the boundary with a genuinely lower-privileged identity, not your
@@ -253,7 +273,7 @@ permissions, indexed permission metadata, and user-token propagation.
 
 **3. A restricted document does not even reveal that it exists.** The plan includes a case that
 queries the supervisor playbook by title. Confirm the restricted identity gets no title, no snippet,
-and no count. An access-denied response has to be indistinguishable from "no such document" — a
+and no count. An access-denied response has to be indistinguishable from "no such document"; a
 title or a hit count is itself a leak.
 
 ## Next module

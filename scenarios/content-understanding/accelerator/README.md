@@ -2,8 +2,8 @@
 
 Build a document workflow that extracts typed results a person can review against the source. The
 accelerator includes safe local fixtures and an optional Bicep foundation for a clean Azure demo
-subscription. It supports a pilot. It does not choose a customer's document process or approve a
-production deployment.
+subscription. It can support a pilot, but it does not choose a customer's document process or
+approve production deployment.
 
 ## What the completed workflow must prove
 
@@ -16,13 +16,13 @@ production deployment.
 ## Before you start
 
 Install **Azure CLI, the standalone Bicep CLI, Python 3, Bash, and `sha1sum`** for deployment.
-The lessons also use `jq` and `curl`. Sign in with an Azure user account in the intended
+The modules also use `jq` and `curl`. Sign in with an Azure user account in the intended
 subscription. You need permission to create resources and role assignments, plus model quota
 in the chosen region. The deployment script does not support service-principal sign-in.
 
 **This package supplies infrastructure, an invoice normalizer, and a result-comparison gate.**
-The lessons show how to use them with actual extraction results. Customer intake controls,
-the review UI, and the posting/deployment adapters still need integration.
+The modules show how to use them with actual extraction results. Customer intake controls,
+the review UI, and the posting and deployment adapters still need integration.
 The default Bicep deployment does not configure Content Understanding model
 mappings. Check the selected analyzer's supported models and
 [configure its deployment mappings](https://learn.microsoft.com/azure/ai-services/content-understanding/concepts/models-deployments)
@@ -49,7 +49,7 @@ path for customer documents.
 ### Existing customer environment
 
 Record the approved resource IDs, source boundary, retention rules, and access model. Do not
-redeploy this package into customer resources. Apply the lessons and checks to the approved
+redeploy this package into customer resources. Apply the modules and checks to the approved
 environment instead.
 
 ## The build path
@@ -64,7 +64,7 @@ environment instead.
 | 6. Evaluate and trace | Quality and safety gate with traces | Evaluation result and trace for a failed case |
 | 7. Deploy | Authenticated endpoint with rollback path | Endpoint rejects an unauthenticated caller |
 
-Complete the modules in order. A successful extraction call is not proof that the result is correct.
+Complete the modules in order. A successful extraction call does not prove the result is correct.
 
 ## Decisions to make with the customer
 
@@ -92,7 +92,7 @@ set -a; source scenarios/content-understanding/accelerator/.env; set +a
 ```
 
 Do not commit it or print bearer tokens in logs.
-Each lesson's **Verify** section gives the command and signal for that module.
+Each module's **Verify** section gives the command and signal for that module.
 
 ## Scope and boundaries
 
@@ -113,7 +113,7 @@ Run their offline behavioral checks without Azure:
 python3 -m unittest discover -s scenarios/content-understanding/accelerator -p test_normalize.py
 ```
 
-These exercise normalization and comparison logic; they do not establish live extraction
-accuracy, reviewer authentication, or a customer-system handoff.
+These exercise normalization and comparison logic. They do not prove live extraction accuracy,
+reviewer authentication, or a customer-system handoff.
 
 See [solution.md](solution.md) for the facilitator reference and integration boundaries.

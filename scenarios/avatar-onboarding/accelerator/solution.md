@@ -1,22 +1,23 @@
 # Solution — Avatar Scenario reference implementation
 
-This reference collects the scenario's infrastructure, local pack checks, and integration snippets.
-It is not an end-to-end application. You still need a rendering/channel adapter, authenticated
-approvals, expiry and withdrawal controls, and an evaluation harness. Run commands from the repository root.
+This reference collects the scenario infrastructure, local pack checks, and integration snippets.
+It is not an end-to-end application. Module 1 selects interactive assistance or repeatable content
+production. Build the corresponding client or workflow, with authenticated release controls.
+Run commands from the repository root.
 
 > Fictional data only. The accelerator ships synthetic HR content. Never place real customer
 > content, or a real person's voice or likeness, in this repository.
 
-## Reference stack (the default path)
+## Reference stack (batch rendering example)
 
 | Concern | Reference choice | Module |
 | --- | --- | --- |
-| Experience capability | **Speech text-to-speech avatar — batch synthesis**, standard avatar + standard neural voice (no limited-access gate) | 1 |
+| Rendering example | **Speech text-to-speech avatar — batch synthesis**, for the content-production branch | 5 |
 | Foundation | Azure AI Foundry (AIServices, `kind: AIServices`, custom subdomain) + project, chat + embedding deployments, AI Search, Storage, Log Analytics + App Insights | 2 |
 | Content pipeline | Versioned claims in `sample-data/claims.json`, approved-content blob container, owner/version/expiry metadata | 3 |
 | Grounded assistant | Model + approved claim set; optional Foundry agent; refuses with `NO_APPROVED_CLAIM` | 4 |
 | Experience generation | Batch avatar synthesis from an approved script revision + disclosure, captions, transcript, non-avatar fallback | 5 |
-| Approval gate | Versioned approval record enforced by `content_pack.py`; withdrawal on source change | 6 |
+| Approval gate | Local pack rejection illustrated by `content_pack.py`; tenant approval and withdrawal require the channel adapter | 6 |
 | Prove & operate | Foundry evaluations + AI Red Teaming Agent, GenAI tracing, aggregate-only telemetry, release scorecard | 7 |
 
 ## 0. Prerequisites
@@ -27,11 +28,12 @@ az account set --subscription "<subscription-id>"
 python3 -m pip install -r requirements.txt
 ```
 
-## 1. Select the experience capability (Module 1)
+## 1. Choose the application goal (Module 1)
 
-The default, **standard batch avatar**, avoids the Azure limited-access registration that
-*custom* avatar / *custom* neural voice requires. It still requires synthetic-media disclosure. See
-`lessons/01-experience-selection.md` for the option comparison and responsible-AI gates.
+Choose an **interactive assistant** or a **content-production application** before choosing
+the media format. Neither is the default. This reference illustrates batch rendering as one
+step in content production. Follow [module 1](../lessons/01-experience-selection.md) for the
+application acceptance checks and responsible-AI gates.
 
 ## 2. Provision the foundation (Module 2)
 
@@ -82,15 +84,17 @@ affected publications. The local validator does not implement those controls.
 ## 4. Build the grounded assistant (Module 4)
 
 Use [module 4's drafting function](../lessons/04-grounded-assistant.md) with the approved claim set
-and existing chat deployment. An agent is optional. On-claim asks return the **exact approved wording** and the
-`claim_id`; off-claim asks return `NO_APPROVED_CLAIM` plus a human-help path. The assistant provides
-interactive help; it must **not** silently add claims to a published script.
+and existing chat deployment. An agent is optional. On-claim asks return the **exact approved
+wording** and the `claim_id`; off-claim asks return `NO_APPROVED_CLAIM` plus a human-help path.
+The assistant provides interactive help; it must **not** silently add claims to a published script.
 
 ## 5. Generate the accessible experience (Module 5)
 
-Render deterministically first (no service calls), then submit the live batch job.
+Validate the pack locally first (no rendering or service calls), then submit the live batch job.
+These are integration checks. Connect the adapter to the deployed workflow and persist job state
+as described in module 5.
 
-Watch the batch synthesis job to completion, then download and watch the result. A successful job
+Wait for the batch synthesis job to finish, then download and review the result. A successful job
 can still produce the wrong script, omit disclosure, or use audio that does not match approved
 claims.
 
@@ -110,15 +114,19 @@ Body carries `inputKind` (`PlainText`|`SSML`), `inputs[].content`, and
 
 ## 6. Gate publication behind human approval (Module 6)
 
-Four named approvals bind to the exact `script_id`+`script_version`: `SME`, `legal-compliance`,
-`brand-communications`, `content-owner` (the renderer's `REQUIRED_APPROVER_ROLES`). Withdrawal:
+The fictional pack binds four approval roles to `script_id`+`script_version`: `SME`,
+`legal-compliance`, `brand-communications`, `content-owner` (`REQUIRED_APPROVER_ROLES`).
+The following change demonstrates local rejection only:
 
 ```python
 import json, pathlib
 p = pathlib.Path("scenarios/avatar-onboarding/accelerator/sample-data/approvals.json")
 r = json.loads(p.read_text()); r["approval_status"] = "withdrawn"
-p.write_text(json.dumps(r, indent=2))   # renderer now rejects the pack — publication paused
+p.write_text(json.dumps(r, indent=2))   # Local validation now rejects the pack.
 ```
+
+This does not withdraw served media. Module 6 requires authenticated approval and withdrawal
+through the customer's actual publishing system.
 
 ## 7. Evaluate, red-team, trace, operate (Module 7)
 
@@ -128,12 +136,12 @@ export OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true   # BEFORE import
 python3 -m unittest discover -s scenarios/avatar-onboarding/accelerator -p test_content_pack.py
 ```
 
-The command above checks the local pack only. Follow [module 7](../lessons/07-prove-and-operate.md)
+This command checks the local pack only. Follow [module 7](../lessons/07-prove-and-operate.md)
 to capture actual model responses and inspect the rendered media.
 Evaluate grounding, refusal, disclosure, and accessibility on a golden set. Run the AI Red Teaming
 Agent and the synthetic-media probes (impersonation, "skip the disclosure", unapproved claims).
-Review a trace for a failed case. Ship only when every gate is green. Measure
-the pilot with **aggregate, identifier-free** telemetry only.
+Review a trace for a failed case. Ship only when every gate is green. Measure the pilot with
+**aggregate, identifier-free** telemetry only.
 
 ## End-to-end verification
 
@@ -143,8 +151,12 @@ bicep build scenarios/avatar-onboarding/accelerator/main.bicep --outfile scenari
 bicep lint  scenarios/avatar-onboarding/accelerator/main.bicep
 ```
 
-Then watch the published artifact as a new joiner would. The disclosure appears before the persona
+Then review the published artifact as a new joiner would. The disclosure appears before the persona
 speaks, every spoken claim traces to an approved source, and the non-avatar alternative is reachable.
+
+**One generated video is only an integration check.** Prove a complete source-update cycle through
+the content-production application, including failed-job recovery and withdrawal. For interactive
+assistance, use module 7's checks through the authenticated client.
 
 ## Responsible-AI gates before production
 

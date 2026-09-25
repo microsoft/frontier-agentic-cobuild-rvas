@@ -1,163 +1,126 @@
-# Module 1 — Select the avatar/experience capability
+# Module 1 - Choose the application your users need
 
-Make this decision first. The capability you choose sets the API surface, regions, cost model,
-latency, accessibility obligations, and the **responsible-AI gating** that can add weeks of
-registration. A poor choice creates rework in modules 2–7.
+Start with one communication or support task in your organization. Decide what users should
+be able to do afterward and where they will use the experience. A presenter may help explain a
+process. A searchable page may solve the same problem with less work.
 
-Speech features change quickly, and several are preview or limited-access. Check current Microsoft
-Learn guidance before you commit.
-
-![Experience capability decision](../diagrams/01-experience-capability-choice.png)
+**Choose the application goal before the media format.** Build either an interactive assistant
+or a repeatable content-production application. Neither is the default. A generated video is an
+output; producing one file does not meet this track's application delivery goal.
 
 ## What you build
 
-An avatar experience that uses a supported API, meets the responsible-AI gates, and has an
-accessible fallback.
+An agreed delivery scope for an application in **your tenant**. Identify its audience,
+delivery channel, approved content owner, and acceptance checks. Keep the decision
+in your existing delivery backlog or design record.
+
+Bring one representative message, the intended user task, and the owners of the target channel
+and Azure environment. No API calls or resource deployment are needed in this module.
 
 ## Choose your path
 
-Five Microsoft capabilities can deliver an avatar-led or spoken onboarding moment. They serve
-different needs.
+### First choose the application goal
 
-| Option | What it is | Best when | Real-time? | Custom likeness/voice gating | Status |
-| --- | --- | --- | --- | --- | --- |
-| **A. Speech TTS avatar — batch synthesis** *(default)* | Async REST job renders a talking-avatar **video file** from text/SSML | Pre-produced, reviewable onboarding videos you approve once and replay | No (async job) | Standard avatar+voice = none; custom = limited access | GA (`api-version=2024-08-01`) |
-| B. Speech TTS avatar — real-time synthesis | Speech SDK streams avatar video over **WebRTC** live | A live, interactive kiosk/agent that shows a face | Yes | Same as A | GA |
-| C. Voice Live API | Fully-managed **speech-to-speech** voice agent; can also emit **avatar visuals** | A conversational onboarding assistant you speak to | Yes | Same as A when avatar is on | Check current documentation |
-| D. Video translation | Localises an **existing** onboarding video into other languages, preserving the speaker's voice | You already have approved video and need many locales | No (batch) | Voice replication of a real speaker — treat as consent-bearing | Check current documentation |
-| E. Plain audio (TTS / Voice Live audio-only) | Natural-voice narration, **no face** | Accessibility-first, lowest cost/risk, no likeness | Either | Standard voice = none | GA |
+| Application | Choose it when | What you deliver |
+| --- | --- | --- |
+| **Interactive assistant** | Users need to ask questions or get help completing a task. | An authenticated application connected to approved knowledge, with bounded answers and a human-help route. Add an avatar only when a visible presenter helps the user. |
+| **Content-production application** | Content owners need to generate and maintain communication repeatedly, such as updating explanations when a policy changes. | A deployed workflow that reads approved source revisions, generates media, and routes it for review and controlled publication. It tracks failures and withdraws outdated output. |
 
-**Default: Option A (batch avatar synthesis).** Onboarding content is authored, reviewed, and
-replayed. It is not a live conversation. Batch synthesis produces a reviewable video that fits the
-module-6 human-approval gate. It uses a **standard** avatar and voice, so there is *no* talent
-likeness to license or limited-access form to file. Compare its cost with audio or text before choosing it.
-Verified overview:
-<https://learn.microsoft.com/azure/ai-services/speech-service/text-to-speech-avatar/what-is-text-to-speech-avatar>
+If the need is only to make one video or publish an existing page, use the customer's content
+tools. Do not add AI just to fit this track.
 
-**Migration cost.**
-- **A → B** (batch → real-time) is moderate. Keep the avatars/voices, swap the REST poll for a
-  Speech-SDK WebRTC client, and add TURN/firewall and per-session-latency work.
-- **A → C** (batch → Voice Live) is a larger rebuild. You move from rendering a video to running a
-  live speech-to-speech agent. Scope the client and session controls as additional engineering.
-- **A → E** (drop the avatar) is trivial and always available as your accessibility fallback.
-- **Anything → custom avatar or custom/personal voice** is the expensive jump. It triggers
-  **limited-access registration** and talent consent (see Implementation → RAI). Budget weeks.
-  Do not promise a customer's CEO's face in a demo.
+### Then choose how the application presents content
+
+| Experience | Choose it when | What you must build and operate |
+| --- | --- | --- |
+| Batch avatar video | The content-production application needs reusable videos from approved wording. | Connect source updates to generation jobs and review. Publish approved revisions through the customer's channel and handle replacement or withdrawal. Module 5 covers the rendering step. |
+| Real-time avatar | People need a visible presenter that responds during an interaction, such as a support kiosk. | Build the browser experience and connect it to an answer service. Own connection failures, interruption, captions, and the user's access boundary. Module 5 identifies the integration steps; the repository does not supply this client. |
+| Voice Live conversation | Users primarily want to speak and ask follow-up questions; a face is optional. | Connect approved knowledge to the conversation and build the audio client. Test turn-taking, unsupported questions, and handoff to a person. Follow modules 4 and 5 with additional client implementation. |
+| Video translation | The content-production application maintains language versions of approved source videos. | Track each source revision and its localized outputs. Confirm voice/video rights, review translated meaning, and publish each locale as a separately approved revision. Use module 5's translation branch. |
+| Audio or text without an avatar | The application still meets its goal without a visible presenter. | Keep the assistant's answer path or the content-production workflow, using audio or text as its output. Skip avatar provisioning. A static page alone is outside this application build. |
+
+These are experience choices, not interchangeable API settings. Moving from video to
+conversation changes how the application generates and checks answers while users interact.
+Microsoft's [avatar overview](https://learn.microsoft.com/azure/ai-services/speech-service/text-to-speech-avatar/what-is-text-to-speech-avatar)
+explains the rendering capabilities; [Voice Live](https://learn.microsoft.com/azure/ai-services/speech-service/voice-live)
+describes the conversation path.
+
+![Rendering choices after selecting the application goal](../diagrams/01-experience-capability-choice.png)
 
 ## Implementation
 
-Each option below lists the required configuration and verified facts.
+### Define the first release
 
-### Option A — Speech TTS avatar, batch synthesis (default)
+Write a concrete acceptance statement with the channel owner. Use the example for your goal.
 
-**API (verified).** Batch synthesis is a REST job on the Speech/AIServices resource host:
+**Interactive assistant:**
 
-```
-PUT  https://{resource}.cognitiveservices.azure.com/avatar/batchsyntheses/{SynthesisId}?api-version=2024-08-01
-GET  https://{resource}.cognitiveservices.azure.com/avatar/batchsyntheses/{SynthesisId}?api-version=2024-08-01
-```
+> An authorized user can ask how to submit a service request through our support portal and
+> receive an answer grounded in current, permitted guidance. An unsupported question reaches
+> the support team. The text path works when the avatar is unavailable.
 
-Submit text or SSML, poll `status` (`NotStarted → Running → Succeeded/Failed`), then download
-`outputs.result` (an `.mp4`). Limits are payload ≤ 500 KB, up to 200 concurrent jobs per resource,
-and output ≤ 20 minutes. Standard resolution defaults to 1920×1080 at 25 FPS.
-<https://learn.microsoft.com/azure/ai-services/speech-service/text-to-speech-avatar/batch-synthesis-avatar>
+**Content-production application:**
 
-**Identity (verified).** The Speech data plane accepts a Microsoft Entra token **only if the
-resource has a custom subdomain**. Module 2's Bicep sets `customSubDomainName`, so avatar synthesis
-is keyless. Assign **Cognitive Services Speech User**
-(`f2dc8367-1007-4938-bd23-fe263f013447`); the generic *Cognitive Services Contributor* / *Owner*
-roles grant **no** Speech data access.
-<https://learn.microsoft.com/azure/ai-services/speech-service/role-based-access-control>
+> When a content owner approves a revised process explanation, our deployed workflow generates
+> a private preview for the selected language and requests publication approval. It publishes
+> only the approved revision. The owner can inspect a failed job and withdraw outdated output.
 
-### Option B — Speech TTS avatar, real-time synthesis
+Specify the first audience and language. Then agree what remains outside this release. For
+content production, choose the trigger: a source-change event, a scheduled check, or an
+authorized user request. A manually submitted rendering request is an integration check, not
+completion.
 
-Real-time streams the avatar video to the browser over **WebRTC** via the Speech SDK. It needs the
-**Standard S0** tier and outbound access to the TURN relay
-`relay.communication.microsoft.com` (UDP 3478 / TCP 443, `20.202.0.0/16`); fetch ICE server details
-from the Speech REST API. You set `AvatarConfig("lisa", "casual-sitting")` and a voice such as
-`en-US-Ava:DragonHDLatestNeural`.
-<https://learn.microsoft.com/azure/ai-services/speech-service/text-to-speech-avatar/real-time-synthesis-avatar>
+### Check feasibility before committing
 
-Choose it only for genuinely interactive onboarding. Otherwise, Option A is cheaper and reviewable.
+For the selected capability, confirm region availability and your tenant's access through the
+[Speech regions guidance](https://learn.microsoft.com/azure/ai-services/speech-service/regions?tabs=ttsavatar).
+Check expected usage against current pricing with the environment owner. For a live
+experience, include the target device and network restrictions.
+Do not create resources just to complete this decision.
 
-### Option C — Voice Live API
+Start with a standard avatar and voice unless the use case requires a custom identity.
+For a real person's voice or likeness, confirm authorization and the applicable
+[limited-access requirements](https://learn.microsoft.com/azure/foundry/responsible-ai/speech-service/text-to-speech/limited-access)
+before committing to delivery. The requirements depend on the selected capability; do not
+assume approval for one voice or avatar covers another.
 
-Voice Live is a **fully-managed speech-to-speech** interface: one WebSocket streams mic audio in and
-returns audio, **avatar visuals**, and action triggers — no manual STT→LLM→TTS stitching. It covers
-140+ STT locales and 600+ voices across 150+ locales, and **agent mode authenticates with Microsoft
-Entra ID** (not a Speech key).
-<https://learn.microsoft.com/azure/ai-services/speech-service/voice-live>
+Agree where users see the synthetic-media disclosure and how they reach equivalent text.
+Use the [disclosure guidance](https://learn.microsoft.com/azure/foundry/responsible-ai/speech-service/text-to-speech/concepts-disclosure-guidelines)
+with the customer's reviewers. Keep customer content and consent evidence in approved tenant
+systems, outside this public repository.
 
-This is an optional extension; the batch-avatar default does not need a live client. Record
-`"selected_capability": "voice-live-realtime-avatar"` (or
-`voice-live-audio`) and note that a live agent needs module 4's grounded agent first.
+### Map the chosen path to the remaining modules
 
-### Option D — Video translation
+**For content production**, module 2 connects the workflow runtime and required services.
+Module 3 connects source changes to approved wording. Module 4 is optional authoring assistance.
+Module 5 connects generation jobs and private previews to that workflow. Module 6 enforces
+publication approval and withdrawal. Module 7 proves a complete source-update cycle through
+the deployed application and actual user channel.
 
-Video translation localises an **existing** approved video into more languages while replicating the
-original speaker's voice. Use it only when you already have signed-off video and a multilingual
-cohort. Because it replicates a real person's voice, treat the source as consent-bearing.
-<https://learn.microsoft.com/azure/ai-services/speech-service/video-translation-overview>
+For a live conversation, use module 4 to implement the answer boundary and module 5 to connect
+the client. Approve the application's content policy and behavior in module 6; individual
+spoken answers cannot wait for per-video approval.
 
-Treat the original speaker's consent as a gate even though no *custom* model is trained.
+For translation, retain the approved source video and transcript in module 3, skip drafting
+unless the wording changes, and use the translation branch in module 5. For a text-only
+assistant, skip Speech setup and rendering; keep the answer boundary and application checks.
 
-### Option E — Plain audio (accessibility-first)
-
-Standard-voice narration with no face. Choose it when a face adds risk without value.
-Every option still needs an **accessible text fallback** (module 5); audio alone does not serve
-users who cannot hear it.
-
-### The responsible-AI gate (applies to A–D, verified)
-
-Missing this can turn a two-day build into a two-month program.
-
-- **Standard avatar + standard voice: no registration.** Disclosure to users is still required.
-- **Custom avatar (video/photo) or custom/personal voice: Limited Access.** Available only by
-  registration to customers managed by Microsoft, through the intake form
-  <https://aka.ms/customneural>. A **custom video avatar needs ≥ 10 minutes of the actor's video**
-  and their **explicit written consent**; you must share the *Disclosure for voice and avatar talent*
-  with them in advance, may only use approved use cases, must **disclose the synthetic nature** to
-  end users, and must offer a feedback channel.
-  <https://learn.microsoft.com/azure/foundry/responsible-ai/speech-service/text-to-speech/limited-access>
-- **Disclosure design** (how and when to tell users it's synthetic):
-  <https://learn.microsoft.com/azure/foundry/responsible-ai/speech-service/text-to-speech/concepts-disclosure-guidelines>
-
-In Verify, enforce this consistency rule: if the record says you use a custom avatar or
-custom/personal voice, it must also record `limited_access_registration_required`,
-`talent_consent_required`, and the form URL. Otherwise, legal review discovers the missing gate
-after the build.
+Assign the client or publishing integration to an engineer now. A service choice does not
+implement either path.
 
 ## Verify
 
-You have not provisioned anything. Verify the external facts before you choose a capability.
+The sponsor and implementation owner can name the application goal and its first user task.
+For content production, they can identify the trigger and the workflow owner. For an assistant,
+they can identify the question boundary and the engineer responsible for the client.
+The environment owner has confirmed that the selected capability works in the approved region.
+Required consent or service access is either in place or an explicit blocker.
 
-**1. The region you named actually offers the capability you chose.** Avatar and Voice Live are
-region-gated. Open the Speech regions table and find your region in the column for your capability
-(batch avatar, real-time avatar, or Voice Live):
-
-<https://learn.microsoft.com/azure/ai-services/speech-service/regions?tabs=ttsavatar>
-
-Your region must have a check in that column. Otherwise, avatar pricing will not display there and
-module 2 cannot provision the feature. Change `region` in the record now.
-At the time of writing, batch and real-time avatar are offered in `westus2`, `eastus`, `eastus2`,
-`southcentralus`, `southeastasia`, `centralindia`, `westeurope`, `swedencentral`, `northeurope`,
-`italynorth`, and `francecentral` (limited capacity). Re-read the table; the list changes.
-
-**2. The responsible-AI gate is complete.** If you use a custom avatar or custom/personal voice,
-complete the limited-access registration and obtain talent consent through
-`https://aka.ms/customneural`. A custom avatar or custom/personal voice without the
-limited-access path fails legal review after the build. Standard prebuilt avatar and voice need no
-registration.
-<https://learn.microsoft.com/azure/foundry/responsible-ai/speech-service/text-to-speech/limited-access>
-
-**3. A disclosure statement is present even for a standard avatar.** Users must be told the presenter
-is synthetic whether or not a custom likeness is used:
-
-An empty or missing disclosure lets an undisclosed synthetic persona reach employees, which the
-disclosure guidance forbids:
-<https://learn.microsoft.com/azure/foundry/responsible-ai/speech-service/text-to-speech/concepts-disclosure-guidelines>
+Walk through the acceptance statement with the content owner. They must be able to explain
+who approves wording, who releases the experience, and how an outdated version is withdrawn.
+An unresolved channel or owner means the scope is not ready for provisioning.
 
 ## Next module
 
-[Module 2 — Provision the Foundry + Speech foundation](02-foundation.md) deploys the keyless
-resources this decision implies.
+[Module 2 - Connect the required foundation](02-foundation.md). Reuse approved tenant resources
+first and add only what the selected experience needs.

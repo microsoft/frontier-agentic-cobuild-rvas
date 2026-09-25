@@ -25,7 +25,7 @@
       "type": "text",
       "x": 20,
       "y": 20,
-      "text": "Check the experience before generating it",
+      "text": "Choose rendering for your application",
       "version": 2,
       "versionNonce": 2102762292,
       "index": "a0",
@@ -42,7 +42,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Check the experience before generating it",
+      "originalText": "Choose rendering for your application",
       "autoResize": true
     },
     {
@@ -63,7 +63,7 @@
       "type": "text",
       "x": 20,
       "y": 110,
-      "text": "New, recorded\npresentation",
+      "text": "Produce media\nrepeatedly",
       "version": 2,
       "versionNonce": 1623974412,
       "index": "a1",
@@ -80,7 +80,7 @@
       "locked": false,
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "New, recorded\npresentation",
+      "originalText": "Produce media\nrepeatedly",
       "autoResize": true
     },
     {
@@ -219,7 +219,7 @@
       "type": "text",
       "x": 40,
       "y": 210,
-      "text": "Batch avatar\nDefault for this\nscenario",
+      "text": "Batch avatar\nWorkflow jobs\n+ review",
       "containerId": "batch",
       "version": 2,
       "versionNonce": 1844170508,
@@ -236,7 +236,7 @@
       "link": null,
       "locked": false,
       "verticalAlign": "top",
-      "originalText": "Batch avatar\nDefault for this\nscenario",
+      "originalText": "Batch avatar\nWorkflow jobs\n+ review",
       "autoResize": true
     },
     {

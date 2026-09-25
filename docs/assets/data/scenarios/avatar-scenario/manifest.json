@@ -1,70 +1,71 @@
 {
   "id": "avatar-scenario",
   "name": "Avatar Scenario",
-  "tagline": "Build an accessible avatar experience that people approve before it goes live.",
+  "tagline": "Build an interactive assistant or a repeatable content-production application.",
   "order": 3,
-  "customer_outcome": "People get an accessible avatar-led experience, while owners can trace every published claim to its source and the person who approved it.",
+  "customer_outcome": "Users get grounded help, or content owners run a repeatable media workflow, with accessible output and controlled release in their tenant.",
   "maturity": "initial",
   "level": "guided",
   "duration_minutes": 420,
   "stage": "customer-build",
   "owner": "RVAS field team",
   "decision_prompts": [
-    "Which Azure/Microsoft experience capability (Speech avatar batch, real-time avatar, Voice Live, video translation, or plain audio) fits the pilot's consent, accessibility, latency, language, and cost requirements?",
-    "Which communication, learning, or support moment, audience, locale, and channel should the pilot serve first?",
+    "Are we building an interactive assistant or a repeatable content-production application, and what proves that application works?",
+    "Which communication, learning, or support moment should the pilot serve first, and for which audience, locale, and channel?",
+    "Which media format serves that application goal, and does an avatar add value over audio or text?",
     "Which approved sources and named owners may support the script, and when do they expire?",
     "Who must approve factual accuracy, legal/compliance, brand, and accessibility before anything is published?",
-    "How will the experience disclose synthetic/AI assistance, offer human help, and avoid deceptive representation?",
+    "How will the experience disclose synthetic/AI assistance and offer human help without deceptive representation?",
     "Which evaluation, red-team, and operational measures decide whether to iterate, scale, pause, or withdraw?"
   ],
   "lessons": [
     {
       "id": "experience-selection",
-      "title": "Module 1 — Select the avatar/experience capability",
+      "title": "Choose the application your users need",
       "path": "lessons/01-experience-selection.md"
     },
     {
       "id": "foundation",
-      "title": "Module 2 — Provision the Foundry + Speech foundation",
+      "title": "Connect the required foundation",
       "path": "lessons/02-foundation.md"
     },
     {
       "id": "content-pipeline",
-      "title": "Module 3 — Build the governed content pipeline",
+      "title": "Connect content and approve wording",
       "path": "lessons/03-content-pipeline.md"
     },
     {
       "id": "grounded-assistant",
-      "title": "Module 4 — Build the grounded assistant behind the experience",
+      "title": "Add grounded authoring or live answers when needed",
       "path": "lessons/04-grounded-assistant.md"
     },
     {
       "id": "experience-generation",
-      "title": "Module 5 — Generate the accessible avatar experience",
+      "title": "Connect generation to the application",
       "path": "lessons/05-experience-generation.md"
     },
     {
       "id": "approval-gating",
-      "title": "Module 6 — Gate publication behind human approval",
+      "title": "Approve publication and prove withdrawal",
       "path": "lessons/06-approval-gating.md"
     },
     {
       "id": "prove-and-operate",
-      "title": "Module 7 — Evaluate, red-team, trace, and operate",
+      "title": "Prove and operate the delivered experience",
       "path": "lessons/07-prove-and-operate.md"
     }
   ],
   "build_modules": [
     {
       "id": "experience-selection",
-      "title": "Verify and select the Azure experience capability",
-      "summary": "Before writing code, confirm which Speech or Voice capability fits the experience. Record its API, region, identity, cost, accessibility limits, consent rules, and release gates.",
-      "outcome": "Dated, evidence-backed capability decision record covering service, API, region, identity, pricing, accessibility, disclosure, and limited-access gating"
+      "title": "Choose the application your users need",
+      "summary": "Choose interactive assistance or repeatable content production before selecting a media format. Agree application acceptance checks and prove feasibility.",
+      "outcome": "An agreed application goal, with a user task or workflow trigger and delivery owners"
     },
     {
       "id": "foundation",
-      "title": "Provision the shared Foundry + Speech foundation",
-      "summary": "Deploy the keyless Foundry, model, Azure AI Search, Speech data plane, and observability baseline the avatar experience uses, with managed-identity RBAC and no secrets.",
+      "title": "Connect the required foundation",
+      "summary": "Reuse approved tenant resources and verify runtime access. Add models or indexed retrieval only when the chosen experience needs them.",
       "implementation_paths": [
         "accelerator/main.bicep",
         "accelerator/scripts/deploy.sh"
@@ -73,45 +74,45 @@
     },
     {
       "id": "content-pipeline",
-      "title": "Build the governed content pipeline",
-      "summary": "Connect approved content and keep its owner, version, expiry date, and access rules. Use that record to control what the experience may say.",
+      "title": "Connect content and approve wording",
+      "summary": "Connect authoritative content and keep its version and expiry. For content production, detect source changes and approve replacement wording before rendering.",
       "implementation_paths": [
         "accelerator/sample-data"
       ],
-      "outcome": "Versioned claim set with authoritative sources, owners, and expiry"
+      "outcome": "Approved wording bound to authoritative source revisions"
     },
     {
       "id": "grounded-assistant",
-      "title": "Build the grounded assistant behind the experience",
-      "summary": "Build a model or Foundry agent that drafts from approved content, cites its sources, refuses unsupported claims, and hands uncertain cases to a person.",
+      "title": "Add grounded authoring or live answers when needed",
+      "summary": "Skip generation when wording is already approved. Otherwise connect the approved sources and prove citations, refusal, and support routing.",
       "outcome": "Approved-claim answers with citations and a refusal path"
     },
     {
       "id": "experience-generation",
-      "title": "Generate the accessible avatar experience",
-      "summary": "Generate the experience from an approved script revision. Include a synthetic-media notice, captions or a transcript, and a non-avatar fallback.",
+      "title": "Connect generation to the application",
+      "summary": "Connect generation jobs to the content workflow or live rendering to the assistant client. Include accessible alternatives and recover failed jobs without duplicate output.",
       "implementation_paths": [
         "accelerator/content_pack.py"
       ],
-      "outcome": "Accessible experience generated from an approved revision, with disclosure and fallback"
+      "outcome": "A working generation path in the application, with accessible output"
     },
     {
       "id": "approval-gating",
-      "title": "Gate publication behind human approval",
-      "summary": "Version output, collect factual, legal, brand, and accessibility approvals, and implement pause or withdrawal when a source changes.",
+      "title": "Approve publication and prove withdrawal",
+      "summary": "Use the customer's approval system to authorize the exact media revision. Prove publication and withdrawal in the actual user channel.",
       "implementation_paths": [
         "accelerator/sample-data/approvals.json"
       ],
-      "outcome": "Approved publication and withdrawal record with a full trace"
+      "outcome": "Authorized publication and tested withdrawal from the serving channel"
     },
     {
       "id": "prove-and-operate",
       "title": "Evaluate, red-team, trace, and operate",
-      "summary": "Test whether the experience stays grounded, discloses synthetic media, remains accessible, and hands off correctly. Trace failures before deciding whether to release the pilot.",
+      "summary": "Prove the assistant through its authenticated client or a complete source-update cycle through the deployed content workflow. Test failure recovery and withdrawal before release.",
       "implementation_paths": [
         "accelerator/sample-data/feedback-fixture.json"
       ],
-      "outcome": "Pilot scorecard, red-team result, trace review, and release decision"
+      "outcome": "Application acceptance evidence with an operating owner; a generated video alone is insufficient"
     }
   ],
   "slides": "slides.md",

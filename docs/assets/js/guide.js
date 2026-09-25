@@ -2,7 +2,7 @@
   'use strict';
 
   const GUIDES = {
-    accelerator: { title: 'Accelerator guide', path: 'accelerator_path', summary: 'Deployable starter assets and reusable scripts.' },
+    accelerator: { title: 'Reference code guide', path: 'accelerator_path', summary: 'Reusable code and optional checks to support your tenant implementation.' },
   };
 
   async function init() {

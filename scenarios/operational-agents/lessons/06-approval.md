@@ -23,6 +23,26 @@ The task ID and proposal digest connect these records across a restart.
 
 ## Implementation
 
+### Connect the tenant approval boundary
+
+Prefer the customer's existing approval system when it can bind a decision to
+an immutable proposal. Otherwise add an authenticated approval endpoint to the
+application. Show the reviewer the target record, expected version, and exact
+proposed change.
+
+Store the decision with the authenticated reviewer identity, proposal digest,
+and expiry. At dispatch, reload that decision and the destination's current
+version. Reject an unauthorized reviewer, expired approval, changed proposal,
+or stale record. Keep the writer identity narrowly scoped; a reviewer decision
+does not grant broader destination access.
+
+For a read-only release, keep mutation tools disabled and prove requests to
+write are refused. For a write-enabled release, test the real
+approval-to-dispatch path before using customer records outside the approved
+test scope.
+
+### Optional local approval check
+
 Run from the repository root with fresh synthetic state:
 
 ```bash
@@ -31,8 +51,8 @@ python3 -B scenarios/operational-agents/accelerator/cli.py --state-dir "$STATE" 
   --allow-writes --fixture scenarios/operational-agents/accelerator/sample-data/update.json
 ```
 
-Expect `waiting_approval`. Copy the returned `id` and `pending.digest` into `TASK_ID` and
-`DIGEST`. Inspect the proposal before approving it:
+Expect `waiting_approval`. Copy the returned `id` and `pending.digest` into
+`TASK_ID` and `DIGEST`. Inspect the proposal before approving it:
 
 ```bash
 TASK_ID="paste-the-task-id"
@@ -43,9 +63,10 @@ python3 -B scenarios/operational-agents/accelerator/cli.py --state-dir "$STATE" 
 python3 -B scenarios/operational-agents/accelerator/cli.py --state-dir "$STATE" records
 ```
 
-The record must be `reviewed` at version `2`. Repeat `resume`; the version must remain `2`.
-Use `deny` instead of `approve` on a fresh task to test refusal. The `approve` command
-records a decision; `resume` performs the separately gated operation.
+The record must be `reviewed` at version `2`. Repeat `resume`; the version
+must remain `2`. Use `deny` instead of `approve` on a fresh task to test
+refusal. The `approve` command records a decision; `resume` performs the
+separately gated operation.
 
 `propose_update` cannot call `Backend.apply` directly. The engine validates the
 digest again and fetches the current record version before dispatch. The backend
@@ -61,6 +82,12 @@ python3 -B scenarios/operational-agents/accelerator/validate.py --case approval
 ```
 
 ## Verify
+
+Through the customer's approval surface, approve one permitted test operation
+and confirm its destination receipt. Deny another and confirm no change. Repeat
+with an unauthorized reviewer and with an edited proposal after approval; both
+must be blocked before dispatch. The local CLI check below is not an
+authenticated tenant approval.
 
 The suite must prove denial leaves version 1 unchanged. An approved unmodified
 proposal reaches version 2 once. A changed digest or stale expected version

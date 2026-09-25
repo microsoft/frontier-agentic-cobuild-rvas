@@ -1,170 +1,112 @@
-# Module 6 — Gate publication behind human approval
+# Module 6 - Approve publication and prove withdrawal
 
-A synthetic presenter makes a mistake more costly. It sounds confident, looks on-brand, and reaches
-every new hire. Nothing publishes without **named human sign-off**. When a source changes, you can
-**withdraw** the published content. This module implements the approval gate and proves that it
-blocks.
-
-![Publication approval gate](../diagrams/06-publication-gate.png)
+For content production, module 3 approved the wording and module 5 produced a private preview.
+**Now approve the complete experience and connect that decision to the publishing action.**
+Reviewers must see the media with its disclosure and accessible alternatives. For an interactive
+assistant, review the application version and its content/refusal policy in the actual client.
 
 ## What you build
 
-1. A versioned **approval record** that ties named people to the exact script id + version they
-   signed.
-2. A **gate** that blocks publishing until every required role approves *this* revision.
-3. A **withdrawal path** that blocks publishing when you change approval status (for example, after
-   a source change), even if all sign-offs exist.
+A publishing operation in the customer's channel that accepts only an authorized approval for
+the exact media or application revision. A withdrawal operation removes that revision when its
+source expires, consent changes, or an owner reports a defect.
 
-The approval record template is
-[`accelerator/sample-data/approvals.json`](../accelerator/sample-data/approvals.json), enforced by
-[`content_pack.py`](../accelerator/content_pack.py).
+Bring the private preview, source approval, target channel, and people authorized to approve and
+operate it. Agree required reviewers with the customer. The reference pack's SME,
+legal/compliance, brand, and content-owner roles illustrate one policy; they are not a substitute
+for the customer's policy.
 
 ## Choose your path
 
-Where does the approval gate live and who enforces it?
+| Approval mechanism | Choose it when | Implementation you own |
+| --- | --- | --- |
+| **Existing publishing/content system** | Content owners already release material in a portal, learning platform, or content management system. | Bind its approval to the immutable media revision and make the publish operation verify that decision. Use its native withdrawal and history where available. |
+| Protected release pipeline | The application and content are already released through CI/CD. | Present the exact artifact to required reviewers, protect the release environment, and allow only the release identity to publish. Approval must be invalidated when the artifact changes. |
+| Power Automate / Logic Apps approval flow | Business reviewers work in the organization's approval tools rather than a code pipeline. | Create an approval for the preview and revision, verify the completed decision, and call a narrowly scoped publishing operation. Implement expiry, rejection, and withdrawal separately. |
+| ITSM change control | The customer requires a formal change before content or applications reach users. | Link the revision to the change, enforce its approval at release, and connect emergency withdrawal to the customer's incident process. |
 
-| Option | Where approvals live | Enforcement | Build effort | Best when |
-| --- | --- | --- | --- | --- |
-| **A. Versioned approval record + renderer gate** *(default)* | JSON record versioned with the script | The renderer refuses unapproved/withdrawn packs | Low | You want a portable, auditable gate that travels with the artifact |
-| B. Azure DevOps / GitHub environment approvals | Pipeline environment protection rules | Release pipeline blocks on required reviewers | Medium | Publishing is already a CI/CD release |
-| C. Power Automate / Logic Apps approval flow | Approvals in M365/Teams | Flow gates the publish action | Medium | Approvers live in Teams and want native approvals |
-| D. ITSM change request (ServiceNow etc.) | Change management system | Change ticket must be approved before publish | Higher | Regulated orgs requiring formal change control |
+**Prefer the system the customer already operates.** None of these choices needs a second
+hand-maintained approval ledger in this repository. Keep a durable reference to the authoritative
+decision with the published artifact.
 
-**Default: Option A.** The local validator checks a versioned demo record. It does not authenticate
-reviewers or verify signatures. A publishing integration must bind approvals to immutable content
-and remove withdrawn media from the serving channel. This module's Verify checks only local pack
-rejection. Choose **B/C/D** when the customer's release, collaboration, or
-change-control process must own sign-off. Keep the same **four required roles** and **withdrawal**
-semantics.
-
-**Migration cost.** A → B/C/D wraps the same record in a heavier workflow. The record and roles
-survive. Do not drop the versioned record when you adopt a workflow tool. It is your audit trail.
+The local `approvals.json` fixture is only a contract example. Its validator does not authenticate
+reviewers or remove served media, so it cannot be the publication authority for a tenant build.
 
 ## Implementation
 
-### Option A — Versioned approval record + renderer gate (default)
+### Bind the decision to the preview
 
-**Require four named human approvals**, each tied to the exact revision. The renderer's
-`REQUIRED_APPROVER_ROLES` is the contract: `SME`, `legal-compliance`, `brand-communications`,
-`content-owner`.
+1. Store the preview as an immutable revision, including the media and text alternatives.
+   Calculate a content hash or use the publishing system's immutable artifact identifier.
+2. Create the approval in the selected system. Show reviewers the preview and source references,
+   intended audience, and disclosure. Record the decision against that revision.
+3. Have the publishing operation recheck reviewer authorization and approval status immediately
+   before release. Reject changed content, expired approvals, and a withdrawn source.
+4. Publish through a scoped service identity. Save the channel's publication ID with the revision
+   and approval reference so the operator can find and withdraw it later.
 
-```json
-{
-  "approval_record_id": "DEMO-APPROVAL-ONB-WELCOME-001-0.1.0",
-  "script_id": "ONB-WELCOME-001",
-  "script_version": "0.1.0",
-  "approval_status": "approved-for-demo-only",
-  "approvals": [
-    { "role": "SME",                  "decision": "approved", "approver": "named-demo-sme",            "decided_at": "2026-07-05T09:00:00Z" },
-    { "role": "legal-compliance",     "decision": "approved", "approver": "named-demo-legal-reviewer", "decided_at": "2026-07-05T09:10:00Z" },
-    { "role": "brand-communications", "decision": "approved", "approver": "named-demo-brand-reviewer", "decided_at": "2026-07-05T09:20:00Z" },
-    { "role": "content-owner",        "decision": "approved", "approver": "named-demo-content-owner",  "decided_at": "2026-07-05T09:30:00Z" }
-  ]
-}
-```
+For example, a reviewer approves video revision 4 in the content system. Replacing the transcript
+creates revision 5; the release must stop until revision 5 is approved. A filename or a mutable
+"latest" link is insufficient to bind the decision.
 
-Why these four for a synthetic onboarding experience:
-- **SME** confirms the facts.
-- **legal-compliance** confirms disclosure, consent, and regulated claims.
-- **brand-communications** confirms the avatar, voice, and tone represent the organization
-  acceptably.
-- **content-owner** owns the published wording and its expiry.
+### Connect your selected approval mechanism
 
-The record must match the **exact** `script_id` + `script_version`. Approving 0.1.0 does not approve
-0.2.0. Every revision needs re-approval. A small policy edit must trigger a fresh human decision.
+**Content system:** use its approved-state transition as the release gate. Confirm users cannot
+reach draft media through a direct file URL that bypasses the channel. Test source expiry as well
+as manual withdrawal.
 
-**Implement withdrawal.** When module 3 reports a source change (a claim invalidated, past
-`review_by`), flip the status and republish nothing:
+**Pipeline:** package the media and alternatives into one immutable release artifact. Configure
+the protected environment and required reviewers before the publishing job. Reject a release
+that references another artifact, even if an earlier pipeline run was approved.
 
-```python
-import json
-from pathlib import Path
-p = Path("scenarios/avatar-onboarding/accelerator/sample-data/approvals.json")
-record = json.loads(p.read_text())
-record["approval_status"] = "withdrawn"        # was: approved-for-demo-only
-p.write_text(json.dumps(record, indent=2))
-# The validator rejects future builds. The channel adapter must withdraw any served media.
-```
+**Approval flow:** include the revision ID and preview link in the approval request. On completion,
+load the decision from the approval service; do not trust a caller-supplied `approved: true`.
+Recheck the revision before invoking the publisher. A timeout or partial approval must leave the
+preview private. Connect a rejected or withdrawn source to the unpublish operation.
 
-### Option B — Pipeline environment approvals
+**ITSM:** make the deployment job check the approved change and the referenced artifact. Keep the
+change ID in the channel's release history. Agree who can pause access during an incident without
+waiting for the normal release schedule.
 
-Model publishing as a release to a protected environment with required reviewers. The pipeline reads
-the approval record. An environment protection rule enforces the human gate before the publish step.
-Keep the versioned record as the artifact reviewers approve.
+### Implement withdrawal in the serving channel
 
-### Option C — Power Automate / Logic Apps
+Map source revisions to publication IDs. When a source expires or an owner withdraws approval,
+block new publication and remove access to the affected published revision. Handle cached copies
+and alternate URLs under the channel's actual capabilities; document any copies you cannot recall.
 
-Trigger an approval flow to the four roles in Teams. On full approval, it calls the publish action
-(upload to `experience-output`, flip a "published" flag). Any rejection or later source change
-triggers withdrawal. Approvers stay in their tools, while the record remains the audit trail.
+Serve a clear unavailable message with the support route instead of the outdated explanation.
+Test restoration only after a replacement revision has been approved.
 
-### Option D — ITSM change control
-
-Bind publishing to an approved change request. The avatar experience is a change, and its CR
-references the approval record and artifact hash. Withdrawal is a follow-up change. Use this when
-customer governance requires formal change management.
+For a live experience, approve the deployed application version and its content/refusal policy.
+Withdrawal disables the affected knowledge or experience. Do not claim that each generated
+answer has received human approval.
 
 ## Verify
 
-A gate that never blocks proves nothing. Try to break this one, then confirm approval binds to the
-exact revision. Check both against your records.
+Run these checks through the **actual publishing operation and user channel**:
 
-**1. Removing a required approval, or withdrawing the record, blocks publication.** Exercise the real
-enforcement code against a working copy so you never mutate the signed record:
+| Attempt | Required result |
+| --- | --- |
+| Publish without the required approval | Rejected; preview remains private. |
+| Publish after editing an approved artifact | Rejected because the revision no longer matches. |
+| Release the approved revision | Intended users can access the media and equivalent text. |
+| Access as a user outside the audience | Denied, including direct media access. |
+| Withdraw its source or approval | Published access stops under the agreed withdrawal window; the operator can see the reason. |
 
-```bash
-python3 - <<'PY'
-import json, shutil, sys, tempfile
-from pathlib import Path
-sys.path.insert(0, "scenarios/avatar-onboarding/accelerator")
-from content_pack import validate_pack, PackRejectedError
+Keep the publication and approval references in the customer's release history. A local JSON flag
+does not prove any of these outcomes.
 
-src = Path("scenarios/avatar-onboarding/accelerator/sample-data")
-work = Path(tempfile.mkdtemp(prefix="verify-gate-"))/"pack"
-shutil.rmtree(work, ignore_errors=True); shutil.copytree(src, work)
+To inspect the reference pack's rejection behavior separately, run from the repository root:
 
-validate_pack(work); print("fully-approved pack: PUBLISHES")
-
-appr = json.loads((work / "approvals.json").read_text())
-appr["approvals"] = [a for a in appr["approvals"] if a["role"] != "legal-compliance"]
-(work / "approvals.json").write_text(json.dumps(appr))
-try:
-    validate_pack(work); print("PROBLEM: published without legal-compliance")
-except PackRejectedError as e:
-    print("missing legal-compliance -> BLOCKED:", e)
-
-shutil.copy(src / "approvals.json", work / "approvals.json")
-appr = json.loads((work / "approvals.json").read_text())
-appr["approval_status"] = "withdrawn"
-(work / "approvals.json").write_text(json.dumps(appr))
-try:
-    validate_pack(work); print("PROBLEM: withdrawn pack still published")
-except PackRejectedError as e:
-    print("withdrawn status -> BLOCKED:", e)
-
-shutil.rmtree(work, ignore_errors=True)
-PY
-```
-
-Expected output: the full pack publishes, then the missing-role and withdrawn cases print
-`BLOCKED`. If either prints `PROBLEM`, an unapproved or withdrawn synthetic likeness can reach new
-hires. The gate must stop that.
-
-**2. The approval is bound to this script id and version.** Approving `0.1.0` must not approve a later
-edit:
+![Optional local pack check; the tenant publication gate must authenticate approval and withdraw served media separately.](../diagrams/06-publication-gate.png)
 
 ```bash
-jq -n \
-  --slurpfile a scenarios/avatar-onboarding/accelerator/sample-data/approvals.json \
-  --slurpfile s scenarios/avatar-onboarding/accelerator/sample-data/storyboard-script.json \
-  '($a[0].script_id == $s[0].script_id) and ($a[0].script_version == $s[0].script_version)'
+python3 -m unittest discover -s scenarios/avatar-onboarding/accelerator -p test_content_pack.py
 ```
 
-`true` means the sign-off matches the artifact being published. `false` means the record approves a
-different revision, so a policy edit could ship without a fresh human decision. Re-approve every
-revision.
+Those tests help during adapter development. They are not the tenant acceptance result.
 
 ## Next module
 
-[Module 7 — Evaluate, red-team, trace, and operate](07-prove-and-operate.md) proves the experience is
-safe and useful, then makes the controlled release decision.
+[Module 7 - Evaluate and operate](07-prove-and-operate.md). Prove the complete experience through
+the selected channel and hand operation to its owner.

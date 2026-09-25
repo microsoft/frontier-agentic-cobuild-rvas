@@ -42,32 +42,29 @@ Run an allowed read and an out-of-scope request.
 ---
 <!-- slide:id=lesson-foundation-context -->
 
-## Separate local proof from live inference
+## Connect the customer's execution environment
 
-The same application controls both modes.
-
-A scripted exercise tests execution behavior. A real model call tests the
-connection and the model's selected request.
+Identify the application runtime and its approved model and tool endpoints.
+Prove the runtime identity can reach them. Local checks inspect the reference
+engine; they do not connect the customer's operation.
 
 ---
 <!-- slide:id=lesson-foundation-choices -->
 
 ## Choose the environment
 
-Start locally without Azure calls.
-
-For live work, use an approved project or the optional minimal demo foundation.
-Keep customer data out until its owners approve the path.
+Use the customer's approved environment first. Add only missing resources
+through its normal deployment process. Keep the synthetic reference backend
+separate from the tenant integration.
 
 ---
 <!-- slide:id=lesson-foundation-evidence -->
 
-## Make the mode visible
+## Prove runtime access
 
-An offline run produces local evidence.
-
-**A live check needs a real response ID and tool result.** A missing deployment
-or denied permission must remain a failure.
+Call the selected model and perform an authorized read of the approved test
+record. Test a denied identity too. **A synthetic backend response is not
+tenant acceptance.**
 
 ---
 <!-- slide:id=lesson-tool-contracts-context -->
@@ -97,7 +94,7 @@ Avoid arbitrary commands and unrestricted update objects.
 Reject unexpected arguments.
 
 Replay the same operation ID and confirm one effect. Reuse that ID with
-different arguments and confirm rejection.
+different arguments; the destination must reject it.
 
 ---
 <!-- slide:id=lesson-task-state-context -->
@@ -175,8 +172,8 @@ A changed proposal or record version needs a new decision.
 
 The local CLI demonstrates the contract using a trusted operator.
 
-A customer pilot needs authenticated approvers and policy rules enforced
-outside the model.
+A customer pilot needs authenticated approvers and policy rules outside the
+model.
 
 ---
 <!-- slide:id=lesson-approval-evidence -->
@@ -233,8 +230,8 @@ Test both against the customer's task.
 
 Use local failure cases for runtime behavior.
 
-Add live synthetic prompts and then approved customer integration checks.
-Assign owners to work the kit does not implement.
+Add live synthetic prompts, then approved customer integration checks. Assign
+owners to work the kit does not implement.
 
 ---
 <!-- slide:id=lesson-evaluate-operate-evidence -->
@@ -244,4 +241,4 @@ Assign owners to work the kit does not implement.
 Inspect operation receipts and the destination state.
 
 Record gaps in authenticated approval, shared storage, or telemetry.
-Lesson completion alone does not establish production readiness.
+Module completion alone does not establish production readiness.

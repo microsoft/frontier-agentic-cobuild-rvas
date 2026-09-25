@@ -13,18 +13,18 @@ superseded three months ago.
 1. An ingestion path from the approved source into a retrievable store.
 2. Chunking, embedding, and metadata that survive into the answer as a citation.
 3. A refresh schedule, and a documented worst-case staleness window.
-4. A retrieval smoke test proving the corpus answers the questions it should — and returns nothing
+4. A retrieval smoke test proving the corpus answers the questions it should and returns nothing
    for the questions it should not.
 
 ## Choose your path
 
 | Option | Who writes the pipeline | Chunking control | Freshness model | Effort |
 | --- | --- | --- | --- | --- |
-| **A. Foundry IQ managed ingestion** *(default)* | The platform — data source, skillset, indexer, and index are generated for you | Platform-chosen; `contentExtractionMode` is your main lever | `ingestion_schedule` on the knowledge source | Lowest |
+| **A. Foundry IQ managed ingestion** *(default)* | The platform generates the data source, skillset, indexer, and index | Platform-chosen; `contentExtractionMode` is your main lever | `ingestion_schedule` on the knowledge source | Lowest |
 | B. Azure AI Search indexer (pull) | You define the index + skillset; the indexer runs it | Full, via a split skill in the skillset | Indexer schedule + change detection | Medium |
-| C. Push API with custom chunking | You, entirely — your code chunks, embeds, and uploads | Total | You own it; nothing runs unless you run it | High |
+| C. Push API with custom chunking | You own chunking, embedding, and upload | Total | You own it; nothing runs unless you run it | High |
 | D. Content Understanding preprocessing, then B or C | You, plus a preprocessing pass | Total, over a much richer extraction | Two-stage | Highest |
-| E. Remote knowledge source — no ingestion at all | Nobody | N/A — nothing is chunked | Always fresh by construction | Lowest |
+| E. Remote knowledge source, no ingestion | Nobody | N/A: nothing is chunked | Always fresh by construction | Lowest |
 
 **Default: Option A.** A blob knowledge source generates the data source, skillset, indexer, and
 index, and carries permission metadata forward when requested. You avoid weeks of pipeline work.
@@ -66,7 +66,24 @@ audit the answer:
 
 Use the current Microsoft Learn guidance for the active ingestion and indexing surface.
 
-Seed the approved container with the four fictional source documents. Exclude the sample README.
+### Connect your approved source
+
+Use the source and provisional embedding configuration selected before provisioning. Implement
+the selected connector in the customer environment, preserving source IDs and versions.
+Include one current document, an older revision, and a restricted item in the approved test set.
+Configure actual source permissions; labels in a file do not enforce access.
+
+Run ingestion or refresh, then inspect the stored source reference and permission metadata.
+Change or withdraw one test document and verify that retrieval changes within the agreed window.
+For a remote source, test this through its query path without creating an unnecessary index.
+
+For module 2's Copilot Studio branch, inspect the connected SharePoint knowledge and repeat
+the source-update and denied-user checks there. The Azure commands below do not apply.
+
+### Optional reference corpus check
+
+To inspect the supplied scripts separately, seed an isolated container with the four fictional
+source documents. Exclude the sample README.
 The current notice names a superseded notice, but the older document is not included.
 The supervisor document is labelled restricted; configure real source permissions before testing access.
 
@@ -216,9 +233,9 @@ Your code owns everything. Use `SearchClient.upload_documents()` with chunks you
 each carrying `content`, `source`, effective date, chunk index, parent document id, and permission
 fields.
 
-This is the only option where you can implement structure-aware chunking — split on headings, keep a
-numbered clause intact, attach the section title to every chunk so a retrieved fragment still says
-what it is about.
+This is the only option where you can implement structure-aware chunking. Split on headings, keep
+a numbered clause intact, and attach the section title to every chunk so a retrieved fragment still
+says what it is about.
 
 The cost is permanent: no indexer means no schedule, no change detection, and no ACL resync. When a
 document changes you must re-chunk and re-upload it, and when a permission changes you must reingest
@@ -242,8 +259,9 @@ Fabric Data Agent, Fabric Ontology, MCP server, Work IQ, and Web are all fetched
 through the owning platform's API and never stored in Search.
 
 You trade latency for correctness-by-construction: no chunking decisions, no refresh schedule, no
-ACL staleness window. For anything that changes hourly — inventory, case status, live metrics — this
-is the right answer, and indexing it instead is the most common serious mistake in this scenario.
+ACL staleness window. For anything that changes hourly, such as inventory, case status, or live
+metrics, this is the right answer. Indexing it instead is the most common serious mistake in this
+scenario.
 
 ## Verify
 
@@ -296,5 +314,5 @@ is in the container.
 
 ## Next module
 
-[Module 4 — Compare chat and embedding choices](04-model-selection.md) picks the models, now that
+[Module 4 — Compare chat and embedding choices](04-model-selection.md) picks models now that
 you have a real corpus to measure them against instead of a vendor benchmark.

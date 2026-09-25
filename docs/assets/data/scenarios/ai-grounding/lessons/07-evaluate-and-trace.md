@@ -1,7 +1,7 @@
 # Module 7 — Evaluate and trace
 
-Use the returns questions and resources from the preceding modules. **Keep the same answer
-path:** retrieval if you skipped the agent, or the pinned agent version if you added one.
+Use the customer's reviewed questions and connected sources from the preceding modules. **Keep the
+same answer path:** retrieval if you skipped the agent, or the pinned agent version if you added one.
 
 ## What you build
 
@@ -20,6 +20,18 @@ Run the default gate and review answer meaning. Add managed evaluations when the
 help the release decision. An average score must never hide a restricted-data leak.
 
 ## Implementation
+
+### Establish tenant acceptance
+
+Run the intended users' questions through the selected answer path, including a restricted
+question and one the sources cannot answer. Have the source owner review answer meaning and
+citations. Retain actual responses under the same data access and retention rules as the sources.
+Repeat after a source update to check freshness.
+
+For Copilot Studio, capture this evidence through the configured agent rather than the Azure
+scripts below. For the Azure path, adapt the question set and source markers in your private
+implementation. The supplied returns-role commands illustrate that contract; they are not
+acceptance of a different corpus.
 
 ### Capture actual answers
 

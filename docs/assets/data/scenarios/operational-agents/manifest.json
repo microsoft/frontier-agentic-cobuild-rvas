@@ -3,7 +3,7 @@
   "name": "Operational Agents",
   "tagline": "Carry out bounded work with approved tools and evidence of the result.",
   "order": 4,
-  "customer_outcome": "A team can control an agent's tool execution, approve exact changes, and recover interrupted work without blindly repeating effects.",
+  "customer_outcome": "A team can control an agent's tool execution, approve exact changes, and recover interrupted work without repeating effects blindly.",
   "maturity": "initial",
   "level": "guided",
   "stage": "customer-build",
@@ -13,7 +13,7 @@
     "Which live facts and tool permissions does the task need?",
     "Where does task state belong, and what must survive a restart?",
     "Who approves an exact change, and how will the system reject stale approval?",
-    "How will an operator establish whether an interrupted operation committed?"
+    "How will an operator determine whether an interrupted operation committed?"
   ],
   "lessons": [
     {"id": "task-boundary", "title": "Define the task boundary", "path": "lessons/01-task-boundary.md"},
@@ -27,13 +27,13 @@
   ],
   "build_modules": [
     {"id": "task-boundary", "title": "Define scope and refusal", "summary": "Bind a task to explicit record IDs and reject requests outside that scope.", "outcome": "An out-of-scope request fails without changing a record.", "implementation_paths": ["accelerator/sample-data/out-of-scope.json", "accelerator/runtime.py"]},
-    {"id": "foundation", "title": "Select offline or live execution", "summary": "Run deterministic local exercises or connect the same engine to a configured Foundry agent.", "outcome": "The selected execution mode produces evidence without silently switching modes.", "implementation_paths": ["accelerator/cli.py", "accelerator/foundry_client.py", "accelerator/main.bicep", "accelerator/scripts/deploy.sh"]},
-    {"id": "tool-contracts", "title": "Validate tool requests", "summary": "Define narrow schemas and a synthetic backend with conditional updates and operation IDs.", "outcome": "Invalid arguments and duplicate operation conflicts are rejected.", "implementation_paths": ["accelerator/tools.py", "accelerator/tests/test_runtime.py"]},
-    {"id": "task-state", "title": "Persist task progress", "summary": "Keep task progress separate from live records and load it in a fresh process.", "outcome": "Pending approval and prior evidence survive a CLI restart.", "implementation_paths": ["accelerator/state.py", "accelerator/cli.py"]},
+    {"id": "foundation", "title": "Connect the execution environment", "summary": "Connect the customer's runtime to an approved model and tool API. Use local checks only for reference behavior.", "outcome": "The runtime can authenticate to the required services and rejects denied access.", "implementation_paths": ["accelerator/cli.py", "accelerator/foundry_client.py", "accelerator/main.bicep", "accelerator/scripts/deploy.sh"]},
+    {"id": "tool-contracts", "title": "Connect narrow tool operations", "summary": "Implement the customer's read and proposal adapters with destination authorization and version checks.", "outcome": "The connected operation rejects invalid arguments and duplicate-operation conflicts.", "implementation_paths": ["accelerator/tools.py", "accelerator/tests/test_runtime.py"]},
+    {"id": "task-state", "title": "Persist task progress", "summary": "Keep task progress in the customer's durable application store, separate from live records.", "outcome": "Pending approval and prior evidence survive a runtime restart.", "implementation_paths": ["accelerator/state.py", "accelerator/cli.py"]},
     {"id": "bounded-execution", "title": "Enforce execution limits", "summary": "Apply persisted call and time budgets around the shared execution loop.", "outcome": "Exhausted work stops instead of receiving a fresh budget on resume.", "implementation_paths": ["accelerator/runtime.py", "accelerator/validate.py"]},
     {"id": "approval", "title": "Bind approval to a proposal", "summary": "Require a separate operator decision tied to the task, exact arguments, and expected record version.", "outcome": "Only an unchanged approved proposal can reach the write boundary.", "implementation_paths": ["accelerator/runtime.py", "accelerator/tools.py"]},
-    {"id": "recovery", "title": "Reconcile interrupted operations", "summary": "Interrupt the process around a tool commit and look up the operation before deciding what happened.", "outcome": "A committed operation is recovered once; an unproven result remains unresolved.", "implementation_paths": ["accelerator/runtime.py", "accelerator/tests/test_runtime.py"]},
-    {"id": "evaluate-operate", "title": "Inspect behavioral evidence", "summary": "Run failure cases and distinguish local runtime checks from live model and customer acceptance.", "outcome": "A behavioral report and a named list of remaining pilot requirements.", "implementation_paths": ["accelerator/validate.py", "accelerator/sample-data/expected.json"]}
+    {"id": "recovery", "title": "Reconcile interrupted operations", "summary": "Interrupt the process around a tool commit and look up the operation before deciding what happened.", "outcome": "A committed operation is recovered once; an unproven result stays unresolved.", "implementation_paths": ["accelerator/runtime.py", "accelerator/tests/test_runtime.py"]},
+    {"id": "evaluate-operate", "title": "Deliver and hand over the connected task", "summary": "Test through the customer's user channel, inspect destination evidence, and rehearse recovery with the operating owner.", "outcome": "A deployed scoped task with customer acceptance evidence and an operating owner.", "implementation_paths": ["accelerator/validate.py", "accelerator/sample-data/expected.json"]}
   ],
   "slides": "slides.md",
   "accelerator": "accelerator/README.md"

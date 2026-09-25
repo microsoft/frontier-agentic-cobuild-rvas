@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      try {
+        var k = 'fp-theme';
+        var saved = localStorage.getItem(k);
+        var pref = 'light';
+        document.documentElement.setAttribute('data-theme', saved || pref);
+      } catch (e) {}
+    })();
+  </script>
+  <title>Start — Agentic Co-build</title>
+  <meta name="description" content="Find a customer AI use case, or map a known one to scenario modules." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/shell.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+  <script src="assets/js/marked.min.js"></script>
+</head>
+<body>
+
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Real Value Acceleration Program — Home">
+        <img src="assets/img/logo-full.png" alt="Real Value Acceleration Program" class="brand-logo" />
+      </a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="index.html#outcomes">Scenarios</a>
+        <a href="start.html" aria-current="page">Start</a>
+        <a class="gh" href="https://github.com/microsoft/frontier-agentic-cobuild-rvas" target="_blank" rel="noopener" aria-label="View source on GitHub">GitHub</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="mainContent">
+    <section class="ch-detail-hero" aria-labelledby="startTitle">
+      <div class="wrap">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <span>Start</span>
+        </nav>
+        <h1 id="startTitle">Start from what you know.</h1>
+        <p class="lede">Two repository skills prepare a co-build. <strong>Idea Forge</strong> finds a use case when you only know the customer. <strong>Use-Case Mapper</strong> shows which parts of a known use case the kit helps build.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#idea-forge">I know the customer</a>
+          <a class="btn btn-ghost" href="#use-case-mapper">I know the use case</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight idea-forge-onboard" aria-label="Start routes">
+      <div class="wrap">
+        <article class="guide-body idea-forge-guide">
+          <section aria-labelledby="routes-title">
+            <h2 id="routes-title">Pick a route</h2>
+            <div class="idea-forge-output">
+              <div>
+                <h3>Idea Forge</h3>
+                <p>You know the customer or industry, but not what to build first. The skill researches public sources and ranks about ten ideas.</p>
+              </div>
+              <div>
+                <h3>Use-Case Mapper</h3>
+                <p>You know what the customer wants. The skill breaks the use case into parts and maps each one to modules, including the parts no module covers.</p>
+              </div>
+            </div>
+            <p>Idea Forge hands its top idea to Use-Case Mapper, so both routes end with the same map.</p>
+          </section>
+
+          <section class="idea-forge-lead" aria-labelledby="idea-forge">
+            <div>
+              <p class="eyebrow">Route 1</p>
+              <h2 id="idea-forge">Idea Forge</h2>
+              <p>Use it at the start of an engagement when you know the customer or industry, but not the first useful AI proof. It turns public research and customer signals into ranked, right-sized ideas across all current tracks.</p>
+            </div>
+            <aside class="idea-forge-callout" aria-label="Idea Forge guardrail">
+              <strong>Not an architecture approval.</strong>
+              <span>The scenario conversation still checks source ownership, access, environment, operating model, and evidence.</span>
+            </aside>
+          </section>
+
+          <section aria-labelledby="flow-title">
+            <h2 id="flow-title">Five-minute idea funnel</h2>
+            <div class="idea-forge-steps">
+              <div class="idea-forge-step">
+                <span class="idea-forge-step-num">1</span>
+                <h3>Prepare the prompt</h3>
+                <p>Bring the customer or business-unit name, industry, and any region, segment, or pain points you are allowed to use.</p>
+              </div>
+              <div class="idea-forge-step">
+                <span class="idea-forge-step-num">2</span>
+                <h3>Run the skill</h3>
+                <p>Customer Activity-Forge researches public sources only, marks gaps instead of guessing, and proposes about ten achievable ideas.</p>
+              </div>
+              <div class="idea-forge-step">
+                <span class="idea-forge-step-num">3</span>
+                <h3>Select one direction</h3>
+                <p>Prefer an idea with a narrow user, an owner, a safe representative sample, and a first evidence case the customer can review.</p>
+              </div>
+              <div class="idea-forge-step">
+                <span class="idea-forge-step-num">4</span>
+                <h3>Map the idea</h3>
+                <p>The skill runs Use-Case Mapper on the top idea, so you get the same parts-to-modules map as Route 2.</p>
+              </div>
+            </div>
+          </section>
+
+          <section aria-labelledby="prepare-title">
+            <h2 id="prepare-title">What to prepare</h2>
+            <div class="idea-forge-grid">
+              <div class="idea-forge-card">
+                <h3>Required</h3>
+                <ul>
+                  <li>Customer name or business unit.</li>
+                  <li>Industry or sector.</li>
+                </ul>
+              </div>
+              <div class="idea-forge-card">
+                <h3>Helpful if known</h3>
+                <ul>
+                  <li>Region or customer segment.</li>
+                  <li>Allowed pain points or public signals to verify.</li>
+                  <li>Any data, content, or process boundary already discussed.</li>
+                </ul>
+              </div>
+              <div class="idea-forge-card">
+                <h3>Keep out</h3>
+                <ul>
+                  <li>Confidential account-plan or CRM details.</li>
+                  <li>Unapproved customer data.</li>
+                  <li>Claims the team cannot cite or validate.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section aria-labelledby="produces-title">
+            <h2 id="produces-title">What Idea Forge produces</h2>
+            <div class="idea-forge-output">
+              <div>
+                <h3>Research summary</h3>
+                <p>Three to five sentences with public-source citations and explicit coverage gaps.</p>
+              </div>
+              <div>
+                <h3>Ranked ideas</h3>
+                <p>About ten ideas ranked by customer fit, achievable first proof, and differentiation. Each names the tracks it draws on.</p>
+              </div>
+              <div>
+                <h3>Scenario handoff</h3>
+                <p>The top idea gets a pre-filled handoff, with assumptions marked for the customer to confirm.</p>
+              </div>
+              <div>
+                <h3>Module map</h3>
+                <p>The top idea's parts mapped to modules, with a build order and the gaps.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="idea-forge-lead" aria-labelledby="use-case-mapper">
+            <div>
+              <p class="eyebrow">Route 2</p>
+              <h2 id="use-case-mapper">Use-Case Mapper</h2>
+              <p>Use it when the customer already knows what they want. The skill reads every scenario manifest, splits the use case into the steps it needs, and maps each step to specific modules. <strong>Uncovered work stays in the map.</strong></p>
+            </div>
+            <aside class="idea-forge-callout" aria-label="Use-Case Mapper guardrail">
+              <strong>A partial match is not coverage.</strong>
+              <span>If a module covers half a step, the map says what the team still has to build.</span>
+            </aside>
+          </section>
+
+          <section aria-labelledby="mapper-flow-title">
+            <h2 id="mapper-flow-title">From use case to session plan</h2>
+            <div class="idea-forge-steps">
+              <div class="idea-forge-step">
+                <span class="idea-forge-step-num">1</span>
+                <h3>Describe the use case</h3>
+                <p>Say what starts it and what the finished result is. Add users, systems, and data owners if you know them.</p>
+              </div>
+              <div class="idea-forge-step">
+                <span class="idea-forge-step-num">2</span>
+                <h3>Run the skill</h3>
+                <p>It splits the use case into five to eight steps and marks each one Covered, Adapt, or Not covered.</p>
+              </div>
+              <div class="idea-forge-step">
+                <span class="idea-forge-step-num">3</span>
+                <h3>Review it with the customer</h3>
+                <p>Confirm the assumptions, the open platform choices, and who owns each uncovered part.</p>
+              </div>
+              <div class="idea-forge-step">
+                <span class="idea-forge-step-num">4</span>
+                <h3>Plan the first slice</h3>
+                <p>Build the few parts that prove the main outcome first, in module order.</p>
+              </div>
+            </div>
+          </section>
+
+          <section aria-labelledby="sample-title">
+            <h2 id="sample-title">Sample map</h2>
+            <p>An illustrative map for a supplier-onboarding request. Your map will use your customer's steps.</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Part of the use case</th><th>Modules</th><th>Fit</th><th>Customer-specific work</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Read the fields from the supplier's form</td><td>Content Understanding: <code>typed-extraction</code>, <code>human-review</code></td><td>Adapt</td><td>Define the fields and test on real forms.</td></tr>
+                  <tr><td>Answer a policy question about the request</td><td>AI Grounding: <code>source-selection</code>, <code>grounded-app</code></td><td>Adapt</td><td>Connect approved policy content and prove access boundaries.</td></tr>
+                  <tr><td>Create the supplier record after approval</td><td>Operational Agents: <code>tool-contracts</code>, <code>approval</code></td><td>Adapt</td><td>Build the integration with the customer's system. The sample doesn't supply it.</td></tr>
+                  <tr><td>Notify the supplier of the result</td><td>None</td><td>Not covered</td><td>New pattern needed.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="idea-forge-next" aria-labelledby="next-title">
+            <div>
+              <h2 id="next-title">Agree the first implementation scope</h2>
+              <p>Move to the modules once the use case has an owner, a safe sample, and a way to test it. If most of the map comes back Not covered, contact your Microsoft Cloud Solution Architect about a custom co-build.</p>
+            </div>
+            <div class="idea-forge-actions">
+              <a class="btn btn-primary" href="index.html#outcomes">Choose a scenario</a>
+              <a class="btn btn-ghost" href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/.github/skills/customer-activity-forge/SKILL.md" target="_blank" rel="noopener">Idea Forge skill</a>
+              <a class="btn btn-ghost" href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/.github/skills/use-case-mapper/SKILL.md" target="_blank" rel="noopener">Use-Case Mapper skill</a>
+            </div>
+          </section>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="wrap footer-inner">
+      <a class="brand" href="index.html" aria-label="Real Value Acceleration Program — Home">
+        <img src="assets/img/logo-full.png" alt="Real Value Acceleration Program" class="brand-logo" />
+      </a>
+      <p>Agentic Co-build.</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="index.html#outcomes">Scenarios</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/shell.js"></script>
+</body>
+</html>

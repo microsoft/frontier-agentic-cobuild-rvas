@@ -21,7 +21,7 @@
       "lessons": [
         {
           "id": "foundation",
-          "title": "Provision the grounding foundation",
+          "title": "Confirm scope and connect the grounding foundation",
           "path": "lessons/01-provision-foundation.md",
           "sequence": 1,
           "content_path": "assets/data/scenarios/ai-grounding/lessons/01-provision-foundation.md",
@@ -87,9 +87,9 @@
       "build_modules": [
         {
           "id": "foundation",
-          "title": "Provision Foundry, AI Search, and observability",
-          "summary": "Create the shared keyless foundation and verify its generated environment contract before adding customer data.",
-          "outcome": "Grounding resources and a usable environment contract",
+          "title": "Confirm scope and connect the grounding foundation",
+          "summary": "Confirm the source/platform path before provisioning. Reuse approved tenant resources and verify runtime access.",
+          "outcome": "Approved platform path and working environment connections",
           "implementation_paths": [
             "accelerator/main.bicep",
             "accelerator/scripts/deploy.sh"
@@ -110,7 +110,7 @@
         {
           "id": "ingestion",
           "title": "Ingest and index approved content",
-          "summary": "Connect the selected source, preserve source/version metadata and access controls, then prove retrieval with a seeded corpus.",
+          "summary": "Connect the customer's approved source, keep version metadata and access controls, and prove refresh works.",
           "implementation_paths": [
             "accelerator/sample-data",
             "accelerator/scripts/build_knowledge_source.py"
@@ -122,7 +122,7 @@
           "id": "model-selection",
           "title": "Compare chat and embedding choices",
           "summary": "Compare supported deployments on the answer quality the pilot needs, then check latency, cost, and regional capacity.",
-          "outcome": "A model choice backed by the scenario's question set",
+          "outcome": "A model choice backed by the customer's reviewed questions",
           "implementation_paths": [
             "accelerator/scripts/compare_models.py"
           ],
@@ -149,7 +149,7 @@
         {
           "id": "evaluate-and-trace",
           "title": "Evaluate and trace",
-          "summary": "Test citations, access rules, prompt injection, and stale sources. Trace one request from question to answer so you can explain a failure.",
+          "summary": "Test citations, access rules, prompt injection, and stale sources. Trace one request from question to answer to explain a failure.",
           "outcome": "Evaluation gate passed with trace and red-team evidence",
           "implementation_paths": [
             "accelerator/golden-questions.json",
@@ -180,14 +180,14 @@
       "name": "Content Understanding and Document Workflow",
       "tagline": "Turn documents into structured results that a person can review.",
       "order": 2,
-      "customer_outcome": "An expert tests safe document samples, gives engineering a clear JSON contract, and keeps a person in control of the final workflow decision.",
+      "customer_outcome": "A team processes approved documents in its tenant, reviews uncertain fields, and sends the agreed result with evidence of any downstream action.",
       "maturity": "initial",
       "level": "guided",
       "duration_minutes": 420,
       "stage": "customer-build",
       "owner": "RVAS field team",
       "decision_prompts": [
-        "Which document decision creates measurable value when it is faster and more consistent?",
+        "Which document decision creates measurable value when it becomes faster and more consistent?",
         "Are representative, authorized samples and expected outcomes ready for SME testing?",
         "Where must human review, correction, and evidence be retained in the workflow?",
         "What isolation, access, and promotion controls are required beyond Studio project/analyzer boundaries?"
@@ -195,7 +195,7 @@
       "lessons": [
         {
           "id": "foundation",
-          "title": "Provision the shared Foundry foundation",
+          "title": "Confirm scope and connect the document foundation",
           "path": "lessons/01-provision-foundation.md",
           "sequence": 1,
           "content_path": "assets/data/scenarios/content-understanding-document-workflow/lessons/01-provision-foundation.md",
@@ -253,8 +253,8 @@
       "build_modules": [
         {
           "id": "foundation",
-          "title": "Provision the shared Foundry foundation",
-          "summary": "Create the keyless Foundry account, chat + embedding deployments, document storage, and observability baseline before adding document services or customer files.",
+          "title": "Confirm scope and connect the document foundation",
+          "summary": "Agree the document class and intended action before selecting services. Reuse the approved environment and connect the required runtime identities.",
           "implementation_paths": [
             "accelerator/main.bicep"
           ],
@@ -265,13 +265,13 @@
           "id": "document-source",
           "title": "Connect an approved document source",
           "summary": "Choose Azure Blob, ADLS Gen2, SharePoint, or OneLake and preserve source identity, version, permissions, and quarantine controls.",
-          "outcome": "Approved intake and document-retention design",
+          "outcome": "A working source adapter with authorized intake and rejection evidence",
           "sequence": 2
         },
         {
           "id": "extraction-selection",
           "title": "Select the extraction capability",
-          "summary": "Test the available extraction options against real sample quality and the fields reviewers need. Then check region and cost.",
+          "summary": "Test extraction options against real sample quality and the fields reviewers need. Then check region and cost.",
           "outcome": "Document capability and implementation decision",
           "sequence": 3
         },
@@ -288,8 +288,8 @@
         {
           "id": "human-review",
           "title": "Build review, correction, and handoff",
-          "summary": "Send uncertain results to a named reviewer. Keep every correction, then pass only approved results to the next system.",
-          "outcome": "Reviewer correction and approval trace",
+          "summary": "Connect the customer review surface and the agreed result handoff. Retain corrections and prove approved posting cannot duplicate an action.",
+          "outcome": "A completed review with its authorized handoff or destination receipt",
           "sequence": 5
         },
         {
@@ -318,26 +318,27 @@
     {
       "id": "avatar-scenario",
       "name": "Avatar Scenario",
-      "tagline": "Build an accessible avatar experience that people approve before it goes live.",
+      "tagline": "Build an interactive assistant or a repeatable content-production application.",
       "order": 3,
-      "customer_outcome": "People get an accessible avatar-led experience, while owners can trace every published claim to its source and the person who approved it.",
+      "customer_outcome": "Users get grounded help, or content owners run a repeatable media workflow, with accessible output and controlled release in their tenant.",
       "maturity": "initial",
       "level": "guided",
       "duration_minutes": 420,
       "stage": "customer-build",
       "owner": "RVAS field team",
       "decision_prompts": [
-        "Which Azure/Microsoft experience capability (Speech avatar batch, real-time avatar, Voice Live, video translation, or plain audio) fits the pilot's consent, accessibility, latency, language, and cost requirements?",
-        "Which communication, learning, or support moment, audience, locale, and channel should the pilot serve first?",
+        "Are we building an interactive assistant or a repeatable content-production application, and what proves that application works?",
+        "Which communication, learning, or support moment should the pilot serve first, and for which audience, locale, and channel?",
+        "Which media format serves that application goal, and does an avatar add value over audio or text?",
         "Which approved sources and named owners may support the script, and when do they expire?",
         "Who must approve factual accuracy, legal/compliance, brand, and accessibility before anything is published?",
-        "How will the experience disclose synthetic/AI assistance, offer human help, and avoid deceptive representation?",
+        "How will the experience disclose synthetic/AI assistance and offer human help without deceptive representation?",
         "Which evaluation, red-team, and operational measures decide whether to iterate, scale, pause, or withdraw?"
       ],
       "lessons": [
         {
           "id": "experience-selection",
-          "title": "Module 1 — Select the avatar/experience capability",
+          "title": "Choose the application your users need",
           "path": "lessons/01-experience-selection.md",
           "sequence": 1,
           "content_path": "assets/data/scenarios/avatar-scenario/lessons/01-experience-selection.md",
@@ -345,7 +346,7 @@
         },
         {
           "id": "foundation",
-          "title": "Module 2 — Provision the Foundry + Speech foundation",
+          "title": "Connect the required foundation",
           "path": "lessons/02-foundation.md",
           "sequence": 2,
           "content_path": "assets/data/scenarios/avatar-scenario/lessons/02-foundation.md",
@@ -353,7 +354,7 @@
         },
         {
           "id": "content-pipeline",
-          "title": "Module 3 — Build the governed content pipeline",
+          "title": "Connect content and approve wording",
           "path": "lessons/03-content-pipeline.md",
           "sequence": 3,
           "content_path": "assets/data/scenarios/avatar-scenario/lessons/03-content-pipeline.md",
@@ -361,7 +362,7 @@
         },
         {
           "id": "grounded-assistant",
-          "title": "Module 4 — Build the grounded assistant behind the experience",
+          "title": "Add grounded authoring or live answers when needed",
           "path": "lessons/04-grounded-assistant.md",
           "sequence": 4,
           "content_path": "assets/data/scenarios/avatar-scenario/lessons/04-grounded-assistant.md",
@@ -369,7 +370,7 @@
         },
         {
           "id": "experience-generation",
-          "title": "Module 5 — Generate the accessible avatar experience",
+          "title": "Connect generation to the application",
           "path": "lessons/05-experience-generation.md",
           "sequence": 5,
           "content_path": "assets/data/scenarios/avatar-scenario/lessons/05-experience-generation.md",
@@ -377,7 +378,7 @@
         },
         {
           "id": "approval-gating",
-          "title": "Module 6 — Gate publication behind human approval",
+          "title": "Approve publication and prove withdrawal",
           "path": "lessons/06-approval-gating.md",
           "sequence": 6,
           "content_path": "assets/data/scenarios/avatar-scenario/lessons/06-approval-gating.md",
@@ -385,7 +386,7 @@
         },
         {
           "id": "prove-and-operate",
-          "title": "Module 7 — Evaluate, red-team, trace, and operate",
+          "title": "Prove and operate the delivered experience",
           "path": "lessons/07-prove-and-operate.md",
           "sequence": 7,
           "content_path": "assets/data/scenarios/avatar-scenario/lessons/07-prove-and-operate.md",
@@ -395,15 +396,15 @@
       "build_modules": [
         {
           "id": "experience-selection",
-          "title": "Verify and select the Azure experience capability",
-          "summary": "Before writing code, confirm which Speech or Voice capability fits the experience. Record its API, region, identity, cost, accessibility limits, consent rules, and release gates.",
-          "outcome": "Dated, evidence-backed capability decision record covering service, API, region, identity, pricing, accessibility, disclosure, and limited-access gating",
+          "title": "Choose the application your users need",
+          "summary": "Choose interactive assistance or repeatable content production before selecting a media format. Agree application acceptance checks and prove feasibility.",
+          "outcome": "An agreed application goal, with a user task or workflow trigger and delivery owners",
           "sequence": 1
         },
         {
           "id": "foundation",
-          "title": "Provision the shared Foundry + Speech foundation",
-          "summary": "Deploy the keyless Foundry, model, Azure AI Search, Speech data plane, and observability baseline the avatar experience uses, with managed-identity RBAC and no secrets.",
+          "title": "Connect the required foundation",
+          "summary": "Reuse approved tenant resources and verify runtime access. Add models or indexed retrieval only when the chosen experience needs them.",
           "implementation_paths": [
             "accelerator/main.bicep",
             "accelerator/scripts/deploy.sh"
@@ -413,49 +414,49 @@
         },
         {
           "id": "content-pipeline",
-          "title": "Build the governed content pipeline",
-          "summary": "Connect approved content and keep its owner, version, expiry date, and access rules. Use that record to control what the experience may say.",
+          "title": "Connect content and approve wording",
+          "summary": "Connect authoritative content and keep its version and expiry. For content production, detect source changes and approve replacement wording before rendering.",
           "implementation_paths": [
             "accelerator/sample-data"
           ],
-          "outcome": "Versioned claim set with authoritative sources, owners, and expiry",
+          "outcome": "Approved wording bound to authoritative source revisions",
           "sequence": 3
         },
         {
           "id": "grounded-assistant",
-          "title": "Build the grounded assistant behind the experience",
-          "summary": "Build a model or Foundry agent that drafts from approved content, cites its sources, refuses unsupported claims, and hands uncertain cases to a person.",
+          "title": "Add grounded authoring or live answers when needed",
+          "summary": "Skip generation when wording is already approved. Otherwise connect the approved sources and prove citations, refusal, and support routing.",
           "outcome": "Approved-claim answers with citations and a refusal path",
           "sequence": 4
         },
         {
           "id": "experience-generation",
-          "title": "Generate the accessible avatar experience",
-          "summary": "Generate the experience from an approved script revision. Include a synthetic-media notice, captions or a transcript, and a non-avatar fallback.",
+          "title": "Connect generation to the application",
+          "summary": "Connect generation jobs to the content workflow or live rendering to the assistant client. Include accessible alternatives and recover failed jobs without duplicate output.",
           "implementation_paths": [
             "accelerator/content_pack.py"
           ],
-          "outcome": "Accessible experience generated from an approved revision, with disclosure and fallback",
+          "outcome": "A working generation path in the application, with accessible output",
           "sequence": 5
         },
         {
           "id": "approval-gating",
-          "title": "Gate publication behind human approval",
-          "summary": "Version output, collect factual, legal, brand, and accessibility approvals, and implement pause or withdrawal when a source changes.",
+          "title": "Approve publication and prove withdrawal",
+          "summary": "Use the customer's approval system to authorize the exact media revision. Prove publication and withdrawal in the actual user channel.",
           "implementation_paths": [
             "accelerator/sample-data/approvals.json"
           ],
-          "outcome": "Approved publication and withdrawal record with a full trace",
+          "outcome": "Authorized publication and tested withdrawal from the serving channel",
           "sequence": 6
         },
         {
           "id": "prove-and-operate",
           "title": "Evaluate, red-team, trace, and operate",
-          "summary": "Test whether the experience stays grounded, discloses synthetic media, remains accessible, and hands off correctly. Trace failures before deciding whether to release the pilot.",
+          "summary": "Prove the assistant through its authenticated client or a complete source-update cycle through the deployed content workflow. Test failure recovery and withdrawal before release.",
           "implementation_paths": [
             "accelerator/sample-data/feedback-fixture.json"
           ],
-          "outcome": "Pilot scorecard, red-team result, trace review, and release decision",
+          "outcome": "Application acceptance evidence with an operating owner; a generated video alone is insufficient",
           "sequence": 7
         }
       ],
@@ -469,7 +470,7 @@
       "name": "Operational Agents",
       "tagline": "Carry out bounded work with approved tools and evidence of the result.",
       "order": 4,
-      "customer_outcome": "A team can control an agent's tool execution, approve exact changes, and recover interrupted work without blindly repeating effects.",
+      "customer_outcome": "A team can control an agent's tool execution, approve exact changes, and recover interrupted work without repeating effects blindly.",
       "maturity": "initial",
       "level": "guided",
       "duration_minutes": 0,
@@ -480,7 +481,7 @@
         "Which live facts and tool permissions does the task need?",
         "Where does task state belong, and what must survive a restart?",
         "Who approves an exact change, and how will the system reject stale approval?",
-        "How will an operator establish whether an interrupted operation committed?"
+        "How will an operator determine whether an interrupted operation committed?"
       ],
       "lessons": [
         {
@@ -562,9 +563,9 @@
         },
         {
           "id": "foundation",
-          "title": "Select offline or live execution",
-          "summary": "Run deterministic local exercises or connect the same engine to a configured Foundry agent.",
-          "outcome": "The selected execution mode produces evidence without silently switching modes.",
+          "title": "Connect the execution environment",
+          "summary": "Connect the customer's runtime to an approved model and tool API. Use local checks only for reference behavior.",
+          "outcome": "The runtime can authenticate to the required services and rejects denied access.",
           "implementation_paths": [
             "accelerator/cli.py",
             "accelerator/foundry_client.py",
@@ -575,9 +576,9 @@
         },
         {
           "id": "tool-contracts",
-          "title": "Validate tool requests",
-          "summary": "Define narrow schemas and a synthetic backend with conditional updates and operation IDs.",
-          "outcome": "Invalid arguments and duplicate operation conflicts are rejected.",
+          "title": "Connect narrow tool operations",
+          "summary": "Implement the customer's read and proposal adapters with destination authorization and version checks.",
+          "outcome": "The connected operation rejects invalid arguments and duplicate-operation conflicts.",
           "implementation_paths": [
             "accelerator/tools.py",
             "accelerator/tests/test_runtime.py"
@@ -587,8 +588,8 @@
         {
           "id": "task-state",
           "title": "Persist task progress",
-          "summary": "Keep task progress separate from live records and load it in a fresh process.",
-          "outcome": "Pending approval and prior evidence survive a CLI restart.",
+          "summary": "Keep task progress in the customer's durable application store, separate from live records.",
+          "outcome": "Pending approval and prior evidence survive a runtime restart.",
           "implementation_paths": [
             "accelerator/state.py",
             "accelerator/cli.py"
@@ -621,7 +622,7 @@
           "id": "recovery",
           "title": "Reconcile interrupted operations",
           "summary": "Interrupt the process around a tool commit and look up the operation before deciding what happened.",
-          "outcome": "A committed operation is recovered once; an unproven result remains unresolved.",
+          "outcome": "A committed operation is recovered once; an unproven result stays unresolved.",
           "implementation_paths": [
             "accelerator/runtime.py",
             "accelerator/tests/test_runtime.py"
@@ -630,9 +631,9 @@
         },
         {
           "id": "evaluate-operate",
-          "title": "Inspect behavioral evidence",
-          "summary": "Run failure cases and distinguish local runtime checks from live model and customer acceptance.",
-          "outcome": "A behavioral report and a named list of remaining pilot requirements.",
+          "title": "Deliver and hand over the connected task",
+          "summary": "Test through the customer's user channel, inspect destination evidence, and rehearse recovery with the operating owner.",
+          "outcome": "A deployed scoped task with customer acceptance evidence and an operating owner.",
           "implementation_paths": [
             "accelerator/validate.py",
             "accelerator/sample-data/expected.json"

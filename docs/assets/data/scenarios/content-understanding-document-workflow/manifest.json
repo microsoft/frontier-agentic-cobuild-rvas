@@ -3,14 +3,14 @@
   "name": "Content Understanding and Document Workflow",
   "tagline": "Turn documents into structured results that a person can review.",
   "order": 2,
-  "customer_outcome": "An expert tests safe document samples, gives engineering a clear JSON contract, and keeps a person in control of the final workflow decision.",
+  "customer_outcome": "A team processes approved documents in its tenant, reviews uncertain fields, and sends the agreed result with evidence of any downstream action.",
   "maturity": "initial",
   "level": "guided",
   "duration_minutes": 420,
   "stage": "customer-build",
   "owner": "RVAS field team",
   "decision_prompts": [
-    "Which document decision creates measurable value when it is faster and more consistent?",
+    "Which document decision creates measurable value when it becomes faster and more consistent?",
     "Are representative, authorized samples and expected outcomes ready for SME testing?",
     "Where must human review, correction, and evidence be retained in the workflow?",
     "What isolation, access, and promotion controls are required beyond Studio project/analyzer boundaries?"
@@ -18,7 +18,7 @@
   "lessons": [
     {
       "id": "foundation",
-      "title": "Provision the shared Foundry foundation",
+      "title": "Confirm scope and connect the document foundation",
       "path": "lessons/01-provision-foundation.md"
     },
     {
@@ -55,8 +55,8 @@
   "build_modules": [
     {
       "id": "foundation",
-      "title": "Provision the shared Foundry foundation",
-      "summary": "Create the keyless Foundry account, chat + embedding deployments, document storage, and observability baseline before adding document services or customer files.",
+      "title": "Confirm scope and connect the document foundation",
+      "summary": "Agree the document class and intended action before selecting services. Reuse the approved environment and connect the required runtime identities.",
       "implementation_paths": [
         "accelerator/main.bicep"
       ],
@@ -66,12 +66,12 @@
       "id": "document-source",
       "title": "Connect an approved document source",
       "summary": "Choose Azure Blob, ADLS Gen2, SharePoint, or OneLake and preserve source identity, version, permissions, and quarantine controls.",
-      "outcome": "Approved intake and document-retention design"
+      "outcome": "A working source adapter with authorized intake and rejection evidence"
     },
     {
       "id": "extraction-selection",
       "title": "Select the extraction capability",
-      "summary": "Test the available extraction options against real sample quality and the fields reviewers need. Then check region and cost.",
+      "summary": "Test extraction options against real sample quality and the fields reviewers need. Then check region and cost.",
       "outcome": "Document capability and implementation decision"
     },
     {
@@ -86,8 +86,8 @@
     {
       "id": "human-review",
       "title": "Build review, correction, and handoff",
-      "summary": "Send uncertain results to a named reviewer. Keep every correction, then pass only approved results to the next system.",
-      "outcome": "Reviewer correction and approval trace"
+      "summary": "Connect the customer review surface and the agreed result handoff. Retain corrections and prove approved posting cannot duplicate an action.",
+      "outcome": "A completed review with its authorized handoff or destination receipt"
     },
     {
       "id": "prove-and-observe",

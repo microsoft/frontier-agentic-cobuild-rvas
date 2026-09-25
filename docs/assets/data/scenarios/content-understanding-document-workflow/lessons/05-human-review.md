@@ -1,7 +1,7 @@
 # Module 5 — Build review, correction, and handoff
 
 Module 4 raises exceptions; this module resolves them. A reviewer sees missing and low-confidence
-fields, corrects them, and approves the result. Retain every correction as evidence. Never silently
+fields, corrects them, and approves the result. Keep every correction as evidence. Never silently
 overwrite extraction, and send corrections to module 6's evaluation.
 
 ![Results with review reasons need correction. Both corrected and clean results require authorized approval before handoff.](../diagrams/05-human-review-handoff.png)
@@ -16,28 +16,35 @@ overwrite extraction, and send corrections to module 6's evaluation.
 
 ## Choose your path
 
-| Option | Reviewer surface | Handoff mechanism | Build effort | Best when |
-| --- | --- | --- | --- | --- |
-| **A. Action tool handoff** *(default)* | Any queue/app that reads the result | Agent calls an approved action tool (API/MCP) to post the result | Low–medium | You are building on the Foundry agent stack |
-| B. Human-in-the-loop review app | Purpose-built correction UI over the result | App writes back the approved result | Medium–high | Reviewers need a rich correction experience |
-| C. Multi-agent workflow handoff | An agent routes the case to a named human reviewer | Workflow transition with state | Medium | You already run a multi-agent workflow |
+Make two decisions separately. **Where does the reviewer work?** Prefer the customer's existing
+case queue or workflow when it can show the source evidence and capture a correction. Build a
+dedicated review app when reviewers need side-by-side documents or region overlays. That adds UI
+and authorization work, but does not change the downstream write contract.
 
-**Default: Option A.** The correction UI can be simple. The **handoff seam** must be correct: one
-approved action tool posts an approved result as the workflow identity and records a trace. Action
-tools keep the write boundary narrow. The customer's posting adapter still needs authorization
-and idempotency; an MCP schema alone supplies neither.
+Then choose how the approved result reaches its destination:
 
-**Choose B** when reviewers need a rich correction experience (side-by-side document and fields,
-bounding-box overlays). The handoff still uses the approved seam. **Choose C** when this workflow is
-already an agent in a multi-agent system and needs an explicit human-approval handoff.
+| Handoff | Choose it when | Work required |
+| --- | --- | --- |
+| **Application calls a bounded posting API** | The next action is known after approval. | Authenticate the reviewer, check the exact approved payload, and post under a scoped workflow identity. No agent is required. |
+| Agent proposes an action-tool call | The surrounding application already uses an agent to choose work. | Expose a narrow proposal contract. Application code must still check approval and dispatch the write; a tool schema grants no permission. |
+| Existing workflow coordinates the handoff | The customer already manages long-running review in a workflow system. | Persist the case and approval while waiting, then call the same posting API. Preserve the correction history and destination receipt across retries. |
 
-**Migration cost.** Moving from A to B adds a UI before the same seam. Moving from A or B to C changes
-orchestration but retains the result contract and correction record. Keep the handoff seam stable so
-the rest can change.
+These choices can coexist. A rich review app can use the first handoff, and an agent can route a
+case into an existing human workflow. Use the smallest extra infrastructure that serves the
+reviewer's actual task.
 
 ## Implementation
 
-### Option A — Action tool handoff (default)
+### Build the review-to-posting path
+
+Connect module 4's result to the chosen queue. Each case must show the original document,
+review reasons, and extracted evidence. Give an authorized reviewer a way to correct a field
+and submit the exact reviewed revision for approval.
+
+Implement one posting operation for the agreed destination. For example, create a draft record
+rather than granting unrestricted update access. Define its input schema with the destination
+owner and retain its returned record/operation ID. Use the same operation whether application
+code or an agent proposed the handoff.
 
 Route exceptions to a queue, let a reviewer correct them, then post the approved result through one
 action tool. Record the correction **before** handoff and never mutate the original result:
@@ -66,7 +73,7 @@ def apply_correction(result, field, corrected_value, reviewer_id, reason):
 Save the function in your workflow module and apply it to module 4's `result.json` after the
 reviewer checks the document. Write the returned copy to `reviewed-result.json` and the trace
 to `trace.json`; retain the original. Resolve every review reason before creating an approval.
-The example records one correction; repeat the review for each flagged field.
+The example records one correction. Repeat the review for each flagged field.
 
 **Build the handoff against one approved destination contract.** Use these steps here:
 
@@ -84,14 +91,14 @@ walkthrough without that API, stop at the reviewed result and approval trace. Ma
 handoff unimplemented; do not claim that a local JSON record changed a business system.
 Modules 6 and 7 must retain that boundary.
 
-### Option B — Human-in-the-loop review app
+### When building a dedicated review app
 
 Give reviewers the document with grounding overlays and editable flagged fields. On approval, the app
 writes the same correction record and calls the same handoff seam. The app captures reviewer identity,
 timestamp, before-and-after values, and reason, so its trace matches Option A. Only the reviewer
 experience changes.
 
-### Option C — Multi-agent workflow handoff
+### When using an existing agent workflow
 
 If this workflow is one agent among several, use an explicit handoff. An agent can prepare the
 typed result and correction record, but a **named human** must approve the result before the
@@ -99,6 +106,12 @@ workflow calls the action tool. Module 7 contains the hosting steps; orchestrati
 not replace the approval check at the destination.
 
 ## Verify
+
+**Complete one case in the actual reviewer surface.** Correct a flagged value and submit it through
+the posting adapter. Inspect the destination independently, then repeat the same operation ID and
+confirm no duplicate appears. Deny a second case and confirm the destination remains unchanged.
+If posting is outside the agreed release, verify the reviewed-result handoff to its named owner and
+keep posting disabled.
 
 Check the trace written by your review step, then check who may trigger the handoff. Write the
 approval trace to `trace.json` and inspect it.

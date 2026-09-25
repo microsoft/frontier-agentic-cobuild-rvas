@@ -22,6 +22,19 @@ personal memory. A remembered preference can never authorize a mutation.
 
 ## Implementation
 
+Persist the customer task's scope, consumed budgets, pending proposal, and
+evidence in the approved application store. Keep the authoritative record
+version in the destination system; fetch it again before dispatch. Choose a
+durable store and ownership model that fits the runtime. Local SQLite can
+demonstrate the contract but is not shared state for replaceable workers.
+
+Authorize task reads and approvals separately from model access. Restart the
+application while a task waits for approval, then load it under its existing ID.
+Do not reset its budget or replace its pending proposal. Agree retention and
+deletion with the operating owner.
+
+### Reference restart check
+
 Follow the [approval exercise](../accelerator/README.md#approve-one-exact-update)
 until the task reaches `waiting_approval`. Keep its `STATE` path and `TASK_ID`.
 Open a fresh shell, set those variables to the saved values, and run from the
@@ -40,6 +53,11 @@ The CLI rejects state paths under scenario sources or the published site.
 Do not check databases, credentials, or customer evidence into Git.
 
 ## Verify
+
+Restart the customer's runtime and verify the same pending operation is visible
+to its authorized reviewer. Another user must not gain access to it. Inspect
+the destination and confirm waiting for approval caused no write. Then use the
+reference check below for local regression.
 
 The fresh process must return the same pending digest and prior evidence.
 The record remains unchanged. The automated

@@ -42,9 +42,8 @@
 
     grid.innerHTML = `${scenarioCards}
       <article class="outcome-card outcome-card-custom reveal">
-        <span class="outcome-card-label">Custom route</span>
         <h3>Fully custom scenario</h3>
-        <p>If your use case does not fit these playbooks, contact your Microsoft Cloud Solution Architect to shape a custom co-build.</p>
+        <p>Run <a href="start.html#use-case-mapper">Use-Case Mapper</a> first. If most of your use case comes back not covered, contact your Microsoft Cloud Solution Architect to shape a custom co-build.</p>
       </article>`;
     FP.initReveal();
   }

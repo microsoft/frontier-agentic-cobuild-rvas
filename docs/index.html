@@ -25,7 +25,7 @@
       </a>
       <nav id="navLinks" class="nav-links" aria-label="Primary">
         <a href="#outcomes" aria-current="page">Scenarios</a>
-        <a href="idea-forge.html">Idea Forge</a>
+        <a href="start.html">Start</a>
         <a class="gh" href="https://github.com/microsoft/frontier-agentic-cobuild-rvas" target="_blank" rel="noopener" aria-label="View source on GitHub">GitHub</a>
       </nav>
       <div class="nav-actions">
@@ -56,10 +56,11 @@
         <div>
           <h1 id="heroHeading">Build your customer's<br><span class="accent">AI scenario together.</span></h1>
           <p class="lede">
-            Bring your business idea, break it into practical patterns, and use the relevant guidance to build it with the customer. Adapt the building blocks to the customer's requirements and approved environment.
+            Bring the customer's use case. Break it into parts, find the modules that build each one, and adapt them to the customer's approved environment.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#outcomes">Choose a scenario →</a>
+            <a class="btn btn-ghost" href="start.html#use-case-mapper">Map your use case</a>
           </div>
 
         </div>
@@ -97,12 +98,47 @@
           <div>
             <span class="eyebrow">Initial scenario tracks</span>
             <h2 id="outcomesHeading" style="margin-top:14px">Map your use case to these tracks.</h2>
-            <p>These playbooks provide architectural guidance. They are not standard solutions to build and deploy. Bring your business idea, break it into the capabilities it needs, and use the relevant scenario lessons as building blocks. Record the work the kit does not cover.</p>
+            <p>These playbooks give architectural guidance. They are not standard solutions to deploy. Break your use case into the parts it needs and use the relevant modules as building blocks. Record the work the kit does not cover.</p>
           </div>
         </div>
         <div class="outcome-grid" id="outcomeGrid">
           <div class="empty">Loading outcome journeys…</div>
         </div>
+      </div>
+    </section>
+
+    <section class="section-tight" id="map-example" aria-labelledby="mapHeading">
+      <div class="wrap">
+        <div class="shead reveal">
+          <div>
+            <span class="eyebrow">One use case, several tracks</span>
+            <h2 id="mapHeading" style="margin-top:14px">Most use cases span more than one track.</h2>
+            <p>Take a supplier-onboarding request. Each step lands in a different track, and one step lands in none. <strong>The gaps belong on the map too.</strong></p>
+          </div>
+        </div>
+        <ol class="map-strip reveal" aria-label="Illustrative supplier-onboarding map">
+          <li class="map-part">
+            <span class="map-step">Read the supplier's form</span>
+            <span class="map-track">Content Understanding</span>
+            <span class="map-fit">Adapt the fields</span>
+          </li>
+          <li class="map-part">
+            <span class="map-step">Answer a policy question</span>
+            <span class="map-track">AI Grounding / IQ</span>
+            <span class="map-fit">Connect policy content</span>
+          </li>
+          <li class="map-part">
+            <span class="map-step">Create the record after approval</span>
+            <span class="map-track">Operational Agents</span>
+            <span class="map-fit">Build the system integration</span>
+          </li>
+          <li class="map-part map-part-gap">
+            <span class="map-step">Notify the supplier</span>
+            <span class="map-track">No track</span>
+            <span class="map-fit">New pattern needed</span>
+          </li>
+        </ol>
+        <p class="map-cta reveal"><a class="btn btn-ghost" href="start.html#use-case-mapper">Map your own use case →</a></p>
       </div>
     </section>
 
@@ -112,24 +148,24 @@
           <div>
             <span class="eyebrow">The experience</span>
             <h2 id="howHeading" style="margin-top:14px">How it works.</h2>
-            <p>Use the playbooks to co-build the agreed part of the customer's solution. Slides support the design discussions; the lessons guide implementation.</p>
+            <p>Use the playbooks to co-build the agreed part of the customer's solution. Slides support the design discussions; the modules guide implementation.</p>
           </div>
         </div>
         <div class="steps-grid reveal">
           <div class="step-item">
             <div class="step-num">01</div>
             <div class="step-title">Agree the scope</div>
-            <p class="step-desc">Define the customer outcome and acceptance criteria. Use Idea Forge if the opportunity is still unclear.</p>
+            <p class="step-desc">Define the customer outcome and acceptance criteria. Use <a href="start.html#idea-forge">Idea Forge</a> if the opportunity is still unclear.</p>
           </div>
           <div class="step-item">
             <div class="step-num">02</div>
-            <div class="step-title">Map the parts to sessions</div>
-            <p class="step-desc">Decompose the use case and map each part to relevant lessons across tracks. Identify the adaptation needed and any additional engineering before planning sessions.</p>
+            <div class="step-title">Map the parts to modules</div>
+            <p class="step-desc">Run <a href="start.html#use-case-mapper">Use-Case Mapper</a> to map each part to modules across tracks. It shows what to adapt and what the kit doesn't cover.</p>
           </div>
           <div class="step-item">
             <div class="step-num">03</div>
             <div class="step-title">Build together</div>
-            <p class="step-desc">Work through the design decisions and adapt the building blocks for the agreed parts. Keep lesson prerequisites and use the approved environment.</p>
+            <p class="step-desc">Work through the design decisions and adapt the building blocks for the agreed parts. Respect module prerequisites and use the approved environment.</p>
           </div>
           <div class="step-item">
             <div class="step-num">04</div>
@@ -137,8 +173,8 @@
             <p class="step-desc">Review the implementation against the agreed acceptance criteria. Assign an owner to any remaining work.</p>
           </div>
         </div>
-        <p><strong>Scope each engagement.</strong> The kit can support a pilot or a longer co-build. Guided lesson times exclude customer-specific engineering. Production readiness requires acceptance in the customer's environment; deploying an accelerator alone does not establish it.</p>
-        <p>Accelerators include sample assets and reusable code. Some also create demo resources. Check each guide before running it; demo foundations do not provision an enterprise landing zone.</p>
+        <p><strong>Scope each engagement.</strong> The kit can support a pilot or a longer co-build. Guided module times exclude customer-specific engineering. Production readiness needs acceptance in the customer's environment. Deploying an accelerator doesn't prove it.</p>
+        <p><strong>Deliver in the customer's tenant.</strong> Reuse approved resources and connect the actual sources and user channel. Reference code and synthetic checks support the build; they do not replace tenant acceptance.</p>
       </div>
     </section>
 
@@ -152,7 +188,7 @@
       <p>Agentic Co-build.</p>
       <nav class="footer-links" aria-label="Footer">
         <a href="#outcomes">Scenarios</a>
-        <a href="idea-forge.html">Idea Forge</a>
+        <a href="start.html">Start</a>
       </nav>
     </div>
   </footer>

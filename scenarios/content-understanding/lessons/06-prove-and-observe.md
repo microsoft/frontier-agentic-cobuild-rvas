@@ -1,13 +1,13 @@
 # Module 6 — Evaluate and trace the workflow
 
 Prove the workflow before it affects a real decision. “It worked on the demo document” is not
-evidence. This module measures representative cases against a gate and traces every run so you can
+evidence. This module measures representative cases against a gate and traces each run so you can
 diagnose failures.
 
 ## What you build
 
-1. A labeled evaluation set from module-1 fixtures **and** module-5 corrections. Real mistakes make
-   useful test cases.
+1. A labeled evaluation set from the approved documents connected in module 2 and the corrections
+   captured in module 5. Keep source permissions and retention on this dataset.
 2. Gate metrics: field accuracy, false-approval rate, review rate, injection resistance, and latency.
 3. GenAI tracing to Application Insights that correlates extraction, review, and handoff.
 
@@ -15,14 +15,14 @@ diagnose failures.
 
 | Option | What it measures | Effort | Best when |
 | --- | --- | --- | --- |
-| **A. Foundry evaluation + built-in evaluators** *(default)* | Quality + safety with managed evaluators, correlated to traces | Low–medium | You are on the Foundry stack (you are) |
+| A. Foundry evaluation + built-in evaluators | Quality and safety checks on captured responses | Low–medium | Managed evaluation adds useful evidence for the selected extraction path |
 | B. Custom offline harness | Field-level accuracy vs. expected results, no network | Low | You want a fast, deterministic gate in CI |
 | C. Adversarial / red-team pass | Injection resistance, false-approval under attack | Medium | The documents are attacker-influenced (most real ones are) |
 
-**Default: Option A.** Pair it with B and C. Run the offline harness (B) in CI on every change for a
-fast field-accuracy gate. Use Foundry evaluators (A) for the graded quality and safety run correlated
-to traces. Add the adversarial pass (C) because documents contain untrusted text. An ordinary payment
-request is document content; an instruction to bypass review must never control the workflow.
+**Start with reviewed field labels and explicit acceptance thresholds.** Use B for deterministic
+comparison of captured results, and add A when model-graded checks provide useful evidence.
+Add the adversarial pass (C) because documents contain untrusted text. An ordinary payment request is
+document content; an instruction to bypass review must never control the workflow.
 Define thresholds and enforce them in your harness.
 
 **Migration cost.** These options layer together. B is inexpensive to keep in CI. A adds managed
@@ -30,6 +30,12 @@ evaluators and trace correlation. C adds attack cases to the same dataset. All r
 gate.
 
 ## Implementation
+
+Run the connected workflow on the approved acceptance set, including the review/posting boundary
+within your agreed scope. Capture actual results, source hashes, and destination receipts. Have the
+business owner review false approvals and missed fields before accepting the gate.
+Synthetic unit tests remain useful for regression, but cannot establish extraction quality on
+the customer's document class.
 
 ### Option A — Foundry evaluation + built-in evaluators
 
@@ -46,7 +52,7 @@ create a dataset evaluation with a row per document: `query` describes the reque
 `response` contains the extracted values, and `context` contains approved source text.
 Map these columns to Groundedness and Relevance, choose the judge deployment, and inspect
 each failed row. Keep source permissions on this evaluation dataset.
-These managed scores supplement the field checks below; they cannot approve a handoff.
+These managed scores add evidence to the field checks below; they cannot approve a handoff.
 Current dataset setup:
 <https://learn.microsoft.com/azure/foundry/observability/how-to/cloud-evaluation-datasets>
 
@@ -115,8 +121,8 @@ script does not measure injection resistance or live latency.
 
 ## Verify
 
-Prove the gate on cases that resemble real documents. Also prove that the run is traceable. A good
-score on the demo document is not evidence.
+Prove the gate on cases that resemble real documents. Also prove the run is traceable. A good score
+on the demo document is not evidence.
 
 **1. An adversarial document does not auto-approve.**
 

@@ -25,6 +25,25 @@ its own proof.
 
 ## Implementation
 
+### Reconcile with the real destination
+
+Persist an operation ID before dispatch and implement an authorized lookup of
+the destination's receipt. Compare that receipt with the approved arguments and
+record version. Do not use the model's conversation as evidence that the
+operation committed.
+
+In an approved test environment, interrupt the caller after the destination
+commits but before the caller records success. Restart the application and
+reconcile using the same operation ID. Then test an unavailable lookup: the
+task must remain unresolved and reach the operating owner. Never inject these
+failures into a production business operation.
+
+Document the destination's absence/retry semantics. If it cannot prove whether
+a write committed, stop for manual reconciliation rather than inventing an
+idempotency guarantee.
+
+### Reference failure injection
+
 Use the [accelerator recovery exercise](../accelerator/README.md#recover-an-interrupted-write)
 to interrupt a fresh approved task after the tool commits. Its runner snapshot
 still says `dispatching`. The backend ledger already contains the operation.
@@ -42,6 +61,11 @@ python3 -B scenarios/operational-agents/accelerator/validate.py --case recovery
 ```
 
 ## Verify
+
+Inspect the destination independently: the approved test operation must occur
+once after reconciliation. Have the operator resolve or escalate an uncertain
+case using the retained task and operation IDs. A passed SQLite test below does
+not prove an external API's recovery contract.
 
 The restart tests use fresh processes and real temporary SQLite files. After
 commit, expect one backend operation and record version 2. Before dispatch,

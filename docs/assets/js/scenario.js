@@ -35,7 +35,7 @@
     document.getElementById('scenarioMeta').innerHTML = `
       ${FP.levelBadge(scenario.level || 'guided')}
       ${FP.durBadge(scenario.duration_minutes)}
-      <span class="badge badge-tag">${(scenario.lessons || []).length} lessons</span>`;
+      <span class="badge badge-tag">${(scenario.lessons || []).length} modules</span>`;
     document.getElementById('customerOutcome').textContent = scenario.customer_outcome;
     document.getElementById('slidesLink').href = `slides.html?id=${encodeURIComponent(scenario.id)}`;
     document.getElementById('acceleratorLink').href = scenarioGuideUrl(scenario.id, 'accelerator');
@@ -70,11 +70,11 @@
       ${firstLesson ? `
         <a class="journey-pager-link next" href="${FP.esc(firstLesson.lesson_path)}">
           <span>Start</span>
-          <strong>Lesson ${FP.esc(firstLesson.sequence)}: ${FP.esc(firstLesson.title)}</strong>
+          <strong>Module ${FP.esc(firstLesson.sequence)}: ${FP.esc(firstLesson.title)}</strong>
         </a>` : `
         <span class="journey-pager-link is-disabled" aria-disabled="true">
           <span>Start</span>
-          <strong>No lessons available</strong>
+          <strong>No modules available</strong>
         </span>`}
     `;
   }
@@ -84,7 +84,7 @@
     if (!target) return;
 
     target.innerHTML = [
-      ['Accelerator guide', scenarioGuideUrl(scenario.id, 'accelerator')],
+      ['Reference code guide', scenarioGuideUrl(scenario.id, 'accelerator')],
     ].map(([label, href]) => `<a href="${FP.esc(href)}">${FP.esc(label)}</a>`).join('');
   }
 

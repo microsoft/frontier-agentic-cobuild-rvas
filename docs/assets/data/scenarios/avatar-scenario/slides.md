@@ -6,11 +6,10 @@ paginate: true
 <!-- slide:id=scenario-open -->
 
 # Avatar Scenario
-## A governed, accessible avatar-led experience
+## An application with accessible output
 
-This workshop helps you decide whether an avatar-led experience can help employees understand
-approved onboarding content while preserving human ownership, disclosure, accessibility, and
-operating evidence.
+Build an interactive assistant or a repeatable content-production application in the customer's
+tenant. Start with the application goal, then choose whether an avatar helps.
 
 **Customer question:** What would make this trustworthy enough to pilot?
 
@@ -18,17 +17,15 @@ operating evidence.
 <!-- slide:id=lesson-experience-selection-context -->
 
 # Module 1 — Context
-## Select the experience capability
+## Choose the application goal
 
-Onboarding moments need different experiences. A short policy update, multilingual welcome, live
-support moment, and replayable training segment imply different choices.
+**Interactive assistant:** help users ask questions or complete a task using approved knowledge.
 
-Start with the **customer experience goal**, then choose the technology:
+**Content-production application:** turn approved source revisions into media through a repeatable
+generation and publishing workflow.
 
-- What should the employee be able to understand or do afterward?
-- Does the moment need video, avatar presence, live interaction, translated video, plain audio, or text?
-- Which audience, locale, channel, and accessibility needs define the first pilot?
-- Where would synthetic media help clarity, and where might it reduce trust?
+Neither is the default. Agree on the first user task or workflow trigger and the evidence that
+proves delivery. Producing one video is an integration check.
 
 ---
 <!-- slide:id=lesson-experience-selection-choices -->
@@ -36,16 +33,16 @@ Start with the **customer experience goal**, then choose the technology:
 # Module 1 — Choices and trade-offs
 ## Match capability to risk and value
 
-Compare experience options against the actual pilot need:
+Choose the media format after the application goal:
 
-- **Batch avatar video:** good for reviewed, reusable messages; slower to change.
+- **Batch avatar video:** a rendering step in a content-production application; requires job handling and controlled publication.
 - **Real-time avatar:** more interactive; higher latency, consent, moderation, and support expectations.
 - **Voice or audio-first:** lower production weight; may meet accessibility and channel needs better.
-- **Video translation:** useful when source video already exists; requires careful approval of translated meaning.
+- **Video translation:** maintain language versions in the content workflow; review translated meaning before publication.
 - **No avatar:** still valid when disclosure, accessibility, cost, or trust argues for a simpler format.
 
 The decision must cover consent, likeness and voice rights, supported regions, identity model,
-pricing shape, accessibility coverage, content-safety controls, and an exit path.
+pricing, accessibility coverage, content-safety controls, and an exit path.
 
 ---
 <!-- slide:id=lesson-experience-selection-evidence -->
@@ -56,6 +53,7 @@ pricing shape, accessibility coverage, content-safety controls, and an exit path
 By the end of this module, the team should have a short decision record that states:
 
 - selected experience capability and why it fits the pilot
+- application goal, user task or workflow trigger, and acceptance checks
 - alternatives considered and why they were not selected
 - consent, disclosure, accessibility, privacy, residency, and retention assumptions
 - operating owner, support path, and conditions that would stop or simplify the experience
@@ -68,14 +66,14 @@ By the end of this module, the team should have a short decision record that sta
 # Module 2 — Context
 ## Provision the Foundry and Speech foundation
 
-The scenario needs a foundation that avoids turning every prototype into a one-off integration.
+The scenario needs a foundation so each prototype does not become a one-off integration.
 
 The foundation should support:
 
 - keyless access patterns where possible
-- a model and grounding path for drafting and review
+- a model and grounding path only when assisted authoring or live answers are needed
 - Speech or media services for the selected experience capability
-- search or knowledge access for approved onboarding content
+- access to the approved content; add indexed retrieval only when the selected path needs it
 - telemetry that helps owners understand behavior without over-collecting employee data
 
 This becomes the shared base for policy, learning, and multilingual communication scenarios.
@@ -102,13 +100,13 @@ Build a foundation customers can adapt. Avoid a locked architecture.
 # Module 2 — What must be true
 ## A foundation ready for governed work
 
-The test is whether the foundation supports accountable operation:
+The test is whether the foundation can run accountably:
 
 - required resources are provisioned with the intended identity model
 - environment settings are documented without exposing secrets
 - content, assistant, rendering, approval, and telemetry components can connect
 - owners know where logs, traces, and configuration evidence will live
-- the platform team understands what must change for a real customer tenant
+- the runtime identity can reach the selected services from the customer's approved network
 
 **Discussion:** Can the team explain who can access what, why, and how that access is reviewed?
 
@@ -128,8 +126,8 @@ For every claim used in the experience, the pipeline needs:
 - expiry or withdrawal conditions
 - traceability from source to script segment
 
-This makes onboarding content a controlled input for the assistant, storyboard, approvals, and final
-experience.
+This makes onboarding content a controlled input for the assistant, storyboard, approvals, and
+published experience.
 
 ---
 <!-- slide:id=lesson-content-pipeline-choices -->
@@ -147,7 +145,7 @@ Discussion choices:
 - How are locale-specific policy differences handled?
 - Who can retire, pause, or replace content when guidance changes?
 
-There is a trade-off between speed and confidence. Start with a small, well-owned pilot corpus.
+This is a speed-versus-confidence choice. Start with a small, well-owned pilot corpus.
 
 ---
 <!-- slide:id=lesson-content-pipeline-evidence -->
@@ -162,6 +160,7 @@ Build a traceable claim set that downstream steps can use:
 - sensitive topics are marked with review and escalation requirements
 - unapproved or expired material is excluded from drafting
 - the source-to-script relationship can be shown to reviewers
+- exact wording is approved before module 5 creates a private preview
 
 **Discussion:** If an employee challenges a statement in the avatar experience, can the owner show where it came from and whether it was current?
 
@@ -171,8 +170,8 @@ Build a traceable claim set that downstream steps can use:
 # Module 4 — Context
 ## Build the grounded assistant behind the experience
 
-The assistant helps draft scripts, answer reviewer questions, and propose employee-facing language.
-It must stay grounded in approved content.
+Skip model-based drafting when the wording is already approved.
+When assisted authoring or live answers are needed, connect only the permitted sources.
 
 Expected behavior:
 
@@ -209,7 +208,7 @@ interaction.
 # Module 4 — What must be true
 ## Cited drafts and visible refusals
 
-The evidence should show that the assistant supports accountable content work:
+The evidence should show accountable content work:
 
 - draft segments include source links or claim references
 - unsupported requests are refused or routed for human help
@@ -223,11 +222,12 @@ The evidence should show that the assistant supports accountable content work:
 <!-- slide:id=lesson-experience-generation-context -->
 
 # Module 5 — Context
-## Generate the accessible avatar experience
+## Connect generation to the application
 
-The experience is more than a rendered avatar. It includes the script, visuals, captions, transcript, disclosure, fallback path, and channel experience.
+Content production needs a deployed workflow with persisted job state and failure recovery.
+An interactive assistant needs a client connected to the bounded answer path.
 
-For customers, the key question is whether employees can understand the message clearly and honestly:
+The question is whether employees can understand the message clearly and honestly:
 
 - synthetic-media disclosure is visible and plain
 - captions and transcript are available
@@ -235,7 +235,7 @@ For customers, the key question is whether employees can understand the message 
 - languages and locale differences are handled intentionally
 - a non-avatar alternative exists where needed
 
-Accessibility and disclosure are part of the product, not post-production cleanup.
+Accessibility and disclosure belong in the product, not post-production cleanup.
 
 ---
 <!-- slide:id=lesson-experience-generation-choices -->
@@ -243,7 +243,7 @@ Accessibility and disclosure are part of the product, not post-production cleanu
 # Module 5 — Choices and trade-offs
 ## Design for trust, not novelty
 
-Experience choices affect employee trust:
+Experience choices shape employee trust:
 
 - **Avatar style:** realistic avatars can feel polished, but may raise impersonation concerns.
 - **Voice:** branded voice can improve consistency, but requires consent and rights clarity.
@@ -268,6 +268,9 @@ Build an experience package that can be reviewed before release:
 - supports the selected audience, locale, and channel
 - identifies who can pause or withdraw the published version
 
+For content production, repeat a trigger and recover an interrupted job without duplicate output.
+For an assistant, test supported and refused questions through the actual client.
+
 **Discussion:** Could an employee understand that the media is synthetic, get the same message without the avatar, and find human help?
 
 ---
@@ -286,7 +289,9 @@ Before anything is published, named reviewers should confirm:
 - accessibility and inclusive design expectations
 - publication scope, support route, and withdrawal authority
 
-No approval record means no production release.
+For content production, module 3 approved the wording; this module approves the media and release.
+For an assistant, approve the application version and content/refusal policy.
+Enforce the decision in the customer's release system.
 
 ---
 <!-- slide:id=lesson-approval-gating-choices -->
@@ -312,13 +317,15 @@ The approval gate must be easy to use and strong enough to stop unsafe publicati
 # Module 6 — What must be true
 ## Publication and withdrawal record
 
-What you should have is a release record that shows:
+Create a release record that shows:
 
 - approved script revision and rendered experience
 - reviewer roles, decisions, and conditions
 - accessibility and disclosure review outcome
 - publication channel, audience, and owner
 - pause, withdrawal, and replacement process
+
+**Prove withdrawal through the user channel.** Changing a local approval file is insufficient.
 
 **Discussion:** If a source policy changes after launch, who knows, who acts, and what happens to the published experience?
 
@@ -330,7 +337,7 @@ What you should have is a release record that shows:
 
 The pilot should produce evidence for a business decision, not just engagement numbers.
 
-Useful operating evidence includes:
+Useful evidence includes:
 
 - grounding quality and unsupported-claim defects
 - disclosure and accessibility checks
@@ -361,9 +368,13 @@ Use evidence to improve the experience without making employees feel observed.
 <!-- slide:id=lesson-prove-and-operate-evidence -->
 
 # Module 7 — What must be true
-## Pilot scorecard and release decision
+## Application acceptance and release decision
 
-The final artifact is a decision package:
+**Prove the deployed application.** For content production, run a source update through generation
+and approved publication, then recover a failed job and withdraw outdated output. For an assistant,
+prove the supported task and refusal through its authenticated client.
+
+Keep release evidence in the customer's existing system:
 
 - pilot scorecard tied to the original onboarding outcome
 - known defects and remediation owners
@@ -376,14 +387,15 @@ The final artifact is a decision package:
 ---
 <!-- slide:id=scenario-next-session -->
 
-# Next working session
+# Next working module
 ## Turn the discussion into a pilot plan
 
-Bring one real onboarding moment and the people who own it to the next session.
+Bring one real onboarding moment and the people who own it to the next module.
 
-We will align on:
+Align on:
 
 - pilot topic, audience, locale, and channel
+- application goal and first user task or workflow trigger
 - approved source owners and review expectations
 - selected experience capability and fallback
 - disclosure, accessibility, and human-help requirements

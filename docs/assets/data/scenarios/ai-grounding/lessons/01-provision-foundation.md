@@ -1,11 +1,17 @@
-# Module 1 — Provision the grounding foundation
+# Module 1 — Confirm scope and connect the grounding foundation
 
-Later modules use this footprint. Check resource access before adding content; per-user permissions
-and the application still need implementation.
+Bring the first user task, its source owner, and the channel where people need answers.
+**Confirm the platform path before provisioning.** Review module 2's source choices now:
+if the build belongs in Copilot Studio, do not create an Azure retrieval stack.
+
+For an Azure build, use approved existing resources first. Agree a provisional chat and
+embedding choice with the platform owner before ingestion; module 4 measures and confirms
+those choices. A later embedding change requires a separate index or reingestion.
 
 ## What you build
 
-A resource group containing:
+A verified connection to the resources your selected build needs. The Azure reference
+footprint below is one option, not a requirement for every source/platform choice:
 
 | Resource | Why grounding needs it |
 | --- | --- |
@@ -23,18 +29,19 @@ Output: a `.env` contract with **no secrets**, used by every later module.
 
 | Option | Reproducible | Creates embedding + storage | Best when | Cost while idle |
 | --- | --- | --- | --- | --- |
-| **A. Scenario Bicep** *(default)* | Yes, reviewable IaC | Yes | You are building this scenario for a customer | Search basic + Log Analytics + idle model deployments |
-| B. `azd up` (kit root infra) | Yes | No — chat + Search only, no storage/embedding | You are running the whole Agentic Co-build repository end to end | Same, plus ACR |
+| A. Scenario Bicep reference | Yes, reviewable IaC | Yes | A new footprint reviewed by the platform owner | Review service tiers and deployment SKUs |
+| B. `azd up` (kit root infra) | Yes | No: chat + Search only, no storage/embedding | You are running the whole Agentic Co-build repository end to end | Same, plus ACR |
 | C. Foundry portal | No | Manual | A throwaway demo, or a free-tier Search proof of concept | Lowest; free Search tier possible |
-| D. Bring your own landing zone | Customer's IaC | Depends on what exists | The customer already has governed Foundry + Search | Already owned |
+| **D. Existing approved environment** *(preferred)* | Customer's IaC | Confirm what exists | The customer already has governed resources | Confirm capacity and incremental usage |
 
-**Default: Option A.** It is the only path that provisions *both* an embedding deployment and the
-approved-content container required by modules 3–5. It also produces a diff the customer's platform
-team can review.
+**Prefer D when the platform team provides an approved environment.** Map its endpoints and
+deployment names into your application configuration. Test from the intended runtime network
+and identity; changing environment variables alone does not establish permission or connectivity.
 
-**Migration cost.** A → D is cheap because modules 2+ only read the `.env` contract. Pointing them
-at customer resources is a variable change. C → A is expensive: portal-created resources have
-generated names and no template, so you rebuild. Do not demo from C and promise A.
+Use A for an approved new footprint after reviewing the template with the platform team. B adds
+the shared kit infrastructure and may provision components this use case does not need. C helps
+check a capability, but capture the resulting configuration in the customer's normal deployment
+process before relying on it.
 
 ### Region and model availability come first
 
@@ -47,7 +54,7 @@ and region-support reference below.
 - Query-planning models supported by a knowledge base: `gpt-4o`, `gpt-4o-mini`,
   `gpt-4.1`, `gpt-4.1-mini`, `gpt-4.1-nano`, `gpt-5`, `gpt-5-mini`, `gpt-5-nano` on
   `2025-11-01-preview` and `2026-05-01-preview`; `gpt-5.1`, `gpt-5.2`, `gpt-5.4`, `gpt-5.4-mini`,
-  `gpt-5.4-nano` on `2026-05-01-preview` only —
+  `gpt-5.4-nano` on `2026-05-01-preview` only. Source:
   <https://learn.microsoft.com/azure/search/agentic-retrieval-how-to-create-knowledge-base>
 
 > **Search tier matters.** The free tier cannot use a managed identity to reach your models. Use
@@ -55,7 +62,17 @@ and region-support reference below.
 
 ## Implementation
 
-### Option A — Scenario Bicep (default)
+### Confirm your environment and access
+
+Record the chosen source and first user channel in the existing delivery backlog. Have the
+environment owner identify the subscription, network boundary, and runtime identity. Grant
+only the access required for the chosen ingestion and query paths.
+
+For Copilot Studio, confirm the approved Power Platform environment and the creator's access,
+then continue with module 2 option C. For Azure, follow D below when resources exist; otherwise
+review A before deployment. Do not upload customer content until the source owner approves it.
+
+### Option A — Scenario Bicep reference
 
 The template is [`accelerator/main.bicep`](../accelerator/main.bicep); defaults live in
 [`accelerator/parameters.example.json`](../accelerator/parameters.example.json).
@@ -85,7 +102,7 @@ set +a
 export AZURE_KNOWLEDGE_BASE_NAME=grounding-kb
 ```
 
-What the template does that matters, and why:
+What the template does and why:
 
 ```bicep
 // Keyless-first: shared key access is OFF, so ingestion must use Entra ID.

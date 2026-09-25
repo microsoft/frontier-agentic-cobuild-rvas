@@ -19,7 +19,7 @@
   "lessons": [
     {
       "id": "foundation",
-      "title": "Provision the grounding foundation",
+      "title": "Confirm scope and connect the grounding foundation",
       "path": "lessons/01-provision-foundation.md"
     },
     {
@@ -61,9 +61,9 @@
   "build_modules": [
     {
       "id": "foundation",
-      "title": "Provision Foundry, AI Search, and observability",
-      "summary": "Create the shared keyless foundation and verify its generated environment contract before adding customer data.",
-      "outcome": "Grounding resources and a usable environment contract",
+      "title": "Confirm scope and connect the grounding foundation",
+      "summary": "Confirm the source/platform path before provisioning. Reuse approved tenant resources and verify runtime access.",
+      "outcome": "Approved platform path and working environment connections",
       "implementation_paths": [
         "accelerator/main.bicep",
         "accelerator/scripts/deploy.sh"
@@ -82,7 +82,7 @@
     {
       "id": "ingestion",
       "title": "Ingest and index approved content",
-      "summary": "Connect the selected source, preserve source/version metadata and access controls, then prove retrieval with a seeded corpus.",
+      "summary": "Connect the customer's approved source, keep version metadata and access controls, and prove refresh works.",
       "implementation_paths": [
         "accelerator/sample-data",
         "accelerator/scripts/build_knowledge_source.py"
@@ -93,7 +93,7 @@
       "id": "model-selection",
       "title": "Compare chat and embedding choices",
       "summary": "Compare supported deployments on the answer quality the pilot needs, then check latency, cost, and regional capacity.",
-      "outcome": "A model choice backed by the scenario's question set",
+      "outcome": "A model choice backed by the customer's reviewed questions",
       "implementation_paths": [
         "accelerator/scripts/compare_models.py"
       ]
@@ -117,7 +117,7 @@
     {
       "id": "evaluate-and-trace",
       "title": "Evaluate and trace",
-      "summary": "Test citations, access rules, prompt injection, and stale sources. Trace one request from question to answer so you can explain a failure.",
+      "summary": "Test citations, access rules, prompt injection, and stale sources. Trace one request from question to answer to explain a failure.",
       "outcome": "Evaluation gate passed with trace and red-team evidence",
       "implementation_paths": [
         "accelerator/golden-questions.json",

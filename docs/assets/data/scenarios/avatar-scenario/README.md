@@ -1,14 +1,15 @@
-# Avatar Scenario: build an experience people can verify
+# Avatar Scenario: build an application people can verify
 
 Build an accessible avatar-led experience on Azure and Microsoft Foundry. The sample focuses on
-employee onboarding. You can also use the pattern for approved learning or support content. Every
+employee onboarding, and the pattern also fits approved learning or support content. Every
 published statement must trace to an approved source and named reviewer. Tell users when media is
-synthetic. When a source changes, owners must be able to withdraw the published version.
+synthetic. Owners must be able to withdraw the published version when a source changes.
 
-The course builds the default path. Each module compares Microsoft options and marks where you can
-switch to another approved service. See [`solution.md`](accelerator/solution.md) for the reference
-implementation. Start deployment in
-[`accelerator/README.md`](accelerator/README.md).
+**Deliver an interactive assistant or a repeatable content-production application.** Choose the
+application goal before deciding whether it needs an avatar. Neither goal is the default.
+The batch path includes rendering instructions; the modules identify the workflow and channel
+integrations you must build around generation.
+The [reference guide](accelerator/README.md) explains the reusable code and its limits.
 
 > **Fictional data only.** The accelerator ships synthetic HR content. Never place real customer
 > content, or a real person's voice or likeness, in this repository. **Keyless-first:**
@@ -16,25 +17,41 @@ implementation. Start deployment in
 
 ## The 7 modules
 
-| Module | You build | Default path |
+| Module | You build | Path guidance |
 | --- | --- | --- |
-| [1. Select the experience capability](lesson.html?scenario=avatar-scenario&lesson=experience-selection) | An evidence-backed capability decision | Speech **batch avatar**, standard voice |
-| [2. Provision the foundation](lesson.html?scenario=avatar-scenario&lesson=foundation) | Foundry and Speech resources with observability | Scenario Bicep, managed identity |
+| [1. Choose the application goal](lesson.html?scenario=avatar-scenario&lesson=experience-selection) | An agreed application scope and acceptance statement | Interactive assistant or content production; then choose the media format |
+| [2. Connect the foundation](lesson.html?scenario=avatar-scenario&lesson=foundation) | Runtime access to the resources the experience needs | Existing approved environment first |
 | [3. Governed content pipeline](lesson.html?scenario=avatar-scenario&lesson=content-pipeline) | Versioned, owned claims | Blob + typed claim set |
-| [4. Grounded assistant](lesson.html?scenario=avatar-scenario&lesson=grounded-assistant) | Cited answers and unsupported-claim refusals | Model + approved claim set; agent optional |
-| [5. Generate the accessible experience](lesson.html?scenario=avatar-scenario&lesson=experience-generation) | Approved avatar video with disclosure and text alternatives | Batch synthesis |
-| [6. Gate publication behind human approval](lesson.html?scenario=avatar-scenario&lesson=approval-gating) | Exact-revision approval and withdrawal | Demo approval record checked in code |
+| [4. Grounded authoring or live answers](lesson.html?scenario=avatar-scenario&lesson=grounded-assistant) | Cited drafts or bounded answers, only if needed | Skip generation when wording is already approved |
+| [5. Connect generation to the application](lesson.html?scenario=avatar-scenario&lesson=experience-generation) | A rendering adapter or live client with accessible alternatives | Batch jobs for content production; live rendering for interaction |
+| [6. Gate publication behind human approval](lesson.html?scenario=avatar-scenario&lesson=approval-gating) | Authorized release and withdrawal in the actual channel | Customer's publishing or approval system |
 | [7. Evaluate, red-team, trace, operate](lesson.html?scenario=avatar-scenario&lesson=prove-and-operate) | Release evidence and a scorecard | Scenario checks plus managed evaluation |
 
-**Work through these modules in order.** The default path includes its required steps and
-uses one claim set throughout. You do not need a separate grounding or voice curriculum.
+Module 1 maps the path for your application. For content production, **approve source wording
+in module 3 before rendering a private preview in module 5.** Module 6 approves publication and
+proves withdrawal. For an assistant, approve the source boundary and application behavior;
+individual live answers do not receive per-video approval.
 
-## Decision gates to carry into the customer conversation
+## Bring your implementation
+
+Use a customer-owned private repository for adapters and deployment configuration. Keep approved
+content in its existing system of record. The fictional onboarding pack illustrates the claim
+contract; replace its wording and reviewer identities in your private implementation.
+
+Before building, choose the portal, learning platform, or application that will serve the result.
+Assign an engineer to connect generation to that channel and an owner to approve releases.
+**Delivery requires a working application.** For an assistant, prove a supported task and a
+refusal through the authenticated client. For content production, prove a source update through
+generation and approved publication, including recovery from a failed job. In both cases, prove
+withdrawal through the actual user channel. One generated video is only an integration check.
+
+## Decision gates for the customer conversation
 
 Answer these questions before building:
 
 | Gate | Decide before building |
 |---|---|
+| Application goal | Are we building interactive assistance or repeatable content production, and what proves it works? |
 | Experience boundary | Why does avatar, voice, audio, or video improve the outcome compared with a typed experience? |
 | Content boundary | Which claims are approved, versioned, owned, expirable, and traceable to source evidence? |
 | Consent boundary | Which likeness, voice, disclosure, accessibility, and fallback rules apply before generation? |
@@ -56,18 +73,11 @@ Answer these questions before building:
 - **Withdrawal is part of the build.** A source change, consent withdrawal, safety issue, or defect
   must identify and pause the affected revision.
 
-## Quick start
+## Start the build
 
-Run commands from the repository root.
-
-```bash
-# Deploy the keyless foundation (writes accelerator/.env):
-scenarios/avatar-onboarding/accelerator/scripts/deploy.sh rg-avatar-onboarding westus2
-```
-
-Then work through the modules in order. Each **Verify** section gives you a command and explains
-its output. The reference snippets and remaining integration work are in
-[`solution.md`](accelerator/solution.md).
+Begin with [module 1](lesson.html?scenario=avatar-scenario&lesson=experience-selection). In module 2, connect the approved
+environment before considering new resources. The optional reference template creates a broader
+demo footprint; do not deploy it unchanged into an existing tenant.
 
 ## Responsible AI
 

@@ -1,15 +1,16 @@
 # Module 1 - Define the task boundary
 
 Start with the work a customer wants to delegate. Identify the systems it may
-read and the effects it may propose. A useful answer is not sufficient evidence
-that an operation completed.
+read and the effects it may propose. A useful answer does not prove that an
+operation completed.
 
 ## What you build
 
 A bounded task with explicit record scope and a refusal path. Inputs are the
-customer's task description, the source owner, and the operations that owner
-permits. The guided exercise uses `record-001`; it does not assume a business
-use case.
+customer's task description, source owner, and permitted operations. Name one
+real operation and its destination. For example, inspect a service request and
+propose moving it to an approved status. The `record-001` reference below shows
+the boundary; replace that generic task with the customer's operation.
 
 ## Choose your path
 
@@ -24,6 +25,18 @@ requires judgment. A fixed sequence can use the same tool contracts without a
 model.
 
 ## Implementation
+
+In the existing delivery backlog, define the record scope and the exact fields
+an operation may read or change. Have the source owner approve a test record in
+the tenant and identify the application identity allowed to access it. Keep
+writes disabled until module 6's approval boundary is connected.
+
+Specify a successful result that can be checked independently in the
+destination system. For a read-only release, that may be an evidence-backed
+investigation shown to an authorized user. For a write, require the
+destination's operation receipt. A model explanation is not enough.
+
+### Optional reference check
 
 Run commands from the repository root:
 
@@ -43,6 +56,12 @@ and the condition that ends or escalates the task. Do not give the model an
 arbitrary URL or shell tool to avoid making these choices.
 
 ## Verify
+
+The destination owner can identify the allowed operation and excluded records.
+The implementation team has an approved read path and a named user channel.
+Confirm an out-of-scope record cannot be retrieved through that path. If access
+is blocked, record the blocker; the local check below does not replace the
+tenant result.
 
 The first command returns `completed` with a record read in `evidence`. The
 second exits nonzero with `failed` and an outside-scope error. It must contain

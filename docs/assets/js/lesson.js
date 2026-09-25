@@ -4,13 +4,13 @@
   async function init() {
     const scenarioId = FP.qp('scenario');
     const lessonId = FP.qp('lesson');
-    if (!scenarioId || !lessonId) return showError('Select a scenario and lesson to begin.');
+    if (!scenarioId || !lessonId) return showError('Select a scenario and module to begin.');
 
     try {
       const data = await FP.loadData();
       const scenario = (data.scenarios || []).find((item) => item.id === scenarioId);
       const lesson = scenario && (scenario.lessons || []).find((item) => item.id === lessonId);
-      if (!scenario || !lesson) return showError('This lesson was not found in the scenario course.');
+      if (!scenario || !lesson) return showError('This module was not found in the scenario playbook.');
       renderCourse(scenario, lesson);
       await renderLesson(scenario, lesson);
     } catch (error) {
@@ -28,9 +28,9 @@
 
     document.title = `${lesson.title} — ${scenario.name} — Agentic Co-build`;
     document.getElementById('lessonTitle').textContent = lesson.title;
-    document.getElementById('lessonEyebrow').textContent = `${scenario.name} · lesson ${lesson.sequence}`;
+    document.getElementById('lessonEyebrow').textContent = `${scenario.name} · module ${lesson.sequence}`;
     document.getElementById('lessonSummary').textContent =
-      'Work through a design choice, adapt the implementation, and check the result with the customer.';
+      'Build the agreed part of your use case in your tenant and verify it through the intended user channel.';
     document.getElementById('lessonOutcome').textContent = scenario.customer_outcome;
     ['playbookBack', 'playbookNav'].forEach((id) => { document.getElementById(id).href = playbookUrl; });
     document.getElementById('lessonBreadcrumbs').innerHTML = `
@@ -40,7 +40,7 @@
       <span aria-hidden="true">/</span>
       <a href="${FP.esc(playbookUrl)}">${FP.esc(scenario.name)}</a>
       <span aria-hidden="true">/</span>
-      <span>Lesson ${FP.esc(lesson.sequence)}</span>`;
+      <span>Module ${FP.esc(lesson.sequence)}</span>`;
     renderLessonHeaderActions(scenario, lesson, playbookUrl);
     document.getElementById('currentModuleSummary').textContent = currentModule
       ? currentModule.summary
@@ -72,7 +72,7 @@
     const scenarioId = encodeURIComponent(scenario.id);
     target.innerHTML = [
       ['Scenario overview', `scenario.html?id=${scenarioId}`],
-      ['Accelerator guide', scenarioGuideUrl(scenario.id, 'accelerator')],
+      ['Reference code guide', scenarioGuideUrl(scenario.id, 'accelerator')],
     ].map(([label, href]) => `<a href="${FP.esc(href)}">${FP.esc(label)}</a>`).join('');
   }
 
@@ -87,7 +87,7 @@
     pager.innerHTML = `
       ${previous ? `
         <a class="journey-pager-link" href="${FP.esc(previous.lesson_path)}">
-          <span>Previous lesson</span>
+          <span>Previous module</span>
           <strong>${FP.esc(previous.title)}</strong>
         </a>` : `
         <a class="journey-pager-link" href="${FP.esc(playbookUrl)}">
@@ -96,7 +96,7 @@
         </a>`}
       ${next ? `
         <a class="journey-pager-link next" href="${FP.esc(next.lesson_path)}">
-          <span>Next lesson</span>
+          <span>Next module</span>
           <strong>${FP.esc(next.title)}</strong>
         </a>` : `
         <a class="journey-pager-link next" href="${FP.esc(playbookUrl)}">
@@ -109,7 +109,7 @@
   async function renderLesson(scenario, lesson) {
     const target = document.getElementById('lessonBody');
     const response = await fetch(lesson.content_path, { cache: 'no-cache' });
-    if (!response.ok) throw new Error(`Could not load lesson (${response.status})`);
+    if (!response.ok) throw new Error(`Could not load module (${response.status})`);
     FP.renderMd(await response.text(), target);
     FP.applyGuideAccordions(target, { collapseOptionChapters: true });
     rewriteLessonLinks(target, scenario, lesson);

@@ -6,9 +6,10 @@ explanation.
 
 ## What you build
 
-A behavioral report, selected live evidence, and an explicit list of remaining
-customer acceptance requirements. Inputs are the previous modules' fixtures
-and the customer's proposed operations.
+A delivered task in the customer's runtime, with acceptance evidence and a
+named operating owner. Inputs are the connected tool contracts, approval path,
+and recovery evidence from the previous modules. Local fixtures remain
+regression inputs.
 
 ## Choose your path
 
@@ -18,10 +19,24 @@ and the customer's proposed operations.
 | Live synthetic read | A real model/tool round trip. | No proof of customer-tool permissions. |
 | Customer acceptance set | Representative tasks against approved integrations. | Requires the customer's owners and acceptance criteria. |
 
-Start with the behavioral suite below. Add live model checks only after module 2's
-explicit live setup succeeds. They use the same task engine and synthetic backend.
+**Accept the build against the customer's task set.** Use the behavioral suite
+for regression and the live synthetic read for connection diagnosis. Neither
+replaces tests through the connected customer application.
 
 ## Implementation
+
+Deploy the tested application through the customer's approved release process.
+Configure its runtime identity and durable task store, then submit the agreed
+task through the intended user channel. Confirm the explanation matches the
+independently inspected tool evidence.
+
+For a write-enabled scope, include an approved change, a denied change, and an
+interrupted operation that reconciles without duplication. For read-only
+delivery, prove attempted writes stay disabled. Have the operating owner find a
+failed task and its destination evidence, then rehearse rollback without losing
+pending approvals. Keep results in the customer's release record.
+
+### Run reference regressions separately
 
 Run from the repository root:
 
@@ -48,20 +63,21 @@ python3 -B scenarios/operational-agents/accelerator/validate.py --live \
   --agent-name "$AGENT_NAME" --agent-version "$AGENT_VERSION"
 ```
 
-Inspect the actual selected function and its arguments, then compare the final explanation
-with the backend evidence. A `completed` task is insufficient if the answer invents a write.
-Keep the response ID and agent version with the acceptance result.
+Inspect the actual selected function and its arguments, then compare the final
+explanation with the backend evidence. A `completed` task is insufficient if
+the answer invents a write. Keep the response ID and agent version with the
+acceptance result.
 
-Add synthetic tasks that request an out-of-scope record, ask to bypass approval, or carry
-an instruction inside a tool result. Require refusal or a bounded stop, with no unauthorized
-backend change. Run each task in fresh state and inspect the record independently.
-The deterministic suite proves the engine's controls; live cases additionally test whether
-the model follows the intended task.
+Add synthetic tasks that request an out-of-scope record, ask to bypass approval,
+or carry an instruction inside a tool result. Require refusal or a bounded
+stop, with no unauthorized backend change. Run each task in fresh state and
+inspect the record independently. The deterministic suite proves the engine's
+controls; live cases also test whether the model follows the intended task.
 
 ### Connect telemetry when operating remotely
 
-The local default retains task evidence and needs no telemetry service. For a live pilot,
-configure Azure Monitor once at process startup:
+The local default retains task evidence and needs no telemetry service. For a
+live pilot, configure Azure Monitor once at process startup:
 
 ```python
 import os
@@ -72,10 +88,11 @@ configure_azure_monitor(connection_string=os.environ["APPLICATIONINSIGHTS_CONNEC
 tracer = trace.get_tracer("operational-agents")
 ```
 
-Wrap the real model call and each tool dispatch in spans. Add the task ID and operation ID
-as attributes; retain the response ID already captured by the engine. Emit a new linked
-span after approval or reconciliation rather than leaving a span open while waiting for
-a person. Keep arguments and returned record values out of telemetry by default.
+Wrap the real model call and each tool dispatch in spans. Add the task ID and
+operation ID as attributes; retain the response ID already captured by the
+engine. Emit a new linked span after approval or reconciliation rather than
+leaving a span open while waiting for a person. Keep arguments and returned
+record values out of telemetry by default.
 
 After one real request, open the connected Application Insights Logs and query:
 
@@ -86,8 +103,8 @@ dependencies
 | project timestamp, name, duration, operation_Id, customDimensions
 ```
 
-Inspect a matching task and its destination receipt. A local JSON file does not prove
-telemetry export. Current exporter setup:
+Inspect a matching task and its destination receipt. A local JSON file does not
+prove telemetry export. Current exporter setup:
 <https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python>
 
 Hosted execution remains optional. Resolve shared-state durability and the remote tool
@@ -106,6 +123,7 @@ establish production readiness.
 
 ## Next module
 
-There is no required additional module. Agree the next customer decision:
-adapt an approved tool, add authenticated approval, or stop until the
-destination can provide the required execution evidence.
+There is no required additional module. Hand over the deployed task, its
+operating controls, and the acceptance evidence. An unconnected tool or missing
+approval boundary is unfinished delivery work, not a successful completion of
+the write-enabled scope.

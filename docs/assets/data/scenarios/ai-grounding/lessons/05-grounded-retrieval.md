@@ -19,7 +19,7 @@ freshness. It has **no agent**. If it fails here, an agent will not save it.
 
 | Option | Retrieval intelligence | Where the answer is composed | Best for |
 | --- | --- | --- | --- |
-| **A. Knowledge base retrieval with `answerSynthesis`** *(default)* | Query planning, parallel subqueries, semantic reranking, answer synthesis — all managed | Inside the knowledge base | Multi-source, ambiguous, multi-part questions |
+| **A. Knowledge base retrieval with `answerSynthesis`** *(default)* | Managed query planning, parallel subqueries, semantic reranking, and answer synthesis | Inside the knowledge base | Multi-source, ambiguous, multi-part questions |
 | B. Knowledge base retrieval, extractive only | Managed retrieval and ranking | Your code | You want the passages and full control of the prompt |
 | C. Direct hybrid query against an AI Search index | Whatever you configure: vector + keyword + semantic reranker | Your code | Maximum control; a single well-understood index |
 | D. Keyword-only search | None | Your code | Exact-match lookups: ids, codes, SKUs |
@@ -120,8 +120,8 @@ answer = openai.responses.create(
 )
 ```
 
-Inspect the actual shape of `result.references` in your SDK version before relying on field names —
-the response model differs between the GA and preview surfaces.
+Inspect the actual shape of `result.references` in your SDK version before relying on field names.
+The response model differs between the GA and preview surfaces.
 
 ### Option C — Direct hybrid query against the index
 
@@ -153,7 +153,7 @@ People most often get these three things wrong:
 2. **`top` used as the retrieval depth.** Retrieve wide (`k_nearest_neighbors=50`), rerank, then
    return `top=5`. Retrieving 5 and reranking 5 reranks nothing.
 3. **Semantic ranking left off.** It is the single largest quality lever in the pipeline, and the
-   search service must be provisioned with semantic search enabled — module 1's Bicep sets
+   search service must be provisioned with semantic search enabled; module 1's Bicep sets
    `semanticSearch: 'standard'`.
 
 Keep the index and source IDs from module 3. Do not create a second sample index.

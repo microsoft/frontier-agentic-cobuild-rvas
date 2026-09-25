@@ -2,8 +2,9 @@
 
 Build an accessible avatar-led experience from approved content. The accelerator includes a
 vendor-neutral approved-content pack and integration seam, plus an optional Bicep foundation for a
-clean Azure demo subscription. The reference path uses Azure Speech batch avatar synthesis. It
-supports a pilot. It does not select a production channel or implement a production channel adapter.
+clean Azure demo subscription. The rendering example uses Azure Speech batch avatar synthesis.
+Choose the application goal in module 1 before using it. The reference code does not implement
+the repeatable content workflow, the interactive client, or the customer's publishing adapter.
 
 ## What the completed workflow must prove
 
@@ -15,8 +16,8 @@ supports a pilot. It does not select a production channel or implement a product
 
 ## Before you start
 
-For deployment, install **Azure CLI, Python 3, Bash, and `sha1sum`**. The lessons also use
-`jq`, `curl`, and the standalone Bicep CLI. Sign in with an Azure user account in the intended
+Install **Azure CLI, Python 3, Bash, and `sha1sum`**. The modules also use `jq`, `curl`, and
+the standalone Bicep CLI. Sign in with an Azure user account in the intended
 subscription. You need permission to create resources and role assignments, plus model quota in
 the chosen region. The deployment script does not support service-principal sign-in.
 
@@ -40,29 +41,28 @@ RBAC. Keep secrets out of parameters and source control.
 
 ### Clean-subscription demo
 
-Use a disposable subscription after the customer agrees the pilot boundary. Deploy the optional
-foundation, then use the approved-content pack and the fictional claims for the workshop.
+Use a disposable subscription after the customer agrees on the pilot boundary. Deploy the optional
+foundation, then use the approved-content pack and fictional claims for the workshop.
 
 ### Existing customer environment
 
 Record the chosen platform, channel, source boundary, and access model. Do not redeploy this
-package into customer resources. Build the customer-owned adapter against the approved platform and
+package into customer resources. Build the customer-owned adapter against the approved platform
 configuration instead.
 
 ## The build path
 
 | Module | What you build | Evidence |
 |---|---|---|
-| 1. Experience selection | Capability choice, consent rules, accessibility needs, and release gates | Approved capability decision |
+| 1. Application selection | Interactive assistant or content-production scope, then media format | Application acceptance statement |
 | 2. Foundation | Keyless Foundry, Speech, Search, storage, and observability | Generated `.env` contract and live resources |
 | 3. Content pipeline | Versioned claims with owners, source links, and expiry | Approved claim set |
 | 4. Grounded assistant | Citing help that refuses unsupported claims | Cited response or clear handoff |
-| 5. Experience generation | Render from an approved script revision | Disclosure, transcript, and fallback artifact |
+| 5. Experience generation | Connect the workflow's generation jobs or the assistant's live client | Accessible output through the application |
 | 6. Approval gate | Exact-revision approvals and withdrawal path | Publish or withdrawal record |
-| 7. Prove and operate | Evaluation, red-team cases, trace review, and release scorecard | Pilot release decision |
+| 7. Prove and operate | Application acceptance, failure recovery, and withdrawal | Evidence from a working application; a video alone is insufficient |
 
-Complete the modules in order. The experience capability chosen in module 1 shapes the rest of the
-path.
+Complete the modules in order. The capability chosen in module 1 shapes the rest of the path.
 
 ## Decisions to make with the customer
 
@@ -90,7 +90,7 @@ set -a; source scenarios/avatar-onboarding/accelerator/.env; set +a
 ```
 
 Do not commit it or print bearer tokens in logs.
-Each lesson's **Verify** section gives the command and signal for that module.
+Each module's **Verify** section gives the command and signal for that module.
 
 ## Scope and boundaries
 
@@ -106,6 +106,6 @@ Each lesson's **Verify** section gives the command and signal for that module.
 [Module 4](../lessons/04-grounded-assistant.md) contains the approved-claim drafting path.
 Use [module 5](../lessons/05-experience-generation.md) to render it and
 [module 7](../lessons/07-prove-and-operate.md) to collect release evidence.
-The batch-video default needs no separate agent or voice exercise.
+Content production needs a deployed workflow, even when no agent is involved.
 
 See [solution.md](solution.md) for the facilitator reference and integration boundaries.

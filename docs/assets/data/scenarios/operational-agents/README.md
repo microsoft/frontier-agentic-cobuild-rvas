@@ -1,9 +1,8 @@
 # Operational Agents: carry out bounded work
 
-Build an agent that uses approved tools, pauses for an exact human decision, and
-retains evidence when execution is interrupted. The sample uses synthetic records
-and generic updates. Bring the customer's task and map its operations to these
-controls.
+Build an agent that performs a scoped task in **your tenant** with approved tools
+and an exact human decision before any write. Retain evidence when execution is
+interrupted. Bring one business operation and its destination-system owner.
 
 An **agent harness** is the application code around the model that controls tool
 execution and task progress. Here, it owns the approval boundary and recovery
@@ -14,27 +13,40 @@ state. The model may request a tool call; it cannot authorize a write.
 | Module | You decide | Outcome |
 |---|---|---|
 | [1. Task boundary](lesson.html?scenario=operational-agents&lesson=task-boundary) | What may the agent attempt? | Scope violations stop without effects. |
-| [2. Foundation](lesson.html?scenario=operational-agents&lesson=foundation) | Offline exercise or live Foundry call? | Explicit mode and connection evidence. |
+| [2. Foundation](lesson.html?scenario=operational-agents&lesson=foundation) | Where does the customer application run? | Runtime access to the required services. |
 | [3. Tool contracts](lesson.html?scenario=operational-agents&lesson=tool-contracts) | What does each operation accept and prove? | Typed requests and conditional updates. |
 | [4. Task state](lesson.html?scenario=operational-agents&lesson=task-state) | What must survive a process restart? | Reloadable progress and pending approval. |
 | [5. Bounded execution](lesson.html?scenario=operational-agents&lesson=bounded-execution) | What limits stop the loop? | Budgets that persist across resume. |
 | [6. Approval](lesson.html?scenario=operational-agents&lesson=approval) | Who approves which exact change? | A decision bound to the proposal and record version. |
 | [7. Recovery](lesson.html?scenario=operational-agents&lesson=recovery) | Did an interrupted operation commit? | Reconciliation without blind write retries. |
-| [8. Evaluate and operate](lesson.html?scenario=operational-agents&lesson=evaluate-operate) | What evidence is enough for the agreed pilot? | Behavioral checks and visible integration gaps. |
+| [8. Evaluate and operate](lesson.html?scenario=operational-agents&lesson=evaluate-operate) | Does the delivered task meet the agreed scope? | Tenant acceptance and operating handoff. |
 
 ## Choose this track when execution is the difficult part
 
 Use AI Grounding for trusted answers over approved content. Use Content
 Understanding when document extraction and review drive the workflow.
-Operational Agents addresses tasks where several tool calls and their effects
-must remain controlled across failure or interruption. A customer can combine
-these patterns.
+Operational Agents fits tasks where several tool calls and their effects must
+stay controlled across failure or interruption. A customer can combine these
+patterns.
 
 **Start with one agent and a narrow operation set.** Add distributed execution
 only when the task requires it. The guided path does not require persistent
 personal memory, a multi-agent framework, or a new approval UI.
 
-## Start locally
+## Define the tenant delivery
+
+Choose one task, such as inspecting a service request and proposing a permitted
+status change. Agree on its record scope and acceptance result with the
+destination owner. Connect the actual read API in module 3; if writes are in
+scope, connect authenticated approval in module 6 and prove recovery against
+the destination in module 7.
+
+Keep the implementation and operating state in customer-controlled systems. Reuse the reference
+engine where it fits, or apply its contracts in the customer's existing application.
+**A live model connected to the synthetic backend is still only a reference check.**
+The delivery result must include evidence from the real approved integration.
+
+## Optional local reference check
 
 Run from the repository root on Linux or macOS with Python 3.10 or later:
 
@@ -54,11 +66,10 @@ The accelerator implements a local CLI and two SQLite stores. Its operation
 ledger and record update commit together. This proves the sample's retry
 contract; it does not make an arbitrary customer API idempotent.
 
-**Customer-specific work remains:** tool authentication, an authenticated
-approval service, and shared storage if multiple hosts must operate tasks.
-Choose trace retention and validate the customer's actual operations before a
-pilot. Local checks do not prove Azure permissions or model quality.
+**The modules guide the required customer work:** tool authentication, an authenticated approval
+boundary, and durable state that fits the runtime. The local code does not supply those
+tenant integrations. Assign them during scope selection and complete them before accepting the
+corresponding module's delivery result.
 
-**The default build stays in this scenario.** Module 6 binds approval to an exact operation;
-module 8 explains the behavioral checks and telemetry integration. Keep the same local
-records and task state throughout.
+Module 6 binds approval to an exact operation; module 8 verifies the connected task and operating
+handoff. Use the local records only to inspect reference behavior, not as the customer's task store.
