@@ -4,16 +4,13 @@ description: "Break a customer's business use case into parts, map each part to 
 argument-hint: "A short description of the use case. Optional: users, systems, data sources, and known constraints."
 ---
 
-## Context
+## Start
 
-Use this skill when the team knows what the customer wants to build. It answers one question:
-**which parts of this use case does the kit help build, and what is left?**
+If the team knows the use case, continue. If it only knows the customer or industry, run
+`customer-activity-forge` first and use its top idea as the input here.
 
-If the team only knows the customer or industry, run `customer-activity-forge` first. Its top idea
-becomes the input here.
-
-The result is a draft for the customer conversation. It is not an architecture approval or a
-delivery commitment.
+The map is a draft for the customer conversation, not an architecture approval or delivery
+commitment.
 
 ## Input
 
@@ -34,8 +31,9 @@ what starts the process and what the finished result is.
 ### 1. Load the current tracks
 
 Read every `scenarios/*/manifest.json`. Use `id`, `name`, `tagline`, `customer_outcome`, and each
-`build_modules` entry (`id`, `title`, `summary`, `outcome`). Open a module's lesson file when the
-summary is not enough to judge fit.
+`build_modules` entry (`id`, `title`, `summary`, `outcome`). Record each track's `build_modules`
+array order. It is the build order within that track. Open a module's lesson file when the summary
+is not enough to judge fit.
 
 **Do not work from memory or a fixed list.** Tracks get added. A folder without a manifest is not
 a supported track yet.
@@ -63,7 +61,8 @@ needs them.
 
 ### 4. Map each part to modules
 
-For each part, name the track and the module IDs that help build it, then give a fit:
+For each part, compare its need with every current module summary before choosing a module. Then
+name the track and module IDs that help build it, and give a fit:
 
 | Fit | Meaning |
 |---|---|
@@ -80,9 +79,9 @@ Rules:
 
 ### 5. Order the work
 
-Put the selected modules in build order, keeping each module's prerequisites. Then suggest the
-smallest first slice: the few parts that prove the main outcome with a safe sample and a result
-the customer can check.
+Preserve manifest order for selected modules within each track. A lesson can establish an explicit
+cross-track dependency. Then suggest the smallest first slice: the few parts that prove the main
+outcome with a safe sample and a result the customer can check.
 
 ## Output
 

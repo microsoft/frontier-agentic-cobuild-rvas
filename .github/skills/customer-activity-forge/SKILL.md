@@ -1,19 +1,15 @@
 ---
 name: customer-activity-forge
-description: "Research a customer and industry from public sources, then generate ranked AI-application ideas mapped to relevant scenario playbooks, with implementation gaps made explicit."
+description: "Find a bounded AI opportunity when a customer or industry is known but no use case is defined. Research public sources, rank ideas against scenario playbooks, and expose gaps."
 argument-hint: "Company name and industry are required. Optional: region/segment and known pain points."
 ---
 
-## Context
+## Start
 
-Use this skill when a participant has a customer or industry but no bounded AI opportunity. It
-turns “we should do something with AI” into a useful customer conversation: research public facts,
-propose about ten achievable ideas, and map the best candidates to a scenario playbook.
+Use `use-case-mapper` when the team already has a bounded use case. Otherwise, identify a bounded
+AI opportunity from public customer and industry research.
 
-This is an intake tool, not an architecture approval or delivery commitment. After choosing an idea,
-map its parts to scenario modules with the `use-case-mapper` skill. Use that map to agree the first
-implementation scope with the customer, including acceptance criteria. Confirm data access and the
-approved environment before building.
+This is an intake tool, not an architecture approval or delivery commitment.
 
 ## Input
 
@@ -31,7 +27,7 @@ If either required input is missing, ask for it before proceeding.
 
 ### 1. Research public sources only
 
-Use `web_search` and `web_fetch` to collect:
+Search public sources and retrieve the relevant pages to collect:
 
 - the company’s products, services, customer segments, recent announcements, and stated priorities;
 - public evidence of operating activities from investor relations, annual reports, earnings material,
@@ -39,13 +35,14 @@ Use `web_search` and `web_fetch` to collect:
 - current industry pressures and AI/automation trends from freely accessible industry bodies,
   analysts, or government sources.
 
-Cite every company or industry claim with a URL and retrieval date. Mark unavailable facts with
-⚠️ rather than guessing. Do not use account plans, CRM data, confidential material, or non-public
-information.
+Cite every company or industry claim with a source link. Mark unavailable facts with ⚠️ rather than
+guessing. Use public sources only.
 
-### 2. Generate approximately ten ideas
+### 2. Generate 8–10 ideas
 
-Every idea must tie to the research, be safe enough for a first demonstration, and include:
+Every idea must have a distinct cited research fit and be safe enough for a first demonstration. If
+the available evidence supports fewer than eight distinct ideas, return fewer and explain why. Each
+idea includes:
 
 | Field | Guidance |
 |---|---|
@@ -60,18 +57,9 @@ Every idea must tie to the research, be safe enough for a first demonstration, a
 | **Safe representative context** | Candidate documents, data product, approved content, or sample to use in a demonstration |
 | **Evidence** | The routine, edge, refusal, review, or access case that proves the first outcome |
 
-**Read every `scenarios/*/manifest.json` before labelling ideas.** Use each manifest's `name` as the
-label and its `tagline` and `customer_outcome` to judge fit. A folder without a manifest is not a
-supported track yet. The current tracks are:
-
-| Scenario direction | Use when |
-|---|---|
-| **AI Grounding / IQ** | Trusted answers require the right mix of enterprise knowledge and operational context. This can include Foundry IQ, Fabric IQ, Work IQ, Web IQ, SharePoint, or a Copilot Studio discussion. |
-| **Content Understanding and Document Workflow** | Business content needs SME-authored understanding, extraction, review, and handoff into a process. |
-| **Avatar Scenario** | Approved learning, communications, onboarding, or support content needs an accessible, governed semi-automated avatar-led presentation. |
-| **Operational Agents** | An agent must carry out bounded work in a business system, with validated tool calls, exact human approval, and recovery from interrupted operations. |
-
-If a manifest exists for a track not in this table, use it the same way.
+**Read every `scenarios/*/manifest.json` before labelling ideas.** For every idea, compare its
+need with every current manifest. Use each manifest's `name` as the label and its `tagline` and
+`customer_outcome` to judge fit. A folder without a manifest is not a supported track yet.
 
 Visual input, structured data, evaluation, tracing, and deployment are capabilities, not
 separate scenarios. Mention them only when the proposed proof needs them.
@@ -124,7 +112,8 @@ Name the top three and give a one-sentence reason for each.
 
 #### Part E — Scenario handoff
 
-For the top idea, pre-fill this handoff. Clearly mark information the customer must confirm.
+For the highest-ranked idea, pre-fill this handoff. Clearly mark information the customer must
+confirm.
 
 | Scenario input | Pre-filled direction |
 |---|---|
@@ -137,22 +126,14 @@ For the top idea, pre-fill this handoff. Clearly mark information the customer m
 | Golden-dataset / evidence starter | … |
 | First customer decision | … |
 
-Then map the top idea to modules by following the `use-case-mapper` skill
+Then map the highest-ranked idea to modules by following the `use-case-mapper` skill
 (`.github/skills/use-case-mapper/SKILL.md`), using the handoff above as its input. Include its
 **Map**, **Build order and first slice**, and **Gaps and open questions** sections. The customer
 must confirm the map before it becomes an agreed session plan.
 
-End with the playbook URL for each matched track, `docs/scenario.html?id=<manifest id>`:
-
-| Track | URL |
-|---|---|
-| AI Grounding / IQ | `docs/scenario.html?id=ai-grounding` |
-| Content Understanding and Document Workflow | `docs/scenario.html?id=content-understanding-document-workflow` |
-| Avatar Scenario | `docs/scenario.html?id=avatar-scenario` |
-| Operational Agents | `docs/scenario.html?id=operational-agents` |
-
-If a new pattern is needed, state that gap instead of inventing a playbook URL. Effort tags describe
-the initial proof only; they do not estimate the full customer implementation.
+End with `docs/scenario.html?id=<manifest id>` for every matched track. Build each URL from its
+manifest ID. If a new pattern is needed, state that gap instead of inventing a playbook URL. Effort
+tags describe the initial proof only; they do not estimate the full customer implementation.
 
 ## Anti-patterns
 
