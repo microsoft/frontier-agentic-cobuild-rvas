@@ -34,7 +34,7 @@ SDK call, CLI command, env var, and preview-feature claim must be verified again
 | Area | What to check |
 |---|---|
 | `scenarios/*/lessons/*.md` | Instructions, code snippets, environment variables, and lesson order |
-| `scenarios/*/accelerator/README.md`, `solution.md` | Commands match the implementation and its checks |
+| `scenarios/*/accelerator/README.md`, `facilitator-reference.md` | Commands match the implementation and its checks |
 | `scenarios/*/accelerator/**/*.py` | Imports and signatures exist; checks match the stated behavior |
 | `docs/*.html` | Navigation and user-facing explanations match the scenarios |
 | `docs/assets/data/` | **Generated** — compare with `scenarios/`; do not hand-edit |
@@ -71,7 +71,7 @@ For each claim, confirm against the **current** source of truth — do not rely 
 - **`azure` MCP** — resource types, RBAC, quota, Bicep `apiVersion` reality.
 - **Live web** (`fetch_webpage`) — only for official Microsoft/Azure URLs already cited in
   the content, to confirm they resolve and still say what we claim. Do not invent URLs.
-- **Repo ground truth** — does `solution.md` actually pass `validate.py`? Do env-var names
+- **Repo ground truth** — does `facilitator-reference.md` actually pass `validate.py`? Do env-var names
   match `.env.sample` and `infra/` outputs exactly?
 
 Record the authoritative source (doc URL or MCP result) for every confirmed or refuted claim.
@@ -105,7 +105,7 @@ file+line link, category, severity, the verified source, and the proposed fix.
 - [ ] Every flagged SDK/CLI/env claim has a cited authoritative source (doc URL or MCP result).
 - [ ] No fix introduces a signature you did not verify this session.
 - [ ] Env-var names, file paths, and pinned versions are consistent across all files.
-- [ ] `solution.md` steps still satisfy the matching `validate.py` (re-run where feasible).
+- [ ] `facilitator-reference.md` steps still satisfy the matching `validate.py` (re-run where feasible).
 - [ ] Generated `docs/assets/data/` drift is reported, not hand-patched.
 - [ ] Findings report lists residual/unverifiable items explicitly (don't silently drop them).
 

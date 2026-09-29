@@ -48,6 +48,12 @@
       "sourceType": "github",
       "skillPath": "skills/microsoft-foundry/SKILL.md",
       "computedHash": "bbcba6515b4313989a6f29ed5c77bc3dfa9e53be50f17edb1d9eaa5dfe0580a5"
+    },
+    "writing-for-agents": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/writing-for-agents/SKILL.md",
+      "computedHash": "95da47fc97af998e85b7d7e6d57b3ac76727c1e290cfe9ea09005aacb826959f"
     }
   }
 }

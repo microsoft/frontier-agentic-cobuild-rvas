@@ -15,7 +15,7 @@ claim you confirm or refute.
 - [ ] Auth uses `DefaultAzureCredential` (keyless-first); key-based examples are flagged.
 - [ ] Tracing snippets set `AZURE_EXPERIMENTAL_ENABLE_GENAI_TRACING=true` and
       `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true` **before importing** the SDK.
-- [ ] Imports referenced in `solution.md` are actually used/checked by the matching `validate.py`.
+- [ ] Imports referenced in `facilitator-reference.md` are actually used/checked by the matching `validate.py`.
 
 ## 2. CLI commands (`az`, `azd`, `azd ai agent`, `func`, `npx skills`)
 
@@ -55,7 +55,7 @@ claim you confirm or refute.
 
 - [ ] Internal links resolve (file paths, `#anchors`, "see Step N" still points to that step).
 - [ ] File paths named in prose exist at that path.
-- [ ] `solution.md` step order matches `README.md` and the `validate.py` checks.
+- [ ] `facilitator-reference.md` step order matches `README.md` and the `validate.py` checks.
 - [ ] `docs/assets/data/` matches source scenarios (report drift; don't hand-edit).
 
 ## 8. Pacing & pedagogy
