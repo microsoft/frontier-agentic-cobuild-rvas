@@ -38,13 +38,11 @@
       <span class="badge badge-tag">${(scenario.lessons || []).length} modules</span>`;
     document.getElementById('customerOutcome').textContent = scenario.customer_outcome;
     document.getElementById('slidesLink').href = `slides.html?id=${encodeURIComponent(scenario.id)}`;
-    document.getElementById('acceleratorLink').href = scenarioGuideUrl(scenario.id, 'accelerator');
     document.getElementById('decisionPrompts').innerHTML = (scenario.decision_prompts || [])
       .map((prompt) => `<li>${FP.esc(prompt)}</li>`).join('');
     document.getElementById('buildModuleList').innerHTML = (scenario.build_modules || [])
       .map((module) => roadmapItem(module, scenario.lessons || [])).join('');
     renderScenarioPager(scenario);
-    renderDeliveryLinks(scenario);
   }
 
   function roadmapItem(module, lessons) {
@@ -79,15 +77,6 @@
     `;
   }
 
-  function renderDeliveryLinks(scenario) {
-    const target = document.getElementById('scenarioDeliveryLinks');
-    if (!target) return;
-
-    target.innerHTML = [
-      ['Reference code guide', scenarioGuideUrl(scenario.id, 'accelerator')],
-    ].map(([label, href]) => `<a href="${FP.esc(href)}">${FP.esc(label)}</a>`).join('');
-  }
-
   function resolveRelative(basePath, href) {
     const segments = basePath.split('/').slice(0, -1);
     href.split('/').forEach((part) => {
@@ -101,10 +90,6 @@
   function routeAppPage(path, hash) {
     const match = path.match(/(?:^|\/)(lesson|scenario|slides|guide)\.html(\?.*)?$/i);
     return match ? `${match[1].toLowerCase()}.html${match[2] || ''}${hash ? `#${hash}` : ''}` : '';
-  }
-
-  function scenarioGuideUrl(scenarioId, guideId) {
-    return `guide.html?scenario=${encodeURIComponent(scenarioId)}&guide=${encodeURIComponent(guideId)}`;
   }
 
   function rewriteScenarioLinks(container, scenario) {
