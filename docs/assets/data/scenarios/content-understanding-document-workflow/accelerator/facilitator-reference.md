@@ -1,4 +1,4 @@
-# Content Understanding document workflow — reference implementation
+# Facilitator reference: Content Understanding document workflow
 
 This reference has infrastructure and extraction snippets for the seven modules.
 `normalize.py` and `evaluate_results.py` supply the invoice mapping and comparison gate.

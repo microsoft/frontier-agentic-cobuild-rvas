@@ -140,7 +140,7 @@ and refusal policy; do not describe every future answer as individually human-ap
 
 ## Build with your content
 
-Keep the real content in customer-controlled storage. Adapt the claim contract in your private
+Keep the real content in the customer's approved systems. Adapt the claim contract in your private
 application, retaining source version, expiry, and approval references. Configure the renderer
 to load that approved revision rather than `accelerator/sample-data`.
 Try one expired source and one changed revision: neither should reach rendering.

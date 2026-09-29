@@ -30,7 +30,7 @@ Repeat after a source update to check freshness.
 
 For Copilot Studio, capture this evidence through the configured agent rather than the Azure
 scripts below. For the Azure path, adapt the question set and source markers in your private
-implementation. The supplied returns-role commands illustrate that contract; they are not
+application. The supplied returns-role commands illustrate that contract; they are not
 acceptance of a different corpus.
 
 ### Capture actual answers

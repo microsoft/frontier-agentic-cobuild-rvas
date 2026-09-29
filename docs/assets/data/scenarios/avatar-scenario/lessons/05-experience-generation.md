@@ -4,7 +4,7 @@ For content production, connect generation to the workflow and render a **privat
 the wording approved in module 3**. For an interactive assistant, connect the client to module 4's
 answer path. Include disclosure and accessible alternatives in both. Module 6 approves release.
 
-Current Speech guidance is cited inline where service behavior affects the implementation.
+Current Speech guidance is cited inline where service behavior affects the build.
 
 ![Accessible experience generation](../diagrams/05-accessible-generation.png)
 
@@ -79,7 +79,7 @@ print(build_artifact(pack))"
 ```
 
 A pack whose spoken text is not an exact approved claim raises `PackRejectedError`. Passing this
-local check proves only the reference contract; it does not approve your content or generate media.
+local check proves only the sample contract; it does not approve your content or generate media.
 
 **Submit the real batch job (verified API).** The approved artifact becomes an SSML batch request:
 

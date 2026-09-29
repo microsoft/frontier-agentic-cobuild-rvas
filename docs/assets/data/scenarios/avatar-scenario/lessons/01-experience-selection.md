@@ -6,13 +6,13 @@ process. A searchable page may solve the same problem with less work.
 
 **Choose the application goal before the media format.** Build either an interactive assistant
 or a repeatable content-production application. Neither is the default. A generated video is an
-output; producing one file does not meet this track's application delivery goal.
+output; producing one file does not meet this track's application goal.
 
 ## What you build
 
-An agreed delivery scope for an application in **your tenant**. Identify its audience,
-delivery channel, approved content owner, and acceptance checks. Keep the decision
-in your existing delivery backlog or design record.
+An agreed scope for an application in **your tenant**. Identify its audience,
+user channel, approved content owner, and acceptance checks. Keep the decision
+in your existing backlog or design record.
 
 Bring one representative message, the intended user task, and the owners of the target channel
 and Azure environment. No API calls or resource deployment are needed in this module.
@@ -81,7 +81,7 @@ Do not create resources just to complete this decision.
 Start with a standard avatar and voice unless the use case requires a custom identity.
 For a real person's voice or likeness, confirm authorization and the applicable
 [limited-access requirements](https://learn.microsoft.com/azure/foundry/responsible-ai/speech-service/text-to-speech/limited-access)
-before committing to delivery. The requirements depend on the selected capability; do not
+before committing. The requirements depend on the selected capability; do not
 assume approval for one voice or avatar covers another.
 
 Agree where users see the synthetic-media disclosure and how they reach equivalent text.

@@ -5,7 +5,7 @@ employee onboarding, and the pattern also fits approved learning or support cont
 published statement must trace to an approved source and named reviewer. Tell users when media is
 synthetic. Owners must be able to withdraw the published version when a source changes.
 
-**Deliver an interactive assistant or a repeatable content-production application.** Choose the
+**Build an interactive assistant or a repeatable content-production application.** Choose the
 application goal before deciding whether it needs an avatar. Neither goal is the default.
 The batch path includes rendering instructions; the modules identify the workflow and channel
 integrations you must build around generation.
@@ -32,15 +32,15 @@ in module 3 before rendering a private preview in module 5.** Module 6 approves 
 proves withdrawal. For an assistant, approve the source boundary and application behavior;
 individual live answers do not receive per-video approval.
 
-## Bring your implementation
+## Build in your environment
 
-Use a customer-owned private repository for adapters and deployment configuration. Keep approved
+Use a customer-owned private repository for adapters and deployment settings. Keep approved
 content in its existing system of record. The fictional onboarding pack illustrates the claim
-contract; replace its wording and reviewer identities in your private implementation.
+contract; replace its wording and reviewer identities in your private application.
 
 Before building, choose the portal, learning platform, or application that will serve the result.
 Assign an engineer to connect generation to that channel and an owner to approve releases.
-**Delivery requires a working application.** For an assistant, prove a supported task and a
+**A working application is required.** For an assistant, prove a supported task and a
 refusal through the authenticated client. For content production, prove a source update through
 generation and approved publication, including recovery from a failed job. In both cases, prove
 withdrawal through the actual user channel. One generated video is only an integration check.

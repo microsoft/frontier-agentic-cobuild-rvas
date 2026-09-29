@@ -13,7 +13,7 @@ unauthenticated calls.
 
 | Option | Runtime | Identity + auth | Rollback | Best when |
 | --- | --- | --- | --- | --- |
-| A. Hosted agent (`azd ai agent`) | Foundry-hosted container | Managed identity, authenticated endpoint | Pin/swap revision | Your implementation is an agent-based workflow |
+| A. Hosted agent (`azd ai agent`) | Foundry-hosted container | Managed identity, authenticated endpoint | Pin/swap revision | You are building an agent-based workflow |
 | B. Container app / managed online endpoint | Your container | Managed identity + Entra auth | Revision or blue/green | You need custom runtime or scaling control |
 | C. API behind API Management | Your API | Entra-validated via APIM | Deployment slots | You are fronting an existing API estate |
 | D. Hosted long-running workflow | Background job handle + later retrieval | Managed identity, authenticated submit/poll | Pin/swap revision | Document processing outlives an interactive request |
@@ -111,7 +111,7 @@ Store review state outside the container and connect telemetry at startup.
 
 Deploy a candidate revision, submit the same accepted and rejected documents, then route the
 pilot audience to it. Retain a tested previous revision and rehearse rollback. The host-specific
-deployment configuration is part of your implementation; the Foundry commands above do not
+deployment configuration is part of your application; the Foundry commands above do not
 deploy this branch.
 
 ### Option C — API behind API Management
@@ -137,7 +137,7 @@ processing/review duration requires it, rather than holding a request open.
 Have an intended user submit an approved document through the deployed channel. Complete any
 required review and inspect the resulting destination record or agreed reviewed-result handoff.
 Restart the worker or deploy the previous revision and confirm pending cases remain accessible.
-**A healthy container or a generic chat response is not the delivery result.**
+**A healthy container or a generic chat response is not proof that the workflow works.**
 
 Check the deployed endpoint as both attacker and operator. Try it without a token, confirm it uses an
 identity rather than a key, and verify that traces still arrive.

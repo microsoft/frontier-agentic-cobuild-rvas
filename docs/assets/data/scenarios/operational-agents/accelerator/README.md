@@ -168,6 +168,6 @@ files. Expected values are in [sample-data/expected.json](sample-data/expected.j
 Tests clean up their own state; manual exercise directories belong to the
 operator and are not automatically deleted.
 
-Read [solution.md](solution.md) before replacing the backend. Customer APIs must
+Read [facilitator-reference.md](facilitator-reference.md) before replacing the backend. Customer APIs must
 enforce authorization and conditional updates themselves. An idempotency key in
 the runner alone cannot prevent duplicate external effects.

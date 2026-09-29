@@ -33,7 +33,7 @@ patterns.
 only when the task requires it. The guided path does not require persistent
 personal memory, a multi-agent framework, or a new approval UI.
 
-## Define the tenant delivery
+## Define the tenant work
 
 Choose one task, such as inspecting a service request and proposing a permitted
 status change. Agree on its record scope and acceptance result with the
@@ -41,10 +41,10 @@ destination owner. Connect the actual read API in module 3; if writes are in
 scope, connect authenticated approval in module 6 and prove recovery against
 the destination in module 7.
 
-Keep the implementation and operating state in customer-controlled systems. Reuse the reference
-engine where it fits, or apply its contracts in the customer's existing application.
+Keep application and operating state in customer-owned systems. Reuse the reference engine where
+it fits, or apply its contracts in the customer's existing application.
 **A live model connected to the synthetic backend is still only a reference check.**
-The delivery result must include evidence from the real approved integration.
+The evidence must come from the real approved integration.
 
 ## Optional local reference check
 
@@ -66,10 +66,9 @@ The accelerator implements a local CLI and two SQLite stores. Its operation
 ledger and record update commit together. This proves the sample's retry
 contract; it does not make an arbitrary customer API idempotent.
 
-**The modules guide the required customer work:** tool authentication, an authenticated approval
-boundary, and durable state that fits the runtime. The local code does not supply those
-tenant integrations. Assign them during scope selection and complete them before accepting the
-corresponding module's delivery result.
+**The modules identify the customer work:** tool authentication, an authenticated approval boundary,
+and durable state that fits the runtime. The local code does not supply those tenant integrations.
+Assign them during scope selection and complete them before accepting the corresponding module.
 
 Module 6 binds approval to an exact operation; module 8 verifies the connected task and operating
 handoff. Use the local records only to inspect reference behavior, not as the customer's task store.

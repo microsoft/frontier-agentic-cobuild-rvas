@@ -121,4 +121,4 @@ It keeps coordinator and supervisor outputs separate under the ignored `.runtime
 The reports check response contracts, not semantic correctness or retrieval recall.
 Use [module 8](../lessons/08-deploy-and-surface.md) for surface and hosting steps.
 
-See [solution.md](solution.md) for the facilitator reference.
+See [facilitator-reference.md](facilitator-reference.md) for the facilitator reference.

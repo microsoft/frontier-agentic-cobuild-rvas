@@ -26,7 +26,7 @@ model.
 
 ## Implementation
 
-In the existing delivery backlog, define the record scope and the exact fields
+In the existing backlog, define the record scope and the exact fields
 an operation may read or change. Have the source owner approve a test record in
 the tenant and identify the application identity allowed to access it. Keep
 writes disabled until module 6's approval boundary is connected.

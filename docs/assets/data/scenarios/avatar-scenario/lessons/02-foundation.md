@@ -1,6 +1,6 @@
 # Module 2 — Connect the required foundation
 
-Module 1 chose the application goal and delivery channel. **Connect approved tenant resources first.**
+Module 1 chose the application goal and user channel. **Connect approved tenant resources first.**
 Bring the environment owner and the resource access for the selected path. Provision
 missing components through the customer's infrastructure process.
 
@@ -8,7 +8,7 @@ This module follows the kit's working `infra/resources.bicep` and current Micros
 
 ## What you build
 
-A working connection from your implementation to its services, using the identity that will run it.
+A working connection from the application to its services, using the identity that will run it.
 For content production, include the workflow runtime, rendering, and private media storage. Use
 the customer's existing application host or workflow service when it fits.
 The runtime must accept the agreed trigger and retain job state across restarts. A model is

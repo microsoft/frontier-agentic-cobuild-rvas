@@ -339,7 +339,7 @@ test('avatar guidance selects an application before rendering and requires a wor
   const applicationHeading = decision.indexOf('### First choose the application goal');
   const presentationHeading = decision.indexOf('### Then choose how the application presents content');
   assert.ok(applicationHeading >= 0 && presentationHeading > applicationHeading);
-  for (const file of ['README.md', 'lessons/01-experience-selection.md', 'slides.md', 'accelerator/solution.md']) {
+  for (const file of ['README.md', 'lessons/01-experience-selection.md', 'slides.md', 'accelerator/facilitator-reference.md']) {
     const body = read(file);
     assert.match(body, /interactive assistant/i, file);
     assert.match(body, /content-production application/i, file);

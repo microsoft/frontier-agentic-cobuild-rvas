@@ -1,22 +1,22 @@
 # Content Understanding: turn documents into reviewable decisions
 
-Build a controlled path from an invoice, RFQ, or specification to a typed result a person can check.
+Build a workflow from an invoice, RFQ, or specification to a typed result a person can check.
 The workflow keeps source evidence and never makes a business decision by itself. Each module
 compares Microsoft options, recommends a default, and shows when another approved service fits.
 
-**Deliver one document workflow in your tenant.** Bring a representative document class, its
-source owner, and the team that uses the extracted result. Agree the fields and the downstream
-action before selecting services. The [reference contract](accelerator/solution.md) supplies
-reusable validation code; its invoice fixtures are optional development inputs.
+**Build one document workflow in your tenant.** Start with one document type, its owner, and the
+team that uses the result. Decide which fields to extract and what happens after review. The
+[facilitator reference](accelerator/facilitator-reference.md) includes validation code and optional
+invoice fixtures for local development.
 
-## Bring your implementation
+## Build in your environment
 
 Select an approved document source and processing identity. Keep the documents and their reviewed
-labels in customer-controlled storage, outside this repository. Build the source connector and
+labels in the customer's approved storage, outside this repository. Build the source connector and
 posting adapter in the customer's private application repository.
 
 Agree whether the first release ends at a human-reviewed result or writes to a business system.
-If it writes downstream, delivery must show the destination receipt and prove a retry cannot
+If it writes downstream, the team must show the destination receipt and prove a retry cannot
 create a duplicate. A local review record does not complete that integration.
 
 ## The seven modules
@@ -25,11 +25,11 @@ create a duplicate. A local review record does not complete that integration.
 |---|---|---|
 | [1. Confirm scope and connect the foundation](lessons/01-provision-foundation.md) | Which services the document class and intended action need | Approved environment and working runtime access |
 | [2. Connect an approved source](lessons/02-document-source.md) | Which source adapter and intake controls to implement | Authorized intake and rejection evidence |
-| [3. Select the extraction capability](lessons/03-extraction-selection.md) | CU prebuilt/custom analyzer, DI prebuilt/custom model, LLM structured outputs, or multimodal | Document capability and implementation decision |
+| [3. Select the extraction capability](lessons/03-extraction-selection.md) | CU prebuilt/custom analyzer, DI prebuilt/custom model, LLM structured outputs, or multimodal | Chosen extraction capability and why |
 | [4. Typed extraction with evidence](lessons/04-typed-extraction.md) | How to normalize output into one validated contract with confidence + grounding | Structured extraction result and low-confidence failure path |
 | [5. Review, correction, and handoff](lessons/05-human-review.md) | Where reviewers work, then how approved results reach the destination | A completed review and authorized handoff |
 | [6. Evaluate and trace](lessons/06-prove-and-observe.md) | Foundry evaluators, an offline harness, and an adversarial pass, against a gate | Scenario evaluation gate and trace review |
-| [7. Deploy the workflow](lessons/07-deploy.md) | Hosted agent, container app, or an API behind APIM | Controlled pilot deployment |
+| [7. Deploy the workflow](lessons/07-deploy.md) | Hosted agent, container app, or an API behind APIM | Pilot deployment with access controls |
 
 Module 1 checks scope and the intended extraction path before provisioning. Module 3 confirms that
 choice against representative documents. Carry the same source and result contract through review
@@ -58,10 +58,10 @@ customer-specific integrations; a sample approval record does not supply either.
 Begin with [module 1](lessons/01-provision-foundation.md) and the approved environment owner.
 Reuse existing resources; deploy the optional reference template only after reviewing what the
 chosen analyzer actually needs. Each **Verify** section identifies the evidence to collect from
-your implementation.
+your connected application.
 
 API facts (API versions, model ids, SDK packages) are cited inline in each module and in
-[`accelerator/solution.md`](accelerator/solution.md). Check current Microsoft Learn guidance
+[`accelerator/facilitator-reference.md`](accelerator/facilitator-reference.md). Check current Microsoft Learn guidance
 before writing SDK code.
 
 ## Non-negotiable boundaries

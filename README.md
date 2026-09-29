@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/frontier-agentic-cobuild-rvas)
 
-*Build with the customer, using reusable implementation patterns.*
+*Build with the customer, using reusable building blocks.*
 
 ---
 
@@ -51,16 +51,16 @@ For example, a supplier-request process could draw on several parts of the kit:
 **Plan modules around this mapping.** Combine the relevant modules across tracks, keeping their
 prerequisites. Agree which parts the engagement will build and assign owners to the remaining work.
 
-The implementation reference focuses on Microsoft Foundry. The playbooks also discuss options such
-as Copilot Studio, SharePoint, and Fabric. Choose the platform with the customer; naming an option
-does not mean the kit contains a complete implementation for it.
+The code reference focuses on Microsoft Foundry. The playbooks also discuss Copilot Studio,
+SharePoint, and Fabric. Choose the platform with the customer; an option named here is not a
+complete solution.
 
-## Agree the delivery scope
+## Agree the engagement scope
 
-The kit can support a scoped pilot or a longer co-build engagement. **Agree the customer-specific
-work and acceptance criteria before committing to delivery.** Production readiness depends on
-the customer's integrations, security requirements, and operational acceptance. Completing the
-modules or deploying an accelerator does not prove it.
+The kit can support a focused pilot or a longer co-build engagement. **Agree the customer-specific
+work and acceptance criteria before committing.** Production readiness still depends on the
+customer's integrations, security requirements, and operational acceptance. Completing modules or
+deploying an accelerator does not prove it.
 
 Published durations estimate guided module time. They are not estimates for a full customer
 implementation.
@@ -79,8 +79,8 @@ failed request. Hand over operation and rollback to a named owner.
 ## What the reference code provides
 
 The `accelerator/` folders supply reusable code and synthetic inputs for isolated checks.
-They help teams implement and test individual controls. Passing those checks is prep work;
-the modules require evidence from the customer's connected implementation.
+They help teams build and test individual controls. Passing those checks is preparation;
+the modules require evidence from the customer's connected application.
 
 For an existing customer environment, use the bring-your-own-environment path and approved
 resources. The demo foundations do not provision an enterprise landing zone or replace
@@ -92,9 +92,9 @@ Scenarios live in [`scenarios/`](scenarios/). `npm run build` regenerates their 
 run `npm run validate:scenarios` to validate scenario packs. Read the [scenario contribution
 contract](scenarios/README.md) before proposing a scenario or module.
 
-**Use the modules to deliver your scoped build.** Each module names the decision and build work,
-then checks the result. Its reference code is optional where the customer already has an
-implementation that meets the same contract.
+**Use the modules for the agreed build.** Each module names the decision and the work, then checks
+the result. Its reference code is optional when the customer already has an application that meets
+the same contract.
 
 ---
 
@@ -109,8 +109,8 @@ agree a separate, approved path before working with customer data.
 
 ### Delivery teams and facilitators
 
-Use the playbooks to work through design choices with the customer and adapt the implementation
-material. Review the relevant solution guides before delivery. Plan engineering capacity around
+Use the playbooks to work through design choices with the customer and adapt the code and guidance.
+Review the relevant facilitator references before the engagement. Plan engineering capacity around
 the agreed scope, including integration work and handoff to the customer's operating team.
 
 ---
@@ -187,22 +187,23 @@ agentic-cobuild/
 └── .env.sample                        # The .env variable contract (never commit a real .env)
 ```
 
-Each scenario keeps its implementation code and sample data under `accelerator/`.
+Each scenario keeps its reusable code and sample data under `accelerator/`.
 Its manifest defines the module order and published assets.
 
 ---
 
-## Solution Guides
+## Facilitator References
 
-Solution guides under `scenarios/*/accelerator/solution.md` support delivery prep.
-Use the guide for the scenario you are building to understand its implementation and adaptation needs.
+Facilitator references under `scenarios/*/accelerator/facilitator-reference.md` support engagement
+preparation. Use the reference for the scenario you are building to understand its code and the
+work that remains customer-specific.
 
 ### Quick-Start Facilitation Checklist
 
-1. Agree the customer outcome, delivery scope, and acceptance criteria.
+1. Agree the customer outcome, engagement scope, and acceptance criteria.
 2. Map the use-case parts to modules, identify uncovered work, and confirm module prerequisites.
 3. Confirm the approved environment and source-access boundary.
-4. Build with the customer, using the solution guides where helpful.
+4. Build with the customer, using the facilitator references where helpful.
 5. Review the evidence and record remaining work with a named owner.
 
 ---

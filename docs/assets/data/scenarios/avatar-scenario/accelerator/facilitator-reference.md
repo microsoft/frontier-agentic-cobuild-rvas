@@ -1,4 +1,4 @@
-# Solution — Avatar Scenario reference implementation
+# Facilitator reference: Avatar Scenario
 
 This reference collects the scenario infrastructure, local pack checks, and integration snippets.
 It is not an end-to-end application. Module 1 selects interactive assistance or repeatable content

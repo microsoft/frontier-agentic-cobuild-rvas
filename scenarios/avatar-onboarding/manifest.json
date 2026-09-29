@@ -116,6 +116,5 @@
     }
   ],
   "slides": "slides.md",
-  "accelerator": "accelerator/README.md",
-  "solution": "accelerator/solution.md"
+  "accelerator": "accelerator/README.md"
 }

@@ -2,19 +2,19 @@
 
 Build a grounded, permission-aware assistant over approved content. Prove it before it ships.
 
-These eight modules help you deliver an assistant in **your tenant**, using approved sources
+These eight modules help you build an assistant in **your tenant**, using approved sources
 and a channel your users can access. Start with one useful question set and agree how to
 check answers with its source owner. Reuse the customer's approved environment.
 
-## Define the first delivery
+## Define the first release
 
 Bring an authoritative source, its access owner, and a small set of representative questions
 with reviewed answers. Include one unanswered question and one a restricted user must not
 see. Choose the application or collaboration channel users already use.
 
-Keep the corpus and test identities in customer-controlled systems. Copy or adapt the reusable
-scripts in a private implementation repository; the fictional returns corpus is an optional
-smoke test. **Completion means the real user channel returns supported answers and preserves
+Keep the corpus and test identities in customer-approved systems. Copy or adapt the reusable
+scripts in a private application repository; the fictional returns corpus is an optional
+smoke test. **Done means the real user channel returns supported answers and preserves
 the source access boundary**, with an owner able to diagnose failures and roll back.
 
 ## Before you start
@@ -28,7 +28,7 @@ for a fictional retailer. Never copy customer content into this repository.
 
 **Setup.** Use Bash, Azure CLI, Bicep, and Python 3 in a virtual environment. Your Azure account
 needs permission to create the resources and role assignments. Install the Python packages listed
-in [the facilitator reference](accelerator/solution.md#prerequisites).
+in [the facilitator reference](accelerator/facilitator-reference.md#prerequisites).
 
 **Access.** The main data paths use `DefaultAzureCredential`, managed identity, and RBAC.
 The permission probe uses a separate client secret. The template also configures an Application
@@ -124,9 +124,9 @@ Each module's **Verify** section lists the specific commands and signals for tha
 ## Follow one path
 
 Use the modules for the selected platform. Module 2 explains which steps apply to an Azure
-retrieval application and which apply to a Copilot Studio implementation. Adapt the questions
-and source mapping to the customer's use case before module 7. Resolve the reference script
-limits wherever the agreed delivery depends on them.
+retrieval application and which apply to Copilot Studio. Adapt the questions and source mapping
+to the customer's use case before module 7. Resolve any reference-script limits that affect the
+agreed work.
 
 ## Non-negotiables
 

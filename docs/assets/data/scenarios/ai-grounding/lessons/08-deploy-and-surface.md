@@ -27,7 +27,7 @@ function in your application; do not create an agent merely to expose it.
 | F. Hosted long-running workflow | Background job handle + later retrieval | High | The work outlives an interactive request |
 
 **Start with the channel the customer selected in module 1.** Use A to extend an existing app.
-A local script can help inspect answers during development, but the delivery check must use the
+A local script can help inspect answers during development, but the acceptance check must use the
 authenticated channel available to the intended users.
 
 **Choose B when users work in Teams.** Foundry can publish your existing agent directly to Teams and

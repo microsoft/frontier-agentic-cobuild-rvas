@@ -1,4 +1,4 @@
-# AI Grounding — reference implementation
+# Facilitator reference: AI Grounding
 
 Use this facilitator reference with the module path. Check the
 [known implementation gaps](README.md#known-implementation-gaps) before running its release gates.

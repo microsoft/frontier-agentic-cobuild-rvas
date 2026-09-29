@@ -108,4 +108,4 @@ Use [module 5](../lessons/05-experience-generation.md) to render it and
 [module 7](../lessons/07-prove-and-operate.md) to collect release evidence.
 Content production needs a deployed workflow, even when no agent is involved.
 
-See [solution.md](solution.md) for the facilitator reference and integration boundaries.
+See [facilitator-reference.md](facilitator-reference.md) for the facilitator reference and integration boundaries.

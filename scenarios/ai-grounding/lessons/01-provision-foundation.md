@@ -64,7 +64,7 @@ and region-support reference below.
 
 ### Confirm your environment and access
 
-Record the chosen source and first user channel in the existing delivery backlog. Have the
+Record the chosen source and first user channel in the existing backlog. Have the
 environment owner identify the subscription, network boundary, and runtime identity. Grant
 only the access required for the chosen ingestion and query paths.
 

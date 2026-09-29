@@ -116,4 +116,4 @@ python3 -m unittest discover -s scenarios/content-understanding/accelerator -p t
 These exercise normalization and comparison logic. They do not prove live extraction accuracy,
 reviewer authentication, or a customer-system handoff.
 
-See [solution.md](solution.md) for the facilitator reference and integration boundaries.
+See [facilitator-reference.md](facilitator-reference.md) for the facilitator reference and integration boundaries.

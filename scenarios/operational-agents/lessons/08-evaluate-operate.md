@@ -32,7 +32,7 @@ independently inspected tool evidence.
 
 For a write-enabled scope, include an approved change, a denied change, and an
 interrupted operation that reconciles without duplication. For read-only
-delivery, prove attempted writes stay disabled. Have the operating owner find a
+work, prove attempted writes stay disabled. Have the operating owner find a
 failed task and its destination evidence, then rehearse rollback without losing
 pending approvals. Keep results in the customer's release record.
 
@@ -125,5 +125,5 @@ establish production readiness.
 
 There is no required additional module. Hand over the deployed task, its
 operating controls, and the acceptance evidence. An unconnected tool or missing
-approval boundary is unfinished delivery work, not a successful completion of
+approval boundary is unfinished work, not a successful completion of
 the write-enabled scope.
