@@ -233,12 +233,13 @@ test('home page offers a distinct custom co-build route', () => {
   assert.match(homeScript, /outcome-card-custom/);
 });
 
-test('intake skills cover every scenario track and the Start page links both', () => {
+test('intake skills use the scenario manifests and the Start page links both', () => {
   const forge = fs.readFileSync(path.join(ROOT, '.github/skills/customer-activity-forge/SKILL.md'), 'utf8');
-  for (const scenario of loadScenarioRegistry()) {
-    assert.ok(forge.includes(`**${scenario.name}**`), scenario.name);
-    assert.ok(forge.includes(`scenario.html?id=${scenario.id}`), scenario.id);
-  }
+  assert.ok(loadScenarioRegistry().length > 0);
+  assert.match(forge, /Read every `scenarios\/\*\/manifest\.json` before labelling ideas\./);
+  assert.match(forge, /compare its\s+need with every current manifest/);
+  assert.match(forge, /docs\/scenario\.html\?id=<manifest id>/);
+  assert.match(forge, /Build each URL from its\s+manifest ID/);
   assert.match(forge, /use-case-mapper/);
   assert.ok(fs.existsSync(path.join(ROOT, '.github/skills/use-case-mapper/SKILL.md')));
   const start = fs.readFileSync(path.join(ROOT, 'docs/start.html'), 'utf8');
