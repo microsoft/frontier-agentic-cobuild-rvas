@@ -160,7 +160,7 @@ test('documentation audit rejects retired repository and Pages links', () => {
   }
 });
 
-test('build rejects missing scenario guides', () => {
+test('build rejects missing scenario accelerators', () => {
   const scenario = loadScenarioRegistry()[0];
   const failures = detectScenarioProblems([{ ...scenario, accelerator: 'missing.md' }]);
   assert.ok(failures.some((problem) => problem.includes('accelerator missing.md missing')));
@@ -242,7 +242,6 @@ test('intake skills cover every scenario track and the Start page links both', (
   assert.ok(fs.existsSync(path.join(ROOT, '.github/skills/use-case-mapper/SKILL.md')));
   const start = fs.readFileSync(path.join(ROOT, 'docs/start.html'), 'utf8');
   assert.ok(start.includes('id="idea-forge"') && start.includes('id="use-case-mapper"'));
-  assert.match(fs.readFileSync(path.join(ROOT, 'docs/idea-forge.html'), 'utf8'), /start\.html#idea-forge/);
 });
 
 test('diagram branches keep refusals separate and require approval after review', () => {

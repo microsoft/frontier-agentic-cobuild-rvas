@@ -172,8 +172,7 @@
       ],
       "asset_base": "assets/data/scenarios/ai-grounding/",
       "readme_path": "assets/data/scenarios/ai-grounding/README.md",
-      "slides_path": "assets/data/scenarios/ai-grounding/slides.md",
-      "accelerator_path": "assets/data/scenarios/ai-grounding/accelerator/README.md"
+      "slides_path": "assets/data/scenarios/ai-grounding/slides.md"
     },
     {
       "id": "content-understanding-document-workflow",
@@ -312,8 +311,7 @@
       ],
       "asset_base": "assets/data/scenarios/content-understanding-document-workflow/",
       "readme_path": "assets/data/scenarios/content-understanding-document-workflow/README.md",
-      "slides_path": "assets/data/scenarios/content-understanding-document-workflow/slides.md",
-      "accelerator_path": "assets/data/scenarios/content-understanding-document-workflow/accelerator/README.md"
+      "slides_path": "assets/data/scenarios/content-understanding-document-workflow/slides.md"
     },
     {
       "id": "avatar-scenario",
@@ -462,8 +460,7 @@
       ],
       "asset_base": "assets/data/scenarios/avatar-scenario/",
       "readme_path": "assets/data/scenarios/avatar-scenario/README.md",
-      "slides_path": "assets/data/scenarios/avatar-scenario/slides.md",
-      "accelerator_path": "assets/data/scenarios/avatar-scenario/accelerator/README.md"
+      "slides_path": "assets/data/scenarios/avatar-scenario/slides.md"
     },
     {
       "id": "operational-agents",
@@ -643,8 +640,7 @@
       ],
       "asset_base": "assets/data/scenarios/operational-agents/",
       "readme_path": "assets/data/scenarios/operational-agents/README.md",
-      "slides_path": "assets/data/scenarios/operational-agents/slides.md",
-      "accelerator_path": "assets/data/scenarios/operational-agents/accelerator/README.md"
+      "slides_path": "assets/data/scenarios/operational-agents/slides.md"
     }
   ]
 }

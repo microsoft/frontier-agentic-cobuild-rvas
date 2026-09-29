@@ -897,33 +897,6 @@ main { flex: 1 0 auto; }
 .lesson-sidebar .panel-body li + li { margin-top: 7px; }
 .scenario-sidebar .panel-body a,
 .lesson-sidebar .panel-body a { color: var(--c-gold); text-decoration: underline; text-underline-offset: 3px; }
-.rail-action-list {
-  display: grid;
-  gap: 8px;
-  margin-top: 0;
-}
-.rail-action-list a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 9px 10px;
-  border: 1px solid var(--c-line);
-  border-radius: 10px;
-  background: var(--c-700);
-  color: var(--c-fg);
-  font-size: .84rem;
-  text-decoration: none;
-}
-.rail-action-list a::after {
-  content: ">";
-  color: var(--c-gold);
-  font-family: var(--font-mono);
-}
-.rail-action-list a:hover {
-  border-color: var(--c-gold-dim);
-  color: var(--c-gold);
-}
 #buildModuleList { display: grid; gap: 14px; padding-left: 22px; }
 #buildModuleList li { padding-left: 2px; }
 #buildModuleList strong,

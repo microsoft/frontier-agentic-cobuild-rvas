@@ -107,7 +107,7 @@ function publishScenarioAsset(source) {
     '.foundry', '.runtime', '.pytest_cache', 'logs', 'journals'].includes(name)) return false;
   if (/^\.env(?:\.|$)/u.test(name) && name !== '.env.sample') return false;
   if (/^\.deployment/u.test(name)) return false;
-  return !/\.(?:py[co]|db|sqlite3?)(?:-(?:wal|shm|journal))?$|\.log$|\.journal$/u.test(name);
+  return !/\.(?:excalidraw|py[co]|db|sqlite3?)(?:-(?:wal|shm|journal))?$|\.log$|\.journal$/u.test(name);
 }
 
 function copyScenarioAssets(scenarios, outputRoot = path.join(OUT_DATA_DIR, 'scenarios')) {
@@ -161,7 +161,6 @@ function scenarioOutput(scenario) {
     asset_base: assetBase,
     readme_path: `${assetBase}README.md`,
     slides_path: `${assetBase}${scenario.slides}`,
-    accelerator_path: `${assetBase}${scenario.accelerator}`,
   };
 }
 
