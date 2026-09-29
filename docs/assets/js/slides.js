@@ -36,7 +36,9 @@
     const content = source.replace(/^---\s*\n[\s\S]*?\n---\s*\n/mu, '').trim();
     state.slides = content.split(/\n---\s*\n/gu).filter(Boolean).map(parseSlide);
     deck.innerHTML = state.slides.map((slide, index) => {
-      const density = slide.markdown.length > 1050 ? ' slide-dense' : '';
+      const density = slide.markdown.length > 700 ? ' slide-dense'
+        : slide.markdown.length > 350 ? ' slide-compact'
+          : '';
       const table = /^\s*\|.*\|\s*$/mu.test(slide.markdown) ? ' slide-table' : '';
       return `
       <article class="customer-slide${density}${table}" id="${FP.esc(slide.id)}" tabindex="-1"

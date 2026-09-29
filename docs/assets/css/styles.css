@@ -2347,17 +2347,36 @@ body.diagram-lightbox-open { overflow: hidden; }
   font-size: clamp(0.86rem, 1.65cqw, 1.17rem);
   line-height: 1.38;
 }
+.slide-compact .slide-content h2 {
+  font-size: clamp(1.1rem, 2.45cqw, 1.85rem);
+  line-height: 1.04;
+}
+.slide-compact .slide-content p,
+.slide-compact .slide-content li,
+.slide-compact .slide-content td,
+.slide-compact .slide-content th {
+  font-size: clamp(0.76rem, 1.4cqw, 0.98rem);
+  line-height: 1.28;
+}
+.slide-compact .slide-content ul,
+.slide-compact .slide-content ol { margin-top: 0.45rem; }
+.slide-compact .slide-content li { margin-bottom: 0.18rem; }
+.slide-compact .slide-content p { margin: 0.5rem 0; }
 .slide-dense .slide-content p,
 .slide-dense .slide-content li,
 .slide-dense .slide-content td,
 .slide-dense .slide-content th {
-  font-size: clamp(0.77rem, 1.43cqw, 1.02rem);
-  line-height: 1.3;
+  font-size: clamp(0.7rem, 1.22cqw, 0.9rem);
+  line-height: 1.22;
 }
 .slide-content ul,
 .slide-content ol { margin: 0.65rem 0 0; padding-left: 1.35rem; }
 .slide-content li { margin-bottom: 0.25rem; }
 .slide-content p { margin: 0.7rem 0; }
+.slide-dense .slide-content ul,
+.slide-dense .slide-content ol { margin-top: 0.35rem; }
+.slide-dense .slide-content li { margin-bottom: 0.12rem; }
+.slide-dense .slide-content p { margin: 0.35rem 0; }
 .slide-content strong { color: var(--c-heading); }
 .slide-content a { color: var(--c-accent-dim); text-decoration: underline; text-underline-offset: 3px; }
 .slide-content table {

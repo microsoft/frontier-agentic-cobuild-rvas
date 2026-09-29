@@ -265,6 +265,11 @@ test('diagram branches keep refusals separate and require approval after review'
 test('customer pages display modules while keeping existing routes and slide links', async () => {
   const scenario = scenarioOutput(loadScenarioRegistry().find((item) => item.id === 'avatar-scenario'));
   const lesson = scenario.lessons[1];
+  const scenarioPage = fs.readFileSync(path.join(ROOT, 'docs/scenario.html'), 'utf8');
+  const slidesLink = scenarioPage.indexOf('id="slidesLink"');
+  assert.ok(slidesLink > scenarioPage.indexOf('<div class="detail-hero-actions">'));
+  assert.ok(slidesLink < scenarioPage.indexOf('id="scenarioMeta"'));
+  assert.equal(scenarioPage.indexOf('id="slidesLink"', slidesLink + 1), -1);
   for (const page of ['lesson', 'scenario']) {
     const elements = new Map();
     let init;
@@ -313,6 +318,7 @@ test('customer pages display modules while keeping existing routes and slide lin
 test('customer decks expose guided navigation and downloadable formats', () => {
   const html = fs.readFileSync(path.join(ROOT, 'docs/slides.html'), 'utf8');
   const script = fs.readFileSync(path.join(ROOT, 'docs/assets/js/slides.js'), 'utf8');
+  const styles = fs.readFileSync(path.join(ROOT, 'docs/assets/css/styles.css'), 'utf8');
   for (const id of ['scenarioLink', 'slideIndex', 'previousSlide', 'nextSlide', 'downloadPdf', 'downloadPptx']) {
     assert.ok(html.includes(`id="${id}"`), id);
   }
@@ -321,6 +327,9 @@ test('customer decks expose guided navigation and downloadable formats', () => {
   assert.match(script, /slides_pptx_path/);
   assert.match(script, /ArrowRight/);
   assert.match(script, /history\.replaceState/);
+  assert.match(script, /slide-compact/);
+  assert.match(script, /slide\.markdown\.length > 350/);
+  assert.match(styles, /\.slide-compact \.slide-content/);
 });
 
 test('slide sources and generated downloads share one scenario contract', () => {
