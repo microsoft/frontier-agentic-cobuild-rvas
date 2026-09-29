@@ -10,10 +10,19 @@
     "audit:docs:generated": "node scripts/audit-docs.js --generated",
     "validate:diagrams": "python3 scripts/audit-diagrams.py",
     "validate:scenarios": "python3 scripts/validate-scenarios.py && npm run validate:diagrams",
-    "build": "npm run audit:docs:source && node docs/build.js && npm run audit:docs:generated"
+    "build": "npm run audit:docs:source && node docs/build.js && node scripts/build-slides.js && npm run audit:docs:generated"
   },
   "engines": {
     "node": ">=18"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/outfit": "^5.2.8",
+    "pdfkit": "^0.17.2",
+    "pptxgenjs": "^4.0.0"
+  },
+  "overrides": {
+    "image-size": "2.0.4"
+  }
 }

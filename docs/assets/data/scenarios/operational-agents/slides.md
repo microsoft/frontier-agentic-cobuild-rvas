@@ -4,11 +4,29 @@ title: "Operational Agents"
 description: "Customer decisions for bounded tool execution and recovery."
 ---
 
+<!-- slide:id=scenario-open -->
+
 # Operational Agents
 
 Carry out bounded work with approved tools and evidence of the result.
 
 **Bring the customer's task.** This playbook supplies reusable execution controls.
+
+---
+<!-- slide:id=scenario-intro -->
+
+## How to use this conversation
+
+Each module moves through the same three steps:
+
+| Step | Customer question |
+|---|---|
+| Discuss | What can the agent do, and when must it stop? |
+| Decide | Where should policy, state, approval, and recovery live? |
+| Prove | Which observable result shows the boundary held? |
+
+Record the choice, owner, open question, and evidence gate as you go. Keep runtime detail in the
+scenario modules.
 
 ---
 <!-- slide:id=lesson-task-boundary-context -->
@@ -242,3 +260,20 @@ Inspect operation receipts and the destination state.
 
 Record gaps in authenticated approval, shared storage, or telemetry.
 Module completion alone does not establish production readiness.
+
+---
+<!-- slide:id=scenario-close -->
+
+## Close the discussion
+
+Before the next working session, record:
+
+- the bounded task and explicit refusal conditions
+- approved reads, proposed writes, and destination-side controls
+- where task state, budgets, and operation receipts will live
+- who can approve an exact proposal and how stale approval is rejected
+- how operators reconcile an interrupted write
+- the customer-channel evidence required before release
+- one owner and due date for every unresolved decision
+
+The next session should start from these decisions, not reopen them from memory.

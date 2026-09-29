@@ -11,7 +11,24 @@ paginate: true
 Build an interactive assistant or a repeatable content-production application in the customer's
 tenant. Start with the application goal, then choose whether an avatar helps.
 
-**Customer question:** What would make this trustworthy enough to pilot?
+**Workshop outcome:** choose the application goal, media path, approval boundary, accessible
+fallback, and evidence needed for a controlled pilot.
+
+---
+<!-- slide:id=scenario-intro -->
+
+# How to use this conversation
+
+Each module moves through the same three steps:
+
+| Step | Customer question |
+|---|---|
+| Discuss | Which user or content outcome are we trying to improve? |
+| Decide | Which experience and control path fits the risk? |
+| Prove | What must the customer see before the team moves on? |
+
+Record the choice, owner, open question, and evidence gate as you go. Keep build detail in the
+scenario modules.
 
 ---
 <!-- slide:id=lesson-experience-selection-context -->
@@ -387,12 +404,12 @@ Keep release evidence in the customer's existing system:
 ---
 <!-- slide:id=scenario-next-session -->
 
-# Next working module
-## Turn the discussion into a pilot plan
+# Close the discussion
+## Turn the decisions into a pilot plan
 
 Bring one real onboarding moment and the people who own it to the next module.
 
-Align on:
+Before the next working session, record:
 
 - pilot topic, audience, locale, and channel
 - application goal and first user task or workflow trigger
@@ -401,6 +418,7 @@ Align on:
 - disclosure, accessibility, and human-help requirements
 - approval gate and withdrawal path
 - first scorecard for operating evidence
+- one owner and due date for every unresolved decision
 
 **Working outcome:** a narrow, governed pilot that teams can build, review, and measure. The
 Agentic Co-build is not the full production solution.

@@ -172,7 +172,9 @@
       ],
       "asset_base": "assets/data/scenarios/ai-grounding/",
       "readme_path": "assets/data/scenarios/ai-grounding/README.md",
-      "slides_path": "assets/data/scenarios/ai-grounding/slides.md"
+      "slides_path": "assets/data/scenarios/ai-grounding/slides.md",
+      "slides_pdf_path": "assets/downloads/ai-grounding.pdf",
+      "slides_pptx_path": "assets/downloads/ai-grounding.pptx"
     },
     {
       "id": "content-understanding-document-workflow",
@@ -311,7 +313,9 @@
       ],
       "asset_base": "assets/data/scenarios/content-understanding-document-workflow/",
       "readme_path": "assets/data/scenarios/content-understanding-document-workflow/README.md",
-      "slides_path": "assets/data/scenarios/content-understanding-document-workflow/slides.md"
+      "slides_path": "assets/data/scenarios/content-understanding-document-workflow/slides.md",
+      "slides_pdf_path": "assets/downloads/content-understanding-document-workflow.pdf",
+      "slides_pptx_path": "assets/downloads/content-understanding-document-workflow.pptx"
     },
     {
       "id": "avatar-scenario",
@@ -460,7 +464,9 @@
       ],
       "asset_base": "assets/data/scenarios/avatar-scenario/",
       "readme_path": "assets/data/scenarios/avatar-scenario/README.md",
-      "slides_path": "assets/data/scenarios/avatar-scenario/slides.md"
+      "slides_path": "assets/data/scenarios/avatar-scenario/slides.md",
+      "slides_pdf_path": "assets/downloads/avatar-scenario.pdf",
+      "slides_pptx_path": "assets/downloads/avatar-scenario.pptx"
     },
     {
       "id": "operational-agents",
@@ -640,7 +646,9 @@
       ],
       "asset_base": "assets/data/scenarios/operational-agents/",
       "readme_path": "assets/data/scenarios/operational-agents/README.md",
-      "slides_path": "assets/data/scenarios/operational-agents/slides.md"
+      "slides_path": "assets/data/scenarios/operational-agents/slides.md",
+      "slides_pdf_path": "assets/downloads/operational-agents.pdf",
+      "slides_pptx_path": "assets/downloads/operational-agents.pptx"
     }
   ]
 }

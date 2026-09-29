@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-27T08:46:40.032+02:00",
+  "generatedAt": "2026-09-29T10:11:00.829+02:00",
   "title": "Design System: Agentic Co-build",
   "extensions": {
     "colorMeta": {
@@ -57,6 +57,14 @@
       "label": {
         "displayName": "Coordinate Label",
         "purpose": "Eyebrows, badges, route metadata, and compact orientation labels."
+      },
+      "slide-display": {
+        "displayName": "Slide Display",
+        "purpose": "Container-responsive decision titles on the guided 16:9 stage, with Outfit first in the stack."
+      },
+      "slide-body": {
+        "displayName": "Slide Body",
+        "purpose": "Discussion prompts, choices, evidence, and tables, with Inter first in the stack."
       }
     },
     "shadows": [
@@ -74,6 +82,11 @@
         "name": "hero-glass",
         "value": "0 24px 60px rgba(3, 34, 84, 0.28)",
         "purpose": "Translucent stats on deep hero surfaces."
+      },
+      {
+        "name": "slide-frame",
+        "value": "0 24px 70px rgba(3, 34, 84, 0.16), 0 4px 14px rgba(3, 34, 84, 0.08)",
+        "purpose": "Focused 16:9 slide page inside the facilitator cockpit; removed in print."
       }
     ],
     "motion": [
@@ -86,6 +99,11 @@
         "name": "compass-spin",
         "value": "120s linear infinite",
         "purpose": "Slow hero compass rotation, disabled when prefers-reduced-motion is set."
+      },
+      {
+        "name": "slide-arrive",
+        "value": "420ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Directional reveal for the newly active slide, disabled when prefers-reduced-motion is set."
       }
     ],
     "breakpoints": [
@@ -100,6 +118,14 @@
       {
         "name": "stats-four-up",
         "value": "620px"
+      },
+      {
+        "name": "slide-route-collapse",
+        "value": "1050px"
+      },
+      {
+        "name": "slide-mobile-cockpit",
+        "value": "760px"
       }
     ]
   },
@@ -167,6 +193,22 @@
       "description": "Sidebar proof and decision panel for scenario playbooks.",
       "html": "<aside class=\"ds-panel\"><div class=\"ds-panel-head\">Customer decisions</div><div class=\"ds-panel-body\"><ul><li>What data can be used?</li><li>What evidence proves value?</li></ul></div></aside>",
       "css": ".ds-panel{overflow:hidden;border:1px solid #E3E6ED;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(3,34,84,.08),0 4px 12px rgba(3,34,84,.06);color:#111827}.ds-panel-head{padding:10px 14px;border-bottom:1px solid #E3E6ED;background:#F5F8FE;color:#1A77E3;font:600 .72rem Cascadia Code,JetBrains Mono,monospace;text-transform:uppercase;letter-spacing:.08em}.ds-panel-body{padding:14px;color:#47494E;font:400 .86rem/1.6 Aptos,Inter,Segoe UI,system-ui,sans-serif}.ds-panel-body ul{margin:0;padding-left:20px}.ds-panel-body li+li{margin-top:7px}"
+    },
+    {
+      "name": "Guided Discussion Slide",
+      "kind": "custom",
+      "refersTo": "discussion-slide",
+      "description": "Focused 16:9 customer-decision page used by the browser cockpit and mirrored in PDF and PowerPoint.",
+      "html": "<article class=\"ds-slide\"><div class=\"ds-slide-chrome\"><span>AI GROUNDING / IQ</span><span>04 / 18</span></div><div class=\"ds-slide-content\"><h1>Choose the source and permission architecture</h1><h2>Decide</h2><p>Compare the viable paths, record why one fits, and keep the evidence gate visible.</p></div></article>",
+      "css": ".ds-slide{position:relative;width:min(100%,700px);aspect-ratio:16/9;overflow:hidden;padding:52px 58px;border:1px solid rgba(3,34,84,.12);border-radius:3px;background:radial-gradient(520px 320px at 100% 0%,rgba(26,119,227,.11),transparent 72%),#fff;color:#111827;box-shadow:0 24px 70px rgba(3,34,84,.16),0 4px 14px rgba(3,34,84,.08)}.ds-slide-chrome{position:absolute;inset:20px 26px auto;display:flex;justify-content:space-between;color:#53647A;font:700 .68rem Inter,Aptos,Segoe UI,system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase}.ds-slide-content h1{max-width:18ch;margin:0;color:#032254;font:700 2.5rem/.98 Outfit,Aptos Display,Segoe UI,system-ui,sans-serif}.ds-slide-content h2{max-width:25ch;margin:.55rem 0 0;color:#1A77E3;font:700 1.55rem/1.08 Outfit,Aptos Display,Segoe UI,system-ui,sans-serif}.ds-slide-content p{max-width:48ch;margin:.7rem 0;color:#172235;font:400 1rem/1.38 Inter,Aptos,Segoe UI,system-ui,sans-serif}.ds-slide:focus-visible{outline:3px solid #1A77E3;outline-offset:2px}"
+    },
+    {
+      "name": "Facilitator Cue",
+      "kind": "custom",
+      "refersTo": "facilitator-cue",
+      "description": "Plainspoken mode and prompt that stays beside the active slide on desktop and above it on mobile.",
+      "html": "<aside class=\"ds-cue\"><span class=\"ds-cue-mode\">PROVE</span><h2>Set the exit check</h2><p>Agree what the team must show before it moves on.</p></aside>",
+      "css": ".ds-cue{padding:30px 24px;border-left:1px solid rgba(3,34,84,.1);background:rgba(255,255,255,.82);color:#111827}.ds-cue-mode{display:inline-block;margin-bottom:24px;padding:5px 9px;border-radius:4px;background:#032254;color:#fff;font:800 .7rem Inter,Aptos,Segoe UI,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}.ds-cue h2{max-width:13ch;margin:0;color:#032254;font:700 1.7rem/1.06 Outfit,Aptos Display,Segoe UI,system-ui,sans-serif}.ds-cue p{max-width:30ch;margin:.8rem 0 0;color:#42546B;font:400 .94rem/1.55 Inter,Aptos,Segoe UI,system-ui,sans-serif}@media(max-width:760px){.ds-cue{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:8px 12px;padding:9px 14px;border:1px solid rgba(3,34,84,.1);backdrop-filter:blur(12px)}.ds-cue-mode{margin:0}.ds-cue h2{max-width:none;font-size:1rem;line-height:1.1}.ds-cue p{display:none}}"
     }
   ],
   "narrative": {
@@ -177,7 +219,8 @@
       "Scenario-first information architecture expressed through cards, rails, badges, and journey maps.",
       "Outfit/Aptos-style display typography paired with practical Inter/Aptos body copy and JetBrains/Cascadia mono labels.",
       "Subtle motion and elevation that make interaction states clear without distracting from customer evidence.",
-      "Crisp, navigational, and facilitator-friendly components."
+      "Crisp, navigational, and facilitator-friendly components.",
+      "A guided slide cockpit that keeps one customer decision central while route, facilitation cue, and exports remain available."
     ],
     "rules": [
       {
@@ -204,6 +247,26 @@
         "name": "The Flat-Until-Useful Rule",
         "body": "Surfaces stay quiet until interaction or hierarchy needs lift. Use border, fill, and route color before adding more shadow.",
         "section": "elevation"
+      },
+      {
+        "name": "The One Decision Rule",
+        "body": "A guided deck shows one slide at a time. Route and facilitator guidance support the active decision; they do not compete with it as miniature pages.",
+        "section": "layout"
+      },
+      {
+        "name": "The Mobile Preserve-the-Decision Rule",
+        "body": "On narrow screens, preserve the cue, return path, downloads, and table legibility before preserving the desktop three-column composition.",
+        "section": "layout"
+      },
+      {
+        "name": "The Discuss-Decide-Prove Rule",
+        "body": "Every module advances from context to viable choices to observable evidence; do not collapse proof into a closing note.",
+        "section": "components"
+      },
+      {
+        "name": "The One Source, Three Outputs Rule",
+        "body": "Browser, PDF, and PowerPoint are renderings of the same Markdown deck, not independently edited presentations.",
+        "section": "components"
       }
     ],
     "dos": [
@@ -211,14 +274,18 @@
       "Do use mono labels for orientation metadata such as maturity, duration, stage, and route IDs.",
       "Do use cards, rails, and steps to show where the customer is in the decision journey.",
       "Do keep primary actions visibly blue or hero-inverted; secondary actions should stay quiet.",
-      "Do respect reduced-motion settings for compass rotation and reveal animation."
+      "Do respect reduced-motion settings for compass rotation and reveal animation.",
+      "Do preserve deep links, direct scenario return, and synchronized PDF/PowerPoint exports when extending guided decks.",
+      "Do keep comparison columns readable on mobile by scrolling the table, not shrinking its content until it loses meaning."
     ],
     "donts": [
       "Don't turn the system into a dark terminal UI; dark navy is a gateway moment, not the default reading surface.",
       "Don't use RVAP Blue as background ornament everywhere. It must remain a decision/action signal.",
       "Don't add decorative diagrams, customers, proof, or claims that are not present in the product evidence.",
       "Don't replace the RVAP logo or Foundry icon vocabulary with unrelated icon styles.",
-      "Don't make reference-library mechanics visually outrank the scenario playbooks."
+      "Don't make reference-library mechanics visually outrank the scenario playbooks.",
+      "Don't turn the guided surface into a thumbnail gallery or show several competing slides at once.",
+      "Don't edit browser, PDF, or PowerPoint slide content as separate sources of truth."
     ]
   }
 }

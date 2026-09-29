@@ -136,8 +136,9 @@ systems; do not require a parallel set of module-completion files.
   must not pierce a shape, point at nothing, overlap unrelated boxes, or leave text clipped.
 - Slides can be used with a customer without exposing internal implementation detail. Use one
   scenario deck with module sections, not separate module decks.
-- Slides use Marp-compatible Markdown. Open the full deck through `docs/slides.html?id=<scenario-id>`
-  and use the browser's **Print / save as PDF** action for a customer-deck export.
+- Slides use Marp-compatible Markdown. Open the guided deck through
+  `docs/slides.html?id=<scenario-id>`. The page presents one slide at a time, links back to the
+  scenario, and provides generated PDF and PowerPoint downloads from the same source.
 - Each module section has three customer-facing slides: why the decision matters, options/trade-offs
   to discuss, and the evidence the practical activity must produce. Add stable slide markers before
   those slides so module pages can link directly into the deck:

@@ -24,15 +24,16 @@ operating evidence for one bounded AI-assisted decision.
 Choose the smallest useful scenario that can be grounded, evaluated, and operated safely. This is not
 an enterprise platform design session.
 
-Discuss each module through three lenses:
+Each module moves through the same three steps:
 
-| Lens | Customer question |
+| Step | Customer question |
 |---|---|
-| Context | What decision are we improving, and what constraints matter? |
-| Choices | Which path fits the source, access model, and experience? |
-| Evidence | What must be true before we move on? |
+| Discuss | What decision are we improving, and what constraints matter? |
+| Decide | Which path fits the source, access model, and experience? |
+| Prove | What must be true before we move on? |
 
-Keep implementation details in the scenario modules.
+Record the choice, owner, open question, and evidence gate as you go. Keep implementation details in
+the scenario modules.
 
 ---
 <!-- slide:id=lesson-foundation-context -->
@@ -405,16 +406,17 @@ The release contract records:
 ---
 <!-- slide:id=scenario-next-session -->
 
-# Next working module: turn decisions into the pilot plan
+# Close the discussion: turn decisions into the pilot plan
 
 Bring the people who can approve sources, permissions, evaluation, and operations.
 
-Recommended agenda:
+Before the next working session, record:
 
-1. Confirm the bounded customer decision and non-goals.
-2. Name the source of truth, source owner, and access boundary.
-3. Select the IQ/source pattern and live-data boundary.
-4. Draft the golden dataset, including restricted and stale-source cases.
-5. Agree the evidence gate for retrieval, routing, evaluation, tracing, and release.
+- the bounded customer decision and non-goals
+- the source of truth, source owner, and access boundary
+- the selected IQ or source pattern and any live-data boundary
+- the golden dataset, including restricted and stale-source cases
+- the evidence gate for retrieval, routing, evaluation, tracing, and release
+- one owner and due date for every unresolved decision
 
 **Exit outcome:** a pilot decision record the delivery team can implement through the modules.

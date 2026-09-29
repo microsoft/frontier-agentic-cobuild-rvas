@@ -50,7 +50,18 @@ typography:
     fontSize: "0.70rem"
     fontWeight: 500
     letterSpacing: "0.26em"
+  slide-display:
+    fontFamily: "Outfit, Aptos Display, Segoe UI, system-ui, sans-serif"
+    fontSize: "clamp(2rem, 4.7cqw, 3.8rem)"
+    fontWeight: 700
+    lineHeight: 0.98
+  slide-body:
+    fontFamily: "Inter, Aptos, Segoe UI, system-ui, sans-serif"
+    fontSize: "clamp(0.86rem, 1.65cqw, 1.17rem)"
+    fontWeight: 400
+    lineHeight: 1.38
 rounded:
+  slide: "3px"
   sm: "7px"
   md: "12px"
   lg: "18px"
@@ -91,6 +102,12 @@ components:
     rounded: "{rounded.sm}"
     padding: "5px 11px"
     typography: "{typography.label}"
+  discussion-slide:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.slide}"
+    padding: "clamp(2.25rem, 5.2cqw, 4.6rem) clamp(2rem, 6.4cqw, 5.5rem)"
+    typography: "{typography.slide-body}"
 ---
 
 # Design System: Agentic Co-build
@@ -110,6 +127,7 @@ The dominant visual language is light, crisp, and navigational, with a deep navy
 - Outfit/Aptos-style display typography paired with practical Inter/Aptos body copy and JetBrains/Cascadia mono labels.
 - Subtle motion and elevation that make interaction states clear without distracting from customer evidence.
 - Crisp, navigational, and facilitator-friendly components.
+- A guided slide cockpit that keeps one customer decision central while route, facilitation cue, and exports remain available.
 
 ## Colors
 
@@ -150,6 +168,8 @@ The palette is **RVAP Clean Light with Deep Navy Signal**: white and blue-white 
 
 **Character:** The pairing is modern Microsoft workshop typography: confident display headings, highly readable body copy, and small mono labels that behave like coordinates in a journey map.
 
+The guided slide surface deliberately reverses the web fallback order: bundled Outfit is the display face and bundled Inter is the working-copy face in the browser, while the PDF and PowerPoint generators register and name the same families. This keeps line breaks and hierarchy recognizably consistent across all three outputs.
+
 ### Hierarchy
 
 - **Display** (700, responsive clamp, tight line-height): Hero headings and major page openers. Use sparingly and keep line breaks intentional.
@@ -157,6 +177,8 @@ The palette is **RVAP Clean Light with Deep Navy Signal**: white and blue-white 
 - **Title** (700, responsive clamp, tight line-height): Card titles, panel headings, and compact content group labels.
 - **Body** (400, 16px, 1.65 line-height): Main explanatory text, guides, lesson prose, and customer-facing content.
 - **Label** (mono, small, wide tracking, uppercase): Eyebrows, badges, stage labels, IDs, route metadata, and stats labels.
+- **Slide Display** (700, container-responsive, 0.98 line-height): One decision title inside the 16:9 stage; Outfit is first in the stack.
+- **Slide Body** (400, container-responsive, 1.38 line-height): Discussion prompts, choices, evidence, and tables; Inter is first in the stack.
 
 ### Named Rules
 
@@ -168,7 +190,13 @@ The layout is a responsive atlas grid. The shared container maxes out at 1200px 
 
 Home and route pages use a two-column hero at desktop widths, collapsing to a single column on smaller screens. Scenario and lesson pages use a content-plus-sidebar layout: the main narrative carries the journey while the sidebar exposes proof, decisions, and facilitator actions. Cards use auto-fit grids with minimum widths around 320-360px so the system can accept new scenarios without bespoke layout work.
 
+The guided slide surface uses a facilitator-cockpit grid: a numbered, vertically scrollable discussion route on the left; one centered 16:9 decision slide; and a facilitation cue on the right. Below 1050px the route yields first. At 760px and below, the toolbar wraps but keeps the scenario return and both downloads visible, the cue becomes a compact sticky strip above the slide, and comparison tables retain a 42rem minimum width inside a horizontal scroller rather than compressing into unreadable columns.
+
 **The Journey Before Catalog Rule.** Layout should first clarify the customer path, then expose the supporting reference library. Do not let dense implementation catalogs compete with scenario decision surfaces.
+
+**The One Decision Rule.** A guided deck shows one slide at a time. Route and facilitator guidance support the active decision; they do not compete with it as miniature pages.
+
+**The Mobile Preserve-the-Decision Rule.** On narrow screens, preserve the cue, return path, downloads, and table legibility before preserving the desktop three-column composition.
 
 ## Elevation & Depth
 
@@ -180,6 +208,7 @@ Depth is a hybrid of tonal layering, thin borders, and restrained shadows. Cards
 - **Card Shadow** (`0 1px 3px rgba(3, 34, 84, 0.08), 0 4px 12px rgba(3, 34, 84, 0.06)`): Default card depth and hover lift.
 - **Ambient Shadow** (`0 4px 20px -8px rgba(3, 34, 84, 0.12), 0 1px 3px rgba(3, 34, 84, 0.06)`): Higher-level surfaces and shared shell depth.
 - **Hero Glass Shadow** (`0 24px 60px rgba(3, 34, 84, 0.28)`): Used only for translucent statistic blocks on dark hero surfaces.
+- **Slide Frame Shadow** (`0 24px 70px rgba(3, 34, 84, 0.16), 0 4px 14px rgba(3, 34, 84, 0.08)`): The focused 16:9 page floating inside the facilitator cockpit; removed in print.
 
 ### Named Rules
 
@@ -231,6 +260,20 @@ The hero compass is the signature visual device. It combines low-opacity rings, 
 
 Scenario and lesson sidebars use stacked panels with uppercase heads, concise body text, ordered journey lists, and action rails. They should read like facilitator notes: scannable, grounded, and easy to act from.
 
+### Guided Discussion Slides
+
+- **Cockpit:** Keep the discussion route, active 16:9 page, and facilitation cue as three distinct zones on wide screens. The route marks the active step in Deep Navy; the cue uses a compact mode label and plainspoken prompt.
+- **Content Rhythm:** Source decks repeat `context`, `choices`, and `evidence` slide IDs for each module. The browser maps these to **Discuss**, **Decide**, and **Prove** cues, then closes with a **Commit** state that names owners, unresolved questions, and required evidence.
+- **Navigation:** Previous/next controls and Arrow, Page, Space, Home, and End keys all move the same active index. The active slide ID is written to the URL hash so a single decision can be linked directly and restored on load.
+- **Scenario Return:** The toolbar resolves the current scenario and returns directly to its scenario page; do not send facilitators through the catalog to recover context.
+- **Exports:** Browser, PDF, and PowerPoint consume the same source-controlled Markdown and slide IDs. Keep slide order, light content pages, Deep Navy opening/closing pages, page numbering, and Outfit/Inter hierarchy synchronized across outputs.
+- **Responsive Behavior:** Hide the route before the cue. On mobile, pin the compact cue above the active page and let wide tables scroll horizontally with a visible edge hint.
+- **Motion and Print:** Active pages use a brief directional reveal that is removed under reduced motion. Print removes cockpit chrome, shadows, radii, and controls, then emits one landscape page per slide.
+
+**The Discuss-Decide-Prove Rule.** Every module advances from context to viable choices to observable evidence; do not collapse proof into a closing note.
+
+**The One Source, Three Outputs Rule.** Browser, PDF, and PowerPoint are renderings of the same Markdown deck, not independently edited presentations.
+
 ## Do's and Don'ts
 
 ### Do:
@@ -240,6 +283,8 @@ Scenario and lesson sidebars use stacked panels with uppercase heads, concise bo
 - **Do** use cards, rails, and steps to show where the customer is in the decision journey.
 - **Do** keep primary actions visibly blue or hero-inverted; secondary actions should stay quiet.
 - **Do** respect reduced-motion settings for compass rotation and reveal animation.
+- **Do** preserve deep links, direct scenario return, and synchronized PDF/PowerPoint exports when extending guided decks.
+- **Do** keep comparison columns readable on mobile by scrolling the table, not shrinking its content until it loses meaning.
 
 ### Don't:
 
@@ -248,3 +293,5 @@ Scenario and lesson sidebars use stacked panels with uppercase heads, concise bo
 - **Don't** add decorative diagrams, customers, proof, or claims that are not present in the product evidence.
 - **Don't** replace the RVAP logo or Foundry icon vocabulary with unrelated icon styles.
 - **Don't** make reference-library mechanics visually outrank the scenario playbooks.
+- **Don't** turn the guided surface into a thumbnail gallery or show several competing slides at once.
+- **Don't** edit browser, PDF, or PowerPoint slide content as separate sources of truth.

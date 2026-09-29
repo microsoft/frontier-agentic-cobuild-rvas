@@ -22,13 +22,14 @@ Use this deck to agree on the decision, automation evidence, and controls needed
 
 Use this working-module deck with sponsors, SMEs, security, data owners, and engineering. It is not an implementation walkthrough.
 
-For each module, discuss:
+Each module moves through the same three steps:
 
-- **Context:** Why the step matters to the business outcome.
-- **Choices and trade-offs:** Which path fits the environment.
-- **Evidence:** What must be true before moving forward.
+- **Discuss:** Why the decision matters to the business outcome.
+- **Decide:** Which path fits the documents, workflow, and operating environment.
+- **Prove:** What the team must show before moving forward.
 
-The practical steps live in the scenario modules.
+Record the choice, owner, open question, and evidence gate as you go. The practical steps live in the
+scenario modules.
 
 ---
 <!-- slide:id=lesson-foundation-context -->
@@ -348,14 +349,15 @@ Decision question: **Is the workflow ready to serve a bounded real use case with
 ---
 <!-- slide:id=scenario-next-session -->
 
-## Next working module
+## Close the discussion
 
-Bring the people and evidence needed to start the scenario:
+Before the next working session, record:
 
-- One high-value document decision and its business owner.
-- An approved source and 15–30 safe, representative samples.
-- Expected fields, unacceptable errors, and review rules.
-- SME, engineering, security, and workflow handoff owners.
-- Current constraints for identity, retention, monitoring, and deployment.
+- the first high-value document decision and its business owner
+- the approved source and 15–30 safe, representative samples
+- expected fields, unacceptable errors, and review rules
+- the SME, engineering, security, and workflow handoff owners
+- current constraints for identity, retention, monitoring, and deployment
+- one owner and due date for every unresolved decision
 
 Agree on the first pilot slice and the evidence needed before expansion.

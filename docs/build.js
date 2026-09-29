@@ -161,6 +161,8 @@ function scenarioOutput(scenario) {
     asset_base: assetBase,
     readme_path: `${assetBase}README.md`,
     slides_path: `${assetBase}${scenario.slides}`,
+    slides_pdf_path: `assets/downloads/${scenario.id}.pdf`,
+    slides_pptx_path: `assets/downloads/${scenario.id}.pptx`,
   };
 }
 

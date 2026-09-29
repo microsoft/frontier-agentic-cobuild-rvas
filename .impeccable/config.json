@@ -5,6 +5,15 @@
       "docs/vendor/**",
       "docs/.bundle/**",
       "vendor/bundle/**"
+    ],
+    "ignoreRules": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-09-29T08:04:14.617Z",
+        "reason": "DESIGN.md commits Inter as the body face and the slide surface now self-hosts it consistently."
+      }
     ]
   }
 }

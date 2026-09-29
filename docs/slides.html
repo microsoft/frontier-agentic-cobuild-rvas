@@ -13,16 +13,54 @@
 <body class="slides-page">
   <header class="nav slides-toolbar" role="banner">
     <div class="nav-inner slides-toolbar-inner">
-      <a class="brand" href="index.html" aria-label="Real Value Acceleration Program — Home">
+      <a class="brand" href="index.html" aria-label="Real Value Acceleration Program home">
         <img src="assets/img/logo-full.png" alt="Real Value Acceleration Program" class="brand-logo" />
       </a>
-      <span class="slides-toolbar-label">Customer deck</span>
-      <span id="deckTitle" class="slides-toolbar-title">Loading slides…</span>
-      <a class="btn btn-ghost btn-sm slides-home" href="index.html#outcomes">Scenarios</a>
-      <button type="button" class="btn btn-primary btn-sm" id="printSlides">Print / save as PDF</button>
+      <div class="slides-toolbar-heading">
+        <span id="deckTitle" class="slides-toolbar-title">Loading slides…</span>
+      </div>
+      <a class="btn btn-ghost btn-sm" id="scenarioLink" href="index.html#outcomes">Back to scenario</a>
+      <div class="slides-downloads">
+        <a class="btn btn-ghost btn-sm" id="downloadPptx" href="#" download>PowerPoint</a>
+        <a class="btn btn-primary btn-sm" id="downloadPdf" href="#" download>Download PDF</a>
+      </div>
     </div>
   </header>
-  <main id="slideDeck" aria-live="polite"><p>Loading slides…</p></main>
+  <main class="slides-workspace" aria-live="polite">
+    <aside class="slides-index" aria-label="Deck outline">
+      <div class="slides-index-head">
+        <span>Discussion route</span>
+        <strong id="deckProgress">0 / 0</strong>
+      </div>
+      <nav id="slideIndex"></nav>
+    </aside>
+
+    <section class="slides-stage" aria-label="Current slide">
+      <div id="slideDeck"><p>Loading slides…</p></div>
+      <nav class="slides-controls" aria-label="Slide navigation">
+        <button class="slide-nav-button" type="button" id="previousSlide">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+          Previous
+        </button>
+        <span id="slidePosition" class="slides-position">Slide 0 of 0</span>
+        <button class="slide-nav-button next" type="button" id="nextSlide">
+          Next
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </nav>
+    </section>
+
+    <aside class="slides-guide" aria-label="Facilitator guide">
+      <div class="slides-guide-mode" id="guideMode">Orient</div>
+      <h2 id="guideTitle">Use the slide to frame the conversation.</h2>
+      <p id="guideCopy">Keep the customer decision in view. Move on when the group can state what was agreed and what evidence is still missing.</p>
+      <a class="slides-module-link" id="moduleLink" href="#" hidden>Open this module</a>
+      <div class="slides-keyboard">
+        <span>Navigate</span>
+        <kbd>←</kbd><kbd>→</kbd>
+      </div>
+    </aside>
+  </main>
   <script src="assets/js/core.js"></script>
   <script src="assets/js/slides.js"></script>
 </body>

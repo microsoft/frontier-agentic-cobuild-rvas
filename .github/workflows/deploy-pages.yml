@@ -14,6 +14,7 @@ on:
       - scripts/audit-diagrams.py
       - scripts/test-docs.js
       - package.json
+      - package-lock.json
       - .github/workflows/deploy-pages.yml
 
   pull_request:
@@ -31,6 +32,7 @@ on:
       - scripts/audit-diagrams.py
       - scripts/test-docs.js
       - package.json
+      - package-lock.json
       - .github/workflows/deploy-pages.yml
 
   workflow_dispatch:
@@ -55,6 +57,9 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build static site data
         run: npm run build
 
@@ -64,7 +69,7 @@ jobs:
       - name: Verify generated guides are committed
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/assets/data)"
+            docs/assets/data docs/assets/downloads)"
 
   build-production:
     if: github.ref == 'refs/heads/main'
@@ -78,6 +83,9 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build static site data
         run: npm run build
 
@@ -87,7 +95,7 @@ jobs:
       - name: Verify generated guides are committed
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/assets/data)"
+            docs/assets/data docs/assets/downloads)"
 
       - name: Checkout preview state
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -158,6 +166,14 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Install production dependencies
+        run: npm ci
+        working-directory: production
+
+      - name: Install preview dependencies
+        run: npm ci
+        working-directory: preview
+
       - name: Build production site
         run: npm run build
         working-directory: production
@@ -174,7 +190,7 @@ jobs:
         working-directory: preview
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/assets/data)"
+            docs/assets/data docs/assets/downloads)"
 
       - name: Set preview path
         id: preview_path

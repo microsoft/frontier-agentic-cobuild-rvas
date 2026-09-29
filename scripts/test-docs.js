@@ -8,6 +8,7 @@ const test = require('node:test');
 const vm = require('node:vm');
 const { sourceDocs, resolveScript, auditScriptReferences, auditRetiredReferences } = require('./audit-docs');
 const { copyScenarioAssets, detectScenarioProblems, loadScenarioRegistry, scenarioOutput } = require('../docs/build');
+const { parseDeck, slideKind } = require('./build-slides');
 const ROOT = path.resolve(__dirname, '..');
 
 test('guide anchors retain explicit IDs and support section deep links', () => {
@@ -307,6 +308,45 @@ test('customer pages display modules while keeping existing routes and slide lin
       assert.ok(element('scenarioPager').innerHTML.includes(scenario.lessons[0].lesson_path));
     }
   }
+});
+
+test('customer decks expose guided navigation and downloadable formats', () => {
+  const html = fs.readFileSync(path.join(ROOT, 'docs/slides.html'), 'utf8');
+  const script = fs.readFileSync(path.join(ROOT, 'docs/assets/js/slides.js'), 'utf8');
+  for (const id of ['scenarioLink', 'slideIndex', 'previousSlide', 'nextSlide', 'downloadPdf', 'downloadPptx']) {
+    assert.ok(html.includes(`id="${id}"`), id);
+  }
+  assert.match(script, /scenario\.html\?id=/);
+  assert.match(script, /slides_pdf_path/);
+  assert.match(script, /slides_pptx_path/);
+  assert.match(script, /ArrowRight/);
+  assert.match(script, /history\.replaceState/);
+});
+
+test('slide sources and generated downloads share one scenario contract', () => {
+  for (const scenario of loadScenarioRegistry()) {
+    const deck = parseDeck(fs.readFileSync(path.join(scenario.root, scenario.slides), 'utf8'));
+    assert.ok(deck.slides.length >= 4, scenario.id);
+    assert.equal(deck.slides[0].id, 'scenario-open', scenario.id);
+    assert.ok(deck.slides.some((slide) => slide.id === 'scenario-intro'), scenario.id);
+    assert.ok(deck.slides.some((slide) => slide.kind === 'close'), scenario.id);
+    for (const lesson of scenario.lessons) {
+      for (const kind of ['context', 'choices', 'evidence']) {
+        assert.ok(deck.slides.some((slide) => slide.id === `lesson-${lesson.id}-${kind}`),
+          `${scenario.id} ${lesson.id} ${kind}`);
+      }
+    }
+
+    const output = scenarioOutput(scenario);
+    assert.equal(output.slides_pdf_path, `assets/downloads/${scenario.id}.pdf`);
+    assert.equal(output.slides_pptx_path, `assets/downloads/${scenario.id}.pptx`);
+    const pdf = path.join(ROOT, 'docs', output.slides_pdf_path);
+    const pptx = path.join(ROOT, 'docs', output.slides_pptx_path);
+    assert.equal(fs.readFileSync(pdf).subarray(0, 4).toString(), '%PDF');
+    assert.equal(fs.readFileSync(pptx).subarray(0, 2).toString(), 'PK');
+  }
+  assert.equal(slideKind('lesson-example-choices'), 'choices');
+  assert.equal(slideKind('scenario-close'), 'close');
 });
 
 test('module prose keeps decision-first guidance and explicit tenant delivery boundaries', () => {
