@@ -66,10 +66,10 @@ jobs:
       - name: Validate scenarios and build regressions
         run: npm run validate:scenarios && npm test && npm run test:scenarios
 
-      - name: Verify generated guides are committed
+      - name: Verify generated site data is committed
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/assets/data docs/assets/downloads)"
+            docs/assets/data)"
 
   build-production:
     if: github.ref == 'refs/heads/main'
@@ -92,10 +92,10 @@ jobs:
       - name: Validate scenarios and build regressions
         run: npm run validate:scenarios && npm test && npm run test:scenarios
 
-      - name: Verify generated guides are committed
+      - name: Verify generated site data is committed
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/assets/data docs/assets/downloads)"
+            docs/assets/data)"
 
       - name: Checkout preview state
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -186,11 +186,11 @@ jobs:
         run: npm run validate:scenarios && npm test && npm run test:scenarios
         working-directory: preview
 
-      - name: Verify generated preview assets are committed
+      - name: Verify generated preview site data is committed
         working-directory: preview
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/assets/data docs/assets/downloads)"
+            docs/assets/data)"
 
       - name: Set preview path
         id: preview_path
