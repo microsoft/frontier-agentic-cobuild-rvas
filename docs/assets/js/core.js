@@ -83,6 +83,7 @@
     if (!rawMd) { targetEl.innerHTML = '<p class="text-dim">No content.</p>'; return; }
     if (window.marked) {
       targetEl.innerHTML = window.marked.parse(rawMd, { breaks: false, gfm: true });
+      FP.enhanceCommandBlocks(targetEl);
     } else {
       // Fallback: wrap in <pre> if marked not available
       const pre = document.createElement('pre');
@@ -92,6 +93,117 @@
       targetEl.appendChild(pre);
     }
   };
+
+  FP.enhanceCommandBlocks = function (container) {
+    if (!container) return;
+
+    container.querySelectorAll('pre > code').forEach((code) => {
+      const language = commandLanguage(code);
+      const pre = code.parentElement;
+      if (!language || !pre || pre.parentElement?.classList.contains('command-block')) return;
+
+      const block = document.createElement('div');
+      block.className = 'command-block';
+      block.dataset.language = language;
+      const command = code.textContent || '';
+      formatCommandCode(code, command);
+
+      const toolbar = document.createElement('div');
+      toolbar.className = 'command-block__toolbar';
+
+      const label = document.createElement('span');
+      label.className = 'command-block__language';
+      label.textContent = language === 'shell' ? 'Shell' : 'Bash';
+
+      const copy = document.createElement('button');
+      copy.type = 'button';
+      copy.className = 'command-block__copy';
+      copy.textContent = 'Copy';
+      copy.setAttribute('aria-label', `Copy ${label.textContent} command`);
+      copy.addEventListener('click', async () => {
+        const copied = await copyCommand(command);
+        copy.textContent = copied ? 'Copied' : 'Try again';
+        window.setTimeout(() => { copy.textContent = 'Copy'; }, 1600);
+      });
+
+      toolbar.append(label, copy);
+      pre.parentElement.insertBefore(block, pre);
+      block.append(toolbar, pre);
+    });
+  };
+
+  function commandLanguage(code) {
+    const match = Array.from(code.classList)
+      .map((name) => name.match(/^language-(bash|sh|shell|zsh|console)$/i))
+      .find(Boolean);
+    if (!match) return '';
+    return /^(shell|console)$/i.test(match[1]) ? 'shell' : 'bash';
+  }
+
+  function formatCommandCode(code, command) {
+    const fragment = document.createDocumentFragment();
+    command.split('\n').forEach((line, index) => {
+      if (index) fragment.append(document.createTextNode('\n'));
+      appendCommandLine(fragment, line);
+    });
+    code.replaceChildren(fragment);
+  }
+
+  function appendCommandLine(target, line) {
+    const comment = line.match(/^(\s*#.*)$/);
+    if (comment) return appendCommandToken(target, line, 'command-block__comment');
+
+    const match = line.match(/^(\s*)([A-Za-z][\w.-]*)(.*)$/);
+    if (!match) return target.append(document.createTextNode(line));
+
+    target.append(document.createTextNode(match[1]));
+    appendCommandToken(target, match[2], 'command-block__command');
+    appendCommandArguments(target, match[3]);
+  }
+
+  function appendCommandArguments(target, value) {
+    const tokens = /(\$[{]?[A-Za-z_]\w*[}]?|[A-Z][A-Z0-9_]*=|--?[\w-]+)/g;
+    let index = 0;
+    let match;
+    while ((match = tokens.exec(value))) {
+      target.append(document.createTextNode(value.slice(index, match.index)));
+      const className = match[0].startsWith('-')
+        ? 'command-block__flag'
+        : 'command-block__variable';
+      appendCommandToken(target, match[0], className);
+      index = match.index + match[0].length;
+    }
+    target.append(document.createTextNode(value.slice(index)));
+  }
+
+  function appendCommandToken(target, value, className) {
+    const token = document.createElement('span');
+    token.className = className;
+    token.textContent = value;
+    target.append(token);
+  }
+
+  async function copyCommand(value) {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+        return true;
+      }
+    } catch (error) {
+      // Use the synchronous fallback when browser clipboard access is unavailable.
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = value;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    const copied = document.execCommand('copy');
+    textarea.remove();
+    return copied;
+  }
 
   FP.ensureGuideAnchors = function (container) {
     container.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((heading) => {

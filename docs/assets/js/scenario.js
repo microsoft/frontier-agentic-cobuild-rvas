@@ -88,7 +88,7 @@
   }
 
   function routeAppPage(path, hash) {
-    const match = path.match(/(?:^|\/)(lesson|scenario|slides|guide)\.html(\?.*)?$/i);
+    const match = path.match(/(?:^|\/)(lesson|scenario|slides)\.html(\?.*)?$/i);
     return match ? `${match[1].toLowerCase()}.html${match[2] || ''}${hash ? `#${hash}` : ''}` : '';
   }
 

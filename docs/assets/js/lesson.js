@@ -45,8 +45,6 @@
     document.getElementById('currentModuleSummary').textContent = currentModule
       ? currentModule.summary
       : 'Follow the implementation steps and review the evidence against the agreed scope.';
-    renderLessonResources(scenario, lesson);
-
     document.getElementById('lessonProgress').innerHTML = lessons.map((item) => `
       <li class="${item.id === lesson.id ? 'is-current' : ''}">
         <a href="${FP.esc(item.lesson_path)}" ${item.id === lesson.id ? 'aria-current="step"' : ''}>
@@ -63,21 +61,6 @@
     document.getElementById('lessonSlidesLink').href = `slides.html?id=${scenarioId}#${lessonHash}`;
     document.getElementById('lessonFullDeckLink').href = `slides.html?id=${scenarioId}`;
     document.getElementById('lessonPlaybookLink').href = playbookUrl;
-  }
-
-  function renderLessonResources(scenario) {
-    const target = document.getElementById('lessonResourceLinks');
-    if (!target) return;
-
-    const scenarioId = encodeURIComponent(scenario.id);
-    target.innerHTML = [
-      ['Scenario overview', `scenario.html?id=${scenarioId}`],
-      ['Reference code guide', scenarioGuideUrl(scenario.id, 'accelerator')],
-    ].map(([label, href]) => `<a href="${FP.esc(href)}">${FP.esc(label)}</a>`).join('');
-  }
-
-  function scenarioGuideUrl(scenarioId, guideId) {
-    return `guide.html?scenario=${encodeURIComponent(scenarioId)}&guide=${encodeURIComponent(guideId)}`;
   }
 
   function renderLessonPager(previous, next, playbookUrl) {
@@ -142,13 +125,8 @@
         return;
       }
 
-      if (`${scenario.asset_base || ''}${resolved}` === scenario.accelerator_path) {
-        link.href = scenarioGuideUrl(scenario.id, 'accelerator') + (hash ? `#${hash}` : '');
-        return;
-      }
-
       if (/\.md$/i.test(path)) {
-        link.classList.add('is-source-link');
+        link.href = `${scenario.asset_base || ''}${resolved}${hash ? `#${hash}` : ''}`;
         return;
       }
 
