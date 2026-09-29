@@ -5,9 +5,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const PDFDocument = require('pdfkit');
 const pptxgen = require('pptxgenjs');
+const JSZip = require('jszip');
 const { loadScenarioRegistry } = require('../docs/build');
 
 const ROOT = path.resolve(__dirname, '..');
+const BUILD_TIMESTAMP = '1980-01-01T00:00:00.000Z';
 const OUTPUT_DIR = path.join(ROOT, 'docs', 'assets', 'downloads');
 const FONT_OUTPUT_DIR = path.join(ROOT, 'docs', 'assets', 'fonts');
 const LOGO_DARK = path.join(ROOT, 'docs', 'assets', 'img', 'logo-mark-slide.png');
@@ -250,6 +252,35 @@ function blockText(block) {
   return block.text || '';
 }
 
+function buildDate() {
+  return new Date(BUILD_TIMESTAMP);
+}
+
+async function normalizePptx(buffer) {
+  const archive = await JSZip.loadAsync(buffer);
+  const coreProperties = archive.file('docProps/core.xml');
+  if (!coreProperties) throw new Error('PowerPoint core properties are missing.');
+
+  const metadata = await coreProperties.async('string');
+  archive.file(
+    'docProps/core.xml',
+    metadata
+      .replace(/(<dcterms:created[^>]*>)[^<]+(<\/dcterms:created>)/u, `$1${BUILD_TIMESTAMP}$2`)
+      .replace(/(<dcterms:modified[^>]*>)[^<]+(<\/dcterms:modified>)/u, `$1${BUILD_TIMESTAMP}$2`),
+    { date: buildDate() },
+  );
+  archive.forEach((_path, entry) => {
+    entry.date = buildDate();
+  });
+
+  return archive.generateAsync({
+    type: 'nodebuffer',
+    compression: 'DEFLATE',
+    compressionOptions: { level: 9 },
+    platform: 'DOS',
+  });
+}
+
 async function writePptx(scenario, deck, outputPath) {
   const pptx = new pptxgen();
   pptx.layout = 'LAYOUT_WIDE';
@@ -268,7 +299,8 @@ async function writePptx(scenario, deck, outputPath) {
     addPptxChrome(pptx, slide, scenario, item, index, deck.slides.length);
     addPptxContent(pptx, slide, item);
   });
-  await pptx.writeFile({ fileName: outputPath, compression: true });
+  const output = await pptx.write({ outputType: 'nodebuffer', compression: true });
+  fs.writeFileSync(outputPath, await normalizePptx(output));
 }
 
 function pdfColor(hex) {
@@ -277,7 +309,12 @@ function pdfColor(hex) {
 
 function writePdf(scenario, deck, outputPath) {
   return new Promise((resolve, reject) => {
-    const pdf = new PDFDocument({ autoFirstPage: false, size: [960, 540], margin: 0 });
+    const pdf = new PDFDocument({
+      autoFirstPage: false,
+      size: [960, 540],
+      margin: 0,
+      info: { CreationDate: buildDate(), ModDate: buildDate() },
+    });
     pdf.registerFont('Outfit', PDF_FONT_FILES.outfit700);
     pdf.registerFont('Inter', PDF_FONT_FILES.inter400);
     pdf.registerFont('Inter-Semibold', PDF_FONT_FILES.inter600);

@@ -19,6 +19,7 @@
   "devDependencies": {
     "@fontsource/inter": "^5.2.8",
     "@fontsource/outfit": "^5.2.8",
+    "jszip": "^3.10.2",
     "pdfkit": "^0.17.2",
     "pptxgenjs": "^4.0.0"
   },
