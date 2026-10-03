@@ -49,6 +49,12 @@
       "skillPath": "skills/microsoft-foundry/SKILL.md",
       "computedHash": "bbcba6515b4313989a6f29ed5c77bc3dfa9e53be50f17edb1d9eaa5dfe0580a5"
     },
+    "unslop": {
+      "source": "cursor/plugins",
+      "sourceType": "github",
+      "skillPath": "pstack/skills/unslop/SKILL.md",
+      "computedHash": "6018ca8c329ba87c6b4298207f58d6b773fe23e44ff52a00a9a4d160c19bedc0"
+    },
     "writing-for-agents": {
       "source": "mattpocock/skills",
       "sourceType": "github",
