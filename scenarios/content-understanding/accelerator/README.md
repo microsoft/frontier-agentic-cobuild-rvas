@@ -20,7 +20,7 @@ The modules also use `jq` and `curl`. Sign in with an Azure user account in the 
 subscription. You need permission to create resources and role assignments, plus model quota
 in the chosen region. The deployment script does not support service-principal sign-in.
 
-**This package supplies infrastructure, an invoice normalizer, and a result-comparison gate.**
+This package supplies infrastructure, an invoice normalizer, and a result-comparison gate.
 The modules show how to use them with actual extraction results. Customer intake controls,
 the review UI, and the posting and deployment adapters still need integration.
 The default Bicep deployment does not configure Content Understanding model
@@ -28,7 +28,7 @@ mappings. Check the selected analyzer's supported models and
 [configure its deployment mappings](https://learn.microsoft.com/azure/ai-services/content-understanding/concepts/models-deployments)
 before calling it.
 
-**Check the current API surface before writing SDK code.** Content Understanding, Document
+**Check the current API before writing SDK code.** Content Understanding, Document
 Intelligence, Foundry, and their SDKs change quickly. Search current Microsoft Learn guidance and
 the relevant Foundry guidance. Do not infer a signature from this accelerator or from memory.
 
@@ -60,7 +60,7 @@ environment instead.
 | 2. Document source | Approved intake, retention, access, and quarantine design | Signed source and document-boundary decision |
 | 3. Extraction choice | Tested extraction capability for the required fields | Capability decision from representative fixtures |
 | 4. Typed extraction | Validated result contract with confidence and grounding | Evidence-backed result and low-confidence path |
-| 5. Review and handoff | Reviewer correction and approval-gated downstream seam | Correction record and approved handoff |
+| 5. Review and handoff | Reviewer correction and approval-gated downstream integration | Correction record and approved handoff |
 | 6. Evaluate and trace | Quality and safety gate with traces | Evaluation result and trace for a failed case |
 | 7. Deploy | Authenticated endpoint with rollback path | Endpoint rejects an unauthenticated caller |
 
@@ -92,12 +92,12 @@ set -a; source scenarios/content-understanding/accelerator/.env; set +a
 ```
 
 Do not commit it or print bearer tokens in logs.
-Each module's **Verify** section gives the command and signal for that module.
+Each module's Verify section gives the command and expected result.
 
 ## Scope and boundaries
 
 - Keep source evidence with every result. Reject values without usable grounding.
-- Surface missing values and low-confidence results for review. Do not guess.
+- Route missing values and low-confidence results for review. Do not guess.
 - Preserve the original expected result when a reviewer corrects a value.
 - Prompt Flow is outside this scenario. Use agents and tools for agent-based handoffs.
 
@@ -116,4 +116,4 @@ python3 -m unittest discover -s scenarios/content-understanding/accelerator -p t
 These exercise normalization and comparison logic. They do not prove live extraction accuracy,
 reviewer authentication, or a customer-system handoff.
 
-See [facilitator-reference.md](facilitator-reference.md) for the facilitator reference and integration boundaries.
+See [facilitator-reference.md](facilitator-reference.md) for integration examples and their limits.

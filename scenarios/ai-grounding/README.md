@@ -1,6 +1,6 @@
 # AI Grounding: build answers people can trust
 
-Build a grounded, permission-aware assistant over approved content. Prove it before it ships.
+Build an assistant that answers from approved content and respects the caller's permissions.
 
 These eight modules help you build an assistant in **your tenant**, using approved sources
 and a channel your users can access. Start with one useful question set and agree how to
@@ -19,7 +19,7 @@ the source access boundary**, with an owner able to diagnose failures and roll b
 
 ## Before you start
 
-**Verify the API surface before you write code.** Foundry and Azure AI Search move fast, and several
+**Verify the APIs before you write code.** Foundry and Azure AI Search move fast, and several
 features used here are preview. Re-check current Microsoft Learn guidance before writing SDK
 code. Do not infer a signature from the playbook or from memory.
 
@@ -34,7 +34,7 @@ in [the facilitator reference](accelerator/facilitator-reference.md#prerequisite
 The permission probe uses a separate client secret. The template also configures an Application
 Insights connection string. The storage account disables shared-key access.
 
-**Known implementation gaps:** the shipped path does not yet prove per-document permissions,
+**Known implementation gaps.** The shipped path does not yet prove per-document permissions,
 retrieval recall, or agent-level evaluation. Read the
 [accelerator limits](accelerator/README.md#known-implementation-gaps) before treating results as a release gate.
 
@@ -45,15 +45,15 @@ retrieval recall, or agent-level evaluation. Read the
 | [1. Confirm scope and connect the foundation](lessons/01-provision-foundation.md) | Confirm the source/platform path before connecting or provisioning resources | Approved environment and working runtime access |
 | [2. Source and permission architecture](lessons/02-source-and-permission-architecture.md) | The source decision, the identity evaluated at query time, and a probe proving a restricted identity retrieves nothing | Signed source, access, freshness, and system-of-record decision |
 | [3. Ingest and index approved content](lessons/03-ingest-and-index.md) | Ingestion, chunking, citation metadata, ACL carry-forward, and a refresh schedule | Approved documents are discoverable with source metadata |
-| [4. Compare chat and embedding choices](lessons/04-model-selection.md) | A comparison harness over your own golden set: accuracy, abstention, latency, tokens | A model choice backed by the scenario's question set |
-| [5. Build retrieval before adding an agent](lessons/05-grounded-retrieval.md) | Citations, abstention, access-denied silence, recency — with no agent | Cited answers and correct refusals |
+| [4. Compare chat and embedding choices](lessons/04-model-selection.md) | A comparison over your own golden set, measuring accuracy, abstention, latency, and tokens | A model choice backed by the scenario's question set |
+| [5. Build retrieval before adding an agent](lessons/05-grounded-retrieval.md) | Citations, abstention, access-denied silence, and recency without an agent | Cited answers and correct refusals |
 | [6. Add agent and routing only when justified](lessons/06-agent-and-routing.md) | A justification, an agent with explicit routing rules, and a routing test | Policy and live-data questions route to the correct source |
 | [7. Evaluate and trace](lessons/07-evaluate-and-trace.md) | Evaluation gate, red-team evidence, end-to-end traces | Evaluation gate passed with trace and red-team evidence |
-| [8. Deploy and surface it to users](lessons/08-deploy-and-surface.md) | A pinned agent version and permission-aware surface | Deployed surface passes anonymous, authorized, and restricted HTTP checks |
+| [8. Deploy to the user channel](lessons/08-deploy-and-surface.md) | A pinned agent version and permission-aware user channel | The deployed channel passes anonymous, authorized, and restricted HTTP checks |
 
-Most teams get stuck in modules 5 through 7. They add an agent before retrieval works, copy
-live data into an index, or ship without a release gate. Module 8 checks another common failure:
-the final app must preserve the retrieval layer's permission boundary.
+Before adding an agent, prove retrieval works. Keep live data out of the index and define
+a release gate. Module 8 checks that the final app preserves the retrieval layer's
+permission boundary.
 
 ## Decision gates to carry into the customer conversation
 
@@ -131,9 +131,9 @@ agreed work.
 ## Non-negotiables
 
 - Treat retrieved text as untrusted data, never as instructions. Module 7 tests this directly.
-- Index knowledge and route to systems. Indexing live operational data produces confidently cited,
-  stale answers. That is the worst failure mode in this scenario.
+- Index knowledge and route to systems. Indexed live operational data can produce cited answers
+  that are already stale.
 - A refusal must be indistinguishable from "no information exists." Revealing that a restricted
   document exists is still a leak.
-- Make retrieval work before adding an agent. An agent over weak retrieval makes failures fluent,
-  not correct.
+- Make retrieval work before adding an agent. An agent can turn an incorrect retrieval result
+  into a convincing wrong answer.

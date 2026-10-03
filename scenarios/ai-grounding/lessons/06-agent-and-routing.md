@@ -1,7 +1,7 @@
-# Module 6 — Add agent and live-data routing only when justified
+# Module 6. Add agent and live-data routing only when justified
 
 Module 5 produced a working grounded answer. Do not add an agent by default. Add one only when you
-can name what it contributes. This module makes you name it, then build it correctly.
+can name the need it meets.
 
 ![Routing boundaries](../diagrams/06-routing-boundaries.png)
 
@@ -20,37 +20,36 @@ single-turn question-and-answer, no action is taken for the user, and no live sy
 Module 5 already shipped what you need. Deploy it and move to module 7.
 
 **You need an agent when** the assistant must choose sources, call a live system, take an action, or
-keep multi-turn state. Otherwise, it is architecture for its own sake.
+keep multi-turn state.
 
 | Option | What it adds | Cost | When it wins |
 | --- | --- | --- | --- |
-| No agent: module 5's retrieval path | Nothing; ships today | None | Single-source Q&A. Genuinely common; genuinely underused |
-| **A. Foundry agent + knowledge tool** *(default when an agent is justified)* | Multi-turn, versioned, traceable, tool-capable | Low: one API surface | The normal case |
+| No agent, module 5's retrieval path | No additional orchestration | None | Single-source Q&A |
+| **A. Foundry agent + knowledge tool** *(default when an agent is justified)* | Multi-turn, versioned, traceable, tool-capable | Low, one API | The normal case |
 | B. Multi-source routing inside one knowledge base | Retrieval instructions steer across sources; one call, merged ranking | Low | Sources are all *knowledge*, not systems |
 | C. Agent + separate live-data tool (Fabric IQ, MCP, OpenAPI) | Explicit routing between "what the policy says" and "what is true right now" | Medium | Live operational data is in play |
-| D. Multi-agent workflow | Specialist agents with a planner | High: orchestration, latency, debugging | Genuinely distinct specialisations. Rarely justified in a pilot |
+| D. Multi-agent workflow | Specialist agents with a planner | High, orchestration, latency, debugging | Distinct specialist responsibilities |
 
 **Default: Option A**, extended with C when live data is required. Use B *inside* A when extra
-sources are documents rather than systems. One knowledge base with good `retrieval_instructions`
-beats three tools the agent must choose between.
+sources are documents rather than systems. Use `retrieval_instructions` to route within the
+knowledge base instead of asking the agent to choose among separate document tools.
 
-**Avoid D in a pilot.** Multi-agent orchestration adds latency, cost, and failure modes. Customers
-rarely evaluate it honestly against one well-instructed agent. Treat it as a separately scoped
-extension, with its own comparison against this module's single-agent path.
+**Avoid D in a pilot.** Multi-agent orchestration adds latency, cost, and failure modes.
+Treat it as a separately scoped extension and compare it against this module's single-agent path.
 
-**Use this rule:** index knowledge and route to systems. A policy document belongs in the knowledge
+Index knowledge and route to systems. A policy document belongs in the knowledge
 base. Case status, inventory, and live metrics belong behind a tool called at question time. Indexing
 live data produces confidently cited stale numbers that look correct.
 
-**Migration cost.** No-agent → A is cheap; retrieval and evaluations carry over. A → C is additive.
-A/C → D needs a redesign and new metric baselines.
+**Migration cost.** Adding A to the no-agent path preserves retrieval and evaluations.
+Adding C extends A. Moving from A or C to D needs a redesign and new metric baselines.
 
 ## Implementation
 
 Use the resources from modules 1–5. The default single-source path needs no agent;
 continue to module 7 with the existing retrieval runner if routing adds no value.
 
-### Option A — Foundry agent with a knowledge tool
+### Option A. Foundry agent with a knowledge tool
 
 ```python
 import os
@@ -112,7 +111,7 @@ If you built a Foundry IQ knowledge base in module 3, attach that instead of the
 agent inherits query planning, multi-source merging, and permission-aware retrieval rather than
 querying one index directly.
 
-### Writing routing instructions that actually route
+### Write testable routing instructions
 
 This prompt has a testable outcome, so treat it as code:
 
@@ -134,9 +133,10 @@ Rules:
 - Never reveal that a document exists if retrieval did not return it to you.
 ```
 
-Vague instructions produce vague routing. "Use the appropriate source" does not route anything.
+Name which source answers each request type. "Use the appropriate source" leaves that decision
+unspecified.
 
-### Option B — Multi-source routing inside one knowledge base
+### Option B. Multi-source routing inside one knowledge base
 
 Add sources to the knowledge base from module 3 and steer with `retrieval_instructions`:
 
@@ -159,7 +159,7 @@ knowledge_base = KnowledgeBase(
 All sources use one ranking pipeline and return merged. That works better than tool-choice routing
 when every source is a document, because the model does not have to guess before seeing anything.
 
-### Option C — Live data as a routed tool
+### Option C. Live data as a routed tool
 
 Implementation paths:
 
@@ -184,11 +184,10 @@ currently awaiting carrier evidence" separates policy from live data. A blended 
 **If the tool takes an action**, such as issuing a credit or releasing a hold, add a human approval
 step. Read-only retrieval is recoverable. Actions are not.
 
-### Option D — Multi-agent workflow
+### Option D. Multi-agent workflow
 
-Before building a multi-agent extension, write down the specific question that one agent with
-two tools answers worse. If
-you cannot write it, you have the answer.
+Before building a multi-agent extension, identify a specific question it handles better than
+one agent with two tools. Keep the single-agent path if you cannot show that difference.
 
 ## Verify
 
@@ -243,5 +242,5 @@ retrieval captures. These answer checks do not measure passage-level recall.
 
 ## Next module
 
-[Module 7 — Evaluate and trace](07-evaluate-and-trace.md) uses evaluation and traces to decide
+[Module 7. Evaluate and trace](07-evaluate-and-trace.md) uses evaluation and traces to decide
 whether this path ships.

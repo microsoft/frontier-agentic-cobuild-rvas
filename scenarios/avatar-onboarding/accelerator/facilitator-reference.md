@@ -1,7 +1,7 @@
 # Facilitator reference: Avatar Scenario
 
-This reference collects the scenario infrastructure, local pack checks, and integration snippets.
-It is not an end-to-end application. Module 1 selects interactive assistance or repeatable content
+This reference includes the scenario infrastructure, local pack checks, and integration snippets.
+You must connect them to an application. Module 1 selects interactive assistance or repeatable content
 production. Build the corresponding client or workflow, with authenticated release controls.
 Run commands from the repository root.
 
@@ -12,7 +12,7 @@ Run commands from the repository root.
 
 | Concern | Reference choice | Module |
 | --- | --- | --- |
-| Rendering example | **Speech text-to-speech avatar — batch synthesis**, for the content-production branch | 5 |
+| Rendering example | Speech text-to-speech avatar batch synthesis for the content-production branch | 5 |
 | Foundation | Azure AI Foundry (AIServices, `kind: AIServices`, custom subdomain) + project, chat + embedding deployments, AI Search, Storage, Log Analytics + App Insights | 2 |
 | Content pipeline | Versioned claims in `sample-data/claims.json`, approved-content blob container, owner/version/expiry metadata | 3 |
 | Grounded assistant | Model + approved claim set; optional Foundry agent; refuses with `NO_APPROVED_CLAIM` | 4 |
@@ -47,8 +47,8 @@ curl -s -o /dev/null -w '%{http_code}\n' -H "Authorization: Bearer $TOKEN" \
   "$AZURE_SPEECH_ENDPOINT/avatar/batchsyntheses?api-version=2024-08-01"
 ```
 
-`deploy.sh` deploys `accelerator/main.bicep` and writes a **keyless** `.env` contract from the
-deployment outputs (plus the two tracing switches). Key outputs:
+`deploy.sh` deploys `accelerator/main.bicep` and writes a keyless `.env` contract from the
+deployment outputs and two tracing switches. The outputs include:
 
 ```
 AZURE_AI_PROJECT_ENDPOINT, AZURE_AI_FOUNDRY_ENDPOINT,
@@ -84,8 +84,8 @@ affected publications. The local validator does not implement those controls.
 ## 4. Build the grounded assistant (Module 4)
 
 Use [module 4's drafting function](../lessons/04-grounded-assistant.md) with the approved claim set
-and existing chat deployment. An agent is optional. On-claim asks return the **exact approved
-wording** and the `claim_id`; off-claim asks return `NO_APPROVED_CLAIM` plus a human-help path.
+and existing chat deployment. An agent is optional. Supported requests return the **exact approved
+wording** and the `claim_id`; unsupported requests return `NO_APPROVED_CLAIM` plus a human-help path.
 The assistant provides interactive help; it must **not** silently add claims to a published script.
 
 ## 5. Generate the accessible experience (Module 5)
@@ -105,11 +105,11 @@ PUT  https://{resource}.cognitiveservices.azure.com/avatar/batchsyntheses/{id}?a
 GET  https://{resource}.cognitiveservices.azure.com/avatar/batchsyntheses/{id}?api-version=2024-08-01
 ```
 
-Body carries `inputKind` (`PlainText`|`SSML`), `inputs[].content`, and
+The request body carries `inputKind` (`PlainText`|`SSML`), `inputs[].content`, and
 `avatarConfig.talkingAvatarCharacter`/`talkingAvatarStyle`. Poll `NotStarted → Running → Succeeded`;
 `outputs.result` is the mp4 SAS URL. Limits: payload ≤500 KB, ≤200 concurrent jobs, ≤20 min output,
-1920×1080 @ 25 fps. Every render emits: the synthetic-media **disclosure**, **captions**, a
-**transcript**, and a **non-avatar fallback** (`accessible-fallback.html`). Authenticate with
+1920×1080 @ 25 fps. Every render emits the synthetic-media disclosure, captions, a
+transcript, and a non-avatar fallback (`accessible-fallback.html`). Authenticate with
 `DefaultAzureCredential` (Entra token), never a key.
 
 ## 6. Gate publication behind human approval (Module 6)
@@ -140,7 +140,7 @@ This command checks the local pack only. Follow [module 7](../lessons/07-prove-a
 to capture actual model responses and inspect the rendered media.
 Evaluate grounding, refusal, disclosure, and accessibility on a golden set. Run the AI Red Teaming
 Agent and the synthetic-media probes (impersonation, "skip the disclosure", unapproved claims).
-Review a trace for a failed case. Ship only when every gate is green. Measure the pilot with
+Review a trace for a failed case. Release only when every gate passes. Measure the pilot with
 **aggregate, identifier-free** telemetry only.
 
 ## End-to-end verification
@@ -160,14 +160,14 @@ assistance, use module 7's checks through the authenticated client.
 
 ## Responsible-AI gates before production
 
-- **Standard** avatar + **standard** neural voice: no registration, but synthetic-media **disclosure
-  to users and a feedback channel are required**.
-- **Custom** avatar / **custom** or **personal** voice: **Limited Access**, registration only via
+- Standard avatar + standard neural voice: no registration, but synthetic-media disclosure
+  to users and a feedback channel are required.
+- Custom avatar / custom or personal voice: Limited Access, registration only via
   <https://aka.ms/customneural>, Microsoft-managed customers only; custom video avatar needs ≥10 min
-  actor video, **explicit written consent**, and the "Disclosure for voice and avatar talent" shared
+  actor video, explicit written consent, and the "Disclosure for voice and avatar talent" shared
   in advance.
-- Never impersonate a real person; keep disclosure mandatory in the system prompt; keep the Module 6
-  withdrawal path one action away.
+- Never impersonate a real person. Keep disclosure mandatory in the system prompt and keep
+  module 6's withdrawal available as a single action.
 
 Sources: `/azure/ai-services/speech-service/text-to-speech-avatar/*`,
 `/azure/foundry/responsible-ai/speech-service/text-to-speech/{limited-access,concepts-disclosure-guidelines,transparency-note,disclosure-voice-talent}`.

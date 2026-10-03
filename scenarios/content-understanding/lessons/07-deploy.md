@@ -1,7 +1,7 @@
-# Module 7 — Deploy the reviewable workflow
+# Module 7. Deploy the reviewable workflow
 
-The workflow passed the gate. Deploy it without losing the controls that made it safe. Deployment
-makes keyless auth, monitoring, and rollback real.
+Deploy the workflow that passed the evaluation gate. Preserve its keyless access, monitoring, and
+rollback controls in the deployed runtime.
 
 ## What you build
 
@@ -34,8 +34,7 @@ status/result read, and persist state outside the container. Do not add this com
 reviewer expects one document to return while waiting.
 
 **Migration cost.** Moving from A to B or C rehosts the same container and identity model. The
-workflow, action-tool seam, and evaluation gate stay unchanged. You can make this decision late
-and reverse it.
+workflow, action-tool contract, and evaluation gate stay unchanged.
 
 ## Implementation
 
@@ -56,7 +55,7 @@ Test that entry point locally against the approved tenant dependencies before pa
 Persist review state outside the process and authorize reads of its status. An asynchronous
 review should release the HTTP request while the case waits for a person.
 
-### Option A — Host your agent-based workflow
+### Option A. Host your agent-based workflow
 
 Deploy the reviewed workflow as a hosted agent with managed identity and an authenticated endpoint.
 Keep module 6's tracing setup in the runtime. Work in **your application's source directory**,
@@ -102,7 +101,7 @@ source/destination roles. Pin the tested version and retain the preceding versio
 Current hosting setup:
 <https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-deploy-own-code>
 
-### Option B — Container app / managed online endpoint
+### Option B. Container app / managed online endpoint
 
 Package the application entry point as the runtime's request handler or worker. Use the customer's
 deployment pipeline to build and publish its image. Configure runtime identity, source access,
@@ -114,7 +113,7 @@ pilot audience to it. Retain a tested previous revision and rehearse rollback. T
 deployment configuration is part of your application; the Foundry commands above do not
 deploy this branch.
 
-### Option C — API behind API Management
+### Option C. API behind API Management
 
 Deploy the workflow API to the customer's approved host first. Configure the gateway's API
 operation and token validation, then restrict backend access so callers cannot bypass the
@@ -124,7 +123,7 @@ Run the acceptance request through the gateway, inspect the correlated backend r
 test a denied caller. Rollback uses the backend host's supported revision mechanism; API
 Management is not itself the application host.
 
-### Option D — Long-running processing
+### Option D. Long-running processing
 
 Persist a job before acknowledging submission. Return an opaque handle; authorize later status
 and result requests against the submitting user's permitted scope. Run extraction in a worker,
@@ -139,8 +138,8 @@ required review and inspect the resulting destination record or agreed reviewed-
 Restart the worker or deploy the previous revision and confirm pending cases remain accessible.
 **A healthy container or a generic chat response is not proof that the workflow works.**
 
-Check the deployed endpoint as both attacker and operator. Try it without a token, confirm it uses an
-identity rather than a key, and verify that traces still arrive.
+Check unauthorized and authorized access to the deployed endpoint. Try it without a token.
+Confirm it uses an identity rather than a key, and verify that traces still arrive.
 
 **1. The endpoint refuses an unauthenticated caller.**
 
@@ -194,6 +193,5 @@ exporter, destination, runtime configuration, and query window.
 ## Next module
 
 If the deployed checks pass, the seven-module path produced a reviewable document workflow.
-Any disabled customer posting integration remains unfinished work. Start the next document decision
-at [Module 1](01-provision-foundation.md), or extend this workflow with deployment and operations
-patterns that fit the next customer decision.
+Any disabled customer posting integration remains unfinished work. Start the next document class
+at [Module 1](01-provision-foundation.md) and review its source, extraction, and operating requirements.

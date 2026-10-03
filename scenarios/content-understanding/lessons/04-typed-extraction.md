@@ -1,4 +1,4 @@
-# Module 4 — Implement typed extraction with evidence
+# Module 4. Implement typed extraction with evidence
 
 Normalize the completed analysis from module 3. **A value without source evidence cannot
 proceed.** Keep the original response so a reviewer can inspect what was rejected.
@@ -52,7 +52,7 @@ python3 scenarios/content-understanding/accelerator/normalize.py \
   --output scenarios/content-understanding/accelerator/.runtime/result.json
 ```
 
-The normalizer rejects incomplete service operations. It walks the declared fields rather
+The normalizer rejects incomplete service operations. It checks the declared fields rather
 than only the fields returned, so an omitted field cannot disappear silently.
 
 Each field retains `value`, `confidence`, and `evidence`. Evidence includes the page parsed
@@ -100,5 +100,5 @@ Keep this damaged copy out of the approved input set.
 
 ## Next module
 
-[Module 5 — Build review, correction, and handoff](05-human-review.md). Present the result
+[Module 5. Build review, correction, and handoff](05-human-review.md). Present the result
 and original analysis to the reviewer without overwriting either.

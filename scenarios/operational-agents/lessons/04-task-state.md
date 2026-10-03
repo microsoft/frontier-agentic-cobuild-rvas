@@ -1,4 +1,4 @@
-# Module 4 - Separate context from task state
+# Module 4. Separate context from task state
 
 The model's conversation is not the system of record for approval. Persist
 application state explicitly so a fresh process can determine what is pending.

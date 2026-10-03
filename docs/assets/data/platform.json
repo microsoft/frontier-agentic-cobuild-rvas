@@ -77,7 +77,7 @@
         },
         {
           "id": "deploy-and-surface",
-          "title": "Deploy and surface it to users",
+          "title": "Deploy to the user channel",
           "path": "lessons/08-deploy-and-surface.md",
           "sequence": 8,
           "content_path": "assets/data/scenarios/ai-grounding/lessons/08-deploy-and-surface.md",
@@ -160,9 +160,9 @@
         },
         {
           "id": "deploy-and-surface",
-          "title": "Deploy and surface it to users",
-          "summary": "Choose where people will use the agent, pin the version, and verify anonymous, authorized, and restricted calls through that deployed HTTP surface.",
-          "outcome": "Deployed surface passes anonymous, authorized, and restricted HTTP checks",
+          "title": "Deploy to the user channel",
+          "summary": "Connect the evaluated answer path to the customer's user channel. Pin the agent version if used, and test anonymous, authorized, and restricted HTTP calls.",
+          "outcome": "The deployed channel passes anonymous, authorized, and restricted HTTP checks",
           "implementation_paths": [
             "accelerator/surface-probe.json",
             "accelerator/scripts/probe_surface.py"
@@ -289,7 +289,7 @@
         {
           "id": "human-review",
           "title": "Build review, correction, and handoff",
-          "summary": "Connect the customer review surface and the agreed result handoff. Retain corrections and prove approved posting cannot duplicate an action.",
+          "summary": "Connect the customer's review interface and the agreed result handoff. Retain corrections and prove approved posting cannot duplicate an action.",
           "outcome": "A completed review with its authorized handoff or destination receipt",
           "sequence": 5
         },
@@ -388,7 +388,7 @@
         },
         {
           "id": "prove-and-operate",
-          "title": "Prove and operate the delivered experience",
+          "title": "Evaluate, red-team, trace, and operate",
           "path": "lessons/07-prove-and-operate.md",
           "sequence": 7,
           "content_path": "assets/data/scenarios/avatar-scenario/lessons/07-prove-and-operate.md",

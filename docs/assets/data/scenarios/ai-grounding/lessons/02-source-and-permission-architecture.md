@@ -1,4 +1,4 @@
-# Module 2 — Select the source and permission architecture
+# Module 2. Select the source and permission architecture
 
 Use the source/platform choice from module 1 to connect the authoritative source for the
 customer's questions. Bring its access owner and two test users with different permissions.
@@ -8,10 +8,10 @@ customer's questions. Bring its access owner and two test users with different p
 
 ## What you build
 
-1. A source decision: for each fact the assistant must know, which system is authoritative.
-2. A permission architecture: which identity is evaluated at query time, and where.
-3. A **runnable permission probe** that proves a restricted identity retrieves nothing: no content,
-   no title, no snippet, no existence signal.
+1. A record of the authoritative system for each fact the assistant must know.
+2. A permission design that names the identity evaluated at query time and where enforcement happens.
+3. A runnable permission probe that checks a restricted identity receives no content, title,
+   snippet, or signal that the document exists.
 
 ## Choose your path
 
@@ -30,35 +30,35 @@ ingestion pipeline or a security-trimming filter, and one knowledge base can ser
 
 **Choose B instead when** you need retrieval behaviour Foundry IQ does not expose: a custom scoring
 profile, an unusual chunking strategy, a non-Microsoft vector store alongside it, or strict control
-over every field in the index. You are trading weeks of work for that control.
+over every field in the index. Your team owns the implementation work.
 
 **Choose C when** the answer is "this should be a Copilot, not an app". If all the knowledge lives in
-SharePoint and the user is already in Teams, building an Azure retrieval stack is waste. Say so.
+SharePoint and the user is already in Teams, use that path instead of adding an Azure retrieval stack.
 
 **D, E, F are rarely the whole answer.** They are usually *additional* sources on an Option A
 knowledge base. Fabric IQ answers "what are the numbers"; Foundry IQ answers "what does the policy
 say." Do not index live operational data to make it searchable. Route to it.
 
-**Migration cost.** A → B rebuilds the retrieval layer, but the agent and evaluations survive. B → A
-is usually cheap because an existing index can be wrapped as a *search index knowledge source*. C →
-A/B is a full rebuild. That is why A is the default: it is the cheapest option to move away from.
+**Migration cost.** Moving from A to B rebuilds the retrieval layer but preserves the agent and
+evaluations. Moving from B to A can reuse the existing index as a *search index knowledge source*.
+Moving from C to A or B requires a full rebuild.
 
 ### The permission decision, stated precisely
 
 Answer these four questions before writing code:
 
-1. **Whose identity is evaluated at query time**: the end user, or a service identity acting for
-   everyone? If it is a service identity, every user gets the union of all permissions.
-2. **Where do permissions live**: source ACLs, Entra groups, Fabric RLS, or an application table?
-3. **How do permission changes propagate**, and how stale can they be before that is a breach?
-4. **What happens on a denial**: the correct answer is a normal "I don't have information on that",
+1. Does query-time access use the end user's identity or a shared service identity?
+   With a shared identity, every user receives its combined access.
+2. Do permissions live in source ACLs, Entra groups, Fabric RLS, or an application table?
+3. How do permission changes propagate, and how long may stale permissions remain in effect?
+4. What happens on denial? Return a normal "I don't have information on that" response,
    not an error that confirms the document exists.
 
 ## Implementation
 
-### Option A — Foundry IQ knowledge base
+### Option A. Foundry IQ knowledge base
 
-Use current Microsoft Learn guidance for the active knowledge-base surface.
+Use current Microsoft Learn guidance for the knowledge-base APIs.
 
 **Pick your knowledge source kinds.** A knowledge base references one or more sources; retrieval
 queries all of them in one request and merges results through a single ranking pipeline.
@@ -111,21 +111,20 @@ With current permission filtering on an ACL-enabled index, omitting the user tok
 public documents. The header does not create missing permission metadata or enable an unconfigured
 permission filter. See the [query-time enforcement guidance](https://learn.microsoft.com/azure/search/search-query-access-control-rbac-enforcement).
 
-**API version decides what you get.** `2026-04-01` is GA but offers minimal, extractive retrieval
+**Choose the API version.** `2026-04-01` is GA but offers minimal, extractive retrieval
 only: no query planning, no answer synthesis, no configurable reasoning effort, and GA source kinds
-only. `2026-05-01-preview` adds all of those. Choose deliberately and record it. This is the single
-most consequential version decision in the scenario.
+only. `2026-05-01-preview` adds all of those. Record the version you choose.
 
-### Option B — Direct Azure AI Search index
+### Option B. Direct Azure AI Search index
 
-You are now responsible for security trimming. The rules, verified:
+You are responsible for security trimming. Apply these rules:
 
 - Permission metadata must live in **filterable string fields**. You never write the filter
   yourself; the engine builds an internal filter to exclude unauthorized content.
 - Store `userIds` and `groupIds` as **Entra object IDs (GUIDs)**.
 - At query time the service matches identities in `x-ms-query-source-authorization` against those
   stored IDs. Group expansion happens at query time through Microsoft Graph.
-- Use a **preview** REST API or preview SDK package; this filtering is not in the GA surface.
+- Use a **preview** REST API or preview SDK package; this filtering is not in the GA APIs.
 
 ```python
 from azure.search.documents.indexes.models import SearchField, SearchFieldDataType
@@ -141,7 +140,7 @@ permission_fields = [
 Then query exactly as in Option A, passing the end-user token in
 `x-ms-query-source-authorization`.
 
-**Know the limits before you promise anything:**
+Check these limits before choosing this path:
 
 | Constraint | Value |
 | --- | --- |
@@ -162,13 +161,13 @@ Source: <https://learn.microsoft.com/azure/search/search-query-access-control-rb
 Write down the worst-case staleness window and have the data owner accept it in writing. "A revoked
 user keeps access for up to N hours" must be a decision.
 
-### Option C — Copilot Studio + SharePoint / M365
+### Option C. Copilot Studio + SharePoint / M365
 
 No Azure retrieval layer needs securing. Permissions are whatever SharePoint and Microsoft 365 already
 enforce, evaluated as the signed-in user.
 
-Implementation is configuration, not code: connect the SharePoint site as a knowledge source in
-Copilot Studio, scope it to the approved libraries, and publish to Teams.
+Connect the SharePoint site as a knowledge source in Copilot Studio, scope it to the approved
+libraries, and publish to Teams. This path uses configuration rather than custom retrieval code.
 
 The same governance work still matters. Confirm the site's permissions reflect intent (inherited
 permissions on a "public" site are a common surprise), then test with a low-privilege account.
@@ -191,7 +190,7 @@ Azure model deployment comparison. In modules 5 and 7, test citations and refusa
 agent and retain actual answers. Module 6 is needed only for additional tools. Module 8 option C
 publishes to the chosen channel. The supplied Azure scripts do not implement this branch.
 
-### Option D — Fabric IQ (analytics and live business data)
+### Option D. Fabric IQ (analytics and live business data)
 
 Use when the question is "what are the numbers", not "what does the document say". Fabric IQ models
 business data over OneLake and Power BI: ontologies, semantic models, graphs, and data agents.
@@ -208,7 +207,7 @@ Fabric enforces permissions through semantic model RLS and workspace RBAC. Do no
 values into a search index. You will serve stale numbers with a confident citation. Reference:
 <https://learn.microsoft.com/fabric/iq/overview>
 
-### Option E — Work IQ (Microsoft 365 collaboration context)
+### Option E. Work IQ (Microsoft 365 collaboration context)
 
 Work IQ is the contextual layer over M365: documents, meetings, chats, workflows. Add it as a
 **remote Work IQ knowledge source** (preview) when the pilot genuinely needs "how this organization
@@ -218,7 +217,7 @@ Permissions follow M365. Because it is remote, content is never ingested into Se
 means there is no ACL staleness window. Reference:
 <https://learn.microsoft.com/microsoft-365-copilot/extensibility/workiq-overview>
 
-### Option F — Web
+### Option F. Web
 
 A remote source backed by Microsoft Bing, for public, citable authority. Note one hard constraint: a
 knowledge base that includes a web knowledge source **requires** an LLM for query planning; it is
@@ -278,5 +277,5 @@ title or a hit count is itself a leak.
 
 ## Next module
 
-[Module 3 — Ingest and index approved content](03-ingest-and-index.md) implements the source you
+[Module 3. Ingest and index approved content](03-ingest-and-index.md) implements the source you
 just chose, with chunking, embeddings, and a refresh schedule.

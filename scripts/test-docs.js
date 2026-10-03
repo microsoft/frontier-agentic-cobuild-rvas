@@ -367,7 +367,7 @@ test('module prose keeps decision-first guidance and explicit tenant delivery bo
   assert.match(decision, /## Verify/);
   const generation = fs.readFileSync(path.join(avatar, '05-experience-generation.md'), 'utf8');
   assert.match(generation, /wording approved in module 3/);
-  assert.match(generation, /### Option E — Translate an existing video/);
+  assert.match(generation, /^### Option E\. Translate an existing video$/m);
   const publication = fs.readFileSync(path.join(avatar, '06-approval-gating.md'), 'utf8');
   assert.match(publication, /actual publishing operation and user channel/);
   for (const scenario of loadScenarioRegistry()) {

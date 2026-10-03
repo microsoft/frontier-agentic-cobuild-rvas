@@ -1,4 +1,4 @@
-# Module 2 - Choose and verify the execution foundation
+# Module 2. Choose and verify the execution foundation
 
 Connect the customer application's execution environment and approved model
 deployment. Choose where its task state and credentials will live. The local

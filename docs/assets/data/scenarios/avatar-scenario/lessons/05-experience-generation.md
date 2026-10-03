@@ -1,4 +1,4 @@
-# Module 5 — Connect generation to the application
+# Module 5. Connect generation to the application
 
 For content production, connect generation to the workflow and render a **private preview from
 the wording approved in module 3**. For an interactive assistant, connect the client to module 4's
@@ -12,15 +12,15 @@ Current Speech guidance is cited inline where service behavior affects the build
 
 1. The rendered experience, a talking-avatar video, real-time stream, Voice Live session, or plain
    audio, produced from the approved artifact.
-2. **Disclosure** that the presenter is synthetic/AI-assisted, shown/spoken to the user.
-3. **Captions + a transcript** and a **non-avatar fallback** (an accessible HTML/audio path) that
+2. A disclosure that the presenter is synthetic/AI-assisted, shown or spoken to the user.
+3. Captions, a transcript, and a non-avatar fallback (an accessible HTML/audio path) that
    carry the same approved content.
-4. **Locale handling** so the right voice/language is used per cohort.
+4. Locale handling that selects the agreed voice and language for each cohort.
 
 The pack contract, [`accelerator/content_pack.py`](../accelerator/content_pack.py), is deterministic
 and offline. It validates the approved pack and builds a traceable artifact record
-**without calling a paid service or embedding a real likeness**. Use it to rehearse the pipeline
-safely. Its artifact record is **not** a Speech request body; a rendering adapter must map it
+without calling a paid service or embedding a real likeness. Use it to check the pipeline
+locally. Its artifact record is not a Speech request body; a rendering adapter must map it
 to the service request.
 
 ## Choose your path
@@ -63,7 +63,7 @@ render URL as the public publication channel.** Module 6 controls release into t
 The requests below illustrate the batch service shape using fictional wording. Replace that
 wording through the approved-content adapter, rather than editing ad hoc text into a request.
 
-### Option A — Batch avatar synthesis
+### Option A. Batch avatar synthesis
 
 **Optional reference check.** [`content_pack.py`](../accelerator/content_pack.py) demonstrates
 exact-claim matching and rejection of incomplete fictional approvals. It accepts a demo-specific
@@ -81,7 +81,7 @@ print(build_artifact(pack))"
 A pack whose spoken text is not an exact approved claim raises `PackRejectedError`. Passing this
 local check proves only the sample contract; it does not approve your content or generate media.
 
-**Submit the real batch job (verified API).** The approved artifact becomes an SSML batch request:
+Submit the approved artifact as an SSML batch request:
 
 ```
 PUT https://{resource}.cognitiveservices.azure.com/avatar/batchsyntheses/{SynthesisId}?api-version=2024-08-01
@@ -109,7 +109,7 @@ it in logs and docs. This works only when module 2 set the custom subdomain. Lim
 `subtitleType: soft_embedded` adds captions to the video. Still ship the standalone transcript and
 HTML fallback.
 
-### Option B — Real-time avatar
+### Option B. Real-time avatar
 
 Choose this branch only for the live experience agreed in module 1. Connect the browser to module
 4's answer path rather than sending unrestricted text to the renderer. Keep service credentials
@@ -124,7 +124,7 @@ peer connection, then `new SpeechSDK.AvatarConfig("lisa", "casual-sitting")` and
 avatar speaks, render live captions, and keep the Option D fallback one click away.
 <https://learn.microsoft.com/azure/ai-services/speech-service/text-to-speech-avatar/real-time-synthesis-avatar>
 
-### Option C — Voice Live (avatar or audio)
+### Option C. Voice Live (avatar or audio)
 
 Voice Live is the managed speech-to-speech path and can emit avatar visuals. Bind it to the module-4
 agent (agent mode, Entra auth) so spoken answers stay grounded. This optional extension needs a
@@ -133,7 +133,7 @@ Disclose the synthetic voice at session start, both spoken and on-screen, and of
 transcript/fallback.
 <https://learn.microsoft.com/azure/ai-services/speech-service/voice-live>
 
-### Option D — Plain audio and the text fallback
+### Option D. Plain audio and the text fallback
 
 Synthesize the approved claims as narration with a standard neural voice, ship the transcript, and
 serve `accessible-fallback.html` (semantic HTML, `lang` set, `<main>` landmark) with the same
@@ -141,7 +141,7 @@ content and no avatar. Screen-reader users, low-bandwidth users, and anyone who 
 avatar receive this path. The sample fallback is
 [`accessible-fallback.html`](../accelerator/sample-data/accessible-fallback.html).
 
-### Option E — Translate an existing video
+### Option E. Translate an existing video
 
 Use the [video translation guidance](https://learn.microsoft.com/azure/ai-services/speech-service/video-translation-overview)
 for the selected service's current input and job requirements. Submit the approved source video
@@ -153,12 +153,12 @@ obligations. Correct errors before publication approval. This path needs a trans
 and a review process; the batch-avatar request above does not translate existing video.
 Continue to module 6 with both the source and translated revision references.
 
-### Disclosure & accessibility are non-negotiable (verified)
+### Require disclosure and accessible alternatives
 
-- **Disclose the synthetic nature** of the voice/avatar to users — required for standard *and*
-  custom. Design guidance:
+- Disclose the synthetic nature of the voice/avatar to users. This is required for standard and
+  custom capabilities. Design guidance:
   <https://learn.microsoft.com/azure/foundry/responsible-ai/speech-service/text-to-speech/concepts-disclosure-guidelines>
-- **Never** render a real person's face or voice in this repo or a demo. Custom likeness requires the
+- Never render a real person's face or voice in this repo or a demo. Custom likeness requires the
   limited-access + consent path from module 1.
 - Ship captions when the service supports them, plus a transcript and a non-avatar fallback. The
   local validator checks text files and a captions flag; it does not inspect generated captions or
@@ -173,7 +173,7 @@ the job. Interrupt processing and confirm the operator can recover it from persi
 
 For a live branch, run one supported question and one refused question through the actual client.
 For translation, retain the language review against the source video. The batch commands below
-are a service smoke check; they do not replace these application checks.
+check the service connection; they do not replace these application checks.
 
 **1. Submit a batch synthesis job with your Entra token and watch the result.** This proves keyless
 Speech and gives you an artifact to inspect. Submit one approved claim as SSML:
@@ -205,7 +205,7 @@ Custom likenesses need module 1's approval and consent checks.
 <https://learn.microsoft.com/azure/ai-services/speech-service/text-to-speech-avatar/batch-synthesis-avatar>
 
 **2. The experience carries a disclosure, and the non-avatar fallback carries the same content.** A
-video with no disclosure and no accessible path is a compliance incident, not a demo:
+video without disclosure or an accessible path fails the compliance requirements:
 
 ```bash
 jq -e '.disclosure | length > 0' \
@@ -224,5 +224,5 @@ users. Ship captions, a transcript, and the non-avatar page for every option.
 
 ## Next module
 
-[Module 6 — Gate publication behind human approval](06-approval-gating.md) requires named human
+[Module 6. Gate publication behind human approval](06-approval-gating.md) requires named human
 sign-off and a withdrawal path before anything reaches an employee.

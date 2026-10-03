@@ -1,4 +1,4 @@
-# Module 3 — Connect content and approve wording
+# Module 3. Connect content and approve wording
 
 Connect the authoritative content for your user task. Identify the owner who can approve its
 wording and the audience allowed to receive it. **Approve the script content here before
@@ -36,11 +36,11 @@ each one. The customer gets a corpus they can review, diff, and export. The grou
 **Choose B** when onboarding content spans systems and needs permission-aware retrieval. The
 module-4 knowledge base becomes your source of truth, and this claim set becomes the *approved
 subset* the experience may speak. **Choose C** when this is a Copilot rather than an app. **Choose
-D** when HR requires its system to remain authoritative. Export a versioned snapshot and never let
-the avatar outrun it.
+D** when HR requires its system to remain authoritative. Export a versioned snapshot and restrict
+the avatar to that approved revision.
 
-**Migration cost.** A → B is cheap: retain the claim set and add a knowledge base. B → A is also
-cheap because you wrap the index. C → A/B is a rebuild. That is why A is the default.
+**Migration work.** Moving from A to B retains the claim set and adds a knowledge base.
+Moving from B to A requires an adapter around the index. Moving from C to A or B requires a rebuild.
 
 ### Four questions before writing claims
 
@@ -52,10 +52,10 @@ cheap because you wrap the index. C → A/B is a rebuild. That is why A is the d
 
 ## Implementation
 
-### Option A — Blob + typed claim set (default)
+### Option A. Blob + typed claim set (default)
 
-**Model each claim.** The claim is the atom of approval. Exact wording lives here so the avatar can
-never paraphrase a policy:
+Model each claim as a separate unit of approval. Store its exact wording so the renderer can reject
+policy paraphrases:
 
 ```json
 {
@@ -84,8 +84,8 @@ az storage blob upload-batch \
   --source scenarios/avatar-onboarding/accelerator/sample-data
 ```
 
-**Keep owner/version/expiry queryable.** Store them as blob metadata or index tags so an audit can
-answer "who approved this and when does it expire" without opening files:
+Store owner, version, and expiry as blob metadata or index tags. An auditor must be able to check
+who approved the content and when it expires without opening files:
 
 ```bash
 az storage blob metadata update --account-name "$STORAGE" --auth-mode login \
@@ -93,7 +93,7 @@ az storage blob metadata update --account-name "$STORAGE" --auth-mode login \
   --metadata owner=demo-onboarding-content-owner version=0.1.0 review_by=2026-10-01
 ```
 
-### Option B — Foundry IQ / Azure AI Search knowledge base
+### Option B. Foundry IQ / Azure AI Search knowledge base
 
 When content spans systems, build a permission-aware knowledge base and use this claim set as the
 approved subset the avatar may speak. The AI Grounding scenario's Module 2/3 covers knowledge
@@ -101,11 +101,11 @@ sources, ACL carry-forward at ingestion, and query-time enforcement under the ca
 identity. Do not duplicate it here. The avatar can speak only claims in **this** set, even if the
 knowledge base retrieves more.
 
-Verified knowledge-source and permission facts:
+Knowledge-source and permission references:
 <https://learn.microsoft.com/azure/search/agentic-knowledge-source-overview> ·
 <https://learn.microsoft.com/azure/search/search-query-access-control-rbac-enforcement>
 
-### Option C — SharePoint / M365
+### Option C. SharePoint / M365
 
 Use this when content owners already review and version material in SharePoint. Select the approved
 library and published revision, then build an authorized read/export into your claim contract.
@@ -117,7 +117,7 @@ published media to the same intended audience; an exported video does not inheri
 permissions automatically. Test both an allowed and a denied user in the target channel.
 Continue to module 4 only if authoring or live answers are needed; otherwise go to module 5.
 
-### Option D — Export from a system of record
+### Option D. Export from a system of record
 
 Export a **versioned snapshot** (with the source system's version stamped into
 `source_reference`), load it as the claim set, and set `review_by` to the export's validity window.
@@ -202,5 +202,5 @@ presented as current policy is the failure this pipeline prevents.
 
 ## Next module
 
-[Module 4 — Build the grounded assistant behind the experience](04-grounded-assistant.md) turns this
-claim set into a cited, refusing assistant that drafts and answers only from approved content.
+[Module 4. Build the grounded assistant behind the experience](04-grounded-assistant.md) uses this
+claim set to cite approved content and refuse unsupported requests.

@@ -1,4 +1,4 @@
-# Module 1 - Define the task boundary
+# Module 1. Define the task boundary
 
 Start with the work a customer wants to delegate. Identify the systems it may
 read and the effects it may propose. A useful answer does not prove that an

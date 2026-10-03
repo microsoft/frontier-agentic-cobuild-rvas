@@ -52,24 +52,24 @@ found, this sample deliberately stops. Before adding retries to a customer
 adapter, establish whether a lookup can conclusively prove absence and whether
 the same idempotency key is honored across failures.
 
-## Adaptation seams
+## Adapt the reference
 
-**Tool system:** replace `Backend` with approved adapters. Keep schema validation
+**Tool system.** Replace `Backend` with approved adapters. Keep schema validation
 and enforce authorization in the destination service. Make the operation lookup
 authoritative, bind keys to payloads, and preserve conditional version checks.
 The built-in tools use local SQLite timeouts; network adapters need their own
 bounded deadlines and error classification.
 
-**Approval:** replace local username attribution with authenticated identity.
+**Approval.** Replace local username attribution with authenticated identity.
 Bind decisions to the canonical proposal, relevant policy version, and expiry
 rules. The model must not possess a credential that bypasses this service.
 
-**State:** choose a shared transactional store before distributing workers.
+**State.** Choose a shared transactional store before distributing workers.
 Persist tool-call IDs and consumed budgets. Define ownership and recovery from
 concurrent claims. Do not mount this SQLite sample across independent hosts and
 assume equivalent behavior.
 
-**Observability:** correlate task ID, operation ID, and the live response ID with
+**Observability.** Correlate task ID, operation ID, and the live response ID with
 customer traces. This sample emits local JSON evidence; it does not export
 OpenTelemetry spans to Application Insights. Use
 [module 8's telemetry setup](../lessons/08-evaluate-operate.md)

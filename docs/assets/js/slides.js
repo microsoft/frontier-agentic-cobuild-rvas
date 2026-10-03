@@ -17,7 +17,7 @@
       const scenario = (data.scenarios || []).find((item) => item.id === id);
       if (!scenario) return showError(`Scenario "${id}" was not found.`);
 
-      document.title = `${scenario.name} — Customer Slides`;
+      document.title = `${scenario.name}. Customer slides`;
       document.getElementById('deckTitle').textContent = scenario.name;
       document.getElementById('scenarioLink').href = `scenario.html?id=${encodeURIComponent(scenario.id)}`;
       document.getElementById('downloadPptx').href = scenario.slides_pptx_path;

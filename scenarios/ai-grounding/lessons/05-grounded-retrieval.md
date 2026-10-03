@@ -1,10 +1,8 @@
-# Module 5 — Build retrieval before adding an agent
+# Module 5. Build retrieval before adding an agent
 
-Most grounding projects fail here, then discover it three modules later. An agent cannot fix weak
-retrieval. It makes the failure fluent and harder to spot.
-
-This module ships a grounded answer path with citations, abstention, access-denied behavior, and
-freshness. It has **no agent**. If it fails here, an agent will not save it.
+Build and test retrieval before adding an agent. The answer path must cite approved sources,
+refuse unsupported questions, and preserve access boundaries. Check freshness too.
+An agent cannot correct missing or irrelevant source passages.
 
 ![Retrieval before agent orchestration](../diagrams/05-retrieval-before-agent.png)
 
@@ -26,7 +24,7 @@ freshness. It has **no agent**. If it fails here, an agent will not save it.
 
 **Default: Option A.** The knowledge base from module 3 returns a cited answer with
 `output_mode="answerSynthesis"`. Query planning breaks compound questions into parallel subqueries,
-then reranks them together. A naive single-vector query gets this wrong.
+then reranks them together.
 
 **Choose B when** you need to own the answer prompt, such as for a required response format,
 regulated disclaimer, or domain-specific abstention rule. You still get managed retrieval and ranking.
@@ -39,19 +37,20 @@ paraphrase. Nearly every real corpus needs both.
 **D is not a full solution.** It is the right tool for looking up a known identifier.
 `RET-POL-2026-01` should match directly, not by embedding similarity.
 
-**Reasoning effort is a real dial.** `minimal` skips query planning and issues
-queries directly, `low` is the default, `medium` plans harder. Start at `low`, and only move to
+**Set reasoning effort.** `minimal` skips query planning and issues queries directly.
+`low` is the default, and `medium` uses more query planning. Start at `low`, and only move to
 `medium` if the golden set shows compound questions failing. `minimal` is for latency-critical paths
 where questions are simple and singular.
 
-**Migration cost.** A ↔ B is a parameter change. A/B → C rewrites the retrieval layer, though the
-evaluation set and corpus survive. Any change re-baselines metrics, so lock this before module 7.
+**Migration cost.** Switching between A and B changes a parameter. Moving either to C rewrites
+the retrieval layer but preserves the evaluation set and corpus. Record a new metric baseline
+after a change, and choose the path before module 7.
 
 ## Implementation
 
-Use the current Microsoft Learn guidance for the active retrieval surface.
+Use current Microsoft Learn guidance for the retrieval APIs.
 
-### Option A — Knowledge base retrieval with answer synthesis
+### Option A. Knowledge base retrieval with answer synthesis
 
 The script is `scenarios/ai-grounding/accelerator/scripts/grounded_answer.py`:
 
@@ -101,7 +100,7 @@ If the retrieved documents do not contain the answer, reply exactly:
 "Do not infer" matters. Without it, a model may bridge two adjacent policy rules into a third rule
 that does not exist.
 
-### Option B — Extractive retrieval, your own answer prompt
+### Option B. Extractive retrieval, your own answer prompt
 
 Same client, no synthesis. Set `output_mode` to extractive on the knowledge base, take the retrieved
 passages, and compose the answer yourself:
@@ -121,9 +120,9 @@ answer = openai.responses.create(
 ```
 
 Inspect the actual shape of `result.references` in your SDK version before relying on field names.
-The response model differs between the GA and preview surfaces.
+The response model differs between the GA and preview APIs.
 
-### Option C — Direct hybrid query against the index
+### Option C. Direct hybrid query against the index
 
 ```python
 from azure.search.documents import SearchClient
@@ -147,7 +146,7 @@ results = search.search(
 )
 ```
 
-People most often get these three things wrong:
+Check these retrieval settings:
 
 1. **Vector-only retrieval.** It cannot find `RET-POL-2026-01`. Always send `search_text` too.
 2. **`top` used as the retrieval depth.** Retrieve wide (`k_nearest_neighbors=50`), rerank, then
@@ -163,7 +162,7 @@ alternative requires an answer-generation step over the returned passages.
 ### The four behaviours you must implement
 
 **Citations.** Every claim needs a source ID. Enforce it in the instruction and assert it in the
-test. A model told to cite will usually cite, and "usually" is not a control.
+test. Instructions alone do not prove compliance.
 
 **Abstention.** The golden set has a question the corpus cannot answer. The correct response is a
 plain refusal. An assistant that never says "I don't know" is not grounded.
@@ -178,7 +177,7 @@ conflicting versions. The answer must cite the current notice.
 
 ## Verify
 
-**Harness limit:** this script counts source IDs in answers, not relevant retrieved passages.
+**Script limit.** This script counts source IDs in answers, not relevant retrieved passages.
 `--role` selects the questions for one fixture role; it does not select the caller's identity.
 Sign in as the coordinator test identity from module 2 and supply its query-source token:
 
@@ -217,5 +216,5 @@ when finished. Module 7 captures these role-specific responses for a repeatable 
 
 ## Next module
 
-[Module 6 — Add agent and live-data routing only when justified](06-agent-and-routing.md) adds an
-agent, but only after you have written down what it buys you that this module does not.
+[Module 6. Add agent and live-data routing only when justified](06-agent-and-routing.md) adds an
+agent only when you have recorded a need that retrieval alone cannot meet.

@@ -1,6 +1,6 @@
-# Module 3 — Select the extraction capability
+# Module 3. Select the extraction capability
 
-This is the central customer decision. Several Microsoft options fit different work. A deterministic
+Choose an extraction capability for the document class. A deterministic
 model can miss fields in free-form documents; an LLM can waste tokens and invent values on stable
 forms. Record the choice and fallback.
 
@@ -20,34 +20,36 @@ fallback behavior.
 Use the current Microsoft Learn guidance when choosing the capability:
 <https://learn.microsoft.com/azure/ai-services/content-understanding/choosing-right-ai-tool>
 
-| Option | What it is | Confidence + grounding | Labels needed | Wins when | Fails when |
+| Option | What it is | Confidence + grounding | Labels needed | Best when | Poor fit when |
 | --- | --- | --- | --- | --- | --- |
 | **A. Content Understanding prebuilt analyzer** *(default)* | LLM-powered analyzers (`prebuilt-invoice`, `-contract`, `-read`, `-layout`, `-documentSearch`) | Yes (0–1 + source spans) | None | Semi-structured / high-variation docs, RAG prep, reasoning, multimodal | Ultra-high-volume, latency-critical, cost-sensitive stable forms |
 | B. Content Understanding custom analyzer | Zero-shot schema you describe in plain language; optional labels/knowledge source | Yes (`estimateFieldSourceAndConfidence`) | None (zero-shot) or few | Custom fields on unstructured docs (policies, letters, notes) | You need deterministic template accuracy |
 | C. Document Intelligence prebuilt model | Purpose-trained deterministic models (Invoice, Receipt, ID, tax, mortgage…) | Yes (0–1 + bounding regions) | None | Standard structured forms with common templates; low latency, proven accuracy | Free-form or highly variable layouts |
 | D. Document Intelligence custom model | Template/neural model you train on labeled samples | Yes | Yes (labeled) | Highly structured, org-specific forms (claims, applications) | You have no labels or layouts vary a lot |
-| E. LLM structured outputs (build your own) | Azure OpenAI JSON-schema extraction | **No native confidence/grounding** — you implement it | None | Niche workflows needing full control of model + prompt | You need built-in evidence or straight-through automation with audit |
+| E. LLM structured outputs (build your own) | Azure OpenAI JSON-schema extraction | No native confidence/grounding; you implement it | None | Niche workflows needing full control of model + prompt | You need built-in evidence or straight-through automation with audit |
 | F. Multimodal / vision extraction | CU image/vision analyzers or a vision LLM over page images | Yes (CU) / No (raw vision) | None | Charts, diagrams, photos, handwriting, mixed media | Pure text where OCR + fields is cheaper and more accurate |
 
 **Default: Option A.** Content Understanding prebuilt analyzers return schema-aligned fields *with
 confidence and grounding* without labeling. The same service can reach Document Intelligence models,
 so you can specialize without changing stacks.
 
-**When each other option wins**
+### When to choose another option
 
-- **B** — you need fields no prebuilt analyzer covers on documents too variable for a template.
+- **B:** Choose a custom analyzer when no prebuilt analyzer covers the required fields and documents
+  vary too much for a template.
   Describe fields in plain language and iterate quickly.
-- **C** — documents are standard structured forms (invoice, receipt, ID, W-2, 1003). Deterministic
-  models lead on accuracy and latency here, and cost less than an LLM per page.
-- **D** — the form is organization-specific and highly structured, and you can label samples.
+- **C:** Choose a prebuilt model for standard structured forms (invoice, receipt, ID, W-2, 1003).
+  Deterministic models lead on accuracy and latency here, and cost less than an LLM per page.
+- **D:** Choose a custom model when the form is organization-specific and highly structured, and
+  you can label samples.
   You trade labeling effort for template-grade accuracy.
-- **E** — you need control of the model, prompt, and infrastructure, and will implement confidence
-  and grounding yourself. Select this build-your-own path deliberately.
-- **F** — value lives in a chart, diagram, photo, or handwriting. Use a multimodal analyzer. Do not
-  force visual content through a text-only pipeline. Scope image-input validation and
+- **E:** Choose structured outputs when you need control of the model, prompt, and infrastructure.
+  You must implement confidence and grounding yourself.
+- **F:** Use a multimodal analyzer when the value is in a chart, diagram, photo, or handwriting. Do not
+  force visual content through a text-only pipeline. Define image-input validation and
   reviewer-visible regions before choosing this alternative.
 
-**Migration cost.** Moving between A and C is cheap: both are Foundry Tools on the same account and
+**Migration work.** A and C are Foundry Tools on the same account and
 return module 4's typed result contract. Swap the analyzer or model ID, then verify again. Moving
 from A or C to E rebuilds extraction and adds validation code because it provides no confidence or
 grounding. B and D add iteration or labeling but retain the contract. Prefer options that provide
@@ -73,7 +75,7 @@ need a mapper that preserves the same evidence and review contract.
 Each option below produces the typed result that module 4 consumes. Set the confidence threshold once,
 then enforce it everywhere.
 
-### Option A — Content Understanding prebuilt analyzer
+### Option A. Content Understanding prebuilt analyzer
 
 GA API version **`2025-11-01`**. Async: `POST …:analyze` → `202` + `Operation-Location`, then poll.
 
@@ -121,7 +123,7 @@ error instead of treating an empty field set as a successful extraction.
 Scalar values use `valueString`, `valueNumber`, or `valueDate`. Amounts can be nested under
 `valueObject.Amount`; module 4's normalizer handles the invoice mapping.
 
-### Option B — Content Understanding custom analyzer
+### Option B. Content Understanding custom analyzer
 
 Create an analyzer that describes your fields and turns on evidence, then analyze with its id:
 
@@ -145,7 +147,7 @@ are **extract** (as-written), **classify** (from a set), or
 **generate** (summaries/descriptions). Reference:
 <https://learn.microsoft.com/azure/ai-services/content-understanding/overview>
 
-### Option C — Document Intelligence prebuilt model
+### Option C. Document Intelligence prebuilt model
 
 Deterministic, keyless, v4.0 GA (`2024-11-30`). `pip install azure-ai-documentintelligence`.
 
@@ -168,7 +170,7 @@ Model ids include `prebuilt-invoice`, `prebuilt-receipt`, `prebuilt-idDocument`,
 `prebuilt-layout`, `prebuilt-read`. Reference:
 <https://learn.microsoft.com/azure/ai-services/document-intelligence/overview?view=doc-intel-4.0.0>
 
-### Option D — Document Intelligence custom model
+### Option D. Document Intelligence custom model
 
 Choose this when the organization can maintain labeled examples for its document class.
 Use Document Intelligence Studio to prepare and train the model under the current model's
@@ -178,7 +180,7 @@ Call its ID through the option C client, then map its output in module 4.
 Assign ownership of new layouts and failed extractions. The ongoing labeling and evaluation
 work is part of this choice; do not promise accuracy before measuring it.
 
-### Option E — LLM structured outputs (build your own)
+### Option E. LLM structured outputs (build your own)
 
 Full control, **no native confidence or grounding**. You must implement validation and evidence.
 
@@ -206,12 +208,12 @@ a source span for each field and reject any field it cannot locate. Record the s
 decision. Reference:
 <https://learn.microsoft.com/azure/foundry/openai/how-to/structured-outputs>
 
-### Option F — Multimodal / vision extraction
+### Option F. Multimodal / vision extraction
 
 When the value lives in a chart, diagram, photo, or handwriting, use a Content Understanding image
 analyzer (`prebuilt-imageSearch`, or a custom analyzer with `generate` fields) so you still get
 confidence and grounding, or a vision-capable LLM over rendered page images if you are on Option E.
-Do not push visual content through a text-only OCR path and hope.
+Do not use a text-only OCR path for visual content.
 
 For a visual-input extension, accept only approved file types and sizes, preserve the page/image
 reference for each observation, and route uncertain observations to a person. Treat image text
@@ -220,8 +222,8 @@ the invoice default does not require it.
 
 ## Verify
 
-Test the selected capability on a real document, then on a messy one. A decision file that names an
-analyzer does not prove it works on your documents.
+Test the selected capability on an ordinary approved document and a difficult case.
+Compare the fields and evidence against both sources.
 
 **1. The chosen analyzer returns typed fields with confidence and grounding.**
 
@@ -246,15 +248,15 @@ that the capability provides evidence. A null `source` means the path does not g
 expected for Option E, where you must implement the evidence strategy. For Document Intelligence,
 read `field.confidence` and `field.bounding_regions` from the Python SDK result.
 
-**2. It survives a document outside your happy path.**
+**2. Check a document with a different layout or quality.**
 
 Run the same call against a document with a different layout, a scan, or a vendor you did not design
 for. Compare the returned fields to what you can see in the source document.
 
 If obvious fields come back empty or confidence collapses across the document, use the fallback.
-Do not lower the threshold until results look acceptable.
+Do not lower the threshold to make failed cases pass.
 
 ## Next module
 
-[Module 4 — Implement typed extraction with evidence](04-typed-extraction.md) turns the chosen
+[Module 4. Implement typed extraction with evidence](04-typed-extraction.md) turns the chosen
 capability's output into one validated result that fails safely.

@@ -1,4 +1,4 @@
-# Module 4 — Compare chat and embedding choices
+# Module 4. Compare chat and embedding choices
 
 You now have a real corpus and golden question set. Use them to choose models. Public benchmarks
 measure a different workload.
@@ -7,7 +7,7 @@ measure a different workload.
 
 ## What you build
 
-1. A comparison harness that runs the same golden questions through candidate chat deployments and
+1. A comparison script that runs the same golden questions through candidate chat deployments and
    reports quality, latency, and cost side by side.
 2. An embedding decision based on retrieval quality, not dimension count.
 3. A capacity and region plan for the live pilot.
@@ -22,9 +22,9 @@ separate candidate index and compare it before replacing the accepted one.
 
 | Option | Where it wins | Where it fails | Cost signal |
 | --- | --- | --- | --- |
-| **Small-to-mid model — `gpt-4.1-mini` class** *(default)* | Grounded answering over retrieved text; high volume; low latency | Multi-hop reasoning, ambiguous policy interpretation | Lowest per token |
-| Frontier model — `gpt-5` class | Hard synthesis, adversarial phrasing, multi-source reconciliation | Cost and latency at pilot volume | Highest |
-| Nano / micro — `gpt-4.1-nano`, `gpt-5-nano` class | Query planning and routing inside the retrieval pipeline | Final user-facing answers | Very low |
+| **Small-to-mid model, `gpt-4.1-mini` class** *(default)* | Grounded answering over retrieved text; high volume; low latency | Multi-hop reasoning, ambiguous policy interpretation | Lowest per token |
+| Frontier model, `gpt-5` class | Hard synthesis, adversarial phrasing, multi-source reconciliation | Cost and latency at pilot volume | Highest |
+| Nano / micro, `gpt-4.1-nano`, `gpt-5-nano` class | Query planning and routing inside the retrieval pipeline | Final user-facing answers | Very low |
 | Split: nano plans, mid answers | Best cost/quality ratio at volume | Two deployments to operate and evaluate | Low overall |
 
 **Default: a small-to-mid model for answering.** In a grounded pipeline, the retrieved passage does
@@ -94,7 +94,7 @@ it here today."
 ### Run the comparison
 
 [`accelerator/scripts/compare_models.py`](../accelerator/scripts/compare_models.py) runs every golden
-question through each candidate deployment with identical grounding context. It reports these axes:
+question through each candidate deployment with identical grounding context:
 
 ```python
 response = openai.responses.create(
@@ -105,7 +105,7 @@ response = openai.responses.create(
 ```
 
 The context, instructions, and questions stay the same. Only the deployment changes. If prompts vary
-between candidates, you measured the prompt, not the model.
+between candidates, the result cannot isolate the model's effect.
 
 Run commands from the repository root.
 
@@ -116,7 +116,7 @@ python3 scenarios/ai-grounding/accelerator/scripts/compare_models.py \
 
 What it reports per deployment:
 
-| Axis | How it is measured | Why it decides |
+| Metric | How it is measured | What it tells you |
 | --- | --- | --- |
 | Citation match (`grounded`) | Expected bracketed source IDs occur in the answer | A smoke check; manually review factual correctness |
 | Abstention | Does it decline the unanswerable case | A model that never abstains will confabulate in production |
@@ -124,8 +124,8 @@ What it reports per deployment:
 | p50 / p95 latency | Wall clock per call; p95 uses nearest rank | Seven calls are a smoke sample, not a load-test baseline |
 | Tokens in / out | From the response usage | Multiply by volume for the real monthly number |
 
-Judge the abstention and superseded cases first. Any competent model answers easy questions. The
-difference between candidates appears when the right answer is "I don't know" or "not that document."
+Review the abstention and superseded cases first. They test whether candidates refuse unsupported
+questions and use the current source.
 
 ### Choosing PAYG or provisioned throughput
 
@@ -140,8 +140,7 @@ produces the number you would use to size it.
 
 ## Verify
 
-Public benchmarks measure a different workload. A leaderboard pick can guess on your corpus or stall
-at p95 in production. Measure candidates side by side on your golden set.
+Measure candidates side by side on your golden set, including p95 latency.
 
 **1. Both deployments you want to compare exist.**
 
@@ -152,7 +151,7 @@ az cognitiveservices account deployment list \
 ```
 
 Both names passed to `--deployments` must appear. A missing name later causes a
-deployment-not-found error that looks like a harness bug.
+deployment-not-found error that looks like a script bug.
 
 **2. Run the comparison and read the table.**
 
@@ -161,7 +160,7 @@ python3 scenarios/ai-grounding/accelerator/scripts/compare_models.py \
   --deployments chat chat-candidate
 ```
 
-**Illustrative output, not measured benchmark results:**
+The values below illustrate the output format. They are not measured benchmark results.
 
 ```
 deployment          grounded  abstained  p50(ms)  p95(ms)   tok_in  tok_out
@@ -175,12 +174,12 @@ are answerable. Review answers against their acceptance criteria as well as thes
 tie on quality but differ by 2× latency and 40% more output tokens, decide. Record the choice and
 what evidence would change it.
 
-The harness uses role-scoped local context, not live retrieval. It does not compare embeddings or
+The script uses role-scoped local context, not live retrieval. It does not compare embeddings or
 enforce Azure permissions. The corpus has no separate superseded-notice document, so it does not
 test choosing between competing notices.
 
 ## Next module
 
-[Module 5 — Build retrieval before adding an agent](05-grounded-retrieval.md) turns the corpus and
+[Module 5. Build retrieval before adding an agent](05-grounded-retrieval.md) turns the corpus and
 the models into a grounded answer with citations, abstention, and access-denied behaviour. It still
 has no agent.

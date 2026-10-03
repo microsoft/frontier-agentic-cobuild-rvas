@@ -1,4 +1,4 @@
-# Module 7 - Recover without replaying uncertain writes
+# Module 7. Recover without replaying uncertain writes
 
 An interrupted caller does not prove an operation failed. Read authoritative
 operation evidence before deciding what happened.

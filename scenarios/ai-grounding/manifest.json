@@ -54,7 +54,7 @@
     },
     {
       "id": "deploy-and-surface",
-      "title": "Deploy and surface it to users",
+      "title": "Deploy to the user channel",
       "path": "lessons/08-deploy-and-surface.md"
     }
   ],
@@ -127,9 +127,9 @@
     },
     {
       "id": "deploy-and-surface",
-      "title": "Deploy and surface it to users",
-      "summary": "Choose where people will use the agent, pin the version, and verify anonymous, authorized, and restricted calls through that deployed HTTP surface.",
-      "outcome": "Deployed surface passes anonymous, authorized, and restricted HTTP checks",
+      "title": "Deploy to the user channel",
+      "summary": "Connect the evaluated answer path to the customer's user channel. Pin the agent version if used, and test anonymous, authorized, and restricted HTTP calls.",
+      "outcome": "The deployed channel passes anonymous, authorized, and restricted HTTP checks",
       "implementation_paths": [
         "accelerator/surface-probe.json",
         "accelerator/scripts/probe_surface.py"

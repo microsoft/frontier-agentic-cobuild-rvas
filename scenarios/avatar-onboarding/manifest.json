@@ -51,7 +51,7 @@
     },
     {
       "id": "prove-and-operate",
-      "title": "Prove and operate the delivered experience",
+      "title": "Evaluate, red-team, trace, and operate",
       "path": "lessons/07-prove-and-operate.md"
     }
   ],

@@ -1,4 +1,4 @@
-# Module 1 — Confirm scope and connect the document foundation
+# Module 1. Confirm scope and connect the document foundation
 
 Start with one approved document class and the action its extracted fields will support.
 Bring representative files and the source owner. Review module 3's capability choices before
@@ -24,14 +24,14 @@ before adapting or deploying it:
 | Log Analytics + Application Insights | Workflow tracing and the evaluation gate in modules 6–7 |
 | Role assignments | Keyless access between the account identity, storage, and the engineer |
 
-This creates a `.env` contract with **no secrets**, used by every later module.
+The environment configuration goes into a `.env` contract with no secrets for later modules.
 
 ## Choose your path
 
 | Option | Reproducible | Creates storage + embedding | Best when | Cost while idle |
 | --- | --- | --- | --- | --- |
 | A. Scenario Bicep reference | Yes, reviewable IaC | Yes | A new footprint reviewed by the platform owner | Review service tiers and deployment SKUs |
-| B. `azd up` (kit root infra) | Yes | No — chat + Search only, no doc storage/embedding | You are running the whole Agentic Co-build repository end to end | Same, plus AI Search + ACR |
+| B. `azd up` (kit root infra) | Yes | No; chat + Search only, no doc storage/embedding | You are running the whole Agentic Co-build repository end to end | Same, plus AI Search + ACR |
 | C. Foundry portal / Content Understanding Studio | No | Manual | A throwaway demo of an analyzer | Lowest |
 | **D. Existing approved environment** *(preferred)* | Customer's IaC | Confirm what exists | The customer already has governed resources | Confirm capacity and incremental usage |
 
@@ -69,7 +69,7 @@ deployment SKU separately.
 
 ## Implementation
 
-### Option A — Scenario Bicep reference
+### Option A. Scenario Bicep reference
 
 The template is [`accelerator/main.bicep`](../accelerator/main.bicep); defaults live in
 [`accelerator/parameters.example.json`](../accelerator/parameters.example.json).
@@ -90,7 +90,7 @@ bicep build scenarios/content-understanding/accelerator/main.bicep --stdout > /d
 `accelerator/.env` from the outputs. It passes your signed-in object ID as `principalId` to grant
 keyless data-plane access.
 
-What the template does that matters, and why:
+The template disables shared-key access and grants the account identity read access to documents:
 
 ```bicep
 // Keyless-first: shared key access is OFF, so intake must use Entra ID.
@@ -117,7 +117,7 @@ az deployment group create \
   --parameters principalId="$(az ad signed-in-user show --query id -o tsv)"
 ```
 
-### Option B — `azd up` (kit root infra)
+### Option B. `azd up` (kit root infra)
 
 Use when you already use the root deployment. It provisions Foundry +
 project + a **chat** deployment + AI Search + observability, but **not** the document storage or the
@@ -150,7 +150,7 @@ Then append `AZURE_AI_EMBEDDING_DEPLOYMENT_NAME`, `AZURE_STORAGE_ACCOUNT_NAME`,
 
 Continue with this scenario's environment contract; you do not need a separate setup exercise.
 
-### Option C — Foundry portal / Content Understanding Studio
+### Option C. Foundry portal / Content Understanding Studio
 
 Use this for a same-day analyzer demo. Create a Foundry resource in the portal, then open Content
 Understanding Studio (<https://contentunderstanding.ai.azure.com>) and let it auto-deploy the
@@ -160,7 +160,7 @@ deployment names into `accelerator/.env` by hand.
 This option has no template, uses generated names, and leaves no reviewable platform diff. Treat the
 work as disposable. Do not build the pilot on it.
 
-### Option D — Bring your own landing zone
+### Option D. Bring your own landing zone
 
 This option creates no resources. Verify what exists, then fill the same contract.
 
@@ -169,7 +169,7 @@ az cognitiveservices account list \
   --query "[?kind=='AIServices'].{name:name,rg:resourceGroup,loc:location}" -o table
 ```
 
-Then confirm the three things this scenario depends on:
+Confirm these dependencies:
 
 1. The account has `allowProjectManagement: true` (it is a Foundry account).
 2. It exposes Content Understanding and Document Intelligence in its region.
@@ -234,9 +234,9 @@ documents.
 grep -iE 'api_key|account_key|connection_string|sas_token' scenarios/content-understanding/accelerator/.env
 ```
 
-You want no output. Any match means an upstream step provided a key and broke the keyless chain.
+Expect no output. Any match means an upstream step supplied a key. Remove it before continuing.
 
 ## Next module
 
-[Module 2 — Connect an approved document source](02-document-source.md) decides where trusted
+[Module 2. Connect an approved document source](02-document-source.md) decides where trusted
 documents come from and how intake controls keep unapproved content out.

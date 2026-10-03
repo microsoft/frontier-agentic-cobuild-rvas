@@ -4,17 +4,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/frontier-agentic-cobuild-rvas)
 
-*Build with the customer, using reusable building blocks.*
-
----
-
 ## Start with the customer's scenario
 
 Agentic Co-build helps customer teams and their technical advisers **build the customer's own
-AI scenario**. Each playbook breaks architectural choices into reusable modules. Teams adapt the
+AI scenario**. Each playbook breaks design choices into reusable modules. Teams adapt the
 code in their approved environment, and customer-facing slides support the design discussions.
 
-**The initial tracks cover four reusable patterns:**
+The initial tracks cover four reusable patterns:
 
 | Track | What you build |
 |---|---|
@@ -35,10 +31,9 @@ case is clear, use [Use-Case Mapper](.github/skills/use-case-mapper/) to map it 
 
 Before selecting modules, split the customer's end-to-end use case into the parts it needs.
 Map each part to the relevant scenario modules. Record what the material covers,
-what needs adaptation, and what needs additional engineering. Keep uncovered work visible even
-when it falls outside the engagement. **The [Use-Case Mapper](.github/skills/use-case-mapper/)
-skill does this for you:** it reads every scenario manifest and marks each part Covered, Adapt, or
-Not covered.
+what needs adaptation, and what needs additional engineering. Include uncovered work even
+when it falls outside the engagement. [Use-Case Mapper](.github/skills/use-case-mapper/)
+reads every scenario manifest and marks each part Covered, Adapt, or Not covered.
 
 For example, a supplier-request process could draw on several parts of the kit:
 
@@ -98,7 +93,7 @@ the same contract.
 
 ---
 
-## Who is this for?
+## Who the kit is for
 
 ### Customer technical teams
 
@@ -117,18 +112,14 @@ the agreed scope, including integration work and handoff to the customer's opera
 
 ## Prerequisites
 
-Before you start, make sure you have:
-
-- **Approved environment**: An Azure subscription and required permissions for live Azure modules;
-  local exercises list their own requirements
-- **Development environment**: GitHub Codespaces or a local Dev Container for the code-based modules
-- **Basic Python**: Comfortable with variables, functions, pip, and virtual environments
-- **Basic API knowledge**: Understand REST APIs, HTTP requests, and JSON
-- **VS Code familiarity**: Helpful, but not required
+Live Azure modules need an approved subscription and the required permissions.
+Local exercises list their own requirements. For code-based modules, use GitHub Codespaces
+or a local Dev Container. You should know basic Python, including pip and virtual environments,
+and understand REST APIs and JSON. Familiarity with VS Code helps but is not required.
 
 ---
 
-## Getting Started
+## Getting started
 
 ### 1. Choose a scenario and scope
 
@@ -142,7 +133,7 @@ steps for credentials and any additional tools:
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/frontier-agentic-cobuild-rvas)
 
-**Alternative**: Open locally with [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) in VS Code.
+To work locally, open the repository with [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) in VS Code.
 
 ### 3. Follow the selected environment path
 
@@ -170,7 +161,7 @@ add or update one comment with its URL. Forked pull requests run the build check
 
 ---
 
-## Repository Structure
+## Repository structure
 
 ```
 agentic-cobuild/
@@ -192,13 +183,13 @@ Its manifest defines the module order and published assets.
 
 ---
 
-## Facilitator References
+## Facilitator references
 
 Facilitator references under `scenarios/*/accelerator/facilitator-reference.md` support engagement
 preparation. Use the reference for the scenario you are building to understand its code and the
 work that remains customer-specific.
 
-### Quick-Start Facilitation Checklist
+### Facilitation checklist
 
 1. Agree the customer outcome, engagement scope, and acceptance criteria.
 2. Map the use-case parts to modules, identify uncovered work, and confirm module prerequisites.
@@ -210,10 +201,6 @@ work that remains customer-specific.
 
 ## Resources
 
-- **[Microsoft Foundry Documentation](https://learn.microsoft.com/azure/foundry/)**: Official docs and tutorials
-- **[Microsoft Foundry Training](https://learn.microsoft.com/training/azure/ai-foundry)**: Structured training modules
-- **[Microsoft AI skills resources](https://www.microsoft.com/en-us/corporate-responsibility/ai-skills-resources)**: Browse AI skilling and training resources
-
----
-
-Choose a [scenario playbook](https://microsoft.github.io/frontier-agentic-cobuild-rvas/index.html#outcomes).
+- [Microsoft Foundry documentation](https://learn.microsoft.com/azure/foundry/)
+- [Microsoft Foundry training](https://learn.microsoft.com/training/azure/ai-foundry)
+- [Microsoft AI skills resources](https://www.microsoft.com/en-us/corporate-responsibility/ai-skills-resources)

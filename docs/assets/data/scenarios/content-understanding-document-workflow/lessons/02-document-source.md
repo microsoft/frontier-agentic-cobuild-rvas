@@ -1,4 +1,4 @@
-# Module 2 — Connect an approved document source
+# Module 2. Connect an approved document source
 
 This module defines which documents can enter the workflow and how their identity, version, and
 permissions stay with them. You can tune extraction later. An unapproved document breaks governance.
@@ -11,7 +11,7 @@ connector, but keep customer acceptance blocked. No PDF is supplied by this repo
 
 ## What you build
 
-1. A source decision: which system is authoritative for the documents you extract.
+1. A source decision that names the authoritative system for the documents you extract.
 2. An intake contract: required metadata (source URI, version, owner, hash, sensitivity) and rules
    that route documents to quarantine.
 3. A **runnable intake check** that confirms the plan is complete and containers are private and
@@ -44,15 +44,15 @@ new permission design, so avoid it unless there is a clear reason.
 Answer these before you write code:
 
 1. **Which system is authoritative** for each document class, and who owns it?
-2. **What metadata must travel** with every document — source URI, version, ingested-by, SHA-256,
-   sensitivity label, permission owner IDs?
-3. **What sends a document to quarantine** — unapproved class, unauthorized source, unsupported type
-   or size, missing sensitivity label?
+2. **What metadata must travel with every document?** Consider source URI, version, ingested-by,
+   SHA-256, sensitivity label, and permission owner IDs.
+3. **What sends a document to quarantine?** Consider unapproved classes, unauthorized sources,
+   unsupported types or sizes, and missing sensitivity labels.
 4. **How long is a document retained**, and who signed off on that window?
 
 ## Implementation
 
-### Option A — Azure Blob Storage (default)
+### Option A. Azure Blob Storage (default)
 
 Use the approved inbound and quarantine containers from module 1. The optional template creates
 them for a new environment. Set `SOURCE_FILE` to an actual approved PDF in your private workspace,
@@ -85,7 +85,7 @@ Confirm the analyzer's supported input authorization as well as the storage role
 access to a private URL does not automatically make that URL readable by the service. Module 3
 describes the approved upload path when analyze-by-URL is not available for your configuration.
 
-### Option B — ADLS Gen2
+### Option B. ADLS Gen2
 
 Same storage account with hierarchical namespace enabled. Set directory ACLs so permissions travel
 with the document, and record that you will carry them forward when the content is indexed:
@@ -101,7 +101,7 @@ Know the limit before you commit to this path: **≤32 ACL entries per file/dire
 redesign to group-based permissions. Reference:
 <https://learn.microsoft.com/azure/search/search-indexer-access-control-lists-and-role-based-access>
 
-### Option C — SharePoint
+### Option C. SharePoint
 
 Keep documents in SharePoint. Connect the library and let M365 enforce permissions for the signed-in
 user. As a knowledge source, SharePoint is available **indexed** (ingested before query time) or
@@ -113,11 +113,12 @@ then pass the exact bytes through the same intake rules as option A. Do not trea
 knowledge-source connection as a document-processing connector. Check an allowed and denied item
 before continuing to module 3; the Blob commands do not verify this branch.
 
-Confirm that library permissions reflect intent. Inherited permissions on a "public" site often surprise teams. Test with a low-privilege account.
+Test with a low-privilege account to check whether inherited library permissions match the
+intended access boundary.
 Reference:
 <https://learn.microsoft.com/azure/search/agentic-knowledge-source-overview>
 
-### Option D — OneLake (lakehouse)
+### Option D. OneLake (lakehouse)
 
 Use this when the source owner already manages the files in a Fabric lakehouse. Implement an
 authorized file read from the selected workspace and preserve the file reference and version.
@@ -147,7 +148,7 @@ You want both names with an empty `public` column. A value of `blob` or `contain
 document corpus anonymously. If the command succeeds, Entra data-plane access works.
 `AuthorizationFailure` means your identity still lacks **Storage Blob Data Contributor**.
 
-**2. Intake metadata actually rode with the document.**
+**2. The document retains its intake metadata.**
 
 ```bash
 az storage blob metadata show --account-name "$AZURE_STORAGE_ACCOUNT_NAME" --auth-mode login \
@@ -174,5 +175,5 @@ A role listing does not prove the analyzer can read the private input.
 
 ## Next module
 
-[Module 3 — Select the extraction capability](03-extraction-selection.md) chooses how these
-documents become typed fields, across every Microsoft option.
+[Module 3. Select the extraction capability](03-extraction-selection.md) compares the Microsoft
+options for extracting typed fields from these documents.

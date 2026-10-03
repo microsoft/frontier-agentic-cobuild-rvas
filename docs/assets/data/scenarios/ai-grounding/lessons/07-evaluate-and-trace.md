@@ -1,4 +1,4 @@
-# Module 7 — Evaluate and trace
+# Module 7. Evaluate and trace
 
 Use the customer's reviewed questions and connected sources from the preceding modules. **Keep the
 same answer path:** retrieval if you skipped the agent, or the pinned agent version if you added one.
@@ -155,5 +155,5 @@ operation ID and actual response. Missing traces or an untested attack remain un
 
 ## Next module
 
-[Module 8 — Deploy and surface it to users](08-deploy-and-surface.md). Carry the evaluated target
-and version into the user-facing surface, then prove its access boundary again.
+[Module 8. Deploy to the user channel](08-deploy-and-surface.md). Deploy the evaluated target
+and version, then prove its access boundary through the user channel.

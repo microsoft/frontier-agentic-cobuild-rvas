@@ -1,4 +1,4 @@
-# Module 4 — Add grounded authoring or live answers when needed
+# Module 4. Add grounded authoring or live answers when needed
 
 **Skip model-based drafting when the script is already approved.** A content-production application can
 render that wording directly in module 5. Use this module when authors need help selecting
@@ -31,13 +31,13 @@ needs no new agent or sample corpus.
 
 **Default: Option A** for the pilot: a chat deployment retrieves from the small approved claim set,
 and its system prompt forbids ungrounded statements. It is the smallest setup with direct control
-over the two behaviours that matter here: **cite** and **refuse**. Choose **B** when you want a
+over citations and refusals. Choose B when you want a
 named, versioned agent shared across channels (including module 5 Option C, Voice Live). Choose
 **C** when retrieval must be permission-aware across systems.
 
-**Migration cost.** A → B/C retains the claim set, module-7 golden questions, and refusal contract;
-only the drafting call becomes an agent invocation. B → A is trivial. Build the module-7 evaluation
-set once because all three options use it.
+**Migration work.** Moving from A to B or C retains the claim set, module-7 golden questions, and
+refusal contract. Replace the drafting call with an agent invocation. Moving from B to A replaces
+the agent invocation with a model call. All three options use the module-7 evaluation set.
 
 ## Implementation
 
@@ -52,7 +52,7 @@ content approval before rendering. For live answers, enforce access on each requ
 the refusal to an actual support route. Test the answer path as an intended user, rather than only
 as the developer who owns the resources.
 
-### Option A — Model + retrieval (default)
+### Option A. Model + retrieval (default)
 
 **Ground on the claim set and forbid invention.** Make the system prompt explicit:
 
@@ -99,14 +99,14 @@ def draft(question: str) -> str:
 ```
 
 > Search before you implement. Confirm the current `AzureOpenAI` / Foundry chat signature and
-> `api_version` against Microsoft Learn because the SDK surface changes. The onboarding rule is fixed:
+> `api_version` against Microsoft Learn because the SDK changes. Keep the same onboarding rule:
 > **draft only from `claims.json`, cite `claim_id`, refuse with `NO_APPROVED_CLAIM`.**
 
 **Enforce refusal downstream.** Module 5's renderer rejects script segments whose spoken text is
 not an *exact* approved claim. A paraphrase or invented sentence cannot render. The model is the
 first gate; the renderer is the backstop.
 
-### Option B — Foundry agent + knowledge base
+### Option B. Foundry agent + knowledge base
 
 This optional path needs a named, versioned agent with a knowledge tool over module 3's
 corpus. In the existing Foundry project, create the agent with the drafting instructions above.
@@ -116,22 +116,22 @@ Store its name and version in the scenario `.env` as `AZURE_FOUNDRY_AGENT_NAME` 
 `AZURE_FOUNDRY_AGENT_VERSION`. Confirm that knowledge citations map to approved claim IDs.
 Do not add an agent to a content-production workflow merely to finish this module.
 
-### Option C — Foundry agent + agentic retrieval (Foundry IQ)
+### Option C. Foundry agent + agentic retrieval (Foundry IQ)
 
 When retrieval must be permission-aware, use a Foundry IQ knowledge base behind the agent. Use the
 preview API version for query planning and answer synthesis, pass the end-user token in
-`x-ms-query-source-authorization`, and keep the "approved claims only" instruction. Verified facts
+`x-ms-query-source-authorization`, and keep the "approved claims only" instruction. Reference
 from the AI Grounding stack:
 <https://learn.microsoft.com/azure/search/agentic-retrieval-how-to-create-knowledge-base>
 
 The assistant may draft *candidate* script text under any option. A **human still approves** the
-final wording in module 3 before rendering. Module 6 approves publication. The assistant speeds
-authoring. It does not grant publication.
+final wording in module 3 before rendering. Module 6 approves publication. The assistant produces
+drafts; it cannot authorize publication.
 
 ## Verify
 
-Test the two behaviours that make this assistant safe to put behind a face: it must **cite**
-on-claim answers and **refuse** off-claim ones. Run both against your deployment, not a fixture.
+Test citations and refusals before connecting this assistant to an avatar. It must cite
+supported answers and refuse unsupported ones. Run both against your deployment, not a fixture.
 This grounded call uses your Entra identity, with no key:
 
 ```bash
@@ -158,7 +158,7 @@ ask () {
 ask "When do I select benefits?"
 ```
 
-Good output states the approved wording and names `ONB-001`. If it paraphrases the policy or drops
+The response must state the approved wording and name `ONB-001`. If it paraphrases the policy or drops
 the citation, tighten the system prompt and keep `temperature` at 0. A paraphrased policy becomes
 an unapproved claim.
 
@@ -168,12 +168,12 @@ an unapproved claim.
 ask "How much is the parking subsidy?"
 ```
 
-The only acceptable output is `NO_APPROVED_CLAIM` and the help path. A plausible dollar figure is a
-confident made-up number spoken by a face. If you get one, do not render the assistant.
+The only acceptable output is `NO_APPROVED_CLAIM` and the help path. If the response invents a
+dollar figure, do not connect the assistant to rendering.
 A `401`/`403` means you are missing the **Cognitive Services OpenAI User** role on the account.
 Grant it and stay keyless.
 
 ## Next module
 
-[Module 5 — Generate the accessible avatar experience](05-experience-generation.md) turns an approved
+[Module 5. Generate the accessible avatar experience](05-experience-generation.md) turns an approved
 script revision into a disclosed, captioned experience with a non-avatar fallback.

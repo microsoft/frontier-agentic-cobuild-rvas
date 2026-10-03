@@ -1,11 +1,11 @@
-# Avatar Scenario: build an application people can verify
+# Avatar Scenario: build an application people can check
 
 Build an accessible avatar-led experience on Azure and Microsoft Foundry. The sample focuses on
 employee onboarding, and the pattern also fits approved learning or support content. Every
 published statement must trace to an approved source and named reviewer. Tell users when media is
 synthetic. Owners must be able to withdraw the published version when a source changes.
 
-**Build an interactive assistant or a repeatable content-production application.** Choose the
+Build an interactive assistant or a repeatable content-production application. Choose the
 application goal before deciding whether it needs an avatar. Neither goal is the default.
 The batch path includes rendering instructions; the modules identify the workflow and channel
 integrations you must build around generation.
@@ -13,7 +13,7 @@ The [reference guide](accelerator/README.md) explains the reusable code and its 
 
 > **Fictional data only.** The accelerator ships synthetic HR content. Never place real customer
 > content, or a real person's voice or likeness, in this repository. **Keyless-first:**
-> `DefaultAzureCredential` + managed identity + RBAC — never keys in code or Bicep.
+> `DefaultAzureCredential` + managed identity + RBAC. Never put keys in code or Bicep.
 
 ## The 7 modules
 
@@ -64,10 +64,10 @@ Answer these questions before building:
   for interactive help. It cannot silently add claims to a published script.
 - **Human approval is a release gate.** Factual/SME, legal/compliance, brand, and content-owner
   decisions must approve an exact script revision before anything publishes.
-- **Accessibility is a first-class output.** Every experience ships a transcript, captions (where the
+- **Include accessible alternatives.** Every experience ships a transcript, captions (where the
   capability supports them), an equivalent non-avatar fallback, a human-help path, and a clear
   AI/avatar disclosure.
-- **Consent and privacy are non-negotiable.** Never clone a real voice or likeness without recorded
+- **Record consent and protect privacy.** Never clone a real voice or likeness without recorded
   authorization. Custom avatar/voice is an Azure limited-access feature. Keep pilot telemetry
   aggregate and identifier-free.
 - **Withdrawal is part of the build.** A source change, consent withdrawal, safety issue, or defect
@@ -81,8 +81,8 @@ demo footprint; do not deploy it unchanged into an existing tenant.
 
 ## Responsible AI
 
-Standard avatar + standard neural voice needs **no** registration, but synthetic-media **disclosure**
-to users and a feedback channel are still required. **Custom** avatar / **custom** or **personal**
-voice is **Limited Access** (registration only, Microsoft-managed customers), and custom video avatar
+Standard avatar + standard neural voice needs no registration, but synthetic-media disclosure
+to users and a feedback channel are still required. Custom avatar / custom or personal
+voice is Limited Access (registration only, Microsoft-managed customers), and custom video avatar
 requires actor consent and advance disclosure to the talent. Module 1 records the exact gates for
 your chosen capability; Module 7 proves them before any release.

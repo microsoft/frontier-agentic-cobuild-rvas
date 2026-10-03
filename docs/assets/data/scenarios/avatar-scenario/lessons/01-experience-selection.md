@@ -1,8 +1,8 @@
-# Module 1 - Choose the application your users need
+# Module 1. Choose the application your users need
 
 Start with one communication or support task in your organization. Decide what users should
-be able to do afterward and where they will use the experience. A presenter may help explain a
-process. A searchable page may solve the same problem with less work.
+be able to do afterward and where they will use the experience. A presenter can explain a process.
+Compare it with a searchable page before committing to media production.
 
 **Choose the application goal before the media format.** Build either an interactive assistant
 or a repeatable content-production application. Neither is the default. A generated video is an
@@ -10,7 +10,7 @@ output; producing one file does not meet this track's application goal.
 
 ## What you build
 
-An agreed scope for an application in **your tenant**. Identify its audience,
+An agreed scope for an application in your tenant. Identify its audience,
 user channel, approved content owner, and acceptance checks. Keep the decision
 in your existing backlog or design record.
 
@@ -105,8 +105,7 @@ For translation, retain the approved source video and transcript in module 3, sk
 unless the wording changes, and use the translation branch in module 5. For a text-only
 assistant, skip Speech setup and rendering; keep the answer boundary and application checks.
 
-Assign the client or publishing integration to an engineer now. A service choice does not
-implement either path.
+Assign an engineer to build the client or publishing integration.
 
 ## Verify
 
@@ -122,5 +121,5 @@ An unresolved channel or owner means the scope is not ready for provisioning.
 
 ## Next module
 
-[Module 2 - Connect the required foundation](02-foundation.md). Reuse approved tenant resources
+[Module 2. Connect the required foundation](02-foundation.md). Reuse approved tenant resources
 first and add only what the selected experience needs.

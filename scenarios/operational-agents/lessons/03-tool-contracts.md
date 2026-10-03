@@ -1,4 +1,4 @@
-# Module 3 - Define narrow tool contracts
+# Module 3. Define narrow tool contracts
 
 A tool schema describes the request. The destination system must still enforce
 permissions and decide whether an update is valid.

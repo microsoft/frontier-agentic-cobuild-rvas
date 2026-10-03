@@ -1,4 +1,4 @@
-# Module 8 - Prove behavior and prepare to operate
+# Module 8. Prove behavior and prepare to operate
 
 Keep runtime correctness separate from model quality. The same engine can
 enforce approval while a model still chooses an irrelevant tool or gives a poor

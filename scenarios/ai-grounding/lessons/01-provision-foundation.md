@@ -1,4 +1,4 @@
-# Module 1 — Confirm scope and connect the grounding foundation
+# Module 1. Confirm scope and connect the grounding foundation
 
 Bring the first user task, its source owner, and the channel where people need answers.
 **Confirm the platform path before provisioning.** Review module 2's source choices now:
@@ -23,7 +23,7 @@ footprint below is one option, not a requirement for every source/platform choic
 | Log Analytics + Application Insights | Traces and evaluation correlation from module 7 |
 | Role assignments | Keyless access between search, project, models, and storage |
 
-Output: a `.env` contract with **no secrets**, used by every later module.
+Later modules use the generated `.env` file. It must contain no secrets.
 
 ## Choose your path
 
@@ -72,7 +72,7 @@ For Copilot Studio, confirm the approved Power Platform environment and the crea
 then continue with module 2 option C. For Azure, follow D below when resources exist; otherwise
 review A before deployment. Do not upload customer content until the source owner approves it.
 
-### Option A — Scenario Bicep reference
+### Option A. Scenario Bicep reference
 
 The template is [`accelerator/main.bicep`](../accelerator/main.bicep); defaults live in
 [`accelerator/parameters.example.json`](../accelerator/parameters.example.json).
@@ -132,7 +132,7 @@ az deployment group create \
   --parameters principalId="$(az ad signed-in-user show --query id -o tsv)"
 ```
 
-### Option B — `azd up` (kit root infra)
+### Option B. `azd up` (kit root infra)
 
 Use when you want the shared footprint every activity in the kit uses.
 
@@ -163,23 +163,24 @@ az storage account create --resource-group "$RG" --name "st${RANDOM}grnd" \
 Then append `AZURE_AI_EMBEDDING_DEPLOYMENT_NAME`, `AZURE_STORAGE_ACCOUNT_NAME`, and
 `AZURE_STORAGE_CONTAINER_NAME` to the `.env` file.
 
-### Option C — Foundry portal
+### Option C. Foundry portal
 
 For a same-day demo or a zero-cost proof of concept.
 
 1. Open the Foundry portal at <https://ai.azure.com>.
 2. Create a project. A Foundry account is created for you.
-3. **Build → Models** — deploy one chat model and one embedding model.
-4. **Build → Knowledge** — create or connect a search service that supports agentic retrieval.
+3. Open **Build → Models** and deploy one chat model and one embedding model.
+4. Open **Build → Knowledge** and create or connect a search service that supports agentic retrieval.
    The portal offers a free Search tier for proof-of-concept work.
 5. Record the project endpoint and deployment names into `accelerator/.env` by hand.
 
-Accept the trade: no template, generated names, nothing for a platform team to review, and no
-managed identity for model access on the free Search tier. Treat anything built here as disposable.
+This path has no deployment template and uses generated names. The platform team has no template
+to review, and the free Search tier cannot use managed identity for model access.
+Treat this setup as disposable.
 
-### Option D — Bring your own landing zone
+### Option D. Bring your own landing zone
 
-No new resources. You verify what exists and fill the same contract.
+Verify the existing resources and fill the same configuration contract without creating new ones.
 
 ```bash
 # Discover what the customer already has.
@@ -242,10 +243,9 @@ to an admin key, or you will carry that key to production.
 grep -iE 'api_key|account_key|connection_string|sas_token' scenarios/ai-grounding/accelerator/.env
 ```
 
-No output is the expected result. Any match means something upstream handed you a key and broke the
-keyless chain.
+Expect no output. Investigate any match before continuing.
 
 ## Next module
 
-[Module 2 — Select the source and permission architecture](02-source-and-permission-architecture.md)
+[Module 2. Select the source and permission architecture](02-source-and-permission-architecture.md)
 decides where trusted content comes from and whose permissions apply at query time.

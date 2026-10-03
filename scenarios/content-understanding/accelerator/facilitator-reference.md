@@ -33,7 +33,7 @@ AZURE_DOCUMENTS_CONTAINER_NAME=documents-inbound
 AZURE_QUARANTINE_CONTAINER_NAME=documents-quarantine
 ```
 
-## 1. Content Understanding — prebuilt analyzer (GA `2025-11-01`)
+## 1. Content Understanding. Prebuilt analyzer (GA `2025-11-01`)
 
 Set the resource's default model deployments, then analyze. Content Understanding is asynchronous:
 `POST …:analyze` returns `202` + `Operation-Location`; poll the result.
@@ -85,7 +85,7 @@ To get confidence + grounding from a **custom** analyzer, set
 
 Reference: <https://learn.microsoft.com/azure/ai-services/content-understanding/quickstart/use-rest-api>
 
-## 2. Document Intelligence — prebuilt model (v4.0 GA `2024-11-30`)
+## 2. Document Intelligence. Prebuilt model (v4.0 GA `2024-11-30`)
 
 Use deterministic extraction for stable templates. `DocumentIntelligenceClient` supports keyless access.
 
@@ -116,7 +116,8 @@ Reference: <https://learn.microsoft.com/azure/ai-services/document-intelligence/
 
 ## 3. LLM structured outputs (build-your-own fallback)
 
-This gives you full control, but **no native confidence or grounding**. You must validate every result.
+This path gives you control of the model and prompt. It has **no native confidence or grounding**,
+so you must validate every result.
 
 ```python
 from pydantic import BaseModel
@@ -153,7 +154,7 @@ text. A high-confidence field with no usable span still goes to review.
 ## 5. Human review, correction, and handoff
 
 The trace records the reviewer identity, timestamp, before-and-after values, and approved downstream
-seam (an action tool). Corrections stay as evaluation evidence and never overwrite the original
+action tool. Keep corrections as evaluation evidence without overwriting the original
 expected result. See [`../lessons/05-human-review.md`](../lessons/05-human-review.md) for
 the exact-payload approval and destination receipt contract.
 
@@ -183,7 +184,7 @@ path. Confirm that the endpoint rejects an unauthenticated caller:
 curl -s -o /dev/null -w '%{http_code}\n' "$WORKFLOW_ENDPOINT"
 ```
 
-A `401` or `403` is the answer you want.
+Expect `401` or `403`.
 
 Use [module 7's hosting steps](../lessons/07-deploy.md). A generic hosted sample is not
 a deployed document workflow; adapt and test the handler before release.
@@ -191,5 +192,4 @@ a deployed document workflow; adapt and test the handler before release.
 ## Offline validation pack
 
 Run the workflow over the synthetic fixtures and compare every extracted field with the source
-document. That comparison is the evidence. A workflow can run cleanly and still extract the wrong
-values.
+document. A successful run can still extract the wrong values.

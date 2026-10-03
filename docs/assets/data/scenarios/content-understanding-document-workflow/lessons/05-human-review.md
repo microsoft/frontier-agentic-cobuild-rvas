@@ -1,8 +1,8 @@
-# Module 5 — Build review, correction, and handoff
+# Module 5. Build review, correction, and handoff
 
 Module 4 raises exceptions; this module resolves them. A reviewer sees missing and low-confidence
-fields, corrects them, and approves the result. Keep every correction as evidence. Never silently
-overwrite extraction, and send corrections to module 6's evaluation.
+fields, corrects them, and approves the result. Keep every correction as evidence. Never overwrite
+the original extraction. Send corrections to module 6's evaluation.
 
 ![Results with review reasons need correction. Both corrected and clean results require authorized approval before handoff.](../diagrams/05-human-review-handoff.png)
 
@@ -11,12 +11,12 @@ overwrite extraction, and send corrections to module 6's evaluation.
 1. A review queue that routes exceptions to a named reviewer with the document, extracted fields, and
    grounding evidence.
 2. A correction record that keeps the field, original value, corrected value, and reason.
-3. A governed handoff where approved results cross one seam to the downstream system as the workflow
-   identity, with an auditable trace.
+3. A governed handoff that sends approved results through one downstream contract under the
+   workflow identity, with an auditable trace.
 
 ## Choose your path
 
-Make two decisions separately. **Where does the reviewer work?** Prefer the customer's existing
+First choose where the reviewer works. Prefer the customer's existing
 case queue or workflow when it can show the source evidence and capture a correction. Build a
 dedicated review app when reviewers need side-by-side documents or region overlays. That adds UI
 and authorization work, but does not change the downstream write contract.
@@ -30,7 +30,7 @@ Then choose how the approved result reaches its destination:
 | Existing workflow coordinates the handoff | The customer already manages long-running review in a workflow system. | Persist the case and approval while waiting, then call the same posting API. Preserve the correction history and destination receipt across retries. |
 
 These choices can coexist. A rich review app can use the first handoff, and an agent can route a
-case into an existing human workflow. Use the smallest extra infrastructure that serves the
+case into an existing human workflow. Add only the infrastructure needed for the
 reviewer's actual task.
 
 ## Implementation
@@ -75,7 +75,7 @@ reviewer checks the document. Write the returned copy to `reviewed-result.json` 
 to `trace.json`; retain the original. Resolve every review reason before creating an approval.
 The example records one correction. Repeat the review for each flagged field.
 
-**Build the handoff against one approved destination contract.** Use these steps here:
+Build the handoff against one approved destination contract:
 
 1. Define `post-approved-result` to accept the document ID, source hash, reviewed values,
    and a unique operation ID. Reject unknown fields and an unapproved result.
@@ -94,9 +94,9 @@ Modules 6 and 7 must retain that boundary.
 ### When building a dedicated review app
 
 Give reviewers the document with grounding overlays and editable flagged fields. On approval, the app
-writes the same correction record and calls the same handoff seam. The app captures reviewer identity,
-timestamp, before-and-after values, and reason, so its trace matches Option A. Only the reviewer
-experience changes.
+writes the same correction record and calls the same posting operation. The app captures reviewer identity,
+timestamp, before-and-after values, and reason. Its trace matches the application-call path.
+Only the review interface changes.
 
 ### When using an existing agent workflow
 
@@ -107,7 +107,7 @@ not replace the approval check at the destination.
 
 ## Verify
 
-**Complete one case in the actual reviewer surface.** Correct a flagged value and submit it through
+**Complete one case in the actual review interface.** Correct a flagged value and submit it through
 the posting adapter. Inspect the destination independently, then repeat the same operation ID and
 confirm no duplicate appears. Deny a second case and confirm the destination remains unchanged.
 If posting is outside the agreed release, verify the reviewed-result handoff to its named owner and
@@ -132,7 +132,7 @@ also corrupts the evaluation set.
 
 **2. The handoff refuses a caller who is not an approver.**
 
-Call the approved action-tool seam as a signed-in identity that lacks the approver role.
+Call the approved action-tool API as a signed-in identity that lacks the approver role.
 Set `ACTION_API_AUDIENCE` to the API's registered token audience; it may differ from its URL:
 
 ```bash
@@ -153,5 +153,5 @@ Keep `reviewer_id` in the approval record so the service identity does not hide 
 
 ## Next module
 
-[Module 6 — Evaluate and trace the workflow](06-prove-and-observe.md) turns the corrections you just
+[Module 6. Evaluate and trace the workflow](06-prove-and-observe.md) turns the corrections you just
 retained into an evaluation gate and reviewable traces.

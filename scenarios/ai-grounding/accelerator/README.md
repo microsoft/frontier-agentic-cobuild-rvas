@@ -11,7 +11,7 @@ enterprise landing zone or approve production.
 - A restricted caller cannot learn that protected content exists.
 - The assistant abstains when the source cannot support an answer.
 - Live-data questions route to the system of record rather than a stale index.
-- The deployed surface preserves the same access boundary as retrieval.
+- The deployed application preserves the same access boundary as retrieval.
 
 ## Known implementation gaps
 
@@ -26,13 +26,13 @@ Close these gaps before a permission-aware pilot can pass the stated gates.
 The model comparison only scopes local prompt context by fixture role. A finite list of text markers
 cannot prove every leak is absent.
 
-**Surface probe transport:** `probe_surface.py` accepts HTTP and follows redirects with its
+**Surface probe transport.** `probe_surface.py` accepts HTTP and follows redirects with its
 authorization header. Do not send real tokens until HTTPS-only requests and safe redirect handling
 are enforced. A redirect can forward a token to another origin.
 
 ## Before you start
 
-**Check the current API surface before writing SDK code.** Foundry and Azure AI Search change
+**Check the current APIs before writing SDK code.** Foundry and Azure AI Search change
 quickly, and several features used here are preview. Search current Microsoft Learn guidance
 and the relevant Foundry guidance. Do not infer a signature from this accelerator or from memory.
 
@@ -67,7 +67,7 @@ into customer resources. Apply the modules and checks to the approved environmen
 | 5. Grounded retrieval | Cited answers, abstention, and access-denied behavior | Citation, abstention, and recall results |
 | 6. Agent and routing | An agent only where it adds value, plus live-data routing | Policy and live questions reach the right source |
 | 7. Evaluate and trace | Release gate, red-team cases, and request traces | Evaluation result and trace for a failure |
-| 8. Deploy and surface | A pinned version behind a permission-aware endpoint | Anonymous, authorized, and restricted surface checks |
+| 8. Deploy to the user channel | A pinned version behind a permission-aware endpoint | Anonymous, authorized, and restricted HTTP checks |
 
 Complete the modules in order. Add an agent only after retrieval passes its tests.
 
@@ -119,6 +119,6 @@ These checks do not verify Azure retrieval or permissions.
 [Module 7](../lessons/07-evaluate-and-trace.md) contains the capture and gate commands.
 It keeps coordinator and supervisor outputs separate under the ignored `.runtime/` directory.
 The reports check response contracts, not semantic correctness or retrieval recall.
-Use [module 8](../lessons/08-deploy-and-surface.md) for surface and hosting steps.
+Use [module 8](../lessons/08-deploy-and-surface.md) for application integration and hosting steps.
 
-See [facilitator-reference.md](facilitator-reference.md) for the facilitator reference.
+Use the [facilitator reference](facilitator-reference.md) to prepare the engagement.

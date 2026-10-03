@@ -1,10 +1,10 @@
-# Module 2 — Connect the required foundation
+# Module 2. Connect the required foundation
 
 Module 1 chose the application goal and user channel. **Connect approved tenant resources first.**
 Bring the environment owner and the resource access for the selected path. Provision
 missing components through the customer's infrastructure process.
 
-This module follows the kit's working `infra/resources.bicep` and current Microsoft Learn guidance.
+Use the kit's `infra/resources.bicep` and the Microsoft Learn guidance linked below as references.
 
 ## What you build
 
@@ -21,13 +21,13 @@ the minimum architecture for every experience.** Select the required components 
 
 | Resource | Why this scenario needs it |
 | --- | --- |
-| Foundry account (`AIServices`) + project | Hosts models, the grounded agent, connections — **and fronts Azure AI Speech** (avatar/Voice Live) with a custom subdomain for keyless Entra auth |
+| Foundry account (`AIServices`) + project | Hosts models, the grounded agent, and connections; fronts Azure AI Speech (avatar/Voice Live) with a custom subdomain for keyless Entra auth |
 | Chat deployment | Grounded drafting and help (module 4) |
-| Embedding deployment | Vectorises approved onboarding content for the knowledge base (modules 3–4) |
+| Embedding deployment | Creates vectors from approved onboarding content for the knowledge base (modules 3–4) |
 | Azure AI Search (semantic ranking on) | The grounded assistant's knowledge base backend |
 | Storage: `approved-content` + `experience-output` | Governed source corpus (module 3) and rendered avatar video/transcript (module 5) |
 | Log Analytics + Application Insights | Traces and evaluation correlation (module 7) |
-| Role assignments | Keyless access between search, project, models, storage, **and the Speech data plane** |
+| Role assignments | Keyless access between search, project, models, storage, and the Speech data plane |
 
 The output is the scenario's `.env` contract for later modules. Use the deployment instructions
 below; no separate foundation exercise is required.
@@ -66,12 +66,12 @@ deployment SKU before deploying.
 
 > **Speech is keyless only with a custom subdomain.** Module 2's Bicep sets
 > `customSubDomainName` on the AIServices account. That lets the avatar batch API accept an Entra
-> token. Verified:
+> token. Reference:
 > <https://learn.microsoft.com/azure/ai-services/speech-service/role-based-access-control>
 
 ## Implementation
 
-### Option A — Scenario Bicep reference
+### Option A. Scenario Bicep reference
 
 The template is [`accelerator/main.bicep`](../accelerator/main.bicep); defaults live in
 [`accelerator/parameters.example.json`](../accelerator/parameters.example.json).
@@ -123,7 +123,7 @@ az deployment group create \
   --parameters principalId="$(az ad signed-in-user show --query id -o tsv)"
 ```
 
-### Option B — `azd up` (kit root infra)
+### Option B. `azd up` (kit root infra)
 
 Use when you want the shared kit footprint.
 
@@ -154,16 +154,17 @@ Then append `AZURE_AI_EMBEDDING_DEPLOYMENT_NAME`, `AZURE_SPEECH_ENDPOINT`, `AZUR
 and `AZURE_EXPERIENCE_OUTPUT_CONTAINER_NAME` to the `.env`. Confirm the account has a custom
 subdomain (it does when created by the kit infra).
 
-### Option C — Foundry portal + Speech
+### Option C. Foundry portal + Speech
 
 Use this for a same-day demo. Create a project (which creates a Foundry account), deploy a chat and
-an embedding model, and connect a Search service. For avatar, open **Build → Models → Azure Speech —
-Text to Speech Avatar** and try it in the playground. The **Code** tab gives you the request. Record
-endpoints and names in `accelerator/.env` by hand. This gives you generated names, no template, nothing to review, and no managed identity for model
-access on the free Search tier.
+an embedding model, and connect a Search service. For avatar, open **Build → Models** and select
+**Azure Speech Text to Speech Avatar**.
+Try it in the playground. The Code tab gives you the request. Record endpoints and names in
+`accelerator/.env` by hand. This path uses generated names and has no template to review.
+The free Search tier has no managed identity for model access.
 <https://learn.microsoft.com/azure/ai-services/speech-service/text-to-speech-avatar/batch-synthesis-avatar>
 
-### Option D — Bring your own landing zone
+### Option D. Bring your own landing zone
 
 Do not create resources. Verify what exists and fill the same contract.
 
@@ -215,9 +216,8 @@ fail with a deployment-not-found error. The cause is provisioning, not code.
 check is applicable only to that path. Repeat it from the customer application's network and
 identity; a successful developer sign-in does not prove runtime access.
 
-The Speech avatar data plane answers your Entra identity, with no key. This is the keyless
-proof for this scenario: the batch-synthesis endpoint accepts an Entra token only when the account
-has a custom subdomain. List synthesis jobs with a token, not a key:
+The batch-synthesis endpoint accepts an Entra token only when the account has a custom subdomain.
+List synthesis jobs with a token to check keyless access:
 
 ```bash
 TOKEN=$(az account get-access-token --scope https://cognitiveservices.azure.com/.default --query accessToken -o tsv)
@@ -239,10 +239,9 @@ grep -iE 'api_key|account_key|connection_string|sas_token|subscription_key' \
   scenarios/avatar-onboarding/accelerator/.env
 ```
 
-No output is the expected result. Any match means something supplied a key and the keyless chain is
-already broken.
+No output is the expected result. Any match means a key was supplied. Remove it before continuing.
 
 ## Next module
 
-[Module 3 — Build the governed content pipeline](03-content-pipeline.md) turns approved HR/onboarding
-sources into the typed, traceable claim set that gates everything downstream.
+[Module 3. Build the governed content pipeline](03-content-pipeline.md) turns approved HR/onboarding
+sources into the typed claim set used to check drafts and rendering.

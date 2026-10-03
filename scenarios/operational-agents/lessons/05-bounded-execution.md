@@ -1,4 +1,4 @@
-# Module 5 - Bound the execution loop
+# Module 5. Bound the execution loop
 
 Each resume continues an existing budget. Restarting the caller must not grant
 the agent another unrestricted run.

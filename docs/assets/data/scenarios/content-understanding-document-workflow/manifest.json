@@ -86,7 +86,7 @@
     {
       "id": "human-review",
       "title": "Build review, correction, and handoff",
-      "summary": "Connect the customer review surface and the agreed result handoff. Retain corrections and prove approved posting cannot duplicate an action.",
+      "summary": "Connect the customer's review interface and the agreed result handoff. Retain corrections and prove approved posting cannot duplicate an action.",
       "outcome": "A completed review with its authorized handoff or destination receipt"
     },
     {

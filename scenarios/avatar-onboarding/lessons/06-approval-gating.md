@@ -1,7 +1,7 @@
-# Module 6 - Approve publication and prove withdrawal
+# Module 6. Approve publication and prove withdrawal
 
 For content production, module 3 approved the wording and module 5 produced a private preview.
-**Now approve the complete experience and connect that decision to the publishing action.**
+Approve the complete experience and make the publishing action enforce that decision.
 Reviewers must see the media with its disclosure and accessible alternatives. For an interactive
 assistant, review the application version and its content/refusal policy in the actual client.
 
@@ -104,9 +104,9 @@ To inspect the reference pack's rejection behavior separately, run from the repo
 python3 -m unittest discover -s scenarios/avatar-onboarding/accelerator -p test_content_pack.py
 ```
 
-Those tests help during adapter development. They are not the tenant acceptance result.
+Use these tests during adapter development. Tenant acceptance still requires the checks above.
 
 ## Next module
 
-[Module 7 - Evaluate and operate](07-prove-and-operate.md). Prove the complete experience through
-the selected channel and hand operation to its owner.
+[Module 7. Evaluate and operate](07-prove-and-operate.md). Prove the complete experience through
+the selected channel and hand over operations to its owner.

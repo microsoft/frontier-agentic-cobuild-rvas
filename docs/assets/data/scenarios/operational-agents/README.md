@@ -4,9 +4,9 @@ Build an agent that performs a scoped task in **your tenant** with approved tool
 and an exact human decision before any write. Retain evidence when execution is
 interrupted. Bring one business operation and its destination-system owner.
 
-An **agent harness** is the application code around the model that controls tool
-execution and task progress. Here, it owns the approval boundary and recovery
-state. The model may request a tool call; it cannot authorize a write.
+The application code controls tool execution and task progress. It enforces
+approval and stores recovery state. The model may request a tool call; it
+cannot authorize a write.
 
 ## The eight modules
 
@@ -66,7 +66,7 @@ The accelerator implements a local CLI and two SQLite stores. Its operation
 ledger and record update commit together. This proves the sample's retry
 contract; it does not make an arbitrary customer API idempotent.
 
-**The modules identify the customer work:** tool authentication, an authenticated approval boundary,
+The modules identify where the customer must implement tool authentication, authenticated approval,
 and durable state that fits the runtime. The local code does not supply those tenant integrations.
 Assign them during scope selection and complete them before accepting the corresponding module.
 

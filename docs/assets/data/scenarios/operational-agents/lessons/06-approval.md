@@ -1,4 +1,4 @@
-# Module 6 - Approve an exact operation
+# Module 6. Approve an exact operation
 
 Approval belongs to a specific proposal. The model cannot carry it forward to
 different arguments or a changed record.
@@ -83,7 +83,7 @@ python3 -B scenarios/operational-agents/accelerator/validate.py --case approval
 
 ## Verify
 
-Through the customer's approval surface, approve one permitted test operation
+Through the customer's approval interface, approve one permitted test operation
 and confirm its destination receipt. Deny another and confirm no change. Repeat
 with an unauthorized reviewer and with an edited proposal after approval; both
 must be blocked before dispatch. The local CLI check below is not an

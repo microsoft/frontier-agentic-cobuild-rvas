@@ -1,7 +1,7 @@
 # Avatar Scenario accelerator
 
 Build an accessible avatar-led experience from approved content. The accelerator includes a
-vendor-neutral approved-content pack and integration seam, plus an optional Bicep foundation for a
+vendor-neutral approved-content pack and adapter contract, plus an optional Bicep foundation for a
 clean Azure demo subscription. The rendering example uses Azure Speech batch avatar synthesis.
 Choose the application goal in module 1 before using it. The reference code does not implement
 the repeatable content workflow, the interactive client, or the customer's publishing adapter.
@@ -21,12 +21,12 @@ the standalone Bicep CLI. Sign in with an Azure user account in the intended
 subscription. You need permission to create resources and role assignments, plus model quota in
 the chosen region. The deployment script does not support service-principal sign-in.
 
-**The local pack is a rehearsal, not a publisher.** `content_pack.py` checks claim wording,
+**The local pack checks do not publish content.** `content_pack.py` checks claim wording,
 demo approval rows, and required text files. It returns an artifact record; it does not render
 captions or media, authenticate reviewers, enforce expiry, or withdraw files already served.
 Build those controls in the channel adapter before using the workflow with employees.
 
-**Check the current API surface before writing SDK code.** The selected avatar service and channel
+**Check the current API before writing SDK code.** The selected avatar service and channel
 determine the API, identity model, availability, privacy controls, accessibility behavior, and
 withdrawal controls. Search current official documentation and the relevant Foundry guidance. Do
 not infer a signature from this accelerator or from memory.
@@ -90,7 +90,7 @@ set -a; source scenarios/avatar-onboarding/accelerator/.env; set +a
 ```
 
 Do not commit it or print bearer tokens in logs.
-Each module's **Verify** section gives the command and signal for that module.
+Each module's Verify section gives the command and expected result.
 
 ## Scope and boundaries
 
@@ -98,8 +98,7 @@ Each module's **Verify** section gives the command and signal for that module.
   preserving source, script, approval, disclosure, locale, and publication identifiers.
 - Never clone a real voice or likeness without recorded authorization.
 - Treat human approval as a release gate for the exact script revision.
-- Keep a withdrawal path one action away when a source changes, consent is withdrawn, or a defect
-  appears.
+- Keep withdrawal available as a single action for source changes, withdrawn consent, or defects.
 
 ## Continue in the scenario
 
@@ -108,4 +107,4 @@ Use [module 5](../lessons/05-experience-generation.md) to render it and
 [module 7](../lessons/07-prove-and-operate.md) to collect release evidence.
 Content production needs a deployed workflow, even when no agent is involved.
 
-See [facilitator-reference.md](facilitator-reference.md) for the facilitator reference and integration boundaries.
+See [facilitator-reference.md](facilitator-reference.md) for integration examples and their limits.

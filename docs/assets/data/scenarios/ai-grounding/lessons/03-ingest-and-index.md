@@ -1,10 +1,8 @@
-# Module 3 — Ingest and index approved content
+# Module 3. Ingest and index approved content
 
-Module 2 chose *where* knowledge lives. This module makes it retrievable, preserving the source
-metadata needed to audit answers and the refresh behavior needed to keep content current.
-
-This module prevents a costly failure: a confident, well-cited answer that quotes a policy
-superseded three months ago.
+Connect the source chosen in module 2. Preserve the metadata reviewers need to audit answers
+and set a refresh schedule. Test that retrieval returns the current policy rather than a
+superseded version.
 
 ![Ingestion lineage](../diagrams/03-ingestion-lineage.png)
 
@@ -27,28 +25,28 @@ superseded three months ago.
 | E. Remote knowledge source, no ingestion | Nobody | N/A: nothing is chunked | Always fresh by construction | Lowest |
 
 **Default: Option A.** A blob knowledge source generates the data source, skillset, indexer, and
-index, and carries permission metadata forward when requested. You avoid weeks of pipeline work.
+index, and carries permission metadata forward when requested.
 
 **Choose B when** you need a specific field schema, scoring profile, or custom enrichment skill but
 still want scheduled pull ingestion. An index built this way can later be wrapped as a *search index
-knowledge source*, so B → A stays cheap.
+knowledge source*, so moving from B to A can reuse it.
 
 **Choose C when** content comes from an unsupported store, such as an API, database join, or CMS, or
-when chunk boundaries are load-bearing. Contracts, legal clauses, and numbered policy documents often
-need this. You then own refresh forever.
+when a rule or clause must remain in one chunk. Contracts, legal clauses, and numbered policy
+documents often need this. Your team also owns refresh.
 
 **Choose D when** the source is not really text: scanned PDFs, forms, tables, or screenshots.
 Extract structure first, then index the structured output. Do not feed raw OCR output into an index
 and hope semantic ranking fixes it.
 
-**Choose E when** the content changes faster than any schedule can chase, or when the platform that
+**Choose E when** the content changes faster than your refresh schedule, or when the platform that
 owns it already answers questions well (SharePoint, a Fabric data agent, Work IQ). Remote sources
 are slower per query and always current. For live operational data this is the only correct answer.
 
-**Migration cost.** A → B is moderate: rebuild the pipeline but keep the knowledge base and agent.
-B → A is cheap. C → anything is expensive because chunking assumptions also shape the evaluation set.
-Mixing is normal and supported. One knowledge base can hold an indexed blob source *and* a remote
-SharePoint source, with every source flowing through the same ranking pipeline.
+**Migration cost.** Moving from A to B rebuilds the pipeline but keeps the knowledge base and agent.
+Moving from B to A can reuse the index. Moving away from C also requires reviewing the evaluation
+set because its tests depend on chunking choices. One knowledge base can combine an indexed blob
+source and a remote SharePoint source through the same ranking pipeline.
 
 ### The four things that must survive ingestion
 
@@ -64,7 +62,7 @@ audit the answer:
 
 ## Implementation
 
-Use the current Microsoft Learn guidance for the active ingestion and indexing surface.
+Use current Microsoft Learn guidance for the ingestion and indexing APIs.
 
 ### Connect your approved source
 
@@ -108,12 +106,12 @@ az storage blob upload-batch \
 The account uses `allowSharedKeyAccess: false`, so `--auth-mode login` is required. There is no
 account key to fall back to.
 
-### Option A — Foundry IQ managed ingestion (blob knowledge source)
+### Option A. Foundry IQ managed ingestion (blob knowledge source)
 
 The knowledge source generates the whole pipeline. You supply the container, the two models, and the
 ingestion parameters.
 
-**Implementation gap:** the example below uses flat Blob Storage but requests user/group ACL
+**Implementation gap.** The example below uses flat Blob Storage but requests user/group ACL
 ingestion. Flat blobs use container RBAC scopes; the fictional per-document role labels are not
 translated into source permissions. Choose and implement that access model before using protected
 content. See [Blob permission ingestion](https://learn.microsoft.com/azure/search/search-blob-indexer-role-based-access).
@@ -123,7 +121,7 @@ pip install --pre azure-search-documents azure-identity python-dotenv
 ```
 
 Preview (`2026-05-01-preview`) is required for query planning, answer synthesis, and ACL carry-
-forward. The GA surface (`2026-04-01`) gives minimal extractive retrieval only.
+forward. The GA API version (`2026-04-01`) gives minimal extractive retrieval only.
 
 [`accelerator/scripts/build_knowledge_source.py`](../accelerator/scripts/build_knowledge_source.py):
 
@@ -190,13 +188,13 @@ export AZURE_KNOWLEDGE_BASE_NAME=grounding-kb
 python3 scenarios/ai-grounding/accelerator/scripts/build_knowledge_source.py
 ```
 
-**Four rules the API enforces**, and one it does not:
+Apply these configuration rules:
 
 1. Create the knowledge source **before** the knowledge base.
 2. A knowledge base and its sources must live on the **same search service**.
 3. To delete a source, first update or delete every knowledge base referencing it.
-4. `retrieval_instructions` is how you steer a multi-source base. With one source it barely matters;
-   with five it is the difference between routing and guessing. Write it now anyway.
+4. Use `retrieval_instructions` to specify which source should answer each request type,
+   especially when the knowledge base has several sources.
 5. *(Not enforced)* Nothing stops you shipping without `ingestion_permission_options`. Module 2's
    probe is what catches that.
 
@@ -208,7 +206,7 @@ delete them during teardown.
 staleness window the data owner approved in module 2, not a default. If content can be no more than
 an hour stale, a nightly indexer breaks that promise.
 
-### Option B — Azure AI Search indexer (pull)
+### Option B. Azure AI Search indexer (pull)
 
 You define the index, skillset, and indexer explicitly, using the source and access rules from
 module 2. This alternative needs a custom ingestion configuration; the default above uses
@@ -227,7 +225,7 @@ Use moderate chunks with light overlap, and never split a rule boundary. In this
 window, proof-of-purchase requirement, and order-record check form one rule. Splitting them can
 produce answers that are individually true and collectively wrong.
 
-### Option C — Push API with custom chunking
+### Option C. Push API with custom chunking
 
 Your code owns everything. Use `SearchClient.upload_documents()` with chunks you produced yourself,
 each carrying `content`, `source`, effective date, chunk index, parent document id, and permission
@@ -237,36 +235,34 @@ This is the only option where you can implement structure-aware chunking. Split 
 a numbered clause intact, and attach the section title to every chunk so a retrieved fragment still
 says what it is about.
 
-The cost is permanent: no indexer means no schedule, no change detection, and no ACL resync. When a
-document changes you must re-chunk and re-upload it, and when a permission changes you must reingest
-the affected documents. Put that in a job with monitoring on day one, or it will silently stop
-running in month three.
+Without an indexer, your code owns scheduling, change detection, and ACL resync.
+Re-chunk and upload changed documents. Reingest documents when their permissions change.
+Run this work in a monitored job.
 
-### Option D — Content Understanding preprocessing
+### Option D. Content Understanding preprocessing
 
 When the source is scanned, tabular, or visual, extract structure first, then index the structured
 output through B or C. The document workflow scenario in this kit covers extraction in depth; here
 you only need the output contract: typed fields plus evidence spans, which become your `content` and
 your citation anchor.
 
-The tell that you need this: retrieval "works" but every answer about a table or a form is subtly
-wrong. That is not a ranking problem and no amount of reranking will fix it.
+If answers about tables or forms are wrong, inspect the extracted structure before tuning ranking.
+Reranking cannot repair incorrect extraction.
 
-### Option E — Remote knowledge source (no ingestion)
+### Option E. Remote knowledge source (no ingestion)
 
 Add the source to the knowledge base and skip this module's pipeline entirely. Remote SharePoint,
 Fabric Data Agent, Fabric Ontology, MCP server, Work IQ, and Web are all fetched at query time
 through the owning platform's API and never stored in Search.
 
-You trade latency for correctness-by-construction: no chunking decisions, no refresh schedule, no
-ACL staleness window. For anything that changes hourly, such as inventory, case status, or live
-metrics, this is the right answer. Indexing it instead is the most common serious mistake in this
-scenario.
+Remote retrieval adds query latency but avoids an indexed snapshot's chunking, refresh, and ACL
+staleness concerns. Use it for frequently changing information such as inventory, case status,
+or live metrics.
 
 ## Verify
 
-Do not query before asynchronous ingestion finishes. Empty results then look like a retrieval bug,
-which sends you to the wrong layer. Confirm the indexer completed before trusting any query.
+Wait for asynchronous ingestion to finish before querying. An unfinished indexer can return
+empty results even when retrieval is configured correctly.
 
 **1. The knowledge source and base were created.** `build_knowledge_source.py` prints one line per
 object it creates or updates.
@@ -314,5 +310,5 @@ is in the container.
 
 ## Next module
 
-[Module 4 — Compare chat and embedding choices](04-model-selection.md) picks models now that
+[Module 4. Compare chat and embedding choices](04-model-selection.md) picks models now that
 you have a real corpus to measure them against instead of a vendor benchmark.
