@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    /* RVAS brand: light theme only. */
+    document.documentElement.setAttribute('data-theme', 'light');
+  </script>
+  <title>RVAS. Agentic Co-build</title>
+  <meta name="description" content="Co-build customer AI scenarios through concrete decisions and reusable building blocks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/shell.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Real Value Acceleration Program home">
+        <img src="assets/img/logo-full.png" alt="Real Value Acceleration Program" class="brand-logo" />
+      </a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="#outcomes" aria-current="page">Scenarios</a>
+        <a href="start.html">Start</a>
+        <a class="gh" href="https://github.com/microsoft/frontier-agentic-cobuild-rvas" target="_blank" rel="noopener" aria-label="View source on GitHub">GitHub</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="heroHeading">
+      <svg class="hero-compass" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <circle cx="200" cy="200" r="180" stroke="currentColor" stroke-width="0.6" stroke-opacity="0.15" stroke-dasharray="4 8"/>
+        <circle cx="200" cy="200" r="140" stroke="currentColor" stroke-width="0.4" stroke-opacity="0.10"/>
+        <circle cx="200" cy="200" r="80" stroke="currentColor" stroke-width="0.4" stroke-opacity="0.12"/>
+        <path d="M200 60 A140 140 0 0 1 340 200" stroke="#0078D4" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
+        <path d="M340 200 A140 140 0 0 1 200 340" stroke="#504092" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
+        <path d="M200 340 A140 140 0 0 1 60 200" stroke="#14868A" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
+        <path d="M60 200 A140 140 0 0 1 200 60" stroke="#1A77E3" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
+        <line x1="200" y1="20" x2="200" y2="380" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.10"/>
+        <line x1="20" y1="200" x2="380" y2="200" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.10"/>
+        <circle cx="200" cy="200" r="5" fill="#1A77E3" fill-opacity="0.8"/>
+        <circle cx="200" cy="200" r="12" stroke="#1A77E3" stroke-width="1" stroke-opacity="0.3"/>
+      </svg>
+
+      <div class="wrap hero-grid">
+        <div>
+          <h1 id="heroHeading">Build your customer's<br><span class="accent">AI scenario together.</span></h1>
+          <p class="lede">
+            Bring the customer's use case. Break it into parts, find the modules that build each one, and adapt them to the customer's approved environment.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#outcomes">Choose a scenario →</a>
+            <a class="btn btn-ghost" href="start.html#use-case-mapper">Map your use case</a>
+          </div>
+
+        </div>
+
+        <div class="hero-modules hero-route-overview" aria-label="Route overview">
+          <div class="hero-scenario-group" aria-label="Primary scenario choices">
+            <a href="scenario.html?id=content-understanding-document-workflow" class="hero-mod-card hero-scenario-card" style="--mod-color:var(--c-agentic)">
+              <img src="assets/img/icon-foundry.svg" class="mod-icon" alt="" aria-hidden="true" />
+              <div class="mod-name">Content Understanding and Document Workflow</div>
+              <div class="mod-count">Evidence-backed extraction with human review.</div>
+            </a>
+            <a href="scenario.html?id=ai-grounding" class="hero-mod-card hero-scenario-card" style="--mod-color:var(--c-ghaw)">
+              <img src="assets/img/icon-foundry.svg" class="mod-icon" alt="" aria-hidden="true" />
+              <div class="mod-name">AI Grounding / IQ</div>
+              <div class="mod-count">Answers from approved content, with access boundaries.</div>
+            </a>
+            <a href="scenario.html?id=avatar-scenario" class="hero-mod-card hero-scenario-card" style="--mod-color:var(--c-ghas)">
+              <img src="assets/img/icon-foundry.svg" class="mod-icon" alt="" aria-hidden="true" />
+              <div class="mod-name">Avatar Scenario</div>
+              <div class="mod-count">Approved avatar-led experiences with human oversight.</div>
+            </a>
+            <a href="scenario.html?id=operational-agents" class="hero-mod-card hero-scenario-card" style="--mod-color:var(--c-agentic)">
+              <img src="assets/img/icon-foundry.svg" class="mod-icon" alt="" aria-hidden="true" />
+              <div class="mod-name">Operational Agents</div>
+              <div class="mod-count">Bounded tool execution with exact approvals and recovery evidence.</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="route-band route-band-home" aria-labelledby="routesHeading">
+      <div class="wrap">
+        <div class="route-pick">
+          <div class="route-pick-intro">
+            <h2 id="routesHeading">Pick a route</h2>
+            <p>Choose a skill based on whether you already have a use case.</p>
+            <p class="route-join">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5c7 0 7 7 14 7M3 19c7 0 7-7 14-7"/><path d="M17 12h4M18 9l3 3-3 3"/></svg>
+              <span>Idea Forge uses Use-Case Mapper to map its top idea to modules. <a href="#map-example">See an example</a>.</span>
+            </p>
+          </div>
+          <a class="route route-forge" href="start.html#idea-forge">
+            <div class="route-top"><span class="route-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/><path d="M10.5 7.5v6M7.5 10.5h6"/></svg></span><div><h3>I know the customer</h3><span class="route-skill">Idea Forge</span></div></div>
+            <p>You know the customer or industry, but not what to build first. The skill researches public sources and ranks about ten ideas.</p>
+            <span class="route-out">The result includes ranked ideas and a handoff for the top idea, with its module map.</span>
+            <span class="route-go">Find a use case</span>
+          </a>
+          <a class="route route-mapper" href="start.html#use-case-mapper">
+            <div class="route-top"><span class="route-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="19" cy="19" r="2.2" stroke-dasharray="2.5 2"/><path d="M7.2 12h9.6M7 10.9l9.9-5M7 13.1l9.9 5"/></svg></span><div><h3>I know the use case</h3><span class="route-skill">Use-Case Mapper</span></div></div>
+            <p>You know what the customer wants. The skill breaks the use case into parts and maps each one to modules, including the parts no module covers.</p>
+            <span class="route-out">The module map shows the build order, what to adapt, and what the kit does not cover.</span>
+            <span class="route-go">Map the use case</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="outcomes" aria-labelledby="outcomesHeading">
+      <div class="wrap">
+        <div class="shead reveal">
+          <div>
+            <span class="eyebrow">Initial scenario tracks</span>
+            <h2 id="outcomesHeading" style="margin-top:14px">Map your use case to these tracks.</h2>
+            <p>Each playbook guides design decisions and implementation. Adapt the relevant modules to your use case and record work the kit does not cover. The playbooks are not complete solutions to deploy.</p>
+          </div>
+        </div>
+        <div class="outcome-grid" id="outcomeGrid">
+          <div class="empty">Loading scenarios...</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight" id="map-example" aria-labelledby="mapHeading">
+      <div class="wrap">
+        <div class="shead reveal">
+          <div>
+            <span class="eyebrow">One use case, several tracks</span>
+            <h2 id="mapHeading" style="margin-top:14px">A use case can combine several tracks.</h2>
+            <p>A supplier-onboarding request needs extraction, policy answers, and an approved record update. Different tracks cover those steps. Supplier notification needs separate implementation.</p>
+          </div>
+        </div>
+        <ol class="map-strip reveal" aria-label="Illustrative supplier-onboarding map">
+          <li class="map-part">
+            <span class="map-step">Read the supplier's form</span>
+            <span class="map-track">Content Understanding</span>
+            <span class="map-fit">Adapt the fields</span>
+          </li>
+          <li class="map-part">
+            <span class="map-step">Answer a policy question</span>
+            <span class="map-track">AI Grounding / IQ</span>
+            <span class="map-fit">Connect policy content</span>
+          </li>
+          <li class="map-part">
+            <span class="map-step">Create the record after approval</span>
+            <span class="map-track">Operational Agents</span>
+            <span class="map-fit">Build the system integration</span>
+          </li>
+          <li class="map-part map-part-gap">
+            <span class="map-step">Notify the supplier</span>
+            <span class="map-track">No track</span>
+            <span class="map-fit">Not AI</span>
+          </li>
+        </ol>
+        <p class="map-cta reveal"><a class="btn btn-ghost" href="start.html#use-case-mapper">Map your own use case →</a></p>
+      </div>
+    </section>
+
+    <section class="how-it-works section" id="how-it-works" aria-labelledby="howHeading">
+      <div class="wrap">
+        <div class="shead reveal">
+          <div>
+            <span class="eyebrow">The experience</span>
+            <h2 id="howHeading" style="margin-top:14px">How it works.</h2>
+            <p>Use the playbooks to co-build the agreed part of the customer's solution. Slides support design discussions; modules guide the build.</p>
+          </div>
+        </div>
+        <div class="steps-grid reveal">
+          <div class="step-item">
+            <div class="step-num">01</div>
+            <div class="step-title">Agree the scope</div>
+            <p class="step-desc">Define the customer outcome and acceptance criteria. Use <a href="start.html#idea-forge">Idea Forge</a> if the opportunity is still unclear.</p>
+          </div>
+          <div class="step-item">
+            <div class="step-num">02</div>
+            <div class="step-title">Map the parts to modules</div>
+            <p class="step-desc">Run <a href="start.html#use-case-mapper">Use-Case Mapper</a> to map each part to modules across tracks. It shows what to adapt and what the kit doesn't cover.</p>
+          </div>
+          <div class="step-item">
+            <div class="step-num">03</div>
+            <div class="step-title">Build together</div>
+            <p class="step-desc">Work through the design decisions and adapt the building blocks for the agreed parts. Respect module prerequisites and use the approved environment.</p>
+          </div>
+          <div class="step-item">
+            <div class="step-num">04</div>
+            <div class="step-title">Check the result</div>
+            <p class="step-desc">Check the result against the agreed acceptance criteria. Assign an owner to any remaining work.</p>
+          </div>
+        </div>
+        <p><strong>Scope each engagement.</strong> The kit can support a pilot or a longer co-build. Guided module times exclude customer-specific engineering. Production readiness needs acceptance in the customer's environment. Deploying an accelerator doesn't prove it.</p>
+        <p><strong>Deliver in the customer's tenant.</strong> Reuse approved resources and connect the actual sources and user channel. Reference code and synthetic checks support the build; they do not replace tenant acceptance.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="wrap footer-inner">
+      <a class="brand" href="index.html" aria-label="Real Value Acceleration Program home">
+        <img src="assets/img/logo-full.png" alt="Real Value Acceleration Program" class="brand-logo" />
+      </a>
+      <p>Agentic Co-build.</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#outcomes">Scenarios</a>
+        <a href="start.html">Start</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/home.js"></script>
+  <script src="assets/js/shell.js"></script>
+</body>
+</html>

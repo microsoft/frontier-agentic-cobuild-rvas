@@ -1,0 +1,185 @@
+# Module 4. Compare chat and embedding choices
+
+You now have a real corpus and golden question set. Use them to choose models. Public benchmarks
+measure a different workload.
+
+![Model comparison tradeoffs](../diagrams/04-model-comparison-tradeoffs.png)
+
+## What you build
+
+1. A comparison script that runs the same golden questions through candidate chat deployments and
+   reports quality, latency, and cost side by side.
+2. An embedding decision based on retrieval quality, not dimension count.
+3. A capacity and region plan for the live pilot.
+
+## Choose your path
+
+Confirm the provisional choices made before module 3's ingestion. Compare answer models without
+changing the source context. If retrieval evidence justifies another embedding model, build a
+separate candidate index and compare it before replacing the accepted one.
+
+### Chat / query-planning model
+
+| Option | Where it wins | Where it fails | Cost signal |
+| --- | --- | --- | --- |
+| **Small-to-mid model, `gpt-4.1-mini` class** *(default)* | Grounded answering over retrieved text; high volume; low latency | Multi-hop reasoning, ambiguous policy interpretation | Lowest per token |
+| Frontier model, `gpt-5` class | Hard synthesis, adversarial phrasing, multi-source reconciliation | Cost and latency at pilot volume | Highest |
+| Nano / micro, `gpt-4.1-nano`, `gpt-5-nano` class | Query planning and routing inside the retrieval pipeline | Final user-facing answers | Very low |
+| Split: nano plans, mid answers | Best cost/quality ratio at volume | Two deployments to operate and evaluate | Low overall |
+
+**Default: a small-to-mid model for answering.** In a grounded pipeline, the retrieved passage does
+most of the work. Teams often overpay for a frontier model to summarize a paragraph the search index
+already found. Measure before upgrading, and identify the golden questions that justify it.
+
+Query planning inside a knowledge base has its own supported list: `gpt-4o`,
+`gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `gpt-4.1-nano`, `gpt-5`, `gpt-5-mini`, `gpt-5-nano` on both
+`2025-11-01-preview` and `2026-05-01-preview`; plus `gpt-5.1`, `gpt-5.2`, `gpt-5.4`, `gpt-5.4-mini`,
+`gpt-5.4-nano` on `2026-05-01-preview` only.
+Source: <https://learn.microsoft.com/azure/search/agentic-retrieval-how-to-create-knowledge-base>
+
+Re-check that list at build time. Model availability moves faster than any module.
+
+### Embedding model
+
+| Option | Trade-off |
+| --- | --- |
+| **`text-embedding-3-large`** *(reference starting point)* | Candidate when retrieval quality justifies its index size and processing cost; measure on your corpus |
+| `text-embedding-3-small` | Candidate when storage or processing cost matters; check whether it still retrieves the required passages |
+| Reduced dimensions on `-3-large` | Cuts index size while keeping most of the quality; measure the loss on your own corpus |
+
+**Default: `text-embedding-3-large`.** Embedding costs occur at index and query time. For a policy
+corpus this size, they are not the dominant cost. Everything downstream depends on retrieval quality.
+
+Changing the answer model requires a comparison and regression run. Changing embeddings also
+requires a matching index and retrieval baseline. Plan that work against the actual corpus size
+and cutover requirements; do not replace a live index merely to try another candidate.
+
+## Implementation
+
+Use the deployments connected in module 1. The reference template names them through
+`AZURE_AI_MODEL_DEPLOYMENT_NAME` and `AZURE_AI_EMBEDDING_DEPLOYMENT_NAME`. Compare a contrasting
+candidate only when the use case needs the evidence and the environment owner approves it.
+
+Replace the fictional questions and expected sources in your private comparison set with the
+customer's reviewed questions. Keep the same approved context for each answer-model candidate.
+Record which cases justify a change. For a Copilot Studio path, skip these Azure commands and
+evaluate the configured agent's answers in module 7.
+
+### Deploy a contrasting candidate
+
+```bash
+az cognitiveservices account deployment create \
+  --name "$AZURE_AI_FOUNDRY_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
+  --deployment-name chat-candidate \
+  --model-name gpt-4.1 \
+  --model-format OpenAI \
+  --sku-name GlobalStandard \
+  --sku-capacity 30
+```
+
+Create model deployments on a single Cognitive Services account **serially**. Concurrent creates
+conflict. Module 1 Bicep uses `dependsOn` for this reason.
+
+Check regional capacity before you promise a model to anyone:
+
+```bash
+az cognitiveservices usage list --location "$AZURE_LOCATION" \
+  --query "[?contains(name.value, 'OpenAI.GlobalStandard')].{name:name.value, used:currentValue, limit:limit}" -o table
+```
+
+Quota is per subscription, region, and SKU family. "The model is GA" does not mean "you can deploy
+it here today."
+
+### Run the comparison
+
+[`accelerator/scripts/compare_models.py`](../accelerator/scripts/compare_models.py) runs every golden
+question through each candidate deployment with identical grounding context:
+
+```python
+response = openai.responses.create(
+    model=deployment,
+    instructions=system_instructions,
+    input=f"Context:\n{context}\n\nQuestion: {case['question']}",
+)
+```
+
+The context, instructions, and questions stay the same. Only the deployment changes. If prompts vary
+between candidates, the result cannot isolate the model's effect.
+
+Run commands from the repository root.
+
+```bash
+python3 scenarios/ai-grounding/accelerator/scripts/compare_models.py \
+  --deployments "$AZURE_AI_MODEL_DEPLOYMENT_NAME" chat-candidate
+```
+
+What it reports per deployment:
+
+| Metric | How it is measured | What it tells you |
+| --- | --- | --- |
+| Citation match (`grounded`) | Expected bracketed source IDs occur in the answer | A smoke check; manually review factual correctness |
+| Abstention | Does it decline the unanswerable case | A model that never abstains will confabulate in production |
+| Superseded-document handling | Does it cite the current notice | Catches recency reasoning, not just retrieval |
+| p50 / p95 latency | Wall clock per call; p95 uses nearest rank | Seven calls are a smoke sample, not a load-test baseline |
+| Tokens in / out | From the response usage | Multiply by volume for the real monthly number |
+
+Review the abstention and superseded cases first. They test whether candidates refuse unsupported
+questions and use the current source.
+
+### Choosing PAYG or provisioned throughput
+
+| Signal | Choose |
+| --- | --- |
+| Pilot, spiky or unknown volume | Pay-as-you-go standard, the default for everything in this scenario |
+| Steady, predictable, high volume with a latency SLA | Provisioned throughput |
+| Latency spikes and `429`s under normal pilot load | Fix concurrency and retries first; PTU is not a fix for a burst pattern |
+
+Do not buy provisioned capacity during a pilot. You do not know your token profile yet. The comparison
+produces the number you would use to size it.
+
+## Verify
+
+Measure candidates side by side on your golden set, including p95 latency.
+
+**1. Both deployments you want to compare exist.**
+
+```bash
+az cognitiveservices account deployment list \
+  --name "$AZURE_AI_FOUNDRY_ACCOUNT_NAME" --resource-group "$AZURE_RESOURCE_GROUP" \
+  --query "[].name" -o tsv
+```
+
+Both names passed to `--deployments` must appear. A missing name later causes a
+deployment-not-found error that looks like a script bug.
+
+**2. Run the comparison and read the table.**
+
+```bash
+python3 scenarios/ai-grounding/accelerator/scripts/compare_models.py \
+  --deployments chat chat-candidate
+```
+
+The values below illustrate the output format. They are not measured benchmark results.
+
+```
+deployment          grounded  abstained  p50(ms)  p95(ms)   tok_in  tok_out
+chat                     4/4        3/3      820     1310     4912      611
+chat-candidate           4/4        3/3     1640     2900     4912      844
+```
+
+`grounded` counts expected citation matches; it does not check that the answer states the policy
+correctly. `abstained` counts exact matches to the refusal string. Four of seven golden questions
+are answerable. Review answers against their acceptance criteria as well as these counts. If candidates
+tie on quality but differ by 2× latency and 40% more output tokens, decide. Record the choice and
+what evidence would change it.
+
+The script uses role-scoped local context, not live retrieval. It does not compare embeddings or
+enforce Azure permissions. The corpus has no separate superseded-notice document, so it does not
+test choosing between competing notices.
+
+## Next module
+
+[Module 5. Build retrieval before adding an agent](05-grounded-retrieval.md) turns the corpus and
+the models into a grounded answer with citations, abstention, and access-denied behaviour. It still
+has no agent.

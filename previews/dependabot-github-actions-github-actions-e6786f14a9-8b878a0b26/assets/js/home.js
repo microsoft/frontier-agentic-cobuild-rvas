@@ -1,0 +1,52 @@
+/* Microsoft Foundry — home page */
+(function () {
+  'use strict';
+
+  async function init() {
+    let data;
+    try { data = await FP.loadData(); }
+    catch (e) { FP.renderError('outcomeGrid', e.message); return; }
+
+    const { scenarios } = data;
+
+    renderScenarioCards(scenarios || []);
+  }
+
+  function renderScenarioCards(scenarios) {
+    const grid = document.getElementById('outcomeGrid');
+    if (!grid) return;
+
+    const scenarioOrder = [
+      'content-understanding-document-workflow',
+      'ai-grounding',
+      'avatar-scenario',
+      'operational-agents',
+    ];
+    const orderedScenarios = scenarioOrder
+      .map((id) => scenarios.find((scenario) => scenario.id === id))
+      .filter(Boolean)
+      .concat(scenarios.filter((scenario) => !scenarioOrder.includes(scenario.id)));
+
+    if (!orderedScenarios.length) {
+      grid.innerHTML = '<div class="empty">No scenario playbooks configured.</div>';
+      return;
+    }
+
+    const scenarioCards = orderedScenarios.map((scenario) => {
+      return `
+        <a href="scenario.html?id=${encodeURIComponent(scenario.id)}" class="outcome-card reveal">
+          <h3>${FP.esc(scenario.name)}</h3>
+          <p>${FP.esc(scenario.tagline || '')}</p>
+        </a>`;
+    }).join('');
+
+    grid.innerHTML = `${scenarioCards}
+      <article class="outcome-card outcome-card-custom reveal">
+        <h3>Fully custom scenario</h3>
+        <p>Run <a href="start.html#use-case-mapper">Use-Case Mapper</a> first. If most of your use case comes back not covered, contact your Microsoft Cloud Solution Architect to shape a custom co-build.</p>
+      </article>`;
+    FP.initReveal();
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})();

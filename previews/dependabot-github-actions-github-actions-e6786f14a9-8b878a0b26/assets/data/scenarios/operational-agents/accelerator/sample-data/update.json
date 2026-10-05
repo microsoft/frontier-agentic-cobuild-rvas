@@ -1,0 +1,4 @@
+[
+  {"calls": [{"name": "inspect_record", "arguments": {"record_id": "record-001"}, "call_id": "read-1"}], "text": ""},
+  {"calls": [{"name": "propose_update", "arguments": {"record_id": "record-001", "expected_version": 1, "new_value": "reviewed"}, "call_id": "update-1"}], "text": ""}
+]

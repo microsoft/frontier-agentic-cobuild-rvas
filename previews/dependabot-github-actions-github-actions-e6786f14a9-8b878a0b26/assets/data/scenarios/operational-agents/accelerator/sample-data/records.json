@@ -1,0 +1,4 @@
+[
+  {"id": "record-001", "value": "initial", "version": 1},
+  {"id": "record-002", "value": "outside the default scope", "version": 1}
+]

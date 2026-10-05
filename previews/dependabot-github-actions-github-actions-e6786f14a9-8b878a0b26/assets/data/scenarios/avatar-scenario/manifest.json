@@ -1,0 +1,120 @@
+{
+  "id": "avatar-scenario",
+  "name": "Avatar Scenario",
+  "tagline": "Build an interactive assistant or a repeatable content-production application.",
+  "order": 3,
+  "customer_outcome": "Users get grounded help, or content owners run a repeatable media workflow, with accessible output and controlled release in their tenant.",
+  "maturity": "initial",
+  "level": "guided",
+  "duration_minutes": 420,
+  "stage": "customer-build",
+  "owner": "RVAS field team",
+  "decision_prompts": [
+    "Are we building an interactive assistant or a repeatable content-production application, and what proves that application works?",
+    "Which communication, learning, or support moment should the pilot serve first, and for which audience, locale, and channel?",
+    "Which media format serves that application goal, and does an avatar add value over audio or text?",
+    "Which approved sources and named owners may support the script, and when do they expire?",
+    "Who must approve factual accuracy, legal/compliance, brand, and accessibility before anything is published?",
+    "How will the experience disclose synthetic/AI assistance and offer human help without deceptive representation?",
+    "Which evaluation, red-team, and operational measures decide whether to iterate, scale, pause, or withdraw?"
+  ],
+  "lessons": [
+    {
+      "id": "experience-selection",
+      "title": "Choose the application your users need",
+      "path": "lessons/01-experience-selection.md"
+    },
+    {
+      "id": "foundation",
+      "title": "Connect the required foundation",
+      "path": "lessons/02-foundation.md"
+    },
+    {
+      "id": "content-pipeline",
+      "title": "Connect content and approve wording",
+      "path": "lessons/03-content-pipeline.md"
+    },
+    {
+      "id": "grounded-assistant",
+      "title": "Add grounded authoring or live answers when needed",
+      "path": "lessons/04-grounded-assistant.md"
+    },
+    {
+      "id": "experience-generation",
+      "title": "Connect generation to the application",
+      "path": "lessons/05-experience-generation.md"
+    },
+    {
+      "id": "approval-gating",
+      "title": "Approve publication and prove withdrawal",
+      "path": "lessons/06-approval-gating.md"
+    },
+    {
+      "id": "prove-and-operate",
+      "title": "Evaluate, red-team, trace, and operate",
+      "path": "lessons/07-prove-and-operate.md"
+    }
+  ],
+  "build_modules": [
+    {
+      "id": "experience-selection",
+      "title": "Choose the application your users need",
+      "summary": "Choose interactive assistance or repeatable content production before selecting a media format. Agree application acceptance checks and prove feasibility.",
+      "outcome": "An agreed application goal, with a user task or workflow trigger and delivery owners"
+    },
+    {
+      "id": "foundation",
+      "title": "Connect the required foundation",
+      "summary": "Reuse approved tenant resources and verify runtime access. Add models or indexed retrieval only when the chosen experience needs them.",
+      "implementation_paths": [
+        "accelerator/main.bicep",
+        "accelerator/scripts/deploy.sh"
+      ],
+      "outcome": "Foundry and Speech resources with a usable environment contract"
+    },
+    {
+      "id": "content-pipeline",
+      "title": "Connect content and approve wording",
+      "summary": "Connect authoritative content and keep its version and expiry. For content production, detect source changes and approve replacement wording before rendering.",
+      "implementation_paths": [
+        "accelerator/sample-data"
+      ],
+      "outcome": "Approved wording bound to authoritative source revisions"
+    },
+    {
+      "id": "grounded-assistant",
+      "title": "Add grounded authoring or live answers when needed",
+      "summary": "Skip generation when wording is already approved. Otherwise connect the approved sources and prove citations, refusal, and support routing.",
+      "outcome": "Approved-claim answers with citations and a refusal path"
+    },
+    {
+      "id": "experience-generation",
+      "title": "Connect generation to the application",
+      "summary": "Connect generation jobs to the content workflow or live rendering to the assistant client. Include accessible alternatives and recover failed jobs without duplicate output.",
+      "implementation_paths": [
+        "accelerator/content_pack.py"
+      ],
+      "outcome": "A working generation path in the application, with accessible output"
+    },
+    {
+      "id": "approval-gating",
+      "title": "Approve publication and prove withdrawal",
+      "summary": "Use the customer's approval system to authorize the exact media revision. Prove publication and withdrawal in the actual user channel.",
+      "implementation_paths": [
+        "accelerator/sample-data/approvals.json"
+      ],
+      "outcome": "Authorized publication and tested withdrawal from the serving channel"
+    },
+    {
+      "id": "prove-and-operate",
+      "title": "Evaluate, red-team, trace, and operate",
+      "summary": "Prove the assistant through its authenticated client or a complete source-update cycle through the deployed content workflow. Test failure recovery and withdrawal before release.",
+      "implementation_paths": [
+        "accelerator/sample-data/feedback-fixture.json"
+      ],
+      "outcome": "Application acceptance evidence with an operating owner; a generated video alone is insufficient"
+    }
+  ],
+  "slides": "slides.md",
+  "accelerator": "accelerator/README.md"
+}

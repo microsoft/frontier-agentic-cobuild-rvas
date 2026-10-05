@@ -1,0 +1,281 @@
+# Module 2. Select the source and permission architecture
+
+Use the source/platform choice from module 1 to connect the authoritative source for the
+customer's questions. Bring its access owner and two test users with different permissions.
+**Source access must remain intact through the final answer channel.**
+
+![Source and permission decision](../diagrams/02-source-permission-decision.png)
+
+## What you build
+
+1. A record of the authoritative system for each fact the assistant must know.
+2. A permission design that names the identity evaluated at query time and where enforcement happens.
+3. A runnable permission probe that checks a restricted identity receives no content, title,
+   snippet, or signal that the document exists.
+
+## Choose your path
+
+| Option | Sources it reaches | Permission enforcement | Build effort | Status |
+| --- | --- | --- | --- | --- |
+| **A. Foundry IQ knowledge base** *(default)* | Blob, ADLS Gen2, SharePoint, OneLake, Azure SQL, Fabric, Work IQ, MCP, web in one base | ACL sync + query-time enforcement under the caller's Entra identity; honours Purview sensitivity labels | Low: configure sources, no pipeline code | GA + preview mix |
+| B. Direct Azure AI Search index | Whatever you index yourself | You implement it: permission metadata in filterable fields + `x-ms-query-source-authorization` | High: you own chunking, embedding, refresh, security trimming | GA |
+| C. Copilot Studio + SharePoint/M365 | SharePoint, Teams, Graph-connected content | Inherited from M365; no Azure retrieval layer to secure | Lowest, but you are not building an Azure app | GA |
+| D. Fabric IQ | OneLake, lakehouses, semantic models, Power BI | Fabric RBAC / RLS on the semantic model | Medium; different skill set (data, not search) | See Fabric docs |
+| E. Work IQ | M365 collaboration signals: docs, meetings, chats | M365 permissions | Medium, as a remote knowledge source | Preview |
+| F. Web (Bing) | Public internet | None needed for public content | Lowest | GA |
+
+**Default: Option A.** Foundry IQ is the managed knowledge layer built on Azure AI Search agentic
+retrieval. It gives permission-aware retrieval across multiple sources without you writing an
+ingestion pipeline or a security-trimming filter, and one knowledge base can serve many agents.
+
+**Choose B instead when** you need retrieval behaviour Foundry IQ does not expose: a custom scoring
+profile, an unusual chunking strategy, a non-Microsoft vector store alongside it, or strict control
+over every field in the index. Your team owns the implementation work.
+
+**Choose C when** the answer is "this should be a Copilot, not an app". If all the knowledge lives in
+SharePoint and the user is already in Teams, use that path instead of adding an Azure retrieval stack.
+
+**D, E, F are rarely the whole answer.** They are usually *additional* sources on an Option A
+knowledge base. Fabric IQ answers "what are the numbers"; Foundry IQ answers "what does the policy
+say." Do not index live operational data to make it searchable. Route to it.
+
+**Migration cost.** Moving from A to B rebuilds the retrieval layer but preserves the agent and
+evaluations. Moving from B to A can reuse the existing index as a *search index knowledge source*.
+Moving from C to A or B requires a full rebuild.
+
+### The permission decision, stated precisely
+
+Answer these four questions before writing code:
+
+1. Does query-time access use the end user's identity or a shared service identity?
+   With a shared identity, every user receives its combined access.
+2. Do permissions live in source ACLs, Entra groups, Fabric RLS, or an application table?
+3. How do permission changes propagate, and how long may stale permissions remain in effect?
+4. What happens on denial? Return a normal "I don't have information on that" response,
+   not an error that confirms the document exists.
+
+## Implementation
+
+### Option A. Foundry IQ knowledge base
+
+Use current Microsoft Learn guidance for the knowledge-base APIs.
+
+**Pick your knowledge source kinds.** A knowledge base references one or more sources; retrieval
+queries all of them in one request and merges results through a single ranking pipeline.
+
+| Kind | Indexed / remote | Status |
+| --- | --- | --- |
+| Search index (wraps an existing index) | Indexed | GA |
+| Azure blob (auto-generates the indexer pipeline) | Indexed | GA |
+| OneLake (lakehouse) | Indexed | GA |
+| Web (Microsoft Bing) | Remote | GA |
+| Azure SQL | Indexed | preview |
+| File (direct upload to Search) | Indexed | preview |
+| Indexed SharePoint | Indexed | preview |
+| Remote SharePoint | Remote | preview |
+| Fabric Data Agent | Remote | preview |
+| Fabric Ontology | Remote | preview |
+| MCP server | Remote | preview |
+| Work IQ | Remote | preview |
+
+Source: <https://learn.microsoft.com/azure/search/agentic-knowledge-source-overview>
+
+*Indexed* content is ingested before query time. *Remote* content is fetched through the platform's
+API at query time and never stored in Search. Remote sources are always fresh and slower; indexed
+sources are fast and can be stale.
+
+**Turn on ACL carry-forward at ingestion.** On an indexed source, permission metadata is available
+at query time only when you request it at ingestion:
+
+```python
+ingestion_parameters = KnowledgeSourceIngestionParameters(
+    # ...
+    # Carry user and group object IDs from the source into the index.
+    ingestion_permission_options=["user_ids", "group_ids"],
+)
+```
+
+**Enforce at query time.** Document visibility requires *both* headers:
+
+- `Authorization`: the calling application's own RBAC role.
+- `x-ms-query-source-authorization`: the **end user's** token.
+
+```python
+result = kb_client.retrieve(
+    request,
+    headers={"x-ms-query-source-authorization": user_token},
+)
+```
+
+With current permission filtering on an ACL-enabled index, omitting the user token returns only
+public documents. The header does not create missing permission metadata or enable an unconfigured
+permission filter. See the [query-time enforcement guidance](https://learn.microsoft.com/azure/search/search-query-access-control-rbac-enforcement).
+
+**Choose the API version.** `2026-04-01` is GA but offers minimal, extractive retrieval
+only: no query planning, no answer synthesis, no configurable reasoning effort, and GA source kinds
+only. `2026-05-01-preview` adds all of those. Record the version you choose.
+
+### Option B. Direct Azure AI Search index
+
+You are responsible for security trimming. Apply these rules:
+
+- Permission metadata must live in **filterable string fields**. You never write the filter
+  yourself; the engine builds an internal filter to exclude unauthorized content.
+- Store `userIds` and `groupIds` as **Entra object IDs (GUIDs)**.
+- At query time the service matches identities in `x-ms-query-source-authorization` against those
+  stored IDs. Group expansion happens at query time through Microsoft Graph.
+- Use a **preview** REST API or preview SDK package; this filtering is not in the GA APIs.
+
+```python
+from azure.search.documents.indexes.models import SearchField, SearchFieldDataType
+
+permission_fields = [
+    SearchField(name="userIds", type=SearchFieldDataType.Collection(SearchFieldDataType.String),
+                filterable=True),
+    SearchField(name="groupIds", type=SearchFieldDataType.Collection(SearchFieldDataType.String),
+                filterable=True),
+]
+```
+
+Then query exactly as in Option A, passing the end-user token in
+`x-ms-query-source-authorization`.
+
+Check these limits before choosing this path:
+
+| Constraint | Value |
+| --- | --- |
+| ACL entries per file/directory (ADLS Gen2) | 32 |
+| Permission entries per file (SharePoint) | 1,000 |
+| ACL evaluation failure (e.g. Graph unavailable) | Returns **5xx**, never a partially filtered result |
+| First ACL-filtered query | Higher latency; later queries are cached |
+
+Source: <https://learn.microsoft.com/azure/search/search-query-access-control-rbac-enforcement>
+
+**Plan for permission freshness explicitly.** How ACL changes reach the index differs by source:
+
+- SharePoint indexer: a scheduled run picks up item-level changes; changes to a **parent** scope
+  (site, library, list, folder) inherited by children require a **resync**.
+- ADLS Gen2 indexer: requires a resync to refresh ACLs.
+- Custom/push ingestion: you must reingest affected documents yourself.
+
+Write down the worst-case staleness window and have the data owner accept it in writing. "A revoked
+user keeps access for up to N hours" must be a decision.
+
+### Option C. Copilot Studio + SharePoint / M365
+
+No Azure retrieval layer needs securing. Permissions are whatever SharePoint and Microsoft 365 already
+enforce, evaluated as the signed-in user.
+
+Connect the SharePoint site as a knowledge source in Copilot Studio, scope it to the approved
+libraries, and publish to Teams. This path uses configuration rather than custom retrieval code.
+
+The same governance work still matters. Confirm the site's permissions reflect intent (inherited
+permissions on a "public" site are a common surprise), then test with a low-privilege account.
+
+For this path, build in the approved Power Platform environment:
+
+1. Create or select the customer's agent and configure end-user authentication.
+2. Add the approved SharePoint location as knowledge, limited to the agreed content.
+3. Test a supported question as an intended user, then the same restricted source as a user
+   without access. Review the cited source, not only the answer.
+4. Configure the no-answer behavior and publish first to the agreed test audience.
+
+Follow the [SharePoint knowledge setup](https://learn.microsoft.com/microsoft-copilot-studio/knowledge-add-sharepoint)
+for current prerequisites and supported content. Connecting a site does not establish that its
+existing permissions match the customer's intent.
+
+**Continue through the applicable checks, not the Azure commands.** Use module 3's source-version
+and refresh checks against the connected library; skip its index provisioning. Skip module 4's
+Azure model deployment comparison. In modules 5 and 7, test citations and refusal through this
+agent and retain actual answers. Module 6 is needed only for additional tools. Module 8 option C
+publishes to the chosen channel. The supplied Azure scripts do not implement this branch.
+
+### Option D. Fabric IQ (analytics and live business data)
+
+Use when the question is "what are the numbers", not "what does the document say". Fabric IQ models
+business data over OneLake and Power BI: ontologies, semantic models, graphs, and data agents.
+
+Two ways to reach it from this scenario:
+
+1. **As a remote knowledge source** on your Foundry IQ knowledge base: *Fabric Data Agent* (answers
+   plus embedded resources) or *Fabric Ontology* (entity- and relationship-based answers). Both are
+   preview.
+2. **As a separate tool on the agent** in module 6, when you want explicit routing rather than
+   blended retrieval.
+
+Fabric enforces permissions through semantic model RLS and workspace RBAC. Do not copy analytical
+values into a search index. You will serve stale numbers with a confident citation. Reference:
+<https://learn.microsoft.com/fabric/iq/overview>
+
+### Option E. Work IQ (Microsoft 365 collaboration context)
+
+Work IQ is the contextual layer over M365: documents, meetings, chats, workflows. Add it as a
+**remote Work IQ knowledge source** (preview) when the pilot genuinely needs "how this organization
+works" rather than "what the policy says".
+
+Permissions follow M365. Because it is remote, content is never ingested into Search, which also
+means there is no ACL staleness window. Reference:
+<https://learn.microsoft.com/microsoft-365-copilot/extensibility/workiq-overview>
+
+### Option F. Web
+
+A remote source backed by Microsoft Bing, for public, citable authority. Note one hard constraint: a
+knowledge base that includes a web knowledge source **requires** an LLM for query planning; it is
+optional for every other source kind.
+
+Public content needs no permission design, but it still needs an authority decision: which domains
+may be cited to this customer's users.
+
+## Verify
+
+For Copilot Studio or a remote source, perform the allowed/denied checks through the selected
+platform with real test-user identities. Keep its response and source evidence in the customer's
+test record. The probe below is for the Azure knowledge-base implementation only.
+
+This module prevents a retrieval path that looks perfect in an administrator demo but leaks to a real
+user with fewer permissions. Prove the boundary with a genuinely lower-privileged identity, not your
+own account.
+
+**Run the probe after module 3's ingestion finishes and real source permissions are configured.**
+The fictional role labels in the corpus do not create Azure permissions.
+
+**1. The probe identity is actually restricted.** `probe_permissions.py` runs each query twice: once
+as you (`DefaultAzureCredential`) and once as the identity in
+`PROBE_TENANT_ID`/`PROBE_CLIENT_ID`/`PROBE_CLIENT_SECRET`. Confirm that second identity holds no
+broad access to the protected source. A credential that cannot query at all tests an authentication
+failure, not document-level filtering.
+
+```bash
+az role assignment list --assignee "$PROBE_CLIENT_ID" \
+  --all --query "[].roleDefinitionName" -o tsv
+```
+
+Inspect source access as well as Search roles. A Search role permits the API call; it does not by
+itself bypass configured document permission filters.
+
+**2. The restricted identity comes back empty.** The plan is
+[`accelerator/permission-probe.json`](../accelerator/permission-probe.json); each case asserts
+`expect_visible` against your identity and `expect_hidden` against the restricted one. A case with an
+empty `expect_hidden` is rejected, because a probe that never expects a denial tests nothing.
+
+Run commands from the repository root.
+
+```bash
+export PROBE_TENANT_ID=... PROBE_CLIENT_ID=... PROBE_CLIENT_SECRET=...
+python3 scenarios/ai-grounding/accelerator/scripts/probe_permissions.py \
+  --knowledge-base "$AZURE_KNOWLEDGE_BASE_NAME"
+```
+
+Read the per-case lines. `PASS  ...: restricted identity cannot see 'X'` is the expected result. Any
+`LEAK — restricted identity retrieved 'X'` means a forbidden marker was returned. Check the source
+permissions, indexed permission metadata, and user-token propagation.
+
+**3. A restricted document does not even reveal that it exists.** The plan includes a case that
+queries the supervisor playbook by title. Confirm the restricted identity gets no title, no snippet,
+and no count. An access-denied response has to be indistinguishable from "no such document"; a
+title or a hit count is itself a leak.
+
+## Next module
+
+[Module 3. Ingest and index approved content](03-ingest-and-index.md) implements the source you
+just chose, with chunking, embeddings, and a refresh schedule.
