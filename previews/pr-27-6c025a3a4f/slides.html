@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Customer slides. Agentic Co-build</title>
+  <link rel="icon" href="assets/img/logo-mark.png" />
+  <meta name="description" content="Printable customer conversation slides for an Agentic Co-build scenario." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/shell.css" />
+  <script src="assets/js/marked.min.js"></script>
+</head>
+<body class="slides-page">
+  <header class="nav slides-toolbar" role="banner">
+    <div class="nav-inner slides-toolbar-inner">
+      <a class="brand" href="index.html" aria-label="Real Value Acceleration Program home">
+        <img src="assets/img/logo-full.png" alt="Real Value Acceleration Program" class="brand-logo" />
+      </a>
+      <div class="slides-toolbar-heading">
+        <span id="deckTitle" class="slides-toolbar-title">Loading slides…</span>
+      </div>
+      <a class="btn btn-ghost btn-sm" id="scenarioLink" href="index.html#outcomes">Back to scenario</a>
+      <div class="slides-downloads">
+        <a class="btn btn-ghost btn-sm" id="downloadPptx" href="#" download>PowerPoint</a>
+        <a class="btn btn-primary btn-sm" id="downloadPdf" href="#" download>Download PDF</a>
+      </div>
+    </div>
+  </header>
+  <main class="slides-workspace" aria-live="polite">
+    <aside class="slides-index" aria-label="Deck outline">
+      <div class="slides-index-head">
+        <span>Discussion route</span>
+        <strong id="deckProgress">0 / 0</strong>
+      </div>
+      <nav id="slideIndex"></nav>
+    </aside>
+
+    <section class="slides-stage" aria-label="Current slide">
+      <div id="slideDeck"><p>Loading slides…</p></div>
+      <nav class="slides-controls" aria-label="Slide navigation">
+        <button class="slide-nav-button" type="button" id="previousSlide">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+          Previous
+        </button>
+        <span id="slidePosition" class="slides-position">Slide 0 of 0</span>
+        <button class="slide-nav-button next" type="button" id="nextSlide">
+          Next
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </nav>
+    </section>
+
+    <aside class="slides-guide" aria-label="Facilitator guide">
+      <div class="slides-guide-mode" id="guideMode">Orient</div>
+      <h2 id="guideTitle">Use the slide to frame the conversation.</h2>
+      <p id="guideCopy">Keep the customer decision in view. Move on when the group can state what was agreed and what evidence is still missing.</p>
+      <a class="slides-module-link" id="moduleLink" href="#" hidden>Open this module</a>
+      <div class="slides-keyboard">
+        <span>Navigate</span>
+        <kbd>←</kbd><kbd>→</kbd>
+      </div>
+    </aside>
+  </main>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/slides.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "read": {"status": "completed", "record_value": "initial", "record_version": 1, "operations": 0},
+  "out-of-scope": {"status": "failed", "record_value": "initial", "record_version": 1, "operations": 0},
+  "update-pending": {"status": "waiting_approval", "record_value": "initial", "record_version": 1, "operations": 0},
+  "update-approved": {"status": "completed", "record_value": "reviewed", "record_version": 2, "operations": 1},
+  "update-denied": {"status": "denied", "record_value": "initial", "record_version": 1, "operations": 0},
+  "after-commit": {"status": "ready", "record_value": "reviewed", "record_version": 2, "operations": 1},
+  "before-dispatch": {"status": "unresolved", "record_value": "initial", "record_version": 1, "operations": 0}
+}
