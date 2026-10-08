@@ -69,8 +69,9 @@ Review only source documentation:
 - `README.md`
 - `CONTRIBUTING.md`
 - `PRODUCT.md`
-- `docs/*.html` and `docs/**/*.md`, excluding generated files under `docs/assets/data/**` and dependencies under `docs/vendor/**`
-- `scenarios/**/*.md`
+- `docs/start.md` and `docs/index.html`, excluding generated `docs/start.html` and `docs/supporting-skills.md`
+- `plugins/agentic-cobuild/**/*.md`
+- `scripts/agentic-skills.json` and the setup script's documented commands
 
 Use generated docs only as consistency evidence when a source-doc change would require `npm run build`.
 

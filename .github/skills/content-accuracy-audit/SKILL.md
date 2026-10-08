@@ -1,121 +1,42 @@
 ---
 name: content-accuracy-audit
-description: 'Audit scenario lessons, READMEs, accelerator code, solution guides, docs, skills, infrastructure, and scripts for correctness, currency, hallucinations, broken cross-references, and pacing. Cross-check Azure / Microsoft Foundry SDK signatures, CLI commands, environment variables, and API surfaces against official Microsoft Learn docs via the microsoft-docs MCP and the live web. USE WHEN: review content for errors, fact-check docs, check currency, verify API signatures, validate scenario instructions, check pacing, or find broken links. Produces a ranked findings report and applies confirmed fixes.'
-argument-hint: '[optional: path or area to audit, e.g. scenarios/ai-grounding or docs/]'
+description: "Audit plugin guidance, setup commands, documentation, and bundled resources for current facts, broken references, and contradictions. Report verified findings and apply confirmed fixes."
+argument-hint: "Optional source path, such as plugins/agentic-cobuild or docs/start.md."
 disable-model-invocation: true
 user-invocable: true
 ---
 
 # Content Accuracy Audit
 
-Systematic review of this session's learning content for **correctness, currency,
-hallucinations, broken references, and pacing**. The golden rule of this repo applies:
-**Search Before Implement** — never trust a memorized API signature. Every Azure / Foundry
-SDK call, CLI command, env var, and preview-feature claim must be verified against the
-**current** official docs before you mark it correct or rewrite it.
+Inspect the requested sources for correctness and currency. Apply fixes only
+after the user confirms findings. Read the
+[audit checklist](references/audit-checklist.md) for the checks.
 
-## When to Use
+## Scope
 
-- "Review/audit all our content for errors of any kind"
-- "Check the docs for hallucinations / outdated SDK calls / wrong API signatures"
-- "Are the scenario instructions still accurate and up to date?"
-- "Verify the env vars, CLI commands, and code snippets actually work"
-- "Check pacing and difficulty progression across lessons"
-- "Find broken cross-references / dead links / stale file paths"
-
-## Inputs
-
-- **Scope** (optional argument): a path or area (e.g. `scenarios/ai-grounding`, `docs/`,
-  `.github/skills/`). If omitted, audit the whole repo content surface (below).
-- The audit is **read-heavy**; fixes are applied only after findings are confirmed.
-
-## Content surface to audit
-
-| Area | What to check |
-|---|---|
-| `scenarios/*/lessons/*.md` | Instructions, code snippets, environment variables, and lesson order |
-| `scenarios/*/accelerator/README.md`, `facilitator-reference.md` | Commands match the implementation and its checks |
-| `scenarios/*/accelerator/**/*.py` | Imports and signatures exist; checks match the stated behavior |
-| `docs/*.html` | Navigation and user-facing explanations match the scenarios |
-| `docs/assets/data/` | **Generated** — compare with `scenarios/`; do not hand-edit |
-| `.github/skills/*/SKILL.md` | Stub install commands, env-var names, "gotcha" claims still valid |
-| `infra/*.bicep`, `azure.yaml`, `scripts/*.sh` | Resource/API versions, command flags, output→`.env` contract |
-| `.env.sample`, `requirements.txt` | Var names authoritative & consistent everywhere; pinned versions exist |
-| `README.md`, `CONTRIBUTING.md`, `PRODUCT.md`, `scenarios/README.md` | Cross-links resolve; claims match the implementation |
+| Source | Check |
+| --- | --- |
+| `plugins/agentic-cobuild/skills/` | References, approval gates, resource paths, and current product guidance |
+| `scripts/agentic-skills.json`, `scripts/setup-agentic-repo.*` | Upstream selectors, runtime requirements, flags, and preservation behavior |
+| `docs/start.md`, `docs/index.html` | Installation and handoff instructions |
+| `docs/start.html`, `docs/supporting-skills.md` | Generated consistency; fix sources and rebuild |
+| `README.md`, `CONTRIBUTING.md`, `PRODUCT.md` | Cross-links and claims |
+| `.github/skills/` | Maintainer guidance and references |
 
 ## Procedure
 
-Work one area at a time. Use the detailed [audit checklist](./references/audit-checklist.md)
-for the full per-category criteria. Track progress with a todo list when scope is large.
+1. Inventory the requested source files.
+2. Extract checkable claims: commands, SDK signatures, resource paths, host
+   capabilities, approval boundaries, and product maturity.
+3. Verify Microsoft claims through current Microsoft Learn evidence. Verify
+   Copilot/VS Code behavior through official host documentation. Verify upstream
+   skill selectors against the source repository and installed resources.
+4. Compare commands with the local implementation. Check requirements against
+   tests rather than assuming setup success proves delivery readiness.
+5. Report ranked findings with file/line references, evidence, and the smallest
+   proposed fix using the [report template](assets/findings-report-template.md).
+6. After confirmation, fix sources and run `npm run build`, `npm test`, and
+   affected diagram tests. Report any unavailable verification explicitly.
 
-### 1. Inventory the scope
-Enumerate the files in scope. For large scope, group by area (table above) and audit
-area-by-area so findings stay organized.
-
-### 2. Extract verifiable claims
-From each file, pull out every **checkable assertion**:
-- SDK imports, classes, methods, kwargs (e.g. `AIProjectClient`, `configure_azure_monitor`)
-- CLI commands & flags (`az`, `azd`, `azd ai agent`, `func`)
-- Env var names and the values they expect
-- Package names + pinned versions in `requirements.txt`
-- Bicep resource types + `apiVersion` values
-- Preview/GA status claims and "this feature does X" statements
-- Cross-file references (file paths, anchor links, "see Step N")
-
-### 3. Verify against official sources (Search Before Implement)
-For each claim, confirm against the **current** source of truth — do not rely on memory:
-- **`microsoft-docs` MCP** (`microsoft_docs_search`, then `microsoft_docs_fetch` for depth;
-  `microsoft_code_sample_search` for real code) — primary for SDK/CLI/env signatures.
-- **`foundry-mcp`** — Foundry-native ops (model catalog, agents, toolboxes, KBs, evals)
-  to confirm feature names, capabilities, and current availability.
-- **`azure` MCP** — resource types, RBAC, quota, Bicep `apiVersion` reality.
-- **Live web** (`fetch_webpage`) — only for official Microsoft/Azure URLs already cited in
-  the content, to confirm they resolve and still say what we claim. Do not invent URLs.
-- **Repo ground truth** — does `facilitator-reference.md` actually pass `validate.py`? Do env-var names
-  match `.env.sample` and `infra/` outputs exactly?
-
-Record the authoritative source (doc URL or MCP result) for every confirmed or refuted claim.
-
-### 4. Classify findings
-Use these categories and severities (details in the checklist):
-- **Hallucination** — API/feature/flag that does not exist → **Critical**
-- **Outdated** — real but superseded/renamed/deprecated signature → **High**
-- **Incorrect** — wrong value, wrong step order, solution won't pass validator → **High**
-- **Inconsistent** — env var / path / version mismatch across files → **Medium**
-- **Broken reference** — dead link, wrong file path, stale "Step N" → **Medium**
-- **Pacing** — difficulty jump, missing prerequisite, unexplained concept → **Low/Medium**
-- **Style/clarity** — ambiguous or sloppy wording → **Low**
-
-### 5. Report
-Produce a ranked findings report using the
-[report template](./assets/findings-report-template.md): one row per finding with
-file+line link, category, severity, the verified source, and the proposed fix.
-**Present findings before mass-editing.**
-
-### 6. Apply fixes (after confirmation)
-- Fix **source** files (`scenarios/`, site HTML/JS/CSS, `.github/skills/`), then run
-  `npm run build` to regenerate `docs/assets/data/`.
-- Make minimal, targeted edits — correct the inaccuracy, don't rewrite surrounding prose.
-- When a fix changes an env var / path / version, update **every** occurrence repo-wide.
-- After fixing code or validators, re-run the relevant `validate.py` to confirm green.
-- Re-verify each fixed signature one last time against the doc source you cited.
-
-## Quality bar (completion checks)
-
-- [ ] Every flagged SDK/CLI/env claim has a cited authoritative source (doc URL or MCP result).
-- [ ] No fix introduces a signature you did not verify this session.
-- [ ] Env-var names, file paths, and pinned versions are consistent across all files.
-- [ ] `facilitator-reference.md` steps still satisfy the matching `validate.py` (re-run where feasible).
-- [ ] Generated `docs/assets/data/` drift is reported, not hand-patched.
-- [ ] Findings report lists residual/unverifiable items explicitly (don't silently drop them).
-
-## Pitfalls
-
-- **Don't hand-edit `docs/assets/data/`.** Fix the source and rebuild with `npm run build`.
-- **Don't guess preview status.** Foundry features move fast and many are preview — confirm
-  GA/preview wording against current docs every time.
-- **Don't invent or "fix" URLs.** Only verify URLs already present; never fabricate links.
-- **Prompt Flow is removed from this curriculum.** Any `promptflow` / `.flow.dag` reference is
-  itself a finding to remove — do not "correct" it, flag it.
-- **Keyless-first.** Flag examples that use keys where `DefaultAzureCredential` is the convention.
-- **Don't mass-rewrite for style.** Stay scoped to correctness, currency, and pacing unless asked.
+Complete when every reported claim has evidence or an explicit verification
+gap, fixes preserve the intended workflow, and generated files match their sources.

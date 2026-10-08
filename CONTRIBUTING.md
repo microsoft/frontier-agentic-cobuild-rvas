@@ -15,21 +15,38 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## Documentation validation
 
-Before submitting documentation or scenario changes, run:
+Before submitting plugin, installer, or documentation changes, use Node.js 22.20
+or newer and run:
 
 ```bash
 npm run build
-npm run validate:scenarios
 npm test
+npm run test:diagrams
 ```
 
-The build audits first-party documentation for broken script references, invalid invocation flags,
-ambiguous checklist glyphs, invalid UTF-8, likely mojibake, and fragile text icons in the site chrome.
-It then regenerates the scenario assets under `docs/assets/data/` and checks their routes.
-The scenario checks cover module structure and diagram geometry. `npm test` covers build and audit
-regressions. These local checks do not prove a live Azure deployment works.
+The build renders `docs/start.md` and the selected upstream commands into
+`docs/start.html` and `docs/supporting-skills.md`. Commit those generated files
+with their sources. Plugin skills live only under `plugins/agentic-cobuild/skills/`.
+Keep third-party dependencies in `scripts/agentic-skills.json`, not in the plugin.
 
-**Commit generated assets under `docs/assets/data/` with their source changes.**
+Tests cover plugin resources, local links, installer failure/preservation behavior,
+and generated-guide consistency. Diagram tests check XML and local asset handling;
+they do not prove visual correctness or cloud security.
 
-For scenario accelerator changes, run `npm run test:scenarios` for the offline regression
-tests.
+For an installation change, test in a disposable application directory. Use
+`copilot --plugin-dir /absolute/path/to/plugins/agentic-cobuild` for local CLI
+discovery without installing into a shared plugin registry. In VS Code, add a
+local plugin location in a disposable profile and confirm skill and MCP discovery.
+Record unavailable host checks explicitly.
+
+## Publishing
+
+A repository administrator must create `gh-pages` for preview storage and select
+**GitHub Actions** in **Settings > Pages**. The existing workflow publishes the
+site on `main` and branch previews elsewhere. Fork pull requests run checks only.
+
+The published identity is `microsoft/frontier-agentic-cobuild-rvas`. Adding plugin
+files here does not create that repository or change this checkout's remote.
+
+Preserve the diagram skill's attribution, source snapshot, and separate icon terms
+when updating imported resources.

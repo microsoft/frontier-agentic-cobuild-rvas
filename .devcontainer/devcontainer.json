@@ -2,7 +2,6 @@
   "name": "Agentic Co-build",
   "image": "mcr.microsoft.com/devcontainers/python:3.11",
   "features": {
-    "ghcr.io/devcontainers/features/azure-cli:1": {},
     "ghcr.io/devcontainers/features/node:1": { "version": "22" },
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
@@ -11,10 +10,6 @@
       "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "ms-toolsai.jupyter",
-        "ms-azuretools.vscode-azurefunctions",
-        "ms-vscode.azure-account",
-        "ms-azuretools.vscode-bicep",
         "github.copilot",
         "github.copilot-chat",
         "redhat.vscode-yaml"
@@ -29,13 +24,7 @@
     }
   },
   "postCreateCommand": "bash .devcontainer/post-create.sh",
-  "remoteEnv": {
-    "AZURE_AI_PROJECT_ENDPOINT": "${localEnv:AZURE_AI_PROJECT_ENDPOINT}",
-    "AZURE_AI_MODEL_DEPLOYMENT_NAME": "${localEnv:AZURE_AI_MODEL_DEPLOYMENT_NAME}",
-    "AZURE_SUBSCRIPTION_ID": "${localEnv:AZURE_SUBSCRIPTION_ID}",
-    "AZURE_RESOURCE_GROUP": "${localEnv:AZURE_RESOURCE_GROUP}"
-  },
-  "forwardPorts": [8080, 8765],
+  "forwardPorts": [8080],
   "mounts": [],
   "shutdownAction": "stopContainer"
 }

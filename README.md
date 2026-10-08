@@ -1,206 +1,90 @@
 # Agentic Co-build
 
-[![Deploy GitHub Pages](https://github.com/microsoft/frontier-agentic-cobuild-rvas/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/microsoft/frontier-agentic-cobuild-rvas/actions/workflows/deploy-pages.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/frontier-agentic-cobuild-rvas)
+**Design and build your own AI application in your own repository.** Bring a new
+idea or a capability you want to add to an existing application. The Agentic
+Co-build plugin helps you define the requirements and approve the architecture
+before implementation begins.
 
-## Start with the customer's scenario
+[Start guide](https://microsoft.github.io/frontier-agentic-cobuild-rvas/start.html)
+| [Guide source](docs/start.md)
+| [Supporting skill commands](docs/supporting-skills.md)
 
-Agentic Co-build helps customer teams and their technical advisers **build the customer's own
-AI scenario**. Each playbook breaks design choices into reusable modules. Teams adapt the
-code in their approved environment, and customer-facing slides support the design discussions.
+## Install the plugin
 
-The initial tracks cover four reusable patterns:
-
-| Track | What you build |
-|---|---|
-| [AI Grounding / IQ](https://microsoft.github.io/frontier-agentic-cobuild-rvas/scenario.html?id=ai-grounding) | An assistant that answers from approved content and respects access boundaries. |
-| [Content Understanding and Document Workflow](https://microsoft.github.io/frontier-agentic-cobuild-rvas/scenario.html?id=content-understanding-document-workflow) | A document workflow with evidence-backed extraction and human review. |
-| [Avatar Scenario](https://microsoft.github.io/frontier-agentic-cobuild-rvas/scenario.html?id=avatar-scenario) | An avatar-led experience with approved content and publication controls. |
-| [Operational Agents](https://microsoft.github.io/frontier-agentic-cobuild-rvas/scenario.html?id=operational-agents) | Bounded tool execution with exact approvals and evidence for recovering interrupted work. |
-
-These are starting points, not a complete catalog of AI use cases. **A customer's scenario may
-combine parts from several tracks.** New tracks can follow the same contribution contract.
-
-Start with the customer's outcome and data constraints. If the opportunity is unclear, use
-[Customer Activity-Forge](.github/skills/customer-activity-forge/) to find a direction. If the use
-case is clear, use [Use-Case Mapper](.github/skills/use-case-mapper/) to map it to modules. The
-[Start page](https://microsoft.github.io/frontier-agentic-cobuild-rvas/start.html) explains both.
-
-## Break the use case into parts
-
-Before selecting modules, split the customer's end-to-end use case into the parts it needs.
-Map each part to the relevant scenario modules. Record what the material covers,
-what needs adaptation, and what needs additional engineering. Include uncovered work even
-when it falls outside the engagement. [Use-Case Mapper](.github/skills/use-case-mapper/)
-reads every scenario manifest and marks each part Covered, Adapt, or Not covered.
-
-For example, a supplier-request process could draw on several parts of the kit:
-
-| Part of the customer use case | Reusable guidance | Customer-specific work |
-|---|---|---|
-| Extract fields from a submitted document | Content Understanding extraction modules | Define the fields and evaluate representative documents. |
-| Answer a related policy question | AI Grounding modules | Connect approved policy content and prove access boundaries. |
-| Create a record in the customer's business system | Operational Agents modules on tool contracts and exact approval | Build the system-specific integration; the local sample does not supply it. |
-
-**Plan modules around this mapping.** Combine the relevant modules across tracks, keeping their
-prerequisites. Agree which parts the engagement will build and assign owners to the remaining work.
-
-The code reference focuses on Microsoft Foundry. The playbooks also discuss Copilot Studio,
-SharePoint, and Fabric. Choose the platform with the customer; an option named here is not a
-complete solution.
-
-## Agree the engagement scope
-
-The kit can support a focused pilot or a longer co-build engagement. **Agree the customer-specific
-work and acceptance criteria before committing.** Production readiness still depends on the
-customer's integrations, security requirements, and operational acceptance. Completing modules or
-deploying an accelerator does not prove it.
-
-Published durations estimate guided module time. They are not estimates for a full customer
-implementation.
-
-## Build in the customer's tenant
-
-**The deliverable is the agreed use case running in the customer's environment.** Use an existing
-approved tenant and subscription where possible. Create the application in a customer-owned
-private repository, and keep data and acceptance evidence in their approved systems.
-
-Before the first build module, agree on a user task and its acceptance check. Identify who owns
-the source and where users will receive the result. Select the relevant modules and assign the
-integration work. At the end, test through the channel those users will use, including a denied or
-failed request. Hand over operation and rollback to a named owner.
-
-## What the reference code provides
-
-The `accelerator/` folders supply reusable code and synthetic inputs for isolated checks.
-They help teams build and test individual controls. Passing those checks is preparation;
-the modules require evidence from the customer's connected application.
-
-For an existing customer environment, use the bring-your-own-environment path and approved
-resources. The demo foundations do not provision an enterprise landing zone or replace
-customer-specific engineering.
-
-## Scenario contribution
-
-Scenarios live in [`scenarios/`](scenarios/). `npm run build` regenerates their static-site assets;
-run `npm run validate:scenarios` to validate scenario packs. Read the [scenario contribution
-contract](scenarios/README.md) before proposing a scenario or module.
-
-**Use the modules for the agreed build.** Each module names the decision and the work, then checks
-the result. Its reference code is optional when the customer already has an application that meets
-the same contract.
-
----
-
-## Who the kit is for
-
-### Customer technical teams
-
-Bring a scenario to build, or use Idea Forge to help choose one. Use-Case Mapper shows which
-modules cover it. The code-based modules assume basic Python and familiarity with REST APIs and
-JSON. Use synthetic data for initial exercises;
-agree a separate, approved path before working with customer data.
-
-### Delivery teams and facilitators
-
-Use the playbooks to work through design choices with the customer and adapt the code and guidance.
-Review the relevant facilitator references before the engagement. Plan engineering capacity around
-the agreed scope, including integration work and handoff to the customer's operating team.
-
----
-
-## Prerequisites
-
-Live Azure modules need an approved subscription and the required permissions.
-Local exercises list their own requirements. For code-based modules, use GitHub Codespaces
-or a local Dev Container. You should know basic Python, including pip and virtual environments,
-and understand REST APIs and JSON. Familiarity with VS Code helps but is not required.
-
----
-
-## Getting started
-
-### 1. Choose a scenario and scope
-
-Break the customer's use case into parts and map them to the relevant modules. Agree what the
-engagement will build and how to judge the result. Check prerequisites before provisioning resources.
-
-### 2. Open in GitHub Codespaces or Dev Container
-
-Click the badge below to open the development environment. Follow the selected module's setup
-steps for credentials and any additional tools:
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/frontier-agentic-cobuild-rvas)
-
-To work locally, open the repository with [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) in VS Code.
-
-### 3. Follow the selected environment path
-
-For live Azure modules, authenticate to the approved subscription:
+For GitHub Copilot CLI:
 
 ```bash
-az login
+copilot plugin marketplace add microsoft/frontier-agentic-cobuild-rvas
+copilot plugin install agentic-cobuild@agentic-cobuild
+copilot plugin list
 ```
 
-Follow the selected scenario's accelerator guide for a clean demo subscription or an existing
-customer environment. Deploy demo resources only where approved.
+For VS Code Copilot, add `microsoft/frontier-agentic-cobuild-rvas` to
+`chat.plugins.marketplaces`, then install **Agentic Co-build** from the Agent
+Plugins view. Enable `chat.plugins.enabled` if needed. Manage the plugin in the
+interface where you installed it.
 
-## Publishing the documentation site
+**Install supporting skills in the application repository too.** Review this
+tooling repository in a separate directory, then run:
 
-Before the first deployment, a repository administrator must:
-
-1. Create a `gh-pages` branch if it does not exist. It can start from `main`; the workflow uses it to store branch previews.
-2. Open **Settings > Pages** and select **GitHub Actions** as the source.
-
-The workflow builds `docs/` and deploys that artifact when changes reach `main`.
-
-Push a site change to another branch to publish a preview under `/previews/`. The workflow summary
-contains the exact URL. Pull requests from branches in this repository also publish a preview and
-add or update one comment with its URL. Forked pull requests run the build checks only.
-
----
-
-## Repository structure
-
-```
-agentic-cobuild/
-├── README.md                          # ← You are here
-├── scenarios/                         # Self-contained scenario playbooks
-│   └── <scenario>/                    # Modules, slides, diagrams, and reference code
-├── azure.yaml                         # Optional shared-infrastructure azd project
-├── infra/                             # Shared Foundry infrastructure templates
-├── scripts/                           # Site checks and shared-infrastructure deploy.sh
-├── docs/                              # Static documentation site (Node.js build / GitHub Pages)
-├── .devcontainer/                     # Dev environment config (Python, Azure CLI, azd)
-├── .github/                           # Copilot enablement (skills, copilot-instructions) + workflows
-├── .vscode/mcp.json                   # MCP servers: azure, foundry-mcp, microsoft-docs
-└── .env.sample                        # The .env variable contract (never commit a real .env)
+```bash
+bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh --dry-run /path/to/my-ai-app
+bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh /path/to/my-ai-app
 ```
 
-Each scenario keeps its reusable code and sample data under `accelerator/`.
-Its manifest defines the module order and published assets.
+The script requires Node.js 22.20 or newer, Git, npx, and Bash. It installs 17
+selected upstream skills at project scope. It preserves application code,
+instructions, MCP settings, and existing skills. Conflicts stop setup before
+installation; network failures can leave partial upstream writes and are reported.
+It does not create a repository, install the plugin globally, or provision resources.
+Manual `npx` commands are available in the [supporting skill guide](docs/supporting-skills.md).
 
----
+## Use it in your application workspace
 
-## Facilitator references
+| Skill | When to use it |
+| --- | --- |
+| **AI Agent Creator** (`ai-agent-creator`) | You know what you want to build or evolve. It interviews you and produces the architecture package. |
+| **Idea Forge** (`customer-activity-forge`) | You know the customer and industry but need an evidence-backed idea first. |
+| **Cloud Architecture Diagram** (`cloud-architecture-diagram`) | The creator uses it for editable diagrams with local assets and explicit review gates. |
 
-Facilitator references under `scenarios/*/accelerator/facilitator-reference.md` support engagement
-preparation. Use the reference for the scenario you are building to understand its code and the
-work that remains customer-specific.
+Select `ai-agent-creator` from your host's skill picker or slash completion and
+describe the intended application. Plugin skill names may be qualified by the host;
+use the name it displays rather than guessing a prefix.
 
-### Facilitation checklist
+The creator writes:
 
-1. Agree the customer outcome, engagement scope, and acceptance criteria.
-2. Map the use-case parts to modules, identify uncovered work, and confirm module prerequisites.
-3. Confirm the approved environment and source-access boundary.
-4. Build with the customer, using the facilitator references where helpful.
-5. Review the evidence and record remaining work with a named owner.
+```text
+docs/architecture/
+  solution.drawio
+  solution.md
+  specification.md
+  implementation-plan.md
+```
 
----
+**Architecture approval finishes the creator workflow.** Start implementation in
+a new session with the current specification, architecture, and plan attached.
+Validate acceptance criteria and resolve implementation and security-review
+findings before deployment. The [Start guide](docs/start.md) provides the handoff
+prompt and separate instructions for both hosts.
 
-## Resources
+The plugin supplies public Microsoft Learn documentation MCP. It grants no cloud
+access. Missing diagram rendering or independent review is reported and needs an
+explicit manual-review exception; XML validation alone is not visual approval.
 
-- [Microsoft Foundry documentation](https://learn.microsoft.com/azure/foundry/)
-- [Microsoft Foundry training](https://learn.microsoft.com/training/azure/ai-foundry)
-- [Microsoft AI skills resources](https://www.microsoft.com/en-us/corporate-responsibility/ai-skills-resources)
+## Maintain this repository
+
+This is the tooling and documentation repository, not the customer's application.
+The three bundled skills live under `plugins/agentic-cobuild/skills/`. Third-party
+dependencies are selected in `scripts/agentic-skills.json`, not copied into the plugin.
+
+```bash
+npm run build
+npm test
+npm run test:diagrams
+```
+
+Commit generated `docs/start.html` and `docs/supporting-skills.md` with their sources.
+See [Contributing](CONTRIBUTING.md) for installation checks and publishing setup.
+
+The repository's MIT license does not replace the diagram assets'
+[attribution and permitted-use terms](plugins/agentic-cobuild/skills/cloud-architecture-diagram/references/REFERENCE.md).

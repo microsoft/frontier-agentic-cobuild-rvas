@@ -1,0 +1,19 @@
+{
+  "installer": "skills@1.7.1",
+  "minimumNode": "22.20.0",
+  "agent": "github-copilot",
+  "sources": [
+    {
+      "repository": "mattpocock/skills",
+      "skills": ["grilling", "domain-modeling", "codebase-design", "implement", "tdd", "diagnosing-bugs", "code-review", "handoff"]
+    },
+    {
+      "repository": "microsoft/azure-skills",
+      "skills": ["discover-azure-skills", "azure-enterprise-infra-planner", "microsoft-foundry", "azure-ai", "foundry-iq", "entra-agent-id", "entra-app-registration", "azure-aigateway"]
+    },
+    {
+      "repository": "lguz/humanize-writing-skill",
+      "skills": ["humanize-writing"]
+    }
+  ]
+}

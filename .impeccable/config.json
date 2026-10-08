@@ -13,6 +13,15 @@
         "value": "inter",
         "createdAt": "2026-09-29T08:04:14.617Z",
         "reason": "DESIGN.md commits Inter as the body face and the slide surface now self-hosts it consistently."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/index.html"
+        ],
+        "createdAt": "2026-10-08T12:45:02.757Z",
+        "reason": "Desktop and mobile screenshots confirm adequate container padding. Border-top rules separate open sections rather than enclosing text."
       }
     ]
   }

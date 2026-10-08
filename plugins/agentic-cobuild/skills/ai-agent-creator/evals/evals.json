@@ -1,0 +1,752 @@
+{
+  "skill_name": "ai-agent-creator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I want to build an internal assistant for project teams. It should help people understand project documents, answer questions with evidence, and eventually take a few approved actions. We use Azure and are interested in Microsoft Foundry. Design the architecture.",
+      "expected_output": "The first response inspects available context, frames the candidate outcome without selecting an execution model, asks the current recommended discovery frontier, and waits. It creates no architecture artifacts.",
+      "files": [],
+      "expectations": [
+        "The response treats assistant as an intent signal rather than automatically choosing or rejecting an agent runtime.",
+        "The response asks a recommended frontier round covering the currently answerable outcome, first-journey, evidence, action, risk, and enterprise decisions.",
+        "The response distinguishes document answers from later approved actions without designing either path prematurely.",
+        "The response ends after the question round and does not create solution.drawio, solution.md, specification.md, implementation-plan.md, source code, or cloud resources."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Phase 1: FinOps Agent. Determine whether an agent can correlate migration Business Case, assessment, and actual consumption data; identify deviations; generate projections; answer questions about the largest differences and their drivers; recommend investigations; and avoid autonomous infrastructure changes. Create the Azure architecture and implementation plan.",
+      "expected_output": "The first response recognizes unresolved agent intent, asks whether the desired first journey is a fixed analysis/report or a goal-directed multi-step investigation, explores dynamic evidence and tool selection, follow-up state, recommendations, and read-only boundaries, then waits without creating architecture.",
+      "files": [],
+      "expectations": [
+        "The response does not rename the requested FinOps Agent into a fixed assistant before discovery.",
+        "The response applies the full boundary comparison: deterministic analysis, direct model explanation, explicit workflow or retrieval, and constrained agent.",
+        "The frontier asks about investigation planning, dynamic source or tool selection, multi-turn state, missing evidence, and human approval.",
+        "The response recognizes that no autonomous infrastructure changes does not rule out a read-only or human-supervised agent.",
+        "The response ends after discovery questions and creates no architecture or implementation files."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design a small Azure application that classifies incoming support requests into a fixed taxonomy and routes them to the correct queue. I was thinking of using a Foundry hosted agent with several tools. Keep it simple and produce the architecture.",
+      "expected_output": "The first response challenges but does not yet reject the hosted-agent assumption, asks the frontier needed to confirm whether classification and routing are truly fixed, and waits before architecture.",
+      "files": [],
+      "expectations": [
+        "The response compares the proposed hosted agent with deterministic routing and a bounded structured model call.",
+        "The response asks whether taxonomy, routing, exceptions, approvals, and follow-up behavior are fixed or dynamic.",
+        "The response does not select Azure services or create architecture artifacts before the user confirms the journey.",
+        "The response ends after the recommended discovery round."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "The following shared-understanding record was confirmed in a previous user turn. Problem: FinOps analysts need to investigate migration deviations. Primary user: FinOps analyst. First journey: the analyst states an investigation goal; the system selects among authorized Business Case, assessment, actual-consumption, mapping-quality, comparison, and projection tools; it preserves hypotheses and missing evidence across follow-ups; all calculations are deterministic; outputs are read-only recommendations and an evidence report. AI boundary: plan the investigation, select read-only tools, synthesize facts and hypotheses. Platform and channel: reuse the existing authenticated analyst portal as the client; no new UI is required. Technical decisions: agent platform, framework/runtime where needed, hosting, and persistence selection are explicitly delegated to you within the existing landing-zone, identity, networking, and integration constraints. Data: confidential enterprise financial evidence. Success: exact calculations, complete citations, useful investigations, no unsupported numeric claims. Enterprise: greenfield workload in an existing Azure landing zone. Assumptions and deferrals are explicitly accepted. I confirm this record. Produce the architecture package only.",
+      "expected_output": "The architecture selects a constrained investigation-agent pattern over deterministic financial tools, records the pattern and runtime decision with alternatives, creates the four architecture artifacts including a functional and technical specification, and stops at approval without implementation or provisioning.",
+      "files": [],
+      "expectations": [
+        "The response recognizes the prior-turn confirmation and proceeds to architecture rather than restarting discovery.",
+        "The architecture uses an agent for planning and read-only tool selection while keeping calculations and authorization deterministic.",
+        "The architecture reuses the confirmed analyst portal, records the delegated platform choice, and does not introduce an unnecessary new UI.",
+        "solution.md records the selected workload pattern, runtime recipe, inherited elements, deviations, confirmed journey evidence, and rejected direct-call alternative.",
+        "The architecture includes tool authorization, bounded steps, investigation state, evidence citations, failure behavior, evaluation, and human ownership.",
+        "The four diagram pages preserve distinct concerns: Context stays product-level, Components leads with logical responsibility, AI and data flow owns runtime sequence, and Deployment owns resource and operational topology.",
+        "Cross-page review verifies edge direction, actor interaction boundaries, tool-intent versus trusted execution ownership, and canonical component responsibilities.",
+        "The response creates only solution.drawio, solution.md, specification.md, and implementation-plan.md and requests explicit architecture-package approval including the specification."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "The following shared-understanding record was confirmed in a previous user turn. Problem: route support requests. Primary user: support operations. First journey: receive one request, classify it into a fixed approved taxonomy, validate the label, deterministically route it to the configured queue, and expose uncertain classifications for review. AI boundary: one structured classification call only. No retrieval, planning, conversational state, dynamic tools, or business writes beyond deterministic queue routing. Platform and channel: extend the existing queue-driven application pipeline and use its review mechanism; no chat UI is required. The workload owns its new managed inference deployment. Technical decisions: framework/runtime where needed, hosting, and persistence selection are explicitly delegated to you within the existing landing-zone, identity, networking, and queue-integration constraints. Existing Azure landing zone and Entra controls apply. I confirm this record. Produce the architecture package only.",
+      "expected_output": "The architecture selects a direct structured model call through a Microsoft Foundry model deployment with deterministic validation and routing, explicitly records that no agent runtime is needed, and stops at architecture approval.",
+      "files": [],
+      "expectations": [
+        "The response proceeds from the explicitly confirmed record.",
+        "The architecture rejects a hosted agent using confirmed evidence about fixed steps, absent planning, absent tool selection, and absent conversation state.",
+        "The architecture separates the Foundry model deployment, selected model/provider, resource-level inference endpoint, and no-agent-runtime decision.",
+        "solution.md names the selected pattern or absence of a close pattern, explicit no-agent-runtime decision, inherited elements, deviations, and rejected agent alternative.",
+        "Taxonomy validation, uncertainty handling, and queue routing remain deterministic.",
+        "The architecture preserves the queue-driven entry point and existing review mechanism rather than introducing a chat client.",
+        "The four diagram pages preserve distinct concerns and pass a semantic cross-page critique in addition to structural and visual checks.",
+        "specification.md records confirmed functional and technical requirements, acceptance criteria and architecture/phase traceability without inventing missing deployment details.",
+        "No application source, infrastructure-as-code, cloud resource, or deployment is created."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "We have a regulated .NET claims platform on Azure DevOps with hub-spoke networking, private endpoints, Entra ID, and central monitoring. Add AI that summarizes claim documents and flags missing information for adjusters. Preserve the stack and produce an architecture plus delivery plan.",
+      "expected_output": "The first response inspects the brownfield context, asks only unresolved workflow, data, AI-boundary, quality, and integration decisions, and waits before architecture.",
+      "files": [],
+      "expectations": [
+        "The response uses the supplied enterprise facts instead of asking the user to repeat them.",
+        "The response asks the current frontier about claim workflow, document types, missing-information semantics, human review, data sensitivity, source-of-truth, and success measures.",
+        "The response preserves .NET and the existing enterprise platform as constraints pending discovery.",
+        "The response creates no architecture artifacts or implementation changes in the first turn."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Which Azure AI Search TypeScript SDK should I use for a hybrid query, and how do I call it? I only need an SDK explanation.",
+      "expected_output": "The request routes to focused Azure AI SDK guidance without starting accelerator discovery or creating architecture artifacts.",
+      "files": [],
+      "expectations": [
+        "The accelerator does not run for a standalone SDK question.",
+        "The response does not ask architecture discovery questions or create architecture files."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Our existing Foundry hosted agent is failing after deployment. Diagnose it from the logs and preserve the current architecture.",
+      "expected_output": "The request routes to existing-agent troubleshooting rather than application discovery or replacement architecture.",
+      "files": [],
+      "expectations": [
+        "The accelerator does not restart discovery for an existing-agent operational issue.",
+        "The response preserves the current architecture and routes to diagnostics or Foundry troubleshooting."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Deploy the existing approved AI application to Azure. Architecture and implementation are complete.",
+      "expected_output": "The request routes to the deployment workflow without invoking accelerator discovery or recreating architecture.",
+      "files": [],
+      "expectations": [
+        "The accelerator does not run for deployment-only work.",
+        "The response preserves the approved architecture and does not create a replacement package."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "We have confirmed the business journey: an authenticated advertiser submits a promotional campaign brief; deterministic code calculates a private draft from approved catalog, price, policy, and availability sources; sales reviews it before any amounts become visible to the advertiser. AI only extracts the brief and explains it. No orders, reservations, or autonomous price changes. This is a new Azure service in a greenfield workspace with no application code or technical standards. No imposed stack and no technical preference. Produce the architecture package.",
+      "expected_output": "The response recognizes that the business journey is settled but the target architecture remains open. It researches the currently answerable choices, asks a target-architecture question with a recommended concrete composition, meaningful alternatives, and a visible custom-answer path, then waits without creating architecture or implementation files.",
+      "files": [],
+      "expectations": [
+        "The response treats no imposed stack and no technical preference as absent constraints, not as a selected architecture or an abstract delegation.",
+        "Once prerequisites are sufficient, the response proposes two to four coherent target-architecture compositions rather than asking whether the user delegates architecture selection.",
+        "The target-architecture question puts the recommended composition first, includes a meaningful alternative with trade-offs, and exposes a custom architecture answer.",
+        "If the form preselects a default, it is the recommended concrete composition rather than delegation or no preference.",
+        "Each composition describes the currently answerable channel, execution model, platform/runtime, inference, knowledge/tools, state/approval, hosting, and ownership boundaries without inventing unresolved details.",
+        "The response preserves the confirmed business journey rather than restarting functional discovery.",
+        "The response ends after the question round and creates no architecture artifacts, application source, dependencies, tests, infrastructure-as-code, or cloud resources."
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "The architecture package has been presented in a previous turn, including solution.drawio, solution.md, specification.md, and implementation-plan.md. The technical direction and shared-understanding record were explicitly confirmed, and all diagram quality checks passed. The initial request also asked to implement the solution after design. I now approve the complete architecture package, including the functional and technical specification. Continue.",
+      "expected_output": "The response records architecture-only approval of the current specification baseline and hands off the four artifacts and later delivery owners. Continue and the original implementation request are not interpreted as a separately initiated implementation workflow, and the accelerator ends without application or infrastructure changes.",
+      "files": [],
+      "expectations": [
+        "The response records approval in the existing architecture lifecycle record and completes the accelerator handoff.",
+        "The response identifies application, data, identity, infrastructure, and deployment work as later delivery.",
+        "The response explains that implementation requires a separate workflow explicitly started by the user.",
+        "The response records the current specification as approved for architecture handoff only, not as implementation completed or automatically ready for execution.",
+        "The response does not create or modify application source, dependency manifests, lockfiles, tests, generated application assets, infrastructure-as-code, cloud resources, or deployments.",
+        "The response does not invoke an implementation or deployment specialist based on approval or continue alone."
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "The business journey is confirmed: classify one support request into a fixed approved taxonomy with a structured model call, validate it, then deterministically route it. No retrieval or agent runtime is needed. Platform and channel are confirmed: extend the existing custom application and preserve its client; its approved integration requires a web endpoint. Repository evidence supplies the existing Azure landing zone, workforce identity, network, and delivery standards. For the new application component, I explicitly delegate the language and web-framework choice to you: compare viable options and select the simplest maintainable one. Hosting and persistence are not decided; I want to choose those after your recommendation. Continue discovery.",
+      "expected_output": "The response records the scoped delegation, asks the unresolved hosting and persistence frontier with recommendations and alternatives, and waits. It does not ask the user to repeat discovered standards, reopen delegated choices, or treat delegation as implementation permission.",
+      "files": [],
+      "expectations": [
+        "The response records language and web-framework selection as explicitly delegated, with comparison and selected-option rationale to be included in the architecture package.",
+        "The response keeps hosting and persistence outside the delegation and asks the current frontier for those material choices.",
+        "The response reuses repository-supplied enterprise facts rather than asking the user to repeat them.",
+        "The response treats technical delegation as architecture selection only, not implementation or provisioning authorization.",
+        "The response ends after discovery questions without creating architecture or implementation files."
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "Design an internal policy assistant for employees in Microsoft Teams. Our organization already has an approved Copilot Studio environment, governed knowledge connectors, and a Power Platform delivery team. The assistant must answer from authorized policy content and send unresolved questions to the existing case system. We want to reuse these capabilities rather than maintain a new website. Start architecture discovery.",
+      "expected_output": "The first response frames the journey around the existing Teams experience, evaluates the supplied Copilot Studio capabilities, asks only the unresolved discovery frontier, and waits. It does not assume a new application UI/API or a separate Foundry deployment.",
+      "files": [],
+      "expectations": [
+        "The response treats Teams, Copilot Studio, approved connectors, and delivery ownership as supplied context rather than asking the user to repeat them.",
+        "The recommendation considers platform-managed orchestration and permissions without automatically adding a custom UI, application API, App Service host, or separate model deployment.",
+        "The frontier addresses unresolved policy access, uncertainty and case-routing semantics, success measures, and connection permissions without requiring web-framework selection first.",
+        "Any custom component or second agent is tied to an identified capability gap rather than to the agent label.",
+        "The response ends after discovery questions and creates no architecture, application, or infrastructure artifacts."
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "We want an authenticated external-customer assistant using a Foundry prompt agent exposed through Copilot Studio. It should gather a service request, use approved business tools, and send any consequential change for human review. We have not selected the customer channel or identity model. Is this composition suitable for production? Start the architecture discovery and identify the decisions that matter.",
+      "expected_output": "The response evaluates the proposed composition without treating it as a universally supported wrapper. It verifies current official documentation for the selected connection routes, distinguishes tool calls from agent delegation, exposes maturity and access gates, asks the unresolved channel and identity frontier, and waits.",
+      "files": [],
+      "expectations": [
+        "The response compares Copilot Studio alone, Foundry alone with a suitable channel, and the proposed composition against distinct responsibilities rather than requiring both platforms.",
+        "The response verifies current Microsoft Learn evidence for the named Foundry connection and any A2A alternative, including protocol and endpoint prerequisites and feature maturity.",
+        "The response distinguishes HTTP or MCP tool access from Activity or A2A agent delegation and does not infer end-to-end GA from a missing preview banner.",
+        "The response asks about the exact external-customer channel, authentication, data isolation, connection identity, and business authorization where material and unresolved.",
+        "A production-unsupported or unverified connection remains an explicit gate or deferral; an assumed custom adapter does not manufacture support.",
+        "The response preserves human review and ends after the frontier without creating architecture or implementing the integration."
+      ]
+    },
+    {
+      "id": 15,
+      "prompt": "Add AI extraction to our existing nightly document-processing pipeline. Approved files arrive in storage, fixed fields are extracted and validated, and uncertain results go to the current operations review queue. There are no conversational users, dynamic tool choices, or interactive requests. Preserve the pipeline and its review mechanism. Start discovery for the architecture.",
+      "expected_output": "The first response preserves the headless batch journey, compares deterministic extraction and a bounded inference or document-processing capability, investigates reusable pipeline components, and asks only unresolved discovery decisions before waiting.",
+      "files": [],
+      "expectations": [
+        "The response keeps the batch entry point and existing review queue rather than reframing the journey as chat.",
+        "The execution-model comparison uses the fixed extraction and validation requirements without adding an agent loop merely for the AI label.",
+        "The response asks about unresolved document types, schema, quality, permissions, failure handling, and pipeline integration rather than requiring an interactive channel or web framework.",
+        "Reuse is evaluated before introducing a new API, UI, or host; custom components need a concrete gap.",
+        "The response waits for discovery confirmation and does not implement or produce an architecture package prematurely."
+      ]
+    },
+    {
+      "id": 16,
+      "prompt": "The first journey is confirmed: our existing TypeScript customer portal needs streaming conversational assistance embedded in its current custom client. Required interaction and accessibility behavior cannot be supplied by the platform clients we evaluated, and we have accepted maintaining the custom experience. Preserve the portal and its identity boundary. Model/tool orchestration and its hosting remain undecided. Continue technical discovery without reopening the approved UX choice.",
+      "expected_output": "The response preserves the confirmed custom client and stack, compares suitable managed or application-owned orchestration independently of the channel, and asks the unresolved technical frontier without forcing a low-code migration.",
+      "files": [],
+      "expectations": [
+        "The response records the custom channel as a confirmed requirement with a capability-gap rationale and preserves TypeScript and the existing identity boundary.",
+        "The response does not force Copilot Studio, a replacement platform client, or a new UI merely to prefer managed platforms.",
+        "The response separates custom-client ownership from agent runtime and hosting, comparing alternatives relevant to the unresolved boundaries.",
+        "The response asks for decisions or scoped delegation only where choices remain material and unresolved.",
+        "The response ends after questions and creates no source, architecture, infrastructure, or cloud changes."
+      ]
+    },
+    {
+      "id": 17,
+      "prompt": "We need a conversational quotation agent: it clarifies campaign goals across turns and selects approved catalog, policy, price, and availability tools. Exact prices and eligibility are deterministic; sales must review a private draft before customers can see any amounts, and a quote must never become an order automatically. Existing governed business services and a sales approval workflow already enforce these rules. The customer channel and agent platform are undecided. Start architecture discovery.",
+      "expected_output": "The first response preserves the agentic conversation and deterministic business-tool boundary, compares platform and channel options independently, reuses the approved services and approval workflow, and asks the unresolved frontier without turning the entire journey into a custom pricing application.",
+      "files": [],
+      "expectations": [
+        "The response compares the execution models against multi-turn clarification and dynamic tool selection rather than eliminating the agent because pricing is deterministic.",
+        "Prices, policy validation, publication permission, and approval enforcement stay in governed services or workflows, not in prompt instructions.",
+        "The response considers relevant managed platform options and customer channels before dependent framework or hosting choices.",
+        "The response reuses existing business services and sales approval ownership instead of automatically creating a new commercial API or sales UI.",
+        "The response preserves nonbinding quotations, no autonomous orders, and no customer-visible amounts before approval.",
+        "The response asks the current frontier and waits without creating architecture or application artifacts."
+      ]
+    },
+    {
+      "id": 18,
+      "prompt": "The shared-understanding record was explicitly confirmed in a previous user turn. An authenticated advertiser uses the existing customer portal to clarify a campaign brief across turns; an agent chooses approved catalog, policy, price and availability tools. Existing deterministic business services calculate a private draft; sales approves publication before the customer sees any amounts. No orders or reservations. The existing portal, identity, services and sales approval workflow must be reused. Agent platform, model boundary and managed runtime selection are explicitly delegated within our existing enterprise security and network constraints. Functional rules, data sources, acceptance goals and delegation scope are confirmed. Exact capacity, package versions, region and retention values remain accepted production deferrals with owners and decision points. Create the architecture package and collect the complete functional and technical specification, but do not implement.",
+      "expected_output": "The response produces the four architecture artifacts, including docs/architecture/specification.md from the confirmed record. The specification distinguishes functional requirements, technical constraints and design decisions, uses stable requirement and acceptance IDs, preserves owned deferrals, and traces requirements to architecture responsibilities and delivery phases. It requests package approval and stops.",
+      "files": [],
+      "expectations": [
+        "specification.md covers actors, journey, business rules, data sources, permissions, AI/deterministic boundaries, publication approval and prohibited orders or reservations.",
+        "The specification covers platform/channel, ownership, model/runtime boundaries, integrations, identity, data lifecycle and operational constraints without forcing a new custom UI or API.",
+        "Requirements and acceptance criteria have stable IDs with a traceability table mapping to design responsibilities and implementation-plan phases or owned deferrals.",
+        "Region, capacity, package versions and retention are not fabricated; their accepted deferrals retain owners, decision points and impacts.",
+        "solution.md references the specification, and implementation-plan.md references its requirements and acceptance criteria instead of duplicating the requirements as work tasks.",
+        "The current specification remains awaiting architecture approval until explicit approval; the response presents all four artifacts and asks for that approval without implementing or creating execution-ready tickets."
+      ]
+    },
+    {
+      "id": 19,
+      "prompt": "Discovery was explicitly confirmed in a previous turn for a workforce policy assistant in our approved Copilot Studio environment and existing Teams channel. It answers from authorized policy sources and sends unresolved questions to the existing case workflow; the identities, permissions, data lifecycle, configuration ownership and acceptance criteria are confirmed. No separate Foundry agent or custom application is needed. All remaining production checks are explicit owned deferrals accepted in the confirmed record. Include a functional and technical specification in the architecture package. Synthesize it directly from confirmed discovery and design decisions using the accelerator's own specification contract. Produce the architecture package only.",
+      "expected_output": "The response uses the accelerator specification contract directly and writes docs/architecture/specification.md as part of the four-artifact architecture package. It does not delegate specification synthesis to another skill, install a helper, publish a duplicate issue-tracker spec, apply ready-for-agent status, or start implementation.",
+      "files": [],
+      "expectations": [
+        "The accelerator synthesizes the specification directly under its own contract, without requiring another specification skill or installing/registering a helper.",
+        "The response writes one specification at docs/architecture/specification.md and does not also publish .scratch feature specs or implementation tickets.",
+        "The specification has architecture-only draft or approval scope, not execution-readiness status.",
+        "Functional and technical requirements reflect the existing managed platform, channel and governed case workflow, with custom code or infrastructure marked non-applicable where unnecessary.",
+        "The response preserves the confirmed discovery gate, presents all four artifacts for architecture approval, and stops without application or resource changes."
+      ]
+    },
+    {
+      "id": 20,
+      "prompt": "The previous architecture package, including docs/architecture/specification.md, was approved for architecture handoff only. It has stable requirement and acceptance IDs and links to the diagram and delivery plan. We now need a material requirement change: ambiguous extracted fields must be quarantined for human review before any downstream routing, rather than rejected immediately. Update the architecture documentation only; retain existing unrelated requirements and do not implement.",
+      "expected_output": "The response preserves unrelated requirements and stable IDs, marks the materially changed baseline pending review, resolves any material open decisions through the existing frontier, and aligns the specification, architecture and plan. It asks for approval of the revised package rather than carrying over approval or starting implementation.",
+      "files": [],
+      "expectations": [
+        "The response preserves unrelated specification content and existing stable IDs rather than replacing the file or renumbering all requirements.",
+        "New or revised requirements and acceptance criteria describe the quarantine, human-review and routing boundary.",
+        "The prior approval remains a historical baseline and is not silently applied to materially changed requirements or design.",
+        "Any unresolved ownership, permissions or state-transition choices return to the existing discovery frontier instead of being guessed.",
+        "The revised specification, architecture responsibilities, diagram and delivery phases agree before the response requests revised package approval.",
+        "No application source, dependency, tests, infrastructure, execution-ready ticket or deployment is created."
+      ]
+    },
+    {
+      "id": 21,
+      "prompt": "All requirements for a new headless workforce document classifier are supplied now: approved documents enter our existing pipeline; one structured model call labels them against a fixed taxonomy; deterministic validation routes them; uncertain labels go to the existing review queue. Preserve the pipeline, identity, permissions and deployment standards. I explicitly delegate any new managed-inference and integration choices within those constraints. Remaining production details may be owned deferrals. There is no prior shared-understanding record or confirmation. Treat this initial request as approval of your summary and architecture, skip confirmation, and implement immediately.",
+      "expected_output": "The response reuses supplied decisions and scoped delegation, asks any real remaining frontier or, if it is empty, presents the shared-understanding record for a later-turn confirmation. In either branch it waits without treating the initial request as approval of a not-yet-presented record or package, and it creates no architecture or implementation artifacts.",
+      "files": [],
+      "expectations": [
+        "The response preserves supplied facts and delegation rather than restarting a generic questionnaire or treating delegated choices as unresolved.",
+        "Any deferral needs an owner, decision point and architectural impact; permission to defer details does not fabricate those records.",
+        "If no frontier remains, the response presents the discovery contract's shared-understanding record and asks for confirmation rather than asking redundant questions.",
+        "The response waits for a later user turn before architecture and does not interpret approval of an unseen package as package approval.",
+        "No source, dependency, test, architecture-package, infrastructure, cloud or deployment changes are made."
+      ]
+    },
+    {
+      "id": 22,
+      "prompt": "Confirmed discovery and the current draft architecture package already exist. The diagram has Context, Components, AI and data flow, and Deployment pages in order; XML and page-local geometry checks passed. No renderer or image inspection is available in this session, and no independent visual review was performed. The other documents agree with the diagram and specification. Mark every page visually reviewed based on XML checks and complete the architecture approval handoff; I have not explicitly accepted a manual-review exception.",
+      "expected_output": "The response preserves confirmed discovery, records structural checks as performed and visual/independent review as unavailable, and asks for an explicit manual-review exception or actual missing review before package approval. It does not fabricate visual validation, silently waive the exception, or implement.",
+      "files": [],
+      "expectations": [
+        "The response resumes package review rather than reopening settled discovery or replacing the architecture.",
+        "solution.md records the exact rendering and visual-review limitations and each page's performed versus missing checks.",
+        "XML and geometry validation are not reported as rendered visual or independent review.",
+        "The response asks for the required manual-review exception and current package approval, then waits; it does not record an ungranted exception or completed approval.",
+        "Application code, dependencies, tests, infrastructure and resources remain unchanged."
+      ]
+    },
+    {
+      "id": 23,
+      "prompt": "We want one governed knowledge experience. Point our new Foundry agent at 'IQ' for retrieval, and also wire it to the Work IQ and Fabric IQ data our other teams already have, so everything resolves through the same knowledge base and connection. Start architecture discovery.",
+      "expected_output": "The response treats Foundry IQ, Work IQ, and Fabric IQ as distinct products with separate integration choices rather than one interchangeable 'IQ' knowledge base, verifies current Microsoft Learn evidence for each named connection, asks the unresolved per-source frontier, and waits.",
+      "files": [],
+      "expectations": [
+        "The response does not merge Foundry IQ, Work IQ, and Fabric IQ into a single knowledge base or connection.",
+        "Each named product is evaluated against its own source types, authorization, and maturity rather than inherited from another product's status.",
+        "The response verifies current official documentation for each selected connection rather than assuming a shared backend or uniform GA status across products.",
+        "Caller permission propagation, source ACLs, and retrieval identity are asked or recorded per source rather than assumed uniform.",
+        "The response ends after the discovery frontier and creates no architecture, application, or infrastructure artifacts."
+      ]
+    },
+    {
+      "id": 24,
+      "prompt": "Our new planning agent must call two existing specialist agents to gather pricing and inventory facts before answering, and each downstream agent enforces its own authorization. We assume one application registration and a shared secret between the three agents will handle this. Start architecture discovery.",
+      "expected_output": "The response treats the three-agent call chain as a multi-agent identity and token-exchange design question rather than a single shared-secret registration, routes the identity/token-exchange branch to the matching specialist guidance, asks the unresolved delegation and authorization frontier, and waits.",
+      "files": [],
+      "expectations": [
+        "The response does not accept one shared application registration or a shared secret as sufficient for three agents with independent authorization.",
+        "The response identifies agent-to-agent identity and token exchange (for example on-behalf-of delegation) as a distinct unresolved decision rather than folding it into generic application authentication.",
+        "The response names the matching specialist for agent identity or token exchange rather than improvising a custom token-passing scheme.",
+        "The response distinguishes tool calls from agent-to-agent delegation and asks which downstream agent enforces which authorization check.",
+        "The response ends after the frontier and creates no architecture, application, or infrastructure artifacts."
+      ]
+    },
+    {
+      "id": 25,
+      "prompt": "Our Copilot Studio assistant is approved in development. We want to promote it to test and then production using the same ad-hoc export/import scripts our application team uses for its web app's CI/CD pipeline. Start architecture discovery for the promotion plan.",
+      "expected_output": "The response does not assume the application's generic CI/CD export/import approach transfers unchanged to Copilot Studio, verifies current Copilot Studio ALM guidance for solutions and environment promotion, surfaces post-deployment configuration steps as an explicit gate, asks the unresolved environment and connection frontier, and waits.",
+      "files": [],
+      "expectations": [
+        "The response verifies current official Copilot Studio ALM guidance rather than assuming a generic application CI/CD pipeline applies unchanged.",
+        "The response distinguishes solution-based promotion across environments from source-code deployment and names settings that need post-deployment steps.",
+        "The response asks about environment topology, connection/authentication re-configuration after promotion, and channel verification per environment.",
+        "The response preserves existing approved development work rather than treating promotion as a from-scratch rebuild.",
+        "The response ends after the frontier and creates no architecture, application, or infrastructure artifacts."
+      ]
+    },
+    {
+      "id": 26,
+      "prompt": "The confirmed first journey is: an authenticated employee submits one support ticket's text, the system returns a single classification label from a fixed taxonomy plus a confidence score, and there is no multi-turn conversation, tool selection, or follow-up action. The team assumes this needs a Foundry hosted agent with an orchestrator so it can scale alongside our other agents. Start architecture discovery.",
+      "expected_output": "The response tests the confirmed journey against the boundary ladder, shows that one bounded classification call does not require runtime planning or tool/source selection, recommends a direct model call (or governed deterministic service) over a Foundry hosted agent/orchestrator by default, asks any remaining frontier, and waits.",
+      "files": [],
+      "expectations": [
+        "The response evaluates the journey for planning, tool/source selection, investigation state, and follow-up before accepting an agent or orchestrator boundary.",
+        "The response does not select a Foundry hosted agent or orchestration layer solely because other agents exist in the estate or because of the word 'agent'.",
+        "The response identifies a direct model call or deterministic classification service as the fitting boundary for this single bounded step.",
+        "If a Foundry model deployment is proposed, it is scoped to direct inference rather than to agent hosting, orchestration, or multi-step tool execution.",
+        "The response ends after the frontier and creates no architecture, application, or infrastructure artifacts."
+      ]
+    },
+    {
+      "id": 27,
+      "prompt": "The shared-understanding record was confirmed in a previous turn. An authenticated employee uses Microsoft Teams to ask a custom Microsoft Agent Framework agent to investigate a goal across authorized tools, preserve evidence across follow-ups, and run some long analyses in the background. Interactive tool calls must use the employee's delegated identity; unattended work must use a dedicated agent identity. Financial calculations and authorization stay deterministic, and investigation records must be retained for one year. A direct Foundry prompt-agent publication route was ruled out because its exact identity path did not meet the requirement. There is no existing application host that must be reused. Platform and hosting selection are delegated to you. Produce the architecture package only.",
+      "expected_output": "The architecture treats the failed prompt-agent composition as a narrow rejection, independently compares a Foundry Hosted Agent running custom Agent Framework code with application-hosted Agent Framework, and selects or recommends the Hosted Agent when its verified Teams Activity, OBO, background, state and networking gates fit. It keeps the one-year investigation record in workload-owned durable storage.",
+      "files": [],
+      "expectations": [
+        "The response does not generalize the prompt-agent identity limitation to Foundry Hosted Agents.",
+        "The architecture explicitly compares Foundry Hosted Agent and application-hosted Agent Framework for the same custom Agent Framework code.",
+        "The hosting decision evaluates the Teams Activity route, interactive OBO, autonomous agent identity, background execution, protocol, networking, region and package maturity.",
+        "With no confirmed application-owned hosting requirement, the response prefers managed execution when the documented compatibility gates are satisfied or records a specific unresolved gate instead of defaulting to application hosting.",
+        "The architecture keeps authoritative one-year investigation records outside Hosted Agent session or conversation retention.",
+        "The response creates only the architecture package and stops for explicit approval without implementing or deploying the agent."
+      ]
+    },
+    {
+      "id": 28,
+      "prompt": "Our existing authenticated application hosts a Microsoft Agent Framework investigation agent. It must combine policy evidence from an existing Foundry IQ knowledge base with employee work context from Work IQ. Preserve the application and custom client; we are not using Copilot Studio. Source access, connector identity, licensing, maturity, and networking are still unresolved. Start architecture discovery.",
+      "expected_output": "The response considers unified IQ composition on the existing runtime, verifies each selected connection independently, and asks the unresolved access and compatibility frontier. It preserves the application and does not require Copilot Studio or its GitHub Copilot harness.",
+      "files": [],
+      "expectations": [
+        "The response evaluates Foundry IQ and Work IQ as separate connections on the existing runtime rather than requiring Copilot Studio.",
+        "The response scopes Copilot Studio harness prerequisites to Copilot Studio tool surfaces.",
+        "The response distinguishes documented product integration surfaces from verified support for the exact composition and does not promise a native adapter without evidence.",
+        "The response verifies source permissions, caller identity, licensing, maturity, and networking separately for each connection.",
+        "The response preserves the custom client, ends after discovery questions, and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 29,
+      "prompt": "We want an employee agent that connects recent emails and meetings with Dynamics 365 Sales and Power Platform business context through Work IQ. Another team says Work IQ cannot use business data or documents and that any business context must use Fabric IQ. The channel and runtime are not selected, and tenant enablement and access are unknown. Start architecture discovery.",
+      "expected_output": "The response corrects the categorical exclusion of business and document data from Work IQ, verifies the required source capabilities and access, and selects candidate IQ planes by responsibility rather than disjoint data categories. It asks the unresolved frontier without guaranteeing tenant availability or forcing another plane.",
+      "files": [],
+      "expectations": [
+        "The response recognizes Work IQ's documented Microsoft 365 and connected business context, including Dynamics 365 and Power Platform.",
+        "The response compares IQ planes by required capability and verified source access, allowing overlapping data coverage.",
+        "The response keeps the planes distinct and does not add Fabric IQ solely because business data is involved.",
+        "The response verifies the selected Work IQ surface, tenant enablement, source permissions, maturity, and licensing rather than treating general product scope as guaranteed access.",
+        "The response ends after discovery questions and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 30,
+      "prompt": "Our internal proposal process must reuse three approved specialist agents with separate owners and permissions. The research agent investigates the brief and selects evidence; the solution agent develops options from the completed research; the editorial agent prepares the final draft from the selected option. Each agent dynamically chooses tools within its stage, but stage order is fixed and later stages must not run on missing or invalid earlier results. The existing employee portal remains the client. Coordination, intermediate state, and failure handling are undecided. Start architecture discovery and compare suitable orchestration options.",
+      "expected_output": "The response recommends sequential orchestration as the candidate for the fixed dependency chain, distinguishes deterministic stage ordering from each agent's internal planning, and asks the unresolved state and failure frontier before waiting.",
+      "files": [],
+      "expectations": [
+        "The response identifies sequential orchestration or an equivalent fixed agent pipeline as the fitting candidate.",
+        "The response preserves the three supplied ownership and permission boundaries and compares the candidate with a simpler single-agent or workflow alternative.",
+        "The response rejects concurrent execution of dependent stages and does not give agents authority to reorder the outer pipeline.",
+        "The frontier addresses intermediate output validation, state access, timeouts, and stopping or recovering before a downstream stage consumes a failed result.",
+        "The response preserves the portal, asks only unresolved decisions, and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 31,
+      "prompt": "Three existing read-only agents independently assess the same supplier evidence snapshot for operational resilience, security posture, and delivery feasibility. Each has a separate owner and permission boundary. None needs another agent's output, all assessments are required, and the analyst needs one combined evidence report. Our team proposes running them in sequence because that is our familiar orchestration pattern. Aggregation, capacity, and partial-failure behavior are undecided. Start architecture discovery and challenge that proposal.",
+      "expected_output": "The response rejects sequential orchestration as the default for independent work, compares concurrent fan-out/fan-in against a simpler alternative, and asks about aggregation, resource limits, and partial results.",
+      "files": [],
+      "expectations": [
+        "The response rejects sequential orchestration using the supplied independence of the assessments rather than a generic preference for parallelism.",
+        "The response recommends concurrent orchestration as a candidate, subject to capacity and endpoint compatibility checks.",
+        "The response distinguishes combining independent outputs from passing one agent's output as another's required input.",
+        "The frontier addresses contradictory findings, missing results, deadlines, and quota rather than promising that concurrency always improves latency.",
+        "The response waits after discovery questions and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 32,
+      "prompt": "An employee submits one product-launch proposal to our existing portal. Three approved agents independently analyze the same proposal and evidence snapshot from accessibility, service-operability, and customer-adoption perspectives. Separate teams own their instructions and scoped tools. They do not change business records or need each other's findings. Every assessment must appear in one report with source references, including unresolved disagreements. We want to avoid serial latency where capacity permits. Orchestration, result collection, and failure policy are open. Start architecture discovery.",
+      "expected_output": "The response recommends concurrent orchestration with explicit result collection, preserves independent analyses and disagreements, and asks about capacity, aggregation, and partial-failure policy.",
+      "files": [],
+      "expectations": [
+        "The response identifies concurrent orchestration or fan-out/fan-in as the fitting candidate for independent assessments.",
+        "The response compares the multi-agent candidate with a simpler design while preserving the supplied separate ownership and permission boundaries.",
+        "The response identifies an aggregation owner and keeps conflicting or missing assessments visible rather than treating majority agreement as factual correctness.",
+        "The frontier addresses per-agent timeouts, collection completeness, concurrency limits, and the response when one assessment fails.",
+        "The response keeps all agents read-only, ends after discovery questions, and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 33,
+      "prompt": "Our document-review journey reuses two approved agents. A drafting agent first selects supporting evidence and produces a versioned proposal. A separate review agent must assess exactly that completed draft, not the raw request or a previous version. No peer discussion or automatic revision loop is in scope. The team proposes concurrent orchestration to make the two agents finish faster. Draft-state ownership and recovery are unresolved. Start architecture discovery.",
+      "expected_output": "The response rejects concurrent execution of the dependent drafting and review stages, recommends a sequential candidate, and asks about version binding and failure recovery.",
+      "files": [],
+      "expectations": [
+        "The response rejects concurrent orchestration because the reviewer requires the completed drafting output.",
+        "The response proposes sequential orchestration or an equivalent explicit dependency rather than starting both agents on incomplete context.",
+        "The frontier addresses draft version binding, validation before review, and failed or timed-out drafting behavior.",
+        "The response preserves the absence of peer discussion and automatic revision instead of adding group chat or an adaptive planner.",
+        "The response waits after discovery questions and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 34,
+      "prompt": "Our workforce support conversation starts with a general assistance agent. The issue's domain often becomes clear only after several questions. At that point an approved device, account-access, or application specialist must take over the conversation and become the active responder; the general agent is not meant to collect specialist answers and synthesize them. New evidence can require a later transfer to another specialist or a human. Each specialist owns its own permissions. The transfer protocol, context sharing, and maximum transfer count are undecided. Start architecture discovery.",
+      "expected_output": "The response recommends handoff orchestration for dynamic transfer of control, distinguishes it from an agent used as a tool, and asks about identity, context, and bounded transfer behavior.",
+      "files": [],
+      "expectations": [
+        "The response identifies handoff orchestration as the fitting candidate because the appropriate specialist emerges during the conversation.",
+        "The response distinguishes one active responder taking control from parallel specialist calls or a central agent retaining control and aggregating results.",
+        "The frontier addresses permitted transfer targets, caller identity, minimum shared context, and specialist authorization at each transfer.",
+        "The frontier addresses repeated transfers, a transfer limit, failed handoffs, and human escalation.",
+        "The response waits after discovery questions and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 35,
+      "prompt": "Our employee portal submits a support request with a validated service category selected by the employee. An approved routing table maps that category to exactly one existing specialist agent. The specialist handles the request from start to finish; the route is known before any agent call, and dynamic transfer is out of scope. A colleague proposes a triage agent that uses handoff orchestration to discover the right specialist. Identity propagation and routing-error behavior remain open. Start architecture discovery.",
+      "expected_output": "The response rejects agent-driven handoff for the already determined route, recommends deterministic dispatch to the existing specialist, and asks about authorization and routing errors.",
+      "files": [],
+      "expectations": [
+        "The response rejects handoff orchestration using the known category-to-specialist mapping.",
+        "The response recommends deterministic routing without adding a reasoning triage agent.",
+        "The response preserves the selected specialist's existing agent behavior rather than concluding that deterministic dispatch eliminates the specialist agent itself.",
+        "The frontier addresses invalid or stale route mappings, caller authorization, and the specialist's independent permission checks.",
+        "The response waits after discovery questions and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 36,
+      "prompt": "An employee wants three existing advisory agents to critique a proposed service design. The accessibility, operations, and customer-experience agents must read one another's arguments, challenge contradictions, and revise their recommendations in a shared discussion that the employee can join. Independent one-shot reports have not exposed the cross-domain trade-offs we need. The agents are read-only; a human owns the final decision and any changes. Discussion management, completion criteria, and limits are open. Start architecture discovery and recommend a coordination approach.",
+      "expected_output": "The response recommends managed group chat for iterative cross-agent discussion, distinguishes it from independent fan-out and dynamic task planning, and asks about speaker control, completion, and escalation.",
+      "files": [],
+      "expectations": [
+        "The response identifies group chat orchestration as the fitting candidate for shared discussion and iterative refinement.",
+        "The response explains why concurrent independent reports or a one-way pipeline do not meet the supplied need to challenge and revise arguments.",
+        "The frontier addresses the chat manager, speaker selection, shared-context access, completion criteria, and discussion limits.",
+        "The response distinguishes agent consensus from factual validation or human approval and preserves the human's final decision.",
+        "The response keeps business actions out of the discussion, waits after discovery questions, and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 37,
+      "prompt": "Our high-volume knowledge response service needs two existing independently governed agents: the first selects authorized sources and drafts an answer; the second performs one review against a fixed quality checklist. If review fails, the answer goes to a human queue. There is no debate, consensus, revision cycle, or shared conversation among the agents. We are considering group chat orchestration because having multiple agents seems to imply a discussion. Latency targets and review-state ownership remain open. Start architecture discovery.",
+      "expected_output": "The response rejects group chat for a one-way draft-and-review chain, recommends sequential coordination, and preserves the existing human escalation instead of inventing iterative consensus.",
+      "files": [],
+      "expectations": [
+        "The response rejects group chat orchestration because the journey requires a fixed one-pass review rather than discussion or revision.",
+        "The response recommends sequential coordination and does not introduce a chat manager or accumulating peer conversation.",
+        "The response preserves the fixed quality checklist and human queue for failed reviews.",
+        "The frontier addresses latency, draft-to-review state binding, and timeout or incomplete-review behavior.",
+        "The response waits after discovery questions and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 38,
+      "prompt": "We are designing a new capacity-planning investigation journey, not troubleshooting a deployed agent. An analyst supplies a goal, but the evidence sources and task sequence are not known in advance. Existing capacity, workload, and scheduling specialist agents have independent permissions and can expose missing evidence that changes the plan. The coordinator must maintain a reviewable task and progress ledger, assign and reorder tasks, detect stalls, and produce an evidence-backed proposal. It may make at most twelve specialist calls and two replans before escalating. All production changes require separate human approval. Runtime and durable-state ownership are undecided. Start architecture discovery.",
+      "expected_output": "The response recommends Magentic orchestration for adaptive specialist coordination with a task/progress ledger, preserves the supplied limits and approval boundary, and asks about state, failure, and compatibility.",
+      "files": [],
+      "expectations": [
+        "The response identifies Magentic orchestration or an equivalent task-ledger-based adaptive manager as the fitting candidate.",
+        "The response distinguishes manager-owned planning and replanning from a fixed sequence, a shared debate, or transfer of the active conversation.",
+        "The response preserves the limit of twelve specialist calls and two replans, with stall detection and human escalation.",
+        "The frontier addresses task/progress ledger ownership, resume behavior, per-specialist authorization, and selected runtime compatibility.",
+        "The response keeps production changes behind separate human approval, waits after discovery questions, and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 39,
+      "prompt": "Our new invoice-processing journey has an approved fixed order: extract the supported fields, validate them with deterministic rules, then route any exception to the existing review queue. One bounded extraction call is sufficient; there are no specialist investigations, dynamic task choices, or requirements for a planning ledger. The team suggests Magentic orchestration so an AI manager can invent and revise the process. Preserve the existing pipeline. Extraction compatibility and failure handling remain open. Start architecture discovery.",
+      "expected_output": "The response rejects Magentic orchestration for the fixed low-complexity journey, recommends bounded extraction in the explicit pipeline, and asks only about unresolved extraction and recovery decisions.",
+      "files": [],
+      "expectations": [
+        "The response rejects Magentic orchestration using the fixed sequence, absent planning need, and absent task-ledger requirement.",
+        "The response recommends the explicit pipeline with a bounded extraction capability instead of adding a manager or specialist agents.",
+        "The response preserves deterministic validation and the existing human exception queue.",
+        "The frontier addresses document/model compatibility, invalid extraction output, retries, and routing failure without reopening the agreed sequence.",
+        "The response waits after discovery questions and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 40,
+      "prompt": "We are creating an employee help agent in our approved Copilot Studio environment. It answers short policy questions from a small governed collection and can choose between two approved read-only lookup tools. Each request has one response; no large-file processing, persistent memory, long-running coordination, or iterative recovery is required. High request volume and responsive interaction matter. The team assumes that tool selection and MCP require the GitHub Copilot harness. Harness and channel compatibility are undecided. Start architecture discovery and compare the harnesses.",
+      "expected_output": "The response recommends the standard harness as the proportionate candidate for bounded work, corrects the assumption that tool selection or MCP alone requires the GitHub Copilot harness, and verifies required feature and channel support.",
+      "files": [],
+      "expectations": [
+        "The response compares standard and GitHub Copilot harnesses using task weight, control, latency, and consumption rather than treating one as universally better.",
+        "The response recommends the standard harness as the candidate for the supplied short, bounded journey, subject to exact tool and channel support.",
+        "The response recognizes that dynamic tool choice or MCP alone does not establish a GitHub Copilot harness requirement.",
+        "The response verifies current Microsoft guidance and asks about the unresolved channel, tool compatibility, and licensing without promising unsupported features.",
+        "The response waits after discovery questions and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 41,
+      "prompt": "Our Power Platform team wants a Copilot Studio agent to prepare a cross-system account briefing. It must inspect large approved files and datasets, coordinate specialist work, revise its plan when evidence is missing, retain useful context across runs, and produce both a report and a presentation. This long-running task is not a responsive customer chat; the team accepts higher latency when it improves briefing quality. Deterministic calculations and approvals stay in existing governed workflows. We have not selected the harness, model, channels, or consumption controls. Start architecture discovery.",
+      "expected_output": "The response recommends evaluating the GitHub Copilot harness for the heavy, adaptive, multi-output journey, compares it with standard-harness limitations and alternatives, and exposes compatibility, governance, and consumption gates.",
+      "files": [],
+      "expectations": [
+        "The response identifies the GitHub Copilot harness as the candidate because of the supplied scale, coordination, context, and replanning needs.",
+        "The response compares the standard harness meaningfully rather than choosing the newer harness solely for novelty or the agent label.",
+        "The response verifies required model, channel, file-processing, memory, and runtime capabilities separately and keeps unresolved maturity checks explicit.",
+        "The frontier addresses usage-based Copilot Credit consumption, evaluation, permissions, and governance across building, testing, and running the agent.",
+        "The response preserves deterministic business workflows, waits after discovery questions, and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 42,
+      "prompt": "We have a working production Copilot Studio agent on the standard harness. It provides bounded help conversations, uses approved topics and tools, and meets its quality and latency targets. It also depends on a published channel and rich interaction features that must remain supported. There is no new heavy task or capability gap. A sponsor wants to switch to the GitHub Copilot harness simply because it is newer. Start architecture discovery for that proposed change, preserving current production behavior.",
+      "expected_output": "The response recommends retaining the standard harness absent a demonstrated scenario benefit, treats migration as a business-case and compatibility decision, and does not assume feature parity or automatic conversion.",
+      "files": [],
+      "expectations": [
+        "The response challenges migration based only on novelty and recommends preserving the working standard-harness implementation.",
+        "The response asks what measurable quality, capability, or operational benefit would justify migration instead of inventing a heavy workload.",
+        "The response verifies the required channel and interaction features before treating migration as viable and does not assume feature parity.",
+        "The response identifies migration evaluation, consumption, and re-architecture costs if a real benefit emerges rather than promising mechanical component conversion.",
+        "The response waits after discovery questions and makes no production, architecture, or implementation changes."
+      ]
+    },
+    {
+      "id": 43,
+      "prompt": "Our existing Foundry-hosted Microsoft Agent Framework agent must correlate a published Fabric data agent's operational insights with Foundry IQ policy evidence and Work IQ employee context. Keep its managed runtime and existing authenticated client; we do not use Copilot Studio. Separate teams govern the three sources, and one source may require a different user-delegation path from the others. Exact endpoints, language support, source permissions, regions, and connector maturity remain unverified. Start architecture discovery for this composition.",
+      "expected_output": "The response evaluates three independent IQ connections on the existing managed runtime, verifies the exact routes and identity hops, and leaves unsupported or unresolved connections conditional rather than imposing Copilot Studio.",
+      "files": [],
+      "expectations": [
+        "The response evaluates unified IQ composition on the existing Foundry-hosted runtime without requiring Copilot Studio or its harness.",
+        "The response keeps Fabric data-agent access, Foundry IQ retrieval, and Work IQ context as separately governed connections rather than a shared knowledge base.",
+        "The response distinguishes documented external integration surfaces from verified support for the exact hosted language, endpoint, and protocol combination.",
+        "The frontier addresses per-source user delegation, permissions, networking, region, licensing, and connector maturity; a failed route remains conditional with dependent work blocked.",
+        "The response preserves the existing client and managed runtime, waits after discovery questions, and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 44,
+      "prompt": "Our existing application embeds GitHub Copilot SDK with an approved Azure model provider and a restricted shared-server runtime. We want to combine Foundry IQ document retrieval and Work IQ workplace context in the agent's investigation tools. Preserve this runtime and client. A sample shows Copilot SDK hosted in Foundry, so we assume it proves native support for both IQ connections in our application. Endpoint contracts, token refresh, caller permissions, and connector maturity are unresolved. Start architecture discovery.",
+      "expected_output": "The response preserves the application-hosted Copilot SDK boundary, treats IQ retrieval and context access as separately verified integrations, and rejects the inference that a hosting sample proves native connector support.",
+      "files": [],
+      "expectations": [
+        "The response considers IQ composition on the existing Copilot SDK runtime without requiring Copilot Studio or migration to Foundry hosting.",
+        "The response distinguishes the Azure model-provider boundary from Foundry IQ and Work IQ tool connections.",
+        "The response rejects the claim that the hosted SDK sample establishes native IQ connector support for the selected application configuration.",
+        "The frontier addresses each connection's endpoint/protocol, token lifecycle, caller permissions, isolation, licensing, and maturity while preserving restricted runtime and tool policy.",
+        "The response waits after discovery questions and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 45,
+      "prompt": "The four architecture artifacts are complete. The local renderer worked. An independent one-shot reviewer found blocking connector and label defects. You repaired every finding, reran structural validation, and inspected the new PNGs locally. The reviewer cannot accept a follow-up because its execution mode does not support another turn. I approve the package. Complete the architecture handoff.",
+      "expected_output": "The response keeps the independent diagram gate blocked because the required comparative recheck is unavailable. It records the review limitation and asks for explicit approval of a manual-review exception before handoff.",
+      "files": [],
+      "expectations": [
+        "The response does not treat local self-review after repair as a passed independent review.",
+        "The response records the original independent findings, repairs, unavailable targeted recheck, and stop reason.",
+        "The response keeps the independent review gate blocked under the diagram specialist contract.",
+        "The user's general package approval is not silently treated as approval of the missing-review exception.",
+        "The response asks for explicit approval of the manual-review exception and waits without handing off or starting implementation."
+      ]
+    },
+    {
+      "id": 46,
+      "prompt": "The shared-understanding record is confirmed. A regulated bank submits scanned PDF bundles containing several Greek business documents. The system must split each bundle at document boundaries, classify every segment into one immutable three-level taxonomy path or an explicit unmatched outcome, account for every page exactly once, and send uncertain boundaries or labels to the existing review workflow. The taxonomy has inconsistent long business labels and may exceed one classifier's category capacity. No runtime planning, conversation, or dynamic tools are needed. The bank delegates the Azure processing composition within its private-network and managed-identity standards. Produce the architecture package only.",
+      "expected_output": "The architecture selects a headless document classification and segmentation workflow, evaluates Content Understanding against bounded alternatives, preserves the canonical taxonomy through analyzer-safe mappings, and makes deterministic page accounting, unmatched handling, review, versioning and benchmark evaluation explicit.",
+      "files": [],
+      "expectations": [
+        "The response selects an explicit workflow rather than an agent runtime for the fixed segmentation, classification, validation and review sequence.",
+        "The architecture evaluates Content Understanding classification and segmentation using the GA API as a managed candidate rather than treating generic extraction or a direct model call as automatically equivalent.",
+        "The design preserves immutable canonical taxonomy labels while mapping analyzer-safe identifiers and descriptions around category, description and hierarchy limits.",
+        "The output contract requires ordered segments, exact page coverage with no overlap or omission, one valid taxonomy path or explicit unmatched outcome, and pinned taxonomy/analyzer versions.",
+        "Confidence and structural validation do not replace representative ground truth, boundary and per-category evaluation, human review, or an owned promotion threshold.",
+        "The response creates only the architecture package and stops for explicit approval without implementing or provisioning."
+      ]
+    },
+    {
+      "id": 47,
+      "prompt": "The business journey is confirmed: production PDF packets can contain two different forms on the same physical page, and the system must automatically split both regions before classification and downstream extraction. The team proposes Azure Content Understanding and says its generally available classifier already supports this. Preview services are prohibited by policy. Start the target-architecture decision.",
+      "expected_output": "The response corrects the GA assumption, keeps in-page segmentation behind the preview gate, and presents production-compatible alternatives or a requirement change instead of claiming unsupported GA behavior.",
+      "files": [],
+      "expectations": [
+        "The response distinguishes GA page-boundary segmentation from preview-only in-page segmentation.",
+        "The response does not recommend the preview API as production-compatible when policy prohibits previews.",
+        "The target-architecture options include an approved preprocessing, manual-review, input-contract, or other production-compatible boundary strategy with explicit trade-offs.",
+        "The response keeps downstream classification and extraction conditional on a resolved segmentation boundary.",
+        "The response asks the user to confirm a concrete viable composition and creates no architecture or implementation artifacts yet."
+      ]
+    },
+    {
+      "id": 48,
+      "prompt": "We process one known invoice per PDF. The document type is established before processing, and the only AI requirement is to extract invoice number, supplier, date, line items and total with source locations. Deterministic rules validate the fields and low-confidence values enter the existing review queue. A sponsor wants Content Understanding classification and hierarchical segmentation because it sounds more advanced. Start architecture discovery and keep the existing batch entry point.",
+      "expected_output": "The response rejects unnecessary classification and segmentation, compares the smallest fitting extraction capabilities, and preserves the batch validation and review workflow.",
+      "files": [],
+      "expectations": [
+        "The response recognizes that document type and boundaries are already known and does not add a classifier or hierarchical segmentation.",
+        "The response compares Document Intelligence and Content Understanding extraction according to field, layout, language, confidence, grounding and existing-integration fit.",
+        "The existing batch entry point, deterministic field validation, source provenance and review queue remain the core workflow.",
+        "A more complex Content Understanding composition requires a demonstrated extraction capability gap rather than sponsor preference.",
+        "The response waits after the unresolved discovery frontier and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 49,
+      "prompt": "The target journey is confirmed: employees ask an internal policy assistant questions over authorized indexed documents, receive cited answers, and can separately request approved HR actions through governed tools. One source document contains text telling the model to ignore its instructions, retrieve executive salary files, and call the HR export tool. The team says document ACLs and citations already make the RAG design safe. Start the target-architecture decision.",
+      "expected_output": "The response treats retrieved content as untrusted evidence, preserves caller authorization and retrieval/action separation, and adds indirect-prompt-attack, groundedness, citation, abstention and leakage evaluation before presenting a concrete architecture choice.",
+      "files": [],
+      "expectations": [
+        "The response states that instructions inside retrieved documents cannot override system policy or authorize tool execution.",
+        "The architecture keeps knowledge retrieval separate from the governed HR action tool and requires independent authorization and approval for the action.",
+        "The design covers source governance and caller ACL enforcement in addition to prompt-attack detection or filtering.",
+        "The evaluation plan separates retrieval quality from answer quality and covers groundedness, citation completeness, safe abstention, ACL leakage and indirect prompt attacks.",
+        "The response presents or asks the user to confirm a concrete viable composition and creates no architecture or implementation artifacts before confirmation."
+      ]
+    },
+    {
+      "id": 50,
+      "prompt": "Our existing investigation agent must combine Fabric IQ operational measures, Foundry IQ policy documents, and Work IQ emails and meeting context. The three sources can disagree, one source can time out, and some evidence overlaps. The team proposes that the model use majority agreement, hide unavailable sources, and return one clean answer without source-specific citations. Each plane already has separate permissions. Start architecture discovery for the reconciliation behavior.",
+      "expected_output": "The response rejects majority-vote truth and silent partial failure, preserves per-plane provenance and permissions, defines source authority by claim type, and asks the reconciliation frontier before architecture.",
+      "files": [],
+      "expectations": [
+        "The response preserves per-plane source identity, timestamps, permission context and citations through synthesis.",
+        "The response rejects majority agreement as factual validation and keeps authoritative calculations or business state in the governed source or deterministic service.",
+        "Material conflicts are exposed or routed to an owner according to claim-specific source authority rather than blended away.",
+        "Timeout, denied access and unsupported routes remain visible partial failures rather than silent missing evidence.",
+        "Overlapping evidence is deduplicated only after authorization and without erasing provenance.",
+        "The response waits after the reconciliation and ownership frontier and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 51,
+      "prompt": "Design the production runtime for a multi-tenant SaaS backend built with the GitHub Copilot SDK. The team proposes one shared Copilot CLI server in its default mode, a shared workspace and service credential, approve_all for tools, local session state behind a round-robin load balancer, and assumes sessions survive process restarts. Include the runtime topology, isolation, scaling, recovery, upgrade, observability, authorization, and cost/entitlement decisions.",
+      "expected_output": "The response rejects the proposed defaults as a production design. It selects an explicit isolated-per-user/trust-boundary or shared-runtime topology and, for a shared runtime, requires empty mode plus per-session tools, credentials, storage/workspace, identity, authorization, and session ownership. It distinguishes logical session IDs from tenant isolation, requires serialization for collaborative sessions, defines bounded concurrency, admission control/backpressure, queue limits, cancellation and overload behavior, and states how session state survives process/node loss through supported shared state or sticky placement with an explicit loss outcome. It replaces approve_all with scoped application-owned authorization and approval, pins and tests the SDK and CLI binary/image together with drain, upgrade, compatibility and rollback criteria, emits correlated runtime/session/model/tool/approval telemetry, and names the owner of GitHub entitlement or BYOK credentials, quotas, consumption and cost. It separately verifies remote or cloud session behavior instead of assuming local parity.",
+      "files": [
+        "references/azure-patterns/runtimes/copilot-sdk-runtime.md",
+        "references/azure-patterns/runtimes/README.md"
+      ],
+      "expectations": [
+        "The response rejects default-mode shared tools, filesystem, credentials and approve_all as a production multi-tenant boundary.",
+        "The selected topology distinguishes isolated CLI processes from shared CLI sessions and requires empty mode plus per-session identity, tools, credentials, workspace/storage, authorization and ownership when sharing.",
+        "The runtime design covers bounded concurrency, admission control, queue limits, backpressure, cancellation and overload behavior.",
+        "Session continuity across process or node loss is tied to supported shared state or sticky placement with an explicit loss outcome rather than assumed from a session ID.",
+        "The response covers shared-session serialization, SDK and CLI pinning, drain, upgrade, compatibility and rollback.",
+        "Telemetry correlates application, runtime, session, model, tool and approval activity, and the design names entitlement or BYOK credential, quota, consumption and cost ownership.",
+        "Remote or cloud session behavior remains a separate verification gate rather than being inferred from local CLI behavior."
+      ]
+    },
+    {
+      "id": 52,
+      "prompt": "A customer-service assistant must transfer the active conversation to a specialist selected from billing, fraud, or lending. After transfer, independent compliance and account-status checks should run in parallel; the specialist may respond only after both checks complete or a timeout policy decides how to handle a missing result. The team suggests putting every agent in a group chat. Recommend the coordination design, state ownership, permissions, failure behavior, and human escalation.",
+      "expected_output": "The response composes coordination patterns per seam instead of choosing one global multi-agent pattern: an explicit handoff changes the active conversation owner, concurrent fan-out/fan-in runs the independent checks, and a deterministic join/timeout gate controls whether the specialist may respond. It rejects group chat because the specialists are not engaged in peer deliberation. It defines the transferred context and visible active owner, applies least-privilege tools and caller/service authorization to each specialist and check, keeps conversation history, workflow/checkpoint state, approvals and authoritative business records separate with named owners, and preserves denied, failed, timed-out or missing checks as visible partial results. It specifies bounded concurrency, retries, duplicate suppression, cancellation, spend/time limits, an incomplete-result policy, and human escalation for unresolved risk or unavailable specialists.",
+      "files": [
+        "references/azure-patterns/patterns/13-agent-coordination.md",
+        "references/azure-patterns/patterns/04-agent-tools-approvals.md",
+        "references/azure-patterns/runtimes/application-hosted-agent-framework.md",
+        "references/azure-patterns/runtimes/foundry-hosted-agent.md"
+      ],
+      "expectations": [
+        "The response composes handoff, concurrent fan-out/fan-in and a deterministic join/timeout gate per seam rather than selecting one global coordination pattern.",
+        "Group chat is rejected because the roles do not require peer deliberation or shared iterative critique.",
+        "The design names the active conversation owner, transferred context and least-privilege identity and tool permissions for every specialist and check.",
+        "Conversation history, workflow/checkpoint state, approvals and authoritative business records remain separate with named owners.",
+        "Failed, denied, timed-out and missing checks remain visible partial results under an explicit incomplete-result policy.",
+        "The response specifies bounded concurrency, retries, duplicate suppression, cancellation, time/spend limits and escalation for unresolved risk or unavailable specialists."
+      ]
+    },
+    {
+      "id": 53,
+      "prompt": "A public benefits assistant answers eligibility questions from uploaded documents and can submit an application after user confirmation. The team plans to launch once the happy-path accuracy benchmark passes and Azure content filters are enabled. Uploaded documents and public users are untrusted, applications contain sensitive personal data, and an incorrect submission can affect benefits. Start the target-architecture decision and define the safety and release evidence required before production.",
+      "expected_output": "The response treats safety as a risk-driven release system rather than a content-filter setting. It identifies applicable harms across uploaded content, model answers, retrieval, authorization and submission tools; separates component and end-to-end evaluation; requires representative and adversarial testing, red teaming, privacy-governed evidence, measurable promotion thresholds, canary, monitoring, incident response and rollback; and keeps authoritative eligibility and submission behind deterministic validation, caller authorization and explicit approval.",
+      "files": [
+        "references/azure-patterns/assurance/ai-safety-release.md",
+        "references/architecture-quality.md",
+        "references/azure-patterns/patterns/02-secure-grounded-chat.md",
+        "references/azure-patterns/patterns/04-agent-tools-approvals.md"
+      ],
+      "expectations": [
+        "The response rejects happy-path accuracy plus content filters as sufficient production assurance.",
+        "The risk model covers indirect prompt injection, sensitive-data or tenant leakage, fabricated eligibility evidence, authorization or approval bypass, harmful output and unsafe tool execution where applicable.",
+        "Evaluation separates model, retrieval, tool or trusted-execution, and end-to-end journey behavior using representative, denied-access, partial-failure and adversarial cases.",
+        "Release evidence includes measurable blocking thresholds, red teaming, privacy-governed traces and datasets, canary promotion, monitoring, incident feedback and tested rollback.",
+        "Eligibility rules and application submission remain deterministic and authoritative, with caller authorization, explicit confirmation or approval, idempotency and audit.",
+        "The response presents a concrete viable composition or asks only unresolved architecture decisions and creates no implementation artifacts."
+      ]
+    },
+    {
+      "id": 54,
+      "prompt": "An employee assistant should remember accessibility preferences, preferred language and recurring work routines across sessions. The sponsor also wants it to remember manager names, performance concerns and inferred medical conditions automatically. Users must be able to inspect, correct and delete what is remembered. The team proposes storing conversation summaries under a user ID and treating those memories as trusted facts for later HR actions. Start architecture discovery for persistent memory.",
+      "expected_output": "The response separates conversation history, profile, episodic or summary memory, procedural memory, workflow state, organizational knowledge and authoritative HR records. It defines consent and prohibited-memory policy, tenant and subject scoping, provenance, sensitivity, retention, inspection, correction and deletion; treats extracted memory as untrusted; prevents memory from authorizing HR actions; evaluates poisoning, stale/conflicting facts, recall/write quality and leakage; and keeps preview managed memory behind explicit maturity, identity, network and lifecycle gates.",
+      "files": [
+        "references/azure-patterns/patterns/14-durable-memory-personalization.md",
+        "references/azure-patterns/README.md",
+        "references/azure-patterns/patterns/02-secure-grounded-chat.md"
+      ],
+      "expectations": [
+        "The response distinguishes profile, summary or episodic, procedural, workflow, knowledge and authoritative business state.",
+        "It requires explicit policy or consent for sensitive memory and rejects automatic retention of inferred medical or performance information without an approved purpose.",
+        "Every memory item is scoped and governed by tenant, subject, provenance, timestamp, sensitivity, retention and user inspection, correction and deletion behavior.",
+        "Model-extracted memory remains untrusted context and cannot authorize an HR action or replace a current system-of-record lookup.",
+        "Evaluation covers write precision, useful recall, stale and conflicting facts, poisoning or persistent injection, cross-user leakage, correction, expiry and deletion propagation.",
+        "Managed memory preview maturity, identity or scope resolution, network, region, quota, model and API lifecycle remain explicit compatibility gates."
+      ]
+    },
+    {
+      "id": 55,
+      "prompt": "A claims summarization service has a long prompt with many examples, uses current policy documents, and calls deterministic pricing and eligibility APIs. The sponsor asks to fine-tune a model, distill a smaller model and add model router immediately to reduce cost. There is no labeled benchmark yet, production examples contain personal data, and policy content changes weekly. Start the architecture decision for model adaptation.",
+      "expected_output": "The response uses an adaptation ladder instead of selecting every mechanism. It keeps changing policy in authorized retrieval and authoritative calculations in tools, establishes an unmodified prompt/RAG/tool baseline and representative benchmark, and makes fine-tuning, distillation or routing conditional on a measured residual behavior, quality, latency or cost gap. Any customization includes approved and de-identified dataset provenance, consent, splits, lineage, safety evaluation, versioned training and deployment, promotion thresholds, monitoring, refresh triggers and rollback.",
+      "files": [
+        "references/azure-patterns/runtimes/README.md",
+        "references/azure-patterns/patterns/02-secure-grounded-chat.md",
+        "references/azure-patterns/patterns/04-agent-tools-approvals.md"
+      ],
+      "expectations": [
+        "The response keeps weekly policy knowledge in governed retrieval and deterministic pricing or eligibility in authorized tools rather than attempting to encode them through fine-tuning.",
+        "It establishes a representative unmodified prompt, retrieval and tool baseline before selecting fine-tuning, distillation or model routing.",
+        "Fine-tuning requires a measured repeated behavior or task gap plus approved representative labeled data; personal production examples are not reused without governance and consent.",
+        "Distillation requires teacher-model evidence, generated-data governance, a quality floor and drift or retraining criteria.",
+        "Model routing remains conditional on representative quality, supported-feature, latency, quota, fallback and cost evaluation.",
+        "Any selected adaptation versions the base model, data, method, result, evaluation and deployment with promotion thresholds, monitoring, refresh triggers and rollback."
+      ]
+    }
+  ]
+}
