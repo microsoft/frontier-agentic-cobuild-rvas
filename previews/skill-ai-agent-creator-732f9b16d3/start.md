@@ -193,9 +193,32 @@ approval before continuing.
 
 ### Review before deployment
 
-In CLI, run `/review` against the implementation and the approved package, resolve
-findings, and rerun affected tests. In a later pass, run `/security-review`.
-Review unresolved findings before approving deployment.
+After implementation and its targeted validation complete, run this in CLI:
+
+```text
+/review Review the staged and unstaged implementation against
+@docs/architecture/specification.md,
+@docs/architecture/implementation-plan.md, and
+@docs/architecture/solution.md. Identify unmet or partially met acceptance
+criteria, skipped or out-of-order plan steps, architecture deviations,
+regressions, and missing tests. Rank findings by severity and include file and
+line references.
+```
+
+Resolve the findings and rerun the relevant validation before moving to the
+security pass. In a later, separate pass, run:
+
+```text
+/security-review Analyze the staged and unstaged implementation for exploitable
+security vulnerabilities, insecure defaults, authorization or data-isolation
+failures, secret exposure, injection risks, unsafe external interactions, and
+dependency or configuration weaknesses. Rank findings by severity and confidence,
+include file and line references, and recommend the smallest safe fix for each
+finding.
+```
+
+Resolve the reported security findings and rerun the affected tests before
+approving deployment.
 
 In VS Code, request a separate implementation review grounded in those same files.
 Then request a separate security review using the review tools available in your

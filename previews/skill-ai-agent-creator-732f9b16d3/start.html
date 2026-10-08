@@ -126,10 +126,6 @@ consistently.</p>
 <p><code>discover-azure-skills</code>, <code>azure-enterprise-infra-planner</code>, <code>microsoft-foundry</code>, <code>azure-ai</code>, <code>foundry-iq</code>, <code>entra-agent-id</code>, <code>entra-app-registration</code>, <code>azure-aigateway</code></p>
 <pre><code class="language-bash">npx --yes skills@1.7.1 add microsoft/azure-skills --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
 </code></pre>
-<h3 id="lguzhumanize-writing-skill">lguz/humanize-writing-skill</h3>
-<p><code>humanize-writing</code></p>
-<pre><code class="language-bash">npx --yes skills@1.7.1 add lguz/humanize-writing-skill --skill humanize-writing --agent github-copilot --copy --yes
-</code></pre>
 <p>Third-party skills remain upstream-owned. Installing a skill makes guidance
 available; it does not authorize cloud changes. In particular, the upstream
 <code>implement</code> skill includes a commit step. Use the explicit handoff below for the
@@ -208,9 +204,26 @@ criterion is verified or explicitly reported as blocked.
 architecture changes materially, update the package and obtain the affected
 approval before continuing.</p>
 <h3 id="review-before-deployment">Review before deployment</h3>
-<p>In CLI, run <code>/review</code> against the implementation and the approved package, resolve
-findings, and rerun affected tests. In a later pass, run <code>/security-review</code>.
-Review unresolved findings before approving deployment.</p>
+<p>After implementation and its targeted validation complete, run this in CLI:</p>
+<pre><code class="language-text">/review Review the staged and unstaged implementation against
+@docs/architecture/specification.md,
+@docs/architecture/implementation-plan.md, and
+@docs/architecture/solution.md. Identify unmet or partially met acceptance
+criteria, skipped or out-of-order plan steps, architecture deviations,
+regressions, and missing tests. Rank findings by severity and include file and
+line references.
+</code></pre>
+<p>Resolve the findings and rerun the relevant validation before moving to the
+security pass. In a later, separate pass, run:</p>
+<pre><code class="language-text">/security-review Analyze the staged and unstaged implementation for exploitable
+security vulnerabilities, insecure defaults, authorization or data-isolation
+failures, secret exposure, injection risks, unsafe external interactions, and
+dependency or configuration weaknesses. Rank findings by severity and confidence,
+include file and line references, and recommend the smallest safe fix for each
+finding.
+</code></pre>
+<p>Resolve the reported security findings and rerun the affected tests before
+approving deployment.</p>
 <p>In VS Code, request a separate implementation review grounded in those same files.
 Then request a separate security review using the review tools available in your
 organization. Do not assume CLI slash commands exist in VS Code. If independent
