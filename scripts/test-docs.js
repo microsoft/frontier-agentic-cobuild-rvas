@@ -71,6 +71,7 @@ test('generated guide and manual commands match their current sources', () => {
   }
   const commands = spawnSync(process.execPath, [SETUP, '--print-commands'], { encoding: 'utf8' });
   assert.equal(commands.status, 0, commands.stderr);
+  assert.doesNotMatch(commands.stdout, /humanize-writing|lguz\/humanize-writing-skill/);
   for (const line of commands.stdout.trim().split('\n')) assert.ok(supportingMarkdown().includes(line));
 });
 
@@ -108,7 +109,7 @@ test('setup dry-run leaves an existing application untouched', (t) => {
   const before = fs.readdirSync(target);
   const result = run(['--dry-run']);
   assert.equal(result.status, 0, result.stderr);
-  assert.match(result.stdout, /17 skills pending/);
+  assert.ok(result.stdout.includes(`${inventory.sources.flatMap((source) => source.skills).length} skills pending`));
   assert.deepEqual(fs.readdirSync(target), before);
 });
 
@@ -121,7 +122,8 @@ test('setup installs the exact set, preserves user configuration, and reruns wit
   const names = inventory.sources.flatMap((source) => source.skills).sort();
   assert.deepEqual(fs.readdirSync(path.join(target, '.agents/skills')).sort(), names);
   const calls = fs.readFileSync(path.join(target, '.stub-invocations'), 'utf8');
-  assert.equal(calls.trim().split('\n').length, 3);
+  assert.equal(calls.trim().split('\n').length, inventory.sources.length);
+  assert.equal(fs.existsSync(path.join(target, '.agents/skills/humanize-writing')), false);
   for (const call of calls.trim().split('\n').map(JSON.parse)) {
     assert.equal(call.includes('--global'), false);
     assert.ok(call.includes('--copy'));
@@ -173,12 +175,12 @@ test('setup rejects linked destinations and alternative skill conflicts', (t) =>
 
 test('setup reports partial failure and does not run later sources', (t) => {
   const { target, run } = fixture(t);
-  const result = run([], { FAIL_SOURCE: 'microsoft/azure-skills' });
+  const result = run([], { FAIL_SOURCE: inventory.sources[0].repository });
   assert.notEqual(result.status, 0);
-  assert.match(result.stderr, /Completed this run: grilling/);
+  assert.match(result.stderr, /Completed this run: none/);
   assert.match(result.stderr, /partial writes/);
-  assert.equal(fs.readFileSync(path.join(target, '.stub-invocations'), 'utf8').trim().split('\n').length, 2);
-  assert.equal(fs.existsSync(path.join(target, '.agents/skills/humanize-writing')), false);
+  assert.equal(fs.readFileSync(path.join(target, '.stub-invocations'), 'utf8').trim().split('\n').length, 1);
+  assert.equal(fs.existsSync(path.join(target, '.agents/skills/azure-ai')), false);
   assert.notEqual(run().status, 0, 'partially installed unowned skills must require review');
 });
 
@@ -189,7 +191,6 @@ test('setup rejects incomplete installer output even when the upstream command s
   assert.match(result.stderr, /Installer did not produce azure-ai\/SKILL.md/);
   assert.match(result.stderr, /Completed this run: grilling/);
   assert.equal(fs.readFileSync(path.join(target, '.stub-invocations'), 'utf8').trim().split('\n').length, 2);
-  assert.equal(fs.existsSync(path.join(target, '.agents/skills/humanize-writing')), false);
   const state = JSON.parse(fs.readFileSync(path.join(target, '.agentic-cobuild-setup.json')));
   assert.deepEqual(Object.keys(state.skills).sort(), inventory.sources[0].skills.slice().sort());
 });

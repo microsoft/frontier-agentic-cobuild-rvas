@@ -20,11 +20,3 @@ npx --yes skills@1.7.1 add mattpocock/skills --skill grilling domain-modeling co
 ```bash
 npx --yes skills@1.7.1 add microsoft/azure-skills --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
 ```
-
-### lguz/humanize-writing-skill
-
-`humanize-writing`
-
-```bash
-npx --yes skills@1.7.1 add lguz/humanize-writing-skill --skill humanize-writing --agent github-copilot --copy --yes
-```
