@@ -7,7 +7,8 @@ brand authority. Fonts are self-hosted.
 The homepage uses the RVAP navy-to-blue gradient with a white architecture
 preview. Reading-page headers and navigation use light blue surfaces; navy marks
 the selected page and table headers. Links use a darker blue for readable
-contrast. Keep body content and diagrams on white. Learn page navigation uses
+contrast. Body content stays white except for the alternating application-family
+bands described below. Diagrams stay white. Learn page navigation uses
 three text tabs with an underline marking the current page.
 
 The homepage leads to repository setup. Its architecture-file preview describes
@@ -32,6 +33,10 @@ The application families pair explanatory text with compact conceptual diagrams
 on the right. Each diagram shows the distinguishing flow or approval boundary,
 without prescribing Microsoft products. Below 960px, the diagrams follow their
 text in a single column. Keep labels readable without horizontal scrolling.
+Alternate white and pale RVAP blue bands across the six families, with thin
+dividers and consistent vertical padding. Bands extend into the page gutters
+without reducing the content width. Keep the white diagram surfaces unbordered;
+do not turn the families into rounded cards or add shadows.
 Product examples sit below the family prose, separate from the conceptual flow.
 Use unchanged Microsoft icons with nearby product names linked to Microsoft Learn.
 Label each example and state that the products are optional, not approved architectures.
