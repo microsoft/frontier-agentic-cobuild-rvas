@@ -20,7 +20,7 @@ to the known-use-case journey.
 Learn pages place three page tabs directly above the article. The section
 disclosure is removed to keep a single navigation layer before the content.
 Prose stays at reading width; diagrams use the full content width.
-Start retains its "On this page" disclosure for the setup steps, without the
+Start opens directly into the setup steps, without section navigation or the
 Learn page tabs. Headings and prose share one 47.5rem column;
 subsections use spacing rather than full-width divider lines. Page tabs become
 two columns on narrow screens. Command blocks wrap to their available width. The copy

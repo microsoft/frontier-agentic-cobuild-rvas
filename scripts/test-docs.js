@@ -83,19 +83,18 @@ test('intro diagrams embed accessible wide and narrow layouts without fixed-widt
   }
 });
 
-test('Learn pages show only page tabs while Start retains its setup section disclosure', () => {
+test('Learn pages show page tabs while Start opens directly into its content', () => {
   for (const page of pages) {
     const html = renderPage(page);
     assert.match(html, /class="wrap guide-layout"/);
+    assert.doesNotMatch(html, /guide-contents|guide-section-links|On this page/);
     if (page.slug === 'start') {
-      assert.match(html, /<details class="guide-contents"><summary>On this page<\/summary>/);
-      assert.ok(html.indexOf('class="guide-contents"') < html.indexOf('<article'));
+      assert.doesNotMatch(html, /class="guide-nav"/);
       assert.doesNotMatch(html, /class="guide-pages"/);
       assert.match(html, /href="start.html" aria-current="page">Start/);
     } else {
       const tabs = html.match(/<div class="guide-pages">([\s\S]*?)<\/div>/)[1];
       assert.equal([...tabs.matchAll(/<a /g)].length, 3);
-      assert.doesNotMatch(html, /guide-contents|guide-section-links|On this page/);
       assert.ok(html.indexOf('class="guide-pages"') < html.indexOf('<article'));
       assert.match(html, /href="applications.html" aria-current="page">Learn/);
       assert.ok(html.includes(`href="${page.slug}.html" aria-current="page">${page.navigationLabel}</a>`));
