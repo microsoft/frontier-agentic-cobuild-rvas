@@ -42,6 +42,7 @@ Framework is required.
 | [Application-hosted Agent Framework](application-hosted-agent-framework.md) | Existing app integration or runtime control matters | Web/worker host, auth, durable state, scaling, deployment and telemetry |
 | [GitHub Copilot SDK runtime](copilot-sdk-runtime.md) | Its agent engine/tools add value | CLI process, provider, tools, sessions and isolation; hosting can be Foundry or app-owned |
 | [Durable workflow variant](durable-workflow-variant.md) | Resume/checkpoints/waits survive failures | Replay-safe workflow, job/approval state, stores and lifecycle |
+| [Logic Apps native agent](logic-apps-native-agent.md) | Connector-centric autonomous or conversational work needs a native, declarative agent loop within a governed Logic Apps workflow | Workflow/trigger design, connector identities, agent instructions and tool scope, model connection, action approvals, operational controls, and current plan/feature support gates |
 
 For a deterministic flow or single model/search call, choose a governed service,
 explicit workflow, or bounded inference path rather than an agent loop. Reuse

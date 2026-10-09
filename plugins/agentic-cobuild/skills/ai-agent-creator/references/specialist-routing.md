@@ -11,6 +11,7 @@ delegated branch.
 | Foundry resource, model deployment, project, hosted agent, evaluation, or tracing | `microsoft-foundry` |
 | Search, speech, document intelligence, or model-inference SDK implementation | `azure-ai` |
 | Foundry knowledge base or retrieval | `foundry-iq` |
+| Logic Apps workflow authoring, connector configuration, or native agent hosting | Use Microsoft Learn evidence; use `discover-azure-skills` for a matching specialist only if deeper architecture guidance is needed and no loaded skill/tool covers it |
 | Fabric IQ, Fabric data agent, or Work IQ context/data routing (distinct from Foundry IQ) | Use Microsoft Learn evidence; use `discover-azure-skills` for a matching specialist only if deeper architecture guidance is needed and no loaded skill/tool covers it |
 | Power Platform solution ALM, environment lifecycle, or manual/admin promotion gates | Use Microsoft Learn evidence; use `discover-azure-skills` for a matching specialist only if deeper architecture guidance is needed and no loaded skill/tool covers it |
 | Agent identity or token exchange | `entra-agent-id` |

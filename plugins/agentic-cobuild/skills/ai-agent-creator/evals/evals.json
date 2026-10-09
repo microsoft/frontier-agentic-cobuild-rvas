@@ -747,6 +747,73 @@
         "Model routing remains conditional on representative quality, supported-feature, latency, quota, fallback and cost evaluation.",
         "Any selected adaptation versions the base model, data, method, result, evaluation and deployment with promotion thresholds, monitoring, refresh triggers and rollback."
       ]
+    },
+    {
+      "id": 56,
+      "prompt": "The shared-understanding record is confirmed. The facilities team already runs a Logic App that receives incoming service requests. It must interpret each request's free text, decide among authorized lookup, work-order creation, routing, and notification operations, and preserve what it has tried across a multi-step case. The team wants to keep the integration inside Logic Apps rather than stand up a separate agent host. Produce the architecture package only.",
+      "expected_output": "The architecture treats native Logic Apps agent hosting as a genuine candidate because the workflow itself must plan and select among connector-backed tools, selects the supported trigger and stateful configuration, scopes agent tools to the authorized operations with approval on consequential actions, and records the plan/workflow-type/model-source support gates rather than assuming parity with other runtimes.",
+      "files": [
+        "references/azure-patterns/runtimes/README.md",
+        "references/azure-patterns/runtimes/logic-apps-native-agent.md",
+        "references/azure-patterns/patterns/04-agent-tools-approvals.md"
+      ],
+      "expectations": [
+        "The response identifies the Logic Apps native agent recipe as a candidate because the workflow itself must plan and choose among connector-backed tools, not merely because the team already uses Logic Apps.",
+        "The design distinguishes native hosting from an external agent calling a scoped Logic Apps tool.",
+        "The response scopes agent tools to authorized operations and assigns approval requirements for consequential actions.",
+        "The response records current plan, workflow-type, and model-source support gates rather than assuming blanket maturity.",
+        "The response creates only the architecture package and stops for explicit approval without implementing or provisioning."
+      ]
+    },
+    {
+      "id": 57,
+      "prompt": "The shared-understanding record is confirmed. An existing Logic App receives a support ticket, calls Azure OpenAI once to produce a short summary, and then runs a fixed sequence of steps to update the Dynamics case record. There is no planning, tool choice, or conversation; the sequence never changes. The team asks whether this should become an agent, and separately whether the durable/Durable-Task runtime is needed because the update sometimes waits on a downstream system. Produce the architecture package only.",
+      "expected_output": "The architecture keeps this as an explicit workflow with one bounded model call rather than introducing a native Logic Apps agent loop or any other agent runtime. It assesses the existing workflow's durability rather than introducing a separate Durable Task runtime solely because a wait exists.",
+      "files": [
+        "references/discovery-quality.md",
+        "references/azure-patterns/runtimes/README.md",
+        "references/azure-patterns/runtimes/durable-workflow-variant.md"
+      ],
+      "expectations": [
+        "The response classifies the sequence as a bounded model call inside an explicit workflow, not an agent, because there is no planning or tool selection.",
+        "The response keeps ordinary workflow execution rather than recommending a native agent or application-hosted Agent Framework.",
+        "The response assesses the existing Logic Apps durability before considering a separate Durable Task runtime; a downstream wait alone is not the selection criterion.",
+        "The response keeps summarization and the Dynamics update as separate bounded responsibilities with their own evaluation and authorization.",
+        "The response creates only the architecture package and stops for explicit approval without implementing or provisioning."
+      ]
+    },
+    {
+      "id": 58,
+      "prompt": "The shared-understanding record is confirmed. A Foundry-hosted agent already handles the conversation and decides when to issue a refund. The team wants the actual refund operation to run through an existing governed Logic App rather than calling the payment system directly from the agent's own code, and asks how authorization and approval should be split between the two. Produce the architecture package only.",
+      "expected_output": "The architecture keeps Foundry as the planning host and Logic Apps as a scoped refund tool executor, verifies the exact supported integration and authentication path, and assigns authorization, approval, idempotency, and audit responsibilities at the tool boundary.",
+      "files": [
+        "references/azure-patterns/patterns/04-agent-tools-approvals.md",
+        "references/azure-patterns/runtimes/logic-apps-native-agent.md",
+        "references/azure-patterns/runtimes/foundry-hosted-agent.md"
+      ],
+      "expectations": [
+        "The response keeps Foundry as the planning host and represents Logic Apps as a tool executor rather than another native agent.",
+        "The response evaluates the supported workflow integration path instead of assuming connector or MCP parity.",
+        "The design separates inbound tool endpoint authentication, outbound connector credentials, and action authorization.",
+        "Approval, idempotency, and audit for the refund are assigned to the governed tool boundary rather than solely to the agent prompt.",
+        "The response creates only the architecture package and stops for explicit approval without implementing or provisioning."
+      ]
+    },
+    {
+      "id": 59,
+      "prompt": "The shared-understanding record is confirmed. The team wants a production Logic Apps agent deployment and states the policy requirement plainly: only generally available dependencies are acceptable, no preview features anywhere in the path. They ask you to confirm Logic Apps native agents meet this bar end to end, including the model connection and any Foundry or MCP integration they might add later. Produce the architecture package only.",
+      "expected_output": "The architecture requires affirmative current evidence for the exact native-agent path, separates hosting from model-source and integration maturity, and records unresolved or preview dependencies against the GA-only policy rather than giving a blanket certification.",
+      "files": [
+        "references/azure-patterns/runtimes/logic-apps-native-agent.md",
+        "references/microsoft-learn-evidence.md"
+      ],
+      "expectations": [
+        "The response requires affirmative current GA evidence rather than deriving GA from a missing preview label.",
+        "The response separately evaluates Standard stateful hosting, agentic workflow/model source, Foundry registration, and workflow MCP exposure when applicable.",
+        "Any currently preview or unverified dependency is recorded as a gate against the GA-only policy rather than silently approved.",
+        "The response evaluates supported alternatives or records a blocked selection when evidence cannot establish policy compliance.",
+        "The response creates only the architecture package and stops for explicit approval without implementing or provisioning."
+      ]
     }
   ]
 }

@@ -129,6 +129,10 @@ Test the candidate journey for:
 Evaluate the whole journey: an agent can be read-only or human-supervised, and
 its deterministic tools do not make planning or tool selection deterministic.
 
+For Logic Apps journeys, establish where planning and tool selection happen,
+then read the [role selection guidance](azure-patterns/runtimes/logic-apps-native-agent.md#role-selection)
+before selecting a runtime.
+
 ## Assumption trap
 
 A fixed journey must be confirmed, not manufactured. Reopen the frontier when the

@@ -34,7 +34,7 @@ Give brief context before asking or stating anything. Write in ASD-STE100
 Simplified Technical English: active voice, short sentences, one idea per
 sentence. Put dense examples and alternatives in short bullet lists. Use the
 repository's ubiquitous language: read `CONTEXT.md` and `docs/adr/` per
-[domain conventions](references/domain-conventions.md). If the repository instead defines `GLOSSARY.md` or
+`docs/agents/domain.md`. If the repository instead defines `GLOSSARY.md` or
 `GLOSSARY-MAP.md`, follow those.
 
 Keep dense technical artifacts exact: schemas, identifiers, tables, evidence
@@ -42,15 +42,6 @@ citations, and code/API names. Simplify the surrounding sentences, not these
 terms.
 
 ## Resume from evidence
-
-Resolve bundled references from the absolute directory of this loaded `SKILL.md`.
-Treat the plugin installation as read-only. Inspect and write domain records and
-architecture artifacts only in the user's selected application repository.
-
-Use the host's question-form and read-only subagent capabilities where available.
-If a question form is unavailable, ask the user directly and wait for their answer.
-If independent review is unavailable, record the blocked gate and request the
-explicit manual-review exception; local self-review does not pass that gate.
 
 Inspect the conversation and existing records before selecting the next step.
 Approval applies to the current baseline, not to later material changes.

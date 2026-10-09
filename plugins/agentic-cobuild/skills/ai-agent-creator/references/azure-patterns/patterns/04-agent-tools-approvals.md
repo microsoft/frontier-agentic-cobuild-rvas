@@ -19,7 +19,9 @@ audit, and an approval path for consequential actions. Choose a
 and system-of-record writes in deterministic services or governed workflows.
 Reuse approved business systems and approval mechanisms; custom APIs or adapters
 need a confirmed requirement or documented integration gap, not merely the
-existence of a tool call.
+existence of a tool call. For Logic Apps as a scoped workflow tool executor,
+read the [role selection and integration gates](../runtimes/logic-apps-native-agent.md#role-selection)
+while retaining the actual agent host's runtime recipe.
 
 ## Flows
 
