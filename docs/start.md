@@ -17,16 +17,16 @@ git init
 ```
 
 For an existing application, clone or open its repository instead. Follow its
-branching and approval rules. A new repository does not imply an empty enterprise
-environment; tell the creator which existing systems and controls it must reuse.
+branching and approval rules. Even a new project may need to use existing enterprise
+systems and controls. Tell the creator which ones it must reuse.
 
 Open **your application repository** in VS Code, or start Copilot CLI there.
-Use an approved workspace and synthetic inputs until customer-data access is agreed.
+Use an approved workspace and synthetic inputs until you have agreed on customer-data access.
 
 ## Install the plugin
 
 Choose your host. Review the plugin contents and publisher before granting trust.
-Plugin installation is separate from the project-local supporting skill setup.
+Install the supporting skills separately in your project.
 
 ### GitHub Copilot CLI
 
@@ -97,8 +97,7 @@ Preserve existing skills rather than deleting them to bypass a conflict.
 
 Third-party skills remain upstream-owned. Installing a skill does not authorize
 cloud changes. The upstream `implement` skill includes a commit step.
-Use the explicit handoff below for the
-recommended journey and authorize commits separately.
+Follow the implementation handoff below and authorize commits separately.
 
 ## Check the workspace before starting
 
@@ -107,8 +106,8 @@ In CLI, start a fresh session in the application directory. Use `/skills` and
 
 In VS Code, use **Chat: Configure Skills** and the MCP server list. Confirm the
 plugin is enabled, the supporting skills are discovered, and Microsoft Learn can
-retrieve documentation. Plugin skill names may be qualified; select the exact
-entry your host displays in its picker or slash completion.
+retrieve documentation. Your host may show a prefix on plugin skill names. Select the exact
+entry in its picker or slash completion.
 
 If skills are missing, check the current workspace, plugin enablement, host version,
 and organization policy. Restart or reload after installation. If the documentation
@@ -143,9 +142,8 @@ Inspect its current stack, preserve established interfaces, and account
 for our enterprise data-access and deployment constraints.
 ```
 
-The creator inspects the repository and interviews you. Confirm discovery after
-you agree on the outcome and first user journey and settle the decisions that
-affect the architecture. The creator then prepares:
+The creator inspects the repository and interviews you. Confirm discovery once you agree on the outcome and first user journey.
+Settle the decisions that affect the architecture before confirming. The creator then prepares:
 
 | Artifact | Responsibility |
 | --- | --- |
@@ -175,8 +173,8 @@ criterion is verified or explicitly reported as blocked.
 ```
 
 Use the application's existing tests and delivery controls.
-If a change to scope or architecture affects an approved decision, update the
-package and obtain the affected approval before continuing.
+If scope or architecture changes an approved decision, update the
+package and get that decision approved again before continuing.
 
 ### Review before deployment
 
@@ -192,8 +190,8 @@ regressions, and missing tests. Rank findings by severity and include file and
 line references.
 ```
 
-Resolve the findings and rerun the relevant validation before moving to the
-security pass. In a later, separate pass, run:
+Resolve the findings and rerun the affected checks. Then run a separate
+security review:
 
 ```text
 /security-review Analyze the staged and unstaged implementation for exploitable
@@ -212,8 +210,8 @@ Then request a separate security review using the review tools available in your
 organization. Do not assume CLI slash commands exist in VS Code. If independent
 review tooling is unavailable, assign a human reviewer and record the gap.
 
-Successful setup or an approved architecture does not prove production readiness.
-The operating team must accept the deployed user journey and own rollback.
+Setup and architecture approval are not production-readiness checks.
+The operating team must accept the deployed user journey and take responsibility for rollback.
 
 ## Need an idea first?
 
@@ -225,9 +223,9 @@ Provide a customer name and industry, with any known pain points:
 Use public evidence and identify a safe first proof.
 ```
 
-Idea Forge researches public sources and ranks distinct ideas. Choose one. The skill
-returns an unapproved brief with evidence and open questions. Pass that brief to
-AI Agent Creator. Detailed discovery and architecture approval still happen there.
+Idea Forge researches public sources and ranks distinct ideas. Choose one. Idea Forge
+returns a brief with evidence and open questions; the brief is not yet approved.
+Pass it to AI Agent Creator for detailed discovery and architecture approval.
 
 ## Updates and team setup
 
