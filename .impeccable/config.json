@@ -22,6 +22,26 @@
         ],
         "createdAt": "2026-10-08T12:45:02.757Z",
         "reason": "Desktop and mobile screenshots confirm adequate container padding. Border-top rules separate open sections rather than enclosing text."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/assets/diagrams/approval-handoff.html",
+          "docs/assets/diagrams/existing-app-delta.html",
+          "docs/assets/diagrams/runtime-choice.html"
+        ],
+        "createdAt": "2026-10-09T06:55:27.527Z",
+        "reason": "Agent: SVG coordinates supply frame insets and node padding; browser text and connector geometry is checked independently."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/index.template.html"
+        ],
+        "createdAt": "2026-10-09T06:55:27.553Z",
+        "reason": "Agent: browser confirms existing artifact rows have 14px top padding and bordered tool rows have 22px; the first tool row has no border."
       }
     ]
   }

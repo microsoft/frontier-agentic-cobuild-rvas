@@ -88,7 +88,8 @@ npm test
 npm run test:diagrams
 ```
 
-Commit generated reading-page HTML and `docs/supporting-skills.md` with their sources.
+Commit generated Overview and reading-page HTML and `docs/supporting-skills.md`
+with their sources.
 See [Contributing](CONTRIBUTING.md) for installation checks and publishing setup.
 
 The repository's MIT license does not replace the diagram assets'

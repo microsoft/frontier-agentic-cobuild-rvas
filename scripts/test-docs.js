@@ -7,7 +7,7 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const test = require('node:test');
 const { audit, sourceDocs, checkLink } = require('./audit-docs');
-const { pages, renderPage, supportingMarkdown } = require('../docs/build');
+const { pages, renderIndex, renderPage, supportingMarkdown } = require('../docs/build');
 const inventory = require('./agentic-skills.json');
 const ROOT = path.resolve(__dirname, '..');
 const SETUP = path.join(__dirname, 'setup-agentic-repo.js');
@@ -64,6 +64,7 @@ test('plugin and marketplace resolve the same complete portable package', () => 
 });
 
 test('generated reading pages and manual commands match their current sources', () => {
+  assert.equal(fs.readFileSync(path.join(ROOT, 'docs/index.html'), 'utf8'), renderIndex());
   for (const page of pages) {
     const html = fs.readFileSync(path.join(ROOT, `docs/${page.slug}.html`), 'utf8');
     assert.equal(html, renderPage(page), page.slug);
@@ -77,6 +78,27 @@ test('generated reading pages and manual commands match their current sources', 
   assert.equal(commands.status, 0, commands.stderr);
   assert.doesNotMatch(commands.stdout, /humanize-writing|lguz\/humanize-writing-skill/);
   for (const line of commands.stdout.trim().split('\n')) assert.ok(supportingMarkdown().includes(line));
+});
+
+test('intro diagrams are embedded with accessible, uniquely identified scroll regions', () => {
+  const figures = [
+    [renderIndex(), 'approval-handoff'],
+    [renderPage(pages.find((page) => page.slug === 'start')), 'approval-handoff'],
+    [renderPage(pages.find((page) => page.slug === 'agent-or-workflow')), 'runtime-choice'],
+    [renderPage(pages.find((page) => page.slug === 'existing-applications')), 'existing-app-delta'],
+  ];
+  for (const [html, name] of figures) {
+    assert.doesNotMatch(html, /<!-- diagram:/);
+    assert.ok(html.includes(`aria-labelledby="${name}-title ${name}-desc"`));
+    assert.ok(html.includes(`<title id="${name}-title">`));
+    assert.match(html, /class="diagram-container" role="region" aria-label="[^"]+" tabindex="0"/);
+    assert.match(html, /<figcaption>[\s\S]+?<\/figcaption>/);
+    const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
+    assert.equal(ids.length, new Set(ids).size, name);
+    const svg = html.match(/<svg [^>]*viewBox="0 0 (\d+) \d+"[^>]*style="min-width: (\d+)px"/);
+    assert.ok(svg, name);
+    assert.equal(svg[1], svg[2], name);
+  }
 });
 
 test('source and generated documentation links resolve', () => {

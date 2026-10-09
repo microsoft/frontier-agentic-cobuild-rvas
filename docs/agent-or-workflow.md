@@ -51,6 +51,8 @@ Microsoft's [agent design guidance](https://learn.microsoft.com/azure/architectu
 distinguishes direct model calls from agents with tools and multi-agent
 orchestration. More complex arrangements add coordination costs and failure modes.
 
+<!-- diagram: runtime-choice -->
+
 ## Test where runtime choice adds value
 
 Bring these questions to discovery:

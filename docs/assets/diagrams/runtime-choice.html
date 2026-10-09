@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Who chooses the next step?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Outfit:wght@500;700&amp;display=swap" rel="stylesheet" />
+  <style data-diagram-style>
+    .intro-diagram { margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram .diagram-container { width: 100%; overflow-x: auto; scrollbar-color: #032254 #f5f8fe; }
+    .intro-diagram .diagram-container:focus-visible { outline: 3px solid #1a77e3; outline-offset: 4px; }
+    .intro-diagram svg { display: block; width: 100%; background: #fff; }
+    .intro-diagram text { font-family: "Inter", "Segoe UI", sans-serif; fill: #032254; }
+    .intro-diagram .diagram-heading { font-family: "Outfit", "Segoe UI", sans-serif; font-size: 28px; font-weight: 700; }
+    .intro-diagram .node-name { font-size: 18px; font-weight: 600; }
+    .intro-diagram .detail { font-size: 16px; font-weight: 400; fill: #47494e; }
+    .intro-diagram .node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram .gate { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram .connector { fill: none; stroke: #47494e; stroke-width: 2; }
+    .intro-diagram .rule { stroke: #dde6f7; stroke-width: 1; }
+    .intro-diagram .arrow-label { font-size: 12px; font-weight: 600; fill: #47494e; }
+    .intro-diagram figcaption { margin-top: 16px; font-size: 14px; line-height: 1.7; }
+    .intro-diagram .scroll-hint { display: block; margin-top: 4px; font-size: 13px; color: #47494e; }
+    @media print {
+      .intro-diagram .diagram-container { overflow-x: visible; }
+      .intro-diagram svg { min-width: 0 !important; }
+      .intro-diagram .scroll-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <figure class="intro-diagram">
+    <div class="diagram-container" role="region" aria-label="Workflow and agent comparison; scroll horizontally" tabindex="0">
+      <!-- impeccable-disable-next-line cramped-padding: SVG coordinates provide frame insets and node padding. -->
+      <svg viewBox="0 0 960 600" style="min-width: 960px" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="runtime-choice-title runtime-choice-desc">
+        <title id="runtime-choice-title">Who chooses the next step?</title>
+        <desc id="runtime-choice-desc">An explicit workflow follows an application-defined sequence, while a bounded agent selects authorized evidence and can repeat its investigation before returning findings or escalating unresolved work.</desc>
+        <defs>
+          <marker id="runtime-choice-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker>
+          <marker id="runtime-choice-arrow-accent" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#1a77e3" /></marker>
+          <marker id="runtime-choice-arrow-link" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#0078d4" /></marker>
+        </defs>
+        <rect width="960" height="600" fill="#fff" />
+        <text x="64" y="48" class="diagram-heading">Explicit workflow</text>
+        <text x="64" y="76" class="detail">The application defines the path.</text>
+        <text x="536" y="48" class="diagram-heading">Bounded agent</text>
+        <text x="536" y="76" class="detail">The agent chooses evidence at runtime.</text>
+        <path d="M232 176 V256" class="connector" marker-end="url(#runtime-choice-arrow)" />
+        <path d="M232 328 V440" class="connector" marker-end="url(#runtime-choice-arrow)" />
+        <path d="M704 176 V216" class="connector" marker-end="url(#runtime-choice-arrow)" />
+        <path d="M704 288 V320" class="connector" marker-end="url(#runtime-choice-arrow)" />
+        <path d="M608 376 H488 Q480 376 480 368 V148 Q480 140 488 140 H536" class="connector" marker-end="url(#runtime-choice-arrow)" />
+        <path d="M800 376 H912 Q920 376 920 384 V508 Q920 516 912 516 H872" class="connector" marker-end="url(#runtime-choice-arrow)" />
+        <rect x="416" y="244" width="56" height="20" fill="#fff" />
+        <text x="444" y="258" text-anchor="middle" class="arrow-label">MORE</text>
+        <rect x="828" y="348" width="64" height="20" fill="#fff" />
+        <text x="860" y="362" text-anchor="middle" class="arrow-label">DONE</text>
+        <g>
+          <rect x="64" y="104" width="336" height="72" rx="6" class="node" />
+          <text x="80" y="132" class="node-name">Retrieve the procedure</text>
+          <text x="80" y="160" class="detail">A known source for this request</text>
+        </g>
+        <g>
+          <rect x="64" y="256" width="336" height="72" rx="6" class="node" />
+          <text x="80" y="284" class="node-name">Prepare a draft</text>
+          <text x="80" y="312" class="detail">Validate the defined output</text>
+        </g>
+        <g>
+          <rect x="64" y="440" width="336" height="72" rx="6" class="node" />
+          <text x="80" y="468" class="node-name">Request manager approval</text>
+          <text x="80" y="496" class="detail">A predefined handoff</text>
+        </g>
+        <g>
+          <rect x="536" y="104" width="336" height="72" rx="6" class="gate" />
+          <text x="552" y="132" class="node-name">Select authorized evidence</text>
+          <text x="552" y="160" class="detail">Choose the next permitted source</text>
+        </g>
+        <g>
+          <rect x="536" y="216" width="336" height="72" rx="6" class="node" />
+          <text x="552" y="244" class="node-name">Inspect and update findings</text>
+          <text x="552" y="272" class="detail">History or procedure, within scope</text>
+        </g>
+        <g>
+          <path d="M704 320 L800 376 L704 432 L608 376 Z" class="node" />
+          <text x="704" y="368" text-anchor="middle" class="node-name"><tspan x="704">Continue</tspan><tspan x="704" dy="24">investigating?</tspan></text>
+        </g>
+        <g>
+          <rect x="536" y="484" width="336" height="64" rx="6" class="node" />
+          <text x="552" y="512" class="node-name">Return findings or escalate</text>
+          <text x="552" y="536" class="detail">Stop at the agreed scope and limits</text>
+        </g>
+        <path d="M32 568 H928" class="rule" />
+        <rect x="32" y="576" width="16" height="16" rx="2" class="gate" />
+        <text x="60" y="588" class="detail">Runtime choice of evidence; authority to perform an action is a separate decision.</text>
+      </svg>
+    </div>
+    <figcaption>Illustrative maintenance-request paths. Retrieval can belong to a fixed workflow. The agent loop adds runtime choice, bounded by permitted sources, stopping conditions, and resource limits. Neither path grants authority to submit a work order.<span class="scroll-hint">Scroll horizontally if the full diagram is not visible.</span></figcaption>
+  </figure>
+</body>
+</html>

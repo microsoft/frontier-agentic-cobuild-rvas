@@ -24,8 +24,13 @@ npm test
 npm run test:diagrams
 ```
 
-The build renders the Start guide and four explanatory pages from Markdown using
-`docs/start.template.html`. Page metadata lives in `docs/build.js`; section links
+The build renders Overview from `docs/index.template.html` and the Start guide
+and four explanatory pages from Markdown using `docs/start.template.html`.
+Static intro figures live in `docs/assets/diagrams/` as self-contained HTML.
+Use `<!-- diagram: filename-without-extension -->` to embed a figure; the build
+inlines its scoped styles and accessible SVG without loading its standalone font
+stylesheet. Embedded figures use the site's self-hosted Outfit/Inter fonts.
+Page metadata lives in `docs/build.js`; section links
 for explanatory pages come from their headings. It also generates supporting
 skill commands from the install inventory. Commit generated HTML and
 `docs/supporting-skills.md` with their sources.
@@ -33,7 +38,8 @@ Plugin skills live only under `plugins/agentic-cobuild/skills/`.
 Keep third-party dependencies in `scripts/agentic-skills.json`, not in the plugin.
 
 Tests cover plugin resources, local links, installer failure/preservation behavior,
-and generated-guide consistency. Diagram tests check XML and local asset handling;
+generated-page consistency, and accessible intro-figure embedding.
+Diagram tests check XML and local asset handling;
 they do not prove visual correctness or cloud security.
 
 For an installation change, test in a disposable application directory. Use

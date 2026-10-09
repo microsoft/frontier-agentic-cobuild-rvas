@@ -6,6 +6,20 @@ const path = require('node:path');
 const marked = require('./assets/js/marked.min.js');
 const inventory = require('../scripts/agentic-skills.json');
 
+function embedDiagrams(content) {
+  return content.replace(/<!-- diagram: ([a-z0-9-]+) -->/g, (_, name) => {
+    const source = fs.readFileSync(path.join(__dirname, 'assets/diagrams', `${name}.html`), 'utf8');
+    const style = source.match(/<style data-diagram-style>([\s\S]*?)<\/style>/);
+    const figure = source.match(/<figure class="intro-diagram">[\s\S]*?<\/figure>/);
+    if (!style || !figure) throw new Error(`Diagram ${name} is missing its style or figure.`);
+    return `<style>${style[1]}</style>\n${figure[0]}`;
+  });
+}
+
+function renderIndex() {
+  return embedDiagrams(fs.readFileSync(path.join(__dirname, 'index.template.html'), 'utf8'));
+}
+
 const pages = [
   {
     slug: 'start',
@@ -86,7 +100,7 @@ function renderPage(page) {
   renderer.table = (header, body) =>
     '<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">\n' +
     `<table>\n<thead>\n${header}</thead>\n<tbody>\n${body}</tbody>\n</table>\n</div>\n`;
-  const body = marked.parse(markdown, { renderer });
+  const body = embedDiagrams(marked.parse(markdown, { renderer }));
   const sectionLinks = (page.sections || sections)
     .map(([id, label]) => `<a href="#${id}">${label}</a>`).join('\n        ');
   const pageLinks = page.slug === 'start' ? '' : '<div class="guide-pages">\n' +
@@ -112,12 +126,13 @@ function renderGuide() {
 }
 
 function build() {
+  fs.writeFileSync(path.join(__dirname, 'index.html'), renderIndex());
   fs.writeFileSync(path.join(__dirname, 'supporting-skills.md'), supportingMarkdown());
   for (const page of pages) {
     fs.writeFileSync(path.join(__dirname, `${page.slug}.html`), renderPage(page));
   }
-  console.log(`Built ${pages.length} reading pages and supporting skill commands.`);
+  console.log(`Built Overview, ${pages.length} reading pages, and supporting skill commands.`);
 }
 
 if (require.main === module) build();
-module.exports = { build, pages, renderPage, renderGuide, supportingMarkdown };
+module.exports = { build, pages, renderIndex, renderPage, renderGuide, supportingMarkdown };
