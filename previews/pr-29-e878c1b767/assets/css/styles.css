@@ -93,10 +93,6 @@ img { max-width: 100%; }
 .guide-pages a { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 12px 16px; border-bottom: 2px solid transparent; text-align: center; }
 .guide-pages a:hover { background: var(--c-paper); }
 .guide-pages a[aria-current] { border-bottom-color: var(--c-heading); color: var(--c-heading); font-weight: 600; }
-.guide-contents { max-width: var(--reading-width); margin: 0 auto; border: 1px solid var(--c-line); border-radius: 6px; background: var(--c-paper); }
-.guide-contents summary { padding: 12px 20px; color: var(--c-heading); cursor: pointer; font-weight: 600; }
-.guide-section-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 24px; padding: 0 20px 16px; }
-.guide-section-links a { display: flex; align-items: center; min-height: 44px; padding: 8px 0; line-height: 1.5; }
 .guide-body { min-width: 0; }
 .guide-body > :not(.intro-diagram):not(style):not(.application-family) { max-width: var(--reading-width); margin-left: auto; margin-right: auto; }
 .guide-body .intro-diagram { margin-top: 40px; margin-bottom: 40px; }
@@ -155,7 +151,6 @@ img { max-width: 100%; }
   .guide-nav { margin-bottom: 32px; }
   .guide-pages { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 8px; margin-bottom: 20px; }
   .guide-pages a { justify-content: flex-start; padding: 12px 8px; text-align: left; line-height: 1.4; }
-  .guide-section-links { grid-template-columns: 1fr; gap: 0; }
   .guide-body h2 { margin-top: 40px; font-size: 1.75rem; }
   .guide-body > .application-family { padding-top: 32px; padding-bottom: 32px; }
   .application-family::before { left: -12px; right: -12px; }

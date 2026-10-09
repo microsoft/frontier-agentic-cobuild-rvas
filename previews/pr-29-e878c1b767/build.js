@@ -27,16 +27,6 @@ const pages = [
     description: 'Install Agentic Co-build in Copilot CLI or VS Code and design your own AI application in your repository.',
     heading: 'Start in <span>your repository.</span>',
     lede: 'Install the plugin and supporting skills. Approve the architecture before starting implementation in a separate session.',
-    sections: [
-      ['work-in-your-own-repository', 'Your workspace'],
-      ['install-the-plugin', 'Plugin installation'],
-      ['install-the-supporting-skills', 'Supporting skills'],
-      ['check-the-workspace-before-starting', 'Readiness check'],
-      ['describe-what-you-want-to-build', 'Discovery and architecture'],
-      ['start-implementation-in-a-new-session', 'Implementation handoff'],
-      ['need-an-idea-first', 'Idea Forge'],
-      ['updates-and-team-setup', 'Updates'],
-    ],
   },
   {
     slug: 'applications',
@@ -107,8 +97,6 @@ function renderPage(page) {
       `<div class="application-family-copy">${copy}</div>\n${diagram}\n</section>`
   );
   const body = embedDiagrams(content);
-  const sectionLinks = (page.sections || [])
-    .map(([id, label]) => `<a href="#${id}">${label}</a>`).join('\n        ');
   const pageLinks = page.slug === 'start' ? '' : '<div class="guide-pages">\n' +
     pages.filter((candidate) => candidate.slug !== 'start').map((candidate) =>
       `<a href="${candidate.slug}.html"${candidate.slug === page.slug ? ' aria-current="page"' : ''}>${candidate.navigationLabel}</a>`
@@ -123,10 +111,9 @@ function renderPage(page) {
     .replace('<!-- primary-links -->', () => primaryLinks)
     .replace('<!-- page-heading -->', () => page.heading)
     .replace('<!-- page-lede -->', () => page.lede)
-    .replace('<!-- guide-navigation -->', () => page.slug === 'start'
-      ? '<details class="guide-contents"><summary>On this page</summary>\n' +
-        `<div class="guide-section-links">${sectionLinks}</div>\n</details>`
-      : pageLinks)
+    .replace(/[ \t]*<!-- guide-navigation -->/, () => pageLinks
+      ? `<nav class="guide-nav" aria-label="Reading navigation">\n${pageLinks}</nav>`
+      : '')
     .replace('<!-- guide-body -->', () => body);
 }
 
