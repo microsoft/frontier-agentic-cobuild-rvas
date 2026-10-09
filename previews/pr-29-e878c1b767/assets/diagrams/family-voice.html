@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A voice response is separate from an action</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet" />
+  <style data-diagram-style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <figure class="intro-diagram" data-family="voice">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 336" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-voice-title family-voice-desc">
+        <title id="family-voice-title">A voice response is separate from an action</title>
+        <desc id="family-voice-desc">Speech is interpreted and answered by voice, while a request for a consequential action follows a separate confirmation path.</desc>
+        <defs><marker id="family-voice-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M160 64 V96" marker-end="url(#family-voice-arrow)" />
+        <path class="family-edge" d="M128 152 V192" marker-end="url(#family-voice-arrow)" />
+        <path class="family-edge" d="M296 124 H312 Q320 124 320 132 V260 Q320 268 312 268 H188 Q180 268 180 276 V284" stroke-dasharray="5 4" marker-end="url(#family-voice-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="272" height="56" rx="6" /><text x="44" y="44">Listen to the user</text></g>
+        <g><rect class="family-node" x="24" y="96" width="272" height="56" rx="6" /><text x="44" y="132">Interpret the request</text></g>
+        <g><rect class="family-node" x="24" y="192" width="208" height="56" rx="6" /><text x="44" y="228">Respond by voice</text></g>
+        <g><rect class="family-focus" x="24" y="284" width="312" height="44" rx="6" /><text x="44" y="312">Confirm before taking action</text></g>
+      </svg>
+    </div>
+    <figcaption>The dashed path applies to consequential actions. Users must be able to interrupt or correct the interaction.</figcaption>
+  </figure>
+</body>
+</html>

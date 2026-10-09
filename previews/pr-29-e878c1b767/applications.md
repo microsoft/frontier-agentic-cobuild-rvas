@@ -17,6 +17,8 @@ The examples below are illustrative, not customer results or deployment template
 
 ## Application families
 
+<!-- application-family -->
+
 ### Knowledge assistants
 
 Help a user find and interpret authorized information. An illustrative operations
@@ -26,6 +28,10 @@ a follow-up question using other permitted evidence.
 The design must establish source ownership and freshness. It must also explain
 how user permissions constrain retrieval and what happens when evidence is absent
 or contradictory. A fixed lookup may need retrieval without an agent loop.
+
+<!-- diagram: family-knowledge -->
+
+<!-- application-family -->
 
 ### Agents that use business tools
 
@@ -37,6 +43,10 @@ Tool access is a separate decision from knowledge access. Specify which actions
 are read-only, which require approval, and how the system handles retries without
 duplicating a business operation. Authorization belongs at the operation boundary.
 
+<!-- diagram: family-tools -->
+
+<!-- application-family -->
+
 ### Document and media processing
 
 Turn incoming material into structured results. For example, classify a document
@@ -45,6 +55,10 @@ bundle, extract fields, and send uncertain results to a reviewer.
 Agree the output schema and the review threshold. Define how a reviewer corrects
 an error and how a corrected result reaches the downstream system. This may be
 a fixed processing pipeline; a conversational interface is optional.
+
+<!-- diagram: family-documents -->
+
+<!-- application-family -->
 
 ### Voice and audiovisual experiences
 
@@ -56,6 +70,10 @@ Decide how users interrupt, correct, or leave the interaction. Identify privacy
 and accessibility requirements, and verify the selected channel's capabilities.
 An avatar or generated video alone does not establish a need for an agent.
 
+<!-- diagram: family-voice -->
+
+<!-- application-family -->
+
 ### Background workflows
 
 Respond to an event or process a job without a new chat interface. An incoming
@@ -65,6 +83,10 @@ approve the proposed next step.
 Identify who owns job state and how work resumes after a failure or a long wait.
 Fixed branches can stay explicit; runtime investigation should have a defined
 scope and stopping condition.
+
+<!-- diagram: family-background -->
+
+<!-- application-family -->
 
 ### Coordinated specialist agents
 
@@ -77,6 +99,8 @@ agents handle conflicting results and shared state. Define what happens when
 one agent fails. Coordination adds overhead.
 Microsoft's [orchestration guidance](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 recommends the lowest complexity that meets the requirement.
+
+<!-- diagram: family-specialists -->
 
 ## Capabilities you can combine
 
