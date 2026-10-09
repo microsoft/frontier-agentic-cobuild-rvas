@@ -21,7 +21,7 @@
     <div class="diagram-container">
       <svg viewBox="0 0 360 344" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-documents-title family-documents-desc">
         <title id="family-documents-title">Turn a document into a reviewed record</title>
-        <desc id="family-documents-desc">An incoming document is classified and its fields extracted, with uncertain fields reviewed before the structured record reaches the downstream system.</desc>
+        <desc id="family-documents-desc">The pipeline classifies a document and extracts its fields, then sends uncertain fields to a reviewer before it publishes the record.</desc>
         <defs><marker id="family-documents-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
         <path class="family-edge" d="M180 56 V88" marker-end="url(#family-documents-arrow)" />
         <path class="family-edge" d="M180 144 V176" marker-end="url(#family-documents-arrow)" />
@@ -32,7 +32,7 @@
         <g><rect class="family-node" x="24" y="276" width="312" height="60" rx="6" /><text x="44" y="312">Publish the structured record</text></g>
       </svg>
     </div>
-    <figcaption>The output follows an agreed schema. Corrections must reach the downstream system.</figcaption>
+    <figcaption>The output must match the agreed schema. Send reviewer corrections to the downstream system.</figcaption>
   </figure>
 </body>
 </html>

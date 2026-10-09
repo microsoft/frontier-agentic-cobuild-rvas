@@ -1,5 +1,5 @@
 ---
-name: customer-activity-forge
+name: idea-forge
 description: "Find a bounded AI opportunity from public customer and industry evidence when the team does not yet know what to build. Rank ideas and prepare an unapproved brief for AI Agent Creator."
 argument-hint: "Company name and industry; optionally region, known pain points, or existing capabilities."
 ---

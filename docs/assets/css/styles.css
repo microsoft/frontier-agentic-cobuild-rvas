@@ -89,7 +89,7 @@ img { max-width: 100%; }
 .guide-nav { margin-bottom: 48px; font-size: 0.94rem; }
 .guide-nav a { color: var(--c-heading); text-decoration: none; }
 .guide-nav a:hover { color: var(--c-action); text-decoration: underline; }
-.guide-pages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--c-line); margin-bottom: 24px; }
+.guide-pages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--c-line); margin-bottom: 24px; }
 .guide-pages a { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 12px 16px; border-bottom: 2px solid transparent; text-align: center; }
 .guide-pages a:hover { background: var(--c-paper); }
 .guide-pages a[aria-current] { border-bottom-color: var(--c-heading); color: var(--c-heading); font-weight: 600; }

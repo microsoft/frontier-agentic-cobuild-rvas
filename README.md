@@ -10,7 +10,6 @@ before implementation begins.
 | [Supporting skill commands](docs/supporting-skills.md)
 
 [What can you build?](docs/applications.md)
-| [Does this need an agent?](docs/agent-or-workflow.md)
 | [Architecture options](docs/architecture-options.md)
 | [Extend an existing application](docs/existing-applications.md)
 
@@ -41,7 +40,7 @@ copies, and a failed install may leave partial files.
 | Skill | When to use it |
 | --- | --- |
 | **AI Agent Creator** (`ai-agent-creator`) | You know what you want to build or evolve. It interviews you and produces the architecture package. |
-| **Idea Forge** (`customer-activity-forge`) | You know the customer and industry but need an evidence-backed idea first. |
+| **Idea Forge** (`idea-forge`) | You know the customer and industry but need an evidence-backed idea first. |
 | **Cloud Architecture Diagram** (`cloud-architecture-diagram`) | The creator uses it for editable diagrams with local assets and explicit review gates. |
 
 Select `ai-agent-creator` from your host's skill picker or slash completion and

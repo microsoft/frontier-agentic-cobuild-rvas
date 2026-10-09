@@ -1,7 +1,7 @@
 # Agentic Co-build plugin
 
 The package contains three skills: `ai-agent-creator`,
-`cloud-architecture-diagram`, and `customer-activity-forge` (Idea Forge).
+`cloud-architecture-diagram`, and `idea-forge` (Idea Forge).
 It also supplies public Microsoft Learn documentation MCP. It contains no hooks,
 live-cloud connections, or application scaffold.
 

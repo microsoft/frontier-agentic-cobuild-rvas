@@ -19,7 +19,7 @@ test('plugin and marketplace resolve the same complete portable package', () => 
   assert.equal(metadata.version, plugin.version);
   assert.equal(metadata.repository, 'https://github.com/microsoft/frontier-agentic-cobuild-rvas');
   const skills = fs.readdirSync(path.join(directory, 'skills')).sort();
-  assert.deepEqual(skills, ['ai-agent-creator', 'cloud-architecture-diagram', 'customer-activity-forge']);
+  assert.deepEqual(skills, ['ai-agent-creator', 'cloud-architecture-diagram', 'idea-forge']);
   for (const skill of skills) {
     assert.match(fs.readFileSync(path.join(directory, 'skills', skill, 'SKILL.md'), 'utf8'),
       new RegExp(`^name: ${skill}$`, 'm'));
@@ -66,7 +66,6 @@ test('intro diagrams embed accessible wide and narrow layouts without fixed-widt
   const figures = [
     [renderIndex(), 'approval-handoff'],
     [renderPage(pages.find((page) => page.slug === 'start')), 'approval-handoff'],
-    [renderPage(pages.find((page) => page.slug === 'agent-or-workflow')), 'runtime-choice'],
     [renderPage(pages.find((page) => page.slug === 'existing-applications')), 'existing-app-delta'],
   ];
   for (const [html, name] of figures) {
@@ -94,6 +93,8 @@ test('Learn pages show only page tabs while Start retains its setup section disc
       assert.doesNotMatch(html, /class="guide-pages"/);
       assert.match(html, /href="start.html" aria-current="page">Start/);
     } else {
+      const tabs = html.match(/<div class="guide-pages">([\s\S]*?)<\/div>/)[1];
+      assert.equal([...tabs.matchAll(/<a /g)].length, 3);
       assert.doesNotMatch(html, /guide-contents|guide-section-links|On this page/);
       assert.ok(html.indexOf('class="guide-pages"') < html.indexOf('<article'));
       assert.match(html, /href="applications.html" aria-current="page">Learn/);
@@ -159,12 +160,13 @@ test('retired application material is absent from source and publishing', () => 
   for (const retired of ['scenarios', 'infra', 'azure.yaml', '.env.sample', 'requirements.txt',
     '.github/skills/use-case-mapper', 'docs/assets/data', 'docs/assets/downloads',
     'docs/scenario.html', 'docs/lesson.html', 'docs/slides.html', 'scripts/build-slides.js',
-    '.impeccable/surfaces/docs-slides-html.md']) {
+    '.impeccable/surfaces/docs-slides-html.md', 'docs/agent-or-workflow.md',
+    'docs/agent-or-workflow.html', 'docs/assets/diagrams/runtime-choice.html']) {
     assert.equal(fs.existsSync(path.join(ROOT, retired)), false, retired);
   }
   for (const file of ['README.md', 'PRODUCT.md', 'docs/index.html', 'docs/start.html',
     '.github/workflows/deploy-pages.yml',
-    'plugins/agentic-cobuild/skills/customer-activity-forge/SKILL.md']) {
+    'plugins/agentic-cobuild/skills/idea-forge/SKILL.md']) {
     assert.doesNotMatch(fs.readFileSync(path.join(ROOT, file), 'utf8'), /use-case-mapper|scenarios\/|validate:scenarios|test:scenarios/);
   }
 });

@@ -27,17 +27,6 @@
         "rule": "cramped-padding",
         "value": "*",
         "files": [
-          "docs/assets/diagrams/approval-handoff.html",
-          "docs/assets/diagrams/existing-app-delta.html",
-          "docs/assets/diagrams/runtime-choice.html"
-        ],
-        "createdAt": "2026-10-09T06:55:27.527Z",
-        "reason": "Agent: SVG coordinates supply frame insets and node padding; browser text and connector geometry is checked independently."
-      },
-      {
-        "rule": "cramped-padding",
-        "value": "*",
-        "files": [
           "docs/index.template.html"
         ],
         "createdAt": "2026-10-09T06:55:27.553Z",
@@ -51,6 +40,16 @@
         ],
         "createdAt": "2026-10-09T07:35:39.767Z",
         "reason": "Agent: these standalone SVGs position text with SVG coordinates, not CSS padding. Browser checks at 320 through 1440px verify node insets and at least 12px labels."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/assets/diagrams/approval-handoff.html",
+          "docs/assets/diagrams/existing-app-delta.html"
+        ],
+        "createdAt": "2026-10-09T07:47:28.399Z",
+        "reason": "Agent: SVG coordinates supply frame insets and node padding; browser text and connector geometry is checked independently."
       }
     ]
   }

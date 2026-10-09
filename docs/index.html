@@ -101,7 +101,7 @@
         <g>
           <rect x="160" y="120" width="160" height="96" rx="6" class="node" />
           <text x="176" y="148" class="node-name">Discovery</text>
-          <text x="176" y="176" class="detail"><tspan x="176">Inspect + ask</tspan><tspan x="176" dy="24">Propose design</tspan></text>
+          <text x="176" y="176" class="detail"><tspan x="176">Inspect and ask</tspan><tspan x="176" dy="24">Propose a design</tspan></text>
         </g>
         <g>
           <rect x="364" y="284" width="160" height="96" rx="6" class="gate" />
@@ -111,7 +111,7 @@
         <g>
           <rect x="568" y="120" width="200" height="120" rx="6" class="node" />
           <text x="584" y="148" class="node-name">Prepare package</text>
-          <text x="584" y="176" class="detail"><tspan x="584">Write four artifacts</tspan><tspan x="584" dy="24">Review diagrams</tspan><tspan x="584" dy="24">+ complete package</tspan></text>
+          <text x="584" y="176" class="detail"><tspan x="584">Write the four files</tspan><tspan x="584" dy="24">Review diagrams</tspan><tspan x="584" dy="24">and the package</tspan></text>
         </g>
         <g>
           <rect x="812" y="284" width="160" height="96" rx="6" class="gate" />
@@ -121,18 +121,18 @@
         <g>
           <rect x="1052" y="284" width="180" height="96" rx="6" class="node" />
           <text x="1068" y="316" class="node-name"><tspan x="1068">Start a new</tspan><tspan x="1068" dy="24">session</tspan></text>
-          <text x="1068" y="364" class="detail">Approved files</text>
+          <text x="1068" y="364" class="detail">Use approved files</text>
         </g>
         <g>
           <rect x="1052" y="448" width="180" height="96" rx="6" class="node" />
-          <text x="1068" y="480" class="node-name">Build + validate</text>
-          <text x="1068" y="508" class="detail"><tspan x="1068">Acceptance criteria</tspan><tspan x="1068" dy="24">and review findings</tspan></text>
+          <text x="1068" y="480" class="node-name">Build and verify</text>
+          <text x="1068" y="508" class="detail"><tspan x="1068">Check acceptance</tspan><tspan x="1068" dy="24">Resolve findings</tspan></text>
         </g>
         <path d="M32 640 H1248" class="rule" />
         <rect x="32" y="660" width="20" height="20" rx="2" class="gate" />
         <text x="64" y="676" class="detail">Your approval gate</text>
         <path d="M304 660 V684" class="boundary" />
-        <text x="320" y="676" class="detail">Separately initiated session, not an automatic continuation</text>
+        <text x="320" y="676" class="detail">You start implementation in a separate session.</text>
       </svg>
       <svg class="diagram-narrow" viewBox="0 0 320 1032" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="approval-handoff-narrow-title approval-handoff-narrow-desc">
         <title id="approval-handoff-narrow-title">Design ends at approval</title>
@@ -150,7 +150,7 @@
           <rect x="16" y="116" width="288" height="92" rx="6" class="node" />
           <text x="32" y="140" class="lane-name">Creator</text>
           <text x="32" y="168" class="node-name">Discovery</text>
-          <text x="32" y="192" class="detail">Inspect, ask, and propose design</text>
+          <text x="32" y="192" class="detail">Investigate and propose a design</text>
         </g>
         <g>
           <rect x="16" y="244" width="288" height="92" rx="6" class="gate" />
@@ -162,7 +162,7 @@
           <rect x="16" y="372" width="288" height="116" rx="6" class="node" />
           <text x="32" y="396" class="lane-name">Creator</text>
           <text x="32" y="424" class="node-name">Prepare the package</text>
-          <text x="32" y="448" class="detail"><tspan x="32">Write the four artifacts.</tspan><tspan x="32" dy="24">Review diagrams and the package.</tspan></text>
+          <text x="32" y="448" class="detail"><tspan x="32">Write the four files.</tspan><tspan x="32" dy="24">Review diagrams and the package.</tspan></text>
         </g>
         <g>
           <rect x="16" y="524" width="288" height="92" rx="6" class="gate" />
@@ -172,7 +172,7 @@
         </g>
         <path d="M16 668 H304" class="boundary" />
         <rect x="48" y="652" width="224" height="32" fill="#fff" />
-        <text x="160" y="672" text-anchor="middle" class="detail">Separately initiated session</text>
+        <text x="160" y="672" text-anchor="middle" class="detail">You start a separate session</text>
         <g>
           <rect x="16" y="724" width="288" height="92" rx="6" class="node" />
           <text x="32" y="748" class="lane-name">You</text>
@@ -189,13 +189,13 @@
         <text x="48" y="1012" class="detail">Your approval gate</text>
       </svg>
     </div>
-    <figcaption>Confirm discovery before the creator prepares the package. Review the diagrams and obtain independent review before approving the complete package. If either review is unavailable, explicitly accept a recorded manual-review exception. Approval ends the creator workflow. Start implementation in a separate session.</figcaption>
+    <figcaption>Confirm discovery before the creator prepares the package. Review the diagrams and have an independent reviewer check the complete package before you approve it. If either review is unavailable, record and explicitly accept a manual-review exception. The creator stops at approval. You start implementation in a separate session.</figcaption>
   </figure>
       <p class="boundary-note">Setup and architecture design do not provision resources or change your application code.</p>
     </section>
     <section class="tool-section" aria-labelledby="tools">
       <div class="wrap tool-layout">
-        <div><h2 id="tools">Start with what you know.</h2><p>A defined use case can go straight to discovery. If the opportunity is unclear, research an idea first.</p><p><a href="applications.html">Explore what you can build</a> or <a href="agent-or-workflow.html">compare agents with simpler workflows</a>.</p></div>
+        <div><h2 id="tools">Start with what you know.</h2><p>A defined use case can go straight to discovery. If the opportunity is unclear, research an idea first.</p><p><a href="applications.html">Explore what you can build</a>.</p></div>
         <dl class="tool-list">
           <div><dt>AI Agent Creator</dt><dd>Define a new application or an AI capability in an existing system, then approve its architecture.</dd></div>
           <div><dt>Idea Forge</dt><dd>Research public customer and industry evidence. Choose an idea and bring its brief to AI Agent Creator.</dd></div>
