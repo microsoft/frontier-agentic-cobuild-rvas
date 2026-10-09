@@ -4,6 +4,10 @@
 Keep them separate. The plugin works for a new application and for a capability
 added to an existing system.
 
+For scope and examples, read [What can you build?](applications.html). If you
+already have an application, [prepare its context](existing-applications.html)
+before discovery.
+
 For a new project, create an empty directory and initialize Git yourself:
 
 ```bash

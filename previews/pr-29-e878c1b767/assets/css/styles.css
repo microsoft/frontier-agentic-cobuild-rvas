@@ -84,6 +84,8 @@ img { max-width: 100%; }
 .guide-nav { align-self: start; position: sticky; top: 120px; display: flex; flex-direction: column; gap: 14px; font-size: 0.88rem; }
 .guide-nav a { text-decoration: none; color: var(--c-dim); }
 .guide-nav a:hover { color: #0960c1; text-decoration: underline; }
+.guide-pages { display: flex; flex-direction: column; gap: 14px; padding-bottom: 24px; border-bottom: 1px solid var(--c-line); margin-bottom: 10px; }
+.guide-pages a[aria-current] { color: var(--c-heading); font-weight: 600; text-decoration: underline; }
 .guide-body { max-width: 76ch; min-width: 0; }
 .guide-body h2 { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--c-line); font-size: 1.95rem; }
 .guide-body > h2:first-child { margin-top: 0; padding-top: 0; border: 0; }
@@ -94,6 +96,10 @@ img { max-width: 100%; }
 .guide-body table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.88rem; }
 .guide-body td, .guide-body th { padding: 14px 12px; text-align: left; border-bottom: 1px solid var(--c-line); vertical-align: top; overflow-wrap: anywhere; }
 .guide-body th { background: var(--c-paper); color: var(--c-heading); }
+.guide-table { max-width: 100%; overflow-x: auto; margin: 24px 0; }
+.guide-table:focus-visible { outline: 3px solid #1b75e5; outline-offset: 3px; }
+.guide-table table { margin: 0; }
+.guide-table td, .guide-table th { overflow-wrap: normal; }
 .copy-command { position: absolute; right: 12px; top: 10px; padding: 4px 10px; border: 1px solid #8399ba; border-radius: 4px; background: #183d70; color: #fff; cursor: pointer; font: inherit; font-size: 0.75rem; }
 .copy-status { display: block; padding-top: 8px; color: #fcd34d; white-space: normal; }
 @media (max-width: 960px) {
@@ -120,4 +126,5 @@ img { max-width: 100%; }
   .guide-nav { position: static; padding-bottom: 32px; margin-bottom: 32px; border-bottom: 1px solid var(--c-line); }
   .guide-body h2 { margin-top: 48px; font-size: 1.75rem; }
   .guide-body td, .guide-body th { padding: 10px 8px; }
+  .guide-table table:has(th:nth-child(3)) { min-width: 36rem; }
 }
