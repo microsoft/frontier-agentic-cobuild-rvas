@@ -151,9 +151,8 @@ visual or independent review must be recorded and explicitly accepted as a
 manual-review exception before architecture approval.</p>
 <h2 id="describe-what-you-want-to-build">Describe what you want to build</h2>
 <style>
-    .intro-diagram { margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
-    .intro-diagram .diagram-container { width: 100%; overflow-x: auto; scrollbar-color: #032254 #f5f8fe; }
-    .intro-diagram .diagram-container:focus-visible { outline: 3px solid #1a77e3; outline-offset: 4px; }
+    .intro-diagram { container-type: inline-size; margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram .diagram-container { width: 100%; }
     .intro-diagram svg { display: block; width: 100%; background: #fff; }
     .intro-diagram text { font-family: "Inter", "Segoe UI", sans-serif; fill: #032254; }
     .intro-diagram .diagram-heading { font-family: "Outfit", "Segoe UI", sans-serif; font-size: 28px; font-weight: 700; }
@@ -166,17 +165,17 @@ manual-review exception before architecture approval.</p>
     .intro-diagram .rule { stroke: #dde6f7; stroke-width: 1; }
     .intro-diagram .boundary { fill: none; stroke: #47494e; stroke-width: 1.5; stroke-dasharray: 5 4; }
     .intro-diagram figcaption { margin-top: 16px; font-size: 14px; line-height: 1.7; }
-    .intro-diagram .scroll-hint { display: block; margin-top: 4px; font-size: 13px; color: #47494e; }
-    @media print {
-      .intro-diagram .diagram-container { overflow-x: visible; }
-      .intro-diagram svg { min-width: 0 !important; }
-      .intro-diagram .scroll-hint { display: none; }
+    .intro-diagram svg.diagram-narrow { display: none; max-width: 440px; margin: 0 auto; }
+    .intro-diagram .diagram-narrow .diagram-heading { font-size: 22px; }
+    @container (max-width: 1000px) {
+      .intro-diagram svg.diagram-wide { display: none; }
+      .intro-diagram svg.diagram-narrow { display: block; }
     }
   </style>
 <figure class="intro-diagram">
-    <div class="diagram-container" role="region" aria-label="Approval handoff diagram; scroll horizontally" tabindex="0">
+    <div class="diagram-container">
       <!-- impeccable-disable-next-line cramped-padding: SVG coordinates provide frame insets and node padding. -->
-      <svg viewBox="0 0 1280 720" style="min-width: 1280px" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="approval-handoff-title approval-handoff-desc">
+      <svg class="diagram-wide" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="approval-handoff-title approval-handoff-desc">
         <title id="approval-handoff-title">Design ends at approval</title>
         <desc id="approval-handoff-desc">The creator proposes an architecture, you confirm discovery, the creator prepares and reviews the package, you approve it and explicitly start a separate implementation session.</desc>
         <defs>
@@ -234,8 +233,62 @@ manual-review exception before architecture approval.</p>
         <path d="M304 660 V684" class="boundary" />
         <text x="320" y="676" class="detail">Separately initiated session, not an automatic continuation</text>
       </svg>
+      <svg class="diagram-narrow" viewBox="0 0 320 1032" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="approval-handoff-narrow-title approval-handoff-narrow-desc">
+        <title id="approval-handoff-narrow-title">Design ends at approval</title>
+        <desc id="approval-handoff-narrow-desc">The creator proposes the design, you confirm discovery, the creator prepares and reviews the package, you approve it, then you start a separate implementation session.</desc>
+        <defs>
+          <marker id="approval-handoff-narrow-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker>
+        </defs>
+        <rect width="320" height="1032" fill="#fff" />
+        <text x="16" y="32" class="diagram-heading"><tspan x="16">Design ends at approval.</tspan><tspan x="16" dy="32">Building starts separately.</tspan></text>
+        <path d="M160 208 V244" class="connector" marker-end="url(#approval-handoff-narrow-arrow)" />
+        <path d="M160 336 V372" class="connector" marker-end="url(#approval-handoff-narrow-arrow)" />
+        <path d="M160 488 V524" class="connector" marker-end="url(#approval-handoff-narrow-arrow)" />
+        <path d="M160 816 V852" class="connector" marker-end="url(#approval-handoff-narrow-arrow)" />
+        <g>
+          <rect x="16" y="116" width="288" height="92" rx="6" class="node" />
+          <text x="32" y="140" class="lane-name">Creator</text>
+          <text x="32" y="168" class="node-name">Discovery</text>
+          <text x="32" y="192" class="detail">Inspect, ask, and propose design</text>
+        </g>
+        <g>
+          <rect x="16" y="244" width="288" height="92" rx="6" class="gate" />
+          <text x="32" y="268" class="lane-name">You</text>
+          <text x="32" y="296" class="node-name">Confirm discovery</text>
+          <text x="32" y="320" class="detail">Agree the target architecture</text>
+        </g>
+        <g>
+          <rect x="16" y="372" width="288" height="116" rx="6" class="node" />
+          <text x="32" y="396" class="lane-name">Creator</text>
+          <text x="32" y="424" class="node-name">Prepare the package</text>
+          <text x="32" y="448" class="detail"><tspan x="32">Write the four artifacts.</tspan><tspan x="32" dy="24">Review diagrams and the package.</tspan></text>
+        </g>
+        <g>
+          <rect x="16" y="524" width="288" height="92" rx="6" class="gate" />
+          <text x="32" y="548" class="lane-name">You</text>
+          <text x="32" y="576" class="node-name">Approve the package</text>
+          <text x="32" y="600" class="detail">The creator workflow stops here</text>
+        </g>
+        <path d="M16 668 H304" class="boundary" />
+        <rect x="48" y="652" width="224" height="32" fill="#fff" />
+        <text x="160" y="672" text-anchor="middle" class="detail">Separately initiated session</text>
+        <g>
+          <rect x="16" y="724" width="288" height="92" rx="6" class="node" />
+          <text x="32" y="748" class="lane-name">You</text>
+          <text x="32" y="776" class="node-name">Start a new session</text>
+          <text x="32" y="800" class="detail">Attach the approved files</text>
+        </g>
+        <g>
+          <rect x="16" y="852" width="288" height="116" rx="6" class="node" />
+          <text x="32" y="876" class="lane-name">Implementation session</text>
+          <text x="32" y="904" class="node-name">Build and validate</text>
+          <text x="32" y="928" class="detail"><tspan x="32">Check acceptance criteria</tspan><tspan x="32" dy="24">and resolve review findings</tspan></text>
+        </g>
+        <rect x="16" y="996" width="20" height="20" rx="2" class="gate" />
+        <text x="48" y="1012" class="detail">Your approval gate</text>
+      </svg>
     </div>
-    <figcaption>Confirm discovery before package preparation. Approve the complete package after diagram and independent review, or an explicitly accepted manual-review exception. Approval ends the creator workflow; you initiate implementation separately.<span class="scroll-hint">Scroll horizontally if the full diagram is not visible.</span></figcaption>
+    <figcaption>Confirm discovery before package preparation. Approve the complete package after diagram and independent review, or an explicitly accepted manual-review exception. Approval ends the creator workflow; you initiate implementation separately.</figcaption>
   </figure>
 
 <p>Select <strong>AI Agent Creator</strong> (<code>ai-agent-creator</code>) and give it the intended outcome.
