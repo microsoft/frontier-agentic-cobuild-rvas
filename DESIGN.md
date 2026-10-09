@@ -32,6 +32,12 @@ The application families pair explanatory text with compact conceptual diagrams
 on the right. Each diagram shows the distinguishing flow or approval boundary,
 without prescribing Microsoft products. Below 960px, the diagrams follow their
 text in a single column. Keep labels readable without horizontal scrolling.
+Product examples sit below the family prose, separate from the conceptual flow.
+Use unchanged Microsoft icons with nearby product names linked to Microsoft Learn.
+Label each example and state that the products are optional, not approved architectures.
+Each family has at most two options, with a short explanation of their roles.
+Use clearly disclosed neutral illustrations when the bundled artwork has no exact icon. Distinguish capabilities
+within one service and frameworks from hosting choices.
 
 Use `docs/assets/css/styles.css` as the token and component source. The guide
 content comes from `docs/start.md`; build output is `docs/start.html`. Preserve

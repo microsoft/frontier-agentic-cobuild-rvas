@@ -111,6 +111,13 @@ test('each application family pairs its explanation with an accessible conceptua
     const [, id, content] = family;
     assert.ok(content.includes(`<div class="application-family-copy"><h3 id="${id}">`), id);
     assert.equal([...content.matchAll(/<figure /g)].length, 1, id);
+    assert.equal([...content.matchAll(/class="family-product-example"/g)].length, 1, id);
+    const examples = content.match(/<div class="family-product-example">([\s\S]*?)\n<\/div>/)[1];
+    assert.match(examples, /<span>Example options<\/span>/);
+    assert.equal([...examples.matchAll(/<a href="https:\/\/learn.microsoft.com\//g)].length, 2, id);
+    assert.equal([...examples.matchAll(/<small>[^<]+<\/small>/g)].length, 2, id);
+    assert.equal([...examples.matchAll(/<img /g)].length, 2, id);
+    assert.match(examples, /<img src="assets\/icons\/microsoft\/[^"]+\.svg" alt="" width="32" height="32" \/>/);
     assert.match(content, /<svg [^>]*role="img" aria-labelledby="family-[a-z]+-title family-[a-z]+-desc"/);
     assert.match(content, /<figcaption>[^<]+<\/figcaption>/);
     assert.doesNotMatch(content, /<h2 /);
@@ -121,6 +128,7 @@ test('each application family pairs its explanation with an accessible conceptua
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(ids.length, new Set(ids).size);
   assert.doesNotMatch(html, /<!-- application-family -->|<!-- diagram: family-/);
+  assert.match(html, /Microsoft Copilot Studio/);
 });
 
 test('architecture snapshots retain identical content and topology across layouts', () => {
