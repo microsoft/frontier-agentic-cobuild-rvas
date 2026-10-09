@@ -28,7 +28,7 @@
     <section class="hero guide-hero">
       <div class="wrap">
         <h1>Start in <span>your repository.</span></h1>
-        <p class="lede">Install the workflow. Define your application, approve its architecture, then build in a separate session.</p>
+        <p class="lede">Install the plugin and supporting skills. Approve the architecture before starting implementation in a separate session.</p>
       </div>
     </section>
     <div class="wrap guide-layout">
@@ -44,9 +44,9 @@
       </nav>
       <article class="guide-body">
         <h2 id="work-in-your-own-repository">Work in your own repository</h2>
-<p><strong>This repository supplies the tools. Your repository holds the application and its architecture.</strong>
-Keep them separate. The plugin works for a new application and for a capability
-added to an existing system.</p>
+<p>This repository supplies the tools. Keep your application and its architecture
+in a separate repository. The plugin supports new applications and AI additions
+to existing systems.</p>
 <p>For scope and examples, read <a href="applications.html">What can you build?</a>. If you
 already have an application, <a href="existing-applications.html">prepare its context</a>
 before discovery.</p>
@@ -93,46 +93,122 @@ It also supplies the public Microsoft Learn MCP server. This server retrieves
 documentation; it cannot read or change your cloud resources. No live Azure,
 Foundry, or hosted diagram connection is installed by default.</p>
 <h2 id="install-the-supporting-skills">Install the supporting skills</h2>
-<p>Use <strong>Node.js 22.20 or newer</strong>, Git, and npx. The script needs Bash on Linux,
-macOS, WSL, or Git Bash. It does not install system tools.</p>
-<p>Clone this tooling repository into a separate directory and review its installer:</p>
-<pre><code class="language-bash">git clone https://github.com/microsoft/frontier-agentic-cobuild-rvas.git /path/to/agentic-cobuild-tools
-</code></pre>
-<p>Replace both example paths below with your actual directories. Your application
-directory must already exist. Preview the selected sources and planned writes:</p>
-<pre><code class="language-bash">bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh --dry-run /path/to/my-ai-app
-bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh /path/to/my-ai-app
-</code></pre>
-<p>The script installs the selected skills under <code>.agents/skills/</code> and maintains
-<code>skills-lock.json</code> plus <code>.agentic-cobuild-setup.json</code>. Keep these with the project
-according to your source-control policy. The installer version is pinned; upstream
-skill content is fetched from its current source and recorded by the installer.
-Review upstream changes before a fresh installation. This is not a commit-pinned
-dependency distribution.</p>
-<p>An unchanged installation can be rerun without downloading or upgrading skills.
-The script stops if a selected skill already exists without its setup record, if
-managed content changed, or if setup paths are linked elsewhere. It does not edit
-application code, <code>AGENTS.md</code>, MCP settings, or Git configuration.</p>
-<p><strong>A failed upstream install may leave partial files.</strong> Read the error and inspect
-<code>.agents/skills/</code> and <code>skills-lock.json</code> before retrying. Preserve anything you
-already owned. Do not delete a directory just to bypass a conflict.</p>
-<h3 id="manual-npx-alternative">Manual npx alternative</h3>
-<p>Run the following commands <strong>from your application directory</strong>. These use the same
-dependency inventory as the script. They are suitable for terminals without Bash.
-Unlike our wrapper, direct upstream commands do not perform our conflict checks
-or create our setup record. Inspect existing skills first; use one setup method
-consistently.</p>
-<h3 id="mattpocockskills">mattpocock/skills</h3>
-<p><code>grilling</code>, <code>domain-modeling</code>, <code>codebase-design</code>, <code>implement</code>, <code>tdd</code>, <code>diagnosing-bugs</code>, <code>code-review</code>, <code>handoff</code></p>
+<p>Use <strong>Node.js 22.20 or newer</strong>, Git, and npx. Run the commands below
+<strong>from your application directory</strong>. You do not need Bash or a clone of this
+tooling repository.</p>
+<p>Each command installs the listed skills directly from its upstream repository.
+Review the skills and their source before running it. Check <code>.agents/skills/</code>
+and <code>.github/skills/</code> for existing copies and preserve any local changes.</p>
+<p>The commands select GitHub Copilot at project scope. <code>--copy</code> copies skill files
+instead of creating symlinks. The first <code>--yes</code> lets npx download the pinned
+installer; the final <code>--yes</code> accepts the skill installer&#39;s prompts.
+These commands can overwrite existing copies of the selected skills.</p>
+<p>The installer version is pinned, but upstream skill content is not pinned to
+specific commits. Review upstream changes before installing or reinstalling.
+Keep <code>skills-lock.json</code> and installed skill files according to your project&#39;s
+source-control policy.</p>
+<h3 id="skills-from-mattpocockskills">Skills from mattpocock/skills</h3>
+<p>Upstream source: <a href="https://github.com/mattpocock/skills"><code>mattpocock/skills</code></a>.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>grilling</code></td>
+<td>Question a plan until the decisions and assumptions are clear.</td>
+</tr>
+<tr>
+<td><code>domain-modeling</code></td>
+<td>Define domain terms and record them in a glossary and architecture decisions.</td>
+</tr>
+<tr>
+<td><code>codebase-design</code></td>
+<td>Design module interfaces and decide where to separate responsibilities.</td>
+</tr>
+<tr>
+<td><code>implement</code></td>
+<td>Implement a specification or tickets, run checks, and review the changes. Includes a commit step.</td>
+</tr>
+<tr>
+<td><code>tdd</code></td>
+<td>Build features or fix bugs through failing tests, implementation, and refactoring.</td>
+</tr>
+<tr>
+<td><code>diagnosing-bugs</code></td>
+<td>Reproduce a bug or performance regression and test possible causes.</td>
+</tr>
+<tr>
+<td><code>code-review</code></td>
+<td>Compare changes against repository standards and the originating specification.</td>
+</tr>
+<tr>
+<td><code>handoff</code></td>
+<td>Write a conversation handoff for a fresh agent session.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <pre><code class="language-bash">npx --yes skills@1.7.1 add mattpocock/skills --skill grilling domain-modeling codebase-design implement tdd diagnosing-bugs code-review handoff --agent github-copilot --copy --yes
 </code></pre>
-<h3 id="microsoftazure-skills">microsoft/azure-skills</h3>
-<p><code>discover-azure-skills</code>, <code>azure-enterprise-infra-planner</code>, <code>microsoft-foundry</code>, <code>azure-ai</code>, <code>foundry-iq</code>, <code>entra-agent-id</code>, <code>entra-app-registration</code>, <code>azure-aigateway</code></p>
+<h3 id="skills-from-microsoftazure-skills">Skills from microsoft/azure-skills</h3>
+<p>Upstream source: <a href="https://github.com/microsoft/azure-skills"><code>microsoft/azure-skills</code></a>.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>discover-azure-skills</code></td>
+<td>Find additional Azure skills for a task in the upstream catalog.</td>
+</tr>
+<tr>
+<td><code>azure-enterprise-infra-planner</code></td>
+<td>Plan enterprise Azure infrastructure and generate Bicep or Terraform.</td>
+</tr>
+<tr>
+<td><code>microsoft-foundry</code></td>
+<td>Build and manage Foundry agents, models, and resources, including deployment and evaluation.</td>
+</tr>
+<tr>
+<td><code>azure-ai</code></td>
+<td>Work with Azure AI Search, Speech, OpenAI, and Document Intelligence.</td>
+</tr>
+<tr>
+<td><code>foundry-iq</code></td>
+<td>Create or troubleshoot Foundry IQ knowledge bases and connect them to agents.</td>
+</tr>
+<tr>
+<td><code>entra-agent-id</code></td>
+<td>Configure identities and authentication for AI agents through Microsoft Entra Agent ID.</td>
+</tr>
+<tr>
+<td><code>entra-app-registration</code></td>
+<td>Register Microsoft Entra applications and configure OAuth and MSAL authentication.</td>
+</tr>
+<tr>
+<td><code>azure-aigateway</code></td>
+<td>Configure Azure API Management policies for AI models, MCP tools, and agents.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <pre><code class="language-bash">npx --yes skills@1.7.1 add microsoft/azure-skills --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
 </code></pre>
-<p>Third-party skills remain upstream-owned. Installing a skill makes guidance
-available; it does not authorize cloud changes. In particular, the upstream
-<code>implement</code> skill includes a commit step. Use the explicit handoff below for the
+<p>If a command fails, stop and inspect its error, <code>.agents/skills/</code>, and
+<code>skills-lock.json</code> before retrying. A failed install may leave partial files.
+Preserve existing skills rather than deleting them to bypass a conflict.</p>
+<p>Third-party skills remain upstream-owned. Installing a skill does not authorize
+cloud changes. The upstream <code>implement</code> skill includes a commit step.
+Use the explicit handoff below for the
 recommended journey and authorize commits separately.</p>
 <h2 id="check-the-workspace-before-starting">Check the workspace before starting</h2>
 <p>In CLI, start a fresh session in the application directory. Use <code>/skills</code> and
@@ -146,9 +222,9 @@ and organization policy. Restart or reload after installation. If the documentat
 server is unavailable, report the limitation; do not invent current product facts.</p>
 <p>Python 3.10 or newer is required for local diagram generation. Local draw.io
 rendering is a separate, organization-approved prerequisite. The plugin does not
-install a renderer or upload your architecture to a hosted service. Missing
-visual or independent review must be recorded and explicitly accepted as a
-manual-review exception before architecture approval.</p>
+install a renderer or upload your architecture to a hosted service.
+If visual or independent review is unavailable, record the gap.
+You must explicitly accept a manual-review exception before architecture approval.</p>
 <h2 id="describe-what-you-want-to-build">Describe what you want to build</h2>
 <style>
     .intro-diagram { container-type: inline-size; margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
@@ -288,7 +364,7 @@ manual-review exception before architecture approval.</p>
         <text x="48" y="1012" class="detail">Your approval gate</text>
       </svg>
     </div>
-    <figcaption>Confirm discovery before package preparation. Approve the complete package after diagram and independent review, or an explicitly accepted manual-review exception. Approval ends the creator workflow; you initiate implementation separately.</figcaption>
+    <figcaption>Confirm discovery before the creator prepares the package. Review the diagrams and obtain independent review before approving the complete package. If either review is unavailable, explicitly accept a recorded manual-review exception. Approval ends the creator workflow. Start implementation in a separate session.</figcaption>
   </figure>
 
 <p>Select <strong>AI Agent Creator</strong> (<code>ai-agent-creator</code>) and give it the intended outcome.
@@ -303,9 +379,9 @@ existing enterprise identity and operating environment.
 Inspect its current stack, preserve established interfaces, and account
 for our enterprise data-access and deployment constraints.
 </code></pre>
-<p>The creator inspects the repository and interviews you. Confirm the shared
-understanding when the outcome, first user journey, and architecture-changing
-decisions are settled. It then prepares:</p>
+<p>The creator inspects the repository and interviews you. Confirm discovery after
+you agree on the outcome and first user journey and settle the decisions that
+affect the architecture. The creator then prepares:</p>
 <div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
 <table>
 <thead>
@@ -334,7 +410,7 @@ decisions are settled. It then prepares:</p>
 </tbody>
 </table>
 </div>
-<p>Review the complete package and any explicitly recorded review exception.
+<p>Review the complete package, including any recorded review exception.
 <strong>Approval ends this workflow.</strong> It does not start implementation, change
 application code, generate infrastructure, or provision resources.</p>
 <h2 id="start-implementation-in-a-new-session">Start implementation in a new session</h2>
@@ -349,11 +425,11 @@ Ask before commits, resource provisioning, or deployment.
 Do not treat implementation as complete until every applicable acceptance
 criterion is verified or explicitly reported as blocked.
 </code></pre>
-<p>Use the application&#39;s existing tests and delivery controls. If the scope or
-architecture changes materially, update the package and obtain the affected
-approval before continuing.</p>
+<p>Use the application&#39;s existing tests and delivery controls.
+If a change to scope or architecture affects an approved decision, update the
+package and obtain the affected approval before continuing.</p>
 <h3 id="review-before-deployment">Review before deployment</h3>
-<p>After implementation and its targeted validation complete, run this in CLI:</p>
+<p>After you finish implementation and run its targeted checks, run this in CLI:</p>
 <pre><code class="language-text">/review Review the staged and unstaged implementation against
 @docs/architecture/specification.md,
 @docs/architecture/implementation-plan.md, and
@@ -373,7 +449,7 @@ finding.
 </code></pre>
 <p>Resolve the reported security findings and rerun the affected tests before
 approving deployment.</p>
-<p>In VS Code, request a separate implementation review grounded in those same files.
+<p>In VS Code, request a separate implementation review against those same files.
 Then request a separate security review using the review tools available in your
 organization. Do not assume CLI slash commands exist in VS Code. If independent
 review tooling is unavailable, assign a human reviewer and record the gap.</p>
@@ -385,7 +461,7 @@ Provide a customer name and industry, with any known pain points:</p>
 <pre><code class="language-text">Find a bounded AI opportunity for [customer] in [industry].
 Use public evidence and identify a safe first proof.
 </code></pre>
-<p>It researches public sources and ranks distinct ideas. Choose one; the skill
+<p>Idea Forge researches public sources and ranks distinct ideas. Choose one. The skill
 returns an unapproved brief with evidence and open questions. Pass that brief to
 AI Agent Creator. Detailed discovery and architecture approval still happen there.</p>
 <h2 id="updates-and-team-setup">Updates and team setup</h2>
@@ -393,9 +469,8 @@ AI Agent Creator. Detailed discovery and architecture approval still happen ther
 Use CLI&#39;s <code>copilot plugin update agentic-cobuild</code> or VS Code&#39;s plugin update action
 for plugin updates. Review the updated contents before use.</p>
 <p>Supporting skill updates are separate. Review source changes and your project&#39;s
-lock file; our setup script deliberately does not overwrite or upgrade managed
-skills. If you update them manually, reconcile the setup record through a reviewed
-reinstallation rather than editing recorded hashes to silence a conflict.</p>
+lock file before reinstalling selected skills with the commands above.
+Preserve local changes and inspect the resulting diff before committing.</p>
 <p>See the <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/tree/main/plugins/agentic-cobuild">plugin source</a>
 and the <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/plugins/agentic-cobuild/skills/cloud-architecture-diagram/references/REFERENCE.md">diagram asset terms</a>.</p>
 
