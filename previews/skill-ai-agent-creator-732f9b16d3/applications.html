@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What can you build? | Agentic Co-build</title>
+  <meta name="description" content="Understand the AI application families covered by the Agentic Co-build design workflow." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to guide</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="index.html">Overview</a>
+<a href="applications.html" aria-current="page">Learn</a>
+<a href="start.html">Start</a>
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero guide-hero">
+      <div class="wrap">
+        <h1>What can <span>you build?</span></h1>
+        <p class="lede">Explore the kinds of AI applications you can bring to discovery, including capabilities added to existing systems.</p>
+      </div>
+    </section>
+    <div class="wrap guide-layout">
+      <nav class="guide-nav" aria-label="Reading navigation">
+        <div class="guide-pages">
+<a href="applications.html" aria-current="page">What can you build?</a>
+<a href="agent-or-workflow.html">Does this need an agent?</a>
+<a href="architecture-options.html">Choose an architecture that fits</a>
+<a href="existing-applications.html">Add AI to an existing application</a>
+</div>
+<a href="#what-the-creator-can-design">What the creator can design</a>
+        <a href="#application-families">Application families</a>
+        <a href="#capabilities-you-can-combine">Capabilities you can combine</a>
+        <a href="#where-this-workflow-stops">Where this workflow stops</a>
+        <a href="#describe-your-first-journey">Describe your first journey</a>
+      </nav>
+      <article class="guide-body">
+        <h2 id="what-the-creator-can-design">What the creator can design</h2>
+<p><strong>Bring an outcome, whether it needs a new application or a change to an existing
+one.</strong> AI Agent Creator helps you define the user journey and agree a
+Microsoft-cloud architecture before implementation starts.</p>
+<p>The workflow covers platform-managed agents and custom applications. It can
+also conclude that a bounded model call or an explicit workflow fits better
+than an agent. <a href="agent-or-workflow.html">Does this need an agent?</a> explains that
+choice.</p>
+<p>Here, <strong>supported means covered by the design workflow</strong>. It does not mean a
+ready-made implementation, a certified architecture, or guaranteed compatibility
+between every service. Discovery verifies the connections your design needs.
+The examples below are illustrative, not customer results or deployment templates.</p>
+<h2 id="application-families">Application families</h2>
+<h3 id="knowledge-assistants">Knowledge assistants</h3>
+<p>Help a user find and interpret authorized information. An illustrative operations
+assistant could explain a procedure and cite the current source, then investigate
+a follow-up question using other permitted evidence.</p>
+<p>The design must establish source ownership and freshness. It must also explain
+how user permissions constrain retrieval and what happens when evidence is absent
+or contradictory. A fixed lookup may need retrieval without an agent loop.</p>
+<h3 id="agents-that-use-business-tools">Agents that use business tools</h3>
+<p>Investigate a task and prepare or perform bounded operations. A maintenance
+assistant could gather request details and propose a work order for a manager
+to approve.</p>
+<p>Tool access is a separate decision from knowledge access. Specify which actions
+are read-only, which require approval, and how the system handles retries without
+duplicating a business operation. Authorization belongs at the operation boundary.</p>
+<h3 id="document-and-media-processing">Document and media processing</h3>
+<p>Turn incoming material into structured results. For example, classify a document
+bundle, extract fields, and send uncertain results to a reviewer.</p>
+<p>Agree the output schema and the review threshold. Define how a reviewer corrects
+an error and how a corrected result reaches the downstream system. This may be
+a fixed processing pipeline; a conversational interface is optional.</p>
+<h3 id="voice-and-audiovisual-experiences">Voice and audiovisual experiences</h3>
+<p>Use speech or an audiovisual presentation when it serves the user&#39;s task. An
+illustrative voice assistant could guide a worker through a permitted procedure,
+with confirmation before a consequential action.</p>
+<p>Decide how users interrupt, correct, or leave the interaction. Identify privacy
+and accessibility requirements, and verify the selected channel&#39;s capabilities.
+An avatar or generated video alone does not establish a need for an agent.</p>
+<h3 id="background-workflows">Background workflows</h3>
+<p>Respond to an event or process a job without a new chat interface. An incoming
+service request could trigger evidence gathering and then wait for an owner to
+approve the proposed next step.</p>
+<p>Identify who owns job state and how work resumes after a failure or a long wait.
+Fixed branches can stay explicit; runtime investigation should have a defined
+scope and stopping condition.</p>
+<h3 id="coordinated-specialist-agents">Coordinated specialist agents</h3>
+<p>Split responsibilities when one agent cannot meet the requirement reliably.
+For example, an investigator and a separately authorized action agent could have
+different tools and access boundaries.</p>
+<p>The design must justify the split and define handoff contracts. It must account
+for conflicting results, shared state, and partial failure. Coordination adds
+overhead; Microsoft&#39;s <a href="https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns">orchestration guidance</a>
+recommends the lowest complexity that meets the requirement.</p>
+<h2 id="capabilities-you-can-combine">Capabilities you can combine</h2>
+<p>These families can overlap. A document workflow may feed a knowledge assistant;
+an investigation may finish with an approval-controlled operation.</p>
+<p>Persistent memory and personalization are additional choices. Define what may be
+remembered, whose context it is, and how it expires or is deleted. Multiple
+knowledge sources need their own permission and provenance boundaries.</p>
+<p>Select these capabilities because the journey needs them. Neither multiple
+agents nor persistent memory is an entry requirement.</p>
+<h2 id="where-this-workflow-stops">Where this workflow stops</h2>
+<p>The creator records the architecture and requirements, with an implementation
+plan for a separate delivery session. You confirm discovery before it prepares
+the complete package, then approve that package before handoff.</p>
+<p>Standalone SDK questions, incident troubleshooting, and live agent operations
+belong to specialist workflows. Architecture approval grants no permission to
+implement or deploy.</p>
+<h2 id="describe-your-first-journey">Describe your first journey</h2>
+<p>Give the creator a task, its user, and a bounded starting point. You can leave the
+platform open or state a genuine constraint:</p>
+<pre><code class="language-text">Design a maintenance assistant for property managers. Help them investigate
+resident requests and prepare a work order for approval. Reuse our existing
+identity and service system. Compare an agent with a simpler workflow before
+recommending the architecture.
+</code></pre>
+<p><a href="start.html">Set up your application workspace</a>, then bring your own idea.
+If you are extending a system, read <a href="existing-applications.html">Add AI to an existing application</a>.</p>
+
+      </article>
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/guide.js"></script>
+</body>
+</html>

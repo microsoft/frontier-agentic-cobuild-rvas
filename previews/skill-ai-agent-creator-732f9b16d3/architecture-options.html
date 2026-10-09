@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Choose an architecture that fits | Agentic Co-build</title>
+  <meta name="description" content="Separate behavior, platform, channel, and ownership before choosing an AI application architecture." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to guide</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="index.html">Overview</a>
+<a href="applications.html">Learn</a>
+<a href="start.html">Start</a>
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero guide-hero">
+      <div class="wrap">
+        <h1>Choose an architecture <span>that fits.</span></h1>
+        <p class="lede">Reuse what works. Compare platform-managed and custom execution against the requirements you actually have.</p>
+      </div>
+    </section>
+    <div class="wrap guide-layout">
+      <nav class="guide-nav" aria-label="Reading navigation">
+        <div class="guide-pages">
+<a href="applications.html">What can you build?</a>
+<a href="agent-or-workflow.html">Does this need an agent?</a>
+<a href="architecture-options.html" aria-current="page">Choose an architecture that fits</a>
+<a href="existing-applications.html">Add AI to an existing application</a>
+</div>
+<a href="#separate-behavior-from-platform">Separate behavior from platform</a>
+        <a href="#start-with-what-you-already-have">Start with what you already have</a>
+        <a href="#execution-options-the-creator-compares">Execution options the creator compares</a>
+        <a href="#choose-the-channel-independently">Choose the channel independently</a>
+        <a href="#keep-knowledge-and-actions-distinct">Keep knowledge and actions distinct</a>
+        <a href="#verify-the-proposed-connections">Verify the proposed connections</a>
+        <a href="#give-discovery-your-constraints">Give discovery your constraints</a>
+      </nav>
+      <article class="guide-body">
+        <h2 id="separate-behavior-from-platform">Separate behavior from platform</h2>
+<p><strong>Choose what the system owns before choosing where it runs.</strong> The creator
+compares coherent architecture options during discovery. You confirm the target
+architecture before it prepares the complete package.</p>
+<p>An agent does not imply a new web application. Custom agent code does not settle
+who should host it. A required interface does not necessarily require a new
+backend.</p>
+<h2 id="start-with-what-you-already-have">Start with what you already have</h2>
+<p>Evaluate existing applications and platform capabilities against the first
+journey. Reuse them when they meet the functional and operating requirements.
+An empty repository says nothing about the enterprise&#39;s existing services.</p>
+<p>Microsoft&#39;s <a href="https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy">technology planning guidance</a>
+starts by checking whether a ready-to-use agent meets the requirements before
+comparing build options. Our discovery process applies the same reuse-first
+principle while preserving confirmed custom requirements.</p>
+<h2 id="execution-options-the-creator-compares">Execution options the creator compares</h2>
+<p>These are design paths, not a promise that every combination is deployable.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>When to evaluate it</th>
+<th>What your team must still define</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Existing or prebuilt capability</td>
+<td>It may already meet the user journey.</td>
+<td>Fit, access boundaries, ownership, and any gaps.</td>
+</tr>
+<tr>
+<td>Copilot Studio</td>
+<td>A low-code agent or workflow could meet the integration and channel requirements.</td>
+<td>Connections and permissions, business approvals, environment lifecycle, and evaluation.</td>
+</tr>
+<tr>
+<td>Foundry prompt agent</td>
+<td>Instructions, model configuration, and permitted tools could express the behavior.</td>
+<td>User access, knowledge permissions, tool policy, and acceptance criteria.</td>
+</tr>
+<tr>
+<td>Foundry hosted agent</td>
+<td>Custom code is needed and managed execution could fit.</td>
+<td>Code and protocol choices, business state, approval semantics, and operational requirements.</td>
+</tr>
+<tr>
+<td>Application-owned execution</td>
+<td>Existing application integration or runtime control is a confirmed requirement.</td>
+<td>Hosting, authorization, durable state, deployment, and telemetry.</td>
+</tr>
+<tr>
+<td>Explicit workflow or bounded inference</td>
+<td>Steps are known or one model response meets the task.</td>
+<td>Output validation, failure handling, and integration with the existing process.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a href="https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio">Copilot Studio</a>
+provides low-code agent and workflow authoring.
+<a href="https://learn.microsoft.com/azure/foundry/agents/overview">Foundry Agent Service</a>
+offers configured prompt agents and managed hosting for custom agent code.
+Use their current documentation to verify the exact feature and connection
+being considered.</p>
+<p>If custom code remains necessary, compare managed execution with application-owned
+execution. The skill includes recipes for Agent Framework and the GitHub Copilot
+SDK; neither framework name alone settles the hosting choice.</p>
+<h2 id="choose-the-channel-independently">Choose the channel independently</h2>
+<p>Identify where the user or caller already works. It may be an existing application,
+a supported platform channel, or a background process. Build a custom client only
+for a confirmed need.</p>
+<p>Verify the chosen channel&#39;s audience and authentication model. Then decide
+whether it provides the needed experience or requires a client you must own.
+Keep that question separate from the agent runtime.</p>
+<p>For example, a maintenance investigation might live inside the existing service
+application. An event-driven document workflow might need no interactive client.
+Both are illustrative choices to test against requirements.</p>
+<h2 id="keep-knowledge-and-actions-distinct">Keep knowledge and actions distinct</h2>
+<p>A knowledge source supplies evidence. A business tool performs an operation.
+Even when both reach the same system, they need separately defined permissions
+and responsibilities.</p>
+<p>When several sources are needed, record what each contributes and how access is
+enforced. Select the model and inference boundary separately from the knowledge
+layer and agent runtime. Reuse suitable existing deployments rather than assuming
+the project needs a new one.</p>
+<h2 id="verify-the-proposed-connections">Verify the proposed connections</h2>
+<p>Before you confirm an architecture, the creator checks decision-bearing product
+facts through current Microsoft Learn evidence and the relevant specialist
+guidance. The package records unresolved checks and their owners.</p>
+<p>Verify the selected channel, protocol, identity, networking, and lifecycle.
+Account for licensing and region availability where they affect the design.
+Distinguish preview capabilities from generally available ones. An assumed adapter
+does not establish compatibility.</p>
+<p>An unresolved connection blocks its dependent delivery work. Architecture approval
+does not turn an unverified integration into a supported one.</p>
+<h2 id="give-discovery-your-constraints">Give discovery your constraints</h2>
+<p>Bring a requirement or an existing standard, rather than a product shopping list:</p>
+<pre><code class="language-text">Design this capability inside our existing service application. Reuse its
+identity and business APIs. Compare Copilot Studio, managed Foundry execution,
+and application-owned execution where they fit. For every new UI, API, or host,
+name the requirement that makes it necessary.
+</code></pre>
+<p><a href="start.html">Set up the workspace</a> to begin discovery. If there is an application
+already in place, use <a href="existing-applications.html">the existing-application guide</a>
+to prepare its context.</p>
+
+      </article>
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/guide.js"></script>
+</body>
+</html>
