@@ -1,7 +1,7 @@
 ## What the creator can design
 
-**Bring an outcome, whether it needs a new application or a change to an existing
-one.** AI Agent Creator helps you define the user journey and agree a
+Bring an outcome for a new application or a change to an existing one.
+AI Agent Creator helps you define the user journey and agree on a
 Microsoft-cloud architecture before implementation starts.
 
 The workflow covers platform-managed agents and custom applications. It can
@@ -9,9 +9,10 @@ also conclude that a bounded model call or an explicit workflow fits better
 than an agent. [Does this need an agent?](agent-or-workflow.html) explains that
 choice.
 
-Here, **supported means covered by the design workflow**. It does not mean a
-ready-made implementation, a certified architecture, or guaranteed compatibility
-between every service. Discovery verifies the connections your design needs.
+Here, **supported means covered by the design workflow**. The plugin does not
+supply ready-made implementations or certified architectures. It does not
+guarantee compatibility between services. Discovery verifies the connections
+your design needs.
 The examples below are illustrative, not customer results or deployment templates.
 
 ## Application families
@@ -47,7 +48,7 @@ a fixed processing pipeline; a conversational interface is optional.
 
 ### Voice and audiovisual experiences
 
-Use speech or an audiovisual presentation when it serves the user's task. An
+Use speech or an audiovisual presentation when the user's task requires it. An
 illustrative voice assistant could guide a worker through a permitted procedure,
 with confirmation before a consequential action.
 
@@ -71,9 +72,10 @@ Split responsibilities when one agent cannot meet the requirement reliably.
 For example, an investigator and a separately authorized action agent could have
 different tools and access boundaries.
 
-The design must justify the split and define handoff contracts. It must account
-for conflicting results, shared state, and partial failure. Coordination adds
-overhead; Microsoft's [orchestration guidance](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
+The design must justify the split and define handoff contracts, including how
+agents handle conflicting results and shared state. Define what happens when
+one agent fails. Coordination adds overhead.
+Microsoft's [orchestration guidance](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 recommends the lowest complexity that meets the requirement.
 
 ## Capabilities you can combine
@@ -81,9 +83,9 @@ recommends the lowest complexity that meets the requirement.
 These families can overlap. A document workflow may feed a knowledge assistant;
 an investigation may finish with an approval-controlled operation.
 
-Persistent memory and personalization are additional choices. Define what may be
-remembered, whose context it is, and how it expires or is deleted. Multiple
-knowledge sources need their own permission and provenance boundaries.
+Persistent memory and personalization are additional choices. Define what the
+system may remember and who owns that context. Set rules for expiry and deletion.
+Multiple knowledge sources need their own permission and provenance boundaries.
 
 Select these capabilities because the journey needs them. Neither multiple
 agents nor persistent memory is an entry requirement.
@@ -100,8 +102,8 @@ implement or deploy.
 
 ## Describe your first journey
 
-Give the creator a task, its user, and a bounded starting point. You can leave the
-platform open or state a genuine constraint:
+Tell the creator who will use the application and what their first task is.
+You can leave the platform open or state a constraint:
 
 ```text
 Design a maintenance assistant for property managers. Help them investigate

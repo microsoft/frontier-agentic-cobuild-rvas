@@ -1,12 +1,11 @@
 ## Choose the execution model from the task
 
-**An AI application does not always need an agent loop.** The creator compares
+An AI application does not always need an agent loop. The creator compares
 execution models against the actual user journey before selecting a runtime.
 Calling something an assistant or copilot leaves that decision open.
 
-Use a maintenance request as an illustrative example. The intended outcome is
-to help a property manager handle it correctly. Different requirements lead
-to different designs.
+The examples below use a maintenance request. What the property manager needs
+to do with it determines the design.
 
 ## Four ways to handle the same request
 
@@ -16,7 +15,7 @@ The request already contains a category and location. Known rules assign the
 correct queue and flag urgent cases. The inputs and sequence are defined.
 
 Keep this deterministic when exact rules are enough. A model should not replace
-an authoritative rule merely to make the application sound agentic.
+an authoritative rule just to call the application agentic.
 
 ### One bounded model call
 
@@ -67,17 +66,18 @@ Bring these questions to discovery:
 
 Avoid narrowing the journey just to make a simpler architecture fit. A form,
 prepared evidence packet, or stateless response should be an agreed scope choice.
-If the user needs an open investigation, compare that requirement honestly.
+If the user needs an open investigation, compare designs that support it.
 
 ## Bound the agent's responsibility
 
-If runtime choice earns its place, specify its limits. Name the permitted tools
+If the task requires runtime planning, specify its limits. Name the permitted tools
 and the evidence each can access. Set a stopping condition and resource limits.
 Define how unresolved work reaches a human.
 
-Decide what the system may recommend and what it may execute. For an action,
-identify the caller's authority, required approval, and duplicate-operation
-protection. Retrieved content is evidence, not permission to take an action.
+Decide what the system may recommend and what it may execute.
+For an action, identify the caller's authority and required approval.
+Define how retries avoid duplicate operations. Retrieved content does not
+grant permission to take an action.
 
 Evaluate routine and failure cases against the same requirements. Include a
 request outside the allowed scope and a case where evidence is insufficient.
@@ -85,12 +85,13 @@ request outside the allowed scope and a case where evidence is insufficient.
 ## Use multiple agents only for a reason
 
 Separate agents may be justified by distinct access boundaries or specialist
-responsibilities. Start by describing what a single agent cannot do adequately.
+responsibilities. Start by describing which requirement a single agent cannot
+meet.
 Then define what each specialist owns and how disagreement is resolved.
 
 A sequence of prompts alone does not prove that several autonomous agents are
-needed. The creator's job is to compare meaningful options, not maximize agent
-count.
+needed. The creator compares options against the requirements.
+Adding more agents is not a goal.
 
 ## Bring the comparison to discovery
 

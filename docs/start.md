@@ -1,8 +1,8 @@
 ## Work in your own repository
 
-**This repository supplies the tools. Your repository holds the application and its architecture.**
-Keep them separate. The plugin works for a new application and for a capability
-added to an existing system.
+This repository supplies the tools. Keep your application and its architecture
+in a separate repository. The plugin supports new applications and AI additions
+to existing systems.
 
 For scope and examples, read [What can you build?](applications.html). If you
 already have an application, [prepare its context](existing-applications.html)
@@ -90,10 +90,10 @@ bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh /path/to/my-ai
 
 The script installs the selected skills under `.agents/skills/` and maintains
 `skills-lock.json` plus `.agentic-cobuild-setup.json`. Keep these with the project
-according to your source-control policy. The installer version is pinned; upstream
-skill content is fetched from its current source and recorded by the installer.
-Review upstream changes before a fresh installation. This is not a commit-pinned
-dependency distribution.
+according to your source-control policy. The script pins the installer version.
+It downloads upstream skill content from its current source and records it.
+Review upstream changes before a fresh installation. The setup does not pin
+skill content to specific commits.
 
 An unchanged installation can be rerun without downloading or upgrading skills.
 The script stops if a selected skill already exists without its setup record, if
@@ -114,9 +114,9 @@ consistently.
 
 <!-- upstream-commands -->
 
-Third-party skills remain upstream-owned. Installing a skill makes guidance
-available; it does not authorize cloud changes. In particular, the upstream
-`implement` skill includes a commit step. Use the explicit handoff below for the
+Third-party skills remain upstream-owned. Installing a skill does not authorize
+cloud changes. The upstream `implement` skill includes a commit step.
+Use the explicit handoff below for the
 recommended journey and authorize commits separately.
 
 ## Check the workspace before starting
@@ -135,9 +135,9 @@ server is unavailable, report the limitation; do not invent current product fact
 
 Python 3.10 or newer is required for local diagram generation. Local draw.io
 rendering is a separate, organization-approved prerequisite. The plugin does not
-install a renderer or upload your architecture to a hosted service. Missing
-visual or independent review must be recorded and explicitly accepted as a
-manual-review exception before architecture approval.
+install a renderer or upload your architecture to a hosted service.
+If visual or independent review is unavailable, record the gap.
+You must explicitly accept a manual-review exception before architecture approval.
 
 ## Describe what you want to build
 
@@ -162,9 +162,9 @@ Inspect its current stack, preserve established interfaces, and account
 for our enterprise data-access and deployment constraints.
 ```
 
-The creator inspects the repository and interviews you. Confirm the shared
-understanding when the outcome, first user journey, and architecture-changing
-decisions are settled. It then prepares:
+The creator inspects the repository and interviews you. Confirm discovery after
+you agree on the outcome and first user journey and settle the decisions that
+affect the architecture. The creator then prepares:
 
 | Artifact | Responsibility |
 | --- | --- |
@@ -173,7 +173,7 @@ decisions are settled. It then prepares:
 | `docs/architecture/specification.md` | Functional and technical requirements with acceptance criteria |
 | `docs/architecture/implementation-plan.md` | Dependency-ordered delivery work and handoff |
 
-Review the complete package and any explicitly recorded review exception.
+Review the complete package, including any recorded review exception.
 **Approval ends this workflow.** It does not start implementation, change
 application code, generate infrastructure, or provision resources.
 
@@ -193,13 +193,13 @@ Do not treat implementation as complete until every applicable acceptance
 criterion is verified or explicitly reported as blocked.
 ```
 
-Use the application's existing tests and delivery controls. If the scope or
-architecture changes materially, update the package and obtain the affected
-approval before continuing.
+Use the application's existing tests and delivery controls.
+If a change to scope or architecture affects an approved decision, update the
+package and obtain the affected approval before continuing.
 
 ### Review before deployment
 
-After implementation and its targeted validation complete, run this in CLI:
+After you finish implementation and run its targeted checks, run this in CLI:
 
 ```text
 /review Review the staged and unstaged implementation against
@@ -226,7 +226,7 @@ finding.
 Resolve the reported security findings and rerun the affected tests before
 approving deployment.
 
-In VS Code, request a separate implementation review grounded in those same files.
+In VS Code, request a separate implementation review against those same files.
 Then request a separate security review using the review tools available in your
 organization. Do not assume CLI slash commands exist in VS Code. If independent
 review tooling is unavailable, assign a human reviewer and record the gap.
@@ -244,7 +244,7 @@ Find a bounded AI opportunity for [customer] in [industry].
 Use public evidence and identify a safe first proof.
 ```
 
-It researches public sources and ranks distinct ideas. Choose one; the skill
+Idea Forge researches public sources and ranks distinct ideas. Choose one. The skill
 returns an unapproved brief with evidence and open questions. Pass that brief to
 AI Agent Creator. Detailed discovery and architecture approval still happen there.
 
@@ -255,9 +255,9 @@ Use CLI's `copilot plugin update agentic-cobuild` or VS Code's plugin update act
 for plugin updates. Review the updated contents before use.
 
 Supporting skill updates are separate. Review source changes and your project's
-lock file; our setup script deliberately does not overwrite or upgrade managed
-skills. If you update them manually, reconcile the setup record through a reviewed
-reinstallation rather than editing recorded hashes to silence a conflict.
+lock file. The setup script does not overwrite or upgrade managed skills.
+If you update them manually, review and reinstall them to reconcile the setup
+record. Do not edit recorded hashes to bypass a conflict.
 
 See the [plugin source](https://github.com/microsoft/frontier-agentic-cobuild-rvas/tree/main/plugins/agentic-cobuild)
 and the [diagram asset terms](https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/plugins/agentic-cobuild/skills/cloud-architecture-diagram/references/REFERENCE.md).

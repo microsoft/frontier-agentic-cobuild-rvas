@@ -50,7 +50,7 @@
       </nav>
       <article class="guide-body">
         <h2 id="extend-the-system-you-already-own">Extend the system you already own</h2>
-<p><strong>Bring the current application and the change you want.</strong> You do not need to
+<p>Bring the current application and the change you want. You do not need to
 start from an empty repository or adopt a new stack to use AI Agent Creator.
 An existing platform-managed agent or workflow can also be the starting point.</p>
 <p>The creator inspects the selected workspace before asking about missing facts.
@@ -95,21 +95,20 @@ services. Use synthetic inputs until customer-data access is agreed.</p>
 </tbody>
 </table>
 </div>
-<p>Repository facts should be inspected rather than repeatedly asked of you.
-Unknown enterprise facts remain questions; a missing local file does not prove
-that a control or service is absent.</p>
+<p>The creator should inspect repository facts before asking you for them.
+It asks about enterprise facts it cannot verify. A missing local file does not
+prove that a control or service is absent.</p>
 <h2 id="start-with-one-useful-addition">Start with one useful addition</h2>
 <p>Choose a first journey whose result you can evaluate. For example, an existing
 service application could gain an evidence-backed case summary while leaving
 case editing and assignment unchanged.</p>
 <p>If follow-up investigation is required, include it explicitly. Otherwise,
 one bounded model response may be enough. If the system prepares an action,
-keep the existing authorization and approval owner visible.</p>
-<p>Agree what counts as success against today&#39;s behavior. Define what stays
+preserve the existing authorization checks and name the approval owner.</p>
+<p>Agree on what counts as success compared with today&#39;s behavior. Define what stays
 unchanged, including response contracts and access boundaries. Specify how the
 application behaves when AI is unavailable or evidence cannot support an answer.</p>
-<p>This is an illustrative scope, not a requirement to add a chat panel or replace
-the application&#39;s workflow.</p>
+<p>This example does not require a chat panel or a replacement workflow.</p>
 <style>
     .intro-diagram { container-type: inline-size; margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
     .intro-diagram .diagram-container { width: 100%; }
@@ -296,7 +295,7 @@ the application&#39;s workflow.</p>
         </g>
       </svg>
     </div>
-    <figcaption>Illustrative topology, not a deployment template. Add summarization and investigation while preserving case APIs, authorization, and the system of record. Plain outlines identify preserved components; blue outlines and the change ledger identify the addition. Define unavailable-AI behavior, regression checks, and rollback in the architecture package.</figcaption>
+    <figcaption>This example adds summarization and investigation without changing case APIs, authorization, or the system of record. It is not a deployment template. Plain outlines mark preserved components. Blue outlines and the change ledger mark additions or changes. The architecture package must define how the application behaves when AI is unavailable, along with regression checks and rollback.</figcaption>
   </figure>
 
 <h2 id="make-reuse-and-migration-explicit">Make reuse and migration explicit</h2>
@@ -306,7 +305,7 @@ or gap, together with the cost of changing the system.</p>
 <p>When migration is justified, the architecture package should explain coexistence
 and compatibility. The implementation plan should identify data movement, cutover,
 rollback, and eventual decommissioning where applicable.</p>
-<p>Avoid leaving the old and new responsibilities ambiguous. Name the system of
+<p>Define responsibilities during the transition. Name the system of
 record and the owner of each operation during the transition.</p>
 <h2 id="review-the-addition-as-a-complete-package">Review the addition as a complete package</h2>
 <p>The creator produces the same four architecture artifacts used for a new project,

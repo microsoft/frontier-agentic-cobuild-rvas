@@ -28,7 +28,7 @@
     <section class="hero guide-hero">
       <div class="wrap">
         <h1>Start in <span>your repository.</span></h1>
-        <p class="lede">Install the workflow. Define your application, approve its architecture, then build in a separate session.</p>
+        <p class="lede">Install the plugin and supporting skills. Approve the architecture before starting implementation in a separate session.</p>
       </div>
     </section>
     <div class="wrap guide-layout">
@@ -44,9 +44,9 @@
       </nav>
       <article class="guide-body">
         <h2 id="work-in-your-own-repository">Work in your own repository</h2>
-<p><strong>This repository supplies the tools. Your repository holds the application and its architecture.</strong>
-Keep them separate. The plugin works for a new application and for a capability
-added to an existing system.</p>
+<p>This repository supplies the tools. Keep your application and its architecture
+in a separate repository. The plugin supports new applications and AI additions
+to existing systems.</p>
 <p>For scope and examples, read <a href="applications.html">What can you build?</a>. If you
 already have an application, <a href="existing-applications.html">prepare its context</a>
 before discovery.</p>
@@ -105,10 +105,10 @@ bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh /path/to/my-ai
 </code></pre>
 <p>The script installs the selected skills under <code>.agents/skills/</code> and maintains
 <code>skills-lock.json</code> plus <code>.agentic-cobuild-setup.json</code>. Keep these with the project
-according to your source-control policy. The installer version is pinned; upstream
-skill content is fetched from its current source and recorded by the installer.
-Review upstream changes before a fresh installation. This is not a commit-pinned
-dependency distribution.</p>
+according to your source-control policy. The script pins the installer version.
+It downloads upstream skill content from its current source and records it.
+Review upstream changes before a fresh installation. The setup does not pin
+skill content to specific commits.</p>
 <p>An unchanged installation can be rerun without downloading or upgrading skills.
 The script stops if a selected skill already exists without its setup record, if
 managed content changed, or if setup paths are linked elsewhere. It does not edit
@@ -130,9 +130,9 @@ consistently.</p>
 <p><code>discover-azure-skills</code>, <code>azure-enterprise-infra-planner</code>, <code>microsoft-foundry</code>, <code>azure-ai</code>, <code>foundry-iq</code>, <code>entra-agent-id</code>, <code>entra-app-registration</code>, <code>azure-aigateway</code></p>
 <pre><code class="language-bash">npx --yes skills@1.7.1 add microsoft/azure-skills --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
 </code></pre>
-<p>Third-party skills remain upstream-owned. Installing a skill makes guidance
-available; it does not authorize cloud changes. In particular, the upstream
-<code>implement</code> skill includes a commit step. Use the explicit handoff below for the
+<p>Third-party skills remain upstream-owned. Installing a skill does not authorize
+cloud changes. The upstream <code>implement</code> skill includes a commit step.
+Use the explicit handoff below for the
 recommended journey and authorize commits separately.</p>
 <h2 id="check-the-workspace-before-starting">Check the workspace before starting</h2>
 <p>In CLI, start a fresh session in the application directory. Use <code>/skills</code> and
@@ -146,9 +146,9 @@ and organization policy. Restart or reload after installation. If the documentat
 server is unavailable, report the limitation; do not invent current product facts.</p>
 <p>Python 3.10 or newer is required for local diagram generation. Local draw.io
 rendering is a separate, organization-approved prerequisite. The plugin does not
-install a renderer or upload your architecture to a hosted service. Missing
-visual or independent review must be recorded and explicitly accepted as a
-manual-review exception before architecture approval.</p>
+install a renderer or upload your architecture to a hosted service.
+If visual or independent review is unavailable, record the gap.
+You must explicitly accept a manual-review exception before architecture approval.</p>
 <h2 id="describe-what-you-want-to-build">Describe what you want to build</h2>
 <style>
     .intro-diagram { container-type: inline-size; margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
@@ -288,7 +288,7 @@ manual-review exception before architecture approval.</p>
         <text x="48" y="1012" class="detail">Your approval gate</text>
       </svg>
     </div>
-    <figcaption>Confirm discovery before package preparation. Approve the complete package after diagram and independent review, or an explicitly accepted manual-review exception. Approval ends the creator workflow; you initiate implementation separately.</figcaption>
+    <figcaption>Confirm discovery before the creator prepares the package. Review the diagrams and obtain independent review before approving the complete package. If either review is unavailable, explicitly accept a recorded manual-review exception. Approval ends the creator workflow. Start implementation in a separate session.</figcaption>
   </figure>
 
 <p>Select <strong>AI Agent Creator</strong> (<code>ai-agent-creator</code>) and give it the intended outcome.
@@ -303,9 +303,9 @@ existing enterprise identity and operating environment.
 Inspect its current stack, preserve established interfaces, and account
 for our enterprise data-access and deployment constraints.
 </code></pre>
-<p>The creator inspects the repository and interviews you. Confirm the shared
-understanding when the outcome, first user journey, and architecture-changing
-decisions are settled. It then prepares:</p>
+<p>The creator inspects the repository and interviews you. Confirm discovery after
+you agree on the outcome and first user journey and settle the decisions that
+affect the architecture. The creator then prepares:</p>
 <div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
 <table>
 <thead>
@@ -334,7 +334,7 @@ decisions are settled. It then prepares:</p>
 </tbody>
 </table>
 </div>
-<p>Review the complete package and any explicitly recorded review exception.
+<p>Review the complete package, including any recorded review exception.
 <strong>Approval ends this workflow.</strong> It does not start implementation, change
 application code, generate infrastructure, or provision resources.</p>
 <h2 id="start-implementation-in-a-new-session">Start implementation in a new session</h2>
@@ -349,11 +349,11 @@ Ask before commits, resource provisioning, or deployment.
 Do not treat implementation as complete until every applicable acceptance
 criterion is verified or explicitly reported as blocked.
 </code></pre>
-<p>Use the application&#39;s existing tests and delivery controls. If the scope or
-architecture changes materially, update the package and obtain the affected
-approval before continuing.</p>
+<p>Use the application&#39;s existing tests and delivery controls.
+If a change to scope or architecture affects an approved decision, update the
+package and obtain the affected approval before continuing.</p>
 <h3 id="review-before-deployment">Review before deployment</h3>
-<p>After implementation and its targeted validation complete, run this in CLI:</p>
+<p>After you finish implementation and run its targeted checks, run this in CLI:</p>
 <pre><code class="language-text">/review Review the staged and unstaged implementation against
 @docs/architecture/specification.md,
 @docs/architecture/implementation-plan.md, and
@@ -373,7 +373,7 @@ finding.
 </code></pre>
 <p>Resolve the reported security findings and rerun the affected tests before
 approving deployment.</p>
-<p>In VS Code, request a separate implementation review grounded in those same files.
+<p>In VS Code, request a separate implementation review against those same files.
 Then request a separate security review using the review tools available in your
 organization. Do not assume CLI slash commands exist in VS Code. If independent
 review tooling is unavailable, assign a human reviewer and record the gap.</p>
@@ -385,7 +385,7 @@ Provide a customer name and industry, with any known pain points:</p>
 <pre><code class="language-text">Find a bounded AI opportunity for [customer] in [industry].
 Use public evidence and identify a safe first proof.
 </code></pre>
-<p>It researches public sources and ranks distinct ideas. Choose one; the skill
+<p>Idea Forge researches public sources and ranks distinct ideas. Choose one. The skill
 returns an unapproved brief with evidence and open questions. Pass that brief to
 AI Agent Creator. Detailed discovery and architecture approval still happen there.</p>
 <h2 id="updates-and-team-setup">Updates and team setup</h2>
@@ -393,9 +393,9 @@ AI Agent Creator. Detailed discovery and architecture approval still happen ther
 Use CLI&#39;s <code>copilot plugin update agentic-cobuild</code> or VS Code&#39;s plugin update action
 for plugin updates. Review the updated contents before use.</p>
 <p>Supporting skill updates are separate. Review source changes and your project&#39;s
-lock file; our setup script deliberately does not overwrite or upgrade managed
-skills. If you update them manually, reconcile the setup record through a reviewed
-reinstallation rather than editing recorded hashes to silence a conflict.</p>
+lock file. The setup script does not overwrite or upgrade managed skills.
+If you update them manually, review and reinstall them to reconcile the setup
+record. Do not edit recorded hashes to bypass a conflict.</p>
 <p>See the <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/tree/main/plugins/agentic-cobuild">plugin source</a>
 and the <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/plugins/agentic-cobuild/skills/cloud-architecture-diagram/references/REFERENCE.md">diagram asset terms</a>.</p>
 
