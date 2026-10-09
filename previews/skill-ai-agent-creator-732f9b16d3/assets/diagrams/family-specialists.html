@@ -21,7 +21,7 @@
     <div class="diagram-container">
       <svg viewBox="0 0 360 328" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-specialists-title family-specialists-desc">
         <title id="family-specialists-title">Coordinate specialists with separate permissions</title>
-        <desc id="family-specialists-desc">A coordinator delegates to specialists with distinct permissions, reconciles their results, and hands off an action proposal that still requires approval.</desc>
+        <desc id="family-specialists-desc">A coordinator assigns work to specialists with separate permissions and checks their results before handing over a proposal for approval.</desc>
         <defs><marker id="family-specialists-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
         <path class="family-edge" d="M144 64 V84 Q144 92 136 92 H88 Q80 92 80 100 V128" marker-end="url(#family-specialists-arrow)" />
         <path class="family-edge" d="M216 64 V84 Q216 92 224 92 H272 Q280 92 280 100 V128" marker-end="url(#family-specialists-arrow)" />
@@ -30,10 +30,10 @@
         <g><rect class="family-focus" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">Coordinate the task</text></g>
         <g><rect class="family-node" x="8" y="128" width="152" height="80" rx="6" /><text x="24" y="160">Investigator</text><text class="family-detail" x="24" y="188">Read evidence</text></g>
         <g><rect class="family-node" x="200" y="128" width="152" height="80" rx="6" /><text x="216" y="160">Action agent</text><text class="family-detail" x="216" y="188">Propose work</text></g>
-        <g><rect class="family-node" x="24" y="264" width="312" height="56" rx="6" /><text x="44" y="300">Reconcile results and hand off</text></g>
+        <g><rect class="family-node" x="24" y="264" width="312" height="56" rx="6" /><text x="44" y="300">Check results and hand over</text></g>
       </svg>
     </div>
-    <figcaption>This is one coordination pattern. Each specialist has its own tools and permissions; consequential actions need approval.</figcaption>
+    <figcaption>This example gives each specialist separate tools and permissions. The coordinator must resolve conflicting results. Consequential actions need approval.</figcaption>
   </figure>
 </body>
 </html>

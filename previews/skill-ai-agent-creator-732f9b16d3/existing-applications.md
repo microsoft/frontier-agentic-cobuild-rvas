@@ -86,5 +86,4 @@ regression checks and rollback.
 ```
 
 [Install the plugin and supporting skills](start.html) without replacing existing
-project configuration. For the execution trade-off, read
-[Does this need an agent?](agent-or-workflow.html).
+project configuration.

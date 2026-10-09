@@ -47,14 +47,6 @@ const pages = [
     lede: 'Explore the kinds of AI applications you can bring to discovery, including capabilities added to existing systems.',
   },
   {
-    slug: 'agent-or-workflow',
-    navigationLabel: 'Agent or workflow',
-    title: 'Does this need an agent?',
-    description: 'Compare fixed rules, bounded model calls, explicit workflows, and agents against your user journey.',
-    heading: 'Does this need <span>an agent?</span>',
-    lede: 'Use an agent when the task requires it to choose the next step. Keep known rules and sequences explicit.',
-  },
-  {
     slug: 'architecture-options',
     navigationLabel: 'Architecture options',
     title: 'Choose an architecture that fits',
