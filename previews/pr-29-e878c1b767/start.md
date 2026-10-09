@@ -141,6 +141,8 @@ manual-review exception before architecture approval.
 
 ## Describe what you want to build
 
+<!-- diagram: approval-handoff -->
+
 Select **AI Agent Creator** (`ai-agent-creator`) and give it the intended outcome.
 You do not need to choose the platform or runtime first.
 
