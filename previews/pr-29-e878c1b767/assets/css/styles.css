@@ -108,6 +108,11 @@ img { max-width: 100%; }
 .application-family-copy { min-width: 0; }
 .application-family-copy h3 { margin-top: 0; font-size: 1.55rem; }
 .application-family-copy p:last-child { margin-bottom: 0; }
+.family-product-example { margin-top: 24px; display: grid; gap: 12px; }
+.family-product-example > span { color: var(--c-dim); font-size: 0.85rem; }
+.family-product-example a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 0.9rem; }
+.family-product-example img { flex: 0 0 32px; object-fit: contain; }
+.family-product-example small { display: block; color: var(--c-dim); font-size: 0.85rem; line-height: 1.6; }
 .guide-body .application-family .intro-diagram { width: 100%; max-width: 400px; margin: 0 auto; }
 .guide-body :not(pre) > code { padding: 2px 4px; border-radius: 3px; background: var(--c-paper); color: var(--c-heading); }
 .guide-body p, .guide-body li { font-size: 0.98rem; }

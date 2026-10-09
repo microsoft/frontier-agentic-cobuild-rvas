@@ -54,6 +54,12 @@ guarantee compatibility between services. Discovery verifies the connections
 your design needs.
 The examples below are illustrative, not customer results or deployment templates.</p>
 <h2 id="application-families">Application families</h2>
+<p>The Microsoft products shown below are examples, not required services or approved
+architectures. Discovery must verify product fit and any connections your design needs.
+Some examples cover different parts of a solution and can work together. They are
+not interchangeable. Check the selected features&#39; availability and release status.
+Product icons use Microsoft artwork where available. Neutral document and code
+symbols are illustrations, not product logos.</p>
 <section class="application-family" aria-labelledby="knowledge-assistants">
 <div class="application-family-copy"><h3 id="knowledge-assistants">Knowledge assistants</h3>
 <p>Help a user find and interpret authorized information. An illustrative operations
@@ -61,7 +67,12 @@ assistant could explain a procedure and cite the current source, then investigat
 a follow-up question using other permitted evidence.</p>
 <p>The design must establish source ownership and freshness. It must also explain
 how user permissions constrain retrieval and what happens when evidence is absent
-or contradictory. A fixed lookup may need retrieval without an agent loop.</p></div>
+or contradictory. A fixed lookup may need retrieval without an agent loop.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/search/search-what-is-azure-search"><img src="assets/icons/microsoft/ai-search.svg" alt="" width="32" height="32" />Azure AI Search</a><small>Search and retrieval for an application-owned assistant.</small></div>
+<div><a href="https://learn.microsoft.com/microsoft-copilot-studio/knowledge-copilot-studio"><img src="assets/icons/microsoft/copilot-studio.svg" alt="" width="32" height="32" />Microsoft Copilot Studio</a><small>A platform-managed agent grounded in configured knowledge sources.</small></div>
+</div></div>
 <style>
     .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
     .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
@@ -96,7 +107,12 @@ assistant could gather request details and propose a work order for a manager
 to approve.</p>
 <p>Tool access is a separate decision from knowledge access. Specify which actions
 are read-only, which require approval, and how the system handles retries without
-duplicating a business operation. Authorization belongs at the operation boundary.</p></div>
+duplicating a business operation. Authorization belongs at the operation boundary.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based business workflows.</small></div>
+<div><a href="https://learn.microsoft.com/azure/foundry/agents/overview"><img src="assets/icons/microsoft/foundry-agent-service.svg" alt="" width="32" height="32" />Foundry Agent Service</a><small>An agent that selects configured tools. Enforce business authorization separately.</small></div>
+</div></div>
 <style>
     .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
     .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
@@ -132,7 +148,12 @@ duplicating a business operation. Authorization belongs at the operation boundar
 bundle, extract fields, and send uncertain results to a reviewer.</p>
 <p>Agree the output schema and the review threshold. Define how a reviewer corrects
 an error and how a corrected result reaches the downstream system. This may be
-a fixed processing pipeline; a conversational interface is optional.</p></div>
+a fixed processing pipeline; a conversational interface is optional.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/ai-services/document-intelligence/overview"><img src="assets/icons/microsoft/document-intelligence.svg" alt="" width="32" height="32" />Azure Document Intelligence</a><small>Prebuilt or custom extraction models for known document types.</small></div>
+<div><a href="https://learn.microsoft.com/azure/ai-services/content-understanding/choosing-right-ai-tool"><img src="assets/icons/document-analysis.svg" alt="" width="32" height="32" />Azure Content Understanding</a><small>Analyzers for unstructured documents or mixed-media inputs.</small></div>
+</div></div>
 <style>
     .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
     .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
@@ -169,7 +190,12 @@ illustrative voice assistant could guide a worker through a permitted procedure,
 with confirmation before a consequential action.</p>
 <p>Decide how users interrupt, correct, or leave the interaction. Identify privacy
 and accessibility requirements, and verify the selected channel&#39;s capabilities.
-An avatar or generated video alone does not establish a need for an agent.</p></div>
+An avatar or generated video alone does not establish a need for an agent.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/ai-services/speech-service/overview"><img src="assets/icons/microsoft/speech.svg" alt="" width="32" height="32" />Azure Speech</a><small>Compose speech recognition and synthesis with your application logic.</small></div>
+<div><a href="https://learn.microsoft.com/azure/ai-services/speech-service/voice-live"><img src="assets/icons/microsoft/speech.svg" alt="" width="32" height="32" />Voice Live API</a><small>A speech-to-speech API within Azure Speech, rather than a separate product.</small></div>
+</div></div>
 <style>
     .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
     .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
@@ -206,7 +232,12 @@ service request could trigger evidence gathering and then wait for an owner to
 approve the proposed next step.</p>
 <p>Identify who owns job state and how work resumes after a failure or a long wait.
 Fixed branches can stay explicit; runtime investigation should have a defined
-scope and stopping condition.</p></div>
+scope and stopping condition.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based workflows with explicit steps.</small></div>
+<div><a href="https://learn.microsoft.com/azure/azure-functions/durable/durable-functions-overview"><img src="assets/icons/microsoft/functions.svg" alt="" width="32" height="32" />Azure Functions with Durable Functions</a><small>Code-defined workflows with persisted state and recovery.</small></div>
+</div></div>
 <style>
     .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
     .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
@@ -245,7 +276,12 @@ different tools and access boundaries.</p>
 agents handle conflicting results and shared state. Define what happens when
 one agent fails. Coordination adds overhead.
 Microsoft&#39;s <a href="https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns">orchestration guidance</a>
-recommends the lowest complexity that meets the requirement.</p></div>
+recommends the lowest complexity that meets the requirement.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/foundry/agents/overview"><img src="assets/icons/microsoft/foundry-agent-service.svg" alt="" width="32" height="32" />Foundry Agent Service</a><small>A managed agent runtime. Verify support for the selected coordination pattern.</small></div>
+<div><a href="https://learn.microsoft.com/agent-framework/workflows/orchestrations/"><img src="assets/icons/code.svg" alt="" width="32" height="32" />Microsoft Agent Framework</a><small>Code-defined orchestration. Choose hosting separately, including Foundry when appropriate.</small></div>
+</div></div>
 <style>
     .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
     .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
