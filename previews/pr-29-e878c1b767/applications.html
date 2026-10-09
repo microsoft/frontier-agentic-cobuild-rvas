@@ -35,7 +35,6 @@
       <nav class="guide-nav" aria-label="Reading navigation">
         <div class="guide-pages">
 <a href="applications.html" aria-current="page">Application types</a>
-<a href="agent-or-workflow.html">Agent or workflow</a>
 <a href="architecture-options.html">Architecture options</a>
 <a href="existing-applications.html">Existing applications</a>
 </div>
@@ -48,8 +47,7 @@ AI Agent Creator helps you define the user journey and agree on a
 Microsoft-cloud architecture before implementation starts.</p>
 <p>The workflow covers platform-managed agents and custom applications. It can
 also conclude that a bounded model call or an explicit workflow fits better
-than an agent. <a href="agent-or-workflow.html">Does this need an agent?</a> explains that
-choice.</p>
+than an agent.</p>
 <p>Here, <strong>supported means covered by the design workflow</strong>. The plugin does not
 supply ready-made implementations or certified architectures. It does not
 guarantee compatibility between services. Discovery verifies the connections
@@ -78,7 +76,7 @@ or contradictory. A fixed lookup may need retrieval without an agent loop.</p></
     <div class="diagram-container">
       <svg viewBox="0 0 360 304" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-knowledge-title family-knowledge-desc">
         <title id="family-knowledge-title">Answer with authorized evidence</title>
-        <desc id="family-knowledge-desc">A question leads to retrieval constrained by the user's permissions, then an answer with citations or an explicit evidence gap.</desc>
+        <desc id="family-knowledge-desc">The assistant searches sources the user may access, cites the evidence in its answer, and identifies missing or conflicting evidence.</desc>
         <defs><marker id="family-knowledge-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
         <path class="family-edge" d="M180 72 V112" marker-end="url(#family-knowledge-arrow)" />
         <path class="family-edge" d="M180 192 V232" marker-end="url(#family-knowledge-arrow)" />
@@ -113,7 +111,7 @@ duplicating a business operation. Authorization belongs at the operation boundar
     <div class="diagram-container">
       <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-tools-title family-tools-desc">
         <title id="family-tools-title">Propose an action before approval</title>
-        <desc id="family-tools-desc">A maintenance request leads to an investigation and proposed work order, which a manager reviews before any authorized business operation.</desc>
+        <desc id="family-tools-desc">The assistant investigates a maintenance request and proposes a work order for a manager to approve or reject before an authorized operation.</desc>
         <defs><marker id="family-tools-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
         <path class="family-edge" d="M180 64 V100" marker-end="url(#family-tools-arrow)" />
         <path class="family-edge" d="M180 156 V192" marker-end="url(#family-tools-arrow)" />
@@ -124,7 +122,7 @@ duplicating a business operation. Authorization belongs at the operation boundar
         <g><rect class="family-focus" x="24" y="284" width="312" height="68" rx="6" /><text x="44" y="312">Manager reviews the proposal</text><text class="family-detail" x="44" y="336">Approve or reject</text></g>
       </svg>
     </div>
-    <figcaption>A proposal is not permission to act. Execution still needs authorization and protection against duplicate operations.</figcaption>
+    <figcaption>The system must authorize each operation and prevent retries from repeating it. A proposal alone grants no permission to act.</figcaption>
   </figure>
 </section>
 
@@ -149,7 +147,7 @@ a fixed processing pipeline; a conversational interface is optional.</p></div>
     <div class="diagram-container">
       <svg viewBox="0 0 360 344" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-documents-title family-documents-desc">
         <title id="family-documents-title">Turn a document into a reviewed record</title>
-        <desc id="family-documents-desc">An incoming document is classified and its fields extracted, with uncertain fields reviewed before the structured record reaches the downstream system.</desc>
+        <desc id="family-documents-desc">The pipeline classifies a document and extracts its fields, then sends uncertain fields to a reviewer before it publishes the record.</desc>
         <defs><marker id="family-documents-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
         <path class="family-edge" d="M180 56 V88" marker-end="url(#family-documents-arrow)" />
         <path class="family-edge" d="M180 144 V176" marker-end="url(#family-documents-arrow)" />
@@ -160,7 +158,7 @@ a fixed processing pipeline; a conversational interface is optional.</p></div>
         <g><rect class="family-node" x="24" y="276" width="312" height="60" rx="6" /><text x="44" y="312">Publish the structured record</text></g>
       </svg>
     </div>
-    <figcaption>The output follows an agreed schema. Corrections must reach the downstream system.</figcaption>
+    <figcaption>The output must match the agreed schema. Send reviewer corrections to the downstream system.</figcaption>
   </figure>
 </section>
 
@@ -186,7 +184,7 @@ An avatar or generated video alone does not establish a need for an agent.</p></
     <div class="diagram-container">
       <svg viewBox="0 0 360 336" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-voice-title family-voice-desc">
         <title id="family-voice-title">A voice response is separate from an action</title>
-        <desc id="family-voice-desc">Speech is interpreted and answered by voice, while a request for a consequential action follows a separate confirmation path.</desc>
+        <desc id="family-voice-desc">The assistant interprets speech and responds by voice, with a separate confirmation step for consequential actions.</desc>
         <defs><marker id="family-voice-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
         <path class="family-edge" d="M160 64 V96" marker-end="url(#family-voice-arrow)" />
         <path class="family-edge" d="M128 152 V192" marker-end="url(#family-voice-arrow)" />
@@ -197,7 +195,7 @@ An avatar or generated video alone does not establish a need for an agent.</p></
         <g><rect class="family-focus" x="24" y="284" width="312" height="44" rx="6" /><text x="44" y="312">Confirm before taking action</text></g>
       </svg>
     </div>
-    <figcaption>The dashed path applies to consequential actions. Users must be able to interrupt or correct the interaction.</figcaption>
+    <figcaption>Confirm consequential actions through the dashed path. Let users interrupt the assistant or correct what it understood.</figcaption>
   </figure>
 </section>
 
@@ -234,7 +232,7 @@ scope and stopping condition.</p></div>
         <g><rect class="family-node" x="24" y="296" width="312" height="56" rx="6" /><text x="44" y="332">Resume after approval</text></g>
       </svg>
     </div>
-    <figcaption>The job can wait without an open chat. Rejection stops the proposed action; failures need a defined recovery path.</figcaption>
+    <figcaption>The job can wait without an open chat. Stop the proposed action if the owner rejects it. Define how the job recovers from failures.</figcaption>
   </figure>
 </section>
 
@@ -262,7 +260,7 @@ recommends the lowest complexity that meets the requirement.</p></div>
     <div class="diagram-container">
       <svg viewBox="0 0 360 328" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-specialists-title family-specialists-desc">
         <title id="family-specialists-title">Coordinate specialists with separate permissions</title>
-        <desc id="family-specialists-desc">A coordinator delegates to specialists with distinct permissions, reconciles their results, and hands off an action proposal that still requires approval.</desc>
+        <desc id="family-specialists-desc">A coordinator assigns work to specialists with separate permissions and checks their results before handing over a proposal for approval.</desc>
         <defs><marker id="family-specialists-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
         <path class="family-edge" d="M144 64 V84 Q144 92 136 92 H88 Q80 92 80 100 V128" marker-end="url(#family-specialists-arrow)" />
         <path class="family-edge" d="M216 64 V84 Q216 92 224 92 H272 Q280 92 280 100 V128" marker-end="url(#family-specialists-arrow)" />
@@ -271,10 +269,10 @@ recommends the lowest complexity that meets the requirement.</p></div>
         <g><rect class="family-focus" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">Coordinate the task</text></g>
         <g><rect class="family-node" x="8" y="128" width="152" height="80" rx="6" /><text x="24" y="160">Investigator</text><text class="family-detail" x="24" y="188">Read evidence</text></g>
         <g><rect class="family-node" x="200" y="128" width="152" height="80" rx="6" /><text x="216" y="160">Action agent</text><text class="family-detail" x="216" y="188">Propose work</text></g>
-        <g><rect class="family-node" x="24" y="264" width="312" height="56" rx="6" /><text x="44" y="300">Reconcile results and hand off</text></g>
+        <g><rect class="family-node" x="24" y="264" width="312" height="56" rx="6" /><text x="44" y="300">Check results and hand over</text></g>
       </svg>
     </div>
-    <figcaption>This is one coordination pattern. Each specialist has its own tools and permissions; consequential actions need approval.</figcaption>
+    <figcaption>This example gives each specialist separate tools and permissions. The coordinator must resolve conflicting results. Consequential actions need approval.</figcaption>
   </figure>
 </section>
 

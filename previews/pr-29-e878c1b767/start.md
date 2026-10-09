@@ -217,11 +217,11 @@ The operating team must accept the deployed user journey and own rollback.
 
 ## Need an idea first?
 
-Select **Idea Forge** (`customer-activity-forge`) in the same application workspace.
+Select **Idea Forge** (`idea-forge`) in the same application workspace.
 Provide a customer name and industry, with any known pain points:
 
 ```text
-Find a bounded AI opportunity for [customer] in [industry].
+/idea-forge Find a bounded AI opportunity for [customer] in [industry].
 Use public evidence and identify a safe first proof.
 ```
 

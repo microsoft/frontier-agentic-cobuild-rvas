@@ -6,8 +6,7 @@ Microsoft-cloud architecture before implementation starts.
 
 The workflow covers platform-managed agents and custom applications. It can
 also conclude that a bounded model call or an explicit workflow fits better
-than an agent. [Does this need an agent?](agent-or-workflow.html) explains that
-choice.
+than an agent.
 
 Here, **supported means covered by the design workflow**. The plugin does not
 supply ready-made implementations or certified architectures. It does not
