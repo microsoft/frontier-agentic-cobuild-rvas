@@ -4,20 +4,20 @@ Define the system's responsibilities before choosing where it runs. The creator
 compares architecture options during discovery. You confirm the target
 architecture before it prepares the complete package.
 
-An agent does not imply a new web application. Custom agent code does not settle
-who should host it. A required interface does not necessarily require a new
-backend.
+You can add an agent without building a new web application. Choose where custom
+agent code runs separately from how you write it. And check whether an existing
+backend can support the interface you need.
 
 ## Start with what you already have
 
-Evaluate existing applications and platform capabilities against the first
+Check whether existing applications and platform capabilities can support the first
 journey. Reuse them when they meet the functional and operating requirements.
-An empty repository says nothing about the enterprise's existing services.
+A new repository can still depend on services the enterprise already runs.
 
 Microsoft's [technology planning guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy)
 starts by checking whether a ready-to-use agent meets the requirements before
-comparing build options. Our discovery process applies the same reuse-first
-principle. It also checks confirmed requirements for custom behavior.
+comparing build options. During discovery, the creator checks for reuse first and identifies which
+confirmed requirements need custom behavior.
 
 ## Execution options the creator compares
 
@@ -47,7 +47,7 @@ SDK; choosing either framework does not determine where the code runs.
 
 Identify where the user or caller already works. It may be an existing application,
 a supported platform channel, or a background process. Build a custom client only
-for a confirmed need.
+when a confirmed requirement calls for one.
 
 Verify the chosen channel's audience and authentication model. Then decide
 whether it provides the needed experience or requires a client you must own.
@@ -55,7 +55,7 @@ Choose the client separately from the agent runtime.
 
 For example, a maintenance investigation might live inside the existing service
 application. An event-driven document workflow might need no interactive client.
-Both are illustrative choices to test against requirements.
+Test either choice against your requirements.
 
 ## Keep knowledge and actions distinct
 
@@ -79,7 +79,7 @@ Account for licensing and region availability where they affect the design.
 Distinguish preview capabilities from generally available ones.
 Verify any adapter the integration needs.
 
-An unresolved connection blocks its dependent delivery work. Architecture approval
+If a connection remains unverified, delivery work that depends on it must wait. Architecture approval
 does not turn an unverified integration into a supported one.
 
 ## Give discovery your constraints

@@ -42,17 +42,17 @@
       </nav>
       <article class="guide-body">
         <h2 id="what-the-creator-can-design">What the creator can design</h2>
-<p>Bring an outcome for a new application or a change to an existing one.
-AI Agent Creator helps you define the user journey and agree on a
+<p>Tell AI Agent Creator what you want a new or existing application to do.
+It helps you define the user journey and agree on a
 Microsoft-cloud architecture before implementation starts.</p>
 <p>The workflow covers platform-managed agents and custom applications. It can
 also conclude that a bounded model call or an explicit workflow fits better
 than an agent.</p>
-<p>Here, <strong>supported means covered by the design workflow</strong>. The plugin does not
-supply ready-made implementations or certified architectures. It does not
-guarantee compatibility between services. Discovery verifies the connections
-your design needs.
-The examples below are illustrative, not customer results or deployment templates.</p>
+<p>Here, <strong>supported means covered by the design workflow</strong>. You still need to build
+the application; the plugin supplies no ready-made implementations or certified
+architectures. During discovery, the creator verifies the connections your design
+needs rather than assuming the services work together.
+The examples below illustrate possible uses. They are not customer results or deployment templates.</p>
 <h2 id="application-families">Application families</h2>
 <p>The Microsoft products shown below are examples, not required services or approved
 architectures. Discovery must verify product fit and any connections your design needs.
@@ -62,11 +62,11 @@ Product icons use Microsoft artwork where available. Neutral document and code
 symbols are illustrations, not product logos.</p>
 <section class="application-family" aria-labelledby="knowledge-assistants">
 <div class="application-family-copy"><h3 id="knowledge-assistants">Knowledge assistants</h3>
-<p>Help a user find and interpret authorized information. An illustrative operations
+<p>Help a user find and understand information they are allowed to access. For example, an operations
 assistant could explain a procedure and cite the current source, then investigate
 a follow-up question using other permitted evidence.</p>
-<p>The design must establish source ownership and freshness. It must also explain
-how user permissions constrain retrieval and what happens when evidence is absent
+<p>Name who owns each source and how it stays current. The design must explain
+how user permissions limit retrieval and what happens when evidence is absent
 or contradictory. A fixed lookup may need retrieval without an agent loop.</p>
 <div class="family-product-example">
 <span>Example options</span>
@@ -102,12 +102,12 @@ or contradictory. A fixed lookup may need retrieval without an agent loop.</p>
 
 <section class="application-family" aria-labelledby="agents-that-use-business-tools">
 <div class="application-family-copy"><h3 id="agents-that-use-business-tools">Agents that use business tools</h3>
-<p>Investigate a task and prepare or perform bounded operations. A maintenance
+<p>Investigate a task and prepare or carry out operations within agreed limits. A maintenance
 assistant could gather request details and propose a work order for a manager
 to approve.</p>
 <p>Tool access is a separate decision from knowledge access. Specify which actions
 are read-only, which require approval, and how the system handles retries without
-duplicating a business operation. Authorization belongs at the operation boundary.</p>
+duplicating a business operation. The system must check authorization when it performs each operation.</p>
 <div class="family-product-example">
 <span>Example options</span>
 <div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based business workflows.</small></div>
@@ -190,7 +190,7 @@ illustrative voice assistant could guide a worker through a permitted procedure,
 with confirmation before a consequential action.</p>
 <p>Decide how users interrupt, correct, or leave the interaction. Identify privacy
 and accessibility requirements, and verify the selected channel&#39;s capabilities.
-An avatar or generated video alone does not establish a need for an agent.</p>
+An avatar or generated video alone is no reason to add an agent.</p>
 <div class="family-product-example">
 <span>Example options</span>
 <div><a href="https://learn.microsoft.com/azure/ai-services/speech-service/overview"><img src="assets/icons/microsoft/speech.svg" alt="" width="32" height="32" />Azure Speech</a><small>Compose speech recognition and synthesis with your application logic.</small></div>
@@ -231,8 +231,8 @@ An avatar or generated video alone does not establish a need for an agent.</p>
 service request could trigger evidence gathering and then wait for an owner to
 approve the proposed next step.</p>
 <p>Identify who owns job state and how work resumes after a failure or a long wait.
-Fixed branches can stay explicit; runtime investigation should have a defined
-scope and stopping condition.</p>
+Keep fixed branches explicit. If the system investigates as it runs, define what
+it may investigate and when it must stop.</p>
 <div class="family-product-example">
 <span>Example options</span>
 <div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based workflows with explicit steps.</small></div>
@@ -272,7 +272,7 @@ scope and stopping condition.</p>
 <p>Split responsibilities when one agent cannot meet the requirement reliably.
 For example, an investigator and a separately authorized action agent could have
 different tools and access boundaries.</p>
-<p>The design must justify the split and define handoff contracts, including how
+<p>Explain why separate agents are needed and define their handoff contracts, including how
 agents handle conflicting results and shared state. Define what happens when
 one agent fails. Coordination adds overhead.
 Microsoft&#39;s <a href="https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns">orchestration guidance</a>
@@ -318,14 +318,14 @@ an investigation may finish with an approval-controlled operation.</p>
 <p>Persistent memory and personalization are additional choices. Define what the
 system may remember and who owns that context. Set rules for expiry and deletion.
 Multiple knowledge sources need their own permission and provenance boundaries.</p>
-<p>Select these capabilities because the journey needs them. Neither multiple
-agents nor persistent memory is an entry requirement.</p>
+<p>Add these capabilities when the journey needs them. You can start without
+multiple agents or persistent memory.</p>
 <h2 id="where-this-workflow-stops">Where this workflow stops</h2>
 <p>The creator records the architecture and requirements, with an implementation
 plan for a separate delivery session. You confirm discovery before it prepares
 the complete package, then approve that package before handoff.</p>
-<p>Standalone SDK questions, incident troubleshooting, and live agent operations
-belong to specialist workflows. Architecture approval grants no permission to
+<p>Use specialist workflows for standalone SDK questions, incident troubleshooting,
+or live agent operations. Architecture approval grants no permission to
 implement or deploy.</p>
 <h2 id="describe-your-first-journey">Describe your first journey</h2>
 <p>Tell the creator who will use the application and what their first task is.

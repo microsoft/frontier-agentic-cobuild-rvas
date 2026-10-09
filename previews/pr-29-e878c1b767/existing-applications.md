@@ -27,8 +27,8 @@ services. Use synthetic inputs until customer-data access is agreed.
 | Constraints | Required stack, compatibility promises, and limits on migration. |
 
 The creator should inspect repository facts before asking you for them.
-It asks about enterprise facts it cannot verify. A missing local file does not
-prove that a control or service is absent.
+It asks you about enterprise facts it cannot verify. If a control or service is
+not documented in the repository, the creator must check rather than assume it is absent.
 
 ## Start with one useful addition
 
@@ -40,7 +40,7 @@ If follow-up investigation is required, include it explicitly. Otherwise,
 one bounded model response may be enough. If the system prepares an action,
 preserve the existing authorization checks and name the approval owner.
 
-Agree on what counts as success compared with today's behavior. Define what stays
+Agree on how you will judge the addition against today's behavior. Define what stays
 unchanged, including response contracts and access boundaries. Specify how the
 application behaves when AI is unavailable or evidence cannot support an answer.
 
@@ -51,15 +51,14 @@ This example does not require a chat panel or a replacement workflow.
 ## Make reuse and migration explicit
 
 Evaluate the existing stack and model deployments before introducing alternatives.
-Reuse suitable capabilities. A proposed replacement needs a stated requirement
-or gap, together with the cost of changing the system.
+Reuse suitable capabilities. Before proposing a replacement, name the requirement or gap it addresses
+and the cost of changing the system.
 
 When migration is justified, the architecture package should explain coexistence
 and compatibility. The implementation plan should identify data movement, cutover,
 rollback, and eventual decommissioning where applicable.
 
-Define responsibilities during the transition. Name the system of
-record and the owner of each operation during the transition.
+Name the system of record and the owner of each operation during the transition.
 
 ## Review the addition as a complete package
 
@@ -73,7 +72,7 @@ to the existing application.
 
 Discovery confirmation and complete-package approval remain separate gates.
 After approval, use [the implementation handoff](start.html#start-implementation-in-a-new-session)
-in a new session. Changes in scope or architecture return to the affected gate.
+in a new session. If scope or architecture changes, repeat the affected approval step.
 
 ## Begin with the intended change
 
