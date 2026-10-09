@@ -104,7 +104,11 @@ img { max-width: 100%; }
 .guide-body h2 { margin-top: 56px; font-size: 1.95rem; }
 .guide-body > h2:first-child { margin-top: 0; padding-top: 0; border: 0; }
 .guide-body h3 { margin-top: 32px; margin-bottom: 12px; }
-.guide-body > .application-family { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: 56px; max-width: none; margin: 48px 0; }
+.guide-body > .application-family { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: 56px; max-width: none; margin: 0; padding: 48px 0; }
+.application-family::before { content: ""; position: absolute; z-index: -1; inset: 0 -24px; background: #fff; border-top: 1px solid var(--c-line); }
+.application-family:nth-of-type(even)::before { background: var(--c-paper); }
+.application-family:first-of-type { margin-top: 48px; }
+.application-family:last-of-type::before { border-bottom: 1px solid var(--c-line); }
 .application-family-copy { min-width: 0; }
 .application-family-copy h3 { margin-top: 0; font-size: 1.55rem; }
 .application-family-copy p:last-child { margin-bottom: 0; }
@@ -155,6 +159,8 @@ img { max-width: 100%; }
   .guide-pages a { justify-content: flex-start; padding: 12px 8px; text-align: left; line-height: 1.4; }
   .guide-section-links { grid-template-columns: 1fr; gap: 0; }
   .guide-body h2 { margin-top: 40px; font-size: 1.75rem; }
+  .guide-body > .application-family { padding-top: 32px; padding-bottom: 32px; }
+  .application-family::before { left: -12px; right: -12px; }
   .guide-body td, .guide-body th { padding: 10px 8px; }
   .guide-table table:has(th:nth-child(3)) { min-width: 36rem; }
 }
