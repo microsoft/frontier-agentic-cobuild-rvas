@@ -1,6 +1,6 @@
 ## Extend the system you already own
 
-**Bring the current application and the change you want.** You do not need to
+Bring the current application and the change you want. You do not need to
 start from an empty repository or adopt a new stack to use AI Agent Creator.
 An existing platform-managed agent or workflow can also be the starting point.
 
@@ -26,9 +26,9 @@ services. Use synthetic inputs until customer-data access is agreed.
 | Delivery and operations | Current environments, release checks, telemetry, and rollback ownership. |
 | Constraints | Required stack, compatibility promises, and limits on migration. |
 
-Repository facts should be inspected rather than repeatedly asked of you.
-Unknown enterprise facts remain questions; a missing local file does not prove
-that a control or service is absent.
+The creator should inspect repository facts before asking you for them.
+It asks about enterprise facts it cannot verify. A missing local file does not
+prove that a control or service is absent.
 
 ## Start with one useful addition
 
@@ -38,14 +38,13 @@ case editing and assignment unchanged.
 
 If follow-up investigation is required, include it explicitly. Otherwise,
 one bounded model response may be enough. If the system prepares an action,
-keep the existing authorization and approval owner visible.
+preserve the existing authorization checks and name the approval owner.
 
-Agree what counts as success against today's behavior. Define what stays
+Agree on what counts as success compared with today's behavior. Define what stays
 unchanged, including response contracts and access boundaries. Specify how the
 application behaves when AI is unavailable or evidence cannot support an answer.
 
-This is an illustrative scope, not a requirement to add a chat panel or replace
-the application's workflow.
+This example does not require a chat panel or a replacement workflow.
 
 <!-- diagram: existing-app-delta -->
 
@@ -59,7 +58,7 @@ When migration is justified, the architecture package should explain coexistence
 and compatibility. The implementation plan should identify data movement, cutover,
 rollback, and eventual decommissioning where applicable.
 
-Avoid leaving the old and new responsibilities ambiguous. Name the system of
+Define responsibilities during the transition. Name the system of
 record and the owner of each operation during the transition.
 
 ## Review the addition as a complete package

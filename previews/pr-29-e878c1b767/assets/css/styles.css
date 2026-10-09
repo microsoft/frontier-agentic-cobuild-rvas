@@ -103,8 +103,8 @@ img { max-width: 100%; }
 .guide-body h3 { margin-top: 36px; }
 .guide-body :not(pre) > code { padding: 2px 4px; border-radius: 3px; background: var(--c-paper); color: var(--c-heading); }
 .guide-body p, .guide-body li { font-size: 0.98rem; }
-.guide-body pre { position: relative; max-width: 100%; overflow-x: auto; margin: 24px 0; padding: 44px 22px 22px; border-radius: 7px; background: #032254; color: #e5efff; scrollbar-color: #819abf #032254; }
-.guide-body pre code { overflow-wrap: normal; font-size: 0.84rem; }
+.guide-body pre { position: relative; max-width: 100%; margin: 24px 0; padding: 44px 22px 22px; border-radius: 7px; background: #032254; color: #e5efff; white-space: pre-wrap; overflow-wrap: anywhere; }
+.guide-body pre code { font-size: 0.84rem; }
 .guide-body table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.88rem; }
 .guide-body td, .guide-body th { padding: 14px 12px; text-align: left; border-bottom: 1px solid var(--c-line); vertical-align: top; overflow-wrap: anywhere; }
 .guide-body th { background: var(--c-heading); color: #fff; }

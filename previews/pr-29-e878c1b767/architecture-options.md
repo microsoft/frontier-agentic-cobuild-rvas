@@ -1,7 +1,7 @@
 ## Separate behavior from platform
 
-**Choose what the system owns before choosing where it runs.** The creator
-compares coherent architecture options during discovery. You confirm the target
+Define the system's responsibilities before choosing where it runs. The creator
+compares architecture options during discovery. You confirm the target
 architecture before it prepares the complete package.
 
 An agent does not imply a new web application. Custom agent code does not settle
@@ -17,11 +17,11 @@ An empty repository says nothing about the enterprise's existing services.
 Microsoft's [technology planning guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy)
 starts by checking whether a ready-to-use agent meets the requirements before
 comparing build options. Our discovery process applies the same reuse-first
-principle while preserving confirmed custom requirements.
+principle. It also checks confirmed requirements for custom behavior.
 
 ## Execution options the creator compares
 
-These are design paths, not a promise that every combination is deployable.
+The creator must verify that the selected services work together before delivery.
 
 | Path | When to evaluate it | What your team must still define |
 | --- | --- | --- |
@@ -41,7 +41,7 @@ being considered.
 
 If custom code remains necessary, compare managed execution with application-owned
 execution. The skill includes recipes for Agent Framework and the GitHub Copilot
-SDK; neither framework name alone settles the hosting choice.
+SDK; choosing either framework does not determine where the code runs.
 
 ## Choose the channel independently
 
@@ -51,7 +51,7 @@ for a confirmed need.
 
 Verify the chosen channel's audience and authentication model. Then decide
 whether it provides the needed experience or requires a client you must own.
-Keep that question separate from the agent runtime.
+Choose the client separately from the agent runtime.
 
 For example, a maintenance investigation might live inside the existing service
 application. An event-driven document workflow might need no interactive client.
@@ -63,28 +63,28 @@ A knowledge source supplies evidence. A business tool performs an operation.
 Even when both reach the same system, they need separately defined permissions
 and responsibilities.
 
-When several sources are needed, record what each contributes and how access is
-enforced. Select the model and inference boundary separately from the knowledge
-layer and agent runtime. Reuse suitable existing deployments rather than assuming
+When several sources are needed, record what each contributes and how the system
+enforces access. Select the model and inference boundary separately from the
+knowledge layer and agent runtime. Reuse suitable existing deployments rather than assuming
 the project needs a new one.
 
 ## Verify the proposed connections
 
-Before you confirm an architecture, the creator checks decision-bearing product
-facts through current Microsoft Learn evidence and the relevant specialist
-guidance. The package records unresolved checks and their owners.
+Before you confirm an architecture, the creator checks product facts that affect
+the design against current Microsoft Learn documentation and the relevant
+specialist guidance. The package records unresolved checks and their owners.
 
 Verify the selected channel, protocol, identity, networking, and lifecycle.
 Account for licensing and region availability where they affect the design.
-Distinguish preview capabilities from generally available ones. An assumed adapter
-does not establish compatibility.
+Distinguish preview capabilities from generally available ones.
+Verify any adapter the integration needs.
 
 An unresolved connection blocks its dependent delivery work. Architecture approval
 does not turn an unverified integration into a supported one.
 
 ## Give discovery your constraints
 
-Bring a requirement or an existing standard, rather than a product shopping list:
+Give the creator requirements and existing standards:
 
 ```text
 Design this capability inside our existing service application. Reuse its

@@ -28,7 +28,7 @@
     <section class="hero guide-hero">
       <div class="wrap">
         <h1>Does this need <span>an agent?</span></h1>
-        <p class="lede">Use runtime planning where it earns its place. Keep known rules and sequences explicit.</p>
+        <p class="lede">Use an agent when the task requires it to choose the next step. Keep known rules and sequences explicit.</p>
       </div>
     </section>
     <div class="wrap guide-layout guide-layout--learn">
@@ -50,18 +50,17 @@
       </nav>
       <article class="guide-body">
         <h2 id="choose-the-execution-model-from-the-task">Choose the execution model from the task</h2>
-<p><strong>An AI application does not always need an agent loop.</strong> The creator compares
+<p>An AI application does not always need an agent loop. The creator compares
 execution models against the actual user journey before selecting a runtime.
 Calling something an assistant or copilot leaves that decision open.</p>
-<p>Use a maintenance request as an illustrative example. The intended outcome is
-to help a property manager handle it correctly. Different requirements lead
-to different designs.</p>
+<p>The examples below use a maintenance request. What the property manager needs
+to do with it determines the design.</p>
 <h2 id="four-ways-to-handle-the-same-request">Four ways to handle the same request</h2>
 <h3 id="fixed-rules">Fixed rules</h3>
 <p>The request already contains a category and location. Known rules assign the
 correct queue and flag urgent cases. The inputs and sequence are defined.</p>
 <p>Keep this deterministic when exact rules are enough. A model should not replace
-an authoritative rule merely to make the application sound agentic.</p>
+an authoritative rule just to call the application agentic.</p>
 <h3 id="one-bounded-model-call">One bounded model call</h3>
 <p>A resident supplies free text. A model summarizes it into a defined response
 schema for the manager to review. The application supplies the context and
@@ -228,7 +227,7 @@ orchestration. More complex arrangements add coordination costs and failure mode
         </g>
       </svg>
     </div>
-    <figcaption>Illustrative maintenance-request paths. Retrieval can belong to a fixed workflow. The agent loop adds runtime choice, bounded by permitted sources, stopping conditions, and resource limits. Neither path grants authority to submit a work order.</figcaption>
+    <figcaption>These maintenance-request examples compare a fixed workflow with an agent loop. The agent chooses which permitted evidence to inspect next. It must stop at the agreed scope and resource limits. Neither path grants authority to submit a work order.</figcaption>
   </figure>
 
 <h2 id="test-where-runtime-choice-adds-value">Test where runtime choice adds value</h2>
@@ -267,23 +266,25 @@ orchestration. More complex arrangements add coordination costs and failure mode
 </div>
 <p>Avoid narrowing the journey just to make a simpler architecture fit. A form,
 prepared evidence packet, or stateless response should be an agreed scope choice.
-If the user needs an open investigation, compare that requirement honestly.</p>
+If the user needs an open investigation, compare designs that support it.</p>
 <h2 id="bound-the-agents-responsibility">Bound the agent&#39;s responsibility</h2>
-<p>If runtime choice earns its place, specify its limits. Name the permitted tools
+<p>If the task requires runtime planning, specify its limits. Name the permitted tools
 and the evidence each can access. Set a stopping condition and resource limits.
 Define how unresolved work reaches a human.</p>
-<p>Decide what the system may recommend and what it may execute. For an action,
-identify the caller&#39;s authority, required approval, and duplicate-operation
-protection. Retrieved content is evidence, not permission to take an action.</p>
+<p>Decide what the system may recommend and what it may execute.
+For an action, identify the caller&#39;s authority and required approval.
+Define how retries avoid duplicate operations. Retrieved content does not
+grant permission to take an action.</p>
 <p>Evaluate routine and failure cases against the same requirements. Include a
 request outside the allowed scope and a case where evidence is insufficient.</p>
 <h2 id="use-multiple-agents-only-for-a-reason">Use multiple agents only for a reason</h2>
 <p>Separate agents may be justified by distinct access boundaries or specialist
-responsibilities. Start by describing what a single agent cannot do adequately.
+responsibilities. Start by describing which requirement a single agent cannot
+meet.
 Then define what each specialist owns and how disagreement is resolved.</p>
 <p>A sequence of prompts alone does not prove that several autonomous agents are
-needed. The creator&#39;s job is to compare meaningful options, not maximize agent
-count.</p>
+needed. The creator compares options against the requirements.
+Adding more agents is not a goal.</p>
 <h2 id="bring-the-comparison-to-discovery">Bring the comparison to discovery</h2>
 <p>You do not need to settle this before installing the plugin:</p>
 <pre><code class="language-text">Help us design a maintenance-request investigation capability. Compare fixed
