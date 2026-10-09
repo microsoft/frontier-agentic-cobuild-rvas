@@ -80,7 +80,7 @@ test('generated reading pages and manual commands match their current sources', 
   for (const line of commands.stdout.trim().split('\n')) assert.ok(supportingMarkdown().includes(line));
 });
 
-test('intro diagrams are embedded with accessible, uniquely identified scroll regions', () => {
+test('intro diagrams embed accessible wide and narrow layouts without fixed-width scrolling', () => {
   const figures = [
     [renderIndex(), 'approval-handoff'],
     [renderPage(pages.find((page) => page.slug === 'start')), 'approval-handoff'],
@@ -91,13 +91,38 @@ test('intro diagrams are embedded with accessible, uniquely identified scroll re
     assert.doesNotMatch(html, /<!-- diagram:/);
     assert.ok(html.includes(`aria-labelledby="${name}-title ${name}-desc"`));
     assert.ok(html.includes(`<title id="${name}-title">`));
-    assert.match(html, /class="diagram-container" role="region" aria-label="[^"]+" tabindex="0"/);
+    assert.match(html, /<div class="diagram-container">/);
+    assert.ok(html.includes(`aria-labelledby="${name}-narrow-title ${name}-narrow-desc"`));
     assert.match(html, /<figcaption>[\s\S]+?<\/figcaption>/);
     const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
     assert.equal(ids.length, new Set(ids).size, name);
-    const svg = html.match(/<svg [^>]*viewBox="0 0 (\d+) \d+"[^>]*style="min-width: (\d+)px"/);
-    assert.ok(svg, name);
-    assert.equal(svg[1], svg[2], name);
+    assert.doesNotMatch(html, /min-width: \d+px|scroll-hint|scroll horizontally/i);
+    assert.match(html, /class="diagram-wide"/);
+    assert.match(html, /class="diagram-narrow"/);
+  }
+});
+
+test('Learn navigation sits above the article with native section disclosure; Start keeps its sidebar', () => {
+  for (const page of pages.filter((page) => page.slug !== 'start')) {
+    const html = renderPage(page);
+    assert.match(html, /class="wrap guide-layout guide-layout--learn"/);
+    assert.match(html, /<details class="guide-contents"><summary>On this page<\/summary>/);
+    assert.match(html, /href="applications.html" aria-current="page">Learn/);
+    assert.ok(html.indexOf('class="guide-contents"') < html.indexOf('<article'));
+  }
+  const start = renderPage(pages.find((page) => page.slug === 'start'));
+  assert.match(start, /class="wrap guide-layout"/);
+  assert.doesNotMatch(start, /guide-contents|guide-layout--learn/);
+});
+
+test('architecture snapshots retain identical content and topology across layouts', () => {
+  const html = fs.readFileSync(path.join(ROOT, 'docs/assets/diagrams/existing-app-delta.html'), 'utf8');
+  for (const snapshot of ['before', 'after']) {
+    const pattern = new RegExp(`<g data-snapshot="${snapshot}"[^>]*>([\\s\\S]*?)\\n        <\\/g>`, 'g');
+    const bodies = [...html.matchAll(pattern)].map((match) =>
+      match[1].replaceAll('existing-app-delta-narrow-arrow', 'existing-app-delta-arrow'));
+    assert.equal(bodies.length, 2, snapshot);
+    assert.equal(bodies[0], bodies[1], snapshot);
   }
 });
 

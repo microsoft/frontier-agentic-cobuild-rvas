@@ -6,9 +6,8 @@
   <title>Add a capability, preserve the application</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Outfit:wght@500;700&amp;display=swap" rel="stylesheet" />
   <style data-diagram-style>
-    .intro-diagram { margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
-    .intro-diagram .diagram-container { width: 100%; overflow-x: auto; scrollbar-color: #032254 #f5f8fe; }
-    .intro-diagram .diagram-container:focus-visible { outline: 3px solid #1a77e3; outline-offset: 4px; }
+    .intro-diagram { container-type: inline-size; margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram .diagram-container { width: 100%; }
     .intro-diagram svg { display: block; width: 100%; background: #fff; }
     .intro-diagram text { font-family: "Inter", "Segoe UI", sans-serif; fill: #032254; }
     .intro-diagram .diagram-heading { font-family: "Outfit", "Segoe UI", sans-serif; font-size: 28px; font-weight: 700; }
@@ -20,19 +19,19 @@
     .intro-diagram .rule { stroke: #dde6f7; stroke-width: 1; }
     .intro-diagram [data-kind="relationship"] { fill: none; stroke: #47494e; stroke-width: 2; }
     .intro-diagram figcaption { margin-top: 16px; font-size: 14px; line-height: 1.7; }
-    .intro-diagram .scroll-hint { display: block; margin-top: 4px; font-size: 13px; color: #47494e; }
-    @media print {
-      .intro-diagram .diagram-container { overflow-x: visible; }
-      .intro-diagram svg { min-width: 0 !important; }
-      .intro-diagram .scroll-hint { display: none; }
+    .intro-diagram svg.diagram-narrow { display: none; max-width: 440px; margin: 0 auto; }
+    .intro-diagram .diagram-narrow .diagram-heading { font-size: 22px; }
+    @container (max-width: 1000px) {
+      .intro-diagram svg.diagram-wide { display: none; }
+      .intro-diagram svg.diagram-narrow { display: block; }
     }
   </style>
 </head>
 <body>
   <figure class="intro-diagram">
-    <div class="diagram-container" role="region" aria-label="Existing application before, changes, and after; scroll horizontally" tabindex="0">
+    <div class="diagram-container">
       <!-- impeccable-disable-next-line cramped-padding: SVG coordinates provide frame insets and node padding. -->
-      <svg data-diagram="architecture-delta" viewBox="0 0 1280 720" style="min-width: 1280px" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="existing-app-delta-title existing-app-delta-desc">
+      <svg class="diagram-wide" data-diagram="architecture-delta" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="existing-app-delta-title existing-app-delta-desc">
         <title id="existing-app-delta-title">Add a capability, preserve the application</title>
         <desc id="existing-app-delta-desc">An illustrative case application gains summarization and investigation while keeping its identity service, case API contracts, and system of record unchanged.</desc>
         <defs>
@@ -115,8 +114,86 @@
         <rect x="304" y="660" width="20" height="20" rx="2" class="gate" />
         <text x="336" y="676" class="detail">Changed or added; the ledger names each difference</text>
       </svg>
+      <svg class="diagram-narrow" viewBox="0 0 336 1512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="existing-app-delta-narrow-title existing-app-delta-narrow-desc">
+        <title id="existing-app-delta-narrow-title">Add a capability, preserve the application</title>
+        <desc id="existing-app-delta-narrow-desc">Before and After retain matching component positions, with a change ledger between them explaining the AI entry point, read-only investigation, and preserved case authority.</desc>
+        <defs>
+          <marker id="existing-app-delta-narrow-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker>
+        </defs>
+        <rect width="336" height="1512" fill="#fff" />
+        <text x="16" y="32" class="diagram-heading">Before</text>
+        <text x="16" y="60" class="detail">Existing case handling</text>
+        <g data-snapshot="before" data-grid="336 480 4" transform="translate(0 72)">
+          <path data-kind="relationship" data-object-id="sign-in" data-status="unchanged" data-signature="operation=sign-in" data-from="identity" data-to="app" d="M117.333 96 V120 Q117.333 128 109.333 128 H96 Q88 128 88 136 V168" marker-end="url(#existing-app-delta-narrow-arrow)" />
+          <path data-kind="relationship" data-object-id="api-auth" data-status="unchanged" data-signature="operation=authorize" data-from="identity" data-to="case-api" d="M218.667 96 V120 Q218.667 128 226.667 128 H244 Q252 128 252 136 V168" marker-end="url(#existing-app-delta-narrow-arrow)" />
+          <path data-kind="relationship" data-object-id="case-operations" data-status="unchanged" data-signature="operation=case-handling" data-from="app" data-to="case-api" d="M160 197.333 H184" marker-end="url(#existing-app-delta-narrow-arrow)" />
+          <path data-kind="relationship" data-object-id="case-storage" data-status="unchanged" data-signature="operation=persist-cases" data-from="case-api" data-to="record" d="M252 256 V368" marker-end="url(#existing-app-delta-narrow-arrow)" />
+          <g data-kind="component" data-object-id="identity" data-status="unchanged" data-signature="identity;policy=existing">
+            <rect data-role="bounds" x="16" y="24" width="304" height="72" rx="6" class="node" />
+            <text x="32" y="44" class="object-id">identity</text>
+            <text x="32" y="72" class="node-name">Existing identity and access</text>
+          </g>
+          <g data-kind="component" data-object-id="app" data-status="changed" data-signature="case-app;capability=case-handling">
+            <rect data-role="bounds" x="16" y="168" width="144" height="88" rx="6" class="node" />
+            <text x="32" y="188" class="object-id">app (changed)</text>
+            <text x="32" y="216" class="node-name"><tspan x="32">Service</tspan><tspan x="32" dy="24">application</tspan></text>
+          </g>
+          <g data-kind="component" data-object-id="case-api" data-status="unchanged" data-signature="case-api;contracts=existing;authorization=existing">
+            <rect data-role="bounds" x="184" y="168" width="136" height="88" rx="6" class="node" />
+            <text x="200" y="188" class="object-id">case-api</text>
+            <text x="200" y="216" class="node-name"><tspan x="200">Case APIs</tspan><tspan x="200" dy="24">+ authority</tspan></text>
+          </g>
+          <g data-kind="component" data-object-id="record" data-status="unchanged" data-signature="case-record;ownership=existing">
+            <rect data-role="bounds" x="184" y="368" width="136" height="80" rx="6" class="node" />
+            <text x="200" y="388" class="object-id">record</text>
+            <text x="200" y="412" class="node-name"><tspan x="200">System</tspan><tspan x="200" dy="20">of record</tspan></text>
+          </g>
+        </g>
+        <path d="M16 556 H320" class="rule" />
+        <text x="16" y="592" class="diagram-heading">Changes</text>
+        <text x="16" y="624" class="node-name"><tspan x="16">CHANGED app</tspan><tspan x="16" dy="24" class="detail">Add an AI entry point; keep editing</tspan><tspan x="16" dy="24" class="detail">and assignment unchanged.</tspan></text>
+        <text x="16" y="708" class="node-name"><tspan x="16">ADDED ai</tspan><tspan x="16" dy="24" class="detail">Summarize and investigate.</tspan><tspan x="16" dy="24" class="detail">Choose execution during discovery.</tspan></text>
+        <text x="16" y="792" class="node-name"><tspan x="16">ADDED ai-request</tspan><tspan x="16" dy="24" class="detail">The application requests</tspan><tspan x="16" dy="24" class="detail">the new capability.</tspan></text>
+        <text x="16" y="876" class="node-name"><tspan x="16">ADDED evidence-read</tspan><tspan x="16" dy="24" class="detail">Read authorized evidence via APIs.</tspan><tspan x="16" dy="24" class="detail">No new authority to edit or assign.</tspan></text>
+        <path d="M16 956 H320" class="rule" />
+        <text x="16" y="992" class="diagram-heading">After</text>
+        <text x="16" y="1020" class="detail">A bounded AI addition</text>
+        <g data-snapshot="after" data-grid="336 480 4" transform="translate(0 1032)">
+          <path data-kind="relationship" data-object-id="sign-in" data-status="unchanged" data-signature="operation=sign-in" data-from="identity" data-to="app" d="M117.333 96 V120 Q117.333 128 109.333 128 H96 Q88 128 88 136 V168" marker-end="url(#existing-app-delta-narrow-arrow)" />
+          <path data-kind="relationship" data-object-id="api-auth" data-status="unchanged" data-signature="operation=authorize" data-from="identity" data-to="case-api" d="M218.667 96 V120 Q218.667 128 226.667 128 H244 Q252 128 252 136 V168" marker-end="url(#existing-app-delta-narrow-arrow)" />
+          <path data-kind="relationship" data-object-id="case-operations" data-status="unchanged" data-signature="operation=case-handling" data-from="app" data-to="case-api" d="M160 197.333 H184" marker-end="url(#existing-app-delta-narrow-arrow)" />
+          <path data-kind="relationship" data-object-id="case-storage" data-status="unchanged" data-signature="operation=persist-cases" data-from="case-api" data-to="record" d="M252 256 V368" marker-end="url(#existing-app-delta-narrow-arrow)" />
+          <path data-kind="relationship" data-object-id="ai-request" data-status="added" data-signature="operation=request-summary-or-investigation" data-from="app" data-to="ai" d="M88 256 V368" marker-end="url(#existing-app-delta-narrow-arrow)" />
+          <path data-kind="relationship" data-object-id="evidence-read" data-status="added" data-signature="operation=read;authorization=caller" data-from="ai" data-to="case-api" d="M160 408 H168 Q176 408 176 400 V234.667 Q176 226.667 184 226.667" marker-end="url(#existing-app-delta-narrow-arrow)" />
+          <g data-kind="component" data-object-id="identity" data-status="unchanged" data-signature="identity;policy=existing">
+            <rect data-role="bounds" x="16" y="24" width="304" height="72" rx="6" class="node" />
+            <text x="32" y="44" class="object-id">identity</text>
+            <text x="32" y="72" class="node-name">Existing identity and access</text>
+          </g>
+          <g data-kind="component" data-object-id="app" data-status="changed" data-signature="case-app;capability=case-handling-and-ai-entry">
+            <rect data-role="bounds" x="16" y="168" width="144" height="88" rx="6" class="gate" />
+            <text x="32" y="188" class="object-id">app (changed)</text>
+            <text x="32" y="216" class="node-name"><tspan x="32">Service</tspan><tspan x="32" dy="24">application</tspan></text>
+          </g>
+          <g data-kind="component" data-object-id="case-api" data-status="unchanged" data-signature="case-api;contracts=existing;authorization=existing">
+            <rect data-role="bounds" x="184" y="168" width="136" height="88" rx="6" class="node" />
+            <text x="200" y="188" class="object-id">case-api</text>
+            <text x="200" y="216" class="node-name"><tspan x="200">Case APIs</tspan><tspan x="200" dy="24">+ authority</tspan></text>
+          </g>
+          <g data-kind="component" data-object-id="record" data-status="unchanged" data-signature="case-record;ownership=existing">
+            <rect data-role="bounds" x="184" y="368" width="136" height="80" rx="6" class="node" />
+            <text x="200" y="388" class="object-id">record</text>
+            <text x="200" y="412" class="node-name"><tspan x="200">System</tspan><tspan x="200" dy="20">of record</tspan></text>
+          </g>
+          <g data-kind="component" data-object-id="ai" data-status="added" data-signature="ai;capability=summary-and-investigation;actions=read-only">
+            <rect data-role="bounds" x="16" y="368" width="144" height="80" rx="6" class="gate" />
+            <text x="32" y="388" class="object-id">+ ai</text>
+            <text x="32" y="412" class="node-name"><tspan x="32">Summarize</tspan><tspan x="32" dy="20">+ investigate</tspan></text>
+          </g>
+        </g>
+      </svg>
     </div>
-    <figcaption>Illustrative topology, not a deployment template. Add summarization and investigation while preserving case APIs, authorization, and the system of record. Define unavailable-AI behavior, regression checks, and rollback in the architecture package.<span class="scroll-hint">Scroll horizontally to compare Before, Changes, and After.</span></figcaption>
+    <figcaption>Illustrative topology, not a deployment template. Add summarization and investigation while preserving case APIs, authorization, and the system of record. Plain outlines identify preserved components; blue outlines and the change ledger identify the addition. Define unavailable-AI behavior, regression checks, and rollback in the architecture package.</figcaption>
   </figure>
 </body>
 </html>

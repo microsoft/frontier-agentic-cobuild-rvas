@@ -13,10 +13,16 @@ The homepage leads to repository setup. Its architecture-file preview describes
 the actual handoff rather than displaying a catalog. Idea Forge stays secondary
 to the known-use-case journey.
 
-The Start guide is a reading surface. A desktop section index becomes an inline
+Learn pages place page links above the article and section links inside an
+"On this page" disclosure. Prose stays at reading width; diagrams use the full
+content width. The Start guide keeps its desktop section index, which becomes an inline
 list on narrow screens. Command blocks scroll horizontally and offer a copy
 button with explicit failure feedback. Maintain visible keyboard focus and
 readable contrast.
+
+Intro figures scale to fit on wide screens and switch to stacked compositions
+when their container becomes narrow. Preserve approval gates and matching
+before/after topology; never hide content to remove a scrollbar.
 
 Use `docs/assets/css/styles.css` as the token and component source. The guide
 content comes from `docs/start.md`; build output is `docs/start.html`. Preserve
