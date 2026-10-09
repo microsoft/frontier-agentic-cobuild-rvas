@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Keep job state across an approval wait</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet" />
+  <style data-diagram-style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <figure class="intro-diagram" data-family="background">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-background-title family-background-desc">
+        <title id="family-background-title">Keep job state across an approval wait</title>
+        <desc id="family-background-desc">An event starts a job that gathers evidence, saves its state while awaiting approval, and resumes only after approval.</desc>
+        <defs><marker id="family-background-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-background-arrow)" />
+        <path class="family-edge" d="M180 152 V184" marker-end="url(#family-background-arrow)" />
+        <path class="family-edge" d="M180 256 V296" stroke-dasharray="5 4" marker-end="url(#family-background-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">An event starts a job</text></g>
+        <g><rect class="family-node" x="24" y="96" width="312" height="56" rx="6" /><text x="44" y="132">Gather evidence</text></g>
+        <g><rect class="family-focus" x="24" y="184" width="312" height="72" rx="6" /><text x="44" y="212">Wait for the owner's approval</text><text class="family-detail" x="44" y="240">Save the job's state</text></g>
+        <g><rect class="family-node" x="24" y="296" width="312" height="56" rx="6" /><text x="44" y="332">Resume after approval</text></g>
+      </svg>
+    </div>
+    <figcaption>The job can wait without an open chat. Rejection stops the proposed action; failures need a defined recovery path.</figcaption>
+  </figure>
+</body>
+</html>
