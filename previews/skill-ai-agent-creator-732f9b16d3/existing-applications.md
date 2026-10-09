@@ -47,6 +47,8 @@ application behaves when AI is unavailable or evidence cannot support an answer.
 This is an illustrative scope, not a requirement to add a chat panel or replace
 the application's workflow.
 
+<!-- diagram: existing-app-delta -->
+
 ## Make reuse and migration explicit
 
 Evaluate the existing stack and model deployments before introducing alternatives.
