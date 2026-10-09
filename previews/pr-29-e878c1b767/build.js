@@ -108,16 +108,19 @@ function renderPage(page) {
       `<a href="${candidate.slug}.html"${candidate.slug === page.slug ? ' aria-current="page"' : ''}>${candidate.title}</a>`
     ).join('\n') + '\n</div>\n';
   const primaryLinks = '<a href="index.html">Overview</a>\n' +
-    `<a href="applications.html"${page.slug === 'applications' ? ' aria-current="page"' : ''}>Learn</a>\n` +
+    `<a href="applications.html"${page.slug !== 'start' ? ' aria-current="page"' : ''}>Learn</a>\n` +
     `<a href="start.html"${page.slug === 'start' ? ' aria-current="page"' : ''}>Start</a>\n` +
     '<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>';
   return fs.readFileSync(path.join(__dirname, 'start.template.html'), 'utf8')
+    .replace('{{layout-class}}', () => page.slug === 'start' ? '' : ' guide-layout--learn')
     .replace('{{page-title}}', () => page.title)
     .replace('{{page-description}}', () => page.description)
     .replace('<!-- primary-links -->', () => primaryLinks)
     .replace('<!-- page-heading -->', () => page.heading)
     .replace('<!-- page-lede -->', () => page.lede)
-    .replace('<!-- guide-navigation -->', () => pageLinks + sectionLinks)
+    .replace('<!-- guide-navigation -->', () => page.slug === 'start' ? sectionLinks :
+      pageLinks + '<details class="guide-contents"><summary>On this page</summary>\n' +
+      `<div class="guide-section-links">${sectionLinks}</div>\n</details>`)
     .replace('<!-- guide-body -->', () => body);
 }
 

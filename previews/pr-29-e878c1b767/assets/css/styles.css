@@ -23,7 +23,7 @@ html { scroll-padding-top: 100px; }
 body { margin: 0; color: var(--c-fg); background: #fff; font-family: var(--font-body); line-height: 1.7; }
 a { color: var(--c-action); text-underline-offset: 0.2em; }
 a:hover { text-decoration-thickness: 2px; }
-a:focus-visible, button:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 4px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 4px; }
 ::selection { background: #bfdbfe; color: var(--c-heading); }
 h1, h2, h3 { font-family: var(--font-display); color: var(--c-heading); line-height: 1.15; text-wrap: balance; }
 h1 { margin: 0; font-size: clamp(2.6rem, 5vw, 4.6rem); letter-spacing: -0.035em; }
@@ -89,6 +89,14 @@ img { max-width: 100%; }
 .guide-nav a:hover { background: var(--c-tint); color: var(--c-action); text-decoration: underline; }
 .guide-pages { display: flex; flex-direction: column; gap: 14px; padding-bottom: 24px; border-bottom: 1px solid var(--c-line); margin-bottom: 10px; }
 .guide-pages a[aria-current] { background: var(--c-heading); color: #fff; font-weight: 600; text-decoration: underline; }
+.guide-layout--learn { display: block; }
+.guide-layout--learn .guide-nav { position: static; margin-bottom: 48px; }
+.guide-layout--learn .guide-pages { flex-direction: row; flex-wrap: wrap; gap: 8px 16px; padding-bottom: 16px; margin-bottom: 16px; }
+.guide-contents summary { width: fit-content; padding: 8px; color: var(--c-heading); cursor: pointer; font-weight: 600; }
+.guide-section-links { display: flex; flex-wrap: wrap; gap: 8px 16px; padding: 8px 0; }
+.guide-layout--learn .guide-body { max-width: none; }
+.guide-layout--learn .guide-body > :not(.intro-diagram):not(style) { max-width: 76ch; margin-left: auto; margin-right: auto; }
+.guide-layout--learn .intro-diagram figcaption { max-width: 76ch; margin-left: auto; margin-right: auto; }
 .guide-body { max-width: 76ch; min-width: 0; }
 .guide-body h2 { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--c-line); font-size: 1.95rem; }
 .guide-body > h2:first-child { margin-top: 0; padding-top: 0; border: 0; }

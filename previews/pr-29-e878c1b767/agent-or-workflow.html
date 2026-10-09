@@ -15,7 +15,7 @@
       <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
       <nav id="navLinks" class="nav-links" aria-label="Primary">
         <a href="index.html">Overview</a>
-<a href="applications.html">Learn</a>
+<a href="applications.html" aria-current="page">Learn</a>
 <a href="start.html">Start</a>
 <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
       </nav>
@@ -31,7 +31,7 @@
         <p class="lede">Use runtime planning where it earns its place. Keep known rules and sequences explicit.</p>
       </div>
     </section>
-    <div class="wrap guide-layout">
+    <div class="wrap guide-layout guide-layout--learn">
       <nav class="guide-nav" aria-label="Reading navigation">
         <div class="guide-pages">
 <a href="applications.html">What can you build?</a>
@@ -39,12 +39,14 @@
 <a href="architecture-options.html">Choose an architecture that fits</a>
 <a href="existing-applications.html">Add AI to an existing application</a>
 </div>
-<a href="#choose-the-execution-model-from-the-task">Choose the execution model from the task</a>
+<details class="guide-contents"><summary>On this page</summary>
+<div class="guide-section-links"><a href="#choose-the-execution-model-from-the-task">Choose the execution model from the task</a>
         <a href="#four-ways-to-handle-the-same-request">Four ways to handle the same request</a>
         <a href="#test-where-runtime-choice-adds-value">Test where runtime choice adds value</a>
         <a href="#bound-the-agents-responsibility">Bound the agent&#39;s responsibility</a>
         <a href="#use-multiple-agents-only-for-a-reason">Use multiple agents only for a reason</a>
-        <a href="#bring-the-comparison-to-discovery">Bring the comparison to discovery</a>
+        <a href="#bring-the-comparison-to-discovery">Bring the comparison to discovery</a></div>
+</details>
       </nav>
       <article class="guide-body">
         <h2 id="choose-the-execution-model-from-the-task">Choose the execution model from the task</h2>
@@ -84,9 +86,8 @@ A read-only investigator can still be an agent.</p>
 distinguishes direct model calls from agents with tools and multi-agent
 orchestration. More complex arrangements add coordination costs and failure modes.</p>
 <style>
-    .intro-diagram { margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
-    .intro-diagram .diagram-container { width: 100%; overflow-x: auto; scrollbar-color: #032254 #f5f8fe; }
-    .intro-diagram .diagram-container:focus-visible { outline: 3px solid #1a77e3; outline-offset: 4px; }
+    .intro-diagram { container-type: inline-size; margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram .diagram-container { width: 100%; }
     .intro-diagram svg { display: block; width: 100%; background: #fff; }
     .intro-diagram text { font-family: "Inter", "Segoe UI", sans-serif; fill: #032254; }
     .intro-diagram .diagram-heading { font-family: "Outfit", "Segoe UI", sans-serif; font-size: 28px; font-weight: 700; }
@@ -98,17 +99,17 @@ orchestration. More complex arrangements add coordination costs and failure mode
     .intro-diagram .rule { stroke: #dde6f7; stroke-width: 1; }
     .intro-diagram .arrow-label { font-size: 12px; font-weight: 600; fill: #47494e; }
     .intro-diagram figcaption { margin-top: 16px; font-size: 14px; line-height: 1.7; }
-    .intro-diagram .scroll-hint { display: block; margin-top: 4px; font-size: 13px; color: #47494e; }
-    @media print {
-      .intro-diagram .diagram-container { overflow-x: visible; }
-      .intro-diagram svg { min-width: 0 !important; }
-      .intro-diagram .scroll-hint { display: none; }
+    .intro-diagram svg.diagram-narrow { display: none; max-width: 440px; margin: 0 auto; }
+    .intro-diagram .diagram-narrow .diagram-heading { font-size: 22px; }
+    @container (max-width: 800px) {
+      .intro-diagram svg.diagram-wide { display: none; }
+      .intro-diagram svg.diagram-narrow { display: block; }
     }
   </style>
 <figure class="intro-diagram">
-    <div class="diagram-container" role="region" aria-label="Workflow and agent comparison; scroll horizontally" tabindex="0">
+    <div class="diagram-container">
       <!-- impeccable-disable-next-line cramped-padding: SVG coordinates provide frame insets and node padding. -->
-      <svg viewBox="0 0 960 600" style="min-width: 960px" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="runtime-choice-title runtime-choice-desc">
+      <svg class="diagram-wide" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="runtime-choice-title runtime-choice-desc">
         <title id="runtime-choice-title">Who chooses the next step?</title>
         <desc id="runtime-choice-desc">An explicit workflow follows an application-defined sequence, while a bounded agent selects authorized evidence and can repeat its investigation before returning findings or escalating unresolved work.</desc>
         <defs>
@@ -169,8 +170,65 @@ orchestration. More complex arrangements add coordination costs and failure mode
         <rect x="32" y="576" width="16" height="16" rx="2" class="gate" />
         <text x="60" y="588" class="detail">Runtime choice of evidence; authority to perform an action is a separate decision.</text>
       </svg>
+      <svg class="diagram-narrow" viewBox="0 0 320 1000" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="runtime-choice-narrow-title runtime-choice-narrow-desc">
+        <title id="runtime-choice-narrow-title">Who chooses the next step?</title>
+        <desc id="runtime-choice-narrow-desc">The workflow follows known steps; the bounded agent chooses authorized evidence, inspects it, and either loops within scope or returns findings or escalates.</desc>
+        <defs>
+          <marker id="runtime-choice-narrow-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker>
+        </defs>
+        <rect width="320" height="1000" fill="#fff" />
+        <text x="16" y="32" class="diagram-heading">Explicit workflow</text>
+        <text x="16" y="60" class="detail">The application defines the path.</text>
+        <path d="M160 164 V200" class="connector" marker-end="url(#runtime-choice-narrow-arrow)" />
+        <path d="M160 280 V316" class="connector" marker-end="url(#runtime-choice-narrow-arrow)" />
+        <g>
+          <rect x="16" y="84" width="288" height="80" rx="6" class="node" />
+          <text x="32" y="116" class="node-name">Retrieve the procedure</text>
+          <text x="32" y="144" class="detail">A known source for the request</text>
+        </g>
+        <g>
+          <rect x="16" y="200" width="288" height="80" rx="6" class="node" />
+          <text x="32" y="232" class="node-name">Prepare a draft</text>
+          <text x="32" y="260" class="detail">Validate the defined output</text>
+        </g>
+        <g>
+          <rect x="16" y="316" width="288" height="80" rx="6" class="node" />
+          <text x="32" y="348" class="node-name">Request manager approval</text>
+          <text x="32" y="376" class="detail">A predefined handoff</text>
+        </g>
+        <path d="M16 428 H304" class="rule" />
+        <text x="48" y="464" class="diagram-heading">Bounded agent</text>
+        <text x="48" y="492" class="detail">Choose evidence at runtime.</text>
+        <path d="M176 596 V632" class="connector" marker-end="url(#runtime-choice-narrow-arrow)" />
+        <path d="M176 712 V748" class="connector" marker-end="url(#runtime-choice-narrow-arrow)" />
+        <path d="M80 804 H24 Q16 804 16 796 V564 Q16 556 24 556 H48" class="connector" marker-end="url(#runtime-choice-narrow-arrow)" />
+        <rect x="24" y="752" width="48" height="20" fill="#fff" />
+        <text x="48" y="766" text-anchor="middle" class="arrow-label">MORE</text>
+        <path d="M176 860 V896" class="connector" marker-end="url(#runtime-choice-narrow-arrow)" />
+        <rect x="184" y="868" width="48" height="20" fill="#fff" />
+        <text x="208" y="882" text-anchor="middle" class="arrow-label">DONE</text>
+        <g>
+          <rect x="48" y="516" width="256" height="80" rx="6" class="gate" />
+          <text x="64" y="544" class="node-name"><tspan x="64">Select authorized</tspan><tspan x="64" dy="24">evidence</tspan></text>
+          <text x="64" y="584" class="detail">Next permitted source</text>
+        </g>
+        <g>
+          <rect x="48" y="632" width="256" height="80" rx="6" class="node" />
+          <text x="64" y="660" class="node-name"><tspan x="64">Inspect and update</tspan><tspan x="64" dy="24">findings</tspan></text>
+          <text x="64" y="700" class="detail">Within the agreed scope</text>
+        </g>
+        <g>
+          <path d="M176 748 L272 804 L176 860 L80 804 Z" class="node" />
+          <text x="176" y="796" text-anchor="middle" class="node-name"><tspan x="176">Continue</tspan><tspan x="176" dy="24">investigating?</tspan></text>
+        </g>
+        <g>
+          <rect x="48" y="896" width="256" height="88" rx="6" class="node" />
+          <text x="64" y="928" class="node-name"><tspan x="64">Return findings</tspan><tspan x="64" dy="24">or escalate</tspan></text>
+          <text x="64" y="972" class="detail">Stop at scope and limits</text>
+        </g>
+      </svg>
     </div>
-    <figcaption>Illustrative maintenance-request paths. Retrieval can belong to a fixed workflow. The agent loop adds runtime choice, bounded by permitted sources, stopping conditions, and resource limits. Neither path grants authority to submit a work order.<span class="scroll-hint">Scroll horizontally if the full diagram is not visible.</span></figcaption>
+    <figcaption>Illustrative maintenance-request paths. Retrieval can belong to a fixed workflow. The agent loop adds runtime choice, bounded by permitted sources, stopping conditions, and resource limits. Neither path grants authority to submit a work order.</figcaption>
   </figure>
 
 <h2 id="test-where-runtime-choice-adds-value">Test where runtime choice adds value</h2>
