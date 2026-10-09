@@ -70,14 +70,20 @@ const pages = [
 
 function supportingMarkdown() {
   const sections = inventory.sources.map((source) =>
-    `### ${source.repository}\n\n` +
-    source.skills.map((skill) => `\`${skill}\``).join(', ') + '\n\n```bash\n' +
+    `### Skills from ${source.repository}\n\n` +
+    `Upstream source: [\`${source.repository}\`](https://github.com/${source.repository}).\n\n` +
+    '| Skill | What it does |\n| --- | --- |\n' +
+    source.skills.map((skill) => {
+      const description = source.descriptions[skill];
+      if (!description) throw new Error(`Missing description for supporting skill ${skill}.`);
+      return `| \`${skill}\` | ${description} |`;
+    }).join('\n') + '\n\n```bash\n' +
     `npx --yes ${inventory.installer} add ${source.repository} --skill ${source.skills.join(' ')} --agent ${inventory.agent} --copy --yes\n` +
     '```\n');
   return '# Supporting skills\n\n' +
     '<!-- Generated from scripts/agentic-skills.json by npm run build. -->\n\n' +
     `Run these commands from your application directory with Node.js ${inventory.minimumNode} or newer.\n` +
-    'Inspect existing skills first. Direct commands do not provide the setup script\'s conflict checks or ownership record.\n\n' +
+    'Review the selected skills and inspect existing installations before running these commands.\n\n' +
     sections.join('\n');
 }
 

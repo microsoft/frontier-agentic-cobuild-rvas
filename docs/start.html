@@ -93,43 +93,119 @@ It also supplies the public Microsoft Learn MCP server. This server retrieves
 documentation; it cannot read or change your cloud resources. No live Azure,
 Foundry, or hosted diagram connection is installed by default.</p>
 <h2 id="install-the-supporting-skills">Install the supporting skills</h2>
-<p>Use <strong>Node.js 22.20 or newer</strong>, Git, and npx. The script needs Bash on Linux,
-macOS, WSL, or Git Bash. It does not install system tools.</p>
-<p>Clone this tooling repository into a separate directory and review its installer:</p>
-<pre><code class="language-bash">git clone https://github.com/microsoft/frontier-agentic-cobuild-rvas.git /path/to/agentic-cobuild-tools
-</code></pre>
-<p>Replace both example paths below with your actual directories. Your application
-directory must already exist. Preview the selected sources and planned writes:</p>
-<pre><code class="language-bash">bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh --dry-run /path/to/my-ai-app
-bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh /path/to/my-ai-app
-</code></pre>
-<p>The script installs the selected skills under <code>.agents/skills/</code> and maintains
-<code>skills-lock.json</code> plus <code>.agentic-cobuild-setup.json</code>. Keep these with the project
-according to your source-control policy. The script pins the installer version.
-It downloads upstream skill content from its current source and records it.
-Review upstream changes before a fresh installation. The setup does not pin
-skill content to specific commits.</p>
-<p>An unchanged installation can be rerun without downloading or upgrading skills.
-The script stops if a selected skill already exists without its setup record, if
-managed content changed, or if setup paths are linked elsewhere. It does not edit
-application code, <code>AGENTS.md</code>, MCP settings, or Git configuration.</p>
-<p><strong>A failed upstream install may leave partial files.</strong> Read the error and inspect
-<code>.agents/skills/</code> and <code>skills-lock.json</code> before retrying. Preserve anything you
-already owned. Do not delete a directory just to bypass a conflict.</p>
-<h3 id="manual-npx-alternative">Manual npx alternative</h3>
-<p>Run the following commands <strong>from your application directory</strong>. These use the same
-dependency inventory as the script. They are suitable for terminals without Bash.
-Unlike our wrapper, direct upstream commands do not perform our conflict checks
-or create our setup record. Inspect existing skills first; use one setup method
-consistently.</p>
-<h3 id="mattpocockskills">mattpocock/skills</h3>
-<p><code>grilling</code>, <code>domain-modeling</code>, <code>codebase-design</code>, <code>implement</code>, <code>tdd</code>, <code>diagnosing-bugs</code>, <code>code-review</code>, <code>handoff</code></p>
+<p>Use <strong>Node.js 22.20 or newer</strong>, Git, and npx. Run the commands below
+<strong>from your application directory</strong>. You do not need Bash or a clone of this
+tooling repository.</p>
+<p>Each command installs the listed skills directly from its upstream repository.
+Review the skills and their source before running it. Check <code>.agents/skills/</code>
+and <code>.github/skills/</code> for existing copies and preserve any local changes.</p>
+<p>The commands select GitHub Copilot at project scope. <code>--copy</code> copies skill files
+instead of creating symlinks. The first <code>--yes</code> lets npx download the pinned
+installer; the final <code>--yes</code> accepts the skill installer&#39;s prompts.
+These commands can overwrite existing copies of the selected skills.</p>
+<p>The installer version is pinned, but upstream skill content is not pinned to
+specific commits. Review upstream changes before installing or reinstalling.
+Keep <code>skills-lock.json</code> and installed skill files according to your project&#39;s
+source-control policy.</p>
+<h3 id="skills-from-mattpocockskills">Skills from mattpocock/skills</h3>
+<p>Upstream source: <a href="https://github.com/mattpocock/skills"><code>mattpocock/skills</code></a>.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>grilling</code></td>
+<td>Question a plan until the decisions and assumptions are clear.</td>
+</tr>
+<tr>
+<td><code>domain-modeling</code></td>
+<td>Define domain terms and record them in a glossary and architecture decisions.</td>
+</tr>
+<tr>
+<td><code>codebase-design</code></td>
+<td>Design module interfaces and decide where to separate responsibilities.</td>
+</tr>
+<tr>
+<td><code>implement</code></td>
+<td>Implement a specification or tickets, run checks, and review the changes. Includes a commit step.</td>
+</tr>
+<tr>
+<td><code>tdd</code></td>
+<td>Build features or fix bugs through failing tests, implementation, and refactoring.</td>
+</tr>
+<tr>
+<td><code>diagnosing-bugs</code></td>
+<td>Reproduce a bug or performance regression and test possible causes.</td>
+</tr>
+<tr>
+<td><code>code-review</code></td>
+<td>Compare changes against repository standards and the originating specification.</td>
+</tr>
+<tr>
+<td><code>handoff</code></td>
+<td>Write a conversation handoff for a fresh agent session.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <pre><code class="language-bash">npx --yes skills@1.7.1 add mattpocock/skills --skill grilling domain-modeling codebase-design implement tdd diagnosing-bugs code-review handoff --agent github-copilot --copy --yes
 </code></pre>
-<h3 id="microsoftazure-skills">microsoft/azure-skills</h3>
-<p><code>discover-azure-skills</code>, <code>azure-enterprise-infra-planner</code>, <code>microsoft-foundry</code>, <code>azure-ai</code>, <code>foundry-iq</code>, <code>entra-agent-id</code>, <code>entra-app-registration</code>, <code>azure-aigateway</code></p>
+<h3 id="skills-from-microsoftazure-skills">Skills from microsoft/azure-skills</h3>
+<p>Upstream source: <a href="https://github.com/microsoft/azure-skills"><code>microsoft/azure-skills</code></a>.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>discover-azure-skills</code></td>
+<td>Find additional Azure skills for a task in the upstream catalog.</td>
+</tr>
+<tr>
+<td><code>azure-enterprise-infra-planner</code></td>
+<td>Plan enterprise Azure infrastructure and generate Bicep or Terraform.</td>
+</tr>
+<tr>
+<td><code>microsoft-foundry</code></td>
+<td>Build and manage Foundry agents, models, and resources, including deployment and evaluation.</td>
+</tr>
+<tr>
+<td><code>azure-ai</code></td>
+<td>Work with Azure AI Search, Speech, OpenAI, and Document Intelligence.</td>
+</tr>
+<tr>
+<td><code>foundry-iq</code></td>
+<td>Create or troubleshoot Foundry IQ knowledge bases and connect them to agents.</td>
+</tr>
+<tr>
+<td><code>entra-agent-id</code></td>
+<td>Configure identities and authentication for AI agents through Microsoft Entra Agent ID.</td>
+</tr>
+<tr>
+<td><code>entra-app-registration</code></td>
+<td>Register Microsoft Entra applications and configure OAuth and MSAL authentication.</td>
+</tr>
+<tr>
+<td><code>azure-aigateway</code></td>
+<td>Configure Azure API Management policies for AI models, MCP tools, and agents.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <pre><code class="language-bash">npx --yes skills@1.7.1 add microsoft/azure-skills --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
 </code></pre>
+<p>If a command fails, stop and inspect its error, <code>.agents/skills/</code>, and
+<code>skills-lock.json</code> before retrying. A failed install may leave partial files.
+Preserve existing skills rather than deleting them to bypass a conflict.</p>
 <p>Third-party skills remain upstream-owned. Installing a skill does not authorize
 cloud changes. The upstream <code>implement</code> skill includes a commit step.
 Use the explicit handoff below for the
@@ -393,9 +469,8 @@ AI Agent Creator. Detailed discovery and architecture approval still happen ther
 Use CLI&#39;s <code>copilot plugin update agentic-cobuild</code> or VS Code&#39;s plugin update action
 for plugin updates. Review the updated contents before use.</p>
 <p>Supporting skill updates are separate. Review source changes and your project&#39;s
-lock file. The setup script does not overwrite or upgrade managed skills.
-If you update them manually, review and reinstall them to reconcile the setup
-record. Do not edit recorded hashes to bypass a conflict.</p>
+lock file before reinstalling selected skills with the commands above.
+Preserve local changes and inspect the resulting diff before committing.</p>
 <p>See the <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/tree/main/plugins/agentic-cobuild">plugin source</a>
 and the <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/plugins/agentic-cobuild/skills/cloud-architecture-diagram/references/REFERENCE.md">diagram asset terms</a>.</p>
 

@@ -16,8 +16,8 @@ to the known-use-case journey.
 Learn pages place page links above the article and section links inside an
 "On this page" disclosure. Prose stays at reading width; diagrams use the full
 content width. The Start guide keeps its desktop section index, which becomes an inline
-list on narrow screens. Command blocks scroll horizontally and offer a copy
-button with explicit failure feedback. Maintain visible keyboard focus and
+list on narrow screens. Command blocks wrap to their available width. The copy
+button preserves the original text and reports failures. Maintain visible keyboard focus and
 readable contrast.
 
 Intro figures scale to fit on wide screens and switch to stacked compositions

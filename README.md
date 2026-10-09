@@ -29,20 +29,12 @@ For VS Code Copilot, add `microsoft/frontier-agentic-cobuild-rvas` to
 Plugins view. Enable `chat.plugins.enabled` if needed. Manage the plugin in the
 interface where you installed it.
 
-**Install supporting skills in the application repository too.** Review this
-tooling repository in a separate directory, then run:
-
-```bash
-bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh --dry-run /path/to/my-ai-app
-bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh /path/to/my-ai-app
-```
-
-The script requires Node.js 22.20 or newer, Git, npx, and Bash. It installs the
-selected upstream skills at project scope. It preserves application code,
-instructions, MCP settings, and existing skills. Conflicts stop setup before
-installation; network failures can leave partial upstream writes and are reported.
-It does not create a repository, install the plugin globally, or provision resources.
-Manual `npx` commands are available in the [supporting skill guide](docs/supporting-skills.md).
+**Install supporting skills in the application repository too.** The
+[Start guide](docs/start.md#install-the-supporting-skills) lists every selected
+skill, its purpose, and the direct `npx` commands. Use Node.js 22.20 or newer,
+Git, and npx. No Bash wrapper or tooling-repository clone is needed.
+Review existing skills before installing; the commands can overwrite selected
+copies, and a failed install may leave partial files.
 
 ## Use it in your application workspace
 

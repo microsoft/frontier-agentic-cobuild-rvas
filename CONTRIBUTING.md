@@ -15,7 +15,7 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## Documentation validation
 
-Before submitting plugin, installer, or documentation changes, use Node.js 22.20
+Before submitting plugin, dependency-inventory, or documentation changes, use Node.js 22.20
 or newer and run:
 
 ```bash
@@ -36,13 +36,13 @@ relationships. Keep the before/after snapshots synchronized across layouts;
 documentation tests compare their components and relationships.
 Page metadata lives in `docs/build.js`; section links
 for explanatory pages come from their headings. It also generates supporting
-skill commands from the install inventory. Commit generated HTML and
+skill descriptions and commands from the install inventory. Commit generated HTML and
 `docs/supporting-skills.md` with their sources.
 Plugin skills live only under `plugins/agentic-cobuild/skills/`.
 Keep third-party dependencies in `scripts/agentic-skills.json`, not in the plugin.
 
-Tests cover plugin resources, local links, installer failure/preservation behavior,
-generated-page consistency, and accessible intro-figure embedding.
+Tests cover plugin resources, local links, generated setup commands and skill
+descriptions, page consistency, and accessible intro-figure embedding.
 Diagram tests check XML and local asset handling;
 they do not prove visual correctness or cloud security.
 

@@ -61,7 +61,7 @@ jobs:
       - name: Build static site data
         run: npm run build
 
-      - name: Validate plugin, installer, and diagrams
+      - name: Validate plugin, setup documentation, and diagrams
         run: npm test && npm run test:diagrams
 
       - name: Verify generated site data is committed
@@ -87,7 +87,7 @@ jobs:
       - name: Build static site data
         run: npm run build
 
-      - name: Validate plugin, installer, and diagrams
+      - name: Validate plugin, setup documentation, and diagrams
         run: npm test && npm run test:diagrams
 
       - name: Verify generated site data is committed
@@ -180,7 +180,7 @@ jobs:
         run: npm run build
         working-directory: preview
 
-      - name: Validate preview plugin, installer, and diagrams
+      - name: Validate preview plugin, setup documentation, and diagrams
         run: npm test && npm run test:diagrams
         working-directory: preview
 

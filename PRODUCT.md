@@ -37,9 +37,10 @@ Bundle AI Agent Creator, Cloud Architecture Diagram, and Idea Forge. Supply
 documentation-only Microsoft Learn MCP. Preserve discovery confirmation and
 complete-package approval, including explicit diagram-review exceptions.
 
-Setup preserves existing code, instructions, MCP settings, and skills. It creates
-no Git repository, cloud resources, or system-tool installation. Architecture
-approval never starts implementation or deployment.
+The Start guide lists each supporting skill and its direct upstream installation
+command. Users review existing skills before installation, which can overwrite
+selected copies. Installing skills grants no permission to change cloud resources.
+Architecture approval never starts implementation or deployment.
 
 ## Brand Commitments
 
@@ -50,7 +51,7 @@ a catalog. Use plain, outcome-first language.
 ## Evidence on Hand
 
 The bundled skills, their contracts and local diagram assets, the upstream skill
-inventory, the setup script, and validation results. Do not invent customer
+inventory, generated setup commands, and validation results. Do not invent customer
 evidence, readiness claims, or guarantees about model behavior.
 
 ## Product Principles
@@ -62,4 +63,4 @@ with its owner. Third-party guidance and asset terms remain identifiable.
 ## Accessibility & Inclusion
 
 Provide readable command blocks, visible keyboard focus, responsive navigation,
-and a guide usable without Bash through equivalent manual commands.
+and setup commands that do not require Bash.

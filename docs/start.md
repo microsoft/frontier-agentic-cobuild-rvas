@@ -71,48 +71,29 @@ Foundry, or hosted diagram connection is installed by default.
 
 ## Install the supporting skills
 
-Use **Node.js 22.20 or newer**, Git, and npx. The script needs Bash on Linux,
-macOS, WSL, or Git Bash. It does not install system tools.
+Use **Node.js 22.20 or newer**, Git, and npx. Run the commands below
+**from your application directory**. You do not need Bash or a clone of this
+tooling repository.
 
-Clone this tooling repository into a separate directory and review its installer:
+Each command installs the listed skills directly from its upstream repository.
+Review the skills and their source before running it. Check `.agents/skills/`
+and `.github/skills/` for existing copies and preserve any local changes.
 
-```bash
-git clone https://github.com/microsoft/frontier-agentic-cobuild-rvas.git /path/to/agentic-cobuild-tools
-```
+The commands select GitHub Copilot at project scope. `--copy` copies skill files
+instead of creating symlinks. The first `--yes` lets npx download the pinned
+installer; the final `--yes` accepts the skill installer's prompts.
+These commands can overwrite existing copies of the selected skills.
 
-Replace both example paths below with your actual directories. Your application
-directory must already exist. Preview the selected sources and planned writes:
-
-```bash
-bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh --dry-run /path/to/my-ai-app
-bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh /path/to/my-ai-app
-```
-
-The script installs the selected skills under `.agents/skills/` and maintains
-`skills-lock.json` plus `.agentic-cobuild-setup.json`. Keep these with the project
-according to your source-control policy. The script pins the installer version.
-It downloads upstream skill content from its current source and records it.
-Review upstream changes before a fresh installation. The setup does not pin
-skill content to specific commits.
-
-An unchanged installation can be rerun without downloading or upgrading skills.
-The script stops if a selected skill already exists without its setup record, if
-managed content changed, or if setup paths are linked elsewhere. It does not edit
-application code, `AGENTS.md`, MCP settings, or Git configuration.
-
-**A failed upstream install may leave partial files.** Read the error and inspect
-`.agents/skills/` and `skills-lock.json` before retrying. Preserve anything you
-already owned. Do not delete a directory just to bypass a conflict.
-
-### Manual npx alternative
-
-Run the following commands **from your application directory**. These use the same
-dependency inventory as the script. They are suitable for terminals without Bash.
-Unlike our wrapper, direct upstream commands do not perform our conflict checks
-or create our setup record. Inspect existing skills first; use one setup method
-consistently.
+The installer version is pinned, but upstream skill content is not pinned to
+specific commits. Review upstream changes before installing or reinstalling.
+Keep `skills-lock.json` and installed skill files according to your project's
+source-control policy.
 
 <!-- upstream-commands -->
+
+If a command fails, stop and inspect its error, `.agents/skills/`, and
+`skills-lock.json` before retrying. A failed install may leave partial files.
+Preserve existing skills rather than deleting them to bypass a conflict.
 
 Third-party skills remain upstream-owned. Installing a skill does not authorize
 cloud changes. The upstream `implement` skill includes a commit step.
@@ -255,9 +236,8 @@ Use CLI's `copilot plugin update agentic-cobuild` or VS Code's plugin update act
 for plugin updates. Review the updated contents before use.
 
 Supporting skill updates are separate. Review source changes and your project's
-lock file. The setup script does not overwrite or upgrade managed skills.
-If you update them manually, review and reinstall them to reconcile the setup
-record. Do not edit recorded hashes to bypass a conflict.
+lock file before reinstalling selected skills with the commands above.
+Preserve local changes and inspect the resulting diff before committing.
 
 See the [plugin source](https://github.com/microsoft/frontier-agentic-cobuild-rvas/tree/main/plugins/agentic-cobuild)
 and the [diagram asset terms](https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/plugins/agentic-cobuild/skills/cloud-architecture-diagram/references/REFERENCE.md).

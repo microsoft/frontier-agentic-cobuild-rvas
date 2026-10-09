@@ -1,6 +1,6 @@
 # Workspace instructions
 
-This repository maintains the Agentic Co-build plugin, dependency installer, and
+This repository maintains the Agentic Co-build plugin, dependency inventory, and
 documentation site. Customer application code and architecture artifacts belong
 in the customer's selected repository.
 
