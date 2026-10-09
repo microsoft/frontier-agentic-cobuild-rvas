@@ -42,6 +42,15 @@
         ],
         "createdAt": "2026-10-09T06:55:27.553Z",
         "reason": "Agent: browser confirms existing artifact rows have 14px top padding and bordered tool rows have 22px; the first tool row has no border."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/assets/diagrams/family-*.html"
+        ],
+        "createdAt": "2026-10-09T07:35:39.767Z",
+        "reason": "Agent: these standalone SVGs position text with SVG coordinates, not CSS padding. Browser checks at 320 through 1440px verify node insets and at least 12px labels."
       }
     ]
   }

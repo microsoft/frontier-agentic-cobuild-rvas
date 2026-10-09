@@ -98,12 +98,17 @@ img { max-width: 100%; }
 .guide-section-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 24px; padding: 0 20px 16px; }
 .guide-section-links a { display: flex; align-items: center; min-height: 44px; padding: 8px 0; line-height: 1.5; }
 .guide-body { min-width: 0; }
-.guide-body > :not(.intro-diagram):not(style) { max-width: var(--reading-width); margin-left: auto; margin-right: auto; }
+.guide-body > :not(.intro-diagram):not(style):not(.application-family) { max-width: var(--reading-width); margin-left: auto; margin-right: auto; }
 .guide-body .intro-diagram { margin-top: 40px; margin-bottom: 40px; }
 .guide-body .intro-diagram figcaption { max-width: var(--reading-width); margin-left: auto; margin-right: auto; }
 .guide-body h2 { margin-top: 56px; font-size: 1.95rem; }
 .guide-body > h2:first-child { margin-top: 0; padding-top: 0; border: 0; }
 .guide-body h3 { margin-top: 32px; margin-bottom: 12px; }
+.guide-body > .application-family { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: 56px; max-width: none; margin: 48px 0; }
+.application-family-copy { min-width: 0; }
+.application-family-copy h3 { margin-top: 0; font-size: 1.55rem; }
+.application-family-copy p:last-child { margin-bottom: 0; }
+.guide-body .application-family .intro-diagram { width: 100%; max-width: 400px; margin: 0 auto; }
 .guide-body :not(pre) > code { padding: 2px 4px; border-radius: 3px; background: var(--c-paper); color: var(--c-heading); }
 .guide-body p, .guide-body li { font-size: 0.98rem; }
 .guide-body pre { position: relative; max-width: 100%; margin: 24px 0; padding: 44px 22px 22px; border-radius: 7px; background: #032254; color: #e5efff; white-space: pre-wrap; overflow-wrap: anywhere; }
@@ -124,6 +129,7 @@ img { max-width: 100%; }
   .hero-grid { gap: 36px; grid-template-columns: 1fr; }
   .architecture-preview { max-width: 640px; }
   .tool-layout { gap: 40px; grid-template-columns: 1fr; }
+  .guide-body > .application-family { grid-template-columns: 1fr; gap: 24px; max-width: var(--reading-width); margin-left: auto; margin-right: auto; }
 }
 @media (max-width: 700px) {
   .wrap { padding-left: 20px; padding-right: 20px; }

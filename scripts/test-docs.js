@@ -84,20 +84,42 @@ test('intro diagrams embed accessible wide and narrow layouts without fixed-widt
   }
 });
 
-test('reading pages share section disclosure and Learn pages retain distinct page navigation', () => {
+test('Learn pages show only page tabs while Start retains its setup section disclosure', () => {
   for (const page of pages) {
     const html = renderPage(page);
     assert.match(html, /class="wrap guide-layout"/);
-    assert.match(html, /<details class="guide-contents"><summary>On this page<\/summary>/);
-    assert.ok(html.indexOf('class="guide-contents"') < html.indexOf('<article'));
     if (page.slug === 'start') {
+      assert.match(html, /<details class="guide-contents"><summary>On this page<\/summary>/);
+      assert.ok(html.indexOf('class="guide-contents"') < html.indexOf('<article'));
       assert.doesNotMatch(html, /class="guide-pages"/);
       assert.match(html, /href="start.html" aria-current="page">Start/);
     } else {
+      assert.doesNotMatch(html, /guide-contents|guide-section-links|On this page/);
+      assert.ok(html.indexOf('class="guide-pages"') < html.indexOf('<article'));
       assert.match(html, /href="applications.html" aria-current="page">Learn/);
       assert.ok(html.includes(`href="${page.slug}.html" aria-current="page">${page.navigationLabel}</a>`));
     }
   }
+});
+
+test('each application family pairs its explanation with an accessible conceptual diagram', () => {
+  const html = renderPage(pages.find((page) => page.slug === 'applications'));
+  const families = [...html.matchAll(/<section class="application-family" aria-labelledby="([^"]+)">([\s\S]*?)<\/section>/g)];
+  assert.equal(families.length, 6);
+  for (const family of families) {
+    const [, id, content] = family;
+    assert.ok(content.includes(`<div class="application-family-copy"><h3 id="${id}">`), id);
+    assert.equal([...content.matchAll(/<figure /g)].length, 1, id);
+    assert.match(content, /<svg [^>]*role="img" aria-labelledby="family-[a-z]+-title family-[a-z]+-desc"/);
+    assert.match(content, /<figcaption>[^<]+<\/figcaption>/);
+    assert.doesNotMatch(content, /<h2 /);
+    assert.ok(content.indexOf('</div>') < content.indexOf('<figure'), id);
+    const name = content.match(/<figure class="intro-diagram" data-family="([a-z-]+)">/)[1];
+    assert.ok(content.includes(`aria-labelledby="family-${name}-title family-${name}-desc"`), id);
+  }
+  const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(ids.length, new Set(ids).size);
+  assert.doesNotMatch(html, /<!-- application-family -->|<!-- diagram: family-/);
 });
 
 test('architecture snapshots retain identical content and topology across layouts', () => {

@@ -30,12 +30,15 @@ Static intro figures live in `docs/assets/diagrams/` as self-contained HTML.
 Use `<!-- diagram: filename-without-extension -->` to embed a figure; the build
 inlines its scoped styles and accessible SVG without loading its standalone font
 stylesheet. Embedded figures use the site's self-hosted Outfit/Inter fonts.
-Each figure has wide and stacked SVG layouts selected by its container width.
+The wide intro figures have wide and stacked SVG layouts selected by container width.
 Check both compositions: no diagram scrollbar, clipped labels, or omitted
 relationships. Keep the before/after snapshots synchronized across layouts;
 documentation tests compare their components and relationships.
-Page metadata lives in `docs/build.js`; section links
-for explanatory pages come from their headings. It also generates supporting
+Compact application-family figures use one narrow composition. Pair a heading
+and its paragraphs with a figure using `<!-- application-family -->` before the
+heading and `<!-- diagram: family-name -->` after the paragraphs.
+Page metadata and Start's setup section links live in `docs/build.js`.
+Learn pages use page tabs without a section menu. The build also generates supporting
 skill descriptions and commands from the install inventory. Commit generated HTML and
 `docs/supporting-skills.md` with their sources.
 Plugin skills live only under `plugins/agentic-cobuild/skills/`.
