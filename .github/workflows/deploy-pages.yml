@@ -67,7 +67,7 @@ jobs:
       - name: Verify generated site data is committed
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/start.html docs/supporting-skills.md)"
+            'docs/*.html' docs/supporting-skills.md)"
 
   build-production:
     if: github.ref == 'refs/heads/main'
@@ -93,7 +93,7 @@ jobs:
       - name: Verify generated site data is committed
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/start.html docs/supporting-skills.md)"
+            'docs/*.html' docs/supporting-skills.md)"
 
       - name: Checkout preview state
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -188,7 +188,7 @@ jobs:
         working-directory: preview
         run: |
           test -z "$(git status --porcelain --untracked-files=all -- \
-            docs/start.html docs/supporting-skills.md)"
+            'docs/*.html' docs/supporting-skills.md)"
 
       - name: Set preview path
         id: preview_path

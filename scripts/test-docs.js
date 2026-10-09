@@ -7,7 +7,7 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const test = require('node:test');
 const { audit, sourceDocs, checkLink } = require('./audit-docs');
-const { renderGuide, supportingMarkdown } = require('../docs/build');
+const { pages, renderPage, supportingMarkdown } = require('../docs/build');
 const inventory = require('./agentic-skills.json');
 const ROOT = path.resolve(__dirname, '..');
 const SETUP = path.join(__dirname, 'setup-agentic-repo.js');
@@ -63,8 +63,12 @@ test('plugin and marketplace resolve the same complete portable package', () => 
   assert.equal(mcp.mcpServers['microsoft-learn'].type, 'streamable-http');
 });
 
-test('generated guide and manual commands match their current sources', () => {
-  assert.equal(fs.readFileSync(path.join(ROOT, 'docs/start.html'), 'utf8'), renderGuide());
+test('generated reading pages and manual commands match their current sources', () => {
+  for (const page of pages) {
+    const html = fs.readFileSync(path.join(ROOT, `docs/${page.slug}.html`), 'utf8');
+    assert.equal(html, renderPage(page), page.slug);
+    assert.doesNotMatch(html, /{{page-|<!-- (?:guide-body|guide-navigation|primary-links|page-heading|page-lede) -->/);
+  }
   assert.equal(fs.readFileSync(path.join(ROOT, 'docs/supporting-skills.md'), 'utf8'), supportingMarkdown());
   for (const { repository, skills } of inventory.sources) {
     assert.ok(supportingMarkdown().includes(`${repository} --skill ${skills.join(' ')}`));
@@ -76,15 +80,23 @@ test('generated guide and manual commands match their current sources', () => {
 });
 
 test('source and generated documentation links resolve', () => {
-  const files = sourceDocs().concat(['index.html', 'start.html'].map((name) => path.join(ROOT, 'docs', name)));
+  const files = sourceDocs().concat(['index.html', ...pages.map((page) => `${page.slug}.html`)]
+    .map((name) => path.join(ROOT, 'docs', name)));
   assert.deepEqual(audit(files), []);
+});
+
+test('comparison tables retain semantics inside a keyboard-accessible scroll region', () => {
+  const html = renderPage(pages.find((page) => page.slug === 'architecture-options'));
+  assert.match(html, /<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">\s*<table>\s*<thead>/);
+  assert.match(html, /<\/thead>\s*<tbody>[\s\S]*<\/tbody>\s*<\/table>\s*<\/div>/);
 });
 
 test('link audit reports broken files and anchors', () => {
   const errors = [];
   checkLink(path.join(ROOT, 'README.md'), 'docs/start.html#missing-section', errors);
   checkLink(path.join(ROOT, 'README.md'), 'missing-file.md', errors);
-  assert.equal(errors.length, 2);
+  checkLink(path.join(ROOT, 'docs/start.html'), 'applications.html#missing-section', errors);
+  assert.equal(errors.length, 3);
   assert.match(errors[0], /missing anchor/);
   assert.match(errors[1], /broken local link/);
 });

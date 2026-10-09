@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add AI to an existing application | Agentic Co-build</title>
+  <meta name="description" content="Prepare an existing application for architecture-first AI design without assuming a rewrite." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to guide</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="index.html">Overview</a>
+<a href="applications.html">Learn</a>
+<a href="start.html">Start</a>
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero guide-hero">
+      <div class="wrap">
+        <h1>Add AI to <span>an existing application.</span></h1>
+        <p class="lede">Design a bounded addition. Preserve established interfaces and make reuse or migration decisions explicit.</p>
+      </div>
+    </section>
+    <div class="wrap guide-layout">
+      <nav class="guide-nav" aria-label="Reading navigation">
+        <div class="guide-pages">
+<a href="applications.html">What can you build?</a>
+<a href="agent-or-workflow.html">Does this need an agent?</a>
+<a href="architecture-options.html">Choose an architecture that fits</a>
+<a href="existing-applications.html" aria-current="page">Add AI to an existing application</a>
+</div>
+<a href="#extend-the-system-you-already-own">Extend the system you already own</a>
+        <a href="#give-the-creator-usable-context">Give the creator usable context</a>
+        <a href="#start-with-one-useful-addition">Start with one useful addition</a>
+        <a href="#make-reuse-and-migration-explicit">Make reuse and migration explicit</a>
+        <a href="#review-the-addition-as-a-complete-package">Review the addition as a complete package</a>
+        <a href="#begin-with-the-intended-change">Begin with the intended change</a>
+      </nav>
+      <article class="guide-body">
+        <h2 id="extend-the-system-you-already-own">Extend the system you already own</h2>
+<p><strong>Bring the current application and the change you want.</strong> You do not need to
+start from an empty repository or adopt a new stack to use AI Agent Creator.
+An existing platform-managed agent or workflow can also be the starting point.</p>
+<p>The creator inspects the selected workspace before asking about missing facts.
+It designs the addition while leaving application code and infrastructure
+unchanged. Implementation starts only in a separate session.</p>
+<h2 id="give-the-creator-usable-context">Give the creator usable context</h2>
+<p>Open the application&#39;s repository, including relevant platform configuration
+when it is maintained there. Point to the current architecture or operating
+records if they live elsewhere in an approved location.</p>
+<p>Explain the intended change and the interfaces that must remain stable. Identify
+enterprise controls outside the repository, such as shared identity or network
+services. Use synthetic inputs until customer-data access is agreed.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>What matters for the design</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Current journey</td>
+<td>What the user does today and where the proposed capability changes it.</td>
+</tr>
+<tr>
+<td>Interfaces and data</td>
+<td>Existing API contracts, systems of record, and source owners.</td>
+</tr>
+<tr>
+<td>Access and approvals</td>
+<td>Who may read evidence or authorize a business operation.</td>
+</tr>
+<tr>
+<td>Delivery and operations</td>
+<td>Current environments, release checks, telemetry, and rollback ownership.</td>
+</tr>
+<tr>
+<td>Constraints</td>
+<td>Required stack, compatibility promises, and limits on migration.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Repository facts should be inspected rather than repeatedly asked of you.
+Unknown enterprise facts remain questions; a missing local file does not prove
+that a control or service is absent.</p>
+<h2 id="start-with-one-useful-addition">Start with one useful addition</h2>
+<p>Choose a first journey whose result you can evaluate. For example, an existing
+service application could gain an evidence-backed case summary while leaving
+case editing and assignment unchanged.</p>
+<p>If follow-up investigation is required, include it explicitly. Otherwise,
+one bounded model response may be enough. If the system prepares an action,
+keep the existing authorization and approval owner visible.</p>
+<p>Agree what counts as success against today&#39;s behavior. Define what stays
+unchanged, including response contracts and access boundaries. Specify how the
+application behaves when AI is unavailable or evidence cannot support an answer.</p>
+<p>This is an illustrative scope, not a requirement to add a chat panel or replace
+the application&#39;s workflow.</p>
+<h2 id="make-reuse-and-migration-explicit">Make reuse and migration explicit</h2>
+<p>Evaluate the existing stack and model deployments before introducing alternatives.
+Reuse suitable capabilities. A proposed replacement needs a stated requirement
+or gap, together with the cost of changing the system.</p>
+<p>When migration is justified, the architecture package should explain coexistence
+and compatibility. The implementation plan should identify data movement, cutover,
+rollback, and eventual decommissioning where applicable.</p>
+<p>Avoid leaving the old and new responsibilities ambiguous. Name the system of
+record and the owner of each operation during the transition.</p>
+<h2 id="review-the-addition-as-a-complete-package">Review the addition as a complete package</h2>
+<p>The creator produces the same four architecture artifacts used for a new project,
+but their scope is the agreed change. The specification should distinguish
+new acceptance criteria from behavior that must be preserved.</p>
+<p>Review the data and action boundaries alongside the component changes. Check
+that the delivery plan includes regression tests and release controls appropriate
+to the existing application.</p>
+<p>Discovery confirmation and complete-package approval remain separate gates.
+After approval, use <a href="start.html#start-implementation-in-a-new-session">the implementation handoff</a>
+in a new session. Changes in scope or architecture return to the affected gate.</p>
+<h2 id="begin-with-the-intended-change">Begin with the intended change</h2>
+<pre><code class="language-text">Add evidence-backed case summarization and follow-up investigation to this
+existing application. Inspect the current stack and architecture records.
+Preserve the case APIs and authorization model. Reuse our enterprise services,
+compare agentic and simpler execution, and plan a bounded first release with
+regression checks and rollback.
+</code></pre>
+<p><a href="start.html">Install the plugin and supporting skills</a> without replacing existing
+project configuration. For the execution trade-off, read
+<a href="agent-or-workflow.html">Does this need an agent?</a>.</p>
+
+      </article>
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/guide.js"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Does this need an agent? | Agentic Co-build</title>
+  <meta name="description" content="Compare fixed rules, bounded model calls, explicit workflows, and agents against your user journey." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to guide</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="index.html">Overview</a>
+<a href="applications.html">Learn</a>
+<a href="start.html">Start</a>
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero guide-hero">
+      <div class="wrap">
+        <h1>Does this need <span>an agent?</span></h1>
+        <p class="lede">Use runtime planning where it earns its place. Keep known rules and sequences explicit.</p>
+      </div>
+    </section>
+    <div class="wrap guide-layout">
+      <nav class="guide-nav" aria-label="Reading navigation">
+        <div class="guide-pages">
+<a href="applications.html">What can you build?</a>
+<a href="agent-or-workflow.html" aria-current="page">Does this need an agent?</a>
+<a href="architecture-options.html">Choose an architecture that fits</a>
+<a href="existing-applications.html">Add AI to an existing application</a>
+</div>
+<a href="#choose-the-execution-model-from-the-task">Choose the execution model from the task</a>
+        <a href="#four-ways-to-handle-the-same-request">Four ways to handle the same request</a>
+        <a href="#test-where-runtime-choice-adds-value">Test where runtime choice adds value</a>
+        <a href="#bound-the-agents-responsibility">Bound the agent&#39;s responsibility</a>
+        <a href="#use-multiple-agents-only-for-a-reason">Use multiple agents only for a reason</a>
+        <a href="#bring-the-comparison-to-discovery">Bring the comparison to discovery</a>
+      </nav>
+      <article class="guide-body">
+        <h2 id="choose-the-execution-model-from-the-task">Choose the execution model from the task</h2>
+<p><strong>An AI application does not always need an agent loop.</strong> The creator compares
+execution models against the actual user journey before selecting a runtime.
+Calling something an assistant or copilot leaves that decision open.</p>
+<p>Use a maintenance request as an illustrative example. The intended outcome is
+to help a property manager handle it correctly. Different requirements lead
+to different designs.</p>
+<h2 id="four-ways-to-handle-the-same-request">Four ways to handle the same request</h2>
+<h3 id="fixed-rules">Fixed rules</h3>
+<p>The request already contains a category and location. Known rules assign the
+correct queue and flag urgent cases. The inputs and sequence are defined.</p>
+<p>Keep this deterministic when exact rules are enough. A model should not replace
+an authoritative rule merely to make the application sound agentic.</p>
+<h3 id="one-bounded-model-call">One bounded model call</h3>
+<p>A resident supplies free text. A model summarizes it into a defined response
+schema for the manager to review. The application supplies the context and
+controls what happens next.</p>
+<p>This can be useful AI without runtime planning. Validate the output and define
+how uncertainty or malformed results reach a reviewer.</p>
+<h3 id="retrieval-or-an-explicit-workflow">Retrieval or an explicit workflow</h3>
+<p>The application retrieves the relevant procedure, prepares a draft, and asks
+the manager for approval in a known sequence. The workflow defines branches and
+state transitions.</p>
+<p>Retrieval does not automatically make the process agentic. When the path is
+known, explicit orchestration may meet the requirement. Approval and retries
+still need an owner.</p>
+<h3 id="an-agent-with-bounded-tools">An agent with bounded tools</h3>
+<p>The manager asks why the request keeps recurring. The system decides which
+authorized history or procedure to inspect next, preserves its findings, and
+changes the investigation when the manager asks a follow-up.</p>
+<p>Here, choosing the next evidence source is part of the work. The agent may
+propose a work order, but authority to submit it remains a separate decision.
+A read-only investigator can still be an agent.</p>
+<p>Microsoft&#39;s <a href="https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns">agent design guidance</a>
+distinguishes direct model calls from agents with tools and multi-agent
+orchestration. More complex arrangements add coordination costs and failure modes.</p>
+<h2 id="test-where-runtime-choice-adds-value">Test where runtime choice adds value</h2>
+<p>Bring these questions to discovery:</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Design consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Must the system decide how to pursue a goal?</td>
+<td>Compare runtime planning with a predefined sequence.</td>
+</tr>
+<tr>
+<td>Must it choose which source or tool to use next?</td>
+<td>Define the permitted choices and selection evidence.</td>
+</tr>
+<tr>
+<td>Does an investigation continue across turns or pauses?</td>
+<td>Specify what state must persist and who owns it.</td>
+</tr>
+<tr>
+<td>Can a follow-up change the evidence or operation needed?</td>
+<td>Evaluate the whole conversation, not only its first response.</td>
+</tr>
+<tr>
+<td>Can it propose or execute a business action?</td>
+<td>Separate recommendation from authorization and approval.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Avoid narrowing the journey just to make a simpler architecture fit. A form,
+prepared evidence packet, or stateless response should be an agreed scope choice.
+If the user needs an open investigation, compare that requirement honestly.</p>
+<h2 id="bound-the-agents-responsibility">Bound the agent&#39;s responsibility</h2>
+<p>If runtime choice earns its place, specify its limits. Name the permitted tools
+and the evidence each can access. Set a stopping condition and resource limits.
+Define how unresolved work reaches a human.</p>
+<p>Decide what the system may recommend and what it may execute. For an action,
+identify the caller&#39;s authority, required approval, and duplicate-operation
+protection. Retrieved content is evidence, not permission to take an action.</p>
+<p>Evaluate routine and failure cases against the same requirements. Include a
+request outside the allowed scope and a case where evidence is insufficient.</p>
+<h2 id="use-multiple-agents-only-for-a-reason">Use multiple agents only for a reason</h2>
+<p>Separate agents may be justified by distinct access boundaries or specialist
+responsibilities. Start by describing what a single agent cannot do adequately.
+Then define what each specialist owns and how disagreement is resolved.</p>
+<p>A sequence of prompts alone does not prove that several autonomous agents are
+needed. The creator&#39;s job is to compare meaningful options, not maximize agent
+count.</p>
+<h2 id="bring-the-comparison-to-discovery">Bring the comparison to discovery</h2>
+<p>You do not need to settle this before installing the plugin:</p>
+<pre><code class="language-text">Help us design a maintenance-request investigation capability. Compare fixed
+rules, a bounded model call, an explicit retrieval workflow, and an agent.
+Preserve the user&#39;s need to ask follow-up questions. Explain which runtime
+choices add value and which actions still require human approval.
+</code></pre>
+<p><a href="start.html">Start in your repository</a>. Once the behavior is clear,
+<a href="architecture-options.html">choose an architecture that fits</a>.</p>
+
+      </article>
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/guide.js"></script>
+</body>
+</html>

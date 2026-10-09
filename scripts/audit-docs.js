@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { TextDecoder } = require('node:util');
 const marked = require('../docs/assets/js/marked.min.js');
+const { pages } = require('../docs/build');
 const ROOT = path.resolve(__dirname, '..');
 
 function walk(directory, predicate, files = []) {
@@ -71,7 +72,7 @@ function audit(files) {
 }
 
 function run(mode) {
-  const html = ['index.html', 'start.html'].map((name) => path.join(ROOT, 'docs', name));
+  const html = ['index.html', ...pages.map((page) => `${page.slug}.html`)].map((name) => path.join(ROOT, 'docs', name));
   const files = mode === '--generated' ? html : mode === '--source' ? sourceDocs() : sourceDocs().concat(html);
   const failures = audit(files);
   if (failures.length) {

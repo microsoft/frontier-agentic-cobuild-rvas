@@ -9,6 +9,11 @@ before implementation begins.
 | [Guide source](docs/start.md)
 | [Supporting skill commands](docs/supporting-skills.md)
 
+[What can you build?](docs/applications.md)
+| [Does this need an agent?](docs/agent-or-workflow.md)
+| [Architecture options](docs/architecture-options.md)
+| [Extend an existing application](docs/existing-applications.md)
+
 ## Install the plugin
 
 For GitHub Copilot CLI:
@@ -32,7 +37,7 @@ bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh --dry-run /pat
 bash /path/to/agentic-cobuild-tools/scripts/setup-agentic-repo.sh /path/to/my-ai-app
 ```
 
-The script requires Node.js 22.20 or newer, Git, npx, and Bash. It installs 17
+The script requires Node.js 22.20 or newer, Git, npx, and Bash. It installs the
 selected upstream skills at project scope. It preserves application code,
 instructions, MCP settings, and existing skills. Conflicts stop setup before
 installation; network failures can leave partial upstream writes and are reported.
@@ -83,7 +88,7 @@ npm test
 npm run test:diagrams
 ```
 
-Commit generated `docs/start.html` and `docs/supporting-skills.md` with their sources.
+Commit generated reading-page HTML and `docs/supporting-skills.md` with their sources.
 See [Contributing](CONTRIBUTING.md) for installation checks and publishing setup.
 
 The repository's MIT license does not replace the diagram assets'

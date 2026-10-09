@@ -69,7 +69,7 @@ Review only source documentation:
 - `README.md`
 - `CONTRIBUTING.md`
 - `PRODUCT.md`
-- `docs/start.md` and `docs/index.html`, excluding generated `docs/start.html` and `docs/supporting-skills.md`
+- `docs/*.md` and `docs/index.html`, excluding generated `docs/supporting-skills.md`
 - `plugins/agentic-cobuild/**/*.md`
 - `scripts/agentic-skills.json` and the setup script's documented commands
 

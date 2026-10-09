@@ -24,9 +24,12 @@ npm test
 npm run test:diagrams
 ```
 
-The build renders `docs/start.md` and the selected upstream commands into
-`docs/start.html` and `docs/supporting-skills.md`. Commit those generated files
-with their sources. Plugin skills live only under `plugins/agentic-cobuild/skills/`.
+The build renders the Start guide and four explanatory pages from Markdown using
+`docs/start.template.html`. Page metadata lives in `docs/build.js`; section links
+for explanatory pages come from their headings. It also generates supporting
+skill commands from the install inventory. Commit generated HTML and
+`docs/supporting-skills.md` with their sources.
+Plugin skills live only under `plugins/agentic-cobuild/skills/`.
 Keep third-party dependencies in `scripts/agentic-skills.json`, not in the plugin.
 
 Tests cover plugin resources, local links, installer failure/preservation behavior,
