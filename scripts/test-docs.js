@@ -84,17 +84,20 @@ test('intro diagrams embed accessible wide and narrow layouts without fixed-widt
   }
 });
 
-test('Learn navigation sits above the article with native section disclosure; Start keeps its sidebar', () => {
-  for (const page of pages.filter((page) => page.slug !== 'start')) {
+test('reading pages share section disclosure and Learn pages retain distinct page navigation', () => {
+  for (const page of pages) {
     const html = renderPage(page);
-    assert.match(html, /class="wrap guide-layout guide-layout--learn"/);
+    assert.match(html, /class="wrap guide-layout"/);
     assert.match(html, /<details class="guide-contents"><summary>On this page<\/summary>/);
-    assert.match(html, /href="applications.html" aria-current="page">Learn/);
     assert.ok(html.indexOf('class="guide-contents"') < html.indexOf('<article'));
+    if (page.slug === 'start') {
+      assert.doesNotMatch(html, /class="guide-pages"/);
+      assert.match(html, /href="start.html" aria-current="page">Start/);
+    } else {
+      assert.match(html, /href="applications.html" aria-current="page">Learn/);
+      assert.ok(html.includes(`href="${page.slug}.html" aria-current="page">${page.navigationLabel}</a>`));
+    }
   }
-  const start = renderPage(pages.find((page) => page.slug === 'start'));
-  assert.match(start, /class="wrap guide-layout"/);
-  assert.doesNotMatch(start, /guide-contents|guide-layout--learn/);
 });
 
 test('architecture snapshots retain identical content and topology across layouts', () => {

@@ -40,6 +40,7 @@ const pages = [
   },
   {
     slug: 'applications',
+    navigationLabel: 'Application types',
     title: 'What can you build?',
     description: 'Understand the AI application families covered by the Agentic Co-build design workflow.',
     heading: 'What can <span>you build?</span>',
@@ -47,6 +48,7 @@ const pages = [
   },
   {
     slug: 'agent-or-workflow',
+    navigationLabel: 'Agent or workflow',
     title: 'Does this need an agent?',
     description: 'Compare fixed rules, bounded model calls, explicit workflows, and agents against your user journey.',
     heading: 'Does this need <span>an agent?</span>',
@@ -54,6 +56,7 @@ const pages = [
   },
   {
     slug: 'architecture-options',
+    navigationLabel: 'Architecture options',
     title: 'Choose an architecture that fits',
     description: 'Separate behavior, platform, channel, and ownership before choosing an AI application architecture.',
     heading: 'Choose an architecture <span>that fits.</span>',
@@ -61,6 +64,7 @@ const pages = [
   },
   {
     slug: 'existing-applications',
+    navigationLabel: 'Existing applications',
     title: 'Add AI to an existing application',
     description: 'Prepare an existing application for architecture-first AI design without assuming a rewrite.',
     heading: 'Add AI to <span>an existing application.</span>',
@@ -111,20 +115,19 @@ function renderPage(page) {
     .map(([id, label]) => `<a href="#${id}">${label}</a>`).join('\n        ');
   const pageLinks = page.slug === 'start' ? '' : '<div class="guide-pages">\n' +
     pages.filter((candidate) => candidate.slug !== 'start').map((candidate) =>
-      `<a href="${candidate.slug}.html"${candidate.slug === page.slug ? ' aria-current="page"' : ''}>${candidate.title}</a>`
+      `<a href="${candidate.slug}.html"${candidate.slug === page.slug ? ' aria-current="page"' : ''}>${candidate.navigationLabel}</a>`
     ).join('\n') + '\n</div>\n';
   const primaryLinks = '<a href="index.html">Overview</a>\n' +
     `<a href="applications.html"${page.slug !== 'start' ? ' aria-current="page"' : ''}>Learn</a>\n` +
     `<a href="start.html"${page.slug === 'start' ? ' aria-current="page"' : ''}>Start</a>\n` +
     '<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>';
   return fs.readFileSync(path.join(__dirname, 'start.template.html'), 'utf8')
-    .replace('{{layout-class}}', () => page.slug === 'start' ? '' : ' guide-layout--learn')
     .replace('{{page-title}}', () => page.title)
     .replace('{{page-description}}', () => page.description)
     .replace('<!-- primary-links -->', () => primaryLinks)
     .replace('<!-- page-heading -->', () => page.heading)
     .replace('<!-- page-lede -->', () => page.lede)
-    .replace('<!-- guide-navigation -->', () => page.slug === 'start' ? sectionLinks :
+    .replace('<!-- guide-navigation -->', () =>
       pageLinks + '<details class="guide-contents"><summary>On this page</summary>\n' +
       `<div class="guide-section-links">${sectionLinks}</div>\n</details>`)
     .replace('<!-- guide-body -->', () => body);
