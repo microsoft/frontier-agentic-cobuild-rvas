@@ -2,413 +2,178 @@
 
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
-const vm = require('node:vm');
-const { sourceDocs, resolveScript, auditScriptReferences, auditRetiredReferences } = require('./audit-docs');
-const { copyScenarioAssets, detectScenarioProblems, loadScenarioRegistry, scenarioOutput } = require('../docs/build');
-const { parseDeck, slideKind } = require('./build-slides');
+const { audit, sourceDocs, checkLink } = require('./audit-docs');
+const { pages, renderIndex, renderPage, supportingMarkdown } = require('../docs/build');
+const inventory = require('./agentic-skills.json');
 const ROOT = path.resolve(__dirname, '..');
 
-test('guide anchors retain explicit IDs and support section deep links', () => {
-  const window = { location: { hash: '#recover-an-interrupted-write' } };
-  vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'docs/assets/js/core.js'), 'utf8'), {
-    window,
-    document: { addEventListener() {} },
-    CSS: { escape: (value) => value },
-    requestAnimationFrame: (callback) => callback(),
-  });
-  let scrolled = false;
-  const headings = [
-    { textContent: 'Recover an interrupted write', id: '', scrollIntoView() { scrolled = true; } },
-    { textContent: 'Other heading', id: 'explicit-anchor' },
-  ];
-  const container = {
-    querySelectorAll: () => headings,
-    querySelector: (selector) => headings.find((heading) => '#' + heading.id === selector),
-  };
-  window.FP.ensureGuideAnchors(container);
-  assert.equal(headings[0].id, 'recover-an-interrupted-write');
-  assert.equal(headings[1].id, 'explicit-anchor');
-  window.FP.scrollToGuideAnchor(container);
-  assert.equal(scrolled, true);
+test('plugin and marketplace resolve the same complete portable package', () => {
+  const marketplace = require('../.github/plugin/marketplace.json');
+  const plugin = marketplace.plugins[0];
+  const directory = path.resolve(ROOT, plugin.source);
+  const metadata = JSON.parse(fs.readFileSync(path.join(directory, 'plugin.json')));
+  assert.equal(metadata.$schema, 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json');
+  assert.equal(metadata.name, plugin.name);
+  assert.equal(metadata.version, plugin.version);
+  assert.equal(metadata.repository, 'https://github.com/microsoft/frontier-agentic-cobuild-rvas');
+  const skills = fs.readdirSync(path.join(directory, 'skills')).sort();
+  assert.deepEqual(skills, ['ai-agent-creator', 'cloud-architecture-diagram', 'idea-forge']);
+  for (const skill of skills) {
+    assert.match(fs.readFileSync(path.join(directory, 'skills', skill, 'SKILL.md'), 'utf8'),
+      new RegExp(`^name: ${skill}$`, 'm'));
+  }
+  const mcp = JSON.parse(fs.readFileSync(path.join(directory, 'mcp.json')));
+  assert.deepEqual(Object.keys(mcp.mcpServers), ['microsoft-learn']);
+  assert.equal(mcp.mcpServers['microsoft-learn'].type, 'streamable-http');
 });
 
-test('documentation audit includes every scenario and the shared guidance', () => {
-  const files = new Set(sourceDocs().map((file) => path.relative(ROOT, file)));
-  for (const scenario of loadScenarioRegistry()) {
-    for (const file of ['README.md', scenario.slides, scenario.accelerator, ...scenario.lessons.map((lesson) => lesson.path)]) {
-      assert.ok(files.has(path.relative(ROOT, path.join(scenario.root, file))), file);
+test('generated reading pages and manual commands match their current sources', () => {
+  assert.equal(fs.readFileSync(path.join(ROOT, 'docs/index.html'), 'utf8'), renderIndex());
+  for (const page of pages) {
+    const html = fs.readFileSync(path.join(ROOT, `docs/${page.slug}.html`), 'utf8');
+    assert.equal(html, renderPage(page), page.slug);
+    assert.doesNotMatch(html, /{{page-|<!-- (?:guide-body|guide-navigation|primary-links|page-heading|page-lede) -->/);
+  }
+  assert.equal(fs.readFileSync(path.join(ROOT, 'docs/supporting-skills.md'), 'utf8'), supportingMarkdown());
+  for (const { repository, skills } of inventory.sources) {
+    assert.ok(supportingMarkdown().includes(`${repository} --skill ${skills.join(' ')}`));
+  }
+});
+
+test('Start lists each supporting skill and its direct project-local installation command', () => {
+  const markdown = supportingMarkdown();
+  const html = renderPage(pages.find((page) => page.slug === 'start'));
+  const commands = [...markdown.matchAll(/```bash\n([^\n]+)\n```/g)].map((match) => match[1]);
+  assert.equal(commands.length, inventory.sources.length);
+  for (const [index, source] of inventory.sources.entries()) {
+    assert.equal(commands[index], `npx --yes ${inventory.installer} add ${source.repository} --skill ${source.skills.join(' ')} --agent ${inventory.agent} --copy --yes`);
+    assert.deepEqual(Object.keys(source.descriptions).sort(), source.skills.slice().sort());
+    for (const skill of source.skills) {
+      assert.ok(source.descriptions[skill].trim(), skill);
+      assert.ok(markdown.includes(`| \`${skill}\` | ${source.descriptions[skill]} |`), skill);
+      assert.ok(html.includes(`<td><code>${skill}</code></td>`), skill);
+      assert.ok(html.includes(source.descriptions[skill]), skill);
     }
   }
-  assert.ok(files.has('PRODUCT.md'));
-  assert.ok(files.has('scenarios/README.md'));
+  assert.doesNotMatch(commands.join('\n'), /--global|--all|humanize-writing/);
+  assert.doesNotMatch(html, /setup-agentic-repo|\.agentic-cobuild-setup|Manual npx alternative/);
+  assert.match(html, /can overwrite existing copies/);
 });
 
-test('root-relative scenario scripts resolve from nested guides, with or without ./', () => {
-  for (const scenario of loadScenarioRegistry()) {
-    const doc = path.join(scenario.root, scenario.accelerator);
-    const script = path.relative(ROOT, path.join(scenario.root, 'accelerator/scripts/deploy.sh'));
-    for (const prefix of ['', './']) {
-      assert.equal(resolveScript(doc, prefix + script, false).existing, path.join(ROOT, script));
-    }
-    assert.equal(resolveScript(doc, 'scripts/deploy.sh', true).existing, path.join(ROOT, script));
-  }
-});
-
-test('scenario validation rejects missing, reordered and mismatched module IDs', () => {
-  const scenario = loadScenarioRegistry()[0];
-  assert.deepEqual(detectScenarioProblems([scenario]), []);
-  const variants = [
-    scenario.build_modules.slice(1),
-    [...scenario.build_modules].reverse(),
-    scenario.build_modules.map((module, index) => index ? module : { ...module, id: 'wrong-lesson' }),
+test('intro diagrams embed accessible wide and narrow layouts without fixed-width scrolling', () => {
+  const figures = [
+    [renderIndex(), 'approval-handoff'],
+    [renderPage(pages.find((page) => page.slug === 'start')), 'approval-handoff'],
+    [renderPage(pages.find((page) => page.slug === 'existing-applications')), 'existing-app-delta'],
   ];
-  for (const build_modules of variants) {
-    assert.ok(detectScenarioProblems([{ ...scenario, build_modules }])
-      .some((problem) => problem.includes('matching IDs and order')));
+  for (const [html, name] of figures) {
+    assert.doesNotMatch(html, /<!-- diagram:/);
+    assert.ok(html.includes(`aria-labelledby="${name}-title ${name}-desc"`));
+    assert.ok(html.includes(`<title id="${name}-title">`));
+    assert.match(html, /<div class="diagram-container">/);
+    assert.ok(html.includes(`aria-labelledby="${name}-narrow-title ${name}-narrow-desc"`));
+    assert.match(html, /<figcaption>[\s\S]+?<\/figcaption>/);
+    const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
+    assert.equal(ids.length, new Set(ids).size, name);
+    assert.doesNotMatch(html, /min-width: \d+px|scroll-hint|scroll horizontally/i);
+    assert.match(html, /class="diagram-wide"/);
+    assert.match(html, /class="diagram-narrow"/);
   }
 });
 
-test('scenario modules cannot declare activity prerequisites', () => {
-  for (const scenario of loadScenarioRegistry()) {
-    assert.ok(scenario.build_modules.every((module) => !Object.hasOwn(module, 'activity_id')));
-    const build_modules = scenario.build_modules.map((module, index) =>
-      index ? module : { ...module, activity_id: 'foundations' });
-    assert.ok(detectScenarioProblems([{ ...scenario, build_modules }])
-      .some((problem) => problem.includes('references a retired activity')));
+test('Learn pages show page tabs while Start opens directly into its content', () => {
+  for (const page of pages) {
+    const html = renderPage(page);
+    assert.match(html, /class="wrap guide-layout"/);
+    assert.doesNotMatch(html, /guide-contents|guide-section-links|On this page/);
+    if (page.slug === 'start') {
+      assert.doesNotMatch(html, /class="guide-nav"/);
+      assert.doesNotMatch(html, /class="guide-pages"/);
+      assert.match(html, /href="start.html" aria-current="page">Start/);
+    } else {
+      const tabs = html.match(/<div class="guide-pages">([\s\S]*?)<\/div>/)[1];
+      assert.equal([...tabs.matchAll(/<a /g)].length, 3);
+      assert.ok(html.indexOf('class="guide-pages"') < html.indexOf('<article'));
+      assert.match(html, /href="applications.html" aria-current="page">Learn/);
+      assert.ok(html.includes(`href="${page.slug}.html" aria-current="page">${page.navigationLabel}</a>`));
+    }
   }
 });
 
-test('lessons cannot link to retired activities, including optional sections', () => {
-  const original = loadScenarioRegistry()[0];
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'scenario-continuity-'));
-  try {
-    const lesson = original.lessons[0];
-    const target = path.join(dir, lesson.path);
-    fs.mkdirSync(path.dirname(target), { recursive: true });
-    const scenario = { ...original, root: dir, lessons: [lesson], build_modules: [original.build_modules[0]] };
-    const link = '[Required build](../../../activities/foundations/README.md)';
-    const errors = () => detectScenarioProblems([scenario]).filter((problem) =>
-      problem.includes('links to a retired activity'));
-    fs.writeFileSync(target, `## Implementation\n${link}\n`);
-    assert.equal(errors().length, 1);
-    fs.writeFileSync(target, `## Optional reference\n${link}\n## Next module\nContinue.`);
-    assert.equal(errors().length, 1);
-    fs.writeFileSync(target, `## Optional reference\nBackground.\n## Implementation\n${link}\n`);
-    assert.equal(errors().length, 1);
-  } finally {
-    fs.rmSync(dir, { recursive: true, force: true });
+test('each application family pairs its explanation with an accessible conceptual diagram', () => {
+  const html = renderPage(pages.find((page) => page.slug === 'applications'));
+  const families = [...html.matchAll(/<section class="application-family" aria-labelledby="([^"]+)">([\s\S]*?)<\/section>/g)];
+  assert.equal(families.length, 6);
+  for (const family of families) {
+    const [, id, content] = family;
+    assert.ok(content.includes(`<div class="application-family-copy"><h3 id="${id}">`), id);
+    assert.equal([...content.matchAll(/<figure /g)].length, 1, id);
+    assert.equal([...content.matchAll(/class="family-product-example"/g)].length, 1, id);
+    const examples = content.match(/<div class="family-product-example">([\s\S]*?)\n<\/div>/)[1];
+    assert.match(examples, /<span>Example options<\/span>/);
+    assert.equal([...examples.matchAll(/<a href="https:\/\/learn.microsoft.com\//g)].length, 2, id);
+    assert.equal([...examples.matchAll(/<small>[^<]+<\/small>/g)].length, 2, id);
+    assert.equal([...examples.matchAll(/<img /g)].length, 2, id);
+    assert.match(examples, /<img src="assets\/icons\/microsoft\/[^"]+\.svg" alt="" width="32" height="32" \/>/);
+    assert.match(content, /<svg [^>]*role="img" aria-labelledby="family-[a-z]+-title family-[a-z]+-desc"/);
+    assert.match(content, /<figcaption>[^<]+<\/figcaption>/);
+    assert.doesNotMatch(content, /<h2 /);
+    assert.ok(content.indexOf('</div>') < content.indexOf('<figure'), id);
+    const name = content.match(/<figure class="intro-diagram" data-family="([a-z-]+)">/)[1];
+    assert.ok(content.includes(`aria-labelledby="family-${name}-title family-${name}-desc"`), id);
+  }
+  const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(ids.length, new Set(ids).size);
+  assert.doesNotMatch(html, /<!-- application-family -->|<!-- diagram: family-/);
+  assert.match(html, /Microsoft Copilot Studio/);
+});
+
+test('architecture snapshots retain identical content and topology across layouts', () => {
+  const html = fs.readFileSync(path.join(ROOT, 'docs/assets/diagrams/existing-app-delta.html'), 'utf8');
+  for (const snapshot of ['before', 'after']) {
+    const pattern = new RegExp(`<g data-snapshot="${snapshot}"[^>]*>([\\s\\S]*?)\\n        <\\/g>`, 'g');
+    const bodies = [...html.matchAll(pattern)].map((match) =>
+      match[1].replaceAll('existing-app-delta-narrow-arrow', 'existing-app-delta-arrow'));
+    assert.equal(bodies.length, 2, snapshot);
+    assert.equal(bodies[0], bodies[1], snapshot);
   }
 });
 
-test('retired workshop files and published routes stay removed', () => {
-  for (const retired of [
-    'activities', 'resources', 'scripts/action-backend',
-    'scripts/setup-foundations.sh', 'scripts/validate-foundations.py', 'scripts/cleanup.sh',
-    'docs/activities', 'docs/activity.html', 'docs/reference.html', 'docs/assets/js/activity.js',
-    'docs/assets/js/catalog.js', 'docs/assets/data/activities',
-    'docs/assets/data/dependency-graph.json', 'docs/resources',
-    'docs/index.md', 'docs/idea-forge.md', 'docs/resources.md',
-    'docs/assets/css/just-the-docs-default.scss',
-  ]) {
+test('source and generated documentation links resolve', () => {
+  const files = sourceDocs().concat(['index.html', ...pages.map((page) => `${page.slug}.html`)]
+    .map((name) => path.join(ROOT, 'docs', name)));
+  assert.deepEqual(audit(files), []);
+});
+
+test('comparison tables retain semantics inside a keyboard-accessible scroll region', () => {
+  const html = renderPage(pages.find((page) => page.slug === 'architecture-options'));
+  assert.match(html, /<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">\s*<table>\s*<thead>/);
+  assert.match(html, /<\/thead>\s*<tbody>[\s\S]*<\/tbody>\s*<\/table>\s*<\/div>/);
+});
+
+test('link audit reports broken files and anchors', () => {
+  const errors = [];
+  checkLink(path.join(ROOT, 'README.md'), 'docs/start.html#missing-section', errors);
+  checkLink(path.join(ROOT, 'README.md'), 'missing-file.md', errors);
+  checkLink(path.join(ROOT, 'docs/start.html'), 'applications.html#missing-section', errors);
+  assert.equal(errors.length, 3);
+  assert.match(errors[0], /missing anchor/);
+  assert.match(errors[1], /broken local link/);
+});
+
+test('retired application material is absent from source and publishing', () => {
+  for (const retired of ['scenarios', 'infra', 'azure.yaml', '.env.sample', 'requirements.txt',
+    '.github/skills/use-case-mapper', 'docs/assets/data', 'docs/assets/downloads',
+    'docs/scenario.html', 'docs/lesson.html', 'docs/slides.html', 'scripts/build-slides.js',
+    '.impeccable/surfaces/docs-slides-html.md', 'docs/agent-or-workflow.md',
+    'docs/agent-or-workflow.html', 'docs/assets/diagrams/runtime-choice.html']) {
     assert.equal(fs.existsSync(path.join(ROOT, retired)), false, retired);
   }
-  const platform = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/assets/data/platform.json'), 'utf8'));
-  assert.deepEqual(Object.keys(platform), ['scenarios']);
-  assert.deepEqual(platform.scenarios, loadScenarioRegistry().map(scenarioOutput));
-  assert.ok(platform.scenarios.every((scenario) => scenario.build_modules.every((module) =>
-    !Object.hasOwn(module, 'activity_path'))));
-});
-
-test('documentation audit rejects retired links and bootstrap commands', () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'retired-docs-'));
-  const doc = path.join(dir, 'README.md');
-  try {
-    for (const text of [
-      '[Library](reference.html)', '[Example](activities/foundations/README.md)',
-      'bash scripts/setup-foundations.sh', 'npm run test:activities',
-    ]) {
-      fs.writeFileSync(doc, text);
-      const failures = [];
-      auditRetiredReferences([doc], failures);
-      assert.equal(failures.length, 1, text);
-    }
-  } finally {
-    fs.unlinkSync(doc);
-    fs.rmdirSync(dir);
+  for (const file of ['README.md', 'PRODUCT.md', 'docs/index.html', 'docs/start.html',
+    '.github/workflows/deploy-pages.yml',
+    'plugins/agentic-cobuild/skills/idea-forge/SKILL.md']) {
+    assert.doesNotMatch(fs.readFileSync(path.join(ROOT, file), 'utf8'), /use-case-mapper|scenarios\/|validate:scenarios|test:scenarios/);
   }
-});
-
-test('documentation audit rejects retired repository and Pages links', () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'retired-repository-docs-'));
-  const doc = path.join(dir, 'README.md');
-  try {
-    for (const text of [
-      'https://github.com/microsoft/agentic-cobuild',
-      'https://codespaces.new/microsoft/agentic-cobuild',
-      'https://microsoft.github.io/agentic-cobuild/index.html',
-    ]) {
-      fs.writeFileSync(doc, text);
-      const failures = [];
-      auditRetiredReferences([doc], failures);
-      assert.equal(failures.length, 1, text);
-    }
-  } finally {
-    fs.unlinkSync(doc);
-    fs.rmdirSync(dir);
-  }
-});
-
-test('build rejects missing scenario accelerators', () => {
-  const scenario = loadScenarioRegistry()[0];
-  const failures = detectScenarioProblems([{ ...scenario, accelerator: 'missing.md' }]);
-  assert.ok(failures.some((problem) => problem.includes('accelerator missing.md missing')));
-});
-
-test('source script checks reject undocumented flags', () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'agentic-cobuild-docs-test-'));
-  const doc = path.join(dir, 'README.md');
-  try {
-    fs.writeFileSync(doc, 'Run from the repository root.\n```bash\npython scripts/audit-diagrams.py --strict-bindings\n```\n');
-    const valid = [];
-    auditScriptReferences([doc], valid);
-    assert.deepEqual(valid, []);
-
-    fs.writeFileSync(doc, 'Run from the repository root.\n```bash\npython scripts/audit-diagrams.py --unsupported-flag\n```\n');
-    const invalid = [];
-    auditScriptReferences([doc], invalid);
-    assert.equal(invalid.length, 1);
-    assert.match(invalid[0], /documented flag --unsupported-flag is not handled/);
-  } finally {
-    fs.unlinkSync(doc);
-    fs.rmdirSync(dir);
-  }
-});
-
-test('scenario publication excludes private state but retains fixtures and source', () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'scenario-publication-'));
-  const source = path.join(dir, 'source');
-  const output = path.join(dir, 'output');
-  fs.mkdirSync(source);
-  const privateFiles = ['.env', '.env.local', 'tasks.sqlite3', 'tools.sqlite3-wal',
-    'tasks.db-journal', 'run.log', 'actions.journal', '.deployment-outputs.json'];
-  const publicFiles = ['.env.sample', 'records.json', 'runtime.py', 'diagram.png', 'main.bicep'];
-  try {
-    for (const name of [...privateFiles, ...publicFiles]) fs.writeFileSync(path.join(source, name), name);
-    for (const name of ['__pycache__', '.venv', '.runtime', 'journals']) {
-      fs.mkdirSync(path.join(source, name));
-      fs.writeFileSync(path.join(source, name, 'private.txt'), 'not for publication');
-    }
-    copyScenarioAssets([{ root: source, id: 'example' }], output);
-    const published = fs.readdirSync(path.join(output, 'example')).sort();
-    assert.deepEqual(published, publicFiles.sort());
-  } finally {
-    fs.rmSync(source, { recursive: true, force: true });
-    fs.rmSync(output, { recursive: true, force: true });
-    fs.rmdirSync(dir);
-  }
-});
-
-test('Operational Agents has eight linked modules and all public entry points', () => {
-  const scenario = loadScenarioRegistry().find((item) => item.id === 'operational-agents');
-  assert.ok(scenario);
-  assert.equal(scenario.order, 4);
-  assert.equal(scenario.lessons.length, 8);
-  assert.deepEqual(detectScenarioProblems([scenario]), []);
-  const slides = fs.readFileSync(path.join(scenario.root, scenario.slides), 'utf8');
-  for (const lesson of scenario.lessons) {
-    for (const kind of ['context', 'choices', 'evidence']) {
-      assert.ok(slides.includes(`slide:id=lesson-${lesson.id}-${kind}`));
-    }
-  }
-  assert.ok(fs.readFileSync(path.join(ROOT, 'docs/index.html'), 'utf8').includes('scenario.html?id=operational-agents'));
-});
-
-test('home page offers a distinct custom co-build route', () => {
-  const homeScript = fs.readFileSync(path.join(ROOT, 'docs/assets/js/home.js'), 'utf8');
-  assert.match(homeScript, /Fully custom scenario/);
-  assert.match(homeScript, /Microsoft Cloud Solution Architect/);
-  assert.match(homeScript, /outcome-card-custom/);
-});
-
-test('intake skills use the scenario manifests and the Start page links both', () => {
-  const forge = fs.readFileSync(path.join(ROOT, '.github/skills/customer-activity-forge/SKILL.md'), 'utf8');
-  assert.ok(loadScenarioRegistry().length > 0);
-  assert.match(forge, /Read every `scenarios\/\*\/manifest\.json` before labelling ideas\./);
-  assert.match(forge, /compare its\s+need with every current manifest/);
-  assert.match(forge, /docs\/scenario\.html\?id=<manifest id>/);
-  assert.match(forge, /Build each URL from its\s+manifest ID/);
-  assert.match(forge, /use-case-mapper/);
-  assert.ok(fs.existsSync(path.join(ROOT, '.github/skills/use-case-mapper/SKILL.md')));
-  const start = fs.readFileSync(path.join(ROOT, 'docs/start.html'), 'utf8');
-  assert.ok(start.includes('id="idea-forge"') && start.includes('id="use-case-mapper"'));
-});
-
-test('diagram branches keep refusals separate and require approval after review', () => {
-  const edges = (file) => JSON.parse(fs.readFileSync(path.join(ROOT, 'scenarios', file), 'utf8'))
-    .elements.filter((element) => element.type === 'arrow')
-    .map((element) => [element.startBinding?.elementId, element.endBinding?.elementId].join('->'));
-  const claims = edges('avatar-onboarding/diagrams/04-grounded-assistant-boundary.excalidraw');
-  assert.ok(claims.includes('gate->answer'));
-  assert.ok(claims.includes('gate->refuse'));
-  assert.ok(!claims.includes('answer->refuse'));
-  const review = edges('content-understanding/diagrams/05-human-review-handoff.excalidraw');
-  for (const edge of ['gate->review', 'gate->clean', 'review->approval', 'clean->approval']) {
-    assert.ok(review.includes(edge), edge);
-  }
-  const surface = edges('ai-grounding/diagrams/08-surface-decision.excalidraw');
-  assert.ok(surface.includes('plain->adapter'));
-  assert.ok(surface.includes('agent->adapter'));
-});
-
-test('customer pages display modules while keeping existing routes and slide links', async () => {
-  const scenario = scenarioOutput(loadScenarioRegistry().find((item) => item.id === 'avatar-scenario'));
-  const lesson = scenario.lessons[1];
-  const scenarioPage = fs.readFileSync(path.join(ROOT, 'docs/scenario.html'), 'utf8');
-  const slidesLink = scenarioPage.indexOf('id="slidesLink"');
-  assert.ok(slidesLink > scenarioPage.indexOf('<div class="detail-hero-actions">'));
-  assert.ok(slidesLink < scenarioPage.indexOf('id="scenarioMeta"'));
-  assert.equal(scenarioPage.indexOf('id="slidesLink"', slidesLink + 1), -1);
-  for (const page of ['lesson', 'scenario']) {
-    const elements = new Map();
-    let init;
-    const element = (id) => {
-      if (!elements.has(id)) elements.set(id, {
-        textContent: '', innerHTML: '', href: '',
-        querySelectorAll: () => [],
-      });
-      return elements.get(id);
-    };
-    vm.runInNewContext(fs.readFileSync(path.join(ROOT, `docs/assets/js/${page}.js`), 'utf8'), {
-      document: {
-        title: '',
-        addEventListener: (event, callback) => { if (event === 'DOMContentLoaded') init = callback; },
-        getElementById: element,
-      },
-      FP: {
-        qp: (key) => ({ scenario: scenario.id, lesson: lesson.id, id: scenario.id })[key],
-        loadData: async () => ({ scenarios: [scenario] }),
-        esc: String,
-        levelBadge: () => '',
-        durBadge: () => '',
-        renderMd() {},
-        applyGuideAccordions() {},
-        initDiagramZoom() {},
-      },
-      fetch: async () => ({ ok: true, text: async () => '# Module content' }),
-    });
-    await init();
-    if (page === 'lesson') {
-      assert.match(element('lessonEyebrow').textContent, /module 2/);
-      assert.match(element('lessonBreadcrumbs').innerHTML, /Module 2/);
-      assert.match(element('lessonBottomPager').innerHTML, /Previous module/);
-      assert.match(element('lessonBottomPager').innerHTML, /Next module/);
-      assert.ok(element('lessonBottomPager').innerHTML.includes(scenario.lessons[2].lesson_path));
-      assert.equal(element('lessonSlidesLink').href, `slides.html?id=${scenario.id}#lesson-${lesson.id}`);
-      assert.match(element('lessonSummary').textContent, /your tenant/);
-    } else {
-      assert.match(element('scenarioMeta').innerHTML, /7 modules/);
-      assert.match(element('scenarioPager').innerHTML, /Module 1:/);
-      assert.ok(element('scenarioPager').innerHTML.includes(scenario.lessons[0].lesson_path));
-    }
-  }
-});
-
-test('customer decks expose guided navigation and downloadable formats', () => {
-  const html = fs.readFileSync(path.join(ROOT, 'docs/slides.html'), 'utf8');
-  const script = fs.readFileSync(path.join(ROOT, 'docs/assets/js/slides.js'), 'utf8');
-  const styles = fs.readFileSync(path.join(ROOT, 'docs/assets/css/styles.css'), 'utf8');
-  for (const id of ['scenarioLink', 'slideIndex', 'previousSlide', 'nextSlide', 'downloadPdf', 'downloadPptx']) {
-    assert.ok(html.includes(`id="${id}"`), id);
-  }
-  assert.match(script, /scenario\.html\?id=/);
-  assert.match(script, /slides_pdf_path/);
-  assert.match(script, /slides_pptx_path/);
-  assert.match(script, /ArrowRight/);
-  assert.match(script, /history\.replaceState/);
-  assert.match(script, /slide-compact/);
-  assert.match(script, /slide\.markdown\.length > 350/);
-  assert.match(styles, /\.slide-compact \.slide-content/);
-});
-
-test('slide sources and generated downloads share one scenario contract', () => {
-  for (const scenario of loadScenarioRegistry()) {
-    const deck = parseDeck(fs.readFileSync(path.join(scenario.root, scenario.slides), 'utf8'));
-    assert.ok(deck.slides.length >= 4, scenario.id);
-    assert.equal(deck.slides[0].id, 'scenario-open', scenario.id);
-    assert.ok(deck.slides.some((slide) => slide.id === 'scenario-intro'), scenario.id);
-    assert.ok(deck.slides.some((slide) => slide.kind === 'close'), scenario.id);
-    for (const lesson of scenario.lessons) {
-      for (const kind of ['context', 'choices', 'evidence']) {
-        assert.ok(deck.slides.some((slide) => slide.id === `lesson-${lesson.id}-${kind}`),
-          `${scenario.id} ${lesson.id} ${kind}`);
-      }
-    }
-
-    const output = scenarioOutput(scenario);
-    assert.equal(output.slides_pdf_path, `assets/downloads/${scenario.id}.pdf`);
-    assert.equal(output.slides_pptx_path, `assets/downloads/${scenario.id}.pptx`);
-    const pdf = path.join(ROOT, 'docs', output.slides_pdf_path);
-    const pptx = path.join(ROOT, 'docs', output.slides_pptx_path);
-    assert.equal(fs.readFileSync(pdf).subarray(0, 4).toString(), '%PDF');
-    assert.equal(fs.readFileSync(pptx).subarray(0, 2).toString(), 'PK');
-  }
-  assert.equal(slideKind('lesson-example-choices'), 'choices');
-  assert.equal(slideKind('scenario-close'), 'close');
-});
-
-test('module prose keeps decision-first guidance and explicit tenant delivery boundaries', () => {
-  const avatar = path.join(ROOT, 'scenarios/avatar-onboarding/lessons');
-  const decision = fs.readFileSync(path.join(avatar, '01-experience-selection.md'), 'utf8');
-  assert.doesNotMatch(decision, /```|api-version=|batchsyntheses|AvatarConfig/);
-  assert.match(decision, /## What you build/);
-  assert.match(decision, /## Verify/);
-  const generation = fs.readFileSync(path.join(avatar, '05-experience-generation.md'), 'utf8');
-  assert.match(generation, /wording approved in module 3/);
-  assert.match(generation, /^### Option E\. Translate an existing video$/m);
-  const publication = fs.readFileSync(path.join(avatar, '06-approval-gating.md'), 'utf8');
-  assert.match(publication, /actual publishing operation and user channel/);
-  for (const scenario of loadScenarioRegistry()) {
-    for (const lesson of scenario.lessons) {
-      const body = fs.readFileSync(path.join(scenario.root, lesson.path), 'utf8');
-      assert.match(body, /^# Module \d+/);
-      assert.match(body, /## Next module/);
-      const prose = body.replace(/```[\s\S]*?```/g, '')
-        .replace(/`[^`]*`|\]\([^)]*\)|https?:\/\/\S+|<!--[\s\S]*?-->/g, '');
-      assert.doesNotMatch(prose, /\blessons?\b/i, lesson.path);
-    }
-  }
-});
-
-test('avatar guidance selects an application before rendering and requires a working delivery', () => {
-  const root = path.join(ROOT, 'scenarios/avatar-onboarding');
-  const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
-  const decision = read('lessons/01-experience-selection.md');
-  const applicationHeading = decision.indexOf('### First choose the application goal');
-  const presentationHeading = decision.indexOf('### Then choose how the application presents content');
-  assert.ok(applicationHeading >= 0 && presentationHeading > applicationHeading);
-  for (const file of ['README.md', 'lessons/01-experience-selection.md', 'slides.md', 'accelerator/facilitator-reference.md']) {
-    const body = read(file);
-    assert.match(body, /interactive assistant/i, file);
-    assert.match(body, /content-production application/i, file);
-    assert.doesNotMatch(body, /recommended starting path is.*prerecorded|batch.video default/i, file);
-  }
-  const manifest = JSON.parse(read('manifest.json'));
-  assert.match(manifest.decision_prompts[0], /interactive assistant.*content-production application/);
-  assert.match(manifest.build_modules[0].summary, /before selecting a media format/);
-  assert.match(manifest.build_modules.at(-1).outcome, /generated video alone is insufficient/);
-  const generation = read('lessons/05-experience-generation.md');
-  assert.doesNotMatch(generation, /Batch avatar synthesis[^\n]*default|Default: Option A/i);
-  assert.match(generation, /Retain its state across restarts/);
-  const operation = read('lessons/07-prove-and-operate.md');
-  assert.match(operation, /complete source-update cycle/);
-  assert.match(operation, /without duplicate publication/);
-  assert.match(operation, /One generated video is only an integration check/);
-  const diagram = JSON.parse(read('diagrams/01-experience-capability-choice.excalidraw'));
-  const batch = diagram.elements.find((element) => element.id === 'batch-label');
-  assert.match(batch.text, /Workflow jobs/);
-  assert.doesNotMatch(batch.text, /default/i);
-  assert.equal(batch.text, batch.originalText);
 });

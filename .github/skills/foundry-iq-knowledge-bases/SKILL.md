@@ -14,10 +14,9 @@ description: Build Microsoft Foundry IQ knowledge bases (preview) — multi-sour
 npx skills add microsoft/skills --skill foundry-iq-knowledge-bases
 ```
 
-**Maps to:** AI Grounding ingestion, retrieval, and knowledge-base lessons.
+**Use for:** Knowledge-base guidance when the approved application architecture needs it.
 
 **Before implementing:** query `microsoft-docs` and `foundry-mcp` for the current knowledge-base API.
-Reuse the scripts and scenario data under `scenarios/ai-grounding/accelerator/`.
-Follow the lesson's identity and permission checks when adapting retrieval.
+Follow the application's approved identity, permission, and retrieval contracts.
 
 **Upstream source:** `.github/plugins/microsoft-foundry/skills/foundry-iq-knowledge-bases/`

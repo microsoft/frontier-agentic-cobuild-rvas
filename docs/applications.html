@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What can you build? | Agentic Co-build</title>
+  <meta name="description" content="Understand the AI application families covered by the Agentic Co-build design workflow." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to guide</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="index.html">Overview</a>
+<a href="applications.html" aria-current="page">Learn</a>
+<a href="start.html">Start</a>
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero guide-hero">
+      <div class="wrap">
+        <h1>What can <span>you build?</span></h1>
+        <p class="lede">Explore the kinds of AI applications you can bring to discovery, including capabilities added to existing systems.</p>
+      </div>
+    </section>
+    <div class="wrap guide-layout">
+<nav class="guide-nav" aria-label="Reading navigation">
+<div class="guide-pages">
+<a href="applications.html" aria-current="page">Application types</a>
+<a href="architecture-options.html">Architecture options</a>
+<a href="existing-applications.html">Existing applications</a>
+</div>
+</nav>
+      <article class="guide-body">
+        <h2 id="what-the-creator-can-design">What the creator can design</h2>
+<p>Tell AI Agent Creator what you want a new or existing application to do.
+It helps you define the user journey and agree on a
+Microsoft-cloud architecture before implementation starts.</p>
+<p>The workflow covers platform-managed agents and custom applications. It can
+also conclude that a bounded model call or an explicit workflow fits better
+than an agent.</p>
+<p>Here, <strong>supported means covered by the design workflow</strong>. You still need to build
+the application; the plugin supplies no ready-made implementations or certified
+architectures. During discovery, the creator verifies the connections your design
+needs rather than assuming the services work together.
+The examples below illustrate possible uses. They are not customer results or deployment templates.</p>
+<h2 id="application-families">Application families</h2>
+<p>The Microsoft products shown below are examples, not required services or approved
+architectures. Discovery must verify product fit and any connections your design needs.
+Some examples cover different parts of a solution and can work together. They are
+not interchangeable. Check the selected features&#39; availability and release status.
+Product icons use Microsoft artwork where available. Neutral document and code
+symbols are illustrations, not product logos.</p>
+<section class="application-family" aria-labelledby="knowledge-assistants">
+<div class="application-family-copy"><h3 id="knowledge-assistants">Knowledge assistants</h3>
+<p>Help a user find and understand information they are allowed to access. For example, an operations
+assistant could explain a procedure and cite the current source, then investigate
+a follow-up question using other permitted evidence.</p>
+<p>Name who owns each source and how it stays current. The design must explain
+how user permissions limit retrieval and what happens when evidence is absent
+or contradictory. A fixed lookup may need retrieval without an agent loop.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/search/search-what-is-azure-search"><img src="assets/icons/microsoft/ai-search.svg" alt="" width="32" height="32" />Azure AI Search</a><small>Search and retrieval for an application-owned assistant.</small></div>
+<div><a href="https://learn.microsoft.com/microsoft-copilot-studio/knowledge-copilot-studio"><img src="assets/icons/microsoft/copilot-studio.svg" alt="" width="32" height="32" />Microsoft Copilot Studio</a><small>A platform-managed agent grounded in configured knowledge sources.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="knowledge">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 304" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-knowledge-title family-knowledge-desc">
+        <title id="family-knowledge-title">Answer with authorized evidence</title>
+        <desc id="family-knowledge-desc">The assistant searches sources the user may access, cites the evidence in its answer, and identifies missing or conflicting evidence.</desc>
+        <defs><marker id="family-knowledge-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 72 V112" marker-end="url(#family-knowledge-arrow)" />
+        <path class="family-edge" d="M180 192 V232" marker-end="url(#family-knowledge-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="64" rx="6" /><text x="44" y="48">Ask a question</text></g>
+        <g><rect class="family-focus" x="24" y="112" width="312" height="80" rx="6" /><text x="44" y="144">Retrieve permitted evidence</text><text class="family-detail" x="44" y="172">Apply the user's permissions</text></g>
+        <g><rect class="family-node" x="24" y="232" width="312" height="64" rx="6" /><text x="44" y="272">Answer with citations</text></g>
+      </svg>
+    </div>
+    <figcaption>If evidence is missing or conflicting, say so. Retrieval alone does not require an agent loop.</figcaption>
+  </figure>
+</section>
+
+<section class="application-family" aria-labelledby="agents-that-use-business-tools">
+<div class="application-family-copy"><h3 id="agents-that-use-business-tools">Agents that use business tools</h3>
+<p>Investigate a task and prepare or carry out operations within agreed limits. A maintenance
+assistant could gather request details and propose a work order for a manager
+to approve.</p>
+<p>Tool access is a separate decision from knowledge access. Specify which actions
+are read-only, which require approval, and how the system handles retries without
+duplicating a business operation. The system must check authorization when it performs each operation.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based business workflows.</small></div>
+<div><a href="https://learn.microsoft.com/azure/foundry/agents/overview"><img src="assets/icons/microsoft/foundry-agent-service.svg" alt="" width="32" height="32" />Foundry Agent Service</a><small>An agent that selects configured tools. Enforce business authorization separately.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="tools">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-tools-title family-tools-desc">
+        <title id="family-tools-title">Propose an action before approval</title>
+        <desc id="family-tools-desc">The assistant investigates a maintenance request and proposes a work order for a manager to approve or reject before an authorized operation.</desc>
+        <defs><marker id="family-tools-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 64 V100" marker-end="url(#family-tools-arrow)" />
+        <path class="family-edge" d="M180 156 V192" marker-end="url(#family-tools-arrow)" />
+        <path class="family-edge" d="M180 248 V284" marker-end="url(#family-tools-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">Receive a request</text></g>
+        <g><rect class="family-node" x="24" y="100" width="312" height="56" rx="6" /><text x="44" y="136">Investigate with allowed tools</text></g>
+        <g><rect class="family-node" x="24" y="192" width="312" height="56" rx="6" /><text x="44" y="228">Propose a work order</text></g>
+        <g><rect class="family-focus" x="24" y="284" width="312" height="68" rx="6" /><text x="44" y="312">Manager reviews the proposal</text><text class="family-detail" x="44" y="336">Approve or reject</text></g>
+      </svg>
+    </div>
+    <figcaption>The system must authorize each operation and prevent retries from repeating it. A proposal alone grants no permission to act.</figcaption>
+  </figure>
+</section>
+
+<section class="application-family" aria-labelledby="document-and-media-processing">
+<div class="application-family-copy"><h3 id="document-and-media-processing">Document and media processing</h3>
+<p>Turn incoming material into structured results. For example, classify a document
+bundle, extract fields, and send uncertain results to a reviewer.</p>
+<p>Agree the output schema and the review threshold. Define how a reviewer corrects
+an error and how a corrected result reaches the downstream system. This may be
+a fixed processing pipeline; a conversational interface is optional.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/ai-services/document-intelligence/overview"><img src="assets/icons/microsoft/document-intelligence.svg" alt="" width="32" height="32" />Azure Document Intelligence</a><small>Prebuilt or custom extraction models for known document types.</small></div>
+<div><a href="https://learn.microsoft.com/azure/ai-services/content-understanding/choosing-right-ai-tool"><img src="assets/icons/document-analysis.svg" alt="" width="32" height="32" />Azure Content Understanding</a><small>Analyzers for unstructured documents or mixed-media inputs.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="documents">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 344" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-documents-title family-documents-desc">
+        <title id="family-documents-title">Turn a document into a reviewed record</title>
+        <desc id="family-documents-desc">The pipeline classifies a document and extracts its fields, then sends uncertain fields to a reviewer before it publishes the record.</desc>
+        <defs><marker id="family-documents-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 56 V88" marker-end="url(#family-documents-arrow)" />
+        <path class="family-edge" d="M180 144 V176" marker-end="url(#family-documents-arrow)" />
+        <path class="family-edge" d="M180 244 V276" marker-end="url(#family-documents-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="48" rx="6" /><text x="44" y="40">Receive a document</text></g>
+        <g><rect class="family-node" x="24" y="88" width="312" height="56" rx="6" /><text x="44" y="124">Classify and extract fields</text></g>
+        <g><rect class="family-focus" x="24" y="176" width="312" height="68" rx="6" /><text x="44" y="204">Review uncertain fields</text><text class="family-detail" x="44" y="228">Apply the agreed threshold</text></g>
+        <g><rect class="family-node" x="24" y="276" width="312" height="60" rx="6" /><text x="44" y="312">Publish the structured record</text></g>
+      </svg>
+    </div>
+    <figcaption>The output must match the agreed schema. Send reviewer corrections to the downstream system.</figcaption>
+  </figure>
+</section>
+
+<section class="application-family" aria-labelledby="voice-and-audiovisual-experiences">
+<div class="application-family-copy"><h3 id="voice-and-audiovisual-experiences">Voice and audiovisual experiences</h3>
+<p>Use speech or an audiovisual presentation when the user&#39;s task requires it. An
+illustrative voice assistant could guide a worker through a permitted procedure,
+with confirmation before a consequential action.</p>
+<p>Decide how users interrupt, correct, or leave the interaction. Identify privacy
+and accessibility requirements, and verify the selected channel&#39;s capabilities.
+An avatar or generated video alone is no reason to add an agent.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/ai-services/speech-service/overview"><img src="assets/icons/microsoft/speech.svg" alt="" width="32" height="32" />Azure Speech</a><small>Compose speech recognition and synthesis with your application logic.</small></div>
+<div><a href="https://learn.microsoft.com/azure/ai-services/speech-service/voice-live"><img src="assets/icons/microsoft/speech.svg" alt="" width="32" height="32" />Voice Live API</a><small>A speech-to-speech API within Azure Speech, rather than a separate product.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="voice">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 336" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-voice-title family-voice-desc">
+        <title id="family-voice-title">A voice response is separate from an action</title>
+        <desc id="family-voice-desc">The assistant interprets speech and responds by voice, with a separate confirmation step for consequential actions.</desc>
+        <defs><marker id="family-voice-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M160 64 V96" marker-end="url(#family-voice-arrow)" />
+        <path class="family-edge" d="M128 152 V192" marker-end="url(#family-voice-arrow)" />
+        <path class="family-edge" d="M296 124 H312 Q320 124 320 132 V260 Q320 268 312 268 H188 Q180 268 180 276 V284" stroke-dasharray="5 4" marker-end="url(#family-voice-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="272" height="56" rx="6" /><text x="44" y="44">Listen to the user</text></g>
+        <g><rect class="family-node" x="24" y="96" width="272" height="56" rx="6" /><text x="44" y="132">Interpret the request</text></g>
+        <g><rect class="family-node" x="24" y="192" width="208" height="56" rx="6" /><text x="44" y="228">Respond by voice</text></g>
+        <g><rect class="family-focus" x="24" y="284" width="312" height="44" rx="6" /><text x="44" y="312">Confirm before taking action</text></g>
+      </svg>
+    </div>
+    <figcaption>Confirm consequential actions through the dashed path. Let users interrupt the assistant or correct what it understood.</figcaption>
+  </figure>
+</section>
+
+<section class="application-family" aria-labelledby="background-workflows">
+<div class="application-family-copy"><h3 id="background-workflows">Background workflows</h3>
+<p>Respond to an event or process a job without a new chat interface. An incoming
+service request could trigger evidence gathering and then wait for an owner to
+approve the proposed next step.</p>
+<p>Identify who owns job state and how work resumes after a failure or a long wait.
+Keep fixed branches explicit. If the system investigates as it runs, define what
+it may investigate and when it must stop.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based workflows with explicit steps.</small></div>
+<div><a href="https://learn.microsoft.com/azure/azure-functions/durable/durable-functions-overview"><img src="assets/icons/microsoft/functions.svg" alt="" width="32" height="32" />Azure Functions with Durable Functions</a><small>Code-defined workflows with persisted state and recovery.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="background">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-background-title family-background-desc">
+        <title id="family-background-title">Keep job state across an approval wait</title>
+        <desc id="family-background-desc">An event starts a job that gathers evidence, saves its state while awaiting approval, and resumes only after approval.</desc>
+        <defs><marker id="family-background-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-background-arrow)" />
+        <path class="family-edge" d="M180 152 V184" marker-end="url(#family-background-arrow)" />
+        <path class="family-edge" d="M180 256 V296" stroke-dasharray="5 4" marker-end="url(#family-background-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">An event starts a job</text></g>
+        <g><rect class="family-node" x="24" y="96" width="312" height="56" rx="6" /><text x="44" y="132">Gather evidence</text></g>
+        <g><rect class="family-focus" x="24" y="184" width="312" height="72" rx="6" /><text x="44" y="212">Wait for the owner's approval</text><text class="family-detail" x="44" y="240">Save the job's state</text></g>
+        <g><rect class="family-node" x="24" y="296" width="312" height="56" rx="6" /><text x="44" y="332">Resume after approval</text></g>
+      </svg>
+    </div>
+    <figcaption>The job can wait without an open chat. Stop the proposed action if the owner rejects it. Define how the job recovers from failures.</figcaption>
+  </figure>
+</section>
+
+<section class="application-family" aria-labelledby="coordinated-specialist-agents">
+<div class="application-family-copy"><h3 id="coordinated-specialist-agents">Coordinated specialist agents</h3>
+<p>Split responsibilities when one agent cannot meet the requirement reliably.
+For example, an investigator and a separately authorized action agent could have
+different tools and access boundaries.</p>
+<p>Explain why separate agents are needed and define their handoff contracts, including how
+agents handle conflicting results and shared state. Define what happens when
+one agent fails. Coordination adds overhead.
+Microsoft&#39;s <a href="https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns">orchestration guidance</a>
+recommends the lowest complexity that meets the requirement.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/foundry/agents/overview"><img src="assets/icons/microsoft/foundry-agent-service.svg" alt="" width="32" height="32" />Foundry Agent Service</a><small>A managed agent runtime. Verify support for the selected coordination pattern.</small></div>
+<div><a href="https://learn.microsoft.com/agent-framework/workflows/orchestrations/"><img src="assets/icons/code.svg" alt="" width="32" height="32" />Microsoft Agent Framework</a><small>Code-defined orchestration. Choose hosting separately, including Foundry when appropriate.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="specialists">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 328" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-specialists-title family-specialists-desc">
+        <title id="family-specialists-title">Coordinate specialists with separate permissions</title>
+        <desc id="family-specialists-desc">A coordinator assigns work to specialists with separate permissions and checks their results before handing over a proposal for approval.</desc>
+        <defs><marker id="family-specialists-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M144 64 V84 Q144 92 136 92 H88 Q80 92 80 100 V128" marker-end="url(#family-specialists-arrow)" />
+        <path class="family-edge" d="M216 64 V84 Q216 92 224 92 H272 Q280 92 280 100 V128" marker-end="url(#family-specialists-arrow)" />
+        <path class="family-edge" d="M80 208 V228 Q80 236 88 236 H136 Q144 236 144 244 V264" marker-end="url(#family-specialists-arrow)" />
+        <path class="family-edge" d="M280 208 V228 Q280 236 272 236 H224 Q216 236 216 244 V264" marker-end="url(#family-specialists-arrow)" />
+        <g><rect class="family-focus" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">Coordinate the task</text></g>
+        <g><rect class="family-node" x="8" y="128" width="152" height="80" rx="6" /><text x="24" y="160">Investigator</text><text class="family-detail" x="24" y="188">Read evidence</text></g>
+        <g><rect class="family-node" x="200" y="128" width="152" height="80" rx="6" /><text x="216" y="160">Action agent</text><text class="family-detail" x="216" y="188">Propose work</text></g>
+        <g><rect class="family-node" x="24" y="264" width="312" height="56" rx="6" /><text x="44" y="300">Check results and hand over</text></g>
+      </svg>
+    </div>
+    <figcaption>This example gives each specialist separate tools and permissions. The coordinator must resolve conflicting results. Consequential actions need approval.</figcaption>
+  </figure>
+</section>
+
+<h2 id="capabilities-you-can-combine">Capabilities you can combine</h2>
+<p>These families can overlap. A document workflow may feed a knowledge assistant;
+an investigation may finish with an approval-controlled operation.</p>
+<p>Persistent memory and personalization are additional choices. Define what the
+system may remember and who owns that context. Set rules for expiry and deletion.
+Multiple knowledge sources need their own permission and provenance boundaries.</p>
+<p>Add these capabilities when the journey needs them. You can start without
+multiple agents or persistent memory.</p>
+<h2 id="where-this-workflow-stops">Where this workflow stops</h2>
+<p>The creator records the architecture and requirements, with an implementation
+plan for a separate delivery session. You confirm discovery before it prepares
+the complete package, then approve that package before handoff.</p>
+<p>Use specialist workflows for standalone SDK questions, incident troubleshooting,
+or live agent operations. Architecture approval grants no permission to
+implement or deploy.</p>
+<h2 id="describe-your-first-journey">Describe your first journey</h2>
+<p>Tell the creator who will use the application and what their first task is.
+You can leave the platform open or state a constraint:</p>
+<pre><code class="language-text">Design a maintenance assistant for property managers. Help them investigate
+resident requests and prepare a work order for approval. Reuse our existing
+identity and service system. Compare an agent with a simpler workflow before
+recommending the architecture.
+</code></pre>
+<p><a href="start.html">Set up your application workspace</a>, then bring your own idea.
+If you are extending a system, read <a href="existing-applications.html">Add AI to an existing application</a>.</p>
+
+      </article>
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/guide.js"></script>
+</body>
+</html>

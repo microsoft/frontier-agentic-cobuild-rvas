@@ -3,200 +3,474 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script>
-    (function () {
-      try {
-        var k = 'fp-theme';
-        var saved = localStorage.getItem(k);
-        var pref = 'light';
-        document.documentElement.setAttribute('data-theme', saved || pref);
-      } catch (e) {}
-    })();
-  </script>
-  <title>Start. Agentic Co-build</title>
-  <meta name="description" content="Find a customer AI use case, or map a known one to scenario modules." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <title>Start | Agentic Co-build</title>
+  <meta name="description" content="Install Agentic Co-build in Copilot CLI or VS Code and design your own AI application in your repository." />
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="stylesheet" href="assets/css/shell.css" />
   <link rel="icon" href="assets/img/logo-mark.png" />
 </head>
 <body>
-
-  <header class="nav" role="banner">
-    <div class="nav-inner">
-      <a class="brand" href="index.html" aria-label="Real Value Acceleration Program home">
-        <img src="assets/img/logo-full.png" alt="Real Value Acceleration Program" class="brand-logo" />
-      </a>
+  <a class="skip-link" href="#main">Skip to guide</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
       <nav id="navLinks" class="nav-links" aria-label="Primary">
-        <a href="index.html#outcomes">Scenarios</a>
-        <a href="start.html" aria-current="page">Start</a>
-        <a class="gh" href="https://github.com/microsoft/frontier-agentic-cobuild-rvas" target="_blank" rel="noopener" aria-label="View source on GitHub">GitHub</a>
+        <a href="index.html">Overview</a>
+<a href="applications.html">Learn</a>
+<a href="start.html" aria-current="page">Start</a>
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
       </nav>
-      <div class="nav-actions">
-        <button class="icon-btn nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        </button>
-      </div>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
     </div>
   </header>
+  <main id="main">
+    <section class="hero guide-hero">
+      <div class="wrap">
+        <h1>Start in <span>your repository.</span></h1>
+        <p class="lede">Install the plugin and supporting skills. Approve the architecture before starting implementation in a separate session.</p>
+      </div>
+    </section>
+    <div class="wrap guide-layout">
 
-  <main id="mainContent">
-    <section class="hero start-hero" aria-labelledby="startTitle">
-      <svg class="hero-compass" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-        <circle cx="200" cy="200" r="180" stroke="currentColor" stroke-width="0.6" stroke-opacity="0.15" stroke-dasharray="4 8"/>
-        <circle cx="200" cy="200" r="140" stroke="currentColor" stroke-width="0.4" stroke-opacity="0.10"/>
-        <circle cx="200" cy="200" r="80" stroke="currentColor" stroke-width="0.4" stroke-opacity="0.12"/>
-        <path d="M200 60 A140 140 0 0 1 340 200" stroke="#0078D4" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
-        <path d="M340 200 A140 140 0 0 1 200 340" stroke="#504092" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
-        <path d="M200 340 A140 140 0 0 1 60 200" stroke="#14868A" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
-        <path d="M60 200 A140 140 0 0 1 200 60" stroke="#1A77E3" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
-        <line x1="200" y1="20" x2="200" y2="380" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.10"/>
-        <line x1="20" y1="200" x2="380" y2="200" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.10"/>
-        <circle cx="200" cy="200" r="5" fill="#1A77E3" fill-opacity="0.8"/>
-        <circle cx="200" cy="200" r="12" stroke="#1A77E3" stroke-width="1" stroke-opacity="0.3"/>
+      <article class="guide-body">
+        <h2 id="work-in-your-own-repository">Work in your own repository</h2>
+<p>This repository supplies the tools. Keep your application and its architecture
+in a separate repository. The plugin supports new applications and AI additions
+to existing systems.</p>
+<p>For scope and examples, read <a href="applications.html">What can you build?</a>. If you
+already have an application, <a href="existing-applications.html">prepare its context</a>
+before discovery.</p>
+<p>For a new project, create an empty directory and initialize Git yourself:</p>
+<pre><code class="language-bash">mkdir my-ai-app
+cd my-ai-app
+git init
+</code></pre>
+<p>For an existing application, clone or open its repository instead. Follow its
+branching and approval rules. Even a new project may need to use existing enterprise
+systems and controls. Tell the creator which ones it must reuse.</p>
+<p>Open <strong>your application repository</strong> in VS Code, or start Copilot CLI there.
+Use an approved workspace and synthetic inputs until you have agreed on customer-data access.</p>
+<h2 id="install-the-plugin">Install the plugin</h2>
+<p>Choose your host. Review the plugin contents and publisher before granting trust.
+Install the supporting skills separately in your project.</p>
+<h3 id="github-copilot-cli">GitHub Copilot CLI</h3>
+<p>Run these commands in a terminal:</p>
+<pre><code class="language-bash">copilot plugin marketplace add microsoft/frontier-agentic-cobuild-rvas
+copilot plugin install agentic-cobuild@agentic-cobuild
+copilot plugin list
+</code></pre>
+<p>The native CLI installation is user-scoped. It makes the plugin available across
+repositories; it does not copy application code into your workspace.</p>
+<h3 id="vs-code-copilot">VS Code Copilot</h3>
+<p>In your user settings, enable <code>chat.plugins.enabled</code> and add this repository to
+the existing marketplace list without replacing other entries:</p>
+<pre><code class="language-json">{
+  &quot;chat.plugins.enabled&quot;: true,
+  &quot;chat.plugins.marketplaces&quot;: [
+    &quot;microsoft/frontier-agentic-cobuild-rvas&quot;
+  ]
+}
+</code></pre>
+<p>Open the Extensions view, search for <code>@agentPlugins</code>, and install <strong>Agentic Co-build</strong>.
+Review the marketplace trust prompt. You can also use <strong>Chat: Open Customizations</strong>
+to manage plugins. Enable it for your application workspace.</p>
+<p>VS Code can discover CLI-installed plugins when both hosts share the same user
+environment. Remote, container, or WSL environments may use different locations.
+Check availability in the environment where you will build; do not assume a
+Windows installation is available inside a container.</p>
+<p>The plugin adds AI Agent Creator, Idea Forge, and Cloud Architecture Diagram.
+It also supplies the public Microsoft Learn MCP server. This server retrieves
+documentation; it cannot read or change your cloud resources. No live Azure,
+Foundry, or hosted diagram connection is installed by default.</p>
+<h2 id="install-the-supporting-skills">Install the supporting skills</h2>
+<p>Use <strong>Node.js 22.20 or newer</strong>, Git, and npx. Run the commands below
+<strong>from your application directory</strong>. You do not need Bash or a clone of this
+tooling repository.</p>
+<p>Each command installs the listed skills directly from its upstream repository.
+Review the skills and their source before running it. Check <code>.agents/skills/</code>
+and <code>.github/skills/</code> for existing copies and preserve any local changes.</p>
+<p>The commands select GitHub Copilot at project scope. <code>--copy</code> copies skill files
+instead of creating symlinks. The first <code>--yes</code> lets npx download the pinned
+installer; the final <code>--yes</code> accepts the skill installer&#39;s prompts.
+These commands can overwrite existing copies of the selected skills.</p>
+<p>The installer version is pinned, but upstream skill content is not pinned to
+specific commits. Review upstream changes before installing or reinstalling.
+Keep <code>skills-lock.json</code> and installed skill files according to your project&#39;s
+source-control policy.</p>
+<h3 id="skills-from-mattpocockskills">Skills from mattpocock/skills</h3>
+<p>Upstream source: <a href="https://github.com/mattpocock/skills"><code>mattpocock/skills</code></a>.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>grilling</code></td>
+<td>Question a plan until the decisions and assumptions are clear.</td>
+</tr>
+<tr>
+<td><code>domain-modeling</code></td>
+<td>Define domain terms and record them in a glossary and architecture decisions.</td>
+</tr>
+<tr>
+<td><code>codebase-design</code></td>
+<td>Design module interfaces and decide where to separate responsibilities.</td>
+</tr>
+<tr>
+<td><code>implement</code></td>
+<td>Implement a specification or tickets, run checks, and review the changes. Includes a commit step.</td>
+</tr>
+<tr>
+<td><code>tdd</code></td>
+<td>Build features or fix bugs through failing tests, implementation, and refactoring.</td>
+</tr>
+<tr>
+<td><code>diagnosing-bugs</code></td>
+<td>Reproduce a bug or performance regression and test possible causes.</td>
+</tr>
+<tr>
+<td><code>code-review</code></td>
+<td>Compare changes against repository standards and the originating specification.</td>
+</tr>
+<tr>
+<td><code>handoff</code></td>
+<td>Write a conversation handoff for a fresh agent session.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-bash">npx --yes skills@1.7.1 add mattpocock/skills --skill grilling domain-modeling codebase-design implement tdd diagnosing-bugs code-review handoff --agent github-copilot --copy --yes
+</code></pre>
+<h3 id="skills-from-microsoftazure-skills">Skills from microsoft/azure-skills</h3>
+<p>Upstream source: <a href="https://github.com/microsoft/azure-skills"><code>microsoft/azure-skills</code></a>.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>discover-azure-skills</code></td>
+<td>Find additional Azure skills for a task in the upstream catalog.</td>
+</tr>
+<tr>
+<td><code>azure-enterprise-infra-planner</code></td>
+<td>Plan enterprise Azure infrastructure and generate Bicep or Terraform.</td>
+</tr>
+<tr>
+<td><code>microsoft-foundry</code></td>
+<td>Build and manage Foundry agents, models, and resources, including deployment and evaluation.</td>
+</tr>
+<tr>
+<td><code>azure-ai</code></td>
+<td>Work with Azure AI Search, Speech, OpenAI, and Document Intelligence.</td>
+</tr>
+<tr>
+<td><code>foundry-iq</code></td>
+<td>Create or troubleshoot Foundry IQ knowledge bases and connect them to agents.</td>
+</tr>
+<tr>
+<td><code>entra-agent-id</code></td>
+<td>Configure identities and authentication for AI agents through Microsoft Entra Agent ID.</td>
+</tr>
+<tr>
+<td><code>entra-app-registration</code></td>
+<td>Register Microsoft Entra applications and configure OAuth and MSAL authentication.</td>
+</tr>
+<tr>
+<td><code>azure-aigateway</code></td>
+<td>Configure Azure API Management policies for AI models, MCP tools, and agents.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-bash">npx --yes skills@1.7.1 add microsoft/azure-skills --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
+</code></pre>
+<p>If a command fails, stop and inspect its error, <code>.agents/skills/</code>, and
+<code>skills-lock.json</code> before retrying. A failed install may leave partial files.
+Preserve existing skills rather than deleting them to bypass a conflict.</p>
+<p>Third-party skills remain upstream-owned. Installing a skill does not authorize
+cloud changes. The upstream <code>implement</code> skill includes a commit step.
+Follow the implementation handoff below and authorize commits separately.</p>
+<h2 id="check-the-workspace-before-starting">Check the workspace before starting</h2>
+<p>In CLI, start a fresh session in the application directory. Use <code>/skills</code> and
+<code>/mcp</code> to inspect available skills and the Microsoft Learn connection.</p>
+<p>In VS Code, use <strong>Chat: Configure Skills</strong> and the MCP server list. Confirm the
+plugin is enabled, the supporting skills are discovered, and Microsoft Learn can
+retrieve documentation. Your host may show a prefix on plugin skill names. Select the exact
+entry in its picker or slash completion.</p>
+<p>If skills are missing, check the current workspace, plugin enablement, host version,
+and organization policy. Restart or reload after installation. If the documentation
+server is unavailable, report the limitation; do not invent current product facts.</p>
+<p>Python 3.10 or newer is required for local diagram generation. Local draw.io
+rendering is a separate, organization-approved prerequisite. The plugin does not
+install a renderer or upload your architecture to a hosted service.
+If visual or independent review is unavailable, record the gap.
+You must explicitly accept a manual-review exception before architecture approval.</p>
+<h2 id="describe-what-you-want-to-build">Describe what you want to build</h2>
+<style>
+    .intro-diagram { container-type: inline-size; margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram .diagram-container { width: 100%; }
+    .intro-diagram svg { display: block; width: 100%; background: #fff; }
+    .intro-diagram text { font-family: "Inter", "Segoe UI", sans-serif; fill: #032254; }
+    .intro-diagram .diagram-heading { font-family: "Outfit", "Segoe UI", sans-serif; font-size: 28px; font-weight: 700; }
+    .intro-diagram .node-name { font-size: 18px; font-weight: 600; }
+    .intro-diagram .detail { font-size: 16px; font-weight: 400; fill: #47494e; }
+    .intro-diagram .lane-name { font-size: 16px; font-weight: 600; }
+    .intro-diagram .node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram .gate { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram .connector { fill: none; stroke: #47494e; stroke-width: 2; }
+    .intro-diagram .rule { stroke: #dde6f7; stroke-width: 1; }
+    .intro-diagram .boundary { fill: none; stroke: #47494e; stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .intro-diagram figcaption { margin-top: 16px; font-size: 14px; line-height: 1.7; }
+    .intro-diagram svg.diagram-narrow { display: none; max-width: 440px; margin: 0 auto; }
+    .intro-diagram .diagram-narrow .diagram-heading { font-size: 22px; }
+    @container (max-width: 1000px) {
+      .intro-diagram svg.diagram-wide { display: none; }
+      .intro-diagram svg.diagram-narrow { display: block; }
+    }
+  </style>
+<figure class="intro-diagram">
+    <div class="diagram-container">
+      <!-- impeccable-disable-next-line cramped-padding: SVG coordinates provide frame insets and node padding. -->
+      <svg class="diagram-wide" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="approval-handoff-title approval-handoff-desc">
+        <title id="approval-handoff-title">Design ends at approval</title>
+        <desc id="approval-handoff-desc">The creator proposes an architecture, you confirm discovery, the creator prepares and reviews the package, you approve it and explicitly start a separate implementation session.</desc>
+        <defs>
+          <marker id="approval-handoff-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker>
+          <marker id="approval-handoff-arrow-accent" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#1a77e3" /></marker>
+          <marker id="approval-handoff-arrow-link" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#0078d4" /></marker>
+        </defs>
+        <rect width="1280" height="720" fill="#fff" />
+        <text x="32" y="48" class="diagram-heading">Design ends at approval. Building starts separately.</text>
+        <rect x="24" y="88" width="1232" height="160" fill="#f5f8fe" />
+        <rect x="24" y="412" width="1232" height="160" fill="#f5f8fe" />
+        <path d="M24 248 H1256 M24 412 H1256" class="rule" />
+        <path d="M1016 88 V592" class="boundary" />
+        <text x="32" y="160" class="lane-name">Creator</text>
+        <text x="32" y="332" class="lane-name">You</text>
+        <text x="32" y="492" class="lane-name"><tspan x="32">Implementation</tspan><tspan x="32" dy="24">session</tspan></text>
+        <path d="M320 168 H409.333 Q417.333 168 417.333 176 V284" class="connector" marker-end="url(#approval-handoff-arrow)" />
+        <path d="M470.667 284 V176 Q470.667 168 478.667 168 H568" class="connector" marker-end="url(#approval-handoff-arrow)" />
+        <path d="M768 168 H884 Q892 168 892 176 V284" class="connector" marker-end="url(#approval-handoff-arrow)" />
+        <path d="M972 332 H1052" class="connector" marker-end="url(#approval-handoff-arrow)" />
+        <path d="M1144 380 V448" class="connector" marker-end="url(#approval-handoff-arrow)" />
+        <g>
+          <rect x="160" y="120" width="160" height="96" rx="6" class="node" />
+          <text x="176" y="148" class="node-name">Discovery</text>
+          <text x="176" y="176" class="detail"><tspan x="176">Inspect and ask</tspan><tspan x="176" dy="24">Propose a design</tspan></text>
+        </g>
+        <g>
+          <rect x="364" y="284" width="160" height="96" rx="6" class="gate" />
+          <text x="380" y="316" class="node-name"><tspan x="380">Confirm</tspan><tspan x="380" dy="24">discovery</tspan></text>
+          <text x="380" y="364" class="detail">Agree the target</text>
+        </g>
+        <g>
+          <rect x="568" y="120" width="200" height="120" rx="6" class="node" />
+          <text x="584" y="148" class="node-name">Prepare package</text>
+          <text x="584" y="176" class="detail"><tspan x="584">Write the four files</tspan><tspan x="584" dy="24">Review diagrams</tspan><tspan x="584" dy="24">and the package</tspan></text>
+        </g>
+        <g>
+          <rect x="812" y="284" width="160" height="96" rx="6" class="gate" />
+          <text x="828" y="316" class="node-name"><tspan x="828">Approve</tspan><tspan x="828" dy="24">the package</tspan></text>
+          <text x="828" y="364" class="detail">Creator stops</text>
+        </g>
+        <g>
+          <rect x="1052" y="284" width="180" height="96" rx="6" class="node" />
+          <text x="1068" y="316" class="node-name"><tspan x="1068">Start a new</tspan><tspan x="1068" dy="24">session</tspan></text>
+          <text x="1068" y="364" class="detail">Use approved files</text>
+        </g>
+        <g>
+          <rect x="1052" y="448" width="180" height="96" rx="6" class="node" />
+          <text x="1068" y="480" class="node-name">Build and verify</text>
+          <text x="1068" y="508" class="detail"><tspan x="1068">Check acceptance</tspan><tspan x="1068" dy="24">Resolve findings</tspan></text>
+        </g>
+        <path d="M32 640 H1248" class="rule" />
+        <rect x="32" y="660" width="20" height="20" rx="2" class="gate" />
+        <text x="64" y="676" class="detail">Your approval gate</text>
+        <path d="M304 660 V684" class="boundary" />
+        <text x="320" y="676" class="detail">You start implementation in a separate session.</text>
       </svg>
-      <div class="wrap">
-        <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="index.html">Home</a>
-          <span aria-hidden="true">/</span>
-          <span>Start</span>
-        </nav>
-        <h1 id="startTitle">Start from what <span class="accent">you know.</span></h1>
-        <p class="lede">Two repository skills prepare a co-build. <strong>Idea Forge</strong> finds a use case when you only know the customer. <strong>Use-Case Mapper</strong> shows which parts of a known use case the kit helps build.</p>
-      </div>
-    </section>
-
-    <section class="route-band" aria-labelledby="routesHeading">
-      <div class="wrap">
-        <div class="route-pick">
-          <div class="route-pick-intro">
-            <h2 id="routesHeading">Pick a route</h2>
-            <p>Choose a skill based on whether you already have a use case.</p>
-            <p class="route-join">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5c7 0 7 7 14 7M3 19c7 0 7-7 14-7"/><path d="M17 12h4M18 9l3 3-3 3"/></svg>
-              <span>Idea Forge uses Use-Case Mapper to map its top idea to modules.</span>
-            </p>
-          </div>
-          <a class="route route-forge" href="#idea-forge">
-            <div class="route-top"><span class="route-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/><path d="M10.5 7.5v6M7.5 10.5h6"/></svg></span><div><h3>I know the customer</h3><span class="route-skill">Idea Forge</span></div></div>
-            <p>You know the customer or industry, but not what to build first. The skill researches public sources and ranks about ten ideas.</p>
-            <span class="route-out">The result includes ranked ideas and a handoff for the top idea, with its module map.</span>
-            <span class="route-go">Find a use case</span>
-          </a>
-          <a class="route route-mapper" href="#use-case-mapper">
-            <div class="route-top"><span class="route-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="19" cy="19" r="2.2" stroke-dasharray="2.5 2"/><path d="M7.2 12h9.6M7 10.9l9.9-5M7 13.1l9.9 5"/></svg></span><div><h3>I know the use case</h3><span class="route-skill">Use-Case Mapper</span></div></div>
-            <p>You know what the customer wants. The skill breaks the use case into parts and maps each one to modules, including the parts no module covers.</p>
-            <span class="route-out">The module map shows the build order, what to adapt, and what the kit does not cover.</span>
-            <span class="route-go">Map the use case</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="route-section route-forge" aria-labelledby="idea-forge">
-      <div class="wrap">
-        <header class="route-head">
-          <div class="route-head-main">
-            <h2 id="idea-forge"><span class="route-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/><path d="M10.5 7.5v6M7.5 10.5h6"/></svg></span>Idea Forge</h2>
-            <p>Use it when you know the customer or industry but have not chosen a use case. It researches public sources and ranks ideas that fit the customer and the available tracks.</p>
-          </div>
-        </header>
-
-        <h3 class="route-sub">Choose the first use case</h3>
-        <ol class="step-track">
-            <li><span class="step-node" aria-hidden="true">1</span><h4>Prepare the prompt</h4><p>Bring the customer or business-unit name, industry, and any region, segment, or pain points you are allowed to use.</p></li>
-            <li><span class="step-node" aria-hidden="true">2</span><h4>Run the skill</h4><p>Customer Activity-Forge researches public sources only, marks gaps instead of guessing, and proposes about ten achievable ideas.</p></li>
-            <li><span class="step-node" aria-hidden="true">3</span><h4>Select one direction</h4><p>Choose an idea for a specific user group, with a named owner and an approved representative sample. Agree on a result the customer can review.</p></li>
-            <li><span class="step-node" aria-hidden="true">4</span><h4>Map the idea</h4><p>The skill runs Use-Case Mapper on the top idea and returns its parts-to-modules map.</p></li>
-        </ol>
-
-        <div class="route-columns">
-          <div>
-            <h3 class="route-sub">What to prepare</h3>
-            <dl class="prep-list">
-              <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg><dt>Required</dt><dd>Customer name or business unit. Industry or sector.</dd></div>
-              <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke-dasharray="3 2.4"/><path d="M12 8v8M8 12h8"/></svg><dt>Helpful if known</dt><dd>Region or customer segment. Allowed pain points or public signals to verify. Any data, content, or process boundary already discussed.</dd></div>
-              <div class="prep-out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg><dt>Keep out</dt><dd>Confidential account-plan or CRM details. Unapproved customer data. Claims the team cannot cite or validate.</dd></div>
-            </dl>
-          </div>
-          <div>
-            <h3 class="route-sub">What Idea Forge produces</h3>
-            <ul class="output-list">
-              <li><strong>Research summary</strong><span>Three to five sentences with public-source citations and explicit coverage gaps.</span></li>
-              <li><strong>Ranked ideas</strong><span>About ten ideas ranked by customer fit, achievable first proof, and differentiation. Each names the tracks it draws on.</span></li>
-              <li><strong>Scenario handoff</strong><span>The top idea gets a pre-filled handoff, with assumptions marked for the customer to confirm.</span></li>
-              <li><strong>Module map</strong><span>The top idea's parts mapped to modules, with a build order and the gaps.</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="route-section route-mapper" aria-labelledby="use-case-mapper">
-      <div class="wrap">
-        <header class="route-head">
-          <div class="route-head-main">
-            <h2 id="use-case-mapper"><span class="route-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="19" cy="19" r="2.2" stroke-dasharray="2.5 2"/><path d="M7.2 12h9.6M7 10.9l9.9-5M7 13.1l9.9 5"/></svg></span>Use-Case Mapper</h2>
-            <p>Use it when the customer already knows what they want. The skill reads every scenario manifest, splits the use case into the steps it needs, and maps each step to specific modules. <strong>Uncovered work stays in the map.</strong></p>
-          </div>
-        </header>
-
-        <h3 class="route-sub">Plan the build</h3>
-        <ol class="step-track">
-            <li><span class="step-node" aria-hidden="true">1</span><h4>Describe the use case</h4><p>Say what starts it and what the finished result is. Add users, systems, and data owners if you know them.</p></li>
-            <li><span class="step-node" aria-hidden="true">2</span><h4>Run the skill</h4><p>It splits the use case into five to eight steps and marks each one Covered, Adapt, or Not covered.</p></li>
-            <li><span class="step-node" aria-hidden="true">3</span><h4>Review it with the customer</h4><p>Confirm the assumptions, the open platform choices, and who owns each uncovered part.</p></li>
-            <li><span class="step-node" aria-hidden="true">4</span><h4>Plan the first build</h4><p>Build the few parts that prove the main outcome first, in module order.</p></li>
-        </ol>
-
-        <h3 class="route-sub" id="sample-title">Sample map</h3>
-        <p class="route-note">An illustrative map for a supplier-onboarding request. Your map will use your customer's steps.</p>
-        <div class="map-table" role="region" aria-labelledby="sample-title" tabindex="0">
-          <table>
-            <thead>
-              <tr><th scope="col">Part of the use case</th><th scope="col">Modules</th><th scope="col">Fit</th><th scope="col">Customer-specific work</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Read the fields from the supplier's form</td><td>Content Understanding: <code>typed-extraction</code>, <code>human-review</code></td><td><span class="fit fit-adapt">Adapt</span></td><td>Define the fields and test on real forms.</td></tr>
-              <tr><td>Answer a policy question about the request</td><td>AI Grounding: <code>source-selection</code>, <code>grounded-app</code></td><td><span class="fit fit-adapt">Adapt</span></td><td>Connect approved policy content and prove access boundaries.</td></tr>
-              <tr><td>Create the supplier record after approval</td><td>Operational Agents: <code>tool-contracts</code>, <code>approval</code></td><td><span class="fit fit-adapt">Adapt</span></td><td>Build the integration with the customer's system. The sample doesn't supply it.</td></tr>
-              <tr class="map-row-gap"><td>Notify the supplier of the result</td><td>None</td><td><span class="fit fit-none">Not covered</span></td><td>Not AI.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <section class="hero start-next" aria-labelledby="next-title">
-      <div class="wrap start-next-inner">
-        <div>
-          <h2 id="next-title">Agree the first build scope</h2>
-          <p>Move to the modules once the use case has an owner, a safe sample, and a way to test it. If most of the map comes back Not covered, contact your Microsoft Cloud Solution Architect about a custom co-build.</p>
-        </div>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="index.html#outcomes">Choose a scenario</a>
-          <a class="btn btn-ghost" href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/.github/skills/customer-activity-forge/SKILL.md" target="_blank" rel="noopener">Idea Forge skill</a>
-          <a class="btn btn-ghost" href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/.github/skills/use-case-mapper/SKILL.md" target="_blank" rel="noopener">Use-Case Mapper skill</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer" role="contentinfo">
-    <div class="wrap footer-inner">
-      <a class="brand" href="index.html" aria-label="Real Value Acceleration Program home">
-        <img src="assets/img/logo-full.png" alt="Real Value Acceleration Program" class="brand-logo" />
-      </a>
-      <p>Agentic Co-build.</p>
-      <nav class="footer-links" aria-label="Footer">
-        <a href="index.html#outcomes">Scenarios</a>
-      </nav>
+      <svg class="diagram-narrow" viewBox="0 0 320 1032" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="approval-handoff-narrow-title approval-handoff-narrow-desc">
+        <title id="approval-handoff-narrow-title">Design ends at approval</title>
+        <desc id="approval-handoff-narrow-desc">The creator proposes the design, you confirm discovery, the creator prepares and reviews the package, you approve it, then you start a separate implementation session.</desc>
+        <defs>
+          <marker id="approval-handoff-narrow-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker>
+        </defs>
+        <rect width="320" height="1032" fill="#fff" />
+        <text x="16" y="32" class="diagram-heading"><tspan x="16">Design ends at approval.</tspan><tspan x="16" dy="32">Building starts separately.</tspan></text>
+        <path d="M160 208 V244" class="connector" marker-end="url(#approval-handoff-narrow-arrow)" />
+        <path d="M160 336 V372" class="connector" marker-end="url(#approval-handoff-narrow-arrow)" />
+        <path d="M160 488 V524" class="connector" marker-end="url(#approval-handoff-narrow-arrow)" />
+        <path d="M160 816 V852" class="connector" marker-end="url(#approval-handoff-narrow-arrow)" />
+        <g>
+          <rect x="16" y="116" width="288" height="92" rx="6" class="node" />
+          <text x="32" y="140" class="lane-name">Creator</text>
+          <text x="32" y="168" class="node-name">Discovery</text>
+          <text x="32" y="192" class="detail">Investigate and propose a design</text>
+        </g>
+        <g>
+          <rect x="16" y="244" width="288" height="92" rx="6" class="gate" />
+          <text x="32" y="268" class="lane-name">You</text>
+          <text x="32" y="296" class="node-name">Confirm discovery</text>
+          <text x="32" y="320" class="detail">Agree the target architecture</text>
+        </g>
+        <g>
+          <rect x="16" y="372" width="288" height="116" rx="6" class="node" />
+          <text x="32" y="396" class="lane-name">Creator</text>
+          <text x="32" y="424" class="node-name">Prepare the package</text>
+          <text x="32" y="448" class="detail"><tspan x="32">Write the four files.</tspan><tspan x="32" dy="24">Review diagrams and the package.</tspan></text>
+        </g>
+        <g>
+          <rect x="16" y="524" width="288" height="92" rx="6" class="gate" />
+          <text x="32" y="548" class="lane-name">You</text>
+          <text x="32" y="576" class="node-name">Approve the package</text>
+          <text x="32" y="600" class="detail">The creator workflow stops here</text>
+        </g>
+        <path d="M16 668 H304" class="boundary" />
+        <rect x="48" y="652" width="224" height="32" fill="#fff" />
+        <text x="160" y="672" text-anchor="middle" class="detail">You start a separate session</text>
+        <g>
+          <rect x="16" y="724" width="288" height="92" rx="6" class="node" />
+          <text x="32" y="748" class="lane-name">You</text>
+          <text x="32" y="776" class="node-name">Start a new session</text>
+          <text x="32" y="800" class="detail">Attach the approved files</text>
+        </g>
+        <g>
+          <rect x="16" y="852" width="288" height="116" rx="6" class="node" />
+          <text x="32" y="876" class="lane-name">Implementation session</text>
+          <text x="32" y="904" class="node-name">Build and validate</text>
+          <text x="32" y="928" class="detail"><tspan x="32">Check acceptance criteria</tspan><tspan x="32" dy="24">and resolve review findings</tspan></text>
+        </g>
+        <rect x="16" y="996" width="20" height="20" rx="2" class="gate" />
+        <text x="48" y="1012" class="detail">Your approval gate</text>
+      </svg>
     </div>
-  </footer>
+    <figcaption>Confirm discovery before the creator prepares the package. Review the diagrams and have an independent reviewer check the complete package before you approve it. If either review is unavailable, record and explicitly accept a manual-review exception. The creator stops at approval. You start implementation in a separate session.</figcaption>
+  </figure>
 
-  <script src="assets/js/core.js"></script>
+<p>Select <strong>AI Agent Creator</strong> (<code>ai-agent-creator</code>) and give it the intended outcome.
+You do not need to choose the platform or runtime first.</p>
+<p>For a new application:</p>
+<pre><code class="language-text">Design an AI maintenance assistant for property managers that triages
+resident requests and prepares work orders for approval. Account for our
+existing enterprise identity and operating environment.
+</code></pre>
+<p>For an existing application:</p>
+<pre><code class="language-text">Add evidence-backed report summarization to this existing application.
+Inspect its current stack, preserve established interfaces, and account
+for our enterprise data-access and deployment constraints.
+</code></pre>
+<p>The creator inspects the repository and interviews you. Confirm discovery once you agree on the outcome and first user journey.
+Settle the decisions that affect the architecture before confirming. The creator then prepares:</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docs/architecture/solution.drawio</code></td>
+<td>Editable context, component, AI/data-flow, and deployment views</td>
+</tr>
+<tr>
+<td><code>docs/architecture/solution.md</code></td>
+<td>Architecture responsibilities, decisions, and boundaries</td>
+</tr>
+<tr>
+<td><code>docs/architecture/specification.md</code></td>
+<td>Functional and technical requirements with acceptance criteria</td>
+</tr>
+<tr>
+<td><code>docs/architecture/implementation-plan.md</code></td>
+<td>Dependency-ordered delivery work and handoff</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Review the complete package, including any recorded review exception.
+<strong>Approval ends this workflow.</strong> It does not start implementation, change
+application code, generate infrastructure, or provision resources.</p>
+<h2 id="start-implementation-in-a-new-session">Start implementation in a new session</h2>
+<p>Choose a model suited to sustained engineering work. Attach the current
+<code>implementation-plan.md</code>, <code>specification.md</code>, and <code>solution.md</code> from your
+application repository. Start with this prompt:</p>
+<pre><code class="language-text">Implement the attached plan. Treat the attached specification as the
+requirements source of truth and follow the attached architecture.
+Work in dependency order and validate against the acceptance criteria.
+Report each blocked criterion with its reason and owner.
+Ask before commits, resource provisioning, or deployment.
+Do not treat implementation as complete until every applicable acceptance
+criterion is verified or explicitly reported as blocked.
+</code></pre>
+<p>Use the application&#39;s existing tests and delivery controls.
+If scope or architecture changes an approved decision, update the
+package and get that decision approved again before continuing.</p>
+<h3 id="review-before-deployment">Review before deployment</h3>
+<p>After you finish implementation and run its targeted checks, run this in CLI:</p>
+<pre><code class="language-text">/review Review the staged and unstaged implementation against
+@docs/architecture/specification.md,
+@docs/architecture/implementation-plan.md, and
+@docs/architecture/solution.md. Identify unmet or partially met acceptance
+criteria, skipped or out-of-order plan steps, architecture deviations,
+regressions, and missing tests. Rank findings by severity and include file and
+line references.
+</code></pre>
+<p>Resolve the findings and rerun the affected checks. Then run a separate
+security review:</p>
+<pre><code class="language-text">/security-review Analyze the staged and unstaged implementation for exploitable
+security vulnerabilities, insecure defaults, authorization or data-isolation
+failures, secret exposure, injection risks, unsafe external interactions, and
+dependency or configuration weaknesses. Rank findings by severity and confidence,
+include file and line references, and recommend the smallest safe fix for each
+finding.
+</code></pre>
+<p>Resolve the reported security findings and rerun the affected tests before
+approving deployment.</p>
+<p>In VS Code, request a separate implementation review against those same files.
+Then request a separate security review using the review tools available in your
+organization. Do not assume CLI slash commands exist in VS Code. If independent
+review tooling is unavailable, assign a human reviewer and record the gap.</p>
+<p>Setup and architecture approval are not production-readiness checks.
+The operating team must accept the deployed user journey and take responsibility for rollback.</p>
+<h2 id="need-an-idea-first">Need an idea first?</h2>
+<p>Select <strong>Idea Forge</strong> (<code>idea-forge</code>) in the same application workspace.
+Provide a customer name and industry, with any known pain points:</p>
+<pre><code class="language-text">/idea-forge Find a bounded AI opportunity for [customer] in [industry].
+Use public evidence and identify a safe first proof.
+</code></pre>
+<p>Idea Forge researches public sources and ranks distinct ideas. Choose one. Idea Forge
+returns a brief with evidence and open questions; the brief is not yet approved.
+Pass it to AI Agent Creator for detailed discovery and architecture approval.</p>
+<h2 id="updates-and-team-setup">Updates and team setup</h2>
+<p>Each teammate installs the plugin in their own host and checks the project skills.
+Use CLI&#39;s <code>copilot plugin update agentic-cobuild</code> or VS Code&#39;s plugin update action
+for plugin updates. Review the updated contents before use.</p>
+<p>Supporting skill updates are separate. Review source changes and your project&#39;s
+lock file before reinstalling selected skills with the commands above.
+Preserve local changes and inspect the resulting diff before committing.</p>
+<p>See the <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/tree/main/plugins/agentic-cobuild">plugin source</a>
+and the <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/plugins/agentic-cobuild/skills/cloud-architecture-diagram/references/REFERENCE.md">diagram asset terms</a>.</p>
+
+      </article>
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
   <script src="assets/js/shell.js"></script>
+  <script src="assets/js/guide.js"></script>
 </body>
 </html>

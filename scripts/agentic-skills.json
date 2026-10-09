@@ -1,0 +1,35 @@
+{
+  "installer": "skills@1.7.1",
+  "minimumNode": "22.20.0",
+  "agent": "github-copilot",
+  "sources": [
+    {
+      "repository": "mattpocock/skills",
+      "skills": ["grilling", "domain-modeling", "codebase-design", "implement", "tdd", "diagnosing-bugs", "code-review", "handoff"],
+      "descriptions": {
+        "grilling": "Question a plan until the decisions and assumptions are clear.",
+        "domain-modeling": "Define domain terms and record them in a glossary and architecture decisions.",
+        "codebase-design": "Design module interfaces and decide where to separate responsibilities.",
+        "implement": "Implement a specification or tickets, run checks, and review the changes. Includes a commit step.",
+        "tdd": "Build features or fix bugs through failing tests, implementation, and refactoring.",
+        "diagnosing-bugs": "Reproduce a bug or performance regression and test possible causes.",
+        "code-review": "Compare changes against repository standards and the originating specification.",
+        "handoff": "Write a conversation handoff for a fresh agent session."
+      }
+    },
+    {
+      "repository": "microsoft/azure-skills",
+      "skills": ["discover-azure-skills", "azure-enterprise-infra-planner", "microsoft-foundry", "azure-ai", "foundry-iq", "entra-agent-id", "entra-app-registration", "azure-aigateway"],
+      "descriptions": {
+        "discover-azure-skills": "Find additional Azure skills for a task in the upstream catalog.",
+        "azure-enterprise-infra-planner": "Plan enterprise Azure infrastructure and generate Bicep or Terraform.",
+        "microsoft-foundry": "Build and manage Foundry agents, models, and resources, including deployment and evaluation.",
+        "azure-ai": "Work with Azure AI Search, Speech, OpenAI, and Document Intelligence.",
+        "foundry-iq": "Create or troubleshoot Foundry IQ knowledge bases and connect them to agents.",
+        "entra-agent-id": "Configure identities and authentication for AI agents through Microsoft Entra Agent ID.",
+        "entra-app-registration": "Register Microsoft Entra applications and configure OAuth and MSAL authentication.",
+        "azure-aigateway": "Configure Azure API Management policies for AI models, MCP tools, and agents."
+      }
+    }
+  ]
+}
