@@ -58,13 +58,13 @@ cd my-ai-app
 git init
 </code></pre>
 <p>For an existing application, clone or open its repository instead. Follow its
-branching and approval rules. A new repository does not imply an empty enterprise
-environment; tell the creator which existing systems and controls it must reuse.</p>
+branching and approval rules. Even a new project may need to use existing enterprise
+systems and controls. Tell the creator which ones it must reuse.</p>
 <p>Open <strong>your application repository</strong> in VS Code, or start Copilot CLI there.
-Use an approved workspace and synthetic inputs until customer-data access is agreed.</p>
+Use an approved workspace and synthetic inputs until you have agreed on customer-data access.</p>
 <h2 id="install-the-plugin">Install the plugin</h2>
 <p>Choose your host. Review the plugin contents and publisher before granting trust.
-Plugin installation is separate from the project-local supporting skill setup.</p>
+Install the supporting skills separately in your project.</p>
 <h3 id="github-copilot-cli">GitHub Copilot CLI</h3>
 <p>Run these commands in a terminal:</p>
 <pre><code class="language-bash">copilot plugin marketplace add microsoft/frontier-agentic-cobuild-rvas
@@ -210,15 +210,14 @@ source-control policy.</p>
 Preserve existing skills rather than deleting them to bypass a conflict.</p>
 <p>Third-party skills remain upstream-owned. Installing a skill does not authorize
 cloud changes. The upstream <code>implement</code> skill includes a commit step.
-Use the explicit handoff below for the
-recommended journey and authorize commits separately.</p>
+Follow the implementation handoff below and authorize commits separately.</p>
 <h2 id="check-the-workspace-before-starting">Check the workspace before starting</h2>
 <p>In CLI, start a fresh session in the application directory. Use <code>/skills</code> and
 <code>/mcp</code> to inspect available skills and the Microsoft Learn connection.</p>
 <p>In VS Code, use <strong>Chat: Configure Skills</strong> and the MCP server list. Confirm the
 plugin is enabled, the supporting skills are discovered, and Microsoft Learn can
-retrieve documentation. Plugin skill names may be qualified; select the exact
-entry your host displays in its picker or slash completion.</p>
+retrieve documentation. Your host may show a prefix on plugin skill names. Select the exact
+entry in its picker or slash completion.</p>
 <p>If skills are missing, check the current workspace, plugin enablement, host version,
 and organization policy. Restart or reload after installation. If the documentation
 server is unavailable, report the limitation; do not invent current product facts.</p>
@@ -381,9 +380,8 @@ existing enterprise identity and operating environment.
 Inspect its current stack, preserve established interfaces, and account
 for our enterprise data-access and deployment constraints.
 </code></pre>
-<p>The creator inspects the repository and interviews you. Confirm discovery after
-you agree on the outcome and first user journey and settle the decisions that
-affect the architecture. The creator then prepares:</p>
+<p>The creator inspects the repository and interviews you. Confirm discovery once you agree on the outcome and first user journey.
+Settle the decisions that affect the architecture before confirming. The creator then prepares:</p>
 <div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
 <table>
 <thead>
@@ -428,8 +426,8 @@ Do not treat implementation as complete until every applicable acceptance
 criterion is verified or explicitly reported as blocked.
 </code></pre>
 <p>Use the application&#39;s existing tests and delivery controls.
-If a change to scope or architecture affects an approved decision, update the
-package and obtain the affected approval before continuing.</p>
+If scope or architecture changes an approved decision, update the
+package and get that decision approved again before continuing.</p>
 <h3 id="review-before-deployment">Review before deployment</h3>
 <p>After you finish implementation and run its targeted checks, run this in CLI:</p>
 <pre><code class="language-text">/review Review the staged and unstaged implementation against
@@ -440,8 +438,8 @@ criteria, skipped or out-of-order plan steps, architecture deviations,
 regressions, and missing tests. Rank findings by severity and include file and
 line references.
 </code></pre>
-<p>Resolve the findings and rerun the relevant validation before moving to the
-security pass. In a later, separate pass, run:</p>
+<p>Resolve the findings and rerun the affected checks. Then run a separate
+security review:</p>
 <pre><code class="language-text">/security-review Analyze the staged and unstaged implementation for exploitable
 security vulnerabilities, insecure defaults, authorization or data-isolation
 failures, secret exposure, injection risks, unsafe external interactions, and
@@ -455,17 +453,17 @@ approving deployment.</p>
 Then request a separate security review using the review tools available in your
 organization. Do not assume CLI slash commands exist in VS Code. If independent
 review tooling is unavailable, assign a human reviewer and record the gap.</p>
-<p>Successful setup or an approved architecture does not prove production readiness.
-The operating team must accept the deployed user journey and own rollback.</p>
+<p>Setup and architecture approval are not production-readiness checks.
+The operating team must accept the deployed user journey and take responsibility for rollback.</p>
 <h2 id="need-an-idea-first">Need an idea first?</h2>
 <p>Select <strong>Idea Forge</strong> (<code>idea-forge</code>) in the same application workspace.
 Provide a customer name and industry, with any known pain points:</p>
 <pre><code class="language-text">/idea-forge Find a bounded AI opportunity for [customer] in [industry].
 Use public evidence and identify a safe first proof.
 </code></pre>
-<p>Idea Forge researches public sources and ranks distinct ideas. Choose one. The skill
-returns an unapproved brief with evidence and open questions. Pass that brief to
-AI Agent Creator. Detailed discovery and architecture approval still happen there.</p>
+<p>Idea Forge researches public sources and ranks distinct ideas. Choose one. Idea Forge
+returns a brief with evidence and open questions; the brief is not yet approved.
+Pass it to AI Agent Creator for detailed discovery and architecture approval.</p>
 <h2 id="updates-and-team-setup">Updates and team setup</h2>
 <p>Each teammate installs the plugin in their own host and checks the project skills.
 Use CLI&#39;s <code>copilot plugin update agentic-cobuild</code> or VS Code&#39;s plugin update action

@@ -88,8 +88,8 @@ services. Use synthetic inputs until customer-data access is agreed.</p>
 </table>
 </div>
 <p>The creator should inspect repository facts before asking you for them.
-It asks about enterprise facts it cannot verify. A missing local file does not
-prove that a control or service is absent.</p>
+It asks you about enterprise facts it cannot verify. If a control or service is
+not documented in the repository, the creator must check rather than assume it is absent.</p>
 <h2 id="start-with-one-useful-addition">Start with one useful addition</h2>
 <p>Choose a first journey whose result you can evaluate. For example, an existing
 service application could gain an evidence-backed case summary while leaving
@@ -97,7 +97,7 @@ case editing and assignment unchanged.</p>
 <p>If follow-up investigation is required, include it explicitly. Otherwise,
 one bounded model response may be enough. If the system prepares an action,
 preserve the existing authorization checks and name the approval owner.</p>
-<p>Agree on what counts as success compared with today&#39;s behavior. Define what stays
+<p>Agree on how you will judge the addition against today&#39;s behavior. Define what stays
 unchanged, including response contracts and access boundaries. Specify how the
 application behaves when AI is unavailable or evidence cannot support an answer.</p>
 <p>This example does not require a chat panel or a replacement workflow.</p>
@@ -292,13 +292,12 @@ application behaves when AI is unavailable or evidence cannot support an answer.
 
 <h2 id="make-reuse-and-migration-explicit">Make reuse and migration explicit</h2>
 <p>Evaluate the existing stack and model deployments before introducing alternatives.
-Reuse suitable capabilities. A proposed replacement needs a stated requirement
-or gap, together with the cost of changing the system.</p>
+Reuse suitable capabilities. Before proposing a replacement, name the requirement or gap it addresses
+and the cost of changing the system.</p>
 <p>When migration is justified, the architecture package should explain coexistence
 and compatibility. The implementation plan should identify data movement, cutover,
 rollback, and eventual decommissioning where applicable.</p>
-<p>Define responsibilities during the transition. Name the system of
-record and the owner of each operation during the transition.</p>
+<p>Name the system of record and the owner of each operation during the transition.</p>
 <h2 id="review-the-addition-as-a-complete-package">Review the addition as a complete package</h2>
 <p>The creator produces the same four architecture artifacts used for a new project,
 but their scope is the agreed change. The specification should distinguish
@@ -308,7 +307,7 @@ that the delivery plan includes regression tests and release controls appropriat
 to the existing application.</p>
 <p>Discovery confirmation and complete-package approval remain separate gates.
 After approval, use <a href="start.html#start-implementation-in-a-new-session">the implementation handoff</a>
-in a new session. Changes in scope or architecture return to the affected gate.</p>
+in a new session. If scope or architecture changes, repeat the affected approval step.</p>
 <h2 id="begin-with-the-intended-change">Begin with the intended change</h2>
 <pre><code class="language-text">Add evidence-backed case summarization and follow-up investigation to this
 existing application. Inspect the current stack and architecture records.
