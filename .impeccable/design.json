@@ -1,32 +1,98 @@
 {
   "schemaVersion": 2,
+  "generatedAt": "2026-10-12T10:06:10Z",
   "title": "Design System: Agentic Co-build",
   "extensions": {
     "colorMeta": {
-      "rvap-blue": {
-        "role": "primary",
-        "displayName": "RVAP Blue",
-        "canonical": "#1A77E3"
-      },
-      "deep-navy": {
+      "c-heading": {
         "role": "primary",
         "displayName": "Deep Navy",
-        "canonical": "#032254"
+        "canonical": "#032254",
+        "tonalRamp": ["oklch(15% 0.0270 259.57)", "oklch(27% 0.0486 259.57)", "oklch(38% 0.0684 259.57)", "oklch(50% 0.0900 259.57)", "oklch(61% 0.0702 259.57)", "oklch(73% 0.0486 259.57)", "oklch(84% 0.0288 259.57)", "oklch(95% 0.0090 259.57)"]
       },
-      "action-blue": {
+      "c-fg": {
+        "role": "neutral",
+        "displayName": "Body Ink",
+        "canonical": "#111827",
+        "tonalRamp": ["oklch(15% 0.0270 264.66)", "oklch(27% 0.0318 264.66)", "oklch(38% 0.0318 264.66)", "oklch(50% 0.0318 264.66)", "oklch(61% 0.0318 264.66)", "oklch(73% 0.0318 264.66)", "oklch(84% 0.0288 264.66)", "oklch(95% 0.0090 264.66)"]
+      },
+      "c-dim": {
+        "role": "neutral",
+        "displayName": "Secondary Ink",
+        "canonical": "#47494e",
+        "tonalRamp": ["oklch(15% 0.0087 268.44)", "oklch(27% 0.0087 268.44)", "oklch(38% 0.0087 268.44)", "oklch(50% 0.0087 268.44)", "oklch(61% 0.0087 268.44)", "oklch(73% 0.0087 268.44)", "oklch(84% 0.0087 268.44)", "oklch(95% 0.0087 268.44)"]
+      },
+      "c-accent": {
+        "role": "primary",
+        "displayName": "RVAP Blue",
+        "canonical": "#1a77e3",
+        "tonalRamp": ["oklch(15% 0.0270 256.06)", "oklch(27% 0.0486 256.06)", "oklch(38% 0.0684 256.06)", "oklch(50% 0.0900 256.06)", "oklch(61% 0.0702 256.06)", "oklch(73% 0.0486 256.06)", "oklch(84% 0.0288 256.06)", "oklch(95% 0.0090 256.06)"]
+      },
+      "c-action": {
         "role": "primary",
         "displayName": "Accessible Action Blue",
-        "canonical": "#0960C1"
+        "canonical": "#0960c1",
+        "tonalRamp": ["oklch(15% 0.0270 256.49)", "oklch(27% 0.0486 256.49)", "oklch(38% 0.0684 256.49)", "oklch(50% 0.0900 256.49)", "oklch(61% 0.0702 256.49)", "oklch(73% 0.0486 256.49)", "oklch(84% 0.0288 256.49)", "oklch(95% 0.0090 256.49)"]
       },
-      "paper": {
+      "c-action-hover": {
+        "role": "primary",
+        "displayName": "Action Blue Hover",
+        "canonical": "#064d9e",
+        "tonalRamp": ["oklch(15% 0.0270 256.66)", "oklch(27% 0.0486 256.66)", "oklch(38% 0.0684 256.66)", "oklch(50% 0.0900 256.66)", "oklch(61% 0.0702 256.66)", "oklch(73% 0.0486 256.66)", "oklch(84% 0.0288 256.66)", "oklch(95% 0.0090 256.66)"]
+      },
+      "c-line": {
+        "role": "neutral",
+        "displayName": "Blue Divider",
+        "canonical": "#dde6f7",
+        "tonalRamp": ["oklch(15% 0.0251 263.33)", "oklch(27% 0.0251 263.33)", "oklch(38% 0.0251 263.33)", "oklch(50% 0.0251 263.33)", "oklch(61% 0.0251 263.33)", "oklch(73% 0.0251 263.33)", "oklch(84% 0.0251 263.33)", "oklch(95% 0.0090 263.33)"]
+      },
+      "c-paper": {
         "role": "neutral",
         "displayName": "RVAP Paper",
-        "canonical": "#F5F8FE"
+        "canonical": "#f0f5ff",
+        "tonalRamp": ["oklch(15% 0.0144 264.50)", "oklch(27% 0.0144 264.50)", "oklch(38% 0.0144 264.50)", "oklch(50% 0.0144 264.50)", "oklch(61% 0.0144 264.50)", "oklch(73% 0.0144 264.50)", "oklch(84% 0.0144 264.50)", "oklch(95% 0.0090 264.50)"]
       },
-      "ink": {
+      "c-wash": {
         "role": "neutral",
-        "displayName": "Ink",
-        "canonical": "#111827"
+        "displayName": "Reading Header Blue",
+        "canonical": "#eaf2ff",
+        "tonalRamp": ["oklch(15% 0.0195 260.17)", "oklch(27% 0.0195 260.17)", "oklch(38% 0.0195 260.17)", "oklch(50% 0.0195 260.17)", "oklch(61% 0.0195 260.17)", "oklch(73% 0.0195 260.17)", "oklch(84% 0.0195 260.17)", "oklch(95% 0.0090 260.17)"]
+      },
+      "c-tint": {
+        "role": "neutral",
+        "displayName": "Selected Surface Blue",
+        "canonical": "#dde6f7",
+        "tonalRamp": ["oklch(15% 0.0251 263.33)", "oklch(27% 0.0251 263.33)", "oklch(38% 0.0251 263.33)", "oklch(50% 0.0251 263.33)", "oklch(61% 0.0251 263.33)", "oklch(73% 0.0251 263.33)", "oklch(84% 0.0251 263.33)", "oklch(95% 0.0090 263.33)"]
+      },
+      "c-on-dark": {
+        "role": "neutral",
+        "displayName": "Text on Navy",
+        "canonical": "#e0ebff",
+        "tonalRamp": ["oklch(15% 0.0270 262.54)", "oklch(27% 0.0296 262.54)", "oklch(38% 0.0296 262.54)", "oklch(50% 0.0296 262.54)", "oklch(61% 0.0296 262.54)", "oklch(73% 0.0296 262.54)", "oklch(84% 0.0288 262.54)", "oklch(95% 0.0090 262.54)"]
+      },
+      "c-success-bg": {
+        "role": "secondary",
+        "displayName": "Copy Success Surface",
+        "canonical": "#d9f3e7",
+        "tonalRamp": ["oklch(15% 0.0270 166.24)", "oklch(27% 0.0316 166.24)", "oklch(38% 0.0316 166.24)", "oklch(50% 0.0316 166.24)", "oklch(61% 0.0316 166.24)", "oklch(73% 0.0316 166.24)", "oklch(84% 0.0288 166.24)", "oklch(95% 0.0090 166.24)"]
+      },
+      "c-success-fg": {
+        "role": "secondary",
+        "displayName": "Copy Success Ink",
+        "canonical": "#16553d",
+        "tonalRamp": ["oklch(15% 0.0270 163.54)", "oklch(27% 0.0486 163.54)", "oklch(38% 0.0684 163.54)", "oklch(50% 0.0753 163.54)", "oklch(61% 0.0702 163.54)", "oklch(73% 0.0486 163.54)", "oklch(84% 0.0288 163.54)", "oklch(95% 0.0090 163.54)"]
+      },
+      "c-error-bg": {
+        "role": "tertiary",
+        "displayName": "Copy Failure Surface",
+        "canonical": "#ffeadf",
+        "tonalRamp": ["oklch(15% 0.0270 49.59)", "oklch(27% 0.0273 49.59)", "oklch(38% 0.0273 49.59)", "oklch(50% 0.0273 49.59)", "oklch(61% 0.0273 49.59)", "oklch(73% 0.0273 49.59)", "oklch(84% 0.0273 49.59)", "oklch(95% 0.0090 49.59)"]
+      },
+      "c-error-fg": {
+        "role": "tertiary",
+        "displayName": "Copy Failure Ink",
+        "canonical": "#783c23",
+        "tonalRamp": ["oklch(15% 0.0270 42.47)", "oklch(27% 0.0486 42.47)", "oklch(38% 0.0684 42.47)", "oklch(50% 0.0900 42.47)", "oklch(61% 0.0702 42.47)", "oklch(73% 0.0486 42.47)", "oklch(84% 0.0288 42.47)", "oklch(95% 0.0090 42.47)"]
       }
     },
     "typographyMeta": {
@@ -38,14 +104,22 @@
         "displayName": "Inter",
         "purpose": "Guide text and navigation."
       },
-      "label": {
+      "code": {
         "displayName": "Cascadia Code / system monospace",
-        "purpose": "Commands, file names, and numbered steps."
+        "purpose": "Commands and file names."
       }
     },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "color-feedback",
+        "value": "background-color 140ms ease-out, color 140ms ease-out",
+        "purpose": "Copy buttons, section links, and navigation links; enabled only when reduced motion is not requested."
+      }
+    ],
     "breakpoints": [
       {
-        "name": "single-column-hero",
+        "name": "single-column-hero-and-application-families",
         "value": "960px"
       },
       {
@@ -58,53 +132,71 @@
     {
       "name": "Primary Button",
       "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Workspace setup action, inverted on the navy hero.",
-      "html": "<a class=\"btn btn-primary\" href=\"start.html\">Set up your workspace</a>",
-      "css": ".btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 22px;border-radius:7px;font-weight:600;text-decoration:none}.btn-primary{background:#0960c1;color:#fff}.btn:hover{background:#064d9e;color:#fff}.hero .btn-primary{background:#fff;color:#032254}.hero .btn-primary:hover{background:#dceaff}a:focus-visible{outline:3px solid #1a77e3;outline-offset:4px}"
+      "description": "Blue action on a light reading surface.",
+      "html": "<a class=\"ds-btn-primary\" href=\"start.html\">Open the Start guide</a>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 22px;border-radius:7px;font-family:var(--font-body,\"Inter\",\"Segoe UI\",sans-serif);font-weight:600;line-height:1.7;text-decoration:none;background:var(--c-action,#0960c1);color:#fff}.ds-btn-primary:hover{background:var(--c-action-hover,#064d9e);color:#fff}.ds-btn-primary:focus-visible{outline:3px solid var(--c-accent,#1a77e3);outline-offset:4px}"
+    },
+    {
+      "name": "Hero Setup Button",
+      "kind": "button",
+      "description": "White setup action on the navy-to-blue hero.",
+      "html": "<div class=\"ds-hero\"><a class=\"ds-btn-hero\" href=\"start.html\">Set up your workspace</a></div>",
+      "css": ".ds-hero{padding:24px;background:linear-gradient(135deg,#032254 0%,#0f3a7a 60%,#1a77e3 100%)}.ds-btn-hero{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 22px;border-radius:7px;font-family:var(--font-body,\"Inter\",\"Segoe UI\",sans-serif);font-weight:600;line-height:1.7;text-decoration:none;background:#fff;color:var(--c-heading,#032254)}.ds-btn-hero:hover{background:#dceaff}.ds-btn-hero:focus-visible{outline:3px solid #fff;outline-offset:4px}"
+    },
+    {
+      "name": "Primary Navigation Links",
+      "kind": "nav",
+      "description": "Compact page links with an underlined current page; mobile links form a vertical list when the menu opens.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary\"><a href=\"index.html\" aria-current=\"page\">Overview</a><a href=\"applications.html\">Learn</a><a href=\"start.html\">Start</a><a href=\"https://github.com/microsoft/frontier-agentic-cobuild-rvas\">GitHub</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:32px;background:var(--c-paper,#f0f5ff);font-family:var(--font-body,\"Inter\",\"Segoe UI\",sans-serif);line-height:1.7}.ds-nav a{padding:8px 12px;border-radius:6px;color:var(--c-heading,#032254);text-decoration:none;font-size:.94rem}.ds-nav a:hover{color:var(--c-action,#0960c1);background:var(--c-paper,#f0f5ff)}.ds-nav a[aria-current]{background:var(--c-tint,#dde6f7);color:var(--c-heading,#032254);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}.ds-nav a:focus-visible{outline:3px solid var(--c-accent,#1a77e3);outline-offset:4px}@media(prefers-reduced-motion:no-preference){.ds-nav a{transition:background-color 140ms ease-out,color 140ms ease-out}}@media(max-width:700px){.ds-nav{padding:24px;flex-direction:column;align-items:flex-start;gap:24px}}"
+    },
+    {
+      "name": "Learn Page Tabs",
+      "kind": "nav",
+      "description": "Three reading-page tabs, with a pale-blue fill and navy underline for the current page.",
+      "html": "<nav class=\"ds-guide-nav\" aria-label=\"Learn pages\"><div class=\"ds-guide-pages\"><a href=\"applications.html\" aria-current=\"page\">Application types</a><a href=\"architecture-options.html\">Architecture options</a><a href=\"existing-applications.html\">Existing applications</a></div></nav>",
+      "css": ".ds-guide-nav{font-family:var(--font-body,\"Inter\",\"Segoe UI\",sans-serif);font-size:.94rem;line-height:1.7}.ds-guide-pages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--c-line,#dde6f7);margin-bottom:24px}.ds-guide-pages a{display:flex;align-items:center;justify-content:center;min-height:56px;padding:12px 16px;border-bottom:2px solid transparent;color:var(--c-heading,#032254);text-align:center;text-decoration:none}.ds-guide-pages a:hover{background:var(--c-paper,#f0f5ff);color:var(--c-action,#0960c1);text-decoration:underline}.ds-guide-pages a[aria-current]{background:var(--c-paper,#f0f5ff);border-bottom-color:var(--c-heading,#032254);color:var(--c-heading,#032254);font-weight:600}.ds-guide-pages a:focus-visible{outline:3px solid var(--c-accent,#1a77e3);outline-offset:4px}@media(max-width:700px){.ds-guide-pages{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 8px;margin-bottom:20px}.ds-guide-pages a{justify-content:flex-start;padding:12px 8px;text-align:left;line-height:1.4}}"
     },
     {
       "name": "Architecture Preview",
       "kind": "custom",
-      "refersTo": "architecture-preview",
-      "description": "The four architecture files and the explicit approval boundary.",
-      "html": "<aside class=\"architecture-preview\"><p class=\"preview-title\">Your idea becomes an approved build plan.</p><div class=\"artifact-row\"><code>solution.drawio</code><span>Editable architecture views</span></div><p class=\"preview-boundary\">You approve the package before starting implementation.</p></aside>",
-      "css": ".architecture-preview{padding:32px;background:#04204b;color:#fff;border:1px solid #476799;border-radius:12px;box-shadow:0 14px 36px rgba(0,0,0,.15)}.artifact-row{padding:14px 0;border-top:1px solid #365680}.artifact-row code{display:block;color:#beddff}.artifact-row span,.preview-boundary{color:#d0dff5}"
+      "description": "Pale-blue file list; file rows link to the setup or separate implementation handoff.",
+      "html": "<div class=\"ds-architecture-preview\" aria-label=\"Architecture package\"><p class=\"ds-preview-title\">Review the architecture and build plan.</p><a class=\"ds-artifact-row\" href=\"start.html#describe-what-you-want-to-build\"><code>solution.drawio</code><span>Editable architecture views</span><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a><a class=\"ds-artifact-row\" href=\"start.html#describe-what-you-want-to-build\"><code>solution.md</code><span>Decisions and boundaries</span><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a><a class=\"ds-artifact-row\" href=\"start.html#describe-what-you-want-to-build\"><code>specification.md</code><span>Requirements and acceptance criteria</span><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a><a class=\"ds-artifact-row\" href=\"start.html#start-implementation-in-a-new-session\"><code>implementation-plan.md</code><span>Build steps in dependency order</span><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a></div>",
+      "css": ".ds-architecture-preview{padding:32px;background:var(--c-wash,#eaf2ff);color:var(--c-heading,#032254);border:1px solid var(--c-tint,#dde6f7);border-radius:8px;font-family:var(--font-body,\"Inter\",\"Segoe UI\",sans-serif);line-height:1.7}.ds-preview-title{font-size:1.1rem;font-weight:600;margin:0 0 28px}.ds-artifact-row{display:grid;grid-template-columns:minmax(0,1fr) 20px;column-gap:12px;padding:14px 0;border-top:1px solid var(--c-tint,#dde6f7);color:var(--c-action,#0960c1);text-decoration:none}.ds-artifact-row code{display:block;color:var(--c-action,#0960c1);font-family:var(--font-mono,\"Cascadia Code\",ui-monospace,monospace);font-size:.88em;overflow-wrap:anywhere}.ds-artifact-row span{color:var(--c-heading,#032254);font-size:.88rem}.ds-artifact-row svg{grid-column:2;grid-row:1/3;align-self:center;color:var(--c-action,#0960c1)}.ds-artifact-row:hover{background:var(--c-tint,#dde6f7)}.ds-artifact-row:hover code{text-decoration:underline;text-underline-offset:.2em}.ds-artifact-row:focus-visible{outline:3px solid var(--c-accent,#1a77e3);outline-offset:4px}@media(max-width:960px){.ds-architecture-preview{max-width:640px}}@media(max-width:700px){.ds-architecture-preview{padding:24px}}"
+    },
+    {
+      "name": "Command Block",
+      "kind": "custom",
+      "description": "Wrapping navy command block with a destination label, copy control, and reserved feedback space. CSS includes pending, copied, and failure states.",
+      "html": "<pre class=\"ds-command\"><span class=\"ds-command-label\">Terminal</span><code>git init\n</code><button class=\"ds-copy-command\" type=\"button\" aria-label=\"Copy terminal command\">Copy</button><span class=\"ds-copy-status\" role=\"status\" aria-atomic=\"true\"></span></pre>",
+      "css": ".ds-command{position:relative;max-width:100%;margin:24px 0;padding:64px 22px 22px;border-radius:7px;background:var(--c-heading,#032254);color:#e5efff;white-space:pre-wrap;overflow-wrap:anywhere;font-family:monospace;font-size:13px;line-height:1.7}.ds-command code{font-family:var(--font-mono,\"Cascadia Code\",ui-monospace,monospace);font-size:.84rem}.ds-command-label{position:absolute;top:20px;left:22px;max-width:calc(100% - 142px);color:var(--c-on-dark,#e0ebff);font-family:var(--font-body,\"Inter\",\"Segoe UI\",sans-serif);font-size:.75rem;line-height:1.4;white-space:normal}.ds-copy-command{position:absolute;right:12px;top:10px;min-width:88px;min-height:44px;padding:8px 12px;border:1px solid #8399ba;border-radius:4px;background:#183d70;color:#fff;cursor:pointer;font-family:var(--font-body,\"Inter\",\"Segoe UI\",sans-serif);font-size:.75rem}.ds-copy-command:hover{background:var(--c-action,#0960c1)}.ds-copy-command[data-state=\"copied\"]{background:var(--c-success-bg,#d9f3e7);color:var(--c-success-fg,#16553d);border-color:var(--c-success-bg,#d9f3e7)}.ds-copy-command[data-state=\"error\"]{background:var(--c-error-bg,#ffeadf);color:var(--c-error-fg,#783c23);border-color:var(--c-error-bg,#ffeadf)}.ds-copy-command[aria-disabled=\"true\"]{cursor:wait}.ds-copy-command:focus-visible{outline:3px solid #fff;outline-offset:4px}.ds-copy-status{display:block;min-height:calc(12px + 1.5em);padding-top:12px;color:var(--c-on-dark,#e0ebff);font-family:var(--font-body,\"Inter\",\"Segoe UI\",sans-serif);font-size:.8rem;line-height:1.5;white-space:normal}.ds-command:has(.ds-copy-command[data-state=\"copied\"]) .ds-copy-status{color:var(--c-success-bg,#d9f3e7)}.ds-command:has(.ds-copy-command[data-state=\"error\"]) .ds-copy-status{color:var(--c-error-bg,#ffeadf)}@media(prefers-reduced-motion:no-preference){.ds-copy-command{transition:background-color 140ms ease-out,color 140ms ease-out}}@media(max-width:700px){.ds-copy-status{min-height:calc(12px + 4.5em)}}"
+    },
+    {
+      "name": "Section Permalink",
+      "kind": "custom",
+      "description": "Visible inline heading link with a blue-tinted hover and keyboard-focus treatment.",
+      "html": "<h2 class=\"ds-section-heading\" id=\"work-in-your-own-repository\">Work in your own repository<a class=\"ds-heading-link\" href=\"#work-in-your-own-repository\" aria-label=\"Link to Work in your own repository\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" aria-hidden=\"true\"><path d=\"m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0\"/></svg></a></h2>",
+      "css": ".ds-section-heading{margin:0 0 20px;font-family:var(--font-display,\"Outfit\",\"Segoe UI\",sans-serif);color:var(--c-heading,#032254);font-size:1.95rem;font-weight:700;line-height:1.15;letter-spacing:-.025em;text-wrap:balance}.ds-heading-link{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin-left:6px;vertical-align:middle;border-radius:4px;color:var(--c-action,#0960c1);text-underline-offset:.2em}.ds-heading-link:hover,.ds-heading-link:focus-visible{background:var(--c-tint,#dde6f7)}.ds-heading-link:focus-visible{outline:3px solid var(--c-accent,#1a77e3);outline-offset:4px}@media(prefers-reduced-motion:no-preference){.ds-heading-link{transition:background-color 140ms ease-out,color 140ms ease-out}}@media(max-width:700px){.ds-section-heading{font-size:1.75rem}}"
     }
   ],
   "narrative": {
-    "northStar": "Build in your own repository",
-    "overview": "The homepage leads to workspace setup. The Start guide explains installation and the separate architecture-to-implementation handoff. DESIGN.md records the visual guidance; docs/assets/css/styles.css owns the shipped tokens and components.",
+    "overview": "The site preserves the RVAP/RVAS identity: a white reading surface, Deep Navy hero, RVAP Blue actions, and Outfit/Inter typography. Existing logos remain the brand authority. Fonts are self-hosted.",
     "keyCharacteristics": [
-      "White reading surfaces with a Deep Navy hero.",
-      "One primary setup action; Idea Forge is secondary.",
-      "Self-hosted Outfit and Inter fonts.",
-      "Readable command blocks with explicit copy feedback."
+      "The homepage uses the RVAP navy-to-blue gradient with a pale-blue architecture preview.",
+      "Blue file links and navy descriptions keep the package readable.",
+      "Reading-page headers and navigation use light blue surfaces; navy marks the selected page and table headers.",
+      "Reserve pale green for successful copying and warm peach for copy failures, always paired with explicit feedback text."
     ],
-    "rules": [
-      {
-        "name": "Preserve the brand",
-        "body": "Keep the existing RVAP logo and colors. Use the darker action blue for readable white button text.",
-        "section": "colors"
-      },
-      {
-        "name": "Guide the next action",
-        "body": "Lead to repository setup and keep architecture approval separate from implementation.",
-        "section": "layout"
-      },
-      {
-        "name": "Preserve mobile reading",
-        "body": "Move the guide index above its content on narrow screens. Scroll wide command blocks within the page.",
-        "section": "layout"
-      }
-    ],
+    "rules": [],
     "dos": [
-      "Keep visible keyboard focus.",
-      "Preserve heading anchors and explicit clipboard failure feedback."
+      "Maintain visible keyboard focus and readable contrast.",
+      "Use short color transitions for interaction feedback, with no motion under reduced-motion preferences.",
+      "Preserve approval gates and matching before/after topology; never hide content to remove a scrollbar.",
+      "Use unchanged Microsoft icons with nearby product names linked to Microsoft Learn."
     ],
     "donts": [
-      "Do not reintroduce scenario catalogs or slide routes.",
-      "Do not treat architecture approval as permission to start implementation."
+      "Keep the white diagram surfaces unbordered; do not turn the families into rounded cards or add shadows.",
+      "Homepage artifact rows link to their setup or handoff section; they do not imply that an architecture file already exists."
     ]
   }
 }

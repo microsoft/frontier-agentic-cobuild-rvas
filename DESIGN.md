@@ -6,8 +6,10 @@ brand authority. Fonts are self-hosted.
 The shared navigation bar matches main's compact proportions: 58px tall with a
 32px-high logo on desktop and mobile.
 
-The homepage uses the RVAP navy-to-blue gradient with a white architecture
-preview. Reading-page headers and navigation use light blue surfaces; navy marks
+The homepage uses the RVAP navy-to-blue gradient with a pale-blue architecture
+preview. Blue file links and navy descriptions keep the package readable.
+Artifact rows gain a stronger blue tint on hover and retain visible keyboard focus.
+Reading-page headers and navigation use light blue surfaces; navy marks
 the selected page and table headers. Links use a darker blue for readable
 contrast. Body content stays white except for the alternating application-family
 bands described below. Diagrams stay white. Learn page navigation uses
