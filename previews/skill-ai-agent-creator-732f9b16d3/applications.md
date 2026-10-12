@@ -172,7 +172,7 @@ Tell the creator who will use the application and what their first task is.
 You can leave the platform open or state a constraint:
 
 ```text
-Design a maintenance assistant for property managers. Help them investigate
+/ai-agent-creator Design a maintenance assistant for property managers. Help them investigate
 resident requests and prepare a work order for approval. Reuse our existing
 identity and service system. Compare an agent with a simpler workflow before
 recommending the architecture.

@@ -243,7 +243,7 @@ You must explicitly accept a manual-review exception before architecture approva
       <!-- impeccable-disable-next-line cramped-padding: SVG coordinates provide frame insets and node padding. -->
       <svg class="diagram-wide" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="approval-handoff-title approval-handoff-desc">
         <title id="approval-handoff-title">Design ends at approval</title>
-        <desc id="approval-handoff-desc">The creator proposes an architecture, you confirm discovery, the creator prepares and reviews the package, you approve it and explicitly start a separate implementation session.</desc>
+        <desc id="approval-handoff-desc">The creator proposes an architecture. You confirm discovery before the creator prepares and reviews the package. You approve the package, then start implementation in a separate session.</desc>
         <defs>
           <marker id="approval-handoff-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker>
           <marker id="approval-handoff-arrow-accent" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#1a77e3" /></marker>
@@ -271,7 +271,7 @@ You must explicitly accept a manual-review exception before architecture approva
         <g>
           <rect x="364" y="284" width="160" height="96" rx="6" class="gate" />
           <text x="380" y="316" class="node-name"><tspan x="380">Confirm</tspan><tspan x="380" dy="24">discovery</tspan></text>
-          <text x="380" y="364" class="detail">Agree the target</text>
+          <text x="380" y="364" class="detail">Agree on design</text>
         </g>
         <g>
           <rect x="568" y="120" width="200" height="120" rx="6" class="node" />
@@ -291,7 +291,7 @@ You must explicitly accept a manual-review exception before architecture approva
         <g>
           <rect x="1052" y="448" width="180" height="96" rx="6" class="node" />
           <text x="1068" y="480" class="node-name">Build and verify</text>
-          <text x="1068" y="508" class="detail"><tspan x="1068">Check acceptance</tspan><tspan x="1068" dy="24">Resolve findings</tspan></text>
+          <text x="1068" y="508" class="detail"><tspan x="1068">Test the criteria</tspan><tspan x="1068" dy="24">Fix review issues</tspan></text>
         </g>
         <path d="M32 640 H1248" class="rule" />
         <rect x="32" y="660" width="20" height="20" rx="2" class="gate" />
@@ -301,7 +301,7 @@ You must explicitly accept a manual-review exception before architecture approva
       </svg>
       <svg class="diagram-narrow" viewBox="0 0 320 1032" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="approval-handoff-narrow-title approval-handoff-narrow-desc">
         <title id="approval-handoff-narrow-title">Design ends at approval</title>
-        <desc id="approval-handoff-narrow-desc">The creator proposes the design, you confirm discovery, the creator prepares and reviews the package, you approve it, then you start a separate implementation session.</desc>
+        <desc id="approval-handoff-narrow-desc">The creator proposes an architecture. You confirm discovery before the creator prepares and reviews the package. You approve the package, then start implementation in a separate session.</desc>
         <defs>
           <marker id="approval-handoff-narrow-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker>
         </defs>
@@ -321,7 +321,7 @@ You must explicitly accept a manual-review exception before architecture approva
           <rect x="16" y="244" width="288" height="92" rx="6" class="gate" />
           <text x="32" y="268" class="lane-name">You</text>
           <text x="32" y="296" class="node-name">Confirm discovery</text>
-          <text x="32" y="320" class="detail">Agree the target architecture</text>
+          <text x="32" y="320" class="detail">Agree on the target architecture</text>
         </g>
         <g>
           <rect x="16" y="372" width="288" height="116" rx="6" class="node" />
@@ -348,24 +348,24 @@ You must explicitly accept a manual-review exception before architecture approva
           <rect x="16" y="852" width="288" height="116" rx="6" class="node" />
           <text x="32" y="876" class="lane-name">Implementation session</text>
           <text x="32" y="904" class="node-name">Build and validate</text>
-          <text x="32" y="928" class="detail"><tspan x="32">Check acceptance criteria</tspan><tspan x="32" dy="24">and resolve review findings</tspan></text>
+          <text x="32" y="928" class="detail"><tspan x="32">Test the acceptance criteria</tspan><tspan x="32" dy="24">and fix issues found in review</tspan></text>
         </g>
         <rect x="16" y="996" width="20" height="20" rx="2" class="gate" />
         <text x="48" y="1012" class="detail">Your approval gate</text>
       </svg>
     </div>
-    <figcaption>Confirm discovery before the creator prepares the package. Review the diagrams and have an independent reviewer check the complete package before you approve it. If either review is unavailable, record and explicitly accept a manual-review exception. The creator stops at approval. You start implementation in a separate session.</figcaption>
+    <figcaption>Confirm discovery before the creator prepares the package. Before approval, review the diagrams and ask an independent reviewer to check the complete package. If either review is unavailable, record and explicitly accept a manual-review exception. The creator stops at approval. You start implementation in a separate session.</figcaption>
   </figure>
 
 <p>Select <strong>AI Agent Creator</strong> (<code>ai-agent-creator</code>) and give it the intended outcome.
 You do not need to choose the platform or runtime first.</p>
 <p>For a new application:</p>
-<pre><code class="language-text">Design an AI maintenance assistant for property managers that triages
+<pre><code class="language-text">/ai-agent-creator Design an AI maintenance assistant for property managers that triages
 resident requests and prepares work orders for approval. Account for our
 existing enterprise identity and operating environment.
 </code></pre>
 <p>For an existing application:</p>
-<pre><code class="language-text">Add evidence-backed report summarization to this existing application.
+<pre><code class="language-text">/ai-agent-creator Add evidence-backed report summarization to this existing application.
 Inspect its current stack, preserve established interfaces, and account
 for our enterprise data-access and deployment constraints.
 </code></pre>

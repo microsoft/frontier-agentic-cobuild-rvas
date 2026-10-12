@@ -77,7 +77,7 @@ in a new session. If scope or architecture changes, repeat the affected approval
 ## Begin with the intended change
 
 ```text
-Add evidence-backed case summarization and follow-up investigation to this
+/ai-agent-creator Add evidence-backed case summarization and follow-up investigation to this
 existing application. Inspect the current stack and architecture records.
 Preserve the case APIs and authorization model. Reuse our enterprise services,
 compare agentic and simpler execution, and plan a bounded first release with
