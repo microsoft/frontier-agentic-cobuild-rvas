@@ -24,6 +24,10 @@ Keep application source, dependency manifests/lockfiles, tests, application asse
 IaC, cloud resources, and deployments unchanged. Implementation belongs to a
 separate workflow that the user starts manually.
 
+Use read-only evidence and already-available validation tools. Keep delivery-tool
+installation, extension setup, authentication, and environment preparation in
+the later workflow that needs them.
+
 ## Voice
 
 Use this voice for every user-facing moment: discovery questions,
@@ -122,9 +126,11 @@ explicitly delegated lower-level decisions.
    one-shot review that found blocking or material defects does not become a
    passed independent review through local inspection after repair.
 7. **Reconcile and ask:** check all four artifacts against their contracts and the
-   current baseline. Resolve conflicts or owned deferrals. Record blocked or
-   unavailable diagram evidence exactly. Present the package, ask for explicit
-   approval and any required manual-review exception, then end the turn.
+   current baseline. Resolve conflicts and every architecture-changing choice.
+   Keep only delivery parameters that preserve the selected topology as owned
+   deferrals. Record blocked or unavailable diagram evidence exactly. Present the
+   package, ask for explicit approval and any required manual-review exception,
+   then end the turn.
 
 **Complete when:** all four artifacts exist and agree, every contract is accounted
 for, review status is recorded, and the user explicitly approves the current

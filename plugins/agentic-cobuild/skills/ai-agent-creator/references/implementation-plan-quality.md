@@ -38,6 +38,9 @@ Write `docs/architecture/implementation-plan.md` with:
   [selection contract](azure-patterns/runtimes/README.md), including its
   model-inference and reuse boundaries. Link decisions instead of selecting a
   second platform, channel or model deployment in the plan.
+- Implement one selected architecture baseline. Phase 0 may confirm SKU, capacity,
+  version, region placement, and compatibility, but it must not choose between
+  service families or topologies that the architecture left unresolved.
 - Map every major diagram component to a Microsoft cloud service, an existing
   enterprise capability, application code, or an explicit external dependency.
 - Name the configuration, connectors, protocols, data formats, test mechanisms,
@@ -127,6 +130,8 @@ The plan is complete when:
 - greenfield foundation work or brownfield migration work is explicit;
 - security, operations, testing, rollout, and rollback are implementable;
 - deferred decisions have an owner, decision point, and impact;
+- remaining deferrals are delivery parameters and cannot change the selected
+  service family, topology, ownership, or trust boundary;
 - plan phases trace to the approved first journey and architecture;
 - `specification.md`, `solution.drawio`, `solution.md`, and
   `implementation-plan.md` agree;

@@ -25,8 +25,10 @@ Start the design tree from:
 - scale, latency, budget, schedule, and stack constraints;
 - enterprise identity, network, security, operations, and delivery context.
 
-The frontier is empty only when each branch is answered, discovered, or explicitly
-deferred with an owner, decision point, and architectural impact.
+The frontier is empty only when every architecture-changing branch is answered or
+discovered. A deferral may retain a delivery parameter such as an exact version,
+SKU, capacity, or approved region only when every allowed value preserves the
+selected service family, topology, responsibility ownership, and trust boundary.
 
 ## Technical decision ownership
 
@@ -78,16 +80,19 @@ Record each material choice as one of:
 - **Delegated subchoice:** the user's explicit scope for a lower-level choice;
   compare options and record the resulting selection and reason in the
   architecture package.
-- **Deferred:** the owner, decision point, and architectural impact accepted by
-  the user.
+- **Deferred delivery parameter:** the owner, decision point, and implementation
+  impact. The remaining values must preserve the confirmed architecture.
 
 A delegation may cover only part of the design. Resolve choices outside its scope
 through subsequent frontier rounds. Technical delegation permits architecture
 selection within that scope, not implementation or provisioning. The top-level
 target architecture must be confirmed through a proposal question or explicitly
 deferred with an owner and impact; it cannot remain an abstract delegation.
-Exact package versions and sizing may remain implementation-time compatibility
-checks when they do not change the architectural boundaries.
+Exact package versions, sizing, and other delivery parameters may remain
+implementation-time compatibility checks when they do not change the selected
+service family, topology, ownership, or trust boundaries. Choices such as
+App Service versus Container Apps, SQL versus Cosmos DB, or direct versus
+delegated agent hosting remain in the frontier until one option is selected.
 
 ## Platform and channel selection
 

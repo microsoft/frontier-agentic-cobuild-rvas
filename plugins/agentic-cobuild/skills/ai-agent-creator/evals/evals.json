@@ -814,6 +814,74 @@
         "The response evaluates supported alternatives or records a blocked selection when evidence cannot establish policy compliance.",
         "The response creates only the architecture package and stops for explicit approval without implementing or provisioning."
       ]
+    },
+    {
+      "id": 60,
+      "prompt": "The shared-understanding record is confirmed. Build an architecture package for a new customer-facing quote assistant. The application will use a workload-owned Microsoft Foundry model deployment, but pricing and approval remain deterministic. This is architecture-only work. Do not implement, provision, deploy, install tools, or prepare the delivery environment.",
+      "expected_output": "The architecture uses read-only Microsoft Learn evidence and the accelerator's Foundry architecture references. It may name microsoft-foundry as a later delivery owner, but it does not load that execution workflow or run its dependency setup scripts during architecture.",
+      "files": [
+        "references/specialist-routing.md",
+        "references/microsoft-learn-evidence.md"
+      ],
+      "expectations": [
+        "The response preserves the explicit architecture-only boundary.",
+        "The response does not run check-and-setup-dependencies.sh, check-and-setup-dependencies.ps1, azd extension installation, authentication, or environment preparation.",
+        "Foundry design claims use verified Microsoft Learn evidence and the selected local architecture or runtime references.",
+        "The response names microsoft-foundry only as a later delivery owner when useful; it does not enter that skill's execution workflow.",
+        "Only domain records and architecture-package artifacts may change."
+      ]
+    },
+    {
+      "id": 61,
+      "prompt": "The architecture package is already approved. Now deploy its existing Microsoft Foundry model and hosted-agent resources, including any required CLI setup. Do not redesign the architecture.",
+      "expected_output": "The accelerator does not start architecture discovery or modify the approved package. It routes the operational request to the later Microsoft Foundry delivery workflow, where execution prerequisites belong.",
+      "files": [
+        "SKILL.md",
+        "references/specialist-routing.md"
+      ],
+      "expectations": [
+        "The ai-agent-creator workflow does not run for this deployment-only request.",
+        "The response preserves the approved architecture and does not reopen discovery or recreate the package.",
+        "The request is routed to microsoft-foundry or the appropriate delivery workflow.",
+        "Any dependency setup is treated as part of that operational workflow, not as architecture work."
+      ]
+    },
+    {
+      "id": 62,
+      "prompt": "The shared-understanding record is confirmed for a greenfield external-customer ASP.NET Core application-hosted agent. No enterprise hosting standard constrains the choice, so hosting selection is delegated to you. Produce the complete architecture package. Compare Azure App Service and Azure Container Apps, but do not leave implementation to choose between them.",
+      "expected_output": "The architecture selects one hosting service with a reason, records the other as rejected, and uses the selected service consistently in solution.md, specification.md, implementation-plan.md, and the Deployment page.",
+      "files": [
+        "references/discovery-quality.md",
+        "references/architecture-quality.md",
+        "references/specification-quality.md",
+        "references/implementation-plan-quality.md"
+      ],
+      "expectations": [
+        "The architecture selects exactly one production hosting service.",
+        "The Deployment page and service-mapping tables do not contain 'App Service or Container Apps', slash-separated product alternatives, 'candidate', or 'selected in Phase 0'.",
+        "The meaningful hosting alternative is recorded under rejected alternatives with its trade-off.",
+        "Phase 0 may confirm sizing, SKU, region, version, or compatibility, but does not select the hosting service family.",
+        "All four architecture artifacts use the same selected hosting baseline."
+      ]
+    },
+    {
+      "id": 63,
+      "prompt": "Discovery is confirmed and technical hosting selection was delegated to the architect. The draft package is otherwise complete, but solution.md and the Deployment page say 'Azure App Service or Azure Container Apps', and Phase 0 is assigned to choose between them. Review the package for approval readiness.",
+      "expected_output": "The package is not approval-ready. The architect must select one hosting service, put the alternative in rejected alternatives, update all four artifacts consistently, and leave only non-topology delivery parameters to Phase 0.",
+      "files": [
+        "SKILL.md",
+        "references/discovery-quality.md",
+        "references/architecture-quality.md",
+        "references/specification-quality.md",
+        "references/implementation-plan-quality.md"
+      ],
+      "expectations": [
+        "The response classifies the unresolved host as an architecture-changing open decision, not an acceptable owned deferral.",
+        "The response blocks package approval until one hosting service is selected.",
+        "The response requires the Deployment page, solution.md, specification.md, and implementation-plan.md to use the same selected host.",
+        "The response moves the unselected service to rejected alternatives with its trade-off.",
+        "Phase 0 retains only sizing, SKU, region, version, compatibility, and similar delivery parameters that preserve the selected topology."
+      ]
     }
   ]
 }

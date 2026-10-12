@@ -41,7 +41,8 @@ handoff only.
 
 Populate sections from confirmed decisions and verified evidence, not a generic
 checklist of invented requirements. Mark genuinely inapplicable concerns with a
-reason; defer unresolved details with an owner, decision point, and impact.
+reason. Defer only delivery parameters that cannot change the selected service
+family, topology, ownership, or trust boundary.
 
 ## Functional coverage
 
@@ -70,6 +71,9 @@ reason; defer unresolved details with an owner, decision point, and impact.
 - In Implementation Decisions, summarize confirmed/delegated choices and link
   authoritative decisions in `solution.md`, existing ADRs or `CONTEXT.md`.
   Avoid duplicate decision narratives, fragile source-file paths, and code.
+- Name one selected production service or existing enterprise capability for
+  each deployable responsibility. Do not encode unresolved alternatives with
+  `or`, slash-separated product names, or "candidate" mappings.
 - Separate verified product evidence, workload assumptions and owned compatibility
   checks. Keep missing package versions, schemas, numeric targets, capabilities
   and enterprise standards unresolved rather than filling them by inference.
@@ -95,7 +99,7 @@ specification. Cross-link `solution.md` and `implementation-plan.md`; link exist
 ## Completion criterion
 
 The specification is complete when functional and technical coverage reflects
-confirmed scope; IDs and acceptance/design/phase links are consistent; missing
-facts are owned deferrals rather than silent assumptions; all four package
-artifacts agree; and approval status belongs to the current baseline without
-authorizing implementation.
+confirmed scope; IDs and acceptance/design/phase links are consistent; no
+architecture-changing choice remains deferred; remaining delivery parameters
+have owners; all four package artifacts agree; and approval status belongs to
+the current baseline without authorizing implementation.

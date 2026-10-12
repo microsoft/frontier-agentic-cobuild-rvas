@@ -2,7 +2,9 @@
 
 Read before writing `solution.md` or defining the diagram views. This contract
 owns their structure and acceptance checks. Account for every item as a decision,
-assumption, owned deferral, or non-applicable concern before package approval.
+assumption, delivery-parameter deferral, or non-applicable concern before package
+approval. A deferral cannot leave the service family, topology, ownership, or
+trust boundary unresolved.
 
 ## Solution record
 
@@ -39,6 +41,8 @@ Link `specification.md` and its requirement IDs. In `## Decisions`, record:
   the [agent-intent test](discovery-quality.md#agent-intent-test) where applicable;
 - the confirmed requirement or capability gap for each custom UI, API, adapter
   or host;
+- one selected production hosting/deployment service for every workload-owned
+  deployable, with the meaningful alternatives recorded as rejected;
 - a reason and meaningful rejected alternative for every major service, with
   links to authoritative ADRs rather than copied decision narratives.
 
@@ -106,6 +110,9 @@ history when material changes require review.
 - The implementation plan separates production identity from development and test
   identity; no plan depends on sharing production credentials.
 - Hosting, availability, and background-processing responsibilities are explicit.
+  Each workload deployable maps to one selected production service. SKU, capacity,
+  exact version, and similar delivery parameters can remain owned gates only when
+  they do not change that mapping.
 - Environment topology, delivery ownership, rollout, rollback, migration, and
   operational readiness are explicit in the implementation plan.
 - Managed platform configuration, connections and publication have lifecycle
@@ -123,7 +130,7 @@ Create one editable `solution.drawio` with these pages in order:
 | **Context** | Actors, external systems, first journey, authoritative sources, and product boundary | Keep the solution as one product-level boundary or a few essential responsibilities. Leave APIs, token mechanics, stores, queues, and resource topology to later views. |
 | **Components** | Logical responsibilities, ownership, interfaces, and selected service mappings | Lead with responsibilities. Service names annotate the mapping without turning this page into deployment topology or a runtime sequence. |
 | **AI and data flow** | Ordered online and offline flows, prompts, grounding, proposed tool intent, trusted execution, stores, safety, approval, failure, and evaluation | Show who calls whom and what changes state. Keep resource placement and environment promotion on Deployment. |
-| **Deployment** | Resources, identities, trust and network boundaries, ingress/egress, environments, platform/workload ownership, delivery path, and operations | Map logical responsibilities to physical services. Summarize application behavior instead of repeating the complete runtime sequence. |
+| **Deployment** | Resources, identities, trust and network boundaries, ingress/egress, environments, platform/workload ownership, delivery path, and operations | Map each logical responsibility to one selected physical service or named existing enterprise capability. Keep alternatives in `solution.md`, not in deployment labels. Summarize application behavior instead of repeating the complete runtime sequence. |
 
 Keep Context and AI/data-flow readable with neutral shapes; add service mappings
 there only when helpful. Use official Azure icons for Azure service mappings in
@@ -156,6 +163,9 @@ relevant.
   distinct even when they use the same backend.
 - Logical components map to deployment resources without silently changing
   ownership.
+- A production responsibility never maps to an unresolved product list such as
+  "App Service or Container Apps". Alternatives belong in rejected decisions;
+  the Deployment page shows the selected baseline.
 - Repetition earns its place by showing a different page concern. Repeated
   meaning is removed.
 
@@ -168,6 +178,10 @@ relevant.
   invariants pass independent critique.
 - Every important edge has a direction and meaningful label.
 - Inferred choices are marked as assumptions rather than facts.
+- No Deployment label, service-mapping table, or implementation phase contains
+  an unresolved service-family alternative. Treat `or`, slash-separated product
+  names, "candidate", and "to be selected" as blocking findings when they describe
+  the production baseline rather than a rejected option or contingency.
 - The diagram specialist's structural validation passes, including page order,
   page-local references, geometry, and embedded images.
 - Every page is exported with an approved local renderer and inspected for overlap,
@@ -191,5 +205,6 @@ relevant.
   clear missing independent evidence.
 
 **Complete when:** every coverage item is accounted for in the four artifacts;
-decision and requirement links agree; every diagram page has recorded review
-status; and any review exception is explicitly approved.
+each production responsibility has one selected deployment mapping; decision and
+requirement links agree; every diagram page has recorded review status; and any
+review exception is explicitly approved.
