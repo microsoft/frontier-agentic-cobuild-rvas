@@ -33,7 +33,7 @@
       <!-- impeccable-disable-next-line cramped-padding: SVG coordinates provide frame insets and node padding. -->
       <svg class="diagram-wide" data-diagram="architecture-delta" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="existing-app-delta-title existing-app-delta-desc">
         <title id="existing-app-delta-title">Add a capability, preserve the application</title>
-        <desc id="existing-app-delta-desc">This example adds summaries and investigation to a case application while preserving its identity service, case API contracts, and system of record.</desc>
+        <desc id="existing-app-delta-desc">The case application gains AI summaries and investigation. Its identity service and case API contracts stay unchanged, as does its system of record.</desc>
         <defs>
           <marker id="existing-app-delta-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker>
           <marker id="existing-app-delta-arrow-accent" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#1a77e3" /></marker>
@@ -44,7 +44,7 @@
         <text x="400" y="48" class="diagram-heading">Changes</text>
         <text x="936" y="48" class="diagram-heading">After</text>
         <text x="40" y="76" class="detail">Existing case handling</text>
-        <text x="936" y="76" class="detail">A bounded AI addition</text>
+        <text x="936" y="76" class="detail">Read-only AI assistance</text>
         <g data-snapshot="before" data-grid="336 480 4" transform="translate(24 96)">
           <path data-kind="relationship" data-object-id="sign-in" data-status="unchanged" data-signature="operation=sign-in" data-from="identity" data-to="app" d="M117.333 96 V120 Q117.333 128 109.333 128 H96 Q88 128 88 136 V168" marker-end="url(#existing-app-delta-arrow)" />
           <path data-kind="relationship" data-object-id="api-auth" data-status="unchanged" data-signature="operation=authorize" data-from="identity" data-to="case-api" d="M218.667 96 V120 Q218.667 128 226.667 128 H244 Q252 128 252 136 V168" marker-end="url(#existing-app-delta-arrow)" />
@@ -73,7 +73,7 @@
         </g>
         <text x="400" y="156" class="node-name" data-change="CHANGED" data-target="app"><tspan x="400">CHANGED app</tspan><tspan x="400" dy="28" class="detail">Add an AI entry point to case handling.</tspan><tspan x="400" dy="24" class="detail">Keep case editing and assignment unchanged.</tspan></text>
         <text x="400" y="272" class="node-name" data-change="ADDED" data-target="ai"><tspan x="400">ADDED ai</tspan><tspan x="400" dy="28" class="detail">Summarize cases and investigate follow-ups.</tspan><tspan x="400" dy="24" class="detail">Choose how AI runs during discovery.</tspan></text>
-        <text x="400" y="388" class="node-name" data-change="ADDED" data-target="ai-request"><tspan x="400">ADDED ai-request</tspan><tspan x="400" dy="28" class="detail">The application requests the new capability.</tspan></text>
+        <text x="400" y="388" class="node-name" data-change="ADDED" data-target="ai-request"><tspan x="400">ADDED ai-request</tspan><tspan x="400" dy="28" class="detail">The application requests AI assistance.</tspan></text>
         <text x="400" y="480" class="node-name" data-change="ADDED" data-target="evidence-read"><tspan x="400">ADDED evidence-read</tspan><tspan x="400" dy="28" class="detail">Read authorized case evidence through APIs.</tspan><tspan x="400" dy="24" class="detail">Keep existing edit and assignment permissions.</tspan></text>
         <g data-snapshot="after" data-grid="336 480 4" transform="translate(920 96)">
           <path data-kind="relationship" data-object-id="sign-in" data-status="unchanged" data-signature="operation=sign-in" data-from="identity" data-to="app" d="M117.333 96 V120 Q117.333 128 109.333 128 H96 Q88 128 88 136 V168" marker-end="url(#existing-app-delta-arrow)" />
@@ -116,7 +116,7 @@
       </svg>
       <svg class="diagram-narrow" viewBox="0 0 336 1512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="existing-app-delta-narrow-title existing-app-delta-narrow-desc">
         <title id="existing-app-delta-narrow-title">Add a capability, preserve the application</title>
-        <desc id="existing-app-delta-narrow-desc">This example adds an AI entry point and read-only investigation while preserving existing case permissions and application components.</desc>
+        <desc id="existing-app-delta-narrow-desc">The case application gains an AI entry point and read-only investigation. Existing case permissions and application components stay unchanged.</desc>
         <defs>
           <marker id="existing-app-delta-narrow-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker>
         </defs>
@@ -153,11 +153,11 @@
         <text x="16" y="592" class="diagram-heading">Changes</text>
         <text x="16" y="624" class="node-name"><tspan x="16">CHANGED app</tspan><tspan x="16" dy="24" class="detail">Add an AI entry point. Keep editing</tspan><tspan x="16" dy="24" class="detail">and assignment unchanged.</tspan></text>
         <text x="16" y="708" class="node-name"><tspan x="16">ADDED ai</tspan><tspan x="16" dy="24" class="detail">Summarize and investigate.</tspan><tspan x="16" dy="24" class="detail">Choose how AI runs in discovery.</tspan></text>
-        <text x="16" y="792" class="node-name"><tspan x="16">ADDED ai-request</tspan><tspan x="16" dy="24" class="detail">The application requests</tspan><tspan x="16" dy="24" class="detail">the new capability.</tspan></text>
-        <text x="16" y="876" class="node-name"><tspan x="16">ADDED evidence-read</tspan><tspan x="16" dy="24" class="detail">Read authorized evidence via APIs.</tspan><tspan x="16" dy="24" class="detail">No new authority to edit or assign.</tspan></text>
+        <text x="16" y="792" class="node-name"><tspan x="16">ADDED ai-request</tspan><tspan x="16" dy="24" class="detail">The application requests</tspan><tspan x="16" dy="24" class="detail">AI assistance.</tspan></text>
+        <text x="16" y="876" class="node-name"><tspan x="16">ADDED evidence-read</tspan><tspan x="16" dy="24" class="detail">Read authorized evidence via APIs.</tspan><tspan x="16" dy="24" class="detail">Keep existing case permissions.</tspan></text>
         <path d="M16 956 H320" class="rule" />
         <text x="16" y="992" class="diagram-heading">After</text>
-        <text x="16" y="1020" class="detail">A bounded AI addition</text>
+        <text x="16" y="1020" class="detail">Read-only AI assistance</text>
         <g data-snapshot="after" data-grid="336 480 4" transform="translate(0 1032)">
           <path data-kind="relationship" data-object-id="sign-in" data-status="unchanged" data-signature="operation=sign-in" data-from="identity" data-to="app" d="M117.333 96 V120 Q117.333 128 109.333 128 H96 Q88 128 88 136 V168" marker-end="url(#existing-app-delta-narrow-arrow)" />
           <path data-kind="relationship" data-object-id="api-auth" data-status="unchanged" data-signature="operation=authorize" data-from="identity" data-to="case-api" d="M218.667 96 V120 Q218.667 128 226.667 128 H244 Q252 128 252 136 V168" marker-end="url(#existing-app-delta-narrow-arrow)" />
@@ -193,7 +193,7 @@
         </g>
       </svg>
     </div>
-    <figcaption>This example adds summaries and investigation while preserving case APIs, authorization, and the system of record. It is not a deployment template. Plain outlines mark unchanged components. Blue outlines mark additions or changes described in the Changes list. The architecture package must specify what the application does when AI is unavailable. It must also define regression checks and rollback.</figcaption>
+    <figcaption>This example adds AI summaries and investigation. Case APIs and authorization stay unchanged, as does the system of record. It is not a deployment template. Plain outlines mark unchanged components. Blue outlines mark additions or changes described in the Changes list. Specify how the application handles AI outages in the architecture package. Include regression checks and a rollback plan.</figcaption>
   </figure>
 </body>
 </html>

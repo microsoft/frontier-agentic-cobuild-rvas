@@ -87,7 +87,7 @@ does not turn an unverified integration into a supported one.
 Give the creator requirements and existing standards:
 
 ```text
-Design this capability inside our existing service application. Reuse its
+/ai-agent-creator Design [capability] inside our existing service application. Reuse its
 identity and business APIs. Compare Copilot Studio, managed Foundry execution,
 and application-owned execution where they fit. For every new UI, API, or host,
 name the requirement that makes it necessary.
