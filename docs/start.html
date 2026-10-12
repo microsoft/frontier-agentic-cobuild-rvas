@@ -448,11 +448,15 @@ The operating team must accept the deployed user journey and take responsibility
 <p>Select <strong>Idea Forge</strong> (<code>idea-forge</code>) in the same application workspace.
 Provide a customer name and industry, with any known pain points:</p>
 <pre><code class="language-text">/idea-forge Find a bounded AI opportunity for [customer] in [industry].
-Use public evidence and identify a safe first proof.
+Research the business and publicly stated priorities on the web.
 </code></pre>
-<p>Idea Forge researches public sources and ranks distinct ideas. Choose one. Idea Forge
-returns a brief with evidence and open questions; the brief is not yet approved.
-Pass it to AI Agent Creator for detailed discovery and architecture approval.</p>
+<p>Idea Forge researches the customer&#39;s business, industry, and publicly stated
+priorities. It returns separate internal and external shortlists, each with up to
+five ideas: two Simple, two Medium, and one Complex. If public evidence cannot
+support that mix, it explains the gaps.</p>
+<p>Choose an idea to receive a brief with evidence and open questions. The brief is
+not yet approved. Invoke AI Agent Creator separately with it for detailed
+discovery and architecture approval.</p>
 <h2 id="updates-and-team-setup">Updates and team setup</h2>
 <p>Each teammate installs the plugin in their own host and checks the project skills.
 Use CLI&#39;s <code>copilot plugin update agentic-cobuild</code> or VS Code&#39;s plugin update action
