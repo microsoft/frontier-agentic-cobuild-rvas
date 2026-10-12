@@ -1,0 +1,16 @@
+{
+  "name": "agentic-cobuild",
+  "owner": { "name": "Microsoft" },
+  "metadata": {
+    "description": "Design and build your own AI application with Agentic Co-build.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "agentic-cobuild",
+      "description": "Find an AI opportunity, define its architecture, and hand off an approved implementation plan.",
+      "version": "1.0.0",
+      "source": "./plugins/agentic-cobuild"
+    }
+  ]
+}

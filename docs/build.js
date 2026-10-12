@@ -1,189 +1,134 @@
 #!/usr/bin/env node
-/** Publish scenario manifests and assets for the static documentation site. */
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
+const marked = require('./assets/js/marked.min.js');
+const inventory = require('../scripts/agentic-skills.json');
 
-const ROOT = path.resolve(__dirname, '..');
-const SCENARIOS_DIR = path.join(ROOT, 'scenarios');
-const OUT_DATA_DIR = path.join(__dirname, 'assets', 'data');
-
-function loadScenarioRegistry() {
-  if (!fs.existsSync(SCENARIOS_DIR)) return [];
-  return fs.readdirSync(SCENARIOS_DIR, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => {
-      const root = path.join(SCENARIOS_DIR, entry.name);
-      const manifestPath = path.join(root, 'manifest.json');
-      if (!fs.existsSync(manifestPath)) {
-        throw new Error(`scenario ${entry.name} is missing manifest.json`);
-      }
-      try {
-        return { root, ...JSON.parse(fs.readFileSync(manifestPath, 'utf8')) };
-      } catch (error) {
-        throw new Error(`scenario ${entry.name} has invalid manifest.json: ${error.message}`);
-      }
-    })
-    .sort((left, right) => {
-      const leftOrder = Number.isFinite(left.order) ? left.order : Number.MAX_SAFE_INTEGER;
-      const rightOrder = Number.isFinite(right.order) ? right.order : Number.MAX_SAFE_INTEGER;
-      return leftOrder - rightOrder || left.name.localeCompare(right.name);
-    });
+function embedDiagrams(content) {
+  return content.replace(/<!-- diagram: ([a-z0-9-]+) -->/g, (_, name) => {
+    const source = fs.readFileSync(path.join(__dirname, 'assets/diagrams', `${name}.html`), 'utf8');
+    const style = source.match(/<style data-diagram-style>([\s\S]*?)<\/style>/);
+    const figure = source.match(/<figure class="intro-diagram"(?: data-family="[a-z-]+")?>[\s\S]*?<\/figure>/);
+    if (!style || !figure) throw new Error(`Diagram ${name} is missing its style or figure.`);
+    return `<style>${style[1]}</style>\n${figure[0]}`;
+  });
 }
 
-function scenarioPathExists(scenario, relativePath) {
-  if (!relativePath || typeof relativePath !== 'string') return false;
-  const target = path.resolve(scenario.root, relativePath);
-  return target.startsWith(`${scenario.root}${path.sep}`) && fs.existsSync(target);
+function renderIndex() {
+  return embedDiagrams(fs.readFileSync(path.join(__dirname, 'index.template.html'), 'utf8'));
 }
 
-function detectScenarioProblems(scenarios) {
-  const problems = [];
-  const ids = new Set();
-  for (const scenario of scenarios) {
-    if (!scenario.id || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(scenario.id)) {
-      problems.push(`${path.basename(scenario.root)} scenario needs a kebab-case id`);
-    }
-    if (!scenario.name || !scenario.tagline || !scenario.customer_outcome || !scenario.owner || !scenario.maturity) {
-      problems.push(`${scenario.id || path.basename(scenario.root)} scenario manifest needs name, tagline, customer_outcome, owner, and maturity`);
-    }
-    if (!Array.isArray(scenario.decision_prompts) || !scenario.decision_prompts.length) {
-      problems.push(`${scenario.id} scenario needs at least one decision prompt`);
-    }
-    if (ids.has(scenario.id)) problems.push(`duplicate scenario id ${scenario.id}`);
-    ids.add(scenario.id);
-    if (!scenarioPathExists(scenario, 'README.md')) problems.push(`${scenario.id} scenario is missing README.md`);
-    if (!scenarioPathExists(scenario, scenario.slides)) problems.push(`${scenario.id} scenario slides ${scenario.slides} missing`);
-    if (!scenarioPathExists(scenario, scenario.accelerator)) problems.push(`${scenario.id} scenario accelerator ${scenario.accelerator} missing`);
-    if (!Array.isArray(scenario.lessons) || !scenario.lessons.length) {
-      problems.push(`${scenario.id} scenario needs at least one lesson`);
-      continue;
-    }
-    if (!Array.isArray(scenario.build_modules) || !scenario.build_modules.length) {
-      problems.push(`${scenario.id} scenario needs at least one build module`);
-    }
-    const moduleIds = new Set();
-    for (const module of scenario.build_modules || []) {
-      if (!module.id || !module.title || !module.summary || !module.outcome) {
-        problems.push(`${scenario.id} build module needs id, title, summary, and outcome`);
-      }
-      if (moduleIds.has(module.id)) problems.push(`${scenario.id} duplicate build module id ${module.id}`);
-      moduleIds.add(module.id);
-      if (Object.hasOwn(module, 'activity_id')) {
-        problems.push(`${scenario.id} build module ${module.id} references a retired activity`);
-      }
-      for (const implementationPath of module.implementation_paths || []) {
-        if (!scenarioPathExists(scenario, implementationPath)) {
-          problems.push(`${scenario.id} build module ${module.id} implementation path ${implementationPath} missing`);
-        }
-      }
-    }
-    const lessonIds = new Set();
-    for (const lesson of scenario.lessons) {
-      if (!lesson.id || !lesson.title || !scenarioPathExists(scenario, lesson.path)) {
-        problems.push(`${scenario.id} lesson needs id, title, and an existing path`);
-      }
-      if (scenarioPathExists(scenario, lesson.path)) {
-        const text = fs.readFileSync(path.join(scenario.root, lesson.path), 'utf8');
-        if (/\]\([^)]*(?:activities\/|(?:activity|reference)\.html)/iu.test(text)) {
-          problems.push(`${scenario.id} lesson ${lesson.id} links to a retired activity`);
-        }
-      }
-      if (lessonIds.has(lesson.id)) problems.push(`${scenario.id} duplicate lesson id ${lesson.id}`);
-      lessonIds.add(lesson.id);
-    }
-    if (scenario.lessons.length !== (scenario.build_modules || []).length ||
-        scenario.lessons.some((lesson, index) => lesson.id !== scenario.build_modules[index]?.id)) {
-      problems.push(`${scenario.id} needs one build module per lesson, with matching IDs and order`);
-    }
-  }
-  return problems;
+const pages = [
+  {
+    slug: 'start',
+    title: 'Start',
+    description: 'Install Agentic Co-build in Copilot CLI or VS Code and design your own AI application in your repository.',
+    heading: 'Start in <span>your repository.</span>',
+    lede: 'Install the plugin and supporting skills. Approve the architecture before starting implementation in a separate session.',
+  },
+  {
+    slug: 'applications',
+    navigationLabel: 'Application types',
+    title: 'What can you build?',
+    description: 'Understand the AI application families covered by the Agentic Co-build design workflow.',
+    heading: 'What can <span>you build?</span>',
+    lede: 'Explore the kinds of AI applications you can bring to discovery, including capabilities added to existing systems.',
+  },
+  {
+    slug: 'architecture-options',
+    navigationLabel: 'Architecture options',
+    title: 'Choose an architecture that fits',
+    description: 'Separate behavior, platform, channel, and ownership before choosing an AI application architecture.',
+    heading: 'Choose an architecture <span>that fits.</span>',
+    lede: 'Check existing capabilities first. Compare platform-managed and custom execution against your requirements.',
+  },
+  {
+    slug: 'existing-applications',
+    navigationLabel: 'Existing applications',
+    title: 'Add AI to an existing application',
+    description: 'Prepare an existing application for architecture-first AI design without assuming a rewrite.',
+    heading: 'Add AI to <span>an existing application.</span>',
+    lede: 'Design a bounded addition. Preserve established interfaces and make reuse or migration decisions explicit.',
+  },
+];
+
+function supportingMarkdown() {
+  const sections = inventory.sources.map((source) =>
+    `### Skills from ${source.repository}\n\n` +
+    `Upstream source: [\`${source.repository}\`](https://github.com/${source.repository}).\n\n` +
+    '| Skill | What it does |\n| --- | --- |\n' +
+    source.skills.map((skill) => {
+      const description = source.descriptions[skill];
+      if (!description) throw new Error(`Missing description for supporting skill ${skill}.`);
+      return `| \`${skill}\` | ${description} |`;
+    }).join('\n') + '\n\n```bash\n' +
+    `npx --yes ${inventory.installer} add ${source.repository} --skill ${source.skills.join(' ')} --agent ${inventory.agent} --copy --yes\n` +
+    '```\n');
+  return '# Supporting skills\n\n' +
+    '<!-- Generated from scripts/agentic-skills.json by npm run build. -->\n\n' +
+    `Run these commands from your application directory with Node.js ${inventory.minimumNode} or newer.\n` +
+    'Review the selected skills and inspect existing installations before running these commands.\n\n' +
+    sections.join('\n');
 }
 
-function publishScenarioAsset(source) {
-  const name = path.basename(source);
-  if (['__pycache__', '.venv', 'venv', 'node_modules', '.git', '.azure',
-    '.foundry', '.runtime', '.pytest_cache', 'logs', 'journals'].includes(name)) return false;
-  if (/^\.env(?:\.|$)/u.test(name) && name !== '.env.sample') return false;
-  if (/^\.deployment/u.test(name)) return false;
-  return !/\.(?:excalidraw|py[co]|db|sqlite3?)(?:-(?:wal|shm|journal))?$|\.log$|\.journal$/u.test(name);
-}
-
-function copyScenarioAssets(scenarios, outputRoot = path.join(OUT_DATA_DIR, 'scenarios')) {
-  fs.rmSync(outputRoot, { recursive: true, force: true });
-  for (const scenario of scenarios) {
-    fs.cpSync(scenario.root, path.join(outputRoot, scenario.id), {
-      recursive: true,
-      filter: publishScenarioAsset,
-    });
-    const readmePath = path.join(outputRoot, scenario.id, 'README.md');
-    if (fs.existsSync(readmePath)) {
-      const lessonByPath = new Map((scenario.lessons || []).map((lesson) => [lesson.path, lesson]));
-      const rewritten = fs.readFileSync(readmePath, 'utf8').replace(
-        /\]\((lessons\/[^)#]+\.md)(#[^)]+)?\)/g,
-        (match, lessonPath, hash = '') => {
-          const lesson = lessonByPath.get(lessonPath);
-          return lesson
-            ? `](lesson.html?scenario=${encodeURIComponent(scenario.id)}&lesson=${encodeURIComponent(lesson.id)}${hash})`
-            : match;
-        },
-      );
-      fs.writeFileSync(readmePath, rewritten);
-    }
-  }
-}
-
-function scenarioOutput(scenario) {
-  const assetBase = `assets/data/scenarios/${scenario.id}/`;
-  return {
-    id: scenario.id,
-    name: scenario.name,
-    tagline: scenario.tagline,
-    order: Number.isFinite(scenario.order) ? scenario.order : null,
-    customer_outcome: scenario.customer_outcome,
-    maturity: scenario.maturity || 'initial',
-    level: scenario.level || 'guided',
-    duration_minutes: scenario.duration_minutes || 0,
-    stage: scenario.stage || '',
-    owner: scenario.owner || 'Unassigned',
-    decision_prompts: scenario.decision_prompts || [],
-    lessons: (scenario.lessons || []).map((lesson, index) => ({
-      ...lesson,
-      sequence: index + 1,
-      content_path: `${assetBase}${lesson.path}`,
-      lesson_path: `lesson.html?scenario=${encodeURIComponent(scenario.id)}&lesson=${encodeURIComponent(lesson.id)}`,
-    })),
-    build_modules: (scenario.build_modules || []).map((module, index) => ({
-      ...module,
-      sequence: index + 1,
-    })),
-    asset_base: assetBase,
-    readme_path: `${assetBase}README.md`,
-    slides_path: `${assetBase}${scenario.slides}`,
-    slides_pdf_path: `assets/downloads/${scenario.id}.pdf`,
-    slides_pptx_path: `assets/downloads/${scenario.id}.pptx`,
+function renderPage(page) {
+  const markdown = fs.readFileSync(path.join(__dirname, `${page.slug}.md`), 'utf8')
+    .replace('<!-- upstream-commands -->', supportingMarkdown().replace(/^# Supporting skills[\s\S]*?(?=### )/, ''));
+  const renderer = new marked.Renderer();
+  const anchors = new Set();
+  renderer.heading = (text, level, raw) => {
+    const base = raw.replace(/<[^>]+>/g, '').replace(/[`*]/g, '').trim().toLowerCase()
+      .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+    let id = base;
+    let suffix = 1;
+    while (anchors.has(id)) id = `${base}-${suffix++}`;
+    anchors.add(id);
+    return `<h${level} id="${id}">${text}</h${level}>\n`;
   };
-}
-
-function main() {
-  const scenarios = loadScenarioRegistry();
-  const problems = detectScenarioProblems(scenarios);
-  if (problems.length) {
-    console.error('Build failed: invalid scenarios');
-    problems.forEach((problem) => console.error(`  - ${problem}`));
-    process.exit(1);
-  }
-  fs.rmSync(OUT_DATA_DIR, { recursive: true, force: true });
-  fs.mkdirSync(OUT_DATA_DIR, { recursive: true });
-  copyScenarioAssets(scenarios);
-  fs.writeFileSync(
-    path.join(OUT_DATA_DIR, 'platform.json'),
-    JSON.stringify({ scenarios: scenarios.map(scenarioOutput) }, null, 2),
+  renderer.table = (header, body) =>
+    '<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">\n' +
+    `<table>\n<thead>\n${header}</thead>\n<tbody>\n${body}</tbody>\n</table>\n</div>\n`;
+  const content = marked.parse(markdown, { renderer }).replace(
+    /<!-- application-family -->\s*(<h3 id="([^"]+)">[\s\S]*?)\s*(<!-- diagram: family-[a-z-]+ -->)/g,
+    (_, copy, id, diagram) =>
+      `<section class="application-family" aria-labelledby="${id}">\n` +
+      `<div class="application-family-copy">${copy}</div>\n${diagram}\n</section>`
   );
-  console.log(`Built platform.json and assets for ${scenarios.length} scenarios.`);
+  const body = embedDiagrams(content);
+  const pageLinks = page.slug === 'start' ? '' : '<div class="guide-pages">\n' +
+    pages.filter((candidate) => candidate.slug !== 'start').map((candidate) =>
+      `<a href="${candidate.slug}.html"${candidate.slug === page.slug ? ' aria-current="page"' : ''}>${candidate.navigationLabel}</a>`
+    ).join('\n') + '\n</div>\n';
+  const primaryLinks = '<a href="index.html">Overview</a>\n' +
+    `<a href="applications.html"${page.slug !== 'start' ? ' aria-current="page"' : ''}>Learn</a>\n` +
+    `<a href="start.html"${page.slug === 'start' ? ' aria-current="page"' : ''}>Start</a>\n` +
+    '<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>';
+  return fs.readFileSync(path.join(__dirname, 'start.template.html'), 'utf8')
+    .replace('{{page-title}}', () => page.title)
+    .replace('{{page-description}}', () => page.description)
+    .replace('<!-- primary-links -->', () => primaryLinks)
+    .replace('<!-- page-heading -->', () => page.heading)
+    .replace('<!-- page-lede -->', () => page.lede)
+    .replace(/[ \t]*<!-- guide-navigation -->/, () => pageLinks
+      ? `<nav class="guide-nav" aria-label="Reading navigation">\n${pageLinks}</nav>`
+      : '')
+    .replace('<!-- guide-body -->', () => body);
 }
 
-if (require.main === module) main();
+function renderGuide() {
+  return renderPage(pages[0]);
+}
 
-module.exports = { copyScenarioAssets, detectScenarioProblems, loadScenarioRegistry, scenarioOutput };
+function build() {
+  fs.writeFileSync(path.join(__dirname, 'index.html'), renderIndex());
+  fs.writeFileSync(path.join(__dirname, 'supporting-skills.md'), supportingMarkdown());
+  for (const page of pages) {
+    fs.writeFileSync(path.join(__dirname, `${page.slug}.html`), renderPage(page));
+  }
+  console.log(`Built Overview, ${pages.length} reading pages, and supporting skill commands.`);
+}
+
+if (require.main === module) build();
+module.exports = { build, pages, renderIndex, renderPage, renderGuide, supportingMarkdown };

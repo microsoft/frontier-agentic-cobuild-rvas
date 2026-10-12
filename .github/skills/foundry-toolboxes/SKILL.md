@@ -14,10 +14,10 @@ description: Curate intent-based Microsoft Foundry Toolboxes (preview) — one M
 npx skills add microsoft/skills --skill foundry-toolboxes
 ```
 
-**Maps to:** Scenario tool integrations and the Operational Agents approval contract.
+**Use for:** Tool-integration guidance when the approved application architecture needs it.
 
 **Before implementing:** query `foundry-mcp` and `microsoft-docs` for the current toolbox API.
-The local execution and approval example is in `scenarios/operational-agents/accelerator/`.
-A toolbox adapter is separate integration work; preserve the scenario's exact-operation approval rules.
+Application-specific adapters require separate integration work. Preserve the
+application's authorization and exact-operation approval requirements.
 
 **Upstream source:** `.github/plugins/microsoft-foundry/skills/foundry-toolboxes/`

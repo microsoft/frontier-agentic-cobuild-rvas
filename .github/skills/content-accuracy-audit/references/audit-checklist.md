@@ -1,78 +1,35 @@
-# Audit Checklist (per category)
+# Audit checklist
 
-Detailed criteria for [content-accuracy-audit](../SKILL.md). Work top-to-bottom for each
-area in scope. Cite an authoritative source (Microsoft Learn URL or MCP result) for every
-claim you confirm or refute.
+Use for the [content audit](../SKILL.md). Cite the primary source for each
+verified or refuted claim.
 
-## 1. SDK code snippets (`*.py`, fenced blocks in `*.md`)
+## Plugin and resources
 
-- [ ] Every imported module/class/function exists in the **current** package version
-      (verify via `microsoft_docs_search` / `microsoft_code_sample_search`).
-- [ ] Method names, argument names, and required kwargs match current signatures
-      (e.g. `AIProjectClient`, `configure_azure_monitor`, `AIProjectInstrumentor`,
-      `azure-ai-evaluation` evaluators).
-- [ ] Deprecated/renamed symbols are flagged as **Outdated** with the replacement.
-- [ ] Auth uses `DefaultAzureCredential` (keyless-first); key-based examples are flagged.
-- [ ] Tracing snippets set `AZURE_EXPERIMENTAL_ENABLE_GENAI_TRACING=true` and
-      `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true` **before importing** the SDK.
-- [ ] Imports referenced in `facilitator-reference.md` are actually used/checked by the matching `validate.py`.
+- Confirm manifest format and marketplace paths with official host guidance.
+- Resolve every skill reference from its installed directory.
+- Preserve local assets, attribution, and separate artwork terms.
+- Keep customer outputs outside the installed plugin.
+- Confirm discovery, architecture approval, and independent-review gates.
 
-## 2. CLI commands (`az`, `azd`, `azd ai agent`, `func`, `npx skills`)
+## Setup
 
-- [ ] Command, subcommand, and flags exist and are spelled correctly.
-- [ ] `azd up` / `azd env get-values` / provisioning flow matches `azure.yaml` + `infra/`.
-- [ ] Skill stub install commands (`npx skills add microsoft/skills --skill <name>`) name a
-      real skill and the `<name>` matches the folder.
+- Verify upstream skill names and the pinned installer's flags.
+- Check the Node requirement against the installer package.
+- Test empty and existing workspaces, conflicts, reruns, and partial failures.
+- Confirm project-only writes and preservation of instructions and MCP settings.
+- Distinguish native plugin scope from project-local supporting skills.
 
-## 3. Environment variables
+## Documentation and product facts
 
-- [ ] Var names match the selected scenario's `.env.sample`, deployment outputs, and code.
-      The root `.env.sample` covers only shared infrastructure.
-- [ ] Environment vars referenced by checks exist (`AZURE_SEARCH_ENDPOINT`,
-      `AZURE_SEARCH_INDEX_NAME`, `AZURE_AI_PROJECT_ENDPOINT`, `AZURE_AI_MODEL_DEPLOYMENT_NAME`,
-      `APPLICATIONINSIGHTS_CONNECTION_STRING`, etc.).
-- [ ] No real secrets are committed anywhere (`.env` must not be in the repo).
+- Verify Microsoft SDK and capability claims with current Microsoft Learn evidence.
+- Verify host-specific commands against CLI and VS Code documentation separately.
+- Resolve local paths and anchors.
+- Compare generated guide and commands with their sources.
+- Explain manual review or unavailable capabilities instead of claiming success.
+- Keep architecture approval separate from implementation and deployment.
 
-## 4. Infra (`infra/*.bicep`, `azure.yaml`, `scripts/*.sh`)
+## Findings
 
-- [ ] Bicep resource types and `apiVersion` values are valid/current (verify via `azure` MCP /
-      `bicepschema`).
-- [ ] Bash fallback (`scripts/deploy.sh`) produces the same `.env` contract as `azd up`.
-- [ ] Region / SKU / model deployment names referenced in docs exist and are available.
-
-## 5. Dependencies (`requirements.txt`, scenario requirements)
-
-- [ ] Every package referenced in code is pinned and present.
-- [ ] Pinned versions are real and not yanked; flag suspiciously old/preview pins.
-
-## 6. Feature & preview claims
-
-- [ ] "Foundry does X / supports Y" statements confirmed against current docs or `foundry-mcp`.
-- [ ] GA vs **preview** status is correct (re-confirm every time — these change fast).
-- [ ] No references to removed curriculum pieces (**Prompt Flow** / `promptflow` / `.flow.dag`).
-
-## 7. Cross-references & structure
-
-- [ ] Internal links resolve (file paths, `#anchors`, "see Step N" still points to that step).
-- [ ] File paths named in prose exist at that path.
-- [ ] `facilitator-reference.md` step order matches `README.md` and the `validate.py` checks.
-- [ ] `docs/assets/data/` matches source scenarios (report drift; don't hand-edit).
-
-## 8. Pacing & pedagogy
-
-- [ ] Each lesson states prerequisites and what the reader builds.
-- [ ] Difficulty progresses without unexplained jumps; new concepts are introduced before use.
-- [ ] Scenario lessons carry the information a participant needs; no parallel curriculum is required.
-- [ ] Time/effort estimates (if present) are plausible for the stated steps.
-
-## Severity reference
-
-| Category | Severity |
-|---|---|
-| Hallucination (nonexistent API/flag/feature) | Critical |
-| Outdated (renamed/deprecated/superseded) | High |
-| Incorrect (wrong value/order; solution fails validator) | High |
-| Inconsistent (env var/path/version mismatch) | Medium |
-| Broken reference (dead link / wrong path / stale step) | Medium |
-| Pacing (jump / missing prereq / unexplained concept) | Low–Medium |
-| Style / clarity | Low |
+Nonexistent APIs or flags are critical. Incorrect or outdated instructions are
+high severity when they block or misdirect the workflow. Broken references and
+cross-file inconsistencies are medium. Cosmetic clarity issues are low.

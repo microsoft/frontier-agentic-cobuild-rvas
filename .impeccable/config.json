@@ -13,6 +13,43 @@
         "value": "inter",
         "createdAt": "2026-09-29T08:04:14.617Z",
         "reason": "DESIGN.md commits Inter as the body face and the slide surface now self-hosts it consistently."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/index.html"
+        ],
+        "createdAt": "2026-10-08T12:45:02.757Z",
+        "reason": "Desktop and mobile screenshots confirm adequate container padding. Border-top rules separate open sections rather than enclosing text."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/index.template.html"
+        ],
+        "createdAt": "2026-10-09T06:55:27.553Z",
+        "reason": "Agent: browser confirms existing artifact rows have 14px top padding and bordered tool rows have 22px; the first tool row has no border."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/assets/diagrams/family-*.html"
+        ],
+        "createdAt": "2026-10-09T07:35:39.767Z",
+        "reason": "Agent: these standalone SVGs position text with SVG coordinates, not CSS padding. Browser checks at 320 through 1440px verify node insets and at least 12px labels."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/assets/diagrams/approval-handoff.html",
+          "docs/assets/diagrams/existing-app-delta.html"
+        ],
+        "createdAt": "2026-10-09T07:47:28.399Z",
+        "reason": "Agent: SVG coordinates supply frame insets and node padding; browser text and connector geometry is checked independently."
       }
     ]
   }

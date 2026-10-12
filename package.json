@@ -1,29 +1,17 @@
 {
   "name": "agentic-cobuild",
   "version": "1.0.0",
-  "description": "Microsoft Foundry session static site builder",
+  "description": "Agentic Co-build plugin, repository setup, and documentation",
   "scripts": {
     "test": "node --test scripts/test-docs.js",
-    "test:scenarios": "python3 -m unittest discover -s scenarios/ai-grounding/accelerator/scripts -p test_offline.py && python3 -m unittest discover -s scenarios/content-understanding/accelerator -p test_normalize.py && python3 -m unittest discover -s scenarios/avatar-onboarding/accelerator -p test_content_pack.py && python3 -B scenarios/operational-agents/accelerator/validate.py",
+    "test:diagrams": "python3 -B -m unittest discover -s plugins/agentic-cobuild/skills/cloud-architecture-diagram/tests",
     "audit:docs": "node scripts/audit-docs.js",
     "audit:docs:source": "node scripts/audit-docs.js --source",
     "audit:docs:generated": "node scripts/audit-docs.js --generated",
-    "validate:diagrams": "python3 scripts/audit-diagrams.py",
-    "validate:scenarios": "python3 scripts/validate-scenarios.py && npm run validate:diagrams",
-    "build": "npm run audit:docs:source && node docs/build.js && node scripts/build-slides.js && npm run audit:docs:generated"
+    "build": "node docs/build.js && npm run audit:docs"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22.20.0"
   },
-  "license": "MIT",
-  "devDependencies": {
-    "@fontsource/inter": "^5.2.8",
-    "@fontsource/outfit": "^5.2.8",
-    "jszip": "^3.10.2",
-    "pdfkit": "^0.17.2",
-    "pptxgenjs": "^4.0.0"
-  },
-  "overrides": {
-    "image-size": "2.0.4"
-  }
+  "license": "MIT"
 }

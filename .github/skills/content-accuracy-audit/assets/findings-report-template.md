@@ -29,4 +29,4 @@
 
 ## Fixes applied
 
-- <list of files edited + re-validation result, e.g. `python3 scenarios/operational-agents/accelerator/validate.py` → PASS>
+- <list of source files edited and the relevant build/test results>
