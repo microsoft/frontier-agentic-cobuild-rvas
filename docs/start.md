@@ -220,12 +220,17 @@ Provide a customer name and industry, with any known pain points:
 
 ```text
 /idea-forge Find a bounded AI opportunity for [customer] in [industry].
-Use public evidence and identify a safe first proof.
+Research the business and publicly stated priorities on the web.
 ```
 
-Idea Forge researches public sources and ranks distinct ideas. Choose one. Idea Forge
-returns a brief with evidence and open questions; the brief is not yet approved.
-Pass it to AI Agent Creator for detailed discovery and architecture approval.
+Idea Forge researches the customer's business, industry, and publicly stated
+priorities. It returns separate internal and external shortlists, each with up to
+five ideas: two Simple, two Medium, and one Complex. If public evidence cannot
+support that mix, it explains the gaps.
+
+Choose an idea to receive a brief with evidence and open questions. The brief is
+not yet approved. Invoke AI Agent Creator separately with it for detailed
+discovery and architecture approval.
 
 ## Updates and team setup
 
