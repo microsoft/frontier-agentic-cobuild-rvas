@@ -11,7 +11,10 @@ preview. Reading-page headers and navigation use light blue surfaces; navy marks
 the selected page and table headers. Links use a darker blue for readable
 contrast. Body content stays white except for the alternating application-family
 bands described below. Diagrams stay white. Learn page navigation uses
-three text tabs with an underline marking the current page.
+three text tabs with a pale-blue fill and navy underline marking the current page.
+Navigation and supporting surfaces use a quiet blue tint; reading-page headers
+use a slightly stronger blue wash. Reserve pale green for successful copying
+and warm peach for copy failures, always paired with explicit feedback text.
 
 The homepage leads to repository setup. Its architecture-file preview describes
 the actual handoff rather than displaying a catalog. Idea Forge stays secondary

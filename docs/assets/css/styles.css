@@ -11,9 +11,14 @@
   --c-action: #0960c1;
   --c-action-hover: #064d9e;
   --c-line: #dde6f7;
-  --c-paper: #f5f8fe;
+  --c-paper: #f0f5ff;
+  --c-wash: #eaf2ff;
   --c-tint: #dde6f7;
   --c-on-dark: #e0ebff;
+  --c-success-bg: #d9f3e7;
+  --c-success-fg: #16553d;
+  --c-error-bg: #ffeadf;
+  --c-error-fg: #783c23;
   --font-display: "Outfit", "Segoe UI", sans-serif;
   --font-body: "Inter", "Segoe UI", sans-serif;
   --font-mono: "Cascadia Code", ui-monospace, monospace;
@@ -36,7 +41,7 @@ img { max-width: 100%; }
 .wrap { max-width: 1200px; padding: 0 32px; margin: 0 auto; }
 .skip-link { position: fixed; left: 16px; top: -100px; z-index: 20; padding: 12px 20px; background: #fff; }
 .skip-link:focus { top: 12px; }
-.nav { position: sticky; top: 0; z-index: 10; background: #fff; border-bottom: 1px solid var(--c-line); }
+.nav { position: sticky; top: 0; z-index: 10; background: var(--c-paper); border-bottom: 1px solid var(--c-line); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; min-height: 58px; gap: 24px; }
 .brand { display: flex; align-items: center; }
 .brand img { display: block; width: auto; height: 32px; }
@@ -83,7 +88,7 @@ img { max-width: 100%; }
 .closing p { max-width: 70ch; }
 .footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding-top: 32px; padding-bottom: 32px; border-top: 1px solid var(--c-line); font-size: 0.88rem; }
 .footer p { margin: 0; color: var(--c-dim); }
-.guide-hero { padding: 56px 0; background: var(--c-paper); color: var(--c-heading); border-bottom: 1px solid var(--c-line); }
+.guide-hero { padding: 56px 0; background: var(--c-wash); color: var(--c-heading); border-bottom: 1px solid var(--c-line); }
 .guide-hero h1 { color: var(--c-heading); font-size: clamp(2.4rem, 4vw, 3.6rem); }
 .guide-hero h1 span { color: var(--c-action); }
 .guide-hero .lede { color: var(--c-dim); margin-bottom: 0; }
@@ -95,7 +100,7 @@ img { max-width: 100%; }
 .guide-pages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--c-line); margin-bottom: 24px; }
 .guide-pages a { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 12px 16px; border-bottom: 2px solid transparent; text-align: center; }
 .guide-pages a:hover { background: var(--c-paper); }
-.guide-pages a[aria-current] { border-bottom-color: var(--c-heading); color: var(--c-heading); font-weight: 600; }
+.guide-pages a[aria-current] { background: var(--c-paper); border-bottom-color: var(--c-heading); color: var(--c-heading); font-weight: 600; }
 .guide-body { min-width: 0; }
 .guide-body > :not(.intro-diagram):not(style):not(.application-family) { max-width: var(--reading-width); margin-left: auto; margin-right: auto; }
 .guide-body .intro-diagram { margin-top: 40px; margin-bottom: 40px; }
@@ -135,10 +140,13 @@ img { max-width: 100%; }
 .guide-table td, .guide-table th { overflow-wrap: normal; }
 .copy-command { position: absolute; right: 12px; top: 10px; min-width: 88px; min-height: 44px; padding: 8px 12px; border: 1px solid #8399ba; border-radius: 4px; background: #183d70; color: #fff; cursor: pointer; font-family: var(--font-body); font-size: 0.75rem; }
 .copy-command:hover { background: var(--c-action); }
-.copy-command[data-state="copied"] { background: var(--c-on-dark); color: var(--c-heading); border-color: var(--c-on-dark); }
+.copy-command[data-state="copied"] { background: var(--c-success-bg); color: var(--c-success-fg); border-color: var(--c-success-bg); }
+.copy-command[data-state="error"] { background: var(--c-error-bg); color: var(--c-error-fg); border-color: var(--c-error-bg); }
 .copy-command[aria-disabled="true"] { cursor: wait; }
 .copy-command:focus-visible { outline-color: #fff; }
 .copy-status { display: block; min-height: calc(12px + 1.5em); padding-top: 12px; color: var(--c-on-dark); font-family: var(--font-body); font-size: 0.8rem; line-height: 1.5; white-space: normal; }
+.guide-body pre:has(.copy-command[data-state="copied"]) .copy-status { color: var(--c-success-bg); }
+.guide-body pre:has(.copy-command[data-state="error"]) .copy-status { color: var(--c-error-bg); }
 @media (prefers-reduced-motion: no-preference) {
   .copy-command, .heading-link, .nav-links a { transition: background-color 140ms ease-out, color 140ms ease-out; }
 }
@@ -151,7 +159,7 @@ img { max-width: 100%; }
 @media (max-width: 700px) {
   .wrap { padding-left: 20px; padding-right: 20px; }
   .nav-toggle { display: flex; }
-  .nav-links { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #fff; padding: 24px; border-bottom: 1px solid var(--c-line); }
+  .nav-links { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--c-paper); padding: 24px; border-bottom: 1px solid var(--c-line); }
   .nav-links.open { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
   .hero { padding: 56px 0; }
   .hero-actions { gap: 20px; }
