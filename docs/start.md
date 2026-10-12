@@ -129,7 +129,7 @@ You do not need to choose the platform or runtime first.
 For a new application:
 
 ```text
-Design an AI maintenance assistant for property managers that triages
+/ai-agent-creator Design an AI maintenance assistant for property managers that triages
 resident requests and prepares work orders for approval. Account for our
 existing enterprise identity and operating environment.
 ```
@@ -137,7 +137,7 @@ existing enterprise identity and operating environment.
 For an existing application:
 
 ```text
-Add evidence-backed report summarization to this existing application.
+/ai-agent-creator Add evidence-backed report summarization to this existing application.
 Inspect its current stack, preserve established interfaces, and account
 for our enterprise data-access and deployment constraints.
 ```
