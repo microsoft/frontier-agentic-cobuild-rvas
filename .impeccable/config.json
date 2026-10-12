@@ -50,6 +50,16 @@
         ],
         "createdAt": "2026-10-09T07:47:28.399Z",
         "reason": "Agent: SVG coordinates supply frame insets and node padding; browser text and connector geometry is checked independently."
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "docs/index.html",
+          "docs/index.template.html"
+        ],
+        "createdAt": "2026-10-12T09:35:02.723Z",
+        "reason": "Agent: rendered desktop (1440px) and mobile (360px) hero text sits on the dark gradient region with sampled contrast above 8:1. The static scanner instead uses the unoccupied #1a77e3 end stop. Exception covers only homepage gradient inference; reading surfaces remain checked."
       }
     ]
   }

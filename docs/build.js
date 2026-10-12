@@ -85,7 +85,12 @@ function renderPage(page) {
     let suffix = 1;
     while (anchors.has(id)) id = `${base}-${suffix++}`;
     anchors.add(id);
-    return `<h${level} id="${id}">${text}</h${level}>\n`;
+    const label = text.replace(/<[^>]+>/g, '').replace(/"/g, '&quot;');
+    const permalink = '<a class="heading-link" href="#' + id + '" aria-label="Link to ' + label + '">' +
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">' +
+      '<path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" />' +
+      '</svg></a>';
+    return `<h${level} id="${id}">${text}${permalink}</h${level}>\n`;
   };
   renderer.table = (header, body) =>
     '<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">\n' +

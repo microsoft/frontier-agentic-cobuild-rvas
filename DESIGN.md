@@ -27,6 +27,14 @@ two columns on narrow screens. Command blocks wrap to their available width. The
 button preserves the original text and reports failures. Maintain visible keyboard focus and
 readable contrast.
 
+Command blocks name their destination and acknowledge copying with a short
+handoff cue. Reserve space for feedback so copying does not move the code.
+Section-link controls stay visible on touch and keyboard paths. A linked heading
+is underlined on arrival. Homepage artifact rows link to their setup or handoff
+section; they do not imply that an architecture file already exists.
+Use short color transitions for interaction feedback, with no motion under
+reduced-motion preferences. Mobile navigation restores focus on Escape.
+
 Intro figures scale to fit on wide screens and switch to stacked compositions
 when their container becomes narrow. Preserve approval gates and matching
 before/after topology; never hide content to remove a scrollbar.

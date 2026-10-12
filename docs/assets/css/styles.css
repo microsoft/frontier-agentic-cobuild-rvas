@@ -61,9 +61,12 @@ img { max-width: 100%; }
 .host-note { margin: 28px 0 0; color: #c9dbf7; font-size: 0.85rem; }
 .architecture-preview { padding: 32px; background: #fff; color: var(--c-heading); border: 1px solid var(--c-line); border-radius: 8px; }
 .preview-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 28px; }
-.artifact-row { padding: 14px 0; border-top: 1px solid var(--c-line); }
+.artifact-row { display: grid; grid-template-columns: minmax(0, 1fr) 20px; column-gap: 12px; padding: 14px 0; border-top: 1px solid var(--c-line); text-decoration: none; }
 .artifact-row code { display: block; color: var(--c-action); }
 .artifact-row span { color: var(--c-dim); font-size: 0.88rem; }
+.artifact-row svg { grid-column: 2; grid-row: 1 / 3; align-self: center; color: var(--c-action); }
+.artifact-row:hover code { text-decoration: underline; text-underline-offset: 0.2em; }
+.architecture-preview .artifact-row:focus-visible { outline-color: var(--c-accent); }
 .preview-boundary { padding: 16px; background: var(--c-paper); color: var(--c-heading); font-size: 0.85rem; margin: 24px 0 0; border-radius: 6px; }
 .section { padding-top: 88px; padding-bottom: 88px; }
 .section-intro { max-width: 70ch; margin-bottom: 48px; }
@@ -100,6 +103,9 @@ img { max-width: 100%; }
 .guide-body h2 { margin-top: 56px; font-size: 1.95rem; }
 .guide-body > h2:first-child { margin-top: 0; padding-top: 0; border: 0; }
 .guide-body h3 { margin-top: 32px; margin-bottom: 12px; }
+.heading-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin-left: 6px; vertical-align: middle; border-radius: 4px; color: var(--c-action); }
+.heading-link:hover, .heading-link:focus-visible { background: var(--c-tint); }
+.guide-body h2:target, .guide-body h3:target { text-decoration: underline; text-decoration-color: var(--c-accent); text-decoration-thickness: 2px; text-underline-offset: 6px; }
 .guide-body > .application-family { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: 56px; max-width: none; margin: 0; padding: 48px 0; }
 .application-family::before { content: ""; position: absolute; z-index: -1; inset: 0 -24px; background: #fff; border-top: 1px solid var(--c-line); }
 .application-family:nth-of-type(even)::before { background: var(--c-paper); }
@@ -116,8 +122,9 @@ img { max-width: 100%; }
 .guide-body .application-family .intro-diagram { width: 100%; max-width: 400px; margin: 0 auto; }
 .guide-body :not(pre) > code { padding: 2px 4px; border-radius: 3px; background: var(--c-paper); color: var(--c-heading); }
 .guide-body p, .guide-body li { font-size: 0.98rem; }
-.guide-body pre { position: relative; max-width: 100%; margin: 24px 0; padding: 44px 22px 22px; border-radius: 7px; background: #032254; color: #e5efff; white-space: pre-wrap; overflow-wrap: anywhere; }
+.guide-body pre { position: relative; max-width: 100%; margin: 24px 0; padding: 64px 22px 22px; border-radius: 7px; background: #032254; color: #e5efff; white-space: pre-wrap; overflow-wrap: anywhere; }
 .guide-body pre code { font-size: 0.84rem; }
+.command-label { position: absolute; top: 20px; left: 22px; max-width: calc(100% - 142px); color: var(--c-on-dark); font-family: var(--font-body); font-size: 0.75rem; line-height: 1.4; white-space: normal; }
 .guide-body table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.88rem; }
 .guide-body td, .guide-body th { padding: 14px 12px; text-align: left; border-bottom: 1px solid var(--c-line); vertical-align: top; overflow-wrap: anywhere; }
 .guide-body th { background: var(--c-heading); color: #fff; }
@@ -126,10 +133,15 @@ img { max-width: 100%; }
 .guide-table:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 3px; }
 .guide-table table { margin: 0; }
 .guide-table td, .guide-table th { overflow-wrap: normal; }
-.copy-command { position: absolute; right: 12px; top: 10px; padding: 4px 10px; border: 1px solid #8399ba; border-radius: 4px; background: #183d70; color: #fff; cursor: pointer; font: inherit; font-size: 0.75rem; }
+.copy-command { position: absolute; right: 12px; top: 10px; min-width: 88px; min-height: 44px; padding: 8px 12px; border: 1px solid #8399ba; border-radius: 4px; background: #183d70; color: #fff; cursor: pointer; font-family: var(--font-body); font-size: 0.75rem; }
 .copy-command:hover { background: var(--c-action); }
+.copy-command[data-state="copied"] { background: var(--c-on-dark); color: var(--c-heading); border-color: var(--c-on-dark); }
+.copy-command[aria-disabled="true"] { cursor: wait; }
 .copy-command:focus-visible { outline-color: #fff; }
-.copy-status { display: block; padding-top: 8px; color: var(--c-on-dark); white-space: normal; }
+.copy-status { display: block; min-height: calc(12px + 1.5em); padding-top: 12px; color: var(--c-on-dark); font-family: var(--font-body); font-size: 0.8rem; line-height: 1.5; white-space: normal; }
+@media (prefers-reduced-motion: no-preference) {
+  .copy-command, .heading-link, .nav-links a { transition: background-color 140ms ease-out, color 140ms ease-out; }
+}
 @media (max-width: 960px) {
   .hero-grid { gap: 36px; grid-template-columns: 1fr; }
   .architecture-preview { max-width: 640px; }
@@ -152,6 +164,7 @@ img { max-width: 100%; }
   .guide-pages { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 8px; margin-bottom: 20px; }
   .guide-pages a { justify-content: flex-start; padding: 12px 8px; text-align: left; line-height: 1.4; }
   .guide-body h2 { margin-top: 40px; font-size: 1.75rem; }
+  .copy-status { min-height: calc(12px + 4.5em); }
   .guide-body > .application-family { padding-top: 32px; padding-bottom: 32px; }
   .application-family::before { left: -12px; right: -12px; }
   .guide-body td, .guide-body th { padding: 10px 8px; }
