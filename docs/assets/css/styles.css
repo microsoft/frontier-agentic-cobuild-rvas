@@ -97,8 +97,8 @@ img { max-width: 100%; }
 .guide-nav { margin-bottom: 48px; font-size: 0.94rem; }
 .guide-nav a { color: var(--c-heading); text-decoration: none; }
 .guide-nav a:hover { color: var(--c-action); text-decoration: underline; }
-.guide-pages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--c-line); margin-bottom: 24px; }
-.guide-pages a { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 12px 16px; border-bottom: 2px solid transparent; text-align: center; }
+.guide-pages { display: flex; overflow-x: auto; border-bottom: 1px solid var(--c-line); margin-bottom: 24px; scrollbar-width: thin; scrollbar-color: var(--c-line) transparent; scroll-snap-type: x proximity; }
+.guide-pages a { display: flex; flex: 1 0 11rem; align-items: center; justify-content: center; min-height: 56px; padding: 12px 16px; border-bottom: 2px solid transparent; text-align: center; white-space: nowrap; scroll-snap-align: start; }
 .guide-pages a:hover { background: var(--c-paper); }
 .guide-pages a[aria-current] { background: var(--c-paper); border-bottom-color: var(--c-heading); color: var(--c-heading); font-weight: 600; }
 .guide-body { min-width: 0; }
@@ -169,8 +169,8 @@ img { max-width: 100%; }
   .tool-section { padding: 56px 0; }
   .guide-layout { padding-top: 24px; padding-bottom: 56px; }
   .guide-nav { margin-bottom: 32px; }
-  .guide-pages { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 8px; margin-bottom: 20px; }
-  .guide-pages a { justify-content: flex-start; padding: 12px 8px; text-align: left; line-height: 1.4; }
+  .guide-pages { margin-bottom: 20px; }
+  .guide-pages a { flex-basis: auto; min-width: max-content; padding: 12px 16px; line-height: 1.4; }
   .guide-body h2 { margin-top: 40px; font-size: 1.75rem; }
   .copy-status { min-height: calc(12px + 4.5em); }
   .guide-body > .application-family { padding-top: 32px; padding-bottom: 32px; }

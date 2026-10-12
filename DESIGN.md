@@ -13,7 +13,8 @@ Reading-page headers and navigation use light blue surfaces; navy marks
 the selected page and table headers. Links use a darker blue for readable
 contrast. Body content stays white except for the alternating application-family
 bands described below. Diagrams stay white. Learn page navigation uses
-three text tabs with a pale-blue fill and navy underline marking the current page.
+one horizontal text-tab strip with a pale-blue fill and navy underline marking
+the current page.
 Navigation and supporting surfaces use a quiet blue tint; reading-page headers
 use a slightly stronger blue wash. Reserve pale green for successful copying
 and warm peach for copy failures, always paired with explicit feedback text.
@@ -22,13 +23,14 @@ The homepage leads to repository setup. Its architecture-file preview describes
 the actual handoff rather than displaying a catalog. Idea Forge stays secondary
 to the known-use-case journey.
 
-Learn pages place three page tabs directly above the article. The section
+Learn pages place the page tabs directly above the article. The section
 disclosure is removed to keep a single navigation layer before the content.
 Prose stays at reading width; diagrams use the full content width.
 Start opens directly into the setup steps, without section navigation or the
 Learn page tabs. Headings and prose share one 47.5rem column;
-subsections use spacing rather than full-width divider lines. Page tabs become
-two columns on narrow screens. Command blocks wrap to their available width. The copy
+subsections use spacing rather than full-width divider lines. Page tabs stay on
+one row and scroll horizontally when the viewport cannot contain them. Command
+blocks wrap to their available width. The copy
 button preserves the original text and reports failures. Maintain visible keyboard focus and
 readable contrast.
 
