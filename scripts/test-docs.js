@@ -259,7 +259,7 @@ test('Learn pages show page tabs while Start opens directly into its content', (
       assert.match(html, /href="start.html" aria-current="page">Start/);
     } else {
       const tabs = html.match(/<div class="guide-pages">([\s\S]*?)<\/div>/)[1];
-      assert.equal([...tabs.matchAll(/<a /g)].length, 3);
+      assert.equal([...tabs.matchAll(/<a /g)].length, pages.length - 1);
       assert.ok(html.indexOf('class="guide-pages"') < html.indexOf('<article'));
       assert.match(html, /href="applications.html" aria-current="page">Learn/);
       assert.ok(html.includes(`href="${page.slug}.html" aria-current="page">${page.navigationLabel}</a>`));

@@ -12,6 +12,8 @@ before implementation begins.
 [What can you build?](docs/applications.md)
 | [Architecture options](docs/architecture-options.md)
 | [Extend an existing application](docs/existing-applications.md)
+| [Participant requirements](docs/participant-requirements.md)
+| [Discovery session guide](docs/discovery-session.md)
 
 ## Install the plugin
 

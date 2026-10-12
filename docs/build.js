@@ -52,6 +52,22 @@ const pages = [
     heading: 'Add AI to <span>an existing application.</span>',
     lede: 'Design a bounded addition. Preserve established interfaces and make reuse or migration decisions explicit.',
   },
+  {
+    slug: 'participant-requirements',
+    navigationLabel: 'Participant requirements',
+    title: 'Prepare for the co-build',
+    description: 'Check the customer knowledge, specialists, tools, repositories, and cloud access needed for an Agentic Co-build.',
+    heading: 'Prepare for a <span>productive co-build.</span>',
+    lede: 'Bring the business context and arrange access to the people, tools, systems, and deployment environment the work depends on.',
+  },
+  {
+    slug: 'discovery-session',
+    navigationLabel: 'Discovery session',
+    title: 'Run the initial discovery session',
+    description: 'Guide and record an initial customer discussion, prepare a grounded discovery brief, and hand it to AI Agent Creator.',
+    heading: 'Run a focused <span>discovery session.</span>',
+    lede: 'Capture the customer goal, first user journey, operating constraints, and open questions before structured architecture discovery begins.',
+  },
 ];
 
 function supportingMarkdown() {

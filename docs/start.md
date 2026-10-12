@@ -8,6 +8,11 @@ For scope and examples, read [What can you build?](applications.html). If you
 already have an application, [prepare its context](existing-applications.html)
 before discovery.
 
+Before scheduling the working session, check the
+[participant requirements](participant-requirements.html). The business participant
+does not need every technical permission personally, but the customer must name
+the specialists and approvers who can resolve access and architecture questions.
+
 For a new project, create an empty directory and initialize Git yourself:
 
 ```bash
@@ -118,6 +123,17 @@ rendering is a separate, organization-approved prerequisite. The plugin does not
 install a renderer or upload your architecture to a hosted service.
 If visual or independent review is unavailable, record the gap.
 You must explicitly accept a manual-review exception before architecture approval.
+
+## Run an initial discovery session
+
+If the idea is distributed across customer participants, run a recorded discussion
+before starting AI Agent Creator. The [discovery session guide](discovery-session.html)
+provides the facilitator's questions, a discovery-brief structure, and handoff
+prompts for WorkIQ or an approved transcript.
+
+The customer must approve recording and AI processing under its policy. Review
+the resulting brief with the customer. The brief is discovery evidence, not
+requirements approval or permission to start architecture work.
 
 ## Describe what you want to build
 
