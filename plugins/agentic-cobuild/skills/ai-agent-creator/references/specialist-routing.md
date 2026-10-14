@@ -23,9 +23,13 @@ at handoff.
 | Agent identity or token exchange | `entra-agent-id` |
 | Application OAuth or app registration | `entra-app-registration` |
 | APIM-based AI gateway governance | `azure-aigateway` |
+| Azure resource, model, token, platform-unit, retail, or negotiated pricing | Maintain mandatory `cost-estimate.md` through [cost-estimation-quality.md](cost-estimation-quality.md); invoke `cost-estimation` as a bounded consultation before final handoff, or record the exact attempted-tool blocker and unresolved evidence |
 
 Skill discovery is guidance selection, not authorization to configure a tenant,
 publish an agent, or start delivery. If no matching specialist is available,
 continue with verified documentation and expose unresolved gates.
 
-At handoff, name later delivery owners without invoking their workflows.
+At handoff, name later delivery owners without invoking their workflows. Include
+`cost-estimate.md`, its consumption scenarios, pricing status, and unresolved
+commercial or measurement owners. The initial pricing attempt occurs during
+package construction; later owners refresh it as measurements or rates change.

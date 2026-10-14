@@ -1,11 +1,11 @@
 ---
 name: ai-agent-creator
-description: "Architecture-first Microsoft-cloud AI design for new applications, platform-managed agents, or AI capabilities in existing systems. Use when discovery, a functional/technical specification, editable draw.io views, and an implementation plan must precede code. Ends at package approval; standalone SDK help, existing-agent operations, implementation, deployment, and troubleshooting use other workflows."
+description: "Architecture-first Microsoft-cloud AI design for new applications, platform-managed agents, or AI capabilities in existing systems. Use when discovery, a functional/technical specification, editable draw.io views, AI token and platform-consumption estimates, cost scenarios, and an implementation plan must precede code. Produces a mandatory cost-estimate.md for every confirmed architecture. Ends with a reconciled architecture-package handoff; standalone SDK help, existing-agent operations, implementation, deployment, and troubleshooting use other workflows."
 ---
 
 # AI Agent Creator
 
-Produce an approved architecture package under `docs/architecture/`:
+Produce a reconciled architecture package under `docs/architecture/`:
 
 ```text
 docs/architecture/
@@ -13,13 +13,15 @@ docs/architecture/
   solution.md
   specification.md
   implementation-plan.md
+  cost-estimate.md
 ```
 
 The diagram shows boundaries; `solution.md` owns design decisions;
 `specification.md` owns requirements and acceptance criteria; the plan owns later
-delivery work. Link these records rather than duplicating their content.
+delivery work; `cost-estimate.md` owns consumption quantities, pricing evidence,
+calculations, and totals. Link these records rather than duplicating their content.
 
-**Approval boundary:** change only domain records and the architecture package.
+**Planning boundary:** change only domain records and the architecture package.
 Keep application source, dependency manifests/lockfiles, tests, application assets,
 IaC, cloud resources, and deployments unchanged. Implementation belongs to a
 separate workflow that the user starts manually.
@@ -31,7 +33,7 @@ the later workflow that needs them.
 ## Voice
 
 Use this voice for every user-facing moment: discovery questions,
-recommendations, shared-understanding summaries, approval requests,
+recommendations, shared-understanding summaries, decision requests,
 status/handoff reports, and conversational explanations.
 
 Give brief context before asking or stating anything. Write in ASD-STE100
@@ -54,12 +56,15 @@ Approval applies to the current baseline, not to later material changes.
 | --- | --- |
 | The discovery frontier is open or shared-understanding confirmation is missing | Discover |
 | A later user turn explicitly confirmed the shared-understanding record | Architect |
-| The four artifacts are ready but package approval is missing | Ask for package approval and wait |
-| The current, complete package and any review exception are explicitly approved | Hand off and stop |
+| The five artifacts are ready but bounded pricing has not run | Run the cost-estimation consultation, reconcile, and complete the package |
+| The current, complete package is reconciled | Hand off and stop; request acceptance only when the user or governance process explicitly requires it |
 | Material scope or design changed after confirmation/approval | Preserve history; return to the affected discovery or package-review gate |
 
 The initial request, silence, batch execution, and the agent's own summary are
-not confirmation or approval.
+not confirmation of an unresolved discovery or architecture decision. Do not turn
+ordinary package completion into a confirmation gate. Use `Ready for review` as
+the reconciled terminal status unless explicit acceptance was requested and
+obtained; do not default to `Awaiting approval` or `Ready for approval`.
 
 ## 1. Discover
 
@@ -117,7 +122,19 @@ explicitly delegated lower-level decisions.
 5. **Plan:** read [implementation plan quality](references/implementation-plan-quality.md).
    Map later phases to specification IDs and architecture responsibilities.
    Describe configuration or code work according to the selected platform.
-6. **Diagram and review:** load `cloud-architecture-diagram` for creation/editing,
+6. **Estimate:** read [cost and consumption estimate quality](references/cost-estimation-quality.md).
+   Load `cost-estimation` as a bounded pricing consultation, then write
+   `cost-estimate.md` for every confirmed architecture. Model token or
+   platform consumption, multi-agent amplification, retrieval/tool/media units,
+   infrastructure, and low/expected/high scenarios. Execute every pricing step
+   supported by the confirmed model, platform, region, currency, and usage evidence
+   before final reconciliation. Merge specialist results into the required
+   modernization document structure rather than substituting a shorter report.
+   Ask only for the minimum missing details needed to disambiguate a meter,
+   preferably in one consolidated cost-input round. Use verified prices when
+   available and explicit attempted-source/tool `Not calculated` blockers when
+   they are not.
+7. **Diagram and review:** load `cloud-architecture-diagram` for creation/editing,
    icons, validation, privacy, rendering, and independent review. Use the four
    views and acceptance contract in architecture quality. Preserve existing
    unrelated pages and hand edits. Treat the diagram specialist's independent
@@ -125,21 +142,28 @@ explicitly delegated lower-level decisions.
    targeted recheck when the available tooling supports multi-turn review. A
    one-shot review that found blocking or material defects does not become a
    passed independent review through local inspection after repair.
-7. **Reconcile and ask:** check all four artifacts against their contracts and the
+8. **Reconcile and hand off:** check all five artifacts against their contracts and the
    current baseline. Resolve conflicts and every architecture-changing choice.
    Keep only delivery parameters that preserve the selected topology as owned
-   deferrals. Record blocked or unavailable diagram evidence exactly. Present the
-   package, ask for explicit approval and any required manual-review exception,
-   then end the turn.
+   deferrals. Record blocked or unavailable diagram evidence exactly. Mark the
+   package exactly `Ready for review` and present the handoff without asking for
+   confirmation unless the user explicitly requested formal acceptance or an
+   unresolved material decision truly requires their choice. Do not use
+   `Awaiting approval` or `Ready for approval` for ordinary completion. If formal
+   acceptance is required, ask once after all five artifacts and the pricing
+   attempt are complete; never reopen acceptance merely because cost was deferred.
 
-**Complete when:** all four artifacts exist and agree, every contract is accounted
-for, review status is recorded, and the user explicitly approves the current
-package and any review exception.
+**Complete when:** all five artifacts exist and agree, every contract is accounted
+for, review status is recorded, the bounded pricing consultation has completed or
+recorded a concrete blocker, and package status is `Ready for review` or explicitly
+accepted.
 
 ## 3. Hand off and stop
 
-Record architecture-only approval in the lifecycle record and specification.
-Report the four paths, current approval/review status, remaining work and owners,
+Record the package revision, status, and any explicit architecture-only acceptance
+in the lifecycle record and specification.
+Report the five paths, including the cost estimate and its pricing status, current
+package/review status, remaining work and owners,
 and the separately initiated workflow needed for delivery. Name later specialists
 without invoking them.
 
@@ -147,5 +171,5 @@ Stop after handoff. Approval, a specification, an original request to implement,
 or "continue" does not start implementation/planning, generate execution-ready
 tickets, or provision/deploy resources.
 
-**Complete when:** the approved package is handed off, later owners are clear,
-and the approval boundary remains intact.
+**Complete when:** the reconciled package is handed off, later owners are clear,
+and the planning boundary remains intact.

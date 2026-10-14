@@ -8,10 +8,12 @@ Preserve existing content and use one authoritative specification at this path.
 ## Lifecycle and boundary
 
 Start from the explicitly confirmed discovery record, then complete the document
-with architecture decisions and acceptance traceability before package approval.
-Keep status **Draft - awaiting architecture approval** until the user approves
-the package. Record the approved baseline and date with scope **architecture
-handoff only; implementation not started**.
+with architecture decisions and acceptance traceability before package handoff.
+Use **Draft - architecture package** while work is in progress and **Ready for
+review** when reconciled. Record any explicit acceptance and date with scope
+**architecture handoff only; implementation not started**. Do not use `Awaiting
+approval` or `Ready for approval` unless the user explicitly requested a formal
+acceptance gate.
 
 Approval of a previous revision does not approve new requirements or decisions.
 Mark materially changed content pending review and use the existing discovery
@@ -65,7 +67,8 @@ family, topology, ownership, or trust boundary.
 - Describe integration and data contracts, identity/authorization, security and
   network boundaries, persistence, audit, observability, and operational lifecycle.
 - Cover scale, latency, availability, recovery, retention, cost and deployment
-  constraints only to the level confirmed or explicitly deferred.
+  constraints only to the level confirmed or explicitly deferred. Link cost and
+  consumption requirements to `cost-estimate.md` and its measurement gates.
 - Preserve confirmed brownfield constraints and managed-platform choices; mark
   custom code and resources non-applicable when configuration meets requirements.
 - In Implementation Decisions, summarize confirmed/delegated choices and link
@@ -101,5 +104,5 @@ specification. Cross-link `solution.md` and `implementation-plan.md`; link exist
 The specification is complete when functional and technical coverage reflects
 confirmed scope; IDs and acceptance/design/phase links are consistent; no
 architecture-changing choice remains deferred; remaining delivery parameters
-have owners; all four package artifacts agree; and approval status belongs to
+have owners; all five package artifacts agree; and package status belongs to
 the current baseline without authorizing implementation.

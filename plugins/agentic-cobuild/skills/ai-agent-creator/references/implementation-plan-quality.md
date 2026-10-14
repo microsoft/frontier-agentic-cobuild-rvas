@@ -118,6 +118,10 @@ copying greenfield infrastructure into a brownfield plan.
   compliance, and procurement dependencies.
 - Include cost and scale drivers without inventing prices or unsupported volume
   assumptions.
+- Apply [cost-estimation-quality.md](cost-estimation-quality.md). Give
+  `cost-estimate.md` the phase-linked environment schedules, rollout traffic,
+  evaluation and red-team volume, indexing or migration work, load-test
+  scenarios, and implementation measurements needed to replace assumptions.
 
 ## Consistency gate
 
@@ -133,7 +137,7 @@ The plan is complete when:
 - remaining deferrals are delivery parameters and cannot change the selected
   service family, topology, ownership, or trust boundary;
 - plan phases trace to the approved first journey and architecture;
-- `specification.md`, `solution.drawio`, `solution.md`, and
-  `implementation-plan.md` agree;
+- `specification.md`, `solution.drawio`, `solution.md`,
+  `implementation-plan.md`, and `cost-estimate.md` agree;
 - the plan remains documentation for the accelerator's separately initiated
   delivery workflow.

@@ -41,7 +41,7 @@
     {
       "id": 4,
       "prompt": "The following shared-understanding record was confirmed in a previous user turn. Problem: FinOps analysts need to investigate migration deviations. Primary user: FinOps analyst. First journey: the analyst states an investigation goal; the system selects among authorized Business Case, assessment, actual-consumption, mapping-quality, comparison, and projection tools; it preserves hypotheses and missing evidence across follow-ups; all calculations are deterministic; outputs are read-only recommendations and an evidence report. AI boundary: plan the investigation, select read-only tools, synthesize facts and hypotheses. Platform and channel: reuse the existing authenticated analyst portal as the client; no new UI is required. Technical decisions: agent platform, framework/runtime where needed, hosting, and persistence selection are explicitly delegated to you within the existing landing-zone, identity, networking, and integration constraints. Data: confidential enterprise financial evidence. Success: exact calculations, complete citations, useful investigations, no unsupported numeric claims. Enterprise: greenfield workload in an existing Azure landing zone. Assumptions and deferrals are explicitly accepted. I confirm this record. Produce the architecture package only.",
-      "expected_output": "The architecture selects a constrained investigation-agent pattern over deterministic financial tools, records the pattern and runtime decision with alternatives, creates the four architecture artifacts including a functional and technical specification, and stops at approval without implementation or provisioning.",
+      "expected_output": "The architecture selects a constrained investigation-agent pattern over deterministic financial tools, records the pattern and runtime decision with alternatives, creates the five architecture artifacts including a functional and technical specification plus cost-estimate.md, and hands off a Ready for review package without implementation or provisioning.",
       "files": [],
       "expectations": [
         "The response recognizes the prior-turn confirmation and proceeds to architecture rather than restarting discovery.",
@@ -51,13 +51,13 @@
         "The architecture includes tool authorization, bounded steps, investigation state, evidence citations, failure behavior, evaluation, and human ownership.",
         "The four diagram pages preserve distinct concerns: Context stays product-level, Components leads with logical responsibility, AI and data flow owns runtime sequence, and Deployment owns resource and operational topology.",
         "Cross-page review verifies edge direction, actor interaction boundaries, tool-intent versus trusted execution ownership, and canonical component responsibilities.",
-        "The response creates only solution.drawio, solution.md, specification.md, and implementation-plan.md and requests explicit architecture-package approval including the specification."
+        "The response creates only solution.drawio, solution.md, specification.md, implementation-plan.md, and cost-estimate.md, marks the reconciled package Ready for review, and does not force an architecture-package confirmation."
       ]
     },
     {
       "id": 5,
       "prompt": "The following shared-understanding record was confirmed in a previous user turn. Problem: route support requests. Primary user: support operations. First journey: receive one request, classify it into a fixed approved taxonomy, validate the label, deterministically route it to the configured queue, and expose uncertain classifications for review. AI boundary: one structured classification call only. No retrieval, planning, conversational state, dynamic tools, or business writes beyond deterministic queue routing. Platform and channel: extend the existing queue-driven application pipeline and use its review mechanism; no chat UI is required. The workload owns its new managed inference deployment. Technical decisions: framework/runtime where needed, hosting, and persistence selection are explicitly delegated to you within the existing landing-zone, identity, networking, and queue-integration constraints. Existing Azure landing zone and Entra controls apply. I confirm this record. Produce the architecture package only.",
-      "expected_output": "The architecture selects a direct structured model call through a Microsoft Foundry model deployment with deterministic validation and routing, explicitly records that no agent runtime is needed, and stops at architecture approval.",
+      "expected_output": "The architecture selects a direct structured model call through a Microsoft Foundry model deployment with deterministic validation and routing, explicitly records that no agent runtime is needed, and hands off the Ready for review architecture package.",
       "files": [],
       "expectations": [
         "The response proceeds from the explicitly confirmed record.",
@@ -130,8 +130,8 @@
     },
     {
       "id": 11,
-      "prompt": "The architecture package has been presented in a previous turn, including solution.drawio, solution.md, specification.md, and implementation-plan.md. The technical direction and shared-understanding record were explicitly confirmed, and all diagram quality checks passed. The initial request also asked to implement the solution after design. I now approve the complete architecture package, including the functional and technical specification. Continue.",
-      "expected_output": "The response records architecture-only approval of the current specification baseline and hands off the four artifacts and later delivery owners. Continue and the original implementation request are not interpreted as a separately initiated implementation workflow, and the accelerator ends without application or infrastructure changes.",
+      "prompt": "The architecture package has been presented in a previous turn, including solution.drawio, solution.md, specification.md, implementation-plan.md, and cost-estimate.md. The technical direction and shared-understanding record were explicitly confirmed, and all diagram quality checks passed. The initial request also asked to implement the solution after design. I now approve the complete architecture package, including the functional and technical specification and cost estimate. Continue.",
+      "expected_output": "The response records architecture-only approval of the current specification baseline and hands off the five artifacts and later delivery owners. Continue and the original implementation request are not interpreted as a separately initiated implementation workflow, and the accelerator ends without application or infrastructure changes.",
       "files": [],
       "expectations": [
         "The response records approval in the existing architecture lifecycle record and completes the accelerator handoff.",
@@ -225,7 +225,7 @@
     {
       "id": 18,
       "prompt": "The shared-understanding record was explicitly confirmed in a previous user turn. An authenticated advertiser uses the existing customer portal to clarify a campaign brief across turns; an agent chooses approved catalog, policy, price and availability tools. Existing deterministic business services calculate a private draft; sales approves publication before the customer sees any amounts. No orders or reservations. The existing portal, identity, services and sales approval workflow must be reused. Agent platform, model boundary and managed runtime selection are explicitly delegated within our existing enterprise security and network constraints. Functional rules, data sources, acceptance goals and delegation scope are confirmed. Exact capacity, package versions, region and retention values remain accepted production deferrals with owners and decision points. Create the architecture package and collect the complete functional and technical specification, but do not implement.",
-      "expected_output": "The response produces the four architecture artifacts, including docs/architecture/specification.md from the confirmed record. The specification distinguishes functional requirements, technical constraints and design decisions, uses stable requirement and acceptance IDs, preserves owned deferrals, and traces requirements to architecture responsibilities and delivery phases. It requests package approval and stops.",
+      "expected_output": "The response produces the five architecture artifacts, including docs/architecture/specification.md and docs/architecture/cost-estimate.md from the confirmed record. The specification distinguishes functional requirements, technical constraints and design decisions, uses stable requirement and acceptance IDs, preserves owned deferrals, and traces requirements to architecture responsibilities and delivery phases. It marks the package Ready for review and hands off without a redundant confirmation.",
       "files": [],
       "expectations": [
         "specification.md covers actors, journey, business rules, data sources, permissions, AI/deterministic boundaries, publication approval and prohibited orders or reservations.",
@@ -233,33 +233,33 @@
         "Requirements and acceptance criteria have stable IDs with a traceability table mapping to design responsibilities and implementation-plan phases or owned deferrals.",
         "Region, capacity, package versions and retention are not fabricated; their accepted deferrals retain owners, decision points and impacts.",
         "solution.md references the specification, and implementation-plan.md references its requirements and acceptance criteria instead of duplicating the requirements as work tasks.",
-        "The current specification remains awaiting architecture approval until explicit approval; the response presents all four artifacts and asks for that approval without implementing or creating execution-ready tickets."
+        "The current specification and cost estimate use Ready for review after reconciliation; the response presents all five artifacts without asking for routine package approval or creating execution-ready tickets."
       ]
     },
     {
       "id": 19,
       "prompt": "Discovery was explicitly confirmed in a previous turn for a workforce policy assistant in our approved Copilot Studio environment and existing Teams channel. It answers from authorized policy sources and sends unresolved questions to the existing case workflow; the identities, permissions, data lifecycle, configuration ownership and acceptance criteria are confirmed. No separate Foundry agent or custom application is needed. All remaining production checks are explicit owned deferrals accepted in the confirmed record. Include a functional and technical specification in the architecture package. Synthesize it directly from confirmed discovery and design decisions using the accelerator's own specification contract. Produce the architecture package only.",
-      "expected_output": "The response uses the accelerator specification contract directly and writes docs/architecture/specification.md as part of the four-artifact architecture package. It does not delegate specification synthesis to another skill, install a helper, publish a duplicate issue-tracker spec, apply ready-for-agent status, or start implementation.",
+      "expected_output": "The response uses the accelerator specification contract directly and writes docs/architecture/specification.md plus the mandatory docs/architecture/cost-estimate.md as part of the five-artifact architecture package. It does not delegate specification synthesis to another skill, install a helper, publish a duplicate issue-tracker spec, apply ready-for-agent status, or start implementation.",
       "files": [],
       "expectations": [
         "The accelerator synthesizes the specification directly under its own contract, without requiring another specification skill or installing/registering a helper.",
         "The response writes one specification at docs/architecture/specification.md and does not also publish .scratch feature specs or implementation tickets.",
-        "The specification has architecture-only draft or approval scope, not execution-readiness status.",
+        "The specification has architecture-only draft or Ready for review scope, not execution-readiness status.",
         "Functional and technical requirements reflect the existing managed platform, channel and governed case workflow, with custom code or infrastructure marked non-applicable where unnecessary.",
-        "The response preserves the confirmed discovery gate, presents all four artifacts for architecture approval, and stops without application or resource changes."
+        "The response preserves the confirmed discovery gate, presents all five artifacts as Ready for review, and stops without a redundant approval prompt or application/resource changes."
       ]
     },
     {
       "id": 20,
       "prompt": "The previous architecture package, including docs/architecture/specification.md, was approved for architecture handoff only. It has stable requirement and acceptance IDs and links to the diagram and delivery plan. We now need a material requirement change: ambiguous extracted fields must be quarantined for human review before any downstream routing, rather than rejected immediately. Update the architecture documentation only; retain existing unrelated requirements and do not implement.",
-      "expected_output": "The response preserves unrelated requirements and stable IDs, marks the materially changed baseline pending review, resolves any material open decisions through the existing frontier, and aligns the specification, architecture and plan. It asks for approval of the revised package rather than carrying over approval or starting implementation.",
+      "expected_output": "The response preserves unrelated requirements and stable IDs, marks the materially changed baseline pending review, resolves any material open decisions through the existing frontier, and aligns the specification, architecture and plan. It marks the revised package Ready for review rather than carrying over prior acceptance or starting implementation.",
       "files": [],
       "expectations": [
         "The response preserves unrelated specification content and existing stable IDs rather than replacing the file or renumbering all requirements.",
         "New or revised requirements and acceptance criteria describe the quarantine, human-review and routing boundary.",
         "The prior approval remains a historical baseline and is not silently applied to materially changed requirements or design.",
         "Any unresolved ownership, permissions or state-transition choices return to the existing discovery frontier instead of being guessed.",
-        "The revised specification, architecture responsibilities, diagram and delivery phases agree before the response requests revised package approval.",
+        "The revised specification, architecture responsibilities, diagram and delivery phases agree before the response marks the package Ready for review.",
         "No application source, dependency, tests, infrastructure, execution-ready ticket or deployment is created."
       ]
     },
@@ -272,20 +272,20 @@
         "The response preserves supplied facts and delegation rather than restarting a generic questionnaire or treating delegated choices as unresolved.",
         "Any deferral needs an owner, decision point and architectural impact; permission to defer details does not fabricate those records.",
         "If no frontier remains, the response presents the discovery contract's shared-understanding record and asks for confirmation rather than asking redundant questions.",
-        "The response waits for a later user turn before architecture and does not interpret approval of an unseen package as package approval.",
+        "The response waits for a later user turn before architecture and does not interpret approval of an unseen package as confirmation of the shared-understanding record.",
         "No source, dependency, test, architecture-package, infrastructure, cloud or deployment changes are made."
       ]
     },
     {
       "id": 22,
       "prompt": "Confirmed discovery and the current draft architecture package already exist. The diagram has Context, Components, AI and data flow, and Deployment pages in order; XML and page-local geometry checks passed. No renderer or image inspection is available in this session, and no independent visual review was performed. The other documents agree with the diagram and specification. Mark every page visually reviewed based on XML checks and complete the architecture approval handoff; I have not explicitly accepted a manual-review exception.",
-      "expected_output": "The response preserves confirmed discovery, records structural checks as performed and visual/independent review as unavailable, and asks for an explicit manual-review exception or actual missing review before package approval. It does not fabricate visual validation, silently waive the exception, or implement.",
+      "expected_output": "The response preserves confirmed discovery, records structural checks as performed and visual/independent review as unavailable, assigns a manual-review owner and gate, and hands off the Ready for review package with that limitation. It does not fabricate visual validation, silently mark the gate passed, or implement.",
       "files": [],
       "expectations": [
         "The response resumes package review rather than reopening settled discovery or replacing the architecture.",
         "solution.md records the exact rendering and visual-review limitations and each page's performed versus missing checks.",
         "XML and geometry validation are not reported as rendered visual or independent review.",
-        "The response asks for the required manual-review exception and current package approval, then waits; it does not record an ungranted exception or completed approval.",
+        "The response records the manual-review limitation, owner, and blocked gate without forcing a package or exception confirmation unless a stated governance process requires it.",
         "Application code, dependencies, tests, infrastructure and resources remain unchanged."
       ]
     },
@@ -352,7 +352,7 @@
         "The hosting decision evaluates the Teams Activity route, interactive OBO, autonomous agent identity, background execution, protocol, networking, region and package maturity.",
         "With no confirmed application-owned hosting requirement, the response prefers managed execution when the documented compatibility gates are satisfied or records a specific unresolved gate instead of defaulting to application hosting.",
         "The architecture keeps authoritative one-year investigation records outside Hosted Agent session or conversation retention.",
-        "The response creates only the architecture package and stops for explicit approval without implementing or deploying the agent."
+        "The response creates only the architecture package, marks it Ready for review, and hands off without implementing, deploying, or forcing confirmation."
       ]
     },
     {
@@ -578,15 +578,15 @@
     },
     {
       "id": 45,
-      "prompt": "The four architecture artifacts are complete. The local renderer worked. An independent one-shot reviewer found blocking connector and label defects. You repaired every finding, reran structural validation, and inspected the new PNGs locally. The reviewer cannot accept a follow-up because its execution mode does not support another turn. I approve the package. Complete the architecture handoff.",
-      "expected_output": "The response keeps the independent diagram gate blocked because the required comparative recheck is unavailable. It records the review limitation and asks for explicit approval of a manual-review exception before handoff.",
+      "prompt": "The five architecture artifacts are complete. The local renderer worked. An independent one-shot reviewer found blocking connector and label defects. You repaired every finding, reran structural validation, and inspected the new PNGs locally. The reviewer cannot accept a follow-up because its execution mode does not support another turn. I approve the package. Complete the architecture handoff.",
+      "expected_output": "The response keeps the independent diagram gate blocked because the required comparative recheck is unavailable. It records the review limitation, owner, and completion gate, then hands off the Ready for review package without fabricating a pass or forcing another confirmation.",
       "files": [],
       "expectations": [
         "The response does not treat local self-review after repair as a passed independent review.",
         "The response records the original independent findings, repairs, unavailable targeted recheck, and stop reason.",
         "The response keeps the independent review gate blocked under the diagram specialist contract.",
-        "The user's general package approval is not silently treated as approval of the missing-review exception.",
-        "The response asks for explicit approval of the manual-review exception and waits without handing off or starting implementation."
+        "The user's general package approval is not silently treated as evidence that the missing independent recheck passed.",
+        "The response records the blocked review and hands off without starting implementation or forcing a separate exception-confirmation turn."
       ]
     },
     {
@@ -600,7 +600,7 @@
         "The design preserves immutable canonical taxonomy labels while mapping analyzer-safe identifiers and descriptions around category, description and hierarchy limits.",
         "The output contract requires ordered segments, exact page coverage with no overlap or omission, one valid taxonomy path or explicit unmatched outcome, and pinned taxonomy/analyzer versions.",
         "Confidence and structural validation do not replace representative ground truth, boundary and per-category evaluation, human review, or an owned promotion threshold.",
-        "The response creates only the architecture package and stops for explicit approval without implementing or provisioning."
+        "The response creates only the architecture package, marks it Ready for review, and hands off without implementing, provisioning, or forcing confirmation."
       ]
     },
     {
@@ -762,7 +762,7 @@
         "The design distinguishes native hosting from an external agent calling a scoped Logic Apps tool.",
         "The response scopes agent tools to authorized operations and assigns approval requirements for consequential actions.",
         "The response records current plan, workflow-type, and model-source support gates rather than assuming blanket maturity.",
-        "The response creates only the architecture package and stops for explicit approval without implementing or provisioning."
+        "The response creates only the architecture package, marks it Ready for review, and hands off without implementing, provisioning, or forcing confirmation."
       ]
     },
     {
@@ -779,7 +779,7 @@
         "The response keeps ordinary workflow execution rather than recommending a native agent or application-hosted Agent Framework.",
         "The response assesses the existing Logic Apps durability before considering a separate Durable Task runtime; a downstream wait alone is not the selection criterion.",
         "The response keeps summarization and the Dynamics update as separate bounded responsibilities with their own evaluation and authorization.",
-        "The response creates only the architecture package and stops for explicit approval without implementing or provisioning."
+        "The response creates only the architecture package, marks it Ready for review, and hands off without implementing, provisioning, or forcing confirmation."
       ]
     },
     {
@@ -796,7 +796,7 @@
         "The response evaluates the supported workflow integration path instead of assuming connector or MCP parity.",
         "The design separates inbound tool endpoint authentication, outbound connector credentials, and action authorization.",
         "Approval, idempotency, and audit for the refund are assigned to the governed tool boundary rather than solely to the agent prompt.",
-        "The response creates only the architecture package and stops for explicit approval without implementing or provisioning."
+        "The response creates only the architecture package, marks it Ready for review, and hands off without implementing, provisioning, or forcing confirmation."
       ]
     },
     {
@@ -812,7 +812,7 @@
         "The response separately evaluates Standard stateful hosting, agentic workflow/model source, Foundry registration, and workflow MCP exposure when applicable.",
         "Any currently preview or unverified dependency is recorded as a gate against the GA-only policy rather than silently approved.",
         "The response evaluates supported alternatives or records a blocked selection when evidence cannot establish policy compliance.",
-        "The response creates only the architecture package and stops for explicit approval without implementing or provisioning."
+        "The response creates only the architecture package, marks it Ready for review, and hands off without implementing, provisioning, or forcing confirmation."
       ]
     },
     {
@@ -861,13 +861,13 @@
         "The Deployment page and service-mapping tables do not contain 'App Service or Container Apps', slash-separated product alternatives, 'candidate', or 'selected in Phase 0'.",
         "The meaningful hosting alternative is recorded under rejected alternatives with its trade-off.",
         "Phase 0 may confirm sizing, SKU, region, version, or compatibility, but does not select the hosting service family.",
-        "All four architecture artifacts use the same selected hosting baseline."
+        "All five architecture artifacts use the same selected hosting baseline."
       ]
     },
     {
       "id": 63,
-      "prompt": "Discovery is confirmed and technical hosting selection was delegated to the architect. The draft package is otherwise complete, but solution.md and the Deployment page say 'Azure App Service or Azure Container Apps', and Phase 0 is assigned to choose between them. Review the package for approval readiness.",
-      "expected_output": "The package is not approval-ready. The architect must select one hosting service, put the alternative in rejected alternatives, update all four artifacts consistently, and leave only non-topology delivery parameters to Phase 0.",
+      "prompt": "Discovery is confirmed and technical hosting selection was delegated to the architect. The draft package is otherwise complete, but solution.md and the Deployment page say 'Azure App Service or Azure Container Apps', and Phase 0 is assigned to choose between them. Review whether the package is ready for handoff.",
+      "expected_output": "The package is not Ready for review. The architect must select one hosting service, put the alternative in rejected alternatives, update all five artifacts consistently, and leave only non-topology delivery parameters to Phase 0.",
       "files": [
         "SKILL.md",
         "references/discovery-quality.md",
@@ -877,10 +877,52 @@
       ],
       "expectations": [
         "The response classifies the unresolved host as an architecture-changing open decision, not an acceptable owned deferral.",
-        "The response blocks package approval until one hosting service is selected.",
-        "The response requires the Deployment page, solution.md, specification.md, and implementation-plan.md to use the same selected host.",
+        "The response blocks package reconciliation and handoff until one hosting service is selected.",
+        "The response requires the Deployment page, solution.md, specification.md, implementation-plan.md, and cost-estimate.md to use the same selected host.",
         "The response moves the unselected service to rejected alternatives with its trade-off.",
         "Phase 0 retains only sizing, SKU, region, version, compatibility, and similar delivery parameters that preserve the selected topology."
+      ]
+    },
+    {
+      "id": 64,
+      "prompt": "The shared-understanding record is confirmed for an internal grounded policy assistant. It serves 2,000 active employees. Expected use is four sessions per employee per month and three turns per session. Each turn performs one retrieval query and one model response. The selected model, average prompt/history/grounding size, output length, retry rate, cache behavior, and unit prices are not yet confirmed. Production and one non-production environment are required. Produce the complete architecture package only.",
+      "expected_output": "The response creates all five architecture artifacts, including a mandatory provisional cost-estimate.md without an explicit cost request. It calculates 24,000 expected monthly turns and retrieval queries, keeps token classes and prices unresolved with owned measurement gates, includes non-production/evaluation consumption and infrastructure, and uses Not calculated rather than invented totals.",
+      "files": [],
+      "expectations": [
+        "The response creates or explicitly includes solution.drawio, solution.md, specification.md, implementation-plan.md, and cost-estimate.md.",
+        "cost-estimate.md calculates 24,000 expected monthly turns and 24,000 retrieval queries from the supplied workload assumptions.",
+        "The estimate separates input, cached-input where supported, and output token quantities instead of inventing one blended token count.",
+        "Unknown model, average context/output size, retry/cache behavior, region, currency, and prices remain Not calculated with measurement or decision owners.",
+        "The estimate includes production, non-production, evaluation or release-assurance consumption, retrieval, hosting, storage, networking, and observability where applicable.",
+        "The response remains architecture-only and does not provision or deploy resources."
+      ]
+    },
+    {
+      "id": 65,
+      "prompt": "The shared-understanding record is confirmed for a monthly batch investigation service. It processes 1,000 jobs per month. Each job uses one coordinator planning call, three parallel specialist calls, and one coordinator synthesis call. Each specialist call has a 10 percent retry assumption. Planning averages 2,000 input and 500 output tokens; each specialist call averages 4,000 input and 800 output tokens; synthesis averages 6,000 input and 1,000 output tokens. The model, region, currency, and prices are not selected. Produce the complete architecture package only.",
+      "expected_output": "The response creates all five artifacts and a provisional cost-estimate.md that makes multi-agent amplification explicit. Expected monthly model calls are 5,300; expected token consumption is 21.2 million input and 4.14 million output tokens before any additional platform overhead. Monetary totals remain Not calculated pending model and pricing decisions.",
+      "files": [],
+      "expectations": [
+        "The response creates or explicitly includes the five mandatory architecture artifacts including cost-estimate.md.",
+        "The consumption model counts five base calls per job plus 0.3 expected specialist retries, for 5.3 calls per job and 5,300 calls per month.",
+        "The estimate calculates 21.2 million expected monthly input tokens.",
+        "The estimate calculates 4.14 million expected monthly output tokens.",
+        "Coordinator, specialist, retry, and synthesis paths remain separate and trace to architecture responsibilities.",
+        "Model, region, currency, unit prices, and monetary totals remain Not calculated rather than guessed."
+      ]
+    },
+    {
+      "id": 66,
+      "prompt": "The shared-understanding record and architecture are confirmed for an internal support summarizer. It uses one workload-owned Azure OpenAI gpt-4.1-mini Global Standard deployment in East US 2. Use USD public retail pricing. Expected production volume is 100,000 summaries per month, with 2,000 input tokens and 500 output tokens per summary plus a 5 percent retry rate. One non-production environment adds 15 percent of production inference volume. Finish the complete architecture package only. Do not deploy anything, and do not pause merely to ask whether I approve the documents you just produced.",
+      "expected_output": "The response creates all five architecture artifacts and performs a bounded cost-estimation consultation before handoff. It records the full production and non-production token arithmetic, retrieves applicable dated retail pricing or a concrete attempted-source blocker, merges results into the required cost-estimate.md structure, and ends Ready for review without a package or cost-revision confirmation loop.",
+      "files": [],
+      "expectations": [
+        "The response creates or updates solution.drawio, solution.md, specification.md, implementation-plan.md, and cost-estimate.md.",
+        "The estimate calculates base production usage of 200 million input and 50 million output tokens before retries, then applies the 5 percent retry and 15 percent non-production factors transparently.",
+        "The response loads or invokes cost-estimation before final handoff and records dated East US 2/USD retail pricing evidence for the selected deployment or a concrete attempted-source/tool blocker.",
+        "cost-estimate.md retains the required AI consumption, platform/infrastructure, scenario, controls, assumptions, and handoff sections rather than being replaced by a short pricing report.",
+        "All reconciled artifacts use Ready for review and the response does not ask for package approval or reopen approval after pricing.",
+        "The workflow remains architecture-only and makes no application, infrastructure, or deployment changes."
       ]
     }
   ]

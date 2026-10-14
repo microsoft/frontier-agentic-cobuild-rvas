@@ -3,7 +3,7 @@
 Read before writing `solution.md` or defining the diagram views. This contract
 owns their structure and acceptance checks. Account for every item as a decision,
 assumption, delivery-parameter deferral, or non-applicable concern before package
-approval. A deferral cannot leave the service family, topology, ownership, or
+handoff. A deferral cannot leave the service family, topology, ownership, or
 trust boundary unresolved.
 
 ## Solution record
@@ -21,6 +21,7 @@ Write `docs/architecture/solution.md` with:
 ## Component responsibilities
 ## AI, data, and evaluation flow
 ## Security and operational boundaries
+## Cost and consumption handoff
 ## Rejected alternatives
 ## Implementation boundary
 ## Deferred decisions
@@ -48,8 +49,8 @@ Link `specification.md` and its requirement IDs. In `## Decisions`, record:
 
 Record decision-bearing sources under the
 [evidence contract](microsoft-learn-evidence.md). Mark inferences as assumptions.
-Use `## Implementation boundary` to record package approval, the current baseline,
-review exceptions and architecture-only scope; preserve earlier approvals as
+Use `## Implementation boundary` to record package status, the current baseline,
+review exceptions and architecture-only scope; preserve earlier acceptances as
 history when material changes require review.
 
 ## Product and boundaries
@@ -58,8 +59,9 @@ history when material changes require review.
 - `specification.md` captures the functional and technical requirements under the
   [specification contract](specification-quality.md). Its acceptance IDs trace to
   design responsibilities and delivery phases, or explicit owned deferrals.
-- `solution.md` links the specification; the current requirement baseline and all
-  four artifacts are included in approval. Approval remains architecture-only.
+- `solution.md` links the specification and `cost-estimate.md`; the current
+  requirement baseline and all five artifacts are included in the same reconciled
+  package. Any explicit acceptance remains architecture-only.
 - Every component has one clear responsibility.
 - External systems and sources of truth are identified.
 - The enterprise starting point is classified as greenfield or brownfield from
@@ -106,7 +108,9 @@ history when material changes require review.
   consequential tools, or broad autonomy, apply
   [AI safety and release assurance](azure-patterns/assurance/ai-safety-release.md).
 - Tracing, logs, metrics, and user feedback have owners and destinations.
-- Cost and scaling drivers are identified.
+- Read [cost-estimation-quality.md](cost-estimation-quality.md). Link the mandatory
+  `cost-estimate.md`, its status, stable architecture IDs, and the architecture
+  limits that bound calls, tokens or other platform consumption.
 - The implementation plan separates production identity from development and test
   identity; no plan depends on sharing production credentials.
 - Hosting, availability, and background-processing responsibilities are explicit.
@@ -200,11 +204,13 @@ relevant.
   findings, and stop reason.
 - If rendering, geometry inspection, the independent critic, or its required
   recheck is unavailable, `solution.md` records the exact limitation and the
-  independent gate remains blocked. Architecture approval requires an explicit
-  manual-review exception. Structural validation or local self-review does not
-  clear missing independent evidence.
+  independent gate remains blocked. Assign a manual-review owner and completion
+  gate. Ask for explicit exception acceptance only when the user or governance
+  process requires that decision; do not create a confirmation turn solely to
+  acknowledge missing evidence. Structural validation or local self-review does
+  not clear missing independent evidence.
 
-**Complete when:** every coverage item is accounted for in the four artifacts;
+**Complete when:** every coverage item is accounted for in the five artifacts;
 each production responsibility has one selected deployment mapping; decision and
 requirement links agree; every diagram page has recorded review status; and any
-review exception is explicitly approved.
+review exception has an owner and gate or explicit acceptance when required.
