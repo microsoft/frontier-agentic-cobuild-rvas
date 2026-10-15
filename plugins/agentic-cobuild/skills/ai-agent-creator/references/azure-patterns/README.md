@@ -23,6 +23,7 @@ and composition; execution/platform/model choices belong to the
 | [Document classification and segmentation](patterns/12-document-classification-segmentation.md) | Bundles must be split, classified against a governed taxonomy, and optionally routed | Locally composed recipe from Content Understanding guidance |
 | [Agent coordination](patterns/13-agent-coordination.md) | Multiple agents or specialist roles must coordinate | Locally composed platform-neutral selection recipe |
 | [Durable memory and personalization](patterns/14-durable-memory-personalization.md) | Learned user context must persist across sessions | Locally composed platform-neutral pattern with product-specific gates |
+| [AI Gateway governance](patterns/15-ai-gateway-governance.md) | Several consumers, model backends, tools, or agent APIs need shared traffic governance | Official capability guidance; cross-cutting governance variant |
 
 ## Cross-cutting assurance
 

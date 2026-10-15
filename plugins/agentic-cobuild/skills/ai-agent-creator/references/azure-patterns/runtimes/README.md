@@ -60,6 +60,19 @@ Keep a required client distinct from a new backend and from agent hosting.
 Record the capability gap or confirmed requirement for each custom UI, API,
 adapter, and host. An empty code repository does not settle platform availability.
 
+## Gateway and API governance
+
+Choose model, tool, and agent API governance independently of the agent runtime.
+Compare direct backend access with [AI Gateway governance](../patterns/15-ai-gateway-governance.md)
+when several consumers or endpoints need shared identity, token allocation,
+policy enforcement, telemetry, routing, resilience, or developer access.
+
+Do not add APIM only because a workload uses AI or an agent. A single workload
+with one backend can use native identity, quota, monitoring, and resilience
+controls when they meet the requirements. When a gateway is justified, keep
+model APIs, MCP or REST tools, and remote agent APIs as separate governed
+surfaces with their own protocol, authorization, state, and maturity gates.
+
 ## Model inference and reuse
 
 For greenfield **workload-owned managed inference**, use a Microsoft Foundry model

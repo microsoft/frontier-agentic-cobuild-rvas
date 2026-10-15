@@ -924,6 +924,182 @@
         "All reconciled artifacts use Ready for review and the response does not ask for package approval or reopen approval after pricing.",
         "The workflow remains architecture-only and makes no application, infrastructure, or deployment changes."
       ]
+    },
+    {
+      "id": 67,
+      "prompt": "We want a low-latency voice assistant for field technicians. A technician should speak naturally, interrupt the assistant, hear an immediate spoken response, and ask it to look up equipment guidance or propose a maintenance action. The existing mobile client and backend authorization service must be reused. The team suggests Azure Voice Live, but transport, model, turn detection, identity, private networking, and fallback behavior are not selected. Start architecture discovery.",
+      "expected_output": "The response identifies Voice Live as the candidate experience pattern for bidirectional low-latency speech, keeps the audio transport independent from the agent runtime and governed business-tool boundary, and asks the unresolved compatibility and operational frontier before architecture.",
+      "files": [
+        "references/azure-patterns/patterns/10-voice-live-agent.md",
+        "references/azure-patterns/runtimes/README.md",
+        "references/azure-patterns/patterns/04-agent-tools-approvals.md",
+        "references/microsoft-learn-evidence.md"
+      ],
+      "expectations": [
+        "The response selects or compares the Voice Live pattern because bidirectional speech, interruption, and low latency are primary requirements.",
+        "The response keeps audio transport, model provider, agent runtime, knowledge retrieval, and authorized maintenance tools as separate architecture decisions.",
+        "The frontier asks about the exact client and transport, model and session combination, turn handling, latency target, authentication, network path, region, fallback, accessibility, and session cleanup.",
+        "A proposed maintenance action remains behind backend authorization and approval; spoken intent does not authorize the business operation.",
+        "Current GA, preview, client-authentication, private-networking, and managed-agent-connector claims are verified for the exact selected path rather than inferred from the general Voice Live capability.",
+        "The response preserves the existing mobile client and backend authorization service, waits after discovery questions, and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 68,
+      "prompt": "The shared-understanding record is confirmed for a browser-based customer voice assistant. Policy permits only generally available dependencies. The journey requires full-duplex speech, user interruption, smart turn detection, browser WebRTC, private-only media connectivity, and a managed-agent connector. The team says the Voice Live core API is GA, so the complete path must also be GA and private. Produce the architecture package only.",
+      "expected_output": "The architecture does not convert core API maturity into end-to-end certification. It verifies every selected Voice Live subfeature and connection, identifies preview or unverified dependencies that conflict with the GA-only and private-only requirements, and blocks or changes the affected composition instead of claiming compliance.",
+      "files": [
+        "references/azure-patterns/patterns/10-voice-live-agent.md",
+        "references/microsoft-learn-evidence.md",
+        "references/architecture-quality.md",
+        "references/specification-quality.md"
+      ],
+      "expectations": [
+        "The response distinguishes Voice Live core API maturity from WebRTC, smart turn detection, browser authentication, private media, and managed-agent connector maturity.",
+        "The response does not claim that a GA core API makes preview or unverified subfeatures acceptable under the GA-only policy.",
+        "Browser token support and private-only media connectivity require affirmative evidence for the exact transport and client path rather than a generic Entra or private-endpoint recommendation.",
+        "The managed-agent connector is verified separately and remains conditional or blocked when its exact support cannot be established.",
+        "The architecture presents a verified GA-compatible requirement or composition change, or records the selection as blocked with an owner and decision gate; it does not fabricate end-to-end compliance.",
+        "The response remains architecture-only and creates no application source, infrastructure, cloud resources, or deployment."
+      ]
+    },
+    {
+      "id": 69,
+      "prompt": "Our warehouse workers need a hands-free spoken assistant in the existing handheld application. They ask short questions, can interrupt the response, and must receive an audio-only answer. No animated person, video stream, generated video artifact, or visual presenter is required. A sponsor asks us to use the Azure conversational avatar service because it includes speech. Start the target-architecture decision.",
+      "expected_output": "The response recommends Voice Live or another verified audio-only path over a conversational avatar, explains that avatar rendering does not satisfy a missing visual requirement, and asks only the unresolved voice transport, runtime, identity, latency, fallback, and accessibility decisions.",
+      "files": [
+        "references/azure-patterns/patterns/08-conversational-avatar.md",
+        "references/azure-patterns/patterns/10-voice-live-agent.md",
+        "references/azure-patterns/runtimes/README.md"
+      ],
+      "expectations": [
+        "The response rejects conversational avatar as the default because the confirmed journey requires bidirectional audio but no visual presentation.",
+        "The response identifies Voice Live or a proportionate verified audio-only composition as the closer pattern.",
+        "The response does not add WebRTC video, ICE or TURN media, avatar rendering, or a new visual client without a demonstrated requirement.",
+        "The target architecture keeps the existing handheld application and selects the audio channel independently from any agent runtime.",
+        "The frontier covers interruption behavior, latency, authentication, supported transport and model combinations, text or audio fallback, accessibility, and session cleanup.",
+        "The response waits for the target-architecture decision and creates no architecture or implementation artifacts."
+      ]
+    },
+    {
+      "id": 70,
+      "prompt": "Our platform team operates six internal AI applications across three business units. They share two Microsoft Foundry model pools, including reserved capacity, and one team can currently exhaust the token quota for everyone. We need per-application budgets, priority routing to reserved capacity, failover, consistent access policy, and central token telemetry. The application runtimes remain independently owned. Start architecture discovery and decide whether Azure API Management should be the AI gateway.",
+      "expected_output": "The response treats APIM AI Gateway as a strong candidate because several consumers share capacity and governance. It preserves independently owned application runtimes, asks the unresolved consumer, identity, routing, capacity, networking, telemetry, availability, and ownership frontier, and waits.",
+      "files": [
+        "references/azure-patterns/patterns/15-ai-gateway-governance.md",
+        "references/azure-patterns/patterns/03-enterprise-landing-zone.md",
+        "references/azure-patterns/runtimes/README.md",
+        "references/microsoft-learn-evidence.md"
+      ],
+      "expectations": [
+        "The response recommends or seriously evaluates APIM AI Gateway from the supplied multi-consumer quota, routing, failover, policy, and telemetry requirements rather than from the AI label alone.",
+        "The design keeps the six application runtimes and their prompts, state, tools, and business authorization independently owned.",
+        "The frontier addresses authenticated consumer keys, per-application token budgets, reserved-capacity priority, fallback, backend and gateway capacity, regional availability, networking, telemetry privacy, policy ownership, and cost.",
+        "The response distinguishes gateway capacity from model quota and does not claim that load balancing creates backend capacity.",
+        "Current APIM tier, policy, model API, identity, private-network, streaming, and Foundry-integration support remain verified gates.",
+        "The response waits after discovery questions and creates no architecture, policy, identity, or cloud-resource changes."
+      ]
+    },
+    {
+      "id": 71,
+      "prompt": "A single internal batch application owns one Microsoft Foundry model deployment. It has one managed identity, one operations team, deployment-level token limits, existing Azure Monitor telemetry, no external consumers, no MCP servers, no agent-to-agent APIs, and no failover requirement. A sponsor says every AI workload must add APIM because AI gateways are a best practice. Start the target-architecture decision.",
+      "expected_output": "The response rejects APIM as a default dependency for the supplied single-workload design unless an additional enterprise requirement is established. It recommends direct governed model access as the simpler candidate and records APIM as an alternative with its added cost and operational boundary.",
+      "files": [
+        "references/azure-patterns/patterns/15-ai-gateway-governance.md",
+        "references/azure-patterns/runtimes/README.md"
+      ],
+      "expectations": [
+        "The response does not add APIM solely because the workload uses AI or because gateways are generally useful at enterprise scale.",
+        "The response recognizes that native identity, deployment quota, monitoring, and single-team ownership already cover the stated requirements.",
+        "Direct model access is the recommended candidate unless discovery reveals a shared governance, capacity, security, resilience, or developer-access requirement.",
+        "APIM is recorded as a meaningful rejected or conditional alternative with latency, cost, policy lifecycle, capacity, and shared-failure-domain trade-offs.",
+        "The response asks only any real remaining architecture decisions and creates no architecture or implementation artifacts before confirmation."
+      ]
+    },
+    {
+      "id": 72,
+      "prompt": "Our multitenant HR policy assistant retrieves documents under each employee's permissions. The platform team proposes APIM semantic caching across all callers so similar questions reuse the same answer. Requests can differ by tenant, employee role, country, policy version, language, and source ACLs. Some answers include personal employment context. Start architecture discovery for the cache design.",
+      "expected_output": "The response treats semantic cache entries as permission-sensitive derived data, rejects a shared similarity-only cache, and requires a proven partition and lifecycle design or disables semantic caching. Retrieval authorization and source freshness remain authoritative.",
+      "files": [
+        "references/azure-patterns/patterns/15-ai-gateway-governance.md",
+        "references/azure-patterns/patterns/02-secure-grounded-chat.md",
+        "references/microsoft-learn-evidence.md"
+      ],
+      "expectations": [
+        "The response states that semantic similarity is not an authorization boundary and rejects cross-user or cross-tenant reuse without equivalent access context.",
+        "The frontier covers tenant, subject or role, locale, model, prompt and policy version, source ACL, freshness, retention, invalidation, correction, and deletion dimensions.",
+        "Permission-aware retrieval remains required on the authoritative path; a prior cached answer cannot replace current caller authorization.",
+        "Personal or regulated responses default to no semantic caching unless the design proves isolation and lifecycle compliance.",
+        "The response evaluates cost and latency benefit against leakage and staleness risk and waits without configuring APIM or a cache."
+      ]
+    },
+    {
+      "id": 73,
+      "prompt": "Twelve agent teams need access to four remote MCP servers owned by different platform groups. Each server exposes read and write tools, has a separate OAuth audience, and needs per-agent rate limits, inventory, incident shutdown, and audit. Business authorization for write operations remains inside each tool service. Start architecture discovery for centralized MCP governance.",
+      "expected_output": "The response evaluates APIM AI Gateway as a tool-governance boundary for MCP exposure and traffic controls while preserving each MCP server's OAuth, operation authorization, approval, and audit responsibilities.",
+      "files": [
+        "references/azure-patterns/patterns/15-ai-gateway-governance.md",
+        "references/azure-patterns/patterns/04-agent-tools-approvals.md",
+        "references/microsoft-learn-evidence.md"
+      ],
+      "expectations": [
+        "The response identifies the shared MCP inventory, access, rate-limit, telemetry, and incident-control requirements as a justified AI Gateway candidate.",
+        "The response keeps caller-to-gateway authentication, gateway-to-MCP credentials, and each tool's business authorization as separate checks.",
+        "Gateway admission does not authorize write operations; consequential tools retain operation validation, approval, idempotency, and audit.",
+        "The frontier addresses MCP protocol support, OAuth audiences, per-agent identity, denied access, streaming or long-running behavior, private connectivity, quotas, shutdown, ownership, and partial failure.",
+        "Current APIM tier and MCP feature maturity are verified before the architecture claims support.",
+        "The response waits after discovery questions and makes no gateway, identity, or tool configuration changes."
+      ]
+    },
+    {
+      "id": 74,
+      "prompt": "The enterprise wants one APIM instance in front of three model providers, five MCP servers, and two remote A2A specialist agents. A draft diagram shows one generic 'AI endpoint' with one shared subscription key and one retry policy for everything. The model calls stream responses, MCP tools can perform business actions, and the A2A agents maintain their own task state. Review the target architecture.",
+      "expected_output": "The response rejects the generic endpoint and shared-policy abstraction. It separates model, tool, and agent gateway surfaces, with protocol-specific identity, authorization, state, streaming, retry, timeout, failure, and maturity decisions.",
+      "files": [
+        "references/azure-patterns/patterns/15-ai-gateway-governance.md",
+        "references/azure-patterns/patterns/04-agent-tools-approvals.md",
+        "references/azure-patterns/patterns/13-agent-coordination.md"
+      ],
+      "expectations": [
+        "The response separates model APIs, MCP tools, and A2A agent APIs instead of treating them as one interchangeable endpoint.",
+        "The response rejects one shared subscription key as sufficient identity and authorization for independently governed backends.",
+        "Model streaming and routing, tool operation authorization and approval, and A2A task or delegation state receive distinct policies.",
+        "Retry, timeout, circuit breaking, idempotency, and partial-result behavior are defined per surface rather than copied globally.",
+        "The review blocks handoff until the diagram and architecture records show the distinct trust and ownership boundaries."
+      ]
+    },
+    {
+      "id": 75,
+      "prompt": "The shared-understanding record is confirmed. A regulated organization requires only generally available components. It wants APIM to expose several model providers through one OpenAI-compatible endpoint and to manage AI Gateway directly from Microsoft Foundry. The team assumes that because core APIM AI Gateway is available, the unified model API and Foundry integration are also generally available. Produce the architecture package only.",
+      "expected_output": "The architecture separates core APIM AI Gateway maturity from the unified model API and Foundry integration, identifies preview dependencies that conflict with the GA-only requirement, and selects a verified GA-compatible composition or records the selection as blocked.",
+      "files": [
+        "references/azure-patterns/patterns/15-ai-gateway-governance.md",
+        "references/microsoft-learn-evidence.md",
+        "references/architecture-quality.md"
+      ],
+      "expectations": [
+        "The response does not infer end-to-end GA from the availability of core APIM AI Gateway capabilities.",
+        "The unified model API and direct Microsoft Foundry AI Gateway integration are checked separately and treated according to their current preview maturity.",
+        "The architecture provides a verified GA-compatible alternative, obtains a requirement change, or records a blocked gate with an owner and decision point.",
+        "Every selected model API, provider, APIM tier, authentication flow, networking path, and policy remains independently verified.",
+        "The response creates only the architecture package and does not provision APIM, configure Foundry, deploy policies, or change cloud resources."
+      ]
+    },
+    {
+      "id": 76,
+      "prompt": "A customer-facing agent is receiving 429 responses because its only model deployment has insufficient token quota. The team proposes APIM load balancing and circuit breakers in front of that same single deployment and says the gateway will create enough capacity. No second deployment or quota increase is approved. Start architecture discovery for reliability.",
+      "expected_output": "The response rejects the claim that APIM can create model quota. It separates gateway resilience from backend capacity, keeps the capacity deficit explicit, and evaluates quota, additional deployments, demand controls, degradation, or admission policies before selecting load balancing.",
+      "files": [
+        "references/azure-patterns/patterns/15-ai-gateway-governance.md",
+        "references/azure-patterns/runtimes/README.md"
+      ],
+      "expectations": [
+        "The response states that a gateway, load balancer, or circuit breaker cannot manufacture token capacity in one constrained backend.",
+        "The response distinguishes backend quota and deployment capacity from APIM gateway scale and availability.",
+        "The frontier addresses measured demand, token limits, admission control, retry behavior, queueing, graceful degradation, quota increase, and additional backend options.",
+        "Load balancing remains conditional on more than one suitable backend or another documented routing purpose.",
+        "The response waits after discovery questions and creates no APIM or model-capacity changes."
+      ]
     }
   ]
 }

@@ -21,7 +21,10 @@ Reuse approved business systems and approval mechanisms; custom APIs or adapters
 need a confirmed requirement or documented integration gap, not merely the
 existence of a tool call. For Logic Apps as a scoped workflow tool executor,
 read the [role selection and integration gates](../runtimes/logic-apps-native-agent.md#role-selection)
-while retaining the actual agent host's runtime recipe.
+while retaining the actual agent host's runtime recipe. When several consumers
+or remote MCP/tool endpoints need shared ingress governance, compare
+[AI Gateway governance](15-ai-gateway-governance.md); gateway access still does
+not authorize the business operation.
 
 ## Flows
 

@@ -22,7 +22,7 @@ at handoff.
 | Power Platform solution ALM, environment lifecycle, or manual/admin promotion gates | Use Microsoft Learn evidence; use `discover-azure-skills` for a matching specialist only if deeper architecture guidance is needed and no loaded skill/tool covers it |
 | Agent identity or token exchange | `entra-agent-id` |
 | Application OAuth or app registration | `entra-app-registration` |
-| APIM-based AI gateway governance | `azure-aigateway` |
+| APIM AI Gateway policy or topology guidance after selecting [AI Gateway governance](azure-patterns/patterns/15-ai-gateway-governance.md) | `azure-aigateway` |
 | Azure resource, model, token, platform-unit, retail, or negotiated pricing | Maintain mandatory `cost-estimate.md` through [cost-estimation-quality.md](cost-estimation-quality.md); invoke `cost-estimation` as a bounded consultation before final handoff, or record the exact attempted-tool blocker and unresolved evidence |
 
 Skill discovery is guidance selection, not authorization to configure a tenant,

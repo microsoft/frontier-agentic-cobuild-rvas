@@ -43,6 +43,8 @@ workload-owned Foundry resources rather than centralizing them indiscriminately.
 Shared controls reduce duplication but introduce cross-team dependencies and
 change coordination. A centralized model endpoint or gateway may be a dependency;
 it does not imply that all workload agent resources should also be centralized.
+When shared AI traffic governance is required, apply
+[AI Gateway governance](15-ai-gateway-governance.md).
 
 ## Diagram mapping
 
