@@ -1,27 +1,20 @@
 ## Separate behavior from platform
 
-Define the system's responsibilities before choosing where it runs. The creator
-compares architecture options during discovery. You confirm the target
-architecture before it prepares the complete package.
-
-You can add an agent without building a new web application. Choose where custom
-agent code runs separately from how you write it. And check whether an existing
-backend can support the interface you need.
+Define the system's responsibilities before choosing its platform, runtime, or
+interface. Confirm the architecture before the creator prepares the package.
 
 ## Start with what you already have
 
-Check whether existing applications and platform capabilities can support the first
-journey. Reuse them when they meet the functional and operating requirements.
-A new repository can still depend on services the enterprise already runs.
+Reuse existing applications and platform capabilities when they meet the first
+journey's requirements.
 
 Microsoft's [technology planning guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy)
-starts by checking whether a ready-to-use agent meets the requirements before
-comparing build options. During discovery, the creator checks for reuse first and identifies which
-confirmed requirements need custom behavior.
+starts with ready-to-use options before custom build choices. The creator records
+which confirmed requirements need custom behavior.
 
 ## Execution options the creator compares
 
-The creator must verify that the selected services work together before delivery.
+The creator verifies that selected services work together before delivery.
 
 | Path | When to evaluate it | What your team must still define |
 | --- | --- | --- |
@@ -32,59 +25,35 @@ The creator must verify that the selected services work together before delivery
 | Application-owned execution | Existing application integration or runtime control is a confirmed requirement. | Hosting, authorization, durable state, deployment, and telemetry. |
 | Explicit workflow or bounded inference | Steps are known or one model response meets the task. | Output validation, failure handling, and integration with the existing process. |
 
-[Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)
-provides low-code agent and workflow authoring.
-[Foundry Agent Service](https://learn.microsoft.com/azure/foundry/agents/overview)
-offers configured prompt agents and managed hosting for custom agent code.
-Use their current documentation to verify the exact feature and connection
-being considered.
-
-If custom code remains necessary, compare managed execution with application-owned
-execution. The skill includes recipes for Agent Framework and the GitHub Copilot
-SDK; choosing either framework does not determine where the code runs.
+Use current [Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)
+and [Foundry Agent Service](https://learn.microsoft.com/azure/foundry/agents/overview)
+documentation to verify each feature and connection. A framework choice does
+not determine where custom code runs.
 
 ## Choose the channel independently
 
-Identify where the user or caller already works. It may be an existing application,
-a supported platform channel, or a background process. Build a custom client only
-when a confirmed requirement calls for one.
-
-Verify the chosen channel's audience and authentication model. Then decide
-whether it provides the needed experience or requires a client you must own.
-Choose the client separately from the agent runtime.
-
-For example, a maintenance investigation might live inside the existing service
-application. An event-driven document workflow might need no interactive client.
-Test either choice against your requirements.
+Use the channel where the user or caller already works. Verify its audience,
+authentication, and experience. Build a custom client only for a confirmed
+requirement, and choose it separately from the agent runtime.
 
 ## Keep knowledge and actions distinct
 
-A knowledge source supplies evidence. A business tool performs an operation.
-Even when both reach the same system, they need separately defined permissions
-and responsibilities.
-
-When several sources are needed, record what each contributes and how the system
-enforces access. Select the model and inference boundary separately from the
-knowledge layer and agent runtime. Reuse suitable existing deployments rather than assuming
-the project needs a new one.
+Knowledge supplies evidence; tools perform operations. Define their permissions
+separately. Record what each source contributes, and choose the model, knowledge
+layer, and runtime independently.
 
 ## Verify the proposed connections
 
-Before you confirm an architecture, the creator checks product facts that affect
-the design against current Microsoft Learn documentation and the relevant
-specialist guidance. The package records unresolved checks and their owners.
+Check product facts against current Microsoft Learn and specialist guidance.
+Verify channel, protocol, identity, networking, lifecycle, licensing, region
+availability, release status, and required adapters.
 
-Verify the selected channel, protocol, identity, networking, and lifecycle.
-Account for licensing and region availability where they affect the design.
-Distinguish preview capabilities from generally available ones.
-Verify any adapter the integration needs.
-
-If a connection remains unverified, delivery work that depends on it must wait. Architecture approval
-does not turn an unverified integration into a supported one.
+Record unresolved checks and owners. Dependent delivery work waits until the
+connection is verified.
 
 ## Give discovery your constraints
 
-Give the creator requirements and existing standards:
+Give the creator the requirements and existing standards:
 
 ```text
 /ai-agent-creator Design [capability] inside our existing service application. Reuse its

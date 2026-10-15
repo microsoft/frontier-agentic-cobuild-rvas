@@ -43,78 +43,55 @@
 </nav>
       <article class="guide-body">
         <h2 id="who-needs-to-be-involved">Who needs to be involved<a class="heading-link" href="#who-needs-to-be-involved" aria-label="Link to Who needs to be involved"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>The co-build participant should understand the business problem and be able to
-work in the customer&#39;s development environment. They do not need to answer every
-technical question alone. Arrange access to the right specialists before the
-session so discovery and architecture decisions do not stall.</p>
-<p>Name a product owner or sponsor who can confirm the scope, approve the requirements,
-and review the architecture package. Architecture approval remains a separate,
-explicit step before implementation.</p>
+<p>Bring someone who understands the business problem and can work in the customer
+environment. Name a product owner and make technical specialists available.
+Architecture approval remains a separate step before implementation.</p>
 <h2 id="knowledge-and-people">Knowledge and people<a class="heading-link" href="#knowledge-and-people" aria-label="Link to Knowledge and people"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>The customer team needs:</p>
 <ul>
-<li><strong>Functional knowledge of the intended solution.</strong> The participant can explain
-the users, current process, expected outcome, constraints, and first journey to
-design.</li>
-<li><strong>Knowledge of the systems around it.</strong> The team knows which applications,
-databases, SharePoint sites, APIs, document stores, or other sources the solution
-may need to read or update. Include system owners and known access rules.</li>
-<li><strong>Technical specialists who can answer wider architecture questions.</strong> They do
-not need to attend the full co-build, but they must be reachable for decisions
-about networking, identity and authentication, security controls, Azure landing
-zones, data residency, and existing platform standards.</li>
-<li><strong>An owner for each approval.</strong> Identify who can approve data access, architecture
-decisions, repository changes, cloud resource creation, and deployment.</li>
+<li>A participant who can explain the users, current process, outcome, constraints,
+and first journey.</li>
+<li>Owners for the systems, data sources, and interfaces the solution may use.</li>
+<li>Reachable specialists for identity, networking, security, data, Azure, and
+platform standards.</li>
+<li>Named approvers for data access, architecture, repository changes, resources,
+and deployment.</li>
 </ul>
 <h2 id="workstation-and-engineering-tools">Workstation and engineering tools<a class="heading-link" href="#workstation-and-engineering-tools" aria-label="Link to Workstation and engineering tools"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>The participant needs an organization-approved workstation with:</p>
+<p>Use an approved workstation with:</p>
 <ul>
-<li>VS Code and GitHub Copilot available under the customer&#39;s policy, plus permission
-to install or enable the Agentic Co-build plugin and its supporting skills.</li>
-<li>Familiarity with Git, pull requests, code review, and the customer&#39;s usual
-development and deployment practices. A developer can pair with the participant
-if needed.</li>
-<li>The runtimes and tools listed in the <a href="start.html">Start guide</a>, including Git,
-Node.js, and Python when local diagram generation is required.</li>
-<li>Network access to the approved package sources, documentation endpoints, Git
-host, and customer development systems. Check proxy, firewall, and extension
-restrictions before the session.</li>
+<li>VS Code and GitHub Copilot, with permission to enable the plugin and skills.</li>
+<li>Git access and support for the customer&#39;s review and delivery process.</li>
+<li>The runtimes listed in the <a href="start.html">Start guide</a>.</li>
+<li>Network access to approved package sources, documentation, Git, and development
+systems.</li>
 </ul>
 <p>Use synthetic or approved test data during discovery and early implementation.
 Do not make production data or broad production access a co-build prerequisite.</p>
 <h2 id="repository-and-delivery-access">Repository and delivery access<a class="heading-link" href="#repository-and-delivery-access" aria-label="Link to Repository and delivery access"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Provide an approved Git repository in GitHub Enterprise Cloud, Azure DevOps, or
-another customer-standard Git service. The participant needs enough access to:</p>
+<p>Provide an approved Git repository and enough access to:</p>
 <ul>
 <li>clone the repository and create a working branch;</li>
 <li>push changes and open a pull request;</li>
 <li>run or request the required CI/CD pipelines; and</li>
 <li>follow branch protection, review, secret-management, and release controls.</li>
 </ul>
-<p>If the participant cannot create repositories or pipelines, assign someone who
-can prepare them before implementation starts.</p>
+<p>Assign someone else to prepare repositories or pipelines when needed.</p>
 <h2 id="customer-systems-and-test-access">Customer systems and test access<a class="heading-link" href="#customer-systems-and-test-access" aria-label="Link to Customer systems and test access"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>For each integration, identify the system owner, interface, test environment,
-authentication method, and approval path. Provide schemas, API documentation,
-sample payloads, or representative documents where possible.</p>
-<p>Live credentials are not required during architecture discovery. Before implementation
-or integration testing, the customer must provide approved non-production access
-and a safe way to store secrets. Record blocked access instead of substituting
-unapproved credentials or guessed interfaces.</p>
+<p>For each integration, name the owner, interface, test environment,
+authentication, and approval path. Provide schemas or representative inputs.</p>
+<p>Discovery does not require live credentials. Implementation needs approved
+non-production access and secret storage. Record blocked access instead of
+guessing interfaces or using unapproved credentials.</p>
 <h2 id="azure-access-for-deployment">Azure access for deployment<a class="heading-link" href="#azure-access-for-deployment" aria-label="Link to Azure access for deployment"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>For deployment, provide access to the approved Azure subscription or resource
-group at the narrowest useful scope. <strong>Contributor</strong> is a common starting point
-when the participant must create and manage resources, but the required role
-depends on the agreed architecture and customer policy.</p>
-<p>Contributor cannot create Azure role assignments. If the deployment grants access
-to a managed identity or service principal, arrange a separate approver or deployment
-identity with permission to assign roles at the required scope, such as Role Based
-Access Control Administrator, User Access Administrator, or Owner. Microsoft Learn
-documents the distinction in <a href="https://learn.microsoft.com/azure/role-based-access-control/rbac-and-directory-admin-roles#azure-roles">Azure roles and permissions</a>.</p>
-<p>Check resource-provider registration, policy restrictions, quotas, allowed regions,
-private networking, and naming or tagging rules before deployment. The co-build
-must use the customer&#39;s landing zone and change process rather than working around
-them.</p>
+<p>Provide deployment access at the narrowest useful scope. <strong>Contributor</strong> is a
+common starting point for resource management, but the required role depends on
+the architecture and policy.</p>
+<p>Contributor cannot create role assignments. Arrange an approved identity with
+the required permission when deployment grants access to another identity. See
+<a href="https://learn.microsoft.com/azure/role-based-access-control/rbac-and-directory-admin-roles#azure-roles">Azure roles and permissions</a>.</p>
+<p>Check providers, policy, quota, regions, networking, naming, and tagging before
+deployment. Use the customer&#39;s landing zone and change process.</p>
 <h2 id="readiness-check">Readiness check<a class="heading-link" href="#readiness-check" aria-label="Link to Readiness check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Before the first working session, confirm that:</p>
 <ul>
@@ -124,9 +101,8 @@ them.</p>
 <li>integration information and representative test inputs are available; and</li>
 <li>the Azure deployment scope, approver, and access path are understood.</li>
 </ul>
-<p>Open gaps can remain, but assign each one an owner and expected resolution date.
-Treat unresolved access or governance decisions as blockers when they prevent a
-safe architecture or a verifiable implementation.</p>
+<p>Assign each gap an owner and date. Treat unresolved access or governance as a
+blocker when it prevents safe design or verification.</p>
 <p>When the people and access are ready, use the
 <a href="discovery-session.html">discovery session guide</a> to structure the initial
 customer discussion and prepare the input for AI Agent Creator.</p>

@@ -1,107 +1,80 @@
 ## Use the session to collect evidence
 
-Run an initial discussion with the customer before starting AI Agent Creator when
-the idea is still spread across several people or documents. Record the session
-only after the customer confirms that recording, transcription, storage, and AI
-processing follow its policy.
+Use this session when the idea is spread across people or documents. Get approval
+for recording, transcription, storage, and AI processing before the call.
 
-The facilitator's job is to make the intended outcome and first user journey
-clear enough for structured discovery. The recording or transcript is evidence.
-It is not an approved requirement, architecture decision, or authorization to
-access customer systems.
-
-Review the [participant requirements](participant-requirements.html) before the
-call. Invite the business participant and product owner. Arrange for technical
-specialists to join or remain reachable when identity, networking, data, or
-deployment questions arise.
+Capture the intended outcome, first journey, decisions, and open questions. The
+record is evidence, not approval or authorization. Review the
+[participant requirements](participant-requirements.html) and keep the needed
+specialists reachable.
 
 ## Prepare the call
 
 Before recording starts:
 
-- state the purpose of the session and how the transcript will be used;
-- confirm who may access the recording, transcript, and generated discovery brief;
-- agree where those files will be stored and when they should be deleted;
-- ask participants not to share passwords, access tokens, private keys, or other
-  live secrets;
-- have a facilitator lead the discussion and a second person watch for unanswered
-  questions when possible; and
-- open the customer repository, existing diagrams, process documents, and sample
-  inputs that participants are allowed to discuss.
+- state the purpose and how the transcript will be used;
+- agree who can access the files, where they are stored, and when they are deleted;
+- tell participants not to share live secrets; and
+- open the approved repository, diagrams, process records, and sample inputs.
 
 If the customer cannot approve recording or AI processing, take structured notes
 instead. The same question set still applies.
 
 ## Guide the discussion
 
-Use the topics below as a route through the conversation, not as a questionnaire
-that must be read word for word. Follow concrete examples. When someone says the
-solution should be "fast," "secure," or "automated," ask what that means in the
-customer's process.
+Use these topics as a route, not a script. Ask for concrete examples and measurable
+meaning behind words such as "fast," "secure," or "automated."
 
 ### 1. Outcome and reason for change
 
-- What problem should this solution solve, and why address it now?
-- Who feels the problem today? What happens if nothing changes?
-- What business result would make the co-build worthwhile?
-- Is the customer creating a new application or changing an existing one?
-- Which ideas are explicitly outside this effort?
+- What problem should change, for whom, and why now?
+- What result would make the work worthwhile?
+- Is this a new application or a change to an existing one?
+- What is outside scope?
 
 ### 2. Users and current process
 
-- Who starts the process, who participates, and who owns the final result?
-- Walk through one recent, representative case from beginning to end.
-- Where do people wait, repeat work, search for information, or correct errors?
-- Which decisions require expertise or judgment?
-- What work already functions well and should remain unchanged?
+- Who starts, participates in, and owns the process?
+- Walk through one recent case from start to finish.
+- Where do people wait, repeat work, search, or correct errors?
+- What already works and should remain unchanged?
 
 ### 3. First user journey
 
-- What event starts the journey?
-- What does the user provide, and what context is already available?
+- What starts the journey, and what context is available?
 - What should the application investigate, produce, recommend, or do?
-- What must the user review or approve?
-- What marks the journey as complete?
-- How should the application respond when information is missing, conflicting,
-  unsafe, or outside scope?
+- What requires review or approval?
+- What marks completion, and what happens when evidence is insufficient or unsafe?
 
 Keep the first journey bounded. Capture later journeys separately instead of
 combining every possible use case into the initial design.
 
 ### 4. Information and evidence
 
-- Which sources contain the information needed for the journey?
-- Which source is authoritative when records disagree?
-- Who owns each source, and how does it stay current?
-- What may each user see? Do source permissions need to carry into the answer?
-- Are citations, source links, or an audit trail required?
-- What representative documents, records, or sample payloads can the team provide?
+- Which sources are needed, who owns them, and which is authoritative?
+- How current are they, and what may each user see?
+- Are citations or an audit trail required?
+- What representative inputs can the team provide?
 
 Distinguish business knowledge from conversation history and long-term memory.
 Ask what the solution may retain, for how long, and who can delete or correct it.
 
 ### 5. Systems and integrations
 
-- Which applications, APIs, databases, SharePoint sites, queues, or document
-  stores are involved?
-- Which integrations already exist and should be reused?
-- Does the solution only read information, or can it change a system of record?
-- What identities and authentication methods do those systems use?
-- Is a non-production endpoint available for implementation and testing?
-- Who owns access approval and technical documentation for each integration?
+- Which systems and existing integrations are involved?
+- Does the solution read only, or change a system of record?
+- What identities and authentication methods apply?
+- Who owns documentation, test access, and approval?
 
 Record names and owners. Do not guess interfaces, credentials, or product support
 from the conversation.
 
 ### 6. Agent behavior, actions, and approvals
 
-- Where would planning or choosing the next step add value?
-- Which steps are fixed business rules and should remain deterministic?
-- What actions may the solution propose? Which may it execute?
-- Which actions need user confirmation or a separate business approval?
-- What limits apply to amount, frequency, destination, or affected records?
-- What happens after a timeout, partial failure, duplicate request, or rejected
-  approval?
+- Where does choosing the next step add value, and which steps stay fixed?
+- What may the solution propose or execute?
+- Which actions require confirmation or business approval?
+- What limits and failure behavior apply?
 
 The session may reveal that a search experience, model call, or fixed workflow
 fits better than an agent. Capture the journey first and let architecture discovery
@@ -109,44 +82,36 @@ test the execution model.
 
 ### 7. Identity, security, and data rules
 
-- Who signs in, and should the solution act as the user or as an application?
-- Which roles or groups control access?
-- What sensitive, personal, regulated, or confidential information may appear?
-- Are there residency, retention, encryption, audit, or private-network rules?
-- What content must never be sent to a model or external service?
-- Which security or compliance owner must approve the design?
+- Who signs in, and does the solution act as the user or application?
+- Which roles control access?
+- What sensitive information and handling rules apply?
+- Who approves the security and compliance design?
 
 Capture the customer's existing controls. The co-build should fit them rather
 than invent a parallel access model.
 
 ### 8. Experience and channels
 
-- Where should the user encounter the capability: an existing application, web
-  interface, Teams, voice channel, background process, or another surface?
-- Does the user need a conversation, a form, a notification, or no new interface?
-- What must the experience explain before a user trusts the result?
-- How can a user correct an answer, cancel an action, or reach a person?
-- Which languages, devices, or accessibility needs affect the design?
+- Where should the user encounter the capability?
+- Is a new interface needed?
+- How does the user understand, correct, cancel, or escalate?
+- Which language, device, or accessibility needs apply?
 
 ### 9. Operating expectations
 
-- How many users, requests, documents, or events should the solution handle?
-- Which response times matter to the user? Can any work run asynchronously?
-- What availability, recovery, and support expectations already apply?
-- What quality or safety checks will run before release and after changes?
-- What telemetry may the operating team collect?
-- Are there cost limits, approved regions, model restrictions, or capacity concerns?
+- What volume and response time matter?
+- What availability, recovery, and support expectations apply?
+- Which quality, safety, and telemetry checks are allowed?
+- What cost, region, model, or capacity limits apply?
 
 Use ranges when exact numbers are unavailable. Mark estimates as assumptions.
 
 ### 10. Delivery and ownership
 
-- Which repository, branching rules, and CI/CD path will the team use?
-- Where will development, test, and production resources run?
-- Which Azure landing-zone, naming, tagging, and policy rules apply?
-- Who can approve architecture, data access, resource creation, and deployment?
-- Who owns the solution after the co-build?
-- What evidence will show that the first journey works well enough to accept?
+- Which repository, environments, and delivery path will the team use?
+- Which landing-zone and policy rules apply?
+- Who approves access, architecture, resources, and deployment?
+- Who owns the solution, and what evidence supports acceptance?
 
 End by reading back the intended outcome, first journey, boundaries, decisions,
 and open questions. Assign an owner to every question that could block architecture
@@ -154,9 +119,8 @@ or implementation.
 
 ## Capture a discovery brief
 
-Turn the session into a short brief in the customer repository. Keep statements
-traceable to the transcript, notes, or customer documents. Separate what the
-customer confirmed from facilitator interpretation.
+Create a short, traceable brief in the customer repository. Separate confirmed
+facts, assumptions, and open questions.
 
 Use this structure:
 
@@ -211,10 +175,8 @@ to ask about.
 
 ## Create the brief with WorkIQ
 
-Use WorkIQ when the meeting and its transcript or notes are available to the
-signed-in user through the customer's Microsoft 365 environment. WorkIQ can
-synthesize meeting content the user is allowed to access. Availability still
-depends on tenant configuration, policy, and the connected user's permissions.
+Use WorkIQ when the signed-in user can access the meeting through the customer's
+Microsoft 365 environment. Availability depends on tenant policy and permissions.
 
 Ask WorkIQ to create the brief from one clearly identified meeting:
 
@@ -232,15 +194,12 @@ references where available. Do not invent missing details or treat the meeting
 as architecture approval.
 ```
 
-Review the result against the meeting evidence. Save the corrected brief in the
-customer repository, for example as `docs/discovery/discovery-brief.md`. Do not
-copy information into the repository if its classification or retention policy
-does not allow it.
+Check the result against the meeting, then save the corrected brief as
+`docs/discovery/discovery-brief.md` when policy allows.
 
 ## Create the brief from a transcript
 
-If WorkIQ is unavailable, export the approved transcript or attach it directly
-to the working session. Ask the assistant:
+If WorkIQ is unavailable, attach the approved transcript and ask:
 
 ```text
 Read the attached customer discovery transcript and prepare
@@ -270,14 +229,12 @@ where available. Do not propose an architecture yet and do not treat the
 transcript as customer approval.
 ```
 
-Remove off-topic conversation and redact content that the repository should not
-retain. Keep the original transcript in its approved location rather than
-committing it by default.
+Remove off-topic or restricted content. Keep the original transcript in its
+approved location.
 
 ## Start AI Agent Creator
 
-The customer or product owner should review the discovery brief before handoff.
-Corrections belong in the brief. Unresolved points should stay marked as open.
+Have the customer or product owner review the brief. Keep unresolved points open.
 
 From the customer application repository, invoke AI Agent Creator with the brief:
 
@@ -292,6 +249,5 @@ requirements approval. Present the shared-understanding record and wait for
 explicit customer confirmation before architecture work begins.
 ```
 
-AI Agent Creator may reopen topics from the recorded discussion. That is expected.
-The brief accelerates discovery; it does not remove the creator's confirmation
-gate, architecture review, or final package approval.
+The brief accelerates discovery. It does not replace confirmation, architecture
+review, or package approval.

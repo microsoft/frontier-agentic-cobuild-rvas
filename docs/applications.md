@@ -1,39 +1,24 @@
 ## What the creator can design
 
 Tell AI Agent Creator what you want a new or existing application to do.
-It helps you define the user journey and agree on a
-Microsoft-cloud architecture before implementation starts.
+It helps define the first user journey and architecture. It may recommend a
+platform agent, custom application, explicit workflow, or bounded model call.
 
-The workflow covers platform-managed agents and custom applications. It can
-also conclude that a bounded model call or an explicit workflow fits better
-than an agent.
-
-Here, **supported means covered by the design workflow**. You still need to build
-the application; the plugin supplies no ready-made implementations or certified
-architectures. During discovery, the creator verifies the connections your design
-needs rather than assuming the services work together.
-The examples below illustrate possible uses. They are not customer results or deployment templates.
+The plugin designs the solution; it does not implement or certify it. The
+examples below are possibilities, not customer results or deployment templates.
 
 ## Application families
 
-The Microsoft products shown below are examples, not required services or approved
-architectures. Discovery must verify product fit and any connections your design needs.
-Some examples cover different parts of a solution and can work together. They are
-not interchangeable. Check the selected features' availability and release status.
-Product icons use Microsoft artwork where available. Neutral document and code
-symbols are illustrations, not product logos.
+The products shown are examples. Discovery must verify product fit, connections,
+availability, and release status.
 
 <!-- application-family -->
 
 ### Knowledge assistants
 
-Help a user find and understand information they are allowed to access. For example, an operations
-assistant could explain a procedure and cite the current source, then investigate
-a follow-up question using other permitted evidence.
-
-Name who owns each source and how it stays current. The design must explain
-how user permissions limit retrieval and what happens when evidence is absent
-or contradictory. A fixed lookup may need retrieval without an agent loop.
+Help users find permitted information and cite its source. Define source
+ownership, permissions, freshness, and what happens when evidence conflicts or
+is missing. A fixed lookup may not need an agent loop.
 
 <div class="family-product-example">
 <span>Example options</span>
@@ -47,13 +32,9 @@ or contradictory. A fixed lookup may need retrieval without an agent loop.
 
 ### Agents that use business tools
 
-Investigate a task and prepare or carry out operations within agreed limits. A maintenance
-assistant could gather request details and propose a work order for a manager
-to approve.
-
-Tool access is a separate decision from knowledge access. Specify which actions
-are read-only, which require approval, and how the system handles retries without
-duplicating a business operation. The system must check authorization when it performs each operation.
+Investigate a task and prepare or perform approved operations. Define read-only
+access, approval boundaries, authorization, and retry behavior that prevents
+duplicate business actions.
 
 <div class="family-product-example">
 <span>Example options</span>
@@ -67,12 +48,9 @@ duplicating a business operation. The system must check authorization when it pe
 
 ### Document and media processing
 
-Turn incoming material into structured results. For example, classify a document
-bundle, extract fields, and send uncertain results to a reviewer.
-
-Agree the output schema and the review threshold. Define how a reviewer corrects
-an error and how a corrected result reaches the downstream system. This may be
-a fixed processing pipeline; a conversational interface is optional.
+Turn incoming material into structured results. Define the output schema,
+review threshold, correction path, and downstream handoff. This may be a fixed
+pipeline with no conversational interface.
 
 <div class="family-product-example">
 <span>Example options</span>
@@ -86,13 +64,9 @@ a fixed processing pipeline; a conversational interface is optional.
 
 ### Voice and audiovisual experiences
 
-Use speech or an audiovisual presentation when the user's task requires it. An
-illustrative voice assistant could guide a worker through a permitted procedure,
-with confirmation before a consequential action.
-
-Decide how users interrupt, correct, or leave the interaction. Identify privacy
-and accessibility requirements, and verify the selected channel's capabilities.
-An avatar or generated video alone is no reason to add an agent.
+Use speech or audiovisual presentation when the task requires it. Define
+interruptions, corrections, exit paths, privacy, and accessibility. An avatar
+or generated video alone does not require an agent.
 
 <div class="family-product-example">
 <span>Example options</span>
@@ -106,13 +80,8 @@ An avatar or generated video alone is no reason to add an agent.
 
 ### Background workflows
 
-Respond to an event or process a job without a new chat interface. An incoming
-service request could trigger evidence gathering and then wait for an owner to
-approve the proposed next step.
-
-Identify who owns job state and how work resumes after a failure or a long wait.
-Keep fixed branches explicit. If the system investigates as it runs, define what
-it may investigate and when it must stop.
+Respond to events or process jobs without a chat interface. Define who owns job
+state, how work resumes, which branches stay fixed, and when investigation stops.
 
 <div class="family-product-example">
 <span>Example options</span>
@@ -126,13 +95,9 @@ it may investigate and when it must stop.
 
 ### Coordinated specialist agents
 
-Split responsibilities when one agent cannot meet the requirement reliably.
-For example, an investigator and a separately authorized action agent could have
-different tools and access boundaries.
-
-Explain why separate agents are needed and define their handoff contracts, including how
-agents handle conflicting results and shared state. Define what happens when
-one agent fails. Coordination adds overhead.
+Split responsibilities only when one agent cannot meet the requirement reliably.
+Define handoffs, access boundaries, shared state, conflict handling, and failure
+behavior. Coordination adds overhead.
 Microsoft's [orchestration guidance](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 recommends the lowest complexity that meets the requirement.
 
@@ -146,30 +111,19 @@ recommends the lowest complexity that meets the requirement.
 
 ## Capabilities you can combine
 
-These families can overlap. A document workflow may feed a knowledge assistant;
-an investigation may finish with an approval-controlled operation.
-
-Persistent memory and personalization are additional choices. Define what the
-system may remember and who owns that context. Set rules for expiry and deletion.
-Multiple knowledge sources need their own permission and provenance boundaries.
-
-Add these capabilities when the journey needs them. You can start without
-multiple agents or persistent memory.
+Families can overlap. Add persistent memory, multiple agents, or personalization
+only when the journey needs them. Define ownership, permissions, provenance,
+expiry, and deletion.
 
 ## Where this workflow stops
 
-The creator records the architecture and requirements, with an implementation
-plan for a separate delivery session. You confirm discovery before it prepares
-the complete package, then approve that package before handoff.
-
-Use specialist workflows for standalone SDK questions, incident troubleshooting,
-or live agent operations. Architecture approval grants no permission to
-implement or deploy.
+The creator produces an approved architecture package for a separate
+implementation session. Architecture approval does not authorize implementation
+or deployment.
 
 ## Describe your first journey
 
-Tell the creator who will use the application and what their first task is.
-You can leave the platform open or state a constraint:
+Tell the creator who will use the application and what their first task is:
 
 ```text
 /ai-agent-creator Design a maintenance assistant for property managers. Help them investigate

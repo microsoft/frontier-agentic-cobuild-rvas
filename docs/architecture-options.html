@@ -43,22 +43,16 @@
 </nav>
       <article class="guide-body">
         <h2 id="separate-behavior-from-platform">Separate behavior from platform<a class="heading-link" href="#separate-behavior-from-platform" aria-label="Link to Separate behavior from platform"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Define the system&#39;s responsibilities before choosing where it runs. The creator
-compares architecture options during discovery. You confirm the target
-architecture before it prepares the complete package.</p>
-<p>You can add an agent without building a new web application. Choose where custom
-agent code runs separately from how you write it. And check whether an existing
-backend can support the interface you need.</p>
+<p>Define the system&#39;s responsibilities before choosing its platform, runtime, or
+interface. Confirm the architecture before the creator prepares the package.</p>
 <h2 id="start-with-what-you-already-have">Start with what you already have<a class="heading-link" href="#start-with-what-you-already-have" aria-label="Link to Start with what you already have"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Check whether existing applications and platform capabilities can support the first
-journey. Reuse them when they meet the functional and operating requirements.
-A new repository can still depend on services the enterprise already runs.</p>
+<p>Reuse existing applications and platform capabilities when they meet the first
+journey&#39;s requirements.</p>
 <p>Microsoft&#39;s <a href="https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy">technology planning guidance</a>
-starts by checking whether a ready-to-use agent meets the requirements before
-comparing build options. During discovery, the creator checks for reuse first and identifies which
-confirmed requirements need custom behavior.</p>
+starts with ready-to-use options before custom build choices. The creator records
+which confirmed requirements need custom behavior.</p>
 <h2 id="execution-options-the-creator-compares">Execution options the creator compares<a class="heading-link" href="#execution-options-the-creator-compares" aria-label="Link to Execution options the creator compares"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>The creator must verify that the selected services work together before delivery.</p>
+<p>The creator verifies that selected services work together before delivery.</p>
 <div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
 <table>
 <thead>
@@ -102,45 +96,26 @@ confirmed requirements need custom behavior.</p>
 </tbody>
 </table>
 </div>
-<p><a href="https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio">Copilot Studio</a>
-provides low-code agent and workflow authoring.
-<a href="https://learn.microsoft.com/azure/foundry/agents/overview">Foundry Agent Service</a>
-offers configured prompt agents and managed hosting for custom agent code.
-Use their current documentation to verify the exact feature and connection
-being considered.</p>
-<p>If custom code remains necessary, compare managed execution with application-owned
-execution. The skill includes recipes for Agent Framework and the GitHub Copilot
-SDK; choosing either framework does not determine where the code runs.</p>
+<p>Use current <a href="https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio">Copilot Studio</a>
+and <a href="https://learn.microsoft.com/azure/foundry/agents/overview">Foundry Agent Service</a>
+documentation to verify each feature and connection. A framework choice does
+not determine where custom code runs.</p>
 <h2 id="choose-the-channel-independently">Choose the channel independently<a class="heading-link" href="#choose-the-channel-independently" aria-label="Link to Choose the channel independently"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Identify where the user or caller already works. It may be an existing application,
-a supported platform channel, or a background process. Build a custom client only
-when a confirmed requirement calls for one.</p>
-<p>Verify the chosen channel&#39;s audience and authentication model. Then decide
-whether it provides the needed experience or requires a client you must own.
-Choose the client separately from the agent runtime.</p>
-<p>For example, a maintenance investigation might live inside the existing service
-application. An event-driven document workflow might need no interactive client.
-Test either choice against your requirements.</p>
+<p>Use the channel where the user or caller already works. Verify its audience,
+authentication, and experience. Build a custom client only for a confirmed
+requirement, and choose it separately from the agent runtime.</p>
 <h2 id="keep-knowledge-and-actions-distinct">Keep knowledge and actions distinct<a class="heading-link" href="#keep-knowledge-and-actions-distinct" aria-label="Link to Keep knowledge and actions distinct"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>A knowledge source supplies evidence. A business tool performs an operation.
-Even when both reach the same system, they need separately defined permissions
-and responsibilities.</p>
-<p>When several sources are needed, record what each contributes and how the system
-enforces access. Select the model and inference boundary separately from the
-knowledge layer and agent runtime. Reuse suitable existing deployments rather than assuming
-the project needs a new one.</p>
+<p>Knowledge supplies evidence; tools perform operations. Define their permissions
+separately. Record what each source contributes, and choose the model, knowledge
+layer, and runtime independently.</p>
 <h2 id="verify-the-proposed-connections">Verify the proposed connections<a class="heading-link" href="#verify-the-proposed-connections" aria-label="Link to Verify the proposed connections"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Before you confirm an architecture, the creator checks product facts that affect
-the design against current Microsoft Learn documentation and the relevant
-specialist guidance. The package records unresolved checks and their owners.</p>
-<p>Verify the selected channel, protocol, identity, networking, and lifecycle.
-Account for licensing and region availability where they affect the design.
-Distinguish preview capabilities from generally available ones.
-Verify any adapter the integration needs.</p>
-<p>If a connection remains unverified, delivery work that depends on it must wait. Architecture approval
-does not turn an unverified integration into a supported one.</p>
+<p>Check product facts against current Microsoft Learn and specialist guidance.
+Verify channel, protocol, identity, networking, lifecycle, licensing, region
+availability, release status, and required adapters.</p>
+<p>Record unresolved checks and owners. Dependent delivery work waits until the
+connection is verified.</p>
 <h2 id="give-discovery-your-constraints">Give discovery your constraints<a class="heading-link" href="#give-discovery-your-constraints" aria-label="Link to Give discovery your constraints"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Give the creator requirements and existing standards:</p>
+<p>Give the creator the requirements and existing standards:</p>
 <pre><code class="language-text">/ai-agent-creator Design [capability] inside our existing service application. Reuse its
 identity and business APIs. Compare Copilot Studio, managed Foundry execution,
 and application-owned execution where they fit. For every new UI, API, or host,
