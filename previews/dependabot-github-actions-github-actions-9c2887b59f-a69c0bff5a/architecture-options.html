@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Choose an architecture that fits | Agentic Co-build</title>
+  <meta name="description" content="Separate behavior, platform, channel, and ownership before choosing an AI application architecture." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to guide</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="index.html">Overview</a>
+<a href="applications.html" aria-current="page">Learn</a>
+<a href="start.html">Start</a>
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero guide-hero">
+      <div class="wrap">
+        <h1>Choose an architecture <span>that fits.</span></h1>
+        <p class="lede">Check existing capabilities first. Compare platform-managed and custom execution against your requirements.</p>
+      </div>
+    </section>
+    <div class="wrap guide-layout">
+<nav class="guide-nav" aria-label="Reading navigation">
+<div class="guide-pages">
+<a href="applications.html">Application types</a>
+<a href="architecture-options.html" aria-current="page">Architecture options</a>
+<a href="existing-applications.html">Existing applications</a>
+<a href="participant-requirements.html">Participant requirements</a>
+<a href="discovery-session.html">Discovery session</a>
+</div>
+</nav>
+      <article class="guide-body">
+        <h2 id="separate-behavior-from-platform">Separate behavior from platform<a class="heading-link" href="#separate-behavior-from-platform" aria-label="Link to Separate behavior from platform"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Define the system&#39;s responsibilities before choosing its platform, runtime, or
+interface. Confirm the architecture before the creator prepares the package.</p>
+<h2 id="start-with-what-you-already-have">Start with what you already have<a class="heading-link" href="#start-with-what-you-already-have" aria-label="Link to Start with what you already have"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Reuse existing applications and platform capabilities when they meet the first
+journey&#39;s requirements.</p>
+<p>Microsoft&#39;s <a href="https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy">technology planning guidance</a>
+starts with ready-to-use options before custom build choices. The creator records
+which confirmed requirements need custom behavior.</p>
+<h2 id="execution-options-the-creator-compares">Execution options the creator compares<a class="heading-link" href="#execution-options-the-creator-compares" aria-label="Link to Execution options the creator compares"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>The creator verifies that selected services work together before delivery.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>When to evaluate it</th>
+<th>What your team must still define</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Existing or prebuilt capability</td>
+<td>It may already meet the user journey.</td>
+<td>Fit, access boundaries, ownership, and any gaps.</td>
+</tr>
+<tr>
+<td>Copilot Studio</td>
+<td>A low-code agent or workflow could meet the integration and channel requirements.</td>
+<td>Connections and permissions, business approvals, environment lifecycle, and evaluation.</td>
+</tr>
+<tr>
+<td>Foundry prompt agent</td>
+<td>Instructions, model configuration, and permitted tools could express the behavior.</td>
+<td>User access, knowledge permissions, tool policy, and acceptance criteria.</td>
+</tr>
+<tr>
+<td>Foundry hosted agent</td>
+<td>Custom code is needed and managed execution could fit.</td>
+<td>Code and protocol choices, business state, approval semantics, and operational requirements.</td>
+</tr>
+<tr>
+<td>Application-owned execution</td>
+<td>Existing application integration or runtime control is a confirmed requirement.</td>
+<td>Hosting, authorization, durable state, deployment, and telemetry.</td>
+</tr>
+<tr>
+<td>Explicit workflow or bounded inference</td>
+<td>Steps are known or one model response meets the task.</td>
+<td>Output validation, failure handling, and integration with the existing process.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Use current <a href="https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio">Copilot Studio</a>
+and <a href="https://learn.microsoft.com/azure/foundry/agents/overview">Foundry Agent Service</a>
+documentation to verify each feature and connection. A framework choice does
+not determine where custom code runs.</p>
+<h2 id="choose-the-channel-independently">Choose the channel independently<a class="heading-link" href="#choose-the-channel-independently" aria-label="Link to Choose the channel independently"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Use the channel where the user or caller already works. Verify its audience,
+authentication, and experience. Build a custom client only for a confirmed
+requirement, and choose it separately from the agent runtime.</p>
+<h2 id="keep-knowledge-and-actions-distinct">Keep knowledge and actions distinct<a class="heading-link" href="#keep-knowledge-and-actions-distinct" aria-label="Link to Keep knowledge and actions distinct"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Knowledge supplies evidence; tools perform operations. Define their permissions
+separately. Record what each source contributes, and choose the model, knowledge
+layer, and runtime independently.</p>
+<h2 id="verify-the-proposed-connections">Verify the proposed connections<a class="heading-link" href="#verify-the-proposed-connections" aria-label="Link to Verify the proposed connections"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Check product facts against current Microsoft Learn and specialist guidance.
+Verify channel, protocol, identity, networking, lifecycle, licensing, region
+availability, release status, and required adapters.</p>
+<p>Record unresolved checks and owners. Dependent delivery work waits until the
+connection is verified.</p>
+<h2 id="give-discovery-your-constraints">Give discovery your constraints<a class="heading-link" href="#give-discovery-your-constraints" aria-label="Link to Give discovery your constraints"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Give the creator the requirements and existing standards:</p>
+<pre><code class="language-text">/ai-agent-creator Design [capability] inside our existing service application. Reuse its
+identity and business APIs. Compare Copilot Studio, managed Foundry execution,
+and application-owned execution where they fit. For every new UI, API, or host,
+name the requirement that makes it necessary.
+</code></pre>
+<p><a href="start.html">Set up the workspace</a> to begin discovery. If there is an application
+already in place, use <a href="existing-applications.html">the existing-application guide</a>
+to prepare its context.</p>
+
+      </article>
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/guide.js"></script>
+</body>
+</html>
