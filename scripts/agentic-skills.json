@@ -1,5 +1,5 @@
 {
-  "installer": "skills@1.7.1",
+  "installer": "skills@1.7.2",
   "minimumNode": "22.20.0",
   "agent": "github-copilot",
   "sources": [

@@ -21,7 +21,7 @@ Upstream source: [`mattpocock/skills`](https://github.com/mattpocock/skills).
 | `handoff` | Write a conversation handoff for a fresh agent session. |
 
 ```bash
-npx --yes skills@1.7.1 add mattpocock/skills --skill grilling domain-modeling codebase-design implement tdd diagnosing-bugs code-review handoff --agent github-copilot --copy --yes
+npx --yes skills@1.7.2 add mattpocock/skills --skill grilling domain-modeling codebase-design implement tdd diagnosing-bugs code-review handoff --agent github-copilot --copy --yes
 ```
 
 ### Skills from microsoft/azure-skills
@@ -40,5 +40,5 @@ Upstream source: [`microsoft/azure-skills`](https://github.com/microsoft/azure-s
 | `azure-aigateway` | Configure Azure API Management policies for AI models, MCP tools, and agents. |
 
 ```bash
-npx --yes skills@1.7.1 add microsoft/azure-skills --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
+npx --yes skills@1.7.2 add microsoft/azure-skills --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
 ```
