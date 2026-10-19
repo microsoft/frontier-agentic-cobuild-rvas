@@ -18,17 +18,29 @@
     var links = document.querySelector(".nav-links");
     if (!toggle || !links || toggle.dataset.shellBound) return;
     toggle.dataset.shellBound = "1";
-    function close() {
+    function close(returnFocus) {
       links.classList.remove("open");
       toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open navigation");
+      if (returnFocus) toggle.focus();
     }
     toggle.addEventListener("click", function () {
       var open = links.classList.toggle("open");
       toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
     });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && links.classList.contains("open")) close();
+      if (e.key === "Escape" && links.classList.contains("open")) close(true);
     });
+    links.addEventListener("click", function (e) {
+      if (e.target.closest("a")) close();
+    });
+    function closeOnFocusOut(e) {
+      if (links.classList.contains("open") && !links.contains(e.relatedTarget) &&
+          e.relatedTarget !== toggle) close();
+    }
+    links.addEventListener("focusout", closeOnFocusOut);
+    toggle.addEventListener("focusout", closeOnFocusOut);
     document.addEventListener("click", function (e) {
       if (!links.classList.contains("open")) return;
       if (!links.contains(e.target) && !toggle.contains(e.target)) close();
