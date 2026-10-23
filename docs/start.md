@@ -60,6 +60,9 @@ conflict. Installing a skill does not authorize cloud changes or commits.
 In CLI, use `/skills` and `/mcp`. In VS Code, use **Chat: Configure Skills** and
 the MCP server list. Reload the host after installation if needed.
 
+**Recommended model: Claude Opus 5.5.** Select it in your host's model picker
+before starting AI Agent Creator or implementation.
+
 ### AI Agent Creator prompts
 
 For a new application:
@@ -83,11 +86,6 @@ for our enterprise data-access and deployment constraints.
 ```text
 Implement the attached plan. Treat the attached specification as the
 requirements source of truth and follow the attached architecture.
-Work in dependency order and validate against the acceptance criteria.
-Report each blocked criterion with its reason and owner.
-Ask before commits, resource provisioning, or deployment.
-Do not treat implementation as complete until every applicable acceptance
-criterion is verified or explicitly reported as blocked.
 ```
 
 ### Review prompts
