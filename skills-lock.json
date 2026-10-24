@@ -5,19 +5,19 @@
       "source": "microsoft/azure-skills",
       "sourceType": "github",
       "skillPath": "skills/azure-ai/SKILL.md",
-      "computedHash": "4d6e69d68a30bf05988677616fb213f7c01d2d97e7d2bcec9ffabb1c3c6ada81"
+      "computedHash": "59533e6163a700fc507d5072dda3e1f5b0de7d2e26694231342e0c0097c5c3cc"
     },
     "azure-aigateway": {
       "source": "microsoft/azure-skills",
       "sourceType": "github",
       "skillPath": "skills/azure-aigateway/SKILL.md",
-      "computedHash": "ce4fbc6e2e04fa6fa0b83ee206d87fdf7320c06cc126374c029d7d7c56fa10c8"
+      "computedHash": "d8073cb540d8799c446148a2605965d9cd0ff2205c0fe8911c4350df499c46d5"
     },
     "diagram-design": {
       "source": "cathrynlavery/diagram-design",
       "sourceType": "github",
       "skillPath": "skills/diagram-design/SKILL.md",
-      "computedHash": "f89f11b1cc3acbb7ac40c8937aff53496f1abaa37f74973174867ff26f4623db"
+      "computedHash": "c7bc6e49f7f16c68af0a889e2a8d514b9b8d4f220899074f632c4f5c5b19c091"
     },
     "excalidraw-diagram": {
       "source": "coleam00/excalidraw-diagram-skill",
@@ -25,41 +25,17 @@
       "skillPath": "SKILL.md",
       "computedHash": "fc91249969c7c1adc1f810ddfe10f18e206b78609467bb4955248e9138932e8a"
     },
-    "frontend-design": {
-      "source": "anthropics/skills",
-      "sourceType": "github",
-      "skillPath": "skills/frontend-design/SKILL.md",
-      "computedHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67"
-    },
-    "grill-me": {
+    "humanize-content": {
       "source": "olivomarco/ai-dev-skills",
       "sourceType": "github",
-      "skillPath": "skills/grill-me/SKILL.md",
-      "computedHash": "f321507f77702a54af1db66549ec1685fc625390d06c57d7949cdcda8eb1b5c7"
-    },
-    "grilling": {
-      "source": "olivomarco/ai-dev-skills",
-      "sourceType": "github",
-      "skillPath": "skills/grilling/SKILL.md",
-      "computedHash": "ef685a6fa0bbe73b05bbd8dc1ec97258191587f07c6aa7dbc9006675ceb8f90f"
-    },
-    "humanize-writing": {
-      "source": "lguz/humanize-writing-skill",
-      "sourceType": "github",
-      "skillPath": "skills/humanize-writing/SKILL.md",
-      "computedHash": "bd0c9bf9dbb1c1117a831edfc7a566d9b09cace1aff42fcf6e2068d272c44593"
+      "skillPath": "skills/humanize-content/SKILL.md",
+      "computedHash": "0a19e363819abac633860ecea1d5e5b60ae14786894eea314317dcf53dc9777b"
     },
     "microsoft-foundry": {
       "source": "microsoft/azure-skills",
       "sourceType": "github",
       "skillPath": "skills/microsoft-foundry/SKILL.md",
-      "computedHash": "bbcba6515b4313989a6f29ed5c77bc3dfa9e53be50f17edb1d9eaa5dfe0580a5"
-    },
-    "unslop": {
-      "source": "cursor/plugins",
-      "sourceType": "github",
-      "skillPath": "pstack/skills/unslop/SKILL.md",
-      "computedHash": "6018ca8c329ba87c6b4298207f58d6b773fe23e44ff52a00a9a4d160c19bedc0"
+      "computedHash": "129354e7615503f0ad4a5aa9d61738fd7016161578cf5d6df74edf55751e9934"
     },
     "writing-for-agents": {
       "source": "mattpocock/skills",
