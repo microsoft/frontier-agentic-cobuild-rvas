@@ -25,9 +25,16 @@ to the known-use-case journey.
 
 Learn pages place the page tabs directly above the article. The section
 disclosure is removed to keep a single navigation layer before the content.
+Learn has three pages: application types, participant requirements, and the
+discovery session guide. Architecture choices sit within application types;
+existing-application preparation sits in Start, where the reader needs it.
 Prose stays at reading width; diagrams use the full content width.
 Start opens directly into the setup steps, without section navigation or the
-Learn page tabs. Headings and prose share one 47.5rem column;
+Learn page tabs. Returning users can jump to discovery. Setup leads to the first
+AI Agent Creator conversation; implementation and review prompts follow the
+architecture approval boundary. Supporting skills are required; show the full
+inventory and installation commands inline, with runtime requirements and
+installation warnings before them. Headings and prose share one 47.5rem column;
 subsections use spacing rather than full-width divider lines. Page tabs stay on
 one row and scroll horizontally when the viewport cannot contain them. Command
 blocks wrap to their available width. The copy

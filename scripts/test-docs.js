@@ -227,11 +227,43 @@ test('Start lists each supporting skill and its direct project-local installatio
   assert.match(html, /can overwrite existing copies/);
 });
 
+test('Start shows the inventory runtime requirement before supporting-skill commands', () => {
+  const html = renderPage(pages.find((page) => page.slug === 'start'));
+  const requirement = `Use Node.js ${inventory.minimumNode} or newer`;
+  const position = html.indexOf(requirement);
+  assert.ok(position >= 0);
+  assert.ok(position < html.indexOf(`npx --yes ${inventory.installer} add`));
+  assert.doesNotMatch(html, /<!-- supporting-runtime -->/);
+});
+
+test('Start leads from setup to discovery before implementation and later references', () => {
+  const html = renderPage(pages.find((page) => page.slug === 'start'));
+  const steps = [
+    'set-up-your-workspace', 'create-a-new-repository', 'install-the-plugin',
+    'install-the-supporting-skills', 'check-the-workspace',
+    'describe-what-you-want-to-build', 'ai-agent-creator-prompts',
+    'start-implementation-in-a-new-session', 'implementation-prompt',
+    'command-and-prompt-reference', 'review-prompts', 'update-the-plugin',
+  ].map((id) => html.indexOf(`id="${id}"`));
+  assert.ok(steps.every((position) => position >= 0));
+  assert.deepEqual(steps, steps.slice().sort((a, b) => a - b));
+  assert.ok(html.indexOf('href="#describe-what-you-want-to-build">Start discovery') < steps[0]);
+  const installation = html.slice(steps[3], steps[4]);
+  assert.doesNotMatch(installation, /<details\b|<summary\b/);
+  assert.match(installation, /All supporting skills below are required/);
+  for (const source of inventory.sources) {
+    assert.ok(installation.includes(`${source.repository} --skill`), source.repository);
+  }
+  assert.ok(installation.indexOf('can overwrite existing copies') < installation.indexOf(`npx --yes ${inventory.installer} add`));
+  const approval = html.indexOf('Approval ends this workflow.');
+  assert.ok(approval > steps[6] && approval < steps[7]);
+  assert.match(html, /Your first milestone is confirmed discovery/);
+});
+
 test('intro diagrams embed accessible wide and narrow layouts without fixed-width scrolling', () => {
   const figures = [
     [renderIndex(), 'approval-handoff'],
     [renderPage(pages.find((page) => page.slug === 'start')), 'approval-handoff'],
-    [renderPage(pages.find((page) => page.slug === 'existing-applications')), 'existing-app-delta'],
   ];
   for (const [html, name] of figures) {
     assert.doesNotMatch(html, /<!-- diagram:/);
@@ -253,6 +285,7 @@ test('Learn pages show page tabs while Start opens directly into its content', (
     const html = renderPage(page);
     assert.match(html, /class="wrap guide-layout"/);
     assert.doesNotMatch(html, /guide-contents|guide-section-links|On this page/);
+    assert.doesNotMatch(html, /href="(?:architecture-options|existing-applications)\.html/);
     if (page.slug === 'start') {
       assert.doesNotMatch(html, /class="guide-nav"/);
       assert.doesNotMatch(html, /class="guide-pages"/);
@@ -312,8 +345,8 @@ test('source and generated documentation links resolve', () => {
   assert.deepEqual(audit(files), []);
 });
 
-test('comparison tables retain semantics inside a keyboard-accessible scroll region', () => {
-  const html = renderPage(pages.find((page) => page.slug === 'architecture-options'));
+test('supporting-skill tables retain semantics inside a keyboard-accessible scroll region', () => {
+  const html = renderPage(pages.find((page) => page.slug === 'start'));
   assert.match(html, /<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">\s*<table>\s*<thead>/);
   assert.match(html, /<\/thead>\s*<tbody>[\s\S]*<\/tbody>\s*<\/table>\s*<\/div>/);
 });
@@ -332,6 +365,8 @@ test('retired application material is absent from source and publishing', () => 
   for (const retired of ['scenarios', 'infra', 'azure.yaml', '.env.sample', 'requirements.txt',
     '.github/skills/use-case-mapper', 'docs/assets/data', 'docs/assets/downloads',
     'docs/scenario.html', 'docs/lesson.html', 'docs/slides.html', 'scripts/build-slides.js',
+    'docs/architecture-options.md', 'docs/architecture-options.html',
+    'docs/existing-applications.md', 'docs/existing-applications.html',
     '.impeccable/surfaces/docs-slides-html.md', 'docs/agent-or-workflow.md',
     'docs/agent-or-workflow.html', 'docs/assets/diagrams/runtime-choice.html']) {
     assert.equal(fs.existsSync(path.join(ROOT, retired)), false, retired);

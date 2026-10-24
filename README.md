@@ -10,8 +10,8 @@ before implementation begins.
 | [Supporting skill commands](docs/supporting-skills.md)
 
 [What can you build?](docs/applications.md)
-| [Architecture options](docs/architecture-options.md)
-| [Extend an existing application](docs/existing-applications.md)
+| [Architecture choices](docs/applications.md#choose-an-architecture-during-discovery)
+| [Existing application preparation](docs/start.md#working-with-an-existing-application)
 | [Participant requirements](docs/participant-requirements.md)
 | [Discovery session guide](docs/discovery-session.md)
 

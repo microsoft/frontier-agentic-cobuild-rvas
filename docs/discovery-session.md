@@ -178,16 +178,12 @@ to ask about.
 Use WorkIQ when the signed-in user can access the meeting through the customer's
 Microsoft 365 environment. Availability depends on tenant policy and permissions.
 
-Ask WorkIQ to create the brief from one clearly identified meeting:
+Provide the brief template above and identify the meeting:
 
 ```text
 Find the customer discovery meeting titled [meeting title] held on [date].
-Using only content available from that meeting, prepare a discovery brief with:
-the intended outcome; users and current process; the first user journey; scope
-and non-goals; inputs and outputs; systems, data sources, and owners; actions,
-limits, and approvals; identity, security, and data constraints; experience and
-operating expectations; delivery constraints; success evidence; confirmed
-decisions; assumptions; and open questions with owners.
+Using only content available from that meeting, fill in the supplied discovery
+brief template, including owners for open questions.
 
 Keep confirmed statements separate from inference. Include timestamps or source
 references where available. Do not invent missing details or treat the meeting
@@ -199,28 +195,12 @@ Check the result against the meeting, then save the corrected brief as
 
 ## Create the brief from a transcript
 
-If WorkIQ is unavailable, attach the approved transcript and ask:
+If WorkIQ is unavailable, attach the approved transcript and provide the brief
+template above:
 
 ```text
 Read the attached customer discovery transcript and prepare
-@docs/discovery/discovery-brief.md with these sections:
-
-- Session: customer, date, participants and roles, transcript location, facilitator
-- Intended outcome
-- Users and current process
-- First user journey
-- Scope and non-goals
-- Inputs, outputs, and evidence
-- Systems, sources, and owners
-- Actions, limits, and approvals
-- Identity, security, and data rules
-- Experience and operating expectations
-- Existing application and delivery constraints
-- Success evidence
-- Confirmed decisions
-- Assumptions to validate
-- Open questions, with owner, needed-by date, and effect if unresolved
-- Source references, with transcript timestamps or document sections
+@docs/discovery/discovery-brief.md using the supplied discovery brief template.
 
 Use only the transcript and attached customer documents as evidence. Separate
 confirmed statements, assumptions, and open questions. Preserve conflicting

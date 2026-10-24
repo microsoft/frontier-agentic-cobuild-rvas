@@ -34,12 +34,26 @@
     <div class="wrap guide-layout">
 
       <article class="guide-body">
-        <h2 id="before-you-start">Before you start<a class="heading-link" href="#before-you-start" aria-label="Link to Before you start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Work in the application repository, not this tooling repository. For an existing
-application, <a href="existing-applications.html">prepare its context</a>. Check the
+        <p>Already installed the plugin and supporting skills? <a href="#describe-what-you-want-to-build">Start discovery</a>.</p>
+<h2 id="before-you-start">Before you start<a class="heading-link" href="#before-you-start" aria-label="Link to Before you start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Work in the application repository, not this tooling repository. Check the
 <a href="participant-requirements.html">participant requirements</a>, use an approved
 workspace, and identify the people who can approve access and architecture.</p>
-<h2 id="command-and-prompt-reference">Command and prompt reference<a class="heading-link" href="#command-and-prompt-reference" aria-label="Link to Command and prompt reference"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<h3 id="working-with-an-existing-application">Working with an existing application?<a class="heading-link" href="#working-with-an-existing-application" aria-label="Link to Working with an existing application?"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Open its repository and point the creator to approved architecture or operating
+records stored elsewhere. Bring:</p>
+<ul>
+<li>The current user journey and the one addition you want to make.</li>
+<li>Existing API contracts and data sources, with their owners and access boundaries.</li>
+<li>Behavior and interfaces that must stay unchanged, including authorization.</li>
+<li>Deployment constraints, regression checks, and rollback ownership.</li>
+</ul>
+<p>Use synthetic inputs until customer-data access is agreed. Describe how the
+application should behave when AI is unavailable or evidence is insufficient.
+Missing documentation does not prove that a control or service is absent.</p>
+<p>Reuse existing capabilities where they fit. Any proposed replacement needs a
+clear requirement and a migration plan that preserves compatibility.</p>
+<h2 id="set-up-your-workspace">Set up your workspace<a class="heading-link" href="#set-up-your-workspace" aria-label="Link to Set up your workspace"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Run setup commands from your application directory unless the step says
 otherwise. Stop on errors and inspect partial files before retrying.</p>
 <h3 id="create-a-new-repository">Create a new repository<a class="heading-link" href="#create-a-new-repository" aria-label="Link to Create a new repository"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
@@ -66,6 +80,9 @@ copilot plugin list
 <p>Open Extensions, search for <code>@agentPlugins</code>, install <strong>Agentic Co-build</strong>, and
 enable it for the application workspace.</p>
 <h3 id="install-the-supporting-skills">Install the supporting skills<a class="heading-link" href="#install-the-supporting-skills" aria-label="Link to Install the supporting skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>All supporting skills below are required. Run every installation command before
+starting discovery.</p>
+<p>Use Node.js 22.20.0 or newer to run the installation commands below.</p>
 <p>Each command installs project-local copies from its upstream repository and can overwrite existing copies.</p>
 <h3 id="skills-from-mattpocockskills">Skills from mattpocock/skills<a class="heading-link" href="#skills-from-mattpocockskills" aria-label="Link to Skills from mattpocock/skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Upstream source: <a href="https://github.com/mattpocock/skills"><code>mattpocock/skills</code></a>.</p>
@@ -169,8 +186,19 @@ conflict. Installing a skill does not authorize cloud changes or commits.</p>
 <h3 id="check-the-workspace">Check the workspace<a class="heading-link" href="#check-the-workspace" aria-label="Link to Check the workspace"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>In CLI, use <code>/skills</code> and <code>/mcp</code>. In VS Code, use <strong>Chat: Configure Skills</strong> and
 the MCP server list. Reload the host after installation if needed.</p>
+<p>Check that <strong>AI Agent Creator</strong>, <strong>Idea Forge</strong>, and <strong>Cloud Architecture Diagram</strong>
+are available, along with the supporting skills you installed and the
+<strong>Microsoft Learn</strong> MCP server. If anything is missing, check the installation
+error and reload the host before continuing.</p>
 <p><strong>Recommended model: Claude Opus 5.5.</strong> Select it in your host&#39;s model picker
 before starting AI Agent Creator or implementation.</p>
+<h2 id="describe-what-you-want-to-build">Describe what you want to build<a class="heading-link" href="#describe-what-you-want-to-build" aria-label="Link to Describe what you want to build"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>If several people hold the business context, use the
+<a href="discovery-session.html">discovery session guide</a> first. Get approval before
+recording or processing the discussion.</p>
+<p>Select <strong>AI Agent Creator</strong> from your host&#39;s skill picker or slash completion.
+Use the matching prompt below and replace the example with your application.
+If your host qualifies skill names, use the name it displays.</p>
 <h3 id="ai-agent-creator-prompts">AI Agent Creator prompts<a class="heading-link" href="#ai-agent-creator-prompts" aria-label="Link to AI Agent Creator prompts"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>For a new application:</p>
 <pre><code class="language-text">/ai-agent-creator Design an AI maintenance assistant for property managers that triages
@@ -182,45 +210,9 @@ existing enterprise identity and operating environment.
 Inspect its current stack, preserve established interfaces, and account
 for our enterprise data-access and deployment constraints.
 </code></pre>
-<h3 id="implementation-prompt">Implementation prompt<a class="heading-link" href="#implementation-prompt" aria-label="Link to Implementation prompt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<pre><code class="language-text">Implement the attached plan. Treat the attached specification as the
-requirements source of truth and follow the attached architecture.
-</code></pre>
-<h3 id="review-prompts">Review prompts<a class="heading-link" href="#review-prompts" aria-label="Link to Review prompts"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Implementation review:</p>
-<pre><code class="language-text">/review Review the staged and unstaged implementation against
-@docs/architecture/specification.md,
-@docs/architecture/implementation-plan.md, and
-@docs/architecture/solution.md. Identify unmet or partially met acceptance
-criteria, skipped or out-of-order plan steps, architecture deviations,
-regressions, and missing tests. Rank findings by severity and include file and
-line references.
-</code></pre>
-<p>Security review:</p>
-<pre><code class="language-text">/security-review Analyze the staged and unstaged implementation for exploitable
-security vulnerabilities, insecure defaults, authorization or data-isolation
-failures, secret exposure, injection risks, unsafe external interactions, and
-dependency or configuration weaknesses. Rank findings by severity and confidence,
-include file and line references, and recommend the smallest safe fix for each
-finding.
-</code></pre>
-<h3 id="idea-forge-prompt">Idea Forge prompt<a class="heading-link" href="#idea-forge-prompt" aria-label="Link to Idea Forge prompt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<pre><code class="language-text">/idea-forge Find a bounded AI opportunity for [customer] in [industry].
-Research the business and publicly stated priorities on the web.
-</code></pre>
-<h3 id="update-the-plugin">Update the plugin<a class="heading-link" href="#update-the-plugin" aria-label="Link to Update the plugin"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Each teammate manages the plugin in their own host. Review updates before use.
-Supporting skill updates remain separate.</p>
-<pre><code class="language-bash">copilot plugin update agentic-cobuild
-</code></pre>
-<p>VS Code users can run the plugin update action instead.</p>
-<h2 id="describe-what-you-want-to-build">Describe what you want to build<a class="heading-link" href="#describe-what-you-want-to-build" aria-label="Link to Describe what you want to build"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>If several people hold the business context, use the
-<a href="discovery-session.html">discovery session guide</a> first. Get approval before
-recording or processing the discussion.</p>
-<p>Select <strong>AI Agent Creator</strong> and use the matching
-<a href="#ai-agent-creator-prompts">prompt</a>. Confirm discovery after you agree on the
-outcome, first user journey, and architecture decisions.</p>
+<p><strong>Your first milestone is confirmed discovery.</strong> Answer the creator&#39;s questions
+and agree on the outcome, first user journey, and architecture decisions before
+confirming discovery. The creator then prepares the architecture package.</p>
 <style>
     .intro-diagram { container-type: inline-size; margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
     .intro-diagram .diagram-container { width: 100%; }
@@ -370,15 +362,48 @@ exception.</p>
 not change code, generate infrastructure, or provision resources.</p>
 <h2 id="start-implementation-in-a-new-session">Start implementation in a new session<a class="heading-link" href="#start-implementation-in-a-new-session" aria-label="Link to Start implementation in a new session"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Open a new session. Attach the approved architecture files and use the
-<a href="#implementation-prompt">implementation prompt</a>. Reapprove any change to an
-architecture decision.</p>
+prompt below. Reapprove any change to an architecture decision.</p>
+<h3 id="implementation-prompt">Implementation prompt<a class="heading-link" href="#implementation-prompt" aria-label="Link to Implementation prompt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<pre><code class="language-text">Implement the attached plan. Treat the attached specification as the
+requirements source of truth and follow the attached architecture.
+</code></pre>
 <p>After targeted checks pass, run the <a href="#review-prompts">implementation and security reviews</a>.
 Resolve findings and rerun affected tests. If review tooling is unavailable,
 assign a human reviewer and record the gap.</p>
 <p>The operating team still owns production acceptance and rollback.</p>
+<h2 id="command-and-prompt-reference">Command and prompt reference<a class="heading-link" href="#command-and-prompt-reference" aria-label="Link to Command and prompt reference"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Use these commands after implementation or when maintaining an existing setup.</p>
+<h3 id="review-prompts">Review prompts<a class="heading-link" href="#review-prompts" aria-label="Link to Review prompts"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Implementation review:</p>
+<pre><code class="language-text">/review Review the staged and unstaged implementation against
+@docs/architecture/specification.md,
+@docs/architecture/implementation-plan.md, and
+@docs/architecture/solution.md. Identify unmet or partially met acceptance
+criteria, skipped or out-of-order plan steps, architecture deviations,
+regressions, and missing tests. Rank findings by severity and include file and
+line references.
+</code></pre>
+<p>Security review:</p>
+<pre><code class="language-text">/security-review Analyze the staged and unstaged implementation for exploitable
+security vulnerabilities, insecure defaults, authorization or data-isolation
+failures, secret exposure, injection risks, unsafe external interactions, and
+dependency or configuration weaknesses. Rank findings by severity and confidence,
+include file and line references, and recommend the smallest safe fix for each
+finding.
+</code></pre>
+<h3 id="update-the-plugin">Update the plugin<a class="heading-link" href="#update-the-plugin" aria-label="Link to Update the plugin"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Each teammate manages the plugin in their own host. Review updates before use.
+Supporting skill updates remain separate.</p>
+<pre><code class="language-bash">copilot plugin update agentic-cobuild
+</code></pre>
+<p>VS Code users can run the plugin update action instead.</p>
 <h2 id="need-an-idea-first">Need an idea first?<a class="heading-link" href="#need-an-idea-first" aria-label="Link to Need an idea first?"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Use <strong>Idea Forge</strong> with the <a href="#idea-forge-prompt">reference prompt</a>, then take the
+<p>Use <strong>Idea Forge</strong> with the prompt below, then take the
 selected brief through AI Agent Creator discovery and architecture approval.</p>
+<h3 id="idea-forge-prompt">Idea Forge prompt<a class="heading-link" href="#idea-forge-prompt" aria-label="Link to Idea Forge prompt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<pre><code class="language-text">/idea-forge Find a bounded AI opportunity for [customer] in [industry].
+Research the business and publicly stated priorities on the web.
+</code></pre>
 <p>See the <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/tree/main/plugins/agentic-cobuild">plugin source</a>
 and the <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/plugins/agentic-cobuild/skills/cloud-architecture-diagram/references/REFERENCE.md">diagram asset terms</a>.</p>
 

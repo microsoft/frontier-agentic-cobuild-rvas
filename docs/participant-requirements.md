@@ -20,7 +20,8 @@ The customer team needs:
 
 Use an approved workstation with:
 
-- VS Code and GitHub Copilot, with permission to enable the plugin and skills.
+- GitHub Copilot CLI or VS Code with GitHub Copilot, with permission to enable
+  the plugin and skills.
 - Git access and support for the customer's review and delivery process.
 - The runtimes listed in the [Start guide](start.html).
 - Network access to approved package sources, documentation, Git, and development

@@ -35,8 +35,6 @@
 <nav class="guide-nav" aria-label="Reading navigation">
 <div class="guide-pages">
 <a href="applications.html" aria-current="page">Application types</a>
-<a href="architecture-options.html">Architecture options</a>
-<a href="existing-applications.html">Existing applications</a>
 <a href="participant-requirements.html">Participant requirements</a>
 <a href="discovery-session.html">Discovery session</a>
 </div>
@@ -45,7 +43,8 @@
         <h2 id="what-the-creator-can-design">What the creator can design<a class="heading-link" href="#what-the-creator-can-design" aria-label="Link to What the creator can design"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Tell AI Agent Creator what you want a new or existing application to do.
 It helps define the first user journey and architecture. It may recommend a
-platform agent, custom application, explicit workflow, or bounded model call.</p>
+platform agent, custom application, explicit workflow, or a model call with a
+defined task.</p>
 <p>The plugin designs the solution; it does not implement or certify it. The
 examples below are possibilities, not customer results or deployment templates.</p>
 <h2 id="application-families">Application families<a class="heading-link" href="#application-families" aria-label="Link to Application families"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
@@ -289,6 +288,15 @@ recommends the lowest complexity that meets the requirement.</p>
 <p>Families can overlap. Add persistent memory, multiple agents, or personalization
 only when the journey needs them. Define ownership, permissions, provenance,
 expiry, and deletion.</p>
+<h2 id="choose-an-architecture-during-discovery">Choose an architecture during discovery<a class="heading-link" href="#choose-an-architecture-during-discovery" aria-label="Link to Choose an architecture during discovery"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Bring the outcome and your existing constraints; you do not need to choose a
+platform before starting. The creator compares existing capabilities with custom
+execution against the first journey&#39;s requirements.
+Microsoft&#39;s <a href="https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy">technology planning guidance</a>
+starts by checking whether a ready-to-use solution meets the need.</p>
+<p>Choose the user channel separately from the runtime. Keep knowledge access and
+permission to perform actions distinct. The architecture review must verify
+product fit and proposed connections, and name owners for unresolved checks.</p>
 <h2 id="where-this-workflow-stops">Where this workflow stops<a class="heading-link" href="#where-this-workflow-stops" aria-label="Link to Where this workflow stops"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>The creator produces an approved architecture package for a separate
 implementation session. Architecture approval does not authorize implementation
@@ -301,7 +309,7 @@ identity and service system. Compare an agent with a simpler workflow before
 recommending the architecture.
 </code></pre>
 <p><a href="start.html">Set up your application workspace</a>, then bring your own idea.
-If you are extending a system, read <a href="existing-applications.html">Add AI to an existing application</a>.</p>
+If you are extending a system, <a href="start.html#working-with-an-existing-application">prepare its context</a>.</p>
 
       </article>
     </div>

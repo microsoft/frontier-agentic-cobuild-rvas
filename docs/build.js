@@ -37,22 +37,6 @@ const pages = [
     lede: 'Explore the kinds of AI applications you can bring to discovery, including capabilities added to existing systems.',
   },
   {
-    slug: 'architecture-options',
-    navigationLabel: 'Architecture options',
-    title: 'Choose an architecture that fits',
-    description: 'Separate behavior, platform, channel, and ownership before choosing an AI application architecture.',
-    heading: 'Choose an architecture <span>that fits.</span>',
-    lede: 'Check existing capabilities first. Compare platform-managed and custom execution against your requirements.',
-  },
-  {
-    slug: 'existing-applications',
-    navigationLabel: 'Existing applications',
-    title: 'Add AI to an existing application',
-    description: 'Prepare an existing application for architecture-first AI design without assuming a rewrite.',
-    heading: 'Add AI to <span>an existing application.</span>',
-    lede: 'Design a bounded addition. Preserve established interfaces and make reuse or migration decisions explicit.',
-  },
-  {
     slug: 'participant-requirements',
     navigationLabel: 'Participant requirements',
     title: 'Prepare for the co-build',
@@ -66,7 +50,7 @@ const pages = [
     title: 'Run the initial discovery session',
     description: 'Guide and record an initial customer discussion, prepare a grounded discovery brief, and hand it to AI Agent Creator.',
     heading: 'Run a focused <span>discovery session.</span>',
-    lede: 'Capture the customer goal, first user journey, operating constraints, and open questions before structured architecture discovery begins.',
+    lede: 'Capture the customer goal, first user journey, operating constraints, and open questions before the creator starts architecture work.',
   },
 ];
 
@@ -91,6 +75,7 @@ function supportingMarkdown() {
 
 function renderPage(page) {
   const markdown = fs.readFileSync(path.join(__dirname, `${page.slug}.md`), 'utf8')
+    .replace('<!-- supporting-runtime -->', `Use Node.js ${inventory.minimumNode} or newer to run the installation commands below.`)
     .replace('<!-- upstream-commands -->', supportingMarkdown().replace(/^# Supporting skills[\s\S]*?(?=### )/, ''));
   const renderer = new marked.Renderer();
   const anchors = new Set();

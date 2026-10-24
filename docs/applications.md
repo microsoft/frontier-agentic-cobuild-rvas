@@ -2,7 +2,8 @@
 
 Tell AI Agent Creator what you want a new or existing application to do.
 It helps define the first user journey and architecture. It may recommend a
-platform agent, custom application, explicit workflow, or bounded model call.
+platform agent, custom application, explicit workflow, or a model call with a
+defined task.
 
 The plugin designs the solution; it does not implement or certify it. The
 examples below are possibilities, not customer results or deployment templates.
@@ -115,6 +116,18 @@ Families can overlap. Add persistent memory, multiple agents, or personalization
 only when the journey needs them. Define ownership, permissions, provenance,
 expiry, and deletion.
 
+## Choose an architecture during discovery
+
+Bring the outcome and your existing constraints; you do not need to choose a
+platform before starting. The creator compares existing capabilities with custom
+execution against the first journey's requirements.
+Microsoft's [technology planning guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy)
+starts by checking whether a ready-to-use solution meets the need.
+
+Choose the user channel separately from the runtime. Keep knowledge access and
+permission to perform actions distinct. The architecture review must verify
+product fit and proposed connections, and name owners for unresolved checks.
+
 ## Where this workflow stops
 
 The creator produces an approved architecture package for a separate
@@ -133,4 +146,4 @@ recommending the architecture.
 ```
 
 [Set up your application workspace](start.html), then bring your own idea.
-If you are extending a system, read [Add AI to an existing application](existing-applications.html).
+If you are extending a system, [prepare its context](start.html#working-with-an-existing-application).
