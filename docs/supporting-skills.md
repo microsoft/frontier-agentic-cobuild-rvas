@@ -13,7 +13,6 @@ Upstream source: [`mattpocock/skills`](https://github.com/mattpocock/skills).
 | --- | --- |
 | `grilling` | Question a plan until the decisions and assumptions are clear. |
 | `domain-modeling` | Define domain terms and record them in a glossary and architecture decisions. |
-| `codebase-design` | Design module interfaces and decide where to separate responsibilities. |
 | `wait-what` | Ask explanations to the agent on what it just said. |
 
 ```bash

@@ -104,33 +104,13 @@ starting discovery.</p>
 <td>Define domain terms and record them in a glossary and architecture decisions.</td>
 </tr>
 <tr>
-<td><code>codebase-design</code></td>
-<td>Design module interfaces and decide where to separate responsibilities.</td>
-</tr>
-<tr>
-<td><code>implement</code></td>
-<td>Implement a specification or tickets, run checks, and review the changes. Includes a commit step.</td>
-</tr>
-<tr>
-<td><code>tdd</code></td>
-<td>Build features or fix bugs through failing tests, implementation, and refactoring.</td>
-</tr>
-<tr>
-<td><code>diagnosing-bugs</code></td>
-<td>Reproduce a bug or performance regression and test possible causes.</td>
-</tr>
-<tr>
-<td><code>code-review</code></td>
-<td>Compare changes against repository standards and the originating specification.</td>
-</tr>
-<tr>
-<td><code>handoff</code></td>
-<td>Write a conversation handoff for a fresh agent session.</td>
+<td><code>wait-what</code></td>
+<td>Ask explanations to the agent on what it just said.</td>
 </tr>
 </tbody>
 </table>
 </div>
-<pre><code class="language-bash">npx --yes skills@1.7.2 add mattpocock/skills --skill grilling domain-modeling codebase-design implement tdd diagnosing-bugs code-review handoff --agent github-copilot --copy --yes
+<pre><code class="language-bash">npx --yes skills@1.7.2 add mattpocock/skills --skill grilling domain-modeling wait-what --agent github-copilot --copy --yes
 </code></pre>
 <h3 id="skills-from-microsoftazure-skills">Skills from microsoft/azure-skills<a class="heading-link" href="#skills-from-microsoftazure-skills" aria-label="Link to Skills from microsoft/azure-skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Upstream source: <a href="https://github.com/microsoft/azure-skills"><code>microsoft/azure-skills</code></a>.</p>
@@ -361,8 +341,8 @@ exception.</p>
 <p><strong>Approval ends this workflow.</strong> Start implementation separately. Approval does
 not change code, generate infrastructure, or provision resources.</p>
 <h2 id="start-implementation-in-a-new-session">Start implementation in a new session<a class="heading-link" href="#start-implementation-in-a-new-session" aria-label="Link to Start implementation in a new session"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>The approved package is a plan, not an implementation. Choose one workflow
-below. All three use the files under <code>docs/architecture/</code> as their authority.
+<p>What you&#39;ve done and approved is a plan, not an implementation. Choose one workflow
+below to implement. All three use the files under <code>docs/architecture/</code> as their authority.
 Do not stack the workflows.</p>
 <div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
 <table>
@@ -377,7 +357,7 @@ Do not stack the workflows.</p>
 <tr>
 <td>Direct from the documents</td>
 <td>You want the shortest path from an approved package to working code</td>
-<td>The installed <code>/implement</code> skill</td>
+<td>Direct prompt</td>
 </tr>
 <tr>
 <td>Matt Pocock spec and tickets</td>
@@ -395,7 +375,7 @@ Do not stack the workflows.</p>
 <h3 id="direct-from-the-documents">Direct from the documents<a class="heading-link" href="#direct-from-the-documents" aria-label="Link to Direct from the documents"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Open a new session and attach the approved architecture files. Use this path
 unless the work needs the extra coordination provided by the other workflows.</p>
-<pre><code class="language-text">/implement Read @docs/architecture/specification.md,
+<pre><code class="language-text">Read @docs/architecture/specification.md,
 @docs/architecture/implementation-plan.md, @docs/architecture/solution.md,
 @docs/architecture/solution.drawio, and @docs/architecture/cost-estimate.md.
 Implement the approved plan in dependency order. Treat the specification and
