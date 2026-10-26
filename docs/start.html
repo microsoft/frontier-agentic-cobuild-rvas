@@ -361,12 +361,88 @@ exception.</p>
 <p><strong>Approval ends this workflow.</strong> Start implementation separately. Approval does
 not change code, generate infrastructure, or provision resources.</p>
 <h2 id="start-implementation-in-a-new-session">Start implementation in a new session<a class="heading-link" href="#start-implementation-in-a-new-session" aria-label="Link to Start implementation in a new session"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Open a new session. Attach the approved architecture files and use the
-prompt below. Reapprove any change to an architecture decision.</p>
-<h3 id="implementation-prompt">Implementation prompt<a class="heading-link" href="#implementation-prompt" aria-label="Link to Implementation prompt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<pre><code class="language-text">Implement the attached plan. Treat the attached specification as the
-requirements source of truth and follow the attached architecture.
+<p>The approved package is a plan, not an implementation. Choose one workflow
+below. All three use the files under <code>docs/architecture/</code> as their authority.
+Do not stack the workflows.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Workflow</th>
+<th>Choose it when</th>
+<th>Entry point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Direct from the documents</td>
+<td>You want the shortest path from an approved package to working code</td>
+<td>The installed <code>/implement</code> skill</td>
+</tr>
+<tr>
+<td>Matt Pocock spec and tickets</td>
+<td>You want a local spec, dependency-linked tickets, and bounded parallel delivery</td>
+<td><code>/to-spec</code>, <code>/to-tickets</code>, then <code>/implement-spec</code></td>
+</tr>
+<tr>
+<td>Spec Kit</td>
+<td>You want a constitution, feature spec, plan, and task artifacts before coding</td>
+<td>Spec Kit&#39;s specify, plan, tasks, and implement commands</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="direct-from-the-documents">Direct from the documents<a class="heading-link" href="#direct-from-the-documents" aria-label="Link to Direct from the documents"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Open a new session and attach the approved architecture files. Use this path
+unless the work needs the extra coordination provided by the other workflows.</p>
+<pre><code class="language-text">/implement Read @docs/architecture/specification.md,
+@docs/architecture/implementation-plan.md, @docs/architecture/solution.md,
+@docs/architecture/solution.drawio, and @docs/architecture/cost-estimate.md.
+Implement the approved plan in dependency order. Treat the specification and
+its acceptance criteria as the requirements source of truth. Follow the
+approved architecture, preserve existing interfaces and authorization, and
+add focused tests for changed behavior. Run the relevant checks and report
+actual results. Do not change an architecture decision without approval.
+Do not commit, provision, deploy, or change production data.
 </code></pre>
+<h3 id="matt-pocock-spec-and-tickets">Matt Pocock spec and tickets<a class="heading-link" href="#matt-pocock-spec-and-tickets" aria-label="Link to Matt Pocock spec and tickets"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Choose this optional workflow when several independent work items need explicit
+dependencies and local coordination. Install the Matt Pocock engineering
+workflow first if <code>/to-spec</code>, <code>/to-tickets</code>, and <code>/implement-spec</code> are not
+available. Use local Markdown tracking, not remote issues.</p>
+<pre><code class="language-text">/to-spec Convert the approved docs/architecture/ package into one bounded local
+implementation spec. Preserve its requirement and acceptance IDs, architecture
+decisions, interfaces, authorization, cost constraints, and out-of-scope work.
+Do not implement yet.
+</code></pre>
+<pre><code class="language-text">/to-tickets Break the local spec into dependency-linked, testable tickets.
+Keep every ticket linked to the original acceptance criteria. Show the proposed
+breakdown before writing it. Do not publish remote issues or implement yet.
+</code></pre>
+<p>Open a new session for delivery:</p>
+<pre><code class="language-text">/implement-spec Implement the approved local spec and tickets. Reconcile them
+with the current source and the full docs/architecture/ package. Preserve the
+approved architecture and existing contracts. Run focused and combined checks.
+Do not push, open a pull request, provision, deploy, or change production data.
+</code></pre>
+<h3 id="spec-kit">Spec Kit<a class="heading-link" href="#spec-kit" aria-label="Link to Spec Kit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Choose this optional workflow when your repository uses Spec Kit or the team
+wants its feature-specification and task lifecycle. Configure Spec Kit first,
+then run its constitution, specify, clarify when needed, plan, and tasks commands
+against the approved <code>docs/architecture/</code> package. Do not use those commands to
+replace settled architecture decisions.</p>
+<p>Open a new session after the feature plan and tasks are reviewed:</p>
+<pre><code class="language-text">/speckit-implement Implement only the reviewed feature tasks. Treat the
+docs/architecture/ package and its acceptance criteria as authoritative.
+Preserve the approved architecture, interfaces, authorization, and cost
+constraints. Run the documented tests and record actual results. Do not commit,
+provision, deploy, or change production data.
+</code></pre>
+<p>Use <code>/speckit-converge</code> after each implementation pass. Repeat implementation
+and convergence until the feature is converged or the remaining blocker is
+recorded.</p>
+<p>Whichever path you choose, reapprove any proposed change to an architecture
+decision.</p>
 <p>After targeted checks pass, run the <a href="#review-prompts">implementation and security reviews</a>.
 Resolve findings and rerun affected tests. If review tooling is unavailable,
 assign a human reviewer and record the gap.</p>

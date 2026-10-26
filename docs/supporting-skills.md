@@ -14,14 +14,10 @@ Upstream source: [`mattpocock/skills`](https://github.com/mattpocock/skills).
 | `grilling` | Question a plan until the decisions and assumptions are clear. |
 | `domain-modeling` | Define domain terms and record them in a glossary and architecture decisions. |
 | `codebase-design` | Design module interfaces and decide where to separate responsibilities. |
-| `implement` | Implement a specification or tickets, run checks, and review the changes. Includes a commit step. |
-| `tdd` | Build features or fix bugs through failing tests, implementation, and refactoring. |
-| `diagnosing-bugs` | Reproduce a bug or performance regression and test possible causes. |
-| `code-review` | Compare changes against repository standards and the originating specification. |
-| `handoff` | Write a conversation handoff for a fresh agent session. |
+| `wait-what` | Ask explanations to the agent on what it just said. |
 
 ```bash
-npx --yes skills@1.7.2 add mattpocock/skills --skill grilling domain-modeling codebase-design implement tdd diagnosing-bugs code-review handoff --agent github-copilot --copy --yes
+npx --yes skills@1.7.2 add mattpocock/skills --skill grilling domain-modeling wait-what --agent github-copilot --copy --yes
 ```
 
 ### Skills from microsoft/azure-skills

@@ -242,7 +242,8 @@ test('Start leads from setup to discovery before implementation and later refere
     'set-up-your-workspace', 'create-a-new-repository', 'install-the-plugin',
     'install-the-supporting-skills', 'check-the-workspace',
     'describe-what-you-want-to-build', 'ai-agent-creator-prompts',
-    'start-implementation-in-a-new-session', 'implementation-prompt',
+    'start-implementation-in-a-new-session', 'direct-from-the-documents',
+    'matt-pocock-spec-and-tickets', 'spec-kit',
     'command-and-prompt-reference', 'review-prompts', 'update-the-plugin',
   ].map((id) => html.indexOf(`id="${id}"`));
   assert.ok(steps.every((position) => position >= 0));
