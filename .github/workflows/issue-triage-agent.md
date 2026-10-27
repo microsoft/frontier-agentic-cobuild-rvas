@@ -1,6 +1,6 @@
 ---
 emoji: "🔧"
-model: gpt-5-mini
+model: mini
 timeout-minutes: 5
 strict: true
 on:
