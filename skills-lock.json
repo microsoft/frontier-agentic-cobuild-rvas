@@ -17,7 +17,7 @@
       "source": "cathrynlavery/diagram-design",
       "sourceType": "github",
       "skillPath": "skills/diagram-design/SKILL.md",
-      "computedHash": "c7bc6e49f7f16c68af0a889e2a8d514b9b8d4f220899074f632c4f5c5b19c091"
+      "computedHash": "60a5683c454680790701665621d37e7d519c971c0fade9632a396c44b005383b"
     },
     "excalidraw-diagram": {
       "source": "coleam00/excalidraw-diagram-skill",
@@ -29,13 +29,13 @@
       "source": "olivomarco/ai-dev-skills",
       "sourceType": "github",
       "skillPath": "skills/humanize-content/SKILL.md",
-      "computedHash": "0a19e363819abac633860ecea1d5e5b60ae14786894eea314317dcf53dc9777b"
+      "computedHash": "2167506ebfb3af5cd2eb43fe675e224dd0b2143d875a0dfbdb9351feeb7d6a3d"
     },
     "microsoft-foundry": {
       "source": "microsoft/azure-skills",
       "sourceType": "github",
       "skillPath": "skills/microsoft-foundry/SKILL.md",
-      "computedHash": "129354e7615503f0ad4a5aa9d61738fd7016161578cf5d6df74edf55751e9934"
+      "computedHash": "4b073fc7e2aab20462aa5b3b83e874b0ef4ac8ee2c190a0d7a3ad795a53bcb44"
     },
     "writing-for-agents": {
       "source": "mattpocock/skills",
