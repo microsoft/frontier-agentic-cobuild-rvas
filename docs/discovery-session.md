@@ -22,8 +22,8 @@ instead. The same question set still applies.
 
 ## Guide the discussion
 
-Use these topics as a route, not a script. Ask for concrete examples and measurable
-meaning behind words such as "fast," "secure," or "automated."
+Use these questions to guide the discussion. Ask for concrete examples and
+measurable definitions of "fast," "secure," or "automated."
 
 ### 1. Outcome and reason for change
 
@@ -170,8 +170,7 @@ Use this structure:
 | --- | --- | --- |
 ```
 
-Do not fill gaps with plausible answers. Leave them visible for AI Agent Creator
-to ask about.
+Leave gaps visible for AI Agent Creator to ask about; do not invent answers.
 
 ## Create the brief with WorkIQ
 
@@ -229,5 +228,5 @@ requirements approval. Present the shared-understanding record and wait for
 explicit customer confirmation before architecture work begins.
 ```
 
-The brief accelerates discovery. It does not replace confirmation, architecture
-review, or package approval.
+The brief does not replace discovery confirmation, architecture review, or
+package approval.

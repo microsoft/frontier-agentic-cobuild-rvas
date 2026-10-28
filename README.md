@@ -30,7 +30,7 @@ For VS Code Copilot, add `microsoft/frontier-agentic-cobuild-rvas` to
 Plugins view. Enable `chat.plugins.enabled` if needed. Manage the plugin in the
 interface where you installed it.
 
-**Install supporting skills in the application repository too.** The
+**Install supporting skills in the application repository.** The
 [Start guide](docs/start.md#install-the-supporting-skills) lists every selected
 skill, its purpose, and the direct `npx` commands. Use Node.js 22.20 or newer,
 Git, and npx. No Bash wrapper or tooling-repository clone is needed.
@@ -65,9 +65,9 @@ Validate acceptance criteria and resolve implementation and security-review
 findings before deployment. The [Start guide](docs/start.md) provides the handoff
 prompt and separate instructions for both hosts.
 
-The plugin supplies public Microsoft Learn documentation MCP. It grants no cloud
-access. Missing diagram rendering or independent review is reported and needs an
-explicit manual-review exception; XML validation alone is not visual approval.
+The plugin supplies public Microsoft Learn documentation MCP, not cloud access.
+If diagram rendering or independent review is unavailable, record and explicitly
+accept a manual-review exception. XML validation alone is not visual approval.
 
 ## Maintain this repository
 

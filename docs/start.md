@@ -81,7 +81,7 @@ conflict. Installing a skill does not authorize cloud changes or commits.
 ### Check the workspace
 
 In CLI, use `/skills` and `/mcp`. In VS Code, use **Chat: Configure Skills** and
-the MCP server list. Reload the host after installation if needed.
+the MCP server list.
 
 Check that **AI Agent Creator**, **Idea Forge**, and **Cloud Architecture Diagram**
 are available, along with the supporting skills you installed and the
@@ -135,9 +135,8 @@ not change code, generate infrastructure, or provision resources.
 
 ## Start implementation in a new session
 
-What you've done and approved is a plan, not an implementation. Choose one workflow
-below to implement. All three use the files under `docs/architecture/` as their authority.
-Do not stack the workflows.
+Choose one implementation workflow below; do not combine them. All three use
+the approved files under `docs/architecture/` as their authority.
 
 | Workflow | Choose it when | Entry point |
 | --- | --- | --- |
@@ -213,8 +212,7 @@ Use `/speckit-converge` after each implementation pass. Repeat implementation
 and convergence until the feature is converged or the remaining blocker is
 recorded.
 
-Whichever path you choose, reapprove any proposed change to an architecture
-decision.
+Get approval before changing an architecture decision, whichever workflow you use.
 
 After targeted checks pass, run the [implementation and security reviews](#review-prompts).
 Resolve findings and rerun affected tests. If review tooling is unavailable,

@@ -105,7 +105,7 @@ starting discovery.</p>
 </tr>
 <tr>
 <td><code>wait-what</code></td>
-<td>Ask explanations to the agent on what it just said.</td>
+<td>Ask the agent to explain what it just said.</td>
 </tr>
 </tbody>
 </table>
@@ -165,7 +165,7 @@ before retrying. Preserve existing skills instead of deleting them to bypass a
 conflict. Installing a skill does not authorize cloud changes or commits.</p>
 <h3 id="check-the-workspace">Check the workspace<a class="heading-link" href="#check-the-workspace" aria-label="Link to Check the workspace"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>In CLI, use <code>/skills</code> and <code>/mcp</code>. In VS Code, use <strong>Chat: Configure Skills</strong> and
-the MCP server list. Reload the host after installation if needed.</p>
+the MCP server list.</p>
 <p>Check that <strong>AI Agent Creator</strong>, <strong>Idea Forge</strong>, and <strong>Cloud Architecture Diagram</strong>
 are available, along with the supporting skills you installed and the
 <strong>Microsoft Learn</strong> MCP server. If anything is missing, check the installation
@@ -341,9 +341,8 @@ exception.</p>
 <p><strong>Approval ends this workflow.</strong> Start implementation separately. Approval does
 not change code, generate infrastructure, or provision resources.</p>
 <h2 id="start-implementation-in-a-new-session">Start implementation in a new session<a class="heading-link" href="#start-implementation-in-a-new-session" aria-label="Link to Start implementation in a new session"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>What you&#39;ve done and approved is a plan, not an implementation. Choose one workflow
-below to implement. All three use the files under <code>docs/architecture/</code> as their authority.
-Do not stack the workflows.</p>
+<p>Choose one implementation workflow below; do not combine them. All three use
+the approved files under <code>docs/architecture/</code> as their authority.</p>
 <div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
 <table>
 <thead>
@@ -421,8 +420,7 @@ provision, deploy, or change production data.
 <p>Use <code>/speckit-converge</code> after each implementation pass. Repeat implementation
 and convergence until the feature is converged or the remaining blocker is
 recorded.</p>
-<p>Whichever path you choose, reapprove any proposed change to an architecture
-decision.</p>
+<p>Get approval before changing an architecture decision, whichever workflow you use.</p>
 <p>After targeted checks pass, run the <a href="#review-prompts">implementation and security reviews</a>.
 Resolve findings and rerun affected tests. If review tooling is unavailable,
 assign a human reviewer and record the gap.</p>
