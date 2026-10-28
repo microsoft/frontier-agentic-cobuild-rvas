@@ -6,19 +6,22 @@ Describe the change and why it is needed.
 - [ ] Content update
 - [ ] Documentation update
 - [ ] Infrastructure / automation
-- [ ] New activity material
+- [ ] Plugin skill or reference change
+- [ ] Dependency inventory change
 
 ## Testing done
 - [ ] Not run
-- [ ] Checked locally
+- [ ] `npm run build`, `npm test`, and `npm run test:diagrams`
+- [ ] Tested plugin installation in a disposable application directory
 - [ ] Verified in Codespaces/devcontainer
 - [ ] Verified in GitHub Actions
 
-## Activity affected
-- [ ] Foundations (setup / provisioning / first agent / knowledge base)
-- [ ] Advanced (action tools / tracing / evaluation / hosted agent)
-- [ ] Extras (Fabric IQ / voice / Magentic workflows / build UI / etc.)
-- [ ] Capstone (multi-agent orchestration)
+## Area affected
+- [ ] ai-agent-creator
+- [ ] cloud-architecture-diagram
+- [ ] idea-forge
+- [ ] Documentation site
+- [ ] Dependency inventory (`scripts/agentic-skills.json`)
 - [ ] Cross-cutting / repo-wide
 
 ## Notes for reviewers

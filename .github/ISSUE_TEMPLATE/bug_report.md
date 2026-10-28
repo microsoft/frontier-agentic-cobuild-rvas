@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report broken instructions, scripts, or repo automation impacting participants.
+about: Report broken instructions, plugin behavior, scripts, or repository automation.
 title: "[Bug]: "
 labels: [bug]
 assignees: []
@@ -10,7 +10,7 @@ assignees: []
 Describe the broken instruction or behavior.
 
 ## Where did you hit it?
-- Activity:
+- Area (plugin skill, documentation site, dependency inventory, or automation):
 - File or page:
 - Step number:
 
@@ -27,7 +27,7 @@ Include the actual result and any error output.
 
 ## Environment
 - Device/OS:
-- Browser or terminal:
+- Host (GitHub Copilot CLI, VS Code, or browser) and version:
 - Codespaces / local devcontainer / local machine:
 
 ## Additional context

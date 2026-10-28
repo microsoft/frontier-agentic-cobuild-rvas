@@ -24,30 +24,40 @@ npm test
 npm run test:diagrams
 ```
 
-The build renders Overview from `docs/index.template.html` and the Start guide
-and four explanatory pages from Markdown using `docs/start.template.html`.
-Static intro figures live in `docs/assets/diagrams/` as self-contained HTML.
-Use `<!-- diagram: filename-without-extension -->` to embed a figure; the build
-inlines its scoped styles and accessible SVG without loading its standalone font
-stylesheet. Embedded figures use the site's self-hosted Outfit/Inter fonts.
-The wide intro figures have wide and stacked SVG layouts selected by container width.
-Check both compositions: no diagram scrollbar, clipped labels, or omitted
-relationships. Keep the before/after snapshots synchronized across layouts;
-documentation tests compare their components and relationships.
-Compact application-family figures use one narrow composition. Pair a heading
-and its paragraphs with a figure using `<!-- application-family -->` before the
-heading and `<!-- diagram: family-name -->` after the paragraphs.
-Page metadata and Start's setup section links live in `docs/build.js`.
-Learn pages use page tabs without a section menu. The build also generates supporting
-skill descriptions and commands from the install inventory. Commit generated HTML and
+The build renders Overview from `docs/index.template.html`. It renders the Start
+guide and four explanatory pages from Markdown through `docs/start.template.html`.
+Page metadata and Start's setup section links live in `docs/build.js`. Learn pages
+use page tabs without a section menu. The build also generates supporting skill
+descriptions and commands from the install inventory. Commit generated HTML and
 `docs/supporting-skills.md` with their sources.
-Plugin skills live only under `plugins/agentic-cobuild/skills/`.
-Keep third-party dependencies in `scripts/agentic-skills.json`, not in the plugin.
+
+Plugin skills live only under `plugins/agentic-cobuild/skills/`. Keep third-party
+dependencies in `scripts/agentic-skills.json`, not in the plugin.
+
+### Intro figures
+
+Static intro figures live in `docs/assets/diagrams/` as self-contained HTML. Use
+`<!-- diagram: filename-without-extension -->` to embed a figure. The build inlines
+its scoped styles and accessible SVG but not its standalone font stylesheet, so
+embedded figures use the site's self-hosted Outfit and Inter fonts.
+
+The wide intro figures have a wide and a stacked SVG layout, selected by container
+width. Check both: no diagram scrollbar, no clipped labels, no missing
+relationships. Keep the before and after snapshots in sync across layouts, because
+the documentation tests compare their components and relationships.
+
+Compact application-family figures use one narrow layout. To pair a heading and
+its paragraphs with a figure, put `<!-- application-family -->` before the heading
+and `<!-- diagram: family-name -->` after the paragraphs.
+
+### What the tests cover
 
 Tests cover plugin resources, local links, generated setup commands and skill
-descriptions, page consistency, and accessible intro-figure embedding.
-Diagram tests check XML and local asset handling;
-they do not prove visual correctness or cloud security.
+descriptions, page consistency, and accessible intro-figure embedding. Diagram
+tests check XML and local asset handling. They do not prove visual correctness or
+cloud security.
+
+### Installation changes
 
 For an installation change, test in a disposable application directory. Use
 `copilot --plugin-dir /absolute/path/to/plugins/agentic-cobuild` for local CLI

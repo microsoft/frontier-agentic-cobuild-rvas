@@ -1,7 +1,7 @@
-name: Scenario or lesson proposal
-description: Propose a customer-delivery scenario, lesson, slide change, or accelerator.
-title: "[Scenario] "
-labels: ["scenario"]
+name: Capability proposal
+description: Propose a new plugin skill, workflow step, pattern card, or supporting dependency.
+title: "[Proposal] "
+labels: ["enhancement"]
 body:
   - type: input
     id: outcome
@@ -14,21 +14,21 @@ body:
     id: decision
     attributes:
       label: Customer decisions
-      description: Which decisions does the material help a customer make?
+      description: Which decisions does the change help a customer make?
     validations:
       required: true
   - type: textarea
-    id: lessons
+    id: placement
     attributes:
-      label: Reusable lessons
-      description: List candidate lessons and which existing scenarios could reuse them.
+      label: Placement
+      description: Name the skill, reference, or inventory entry that should change, or explain why it needs a new one.
     validations:
       required: true
   - type: textarea
-    id: accelerator
+    id: gates
     attributes:
-      label: Minimal accelerator
-      description: State the safe-demo path and the bring-your-own-environment path. Do not propose a landing zone.
+      label: Approval gates
+      description: State how the change keeps discovery confirmation, architecture approval, diagram review, and the separate implementation handoff.
     validations:
       required: true
   - type: dropdown
