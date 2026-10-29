@@ -1100,6 +1100,87 @@
         "Load balancing remains conditional on more than one suitable backend or another documented routing purpose.",
         "The response waits after discovery questions and creates no APIM or model-capacity changes."
       ]
+    },
+    {
+      "id": 77,
+      "prompt": "The RFP requires an Azure investigation assistant to send outbound Microsoft Teams alerts. All other architecture choices are settled. The shared-understanding draft says 'Teams alerts; adapter is a delivery detail'. We have not chosen the notification mechanism, identity, permissions, or operational owner. Confirm discovery and produce the architecture package.",
+      "expected_output": "Discovery remains open. The response records Teams in the integration ledger, distinguishes destination from mechanism, asks the adapter frontier with concrete alternatives, and waits without manufacturing confirmation or producing a ready package.",
+      "files": [
+        "references/discovery-quality.md"
+      ],
+      "expectations": [
+        "The integration ledger contains Microsoft Teams, outbound alerts, and explicit Open or Unresolved adapter, identity, permissions and owner fields.",
+        "The response asks whether notifications use Microsoft Graph, Logic Apps or Power Automate, a Teams workflow or webhook, or an existing enterprise notification service, without assuming those options are interchangeable or currently supported.",
+        "The response explains that destination confirmation does not select an adapter and verifies current product facts before recommending one.",
+        "The response keeps architecture-changing choices in the discovery frontier and ends after the question round.",
+        "The response does not claim discovery confirmation, create architecture artifacts, or mark the package Ready for review."
+      ]
+    },
+    {
+      "id": 78,
+      "prompt": "A later user turn confirmed our shared-understanding record. It explicitly delegates selection of the outbound Teams alert adapter, including its service, identity, permissions, licensing and operational boundary, to you within our Azure landing-zone constraints. Teams is INT-001 in the ledger. Produce the architecture package only. Do not leave a list of adapter candidates for implementation.",
+      "expected_output": "The architecture researches and selects one adapter within the explicit delegation, records its reason and evidence, and reconciles INT-001 across all five artifacts before readiness without asking the user to repeat the delegation.",
+      "files": [
+        "references/discovery-quality.md",
+        "references/architecture-quality.md"
+      ],
+      "expectations": [
+        "The response respects the confirmed baseline and scoped adapter delegation rather than requiring another adapter confirmation when no choice exceeds that scope.",
+        "One verified adapter is selected and its reason, rejected alternatives, identity, permissions and operational owner are recorded.",
+        "INT-001 appears logically on Components, as an outbound notification interaction on AI and data flow, and as a selected service or existing enterprise capability on Deployment.",
+        "specification.md owns the package integration ledger and links requirements, acceptance criteria and authoritative solution.md decisions.",
+        "The implementation plan and cost estimate account for the adapter's delivery owner and cost treatment.",
+        "If compatibility prevents a selection, the package remains Draft rather than claiming Ready for review.",
+        "The response preserves the architecture-only boundary and separately initiated implementation handoff."
+      ]
+    },
+    {
+      "id": 79,
+      "prompt": "Our five architecture artifacts exist and the diagram passed structural and visual checks. The RFP says 'notify Microsoft Teams', specification.md repeats that requirement, but the diagrams and solution.md omit Teams. The team says notifications are minor and wants Ready for review now. Reconcile the package only.",
+      "expected_output": "The final named-entity audit detects the missing Teams integration, records an unresolved draft gap, and blocks package readiness until the adapter choice is confirmed or selected within explicit delegation and the artifacts agree.",
+      "files": [
+        "references/architecture-quality.md",
+        "references/specification-quality.md"
+      ],
+      "expectations": [
+        "The response compares named systems in the RFP and specification against the integration ledger, diagram and decision records.",
+        "Teams is not silently removed, treated as out of scope, or represented only as a destination label.",
+        "The response checks Components, relevant AI and data flow, Deployment, identity and permissions, operational ownership, plan and cost treatment.",
+        "The response uses an explicit Unresolved draft mapping rather than inventing a notification service.",
+        "Structural and visual success do not clear the integration reconciliation gate or permit Ready for review.",
+        "The response returns the unresolved choice to discovery unless existing delegation explicitly covers its selection."
+      ]
+    },
+    {
+      "id": 80,
+      "prompt": "The confirmed design sends Teams alerts through the existing enterprise notification service. Its API, workload identity, permission scope, trust boundary, operational owner, licensing and cost model are fixed and evidenced. Only the environment-specific destination identifier remains unknown; every permitted value preserves those boundaries. May that identifier remain an owned rollout gate while the reconciled architecture package becomes Ready for review?",
+      "expected_output": "The response permits the bounded identifier deferral, records its owner, decision point and invariants, and does not reopen the settled adapter decision or invent another service.",
+      "files": [
+        "references/discovery-quality.md",
+        "references/architecture-quality.md"
+      ],
+      "expectations": [
+        "The response distinguishes a bounded destination identifier from an unresolved adapter or service-family choice.",
+        "The delivery deferral records an owner, decision point, implementation impact and the invariants that all allowed values preserve.",
+        "The selected enterprise notification service remains visible with the same identity and operational owner across the ledger, records and relevant diagram views.",
+        "The response does not force a new architecture confirmation or block readiness solely because this safe delivery parameter remains open."
+      ]
+    },
+    {
+      "id": 81,
+      "prompt": "Everything is confirmed except the adapter for Teams alerts. Put 'Graph / Logic Apps / enterprise notifications - choose during delivery' on Deployment and assign the choice to the implementation team. We have not delegated architecture selection. Mark the package Ready for review because the destination will remain Teams.",
+      "expected_output": "The response rejects the unsafe deferral, keeps the package Draft, and asks the concrete adapter choice because a fixed destination does not preserve deployment, authentication, licensing, trust or ownership boundaries across mechanisms.",
+      "files": [
+        "references/discovery-quality.md",
+        "references/architecture-quality.md"
+      ],
+      "expectations": [
+        "The response does not treat an implementation owner assignment as explicit architecture-selection delegation.",
+        "The response checks changes to deployed services, authentication and permissions, trust boundaries, licensing or cost model, and operational ownership.",
+        "A slash-separated list of adapter candidates is not accepted as a selected Deployment mapping.",
+        "An Unresolved label may document the draft gap but does not permit Ready for review.",
+        "The response asks the unresolved adapter frontier and waits rather than implementing or choosing outside delegation."
+      ]
     }
   ]
 }

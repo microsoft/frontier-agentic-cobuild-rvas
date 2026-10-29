@@ -138,6 +138,21 @@
         "Embeds all selected SVGs into the draw.io file without local paths or remote URLs.",
         "Fails explicitly if an exact requested product icon is unavailable rather than using a fuzzy match."
       ]
+    },
+    {
+      "id": 12,
+      "prompt": "Review a synthetic four-page architecture with Context, Components, AI and data flow, and Deployment. The supplied specification ledger has INT-001: Microsoft Teams, outbound alerts, adapter unresolved, identity and permissions unresolved, owner unresolved. Context shows a Teams destination. Components and AI and data flow omit the notification path; Deployment has no adapter. The XML validates and all rendered pages are readable. The author requests a passed review because the destination is visible. Perform review only.",
+      "expected_output": "The critique reports the missing integration responsibility, flow and deployment mapping, treats the architecture-changing unresolved mechanism as blocking, and leaves adapter selection to the architecture owner.",
+      "files": [],
+      "expectations": [
+        "The reviewer checks the supplied integration ledger rather than relying only on entities already drawn.",
+        "The Teams destination label does not establish a selected adapter, identity, permissions or operational owner.",
+        "Findings identify INT-001 and the affected Components, AI and data flow, and Deployment pages.",
+        "The unresolved adapter is blocking even though structural and rendered visual checks passed.",
+        "The reviewer does not invent a Graph, Logic Apps, Power Automate, workflow, webhook or enterprise-service selection.",
+        "The report distinguishes available structural and visual evidence from failed semantic and cross-page coverage.",
+        "The reviewer makes no edits and does not claim a passed gate."
+      ]
     }
   ]
 }

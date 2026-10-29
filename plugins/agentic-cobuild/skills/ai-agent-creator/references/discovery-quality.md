@@ -29,6 +29,46 @@ The frontier is empty only when every architecture-changing branch is answered o
 discovered. A deferral may retain a delivery parameter such as an exact version,
 SKU, capacity, or approved region only when every allowed value preserves the
 selected service family, topology, responsibility ownership, and trust boundary.
+Apply the integration contract below to every named external system or channel;
+confirming its destination alone does not close its integration branch.
+
+## External integrations and channels
+
+Maintain an **integration ledger** in the discovery record, with one row per named
+external system or channel in the requirements, including the RFP and supplied
+briefs. Give each row a stable ID such as `INT-001`. Preserve aliases and source
+references so later reconciliation can account for every name.
+
+| Integration | Purpose | Direction | Adapter | Identity | Owner | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| INT-001: Microsoft Teams | Alerts | Outbound | Unresolved | Unresolved | Unresolved | Open |
+
+Record the interaction in Purpose, caller-relative direction in Direction,
+selected mechanism in Adapter, identity and required permissions in Identity,
+and operational responsibility in Owner. Link unresolved compatibility gates and
+decision records from the row. Use the technical decision statuses below; keep
+gaps **Open** rather than treating a named destination as a selected adapter.
+Record explicitly excluded systems with the reason and source of that scope
+decision instead of silently dropping them.
+
+For each in-scope named product, confirm the integration, obtain explicit
+lower-level delegation, or prove that every remaining option meets the
+delivery-parameter rule. A choice that changes deployed services,
+authentication or permissions, trust boundaries, licensing or cost model, or
+operational ownership stays in the frontier. Generic technical delegation covers
+an adapter only when that integration is within its stated scope.
+
+**Destination versus mechanism:** "Teams alerts" confirms where notifications
+arrive, not how the platform sends them. Ask the answerable adapter question:
+"How must the platform send Microsoft Teams notifications: through Microsoft
+Graph, Logic Apps/Power Automate, a Teams workflow/webhook, or an existing
+enterprise notification service?" Treat these as alternatives to investigate,
+not interchangeable or verified capabilities. Apply the evidence contract before
+recommending one.
+
+Complete this branch when every row is confirmed, explicitly delegated within
+scope, safely deferred with its invariants recorded, or explicitly excluded.
+Resolve delegated adapter selections during architecture before package readiness.
 
 ## Technical decision ownership
 
@@ -164,6 +204,9 @@ Execution-model comparison:
 Platform and channel:
 Target architecture:
 Custom choices and delegated subchoices:
+External integrations and channels:
+  Integration ledger (system/channel, interaction, direction, selected adapter,
+  identity and permissions, ownership, status, unresolved compatibility gates):
 Data and knowledge:
 Success measures:
 Constraints:
@@ -190,6 +233,9 @@ Discovery is complete when:
   under the technical decision ownership contract;
 - platform and channel are resolved independently of the execution model, and
   custom components have a confirmed requirement or documented capability gap;
+- every named external system or channel is accounted for in the integration
+  ledger under the integration contract, including destination-versus-mechanism
+  checks;
 - repository facts were investigated rather than asked of the user;
 - domain terms are recorded as they resolve;
 - the boundary ladder is compared against the actual first journey;

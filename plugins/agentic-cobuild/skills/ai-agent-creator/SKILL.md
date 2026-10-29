@@ -143,7 +143,10 @@ explicitly delegated lower-level decisions.
    one-shot review that found blocking or material defects does not become a
    passed independent review through local inspection after repair.
 8. **Reconcile and hand off:** check all five artifacts against their contracts and the
-   current baseline. Resolve conflicts and every architecture-changing choice.
+   current baseline. Run architecture quality's
+   [integration reconciliation gate](references/architecture-quality.md#integration-reconciliation-gate),
+   including the final named-entity audit against the RFP and specification.
+   Resolve conflicts and every architecture-changing choice.
    Keep only delivery parameters that preserve the selected topology as owned
    deferrals. Record blocked or unavailable diagram evidence exactly. Mark the
    package exactly `Ready for review` and present the handoff without asking for

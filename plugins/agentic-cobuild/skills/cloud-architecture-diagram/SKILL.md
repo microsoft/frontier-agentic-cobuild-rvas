@@ -86,6 +86,10 @@ Write generators, exports, and refresh candidates only to the user's output area
    is authorized. The builder creates new files, with one or more pages; it is not
    an existing-file editor or synchronizer. Do not regenerate an existing diagram
    from an incomplete description.
+   Account for every named external system and channel in the supplied scope or
+   integration ledger. A destination does not establish its adapter. Show missing
+   mechanisms as unresolved draft facts and request the architectural decision;
+   preserve confirmed identities, permissions, ownership and trust boundaries.
 2. Choose topology or temporal flow. Read
    [topology-patterns.md](references/topology-patterns.md) for deployment boundaries,
    Azure/AWS examples, and auth/API/pipeline patterns.

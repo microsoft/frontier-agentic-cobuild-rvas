@@ -13,6 +13,9 @@ Launch one read-only reviewer. Give it:
 - confirmed architecture facts and assumptions;
 - page names and the declared purpose of each page;
 - any supporting architecture record needed to check meaning.
+- the integration ledger and named external systems/channels from supplied
+  requirements, when available, so omissions can be checked against source scope
+  rather than only against the diagram.
 
 The reviewer inspects only the approved local artifacts. It makes no edits and
 does not access cloud accounts.
@@ -53,6 +56,10 @@ The critique covers:
   independent authentication or authorization.
 - Trust and product boundaries match actual responsibility rather than visual
   convenience.
+- Every named in-scope external system or channel in supplied requirements or the
+  integration ledger is represented. A destination label alone does not resolve
+  its adapter, identity, permissions or operational owner. Report an unresolved
+  architecture-changing mechanism as blocking; do not select it during review.
 
 ### Cross-page consistency
 
@@ -65,6 +72,11 @@ The critique covers:
   is reported when it obscures the current view.
 - Facts, assumptions, and deferrals agree with the supporting architecture
   record.
+- Integrations appear as logical responsibilities on component views, relevant
+  interactions on flow views, and selected physical services or named existing
+  enterprise capabilities on deployment views. Use the declared page purposes
+  for other diagram sets. Unknown mappings are explicit draft gaps, not evidence
+  of a complete architecture; flag omissions and conflicting identities or owners.
 
 ### Visual integrity
 

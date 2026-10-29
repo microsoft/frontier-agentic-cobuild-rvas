@@ -33,6 +33,7 @@ handoff only.
 ## Solution
 ## User Stories and functional requirements
 ## Technical requirements and constraints
+### External integrations and channels
 ## Implementation Decisions
 ## Testing Decisions and acceptance criteria
 ## Traceability
@@ -66,6 +67,12 @@ family, topology, ownership, or trust boundary.
   runtime/framework where needed, model/inference boundary, grounding and tools.
 - Describe integration and data contracts, identity/authorization, security and
   network boundaries, persistence, audit, observability, and operational lifecycle.
+- Under External integrations and channels, maintain the authoritative package
+  copy of the confirmed discovery
+  [integration ledger](discovery-quality.md#external-integrations-and-channels).
+  Retain its IDs, source references, exclusions, permissions, owners and
+  compatibility gates. Link requirements, acceptance criteria and adapter
+  decisions; keep decision rationale in `solution.md`.
 - Cover scale, latency, availability, recovery, retention, cost and deployment
   constraints only to the level confirmed or explicitly deferred. Link cost and
   consumption requirements to `cost-estimate.md` and its measurement gates.
@@ -104,5 +111,7 @@ specification. Cross-link `solution.md` and `implementation-plan.md`; link exist
 The specification is complete when functional and technical coverage reflects
 confirmed scope; IDs and acceptance/design/phase links are consistent; no
 architecture-changing choice remains deferred; remaining delivery parameters
-have owners; all five package artifacts agree; and package status belongs to
+have owners; every integration passes the
+[reconciliation gate](architecture-quality.md#integration-reconciliation-gate);
+all five package artifacts agree; and package status belongs to
 the current baseline without authorizing implementation.

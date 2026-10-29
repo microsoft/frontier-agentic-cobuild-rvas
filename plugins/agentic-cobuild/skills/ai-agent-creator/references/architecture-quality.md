@@ -42,6 +42,9 @@ Link `specification.md` and its requirement IDs. In `## Decisions`, record:
   the [agent-intent test](discovery-quality.md#agent-intent-test) where applicable;
 - the confirmed requirement or capability gap for each custom UI, API, adapter
   or host;
+- the selected adapter and reason for each integration ledger ID, including
+  choices made within explicit delegation; link identities, permissions,
+  ownership and compatibility evidence from the specification ledger;
 - one selected production hosting/deployment service for every workload-owned
   deployable, with the meaningful alternatives recorded as rejected;
 - a reason and meaningful rejected alternative for every major service, with
@@ -182,6 +185,8 @@ relevant.
   invariants pass independent critique.
 - Every important edge has a direction and meaningful label.
 - Inferred choices are marked as assumptions rather than facts.
+- External integrations pass the reconciliation gate below; a destination label
+  alone is not evidence of an adapter, identity or deployment mapping.
 - No Deployment label, service-mapping table, or implementation phase contains
   an unresolved service-family alternative. Treat `or`, slash-separated product
   names, "candidate", and "to be selected" as blocking findings when they describe
@@ -210,7 +215,40 @@ relevant.
   acknowledge missing evidence. Structural validation or local self-review does
   not clear missing independent evidence.
 
+## Integration reconciliation gate
+
+Before package completion, compare every named external system and channel in
+the RFP, supplied requirements and `specification.md` with the integration ledger,
+`solution.md` decisions and diagram. Account for aliases, explicit exclusions and
+each in-scope integration ID. An omitted name is a finding, not an implicit
+out-of-scope decision.
+
+For every in-scope ledger row, verify:
+
+- **Components:** the external system, logical adapter responsibility, interface,
+  direction and owner are visible.
+- **AI and data flow:** the interaction appears when it carries data, tool
+  execution or notifications in the journey; otherwise record why it is not
+  applicable.
+- **Deployment:** the adapter maps to a selected deployed service or named
+  existing enterprise capability, with identity, permissions and trust boundary.
+  An adapter implemented inside an existing component needs no invented service.
+  During drafting, label an unknown mapping **Unresolved** rather than omit it.
+- **Records and delivery:** the adapter decision, compatibility gates,
+  implementation-plan owner and cost-estimate treatment agree with the ledger.
+  Record an existing service's cost inclusion or exclusion rather than assuming
+  it is free.
+
+Record the audit result and gaps by integration ID in `solution.md`. Missing
+integrations and architecture-changing unresolved adapters block `Ready for
+review`, even when diagram structure and visual review pass. An **Unresolved**
+label makes a draft honest; it does not clear readiness. Return choices outside
+delegation to discovery; select and record delegated choices within scope.
+Retain only owned compatibility checks and delivery parameters that satisfy the
+discovery integration contract.
+
 **Complete when:** every coverage item is accounted for in the five artifacts;
-each production responsibility has one selected deployment mapping; decision and
+the integration reconciliation gate passes; each production responsibility has
+one selected deployment mapping; decision and
 requirement links agree; every diagram page has recorded review status; and any
 review exception has an owner and gate or explicit acceptance when required.
