@@ -153,6 +153,21 @@
         "The report distinguishes available structural and visual evidence from failed semantic and cross-page coverage.",
         "The reviewer makes no edits and does not claim a passed gate."
       ]
+    },
+    {
+      "id": 13,
+      "prompt": "Create a local synthetic component diagram containing Microsoft Teams, Microsoft Graph, Work IQ, Fabric IQ with an ontology and data agent, Azure AI Search, Document Intelligence, Content Understanding, Voice Live, Speech avatar, Copilot SDK, Copilot Studio and Dynamics 365. The mechanisms and trust boundaries are supplied and confirmed; do not redesign them. Resolve artwork from the bundled coverage contract. Do not fetch logos or silently substitute a related product.",
+      "expected_output": "The diagram preserves every named component, resolves current and legacy product names deterministically, uses the newly bundled exact assets where available, and reports generic, family-icon and labelled-box mappings without claiming dedicated product logos.",
+      "files": [],
+      "expectations": [
+        "Azure AI Search and Document Intelligence resolve to their exact catalog entries despite the legacy Cognitive-Search and Form-Recognizers filenames.",
+        "Fabric ontology, data agent, Copilot Studio and Dynamics 365 use their respective product/item artwork rather than similar Azure products.",
+        "Teams, Microsoft Graph and Work IQ retain their actual labels alongside explicitly generic Microsoft 365 symbols.",
+        "Fabric IQ is a labelled boundary containing its selected items, not a renamed Fabric data agent.",
+        "Voice Live remains a labelled component; Speech avatar and Copilot SDK use labelled family artwork, not invented dedicated icons.",
+        "Content Understanding uses its explicit generic-symbol mapping without being renamed Document Intelligence.",
+        "The response reports non-product presentations, keeps every confirmed integration and trust boundary, and makes no network artwork requests."
+      ]
     }
   ]
 }

@@ -271,23 +271,112 @@ class BuilderTests(OfflineCase):
         catalog = json.loads(MICROSOFT_CATALOG.read_text())
         self.assertEqual(catalog["schema_version"], 1)
         icons = catalog["icons"]
-        self.assertEqual(len(icons), 32)
-        self.assertEqual(
-            {family: sum(icon_id.startswith(family + ":") for icon_id in icons)
-             for family in ("fabric", "power-platform", "entra")},
-            {"fabric": 20, "power-platform": 8, "entra": 4},
-        )
         self.assertEqual(list(icons), sorted(icons))
         for icon_id, entry in icons.items():
             with self.subTest(icon_id=icon_id):
                 family = icon_id.split(":", 1)[0]
                 self.assertEqual(entry["source_family"], family)
-                self.assertTrue(entry["path"].startswith(f"assets/{family}/i/"))
+                directory = "az" if family == "azure" else family
+                self.assertTrue(entry["path"].startswith(f"assets/{directory}/i/"))
                 path = Path(builder.resolve_icon(SKILL, icon_id))
                 self.assertEqual(path, SKILL / entry["path"])
                 self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), entry["sha256"])
                 uri = builder.svg_data_uri(path)
                 self.assertEqual(unquote(uri.split(",", 1)[1]).encode(), path.read_bytes())
+
+    def test_component_names_resolve_legacy_azure_files_without_fuzzy_search(self):
+        for names, filename in (
+            (("Azure AI Search", "Cognitive Search", "azure:ai-search"), "10044-Cognitive-Search.svg"),
+            (("Document Intelligence", "Form Recognizer", "azure:document-intelligence"), "00819-Form-Recognizers.svg"),
+            (("Web PubSub", "azure:web-pubsub"), "02987-pubsub.svg"),
+        ):
+            for name in names:
+                with self.subTest(name=name):
+                    result = builder.resolve_component_icon(SKILL, name)
+                    self.assertEqual(Path(result["path"]).name, filename)
+                    self.assertEqual(result["presentation"], "product-icon")
+        for name in ("Search", "Copilot", "Unknown synthetic service"):
+            with self.subTest(name=name), self.assertRaises(FileNotFoundError):
+                builder.resolve_component_icon(SKILL, name)
+        for name in ("", " ", None):
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                builder.resolve_component_icon(SKILL, name)
+
+    def test_component_coverage_preserves_product_identity_and_explicit_fallbacks(self):
+        expected = {
+            "Teams": ("m365:teams", "m365:chat", "generic-symbol"),
+            "SharePoint": ("m365:sharepoint", "m365:documents", "generic-symbol"),
+            "Outlook": ("m365:outlook", "m365:mail", "generic-symbol"),
+            "Microsoft Graph": ("m365:graph", "m365:connected-nodes", "generic-symbol"),
+            "M365 Copilot": ("m365:copilot", "m365:bot", "generic-symbol"),
+            "WorkIQ": ("m365:work-iq", "m365:organization", "generic-symbol"),
+            "Fabric IQ": ("fabric:iq", None, "labelled-box"),
+            "Content Understanding": ("azure:content-understanding", "m365:documents", "generic-symbol"),
+            "Voice Live": ("azure:voice-live", None, "labelled-box"),
+            "Speech avatar": ("azure:speech-avatar", "azure:speech", "family-icon"),
+            "Copilot SDK": ("github:copilot-sdk", "github:copilot", "family-icon"),
+            "Container Apps": ("azure:container-apps", None, "labelled-box"),
+        }
+        d = builder.Diagram("Coverage", 1200, 1000)
+        for index, (name, (canonical, icon_id, presentation)) in enumerate(expected.items()):
+            with self.subTest(name=name):
+                result = builder.resolve_component_icon(SKILL, name)
+                self.assertEqual((result["id"], result["icon_id"], result["presentation"]),
+                                 (canonical, icon_id, presentation))
+                self.assertTrue(result["reason"])
+                x, y = 30 + index % 4 * 290, 40 + index // 4 * 280
+                if result["path"]:
+                    d.icon(x, y, result["label"], builder.svg_data_uri(result["path"]))
+                else:
+                    self.assertIsNone(icon_id)
+                    d.card(x, y, 220, 100, result["label"])
+        root = self.save(d)
+        self.assert_structure(root)
+        labels = {cell.get("value") for cell in root.findall(".//mxCell[@vertex='1']")}
+        self.assertIn("Microsoft Teams", labels)
+        self.assertIn("Fabric IQ", labels)
+        self.assertIn("Azure Voice Live", labels)
+        self.assertEqual(len(root.findall(".//mxCell[@vertex='1']")), len(expected))
+
+    def test_component_coverage_rejects_ambiguous_names_and_misleading_symbols(self):
+        shutil.copytree(SKILL / "references", self.out / "references")
+        path = self.out / "references/architecture-icon-coverage.json"
+        coverage = json.loads(path.read_text())
+        teams = coverage["components"]["m365:teams"]
+        teams["aliases"].append("Outlook")
+        path.write_text(json.dumps(coverage))
+        with self.assertRaisesRegex(ValueError, "ambiguous"):
+            builder.resolve_component_icon(self.out, "Outlook")
+        teams["aliases"].remove("Outlook")
+        for field, value, message in (
+            ("reason", "", "missing fallback reason"),
+            ("presentation", "product-icon", "generic symbol cannot"),
+            ("icon_id", None, "invalid artwork mapping"),
+        ):
+            original = teams[field]
+            teams[field] = value
+            path.write_text(json.dumps(coverage))
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, message):
+                builder.resolve_component_icon(self.out, "Teams")
+            teams[field] = original
+
+    def test_all_architecture_candidates_and_aliases_resolve_offline(self):
+        coverage = json.loads((SKILL / "references/architecture-icon-coverage.json").read_text())
+        catalog = json.loads(MICROSOFT_CATALOG.read_text())
+        entries = {**catalog["icons"], **coverage["components"]}
+        for key, entry in entries.items():
+            for name in (key, entry["label"], *entry.get("aliases", [])):
+                with self.subTest(name=name):
+                    result = builder.resolve_component_icon(SKILL, name)
+                    self.assertEqual(result["id"], key)
+                    if result["path"]:
+                        builder.svg_data_uri(result["path"])
+        for recipe, components in coverage["architectures"].items():
+            self.assertTrue(components, recipe)
+            for component in components:
+                with self.subTest(recipe=recipe, component=component):
+                    self.assertIn(component, entries)
+                    builder.resolve_component_icon(SKILL, component)
 
     def test_exact_icon_resolution_fails_explicitly(self):
         for icon_id in ("", "lakehouse", "Fabric:lakehouse", "fabric:", ":lakehouse", None):
@@ -396,6 +485,12 @@ class BuilderTests(OfflineCase):
         cwd = self.out / "unrelated project"
         cwd.mkdir()
         snippet = re.search(r"```python\n(.*?)```", (installed / "SKILL.md").read_text(), re.S).group(1)
+        snippet += """
+from drawio_builder import resolve_component_icon
+assert resolve_component_icon(skill_dir, "Teams")["presentation"] == "generic-symbol"
+assert resolve_component_icon(skill_dir, "Azure AI Search")["path"].endswith("10044-Cognitive-Search.svg")
+assert resolve_component_icon(skill_dir, "Voice Live")["path"] is None
+"""
         generator = cwd / "synthetic_generator.py"
         generator.write_text(snippet)
         output = cwd / "artifacts" / "architecture.drawio"
@@ -647,12 +742,22 @@ class PackageTests(OfflineCase):
     def test_microsoft_catalog_sources_and_notices(self):
         catalog = json.loads(MICROSOFT_CATALOG.read_text())
         self.assertEqual(catalog["retrieved"], "2026-10-07")
-        self.assertEqual(set(catalog["sources"]), {"fabric", "power-platform", "entra"})
+        self.assertTrue({"fabric", "power-platform", "entra", "azure", "m365", "dynamics365", "github"}
+                        <= catalog["sources"].keys())
         for family, source in catalog["sources"].items():
             with self.subTest(family=family):
-                self.assertRegex(source["archive_sha256"], r"^[0-9a-f]{64}$")
+                if "archive_sha256" in source:
+                    self.assertRegex(source["archive_sha256"], r"^[0-9a-f]{64}$")
+                else:
+                    self.assertRegex(source["version"], r"^[0-9a-f]{40}$")
                 self.assertTrue(source["source"].startswith("https://"))
-                self.assertTrue(source["terms_source"].startswith("https://learn.microsoft.com/"))
+                self.assertTrue(source["terms_source"].startswith(
+                    ("https://learn.microsoft.com/", "https://raw.githubusercontent.com/primer/octicons/")))
+                if "license_notice" in source:
+                    notice = source["license_notice"].split("#")[0]
+                    self.assertTrue((SKILL / notice).is_file())
+        self.assertIn("Copyright (c) 2026 GitHub Inc.",
+                      (SKILL / "assets/github/LICENSE.txt").read_text())
         reference = (SKILL / "references" / "REFERENCE.md").read_text()
         self.assertIn("#### Fabric MIT license", reference)
         self.assertIn(

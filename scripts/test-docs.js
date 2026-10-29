@@ -194,6 +194,26 @@ test('plugin and marketplace resolve the same complete portable package', () => 
   assert.equal(mcp.mcpServers['microsoft-learn'].type, 'streamable-http');
 });
 
+test('diagram icon coverage accounts for every creator architecture card', () => {
+  const skills = path.join(ROOT, 'plugins/agentic-cobuild/skills');
+  const patterns = path.join(skills, 'ai-agent-creator/references/azure-patterns');
+  const coverage = JSON.parse(fs.readFileSync(
+    path.join(skills, 'cloud-architecture-diagram/references/architecture-icon-coverage.json'), 'utf8'));
+  const cards = ['patterns', 'runtimes'].flatMap((directory) =>
+    fs.readdirSync(path.join(patterns, directory))
+      .filter((name) => name.endsWith('.md') && name !== 'README.md')
+      .map((name) => `${directory}/${name}`)).sort();
+  assert.deepEqual(Object.keys(coverage.architectures).sort(), cards);
+  const catalog = JSON.parse(fs.readFileSync(
+    path.join(skills, 'cloud-architecture-diagram/references/microsoft-icon-catalog.json'), 'utf8'));
+  for (const [card, components] of Object.entries(coverage.architectures)) {
+    assert.ok(components.length, card);
+    for (const id of components) {
+      assert.ok(coverage.components[id] || catalog.icons[id], `${card}: unmapped ${id}`);
+    }
+  }
+});
+
 test('generated reading pages and manual commands match their current sources', () => {
   assert.equal(fs.readFileSync(path.join(ROOT, 'docs/index.html'), 'utf8'), renderIndex());
   for (const page of pages) {

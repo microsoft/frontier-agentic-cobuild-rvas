@@ -136,10 +136,14 @@ explicitly delegated lower-level decisions.
    they are not.
 7. **Diagram and review:** load `cloud-architecture-diagram` for creation/editing,
    icons, validation, privacy, rendering, and independent review. Use the four
-   views and acceptance contract in architecture quality. Preserve existing
-   unrelated pages and hand edits. Treat the diagram specialist's independent
-   review gate as binding. Use a reviewer mode that preserves context for its
-   targeted recheck when the available tooling supports multi-turn review. A
+   views and acceptance contract in architecture quality. Preserve confirmed
+   component and integration names through the diagram skill's icon-coverage
+   lookup; record explicit family/generic/labelled fallbacks and unknown names.
+   Missing artwork never removes a component or changes a service selection.
+   Preserve existing unrelated pages and hand edits. Treat the diagram
+   specialist's independent review gate as binding. Use a reviewer mode that
+   preserves context for its targeted recheck when the available tooling supports
+   multi-turn review. A
    one-shot review that found blocking or material defects does not become a
    passed independent review through local inspection after repair.
 8. **Reconcile and hand off:** check all five artifacts against their contracts and the

@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "components": {
+    "azure:container-apps": {
+      "label": "Azure Container Apps",
+      "aliases": ["Container Apps"],
+      "icon_id": null,
+      "presentation": "labelled-box",
+      "reason": "The snapshot has worker and environment artwork, not a general application icon. Use azure:container-app-worker only for a worker and azure:container-apps-environment only for its environment."
+    },
+    "azure:content-understanding": {
+      "label": "Azure AI Content Understanding",
+      "aliases": ["Content Understanding"],
+      "icon_id": "m365:documents",
+      "presentation": "generic-symbol",
+      "reason": "No dedicated product artwork in the verified Azure package. The document symbol represents processing, not a Microsoft product logo; preserve the service label and non-document modalities in the diagram."
+    },
+    "azure:voice-live": {
+      "label": "Azure Voice Live",
+      "aliases": ["Voice Live"],
+      "icon_id": null,
+      "presentation": "labelled-box",
+      "reason": "No dedicated artwork in the verified package. Keep session, control, audio and tool connections explicit rather than substituting another service logo."
+    },
+    "azure:speech-avatar": {
+      "label": "Azure AI Speech avatar",
+      "aliases": ["Speech avatar", "Conversational avatar", "Batch avatar"],
+      "icon_id": "azure:speech",
+      "presentation": "family-icon",
+      "reason": "Use the Speech service icon with a visible avatar capability label; it is not dedicated avatar artwork."
+    },
+    "fabric:iq": {
+      "label": "Fabric IQ",
+      "aliases": ["Microsoft Fabric IQ"],
+      "icon_id": null,
+      "presentation": "labelled-box",
+      "reason": "Show IQ as a labelled capability boundary containing its selected ontology, data agent, graph or semantic-model items. Do not equate the whole boundary with one item."
+    },
+    "github:copilot-sdk": {
+      "label": "GitHub Copilot SDK",
+      "aliases": ["Copilot SDK"],
+      "icon_id": "github:copilot",
+      "presentation": "family-icon",
+      "reason": "Use the Copilot product icon with the SDK label. Show the SDK and CLI runtime as separate logical responsibilities, not standalone managed services."
+    },
+    "m365:teams": {
+      "label": "Microsoft Teams",
+      "aliases": ["Teams"],
+      "icon_id": "m365:chat",
+      "presentation": "generic-symbol",
+      "reason": "The architecture package supplies generic content symbols, not Teams product artwork. Label the destination Microsoft Teams and show the selected adapter separately."
+    },
+    "m365:sharepoint": {
+      "label": "Microsoft SharePoint",
+      "aliases": ["SharePoint", "SharePoint Online"],
+      "icon_id": "m365:documents",
+      "presentation": "generic-symbol",
+      "reason": "This document symbol is not a SharePoint logo. Retain the source label and its access boundary."
+    },
+    "m365:outlook": {
+      "label": "Microsoft Outlook",
+      "aliases": ["Outlook"],
+      "icon_id": "m365:mail",
+      "presentation": "generic-symbol",
+      "reason": "This mail symbol is not an Outlook logo or an Exchange access resource."
+    },
+    "m365:graph": {
+      "label": "Microsoft Graph",
+      "aliases": ["Graph API", "Microsoft Graph API"],
+      "icon_id": "m365:connected-nodes",
+      "presentation": "generic-symbol",
+      "reason": "This connected-node symbol is not Microsoft Graph product artwork. Label the API boundary, identity and permission scope explicitly."
+    },
+    "m365:copilot": {
+      "label": "Microsoft 365 Copilot",
+      "aliases": ["M365 Copilot"],
+      "icon_id": "m365:bot",
+      "presentation": "generic-symbol",
+      "reason": "This bot symbol is not Microsoft 365 Copilot artwork. Do not substitute GitHub Copilot or Copilot Studio logos."
+    },
+    "m365:work-iq": {
+      "label": "Work IQ",
+      "aliases": ["Microsoft Work IQ", "WorkIQ"],
+      "icon_id": "m365:organization",
+      "presentation": "generic-symbol",
+      "reason": "This organizational-context symbol is not dedicated Work IQ artwork. Keep the actual API or MCP connection and user-scoped boundary explicit."
+    },
+    "logical:client": {
+      "label": "Interaction channel or client",
+      "icon_id": null,
+      "presentation": "labelled-box",
+      "reason": "Use the confirmed channel mapping when known; an application-owned UI has no vendor product icon."
+    },
+    "logical:agent-framework": {
+      "label": "Microsoft Agent Framework code",
+      "aliases": ["Agent Framework"],
+      "icon_id": null,
+      "presentation": "labelled-box",
+      "reason": "A code/framework responsibility is not a hosting service. Show its selected runtime and host separately."
+    },
+    "logical:tool": {
+      "label": "Authorized tool or integration adapter",
+      "icon_id": null,
+      "presentation": "labelled-box",
+      "reason": "Name the actual adapter, owner and system of record; choose product artwork only after the integration decision."
+    },
+    "logical:approval": {
+      "label": "Human review and approval",
+      "icon_id": null,
+      "presentation": "labelled-box",
+      "reason": "Show the interaction surface, authorization and state transition rather than imply an unselected approval service."
+    },
+    "logical:state": {
+      "label": "Authoritative state or checkpoint store",
+      "icon_id": null,
+      "presentation": "labelled-box",
+      "reason": "Use the selected store's exact icon at deployment level; logical state ownership alone does not choose a product."
+    }
+  },
+  "architectures": {
+    "patterns/01-simple-chat-poc.md": ["logical:client", "azure:foundry-agent-service", "azure:foundry-models"],
+    "patterns/02-secure-grounded-chat.md": ["logical:client", "azure:foundry-agent-service", "azure:foundry-models", "azure:ai-search", "azure:app-service", "azure:private-endpoint", "entra:id"],
+    "patterns/03-enterprise-landing-zone.md": ["azure:virtual-network", "azure:firewall", "azure:private-endpoint", "azure:monitor"],
+    "patterns/04-agent-tools-approvals.md": ["logical:tool", "logical:approval", "azure:logic-apps", "azure:api-management", "m365:teams", "m365:graph", "dynamics365:product"],
+    "patterns/05-agentic-retrieval.md": ["azure:foundry-iq", "azure:ai-search", "azure:foundry-models", "m365:sharepoint", "m365:work-iq", "fabric:iq"],
+    "patterns/06-multimodal-content-processing.md": ["azure:container-apps", "azure:content-understanding", "azure:blob-storage", "azure:storage-queue", "azure:cosmos-db", "logical:approval"],
+    "patterns/07-structured-document-extraction.md": ["azure:document-intelligence", "azure:content-understanding", "logical:approval"],
+    "patterns/08-conversational-avatar.md": ["logical:client", "azure:speech-avatar", "azure:speech"],
+    "patterns/09-batch-avatar.md": ["azure:speech-avatar", "azure:blob-storage", "logical:state"],
+    "patterns/10-voice-live-agent.md": ["logical:client", "azure:voice-live", "azure:speech-avatar", "logical:tool"],
+    "patterns/11-unified-iq-agent.md": ["fabric:iq", "fabric:ontology", "fabric:graph-model", "fabric:operations-agent", "fabric:data-agent", "fabric:semantic-model", "fabric:onelake", "azure:foundry-iq", "m365:work-iq", "m365:copilot"],
+    "patterns/12-document-classification-segmentation.md": ["azure:content-understanding", "azure:blob-storage", "logical:state", "logical:approval"],
+    "patterns/13-agent-coordination.md": ["logical:agent-framework", "logical:tool", "logical:state", "logical:approval"],
+    "patterns/14-durable-memory-personalization.md": ["logical:state", "azure:managed-redis", "azure:cosmos-db", "logical:approval"],
+    "patterns/15-ai-gateway-governance.md": ["azure:ai-gateway", "azure:api-management", "azure:managed-identity", "azure:monitor"],
+    "runtimes/application-hosted-agent-framework.md": ["logical:agent-framework", "azure:app-service", "azure:container-apps", "logical:state", "azure:application-insights"],
+    "runtimes/copilot-sdk-runtime.md": ["github:copilot-sdk", "github:github", "azure:foundry-models", "logical:tool", "logical:state"],
+    "runtimes/copilot-studio-agent.md": ["power-platform:copilot-studio", "power-platform:dataverse", "power-platform:power-automate", "m365:teams", "m365:copilot", "m365:outlook", "m365:work-iq", "fabric:iq"],
+    "runtimes/durable-workflow-variant.md": ["azure:functions", "logical:agent-framework", "logical:state", "logical:approval"],
+    "runtimes/foundry-hosted-agent.md": ["azure:foundry-project", "azure:foundry-agent-service", "azure:container-registry", "entra:workload-id", "logical:agent-framework", "m365:teams"],
+    "runtimes/foundry-prompt-agent.md": ["azure:foundry", "azure:foundry-project", "azure:foundry-agent-service", "azure:foundry-models", "azure:foundry-iq", "logical:tool"],
+    "runtimes/logic-apps-native-agent.md": ["azure:logic-apps", "azure:foundry-models", "azure:managed-identity", "logical:tool", "logical:approval"]
+  }
+}

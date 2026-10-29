@@ -93,15 +93,19 @@ Write generators, exports, and refresh candidates only to the user's output area
 2. Choose topology or temporal flow. Read
    [topology-patterns.md](references/topology-patterns.md) for deployment boundaries,
    Azure/AWS examples, and auth/API/pipeline patterns.
-3. Look up icons **locally**. Search filenames under
-   `assets/az/i` for Azure, or
-   `references/aws4-complete-catalog.txt` for AWS stencil names.
-   Resolve Fabric, Power Platform, and Entra icons by exact family-qualified ID
-   from `references/microsoft-icon-catalog.json`; examples include
-   `fabric:lakehouse`, `power-platform:copilot-studio`, and `entra:workload-id`.
-   Read [REFERENCE.md](references/REFERENCE.md) for catalog caveats and refresh.
-   Missing icons are explicit errors; propose labelled generic shapes rather than
-   silently using the wrong service icon. Do not fetch a replacement per invocation.
+3. Look up icons **locally** under the
+   [coverage contract](references/REFERENCE.md#creator-component-coverage).
+   Resolve named components with `resolve_component_icon`; it returns an exact
+   catalog icon, an explicit family/generic symbol, or a labelled-box mapping.
+   Keep its canonical label and report non-product mappings. Check the selected
+   creator pattern/runtime in `references/architecture-icon-coverage.json`;
+   these are coverage candidates, not a required service composition.
+   Use `resolve_icon` for exact family-qualified IDs such as `azure:ai-search`,
+   `fabric:ontology`, `power-platform:copilot-studio`, and `entra:workload-id`.
+   Search remaining Azure filenames under `assets/az/i` or AWS stencil names in
+   `references/aws4-complete-catalog.txt`. Unknown components are explicit errors:
+   propose a labelled shape and record the coverage gap instead of substituting
+   another product or dropping the component. Do not fetch artwork per invocation.
 4. Build with [scripts/drawio_builder.py](scripts/drawio_builder.py), using arithmetic
    spacing and embedded local SVGs. Generic shapes require no image lookup.
    Keep facts separate from layout choices. Frames use absolute coordinates and
@@ -141,14 +145,13 @@ import sys
 
 skill_dir = Path(sys.argv[1]).resolve(strict=True)
 sys.path.insert(0, str(skill_dir / "scripts"))
-from drawio_builder import Diagram, find_icon, resolve_icon, svg_data_uri
+from drawio_builder import Diagram, resolve_icon, svg_data_uri
 
-icons = skill_dir / "assets" / "az" / "i"
 d = Diagram("Synthetic architecture", 1000, 600)
 api = d.icon(120, 180, "Azure API Management",
-             svg_data_uri(find_icon(icons, "API-Management-Services")))
+             svg_data_uri(resolve_icon(skill_dir, "azure:api-management")))
 ai = d.icon(500, 180, "Azure OpenAI",
-            svg_data_uri(find_icon(icons, "Azure-OpenAI")))
+            svg_data_uri(resolve_icon(skill_dir, "azure:openai")))
 fabric = d.icon(760, 180, "Microsoft Fabric Lakehouse",
                 svg_data_uri(resolve_icon(skill_dir, "fabric:lakehouse")))
 d.edge(api, ai, "HTTPS 443 (example)", sx=1, sy=0.5, tx=0, ty=0.5)
@@ -165,6 +168,10 @@ in 0..1; waypoints and geometry must be finite. Nonpositive sizes are rejected.
 returned filename and use a more specific fragment when multiple services match.
 Use `resolve_icon` for the exact Microsoft product catalog; it rejects unknown IDs,
 unsafe paths, and changed icon bytes rather than falling back to a similar service.
+Use `resolve_component_icon(SKILL_DIR, "Teams")` for the coverage mapping. Its
+`path` is an SVG path or `None` for a labelled box; `label`, `presentation` and
+`reason` distinguish product artwork from a family icon or generic symbol.
+Render a missing path as a labelled card, not a missing-image placeholder.
 
 ### Multiple pages and saved-file validation
 

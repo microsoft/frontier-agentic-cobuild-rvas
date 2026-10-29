@@ -10,8 +10,10 @@ Adapted by Paolo Montagna from original work by Thomas Thornton.
   codes and omit the redundant `icon-service-` filename prefix to keep Windows
   checkouts portable; each filename retains its original numeric identifier and
   searchable service name.
-- `microsoft-icon-catalog.json`: 32 curated Microsoft Fabric, Power Platform, and
-  Entra SVGs resolved by exact family-qualified IDs. The catalog records labels,
+- `microsoft-icon-catalog.json`: 78 exact entries covering Azure, Fabric, Power
+  Platform, Entra, Dynamics 365, GitHub and generic Microsoft 365 symbols.
+  The Azure entries pin existing files; 11 additional SVGs extend the snapshot.
+  The catalog records labels,
   upstream filenames, source versions, archive fingerprints, and per-icon hashes.
   Family namespaces prevent semantic collisions such as Microsoft Fabric versus
   Azure Service Fabric and Power BI versus Power BI Embedded.
@@ -35,7 +37,7 @@ Use `svg_data_uri(find_icon(...))` from the builder to embed an Azure icon with
 `image=data:image/svg+xml,<percent-encoded-svg>;`. Do not put a bare local path,
 URL, or `img/lib/...` in an otherwise standalone artifact.
 
-Use `svg_data_uri(resolve_icon(...))` for Fabric, Power Platform, and Entra.
+Use `svg_data_uri(resolve_icon(...))` for the exact catalog.
 `resolve_icon` verifies the catalog schema, exact ID, safe local path, file
 existence, and recorded SHA-256 before returning an SVG.
 
@@ -54,6 +56,41 @@ catalog contains the SVGs.
 Use category colors consistently (compute orange, networking purple, storage
 green, security red) but prefer readability and accurate labels over decoration.
 Plain flow diagrams can skip cloud icons entirely.
+
+## Creator component coverage
+
+`architecture-icon-coverage.json` maps the creator's pattern and runtime cards
+to candidate components and records non-product presentations. It is an icon
+coverage contract, not a requirement to deploy every listed component.
+
+Call `resolve_component_icon(SKILL_DIR, name_or_id)` for a named component.
+It accepts exact IDs, canonical labels and explicit aliases, without fuzzy
+matching. For example, `Azure AI Search` resolves the existing
+`Cognitive-Search` file, and `Document Intelligence` resolves `Form-Recognizers`.
+Unknown names fail explicitly; ambiguous names require a canonical ID.
+
+The result contains `id`, `label`, `icon_id`, `presentation` and `path`.
+Non-product component mappings also carry a `reason`:
+
+| Presentation | Required handling |
+| --- | --- |
+| `product-icon` | Embed the exact SVG and retain the product label. |
+| `family-icon` | Name both the product family and capability; do not claim dedicated capability artwork. |
+| `generic-symbol` | Keep the actual system label and record that the symbol is not its product logo. |
+| `labelled-box` | Use a labelled card or boundary; `path` is `None`. Preserve its interactions and ownership. |
+
+Teams, SharePoint, Outlook, Microsoft Graph, Microsoft 365 Copilot and Work IQ
+have generic-symbol mappings. Fabric IQ is a labelled boundary whose selected
+items have their own icons, including ontology, graph model and data agent.
+Content Understanding uses an explicit generic document symbol; Voice Live is a
+labelled box; Speech avatar and Copilot SDK use labelled family artwork.
+Container Apps application, worker and environment mappings remain distinct.
+
+For a selected architecture, resolve every named component and integration, not
+only those in its card. Report gaps and agree a labelled fallback; missing
+artwork never removes a component or selects a different architecture. Offline
+tests validate each mapping, alias and embedded SVG. Repository tests require
+coverage entries for every creator pattern and runtime card.
 
 ## Optional public GitHub search / refresh
 
@@ -167,9 +204,33 @@ The four product-level Entra SVGs remain byte-for-byte from the official October
 for Entra product boundaries; continue to use Azure resource icons for specific
 deployed capabilities such as managed identities or private access.
 
-Microsoft 365 product logos are not bundled. The official architecture package
-contains generic content symbols rather than a licensed product-logo subset;
-use labelled generic shapes until an approved redistributable source is recorded.
+### Additional architecture artwork
+
+The five Microsoft 365 symbols come byte-for-byte from the official 2024 content
+icon package linked at
+`https://learn.microsoft.com/previous-versions/microsoft-365/solutions/architecture-icons-templates`.
+That page permits architectural diagrams, training materials and documentation,
+including copying, distribution and display for those uses. These are generic
+content symbols, not Teams, SharePoint, Outlook, Graph, Copilot or Work IQ logos.
+Microsoft 365 product artwork remains unbundled until an approved redistributable
+source is recorded; Office UI Fabric's separately licensed CDN assets are not
+treated as covered by the architecture package's terms.
+
+The Dynamics 365 product SVG is unchanged from the official scalable package
+linked at `https://learn.microsoft.com/dynamics365/get-started/icons`. Its terms
+permit architectural diagrams, training materials and documentation, including
+copying, distribution and display for those uses. Preserve the icon, proportions
+and nearby product name; do not use it to identify another product.
+
+The GitHub and Copilot SVGs come unchanged from the pinned `primer/octicons`
+revision recorded in the catalog. Retain `assets/github/LICENSE.txt` (MIT).
+These identify GitHub products; the Copilot SDK mapping uses the Copilot family
+icon, not dedicated SDK artwork. Trademarks remain with their owners.
+
+The added Fabric ontology, graph model and operations-agent SVGs come from the
+same MIT-licensed Fabric package as the existing subset. The original Azure
+snapshot and its source fingerprint remain unchanged; exact Azure catalog
+entries are verified against the V24 archive recorded in the catalog.
 
 The supplied AWS catalog contains stencil names, not artwork or libraries.
 The Azure catalog is the local Microsoft inventory despite its inherited

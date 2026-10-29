@@ -5,7 +5,7 @@ gutters) and regeneration deterministic. It does not replace visual review.
 
 Usage
 -----
-    from drawio_builder import Diagram, svg_data_uri, png_data_uri, find_icon, resolve_icon
+    from drawio_builder import Diagram, svg_data_uri, png_data_uri, find_icon, resolve_icon, resolve_component_icon
 
     d = Diagram("My architecture", 2000, 1200)
     api = d.icon(100, 100, "API Management", svg_data_uri(find_icon(ICONS, "API-Management")))
@@ -98,6 +98,47 @@ def resolve_icon(skill_dir: str, icon_id: str) -> str:
     if actual_hash != expected_hash:
         raise ValueError(f"catalog icon hash mismatch for {icon_id!r}: {path}")
     return str(path)
+
+
+def resolve_component_icon(skill_dir: str, name: str) -> dict:
+    """Resolve a component name/alias to explicit artwork or a labelled fallback."""
+    if not isinstance(name, str) or not name.strip():
+        raise ValueError("component name or ID is required")
+    root = Path(skill_dir).resolve()
+    catalog = json.loads((root / "references/microsoft-icon-catalog.json").read_text(encoding="utf-8"))
+    coverage = json.loads((root / "references/architecture-icon-coverage.json").read_text(encoding="utf-8"))
+    if catalog.get("schema_version") != 1 or coverage.get("schema_version") != 1:
+        raise ValueError("unsupported icon catalog or coverage schema")
+    entries = {
+        key: {"label": entry["label"], "icon_id": key,
+              "presentation": entry.get("presentation", "product-icon"),
+              "aliases": entry.get("aliases", [])}
+        for key, entry in catalog["icons"].items()
+    }
+    entries.update(coverage["components"])
+    query = name.strip().casefold()
+    matches = [
+        (key, entry) for key, entry in entries.items()
+        if query in {value.casefold() for value in (key, entry["label"], *entry.get("aliases", []))}
+    ]
+    if not matches:
+        raise FileNotFoundError(f"no icon coverage for component {name!r}")
+    if len(matches) != 1:
+        raise ValueError(f"ambiguous component name {name!r}; use a canonical ID")
+    key, entry = matches[0]
+    presentation = entry["presentation"]
+    icon_id = entry.get("icon_id")
+    if presentation not in ("product-icon", "family-icon", "generic-symbol", "labelled-box"):
+        raise ValueError(f"invalid presentation for {key!r}")
+    if key in coverage["components"] and presentation != "product-icon" and not entry.get("reason"):
+        raise ValueError(f"missing fallback reason for {key!r}")
+    if (presentation == "labelled-box") != (icon_id is None):
+        raise ValueError(f"invalid artwork mapping for {key!r}")
+    if icon_id is not None and catalog["icons"].get(icon_id, {}).get("presentation") == "generic-symbol":
+        if presentation != "generic-symbol":
+            raise ValueError(f"generic symbol cannot be product artwork for {key!r}")
+    return {"id": key, **entry,
+            "path": resolve_icon(root, icon_id) if icon_id is not None else None}
 
 
 def svg_data_uri(path: str) -> str:

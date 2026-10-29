@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "retrieved": "2026-10-07",
+  "updated": "2026-10-29",
   "sources": {
     "fabric": {
       "name": "@fabric-msft/svg-icons",
@@ -25,9 +26,317 @@
       "source": "https://download.microsoft.com/download/3/1/a/31a56038-856a-4489-88e4-ee5a1c4352be/Microsoft%20Entra%20architecture%20icons%20-%20Oct%202023.zip",
       "archive_sha256": "4e07536706a2d092e6524e5417e2c861333fdbdb41c36f78d44dfa07ccc5eedc",
       "terms_source": "https://learn.microsoft.com/entra/architecture/architecture-icons"
+    },
+    "azure": {
+      "name": "Microsoft Azure architecture icons",
+      "version": "V24",
+      "source": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V24.zip",
+      "archive_sha256": "921594ccd1bf3d9c0a1bd7b6d924e050551a59342f2b353bb74bdcf761c35141",
+      "terms_source": "https://learn.microsoft.com/azure/architecture/icons/"
+    },
+    "m365": {
+      "name": "Microsoft 365 architecture content symbols (not product logos)",
+      "version": "2024",
+      "source": "https://download.microsoft.com/download/2/F/3/2F346655-1F7E-4F5E-BE78-82DA3D507F3A/2024-microsoft-365-content-icons.zip",
+      "archive_sha256": "522c4d43cf98a00380b0836f9ec6e06d81fb99758b258c49b6e5f385c05c547a",
+      "terms_source": "https://learn.microsoft.com/previous-versions/microsoft-365/solutions/architecture-icons-templates"
+    },
+    "dynamics365": {
+      "name": "Microsoft Dynamics 365 architecture icons",
+      "version": "February 2026",
+      "source": "https://download.microsoft.com/download/498606aa-6d27-4f13-aa5c-1401078c153b/Dynamics-365-icons-scalable.zip",
+      "archive_sha256": "f5f4d96aaa637b71e47136cc74e9a4a69b8a81f7e43c1c5756f00b5cea9ffe02",
+      "terms_source": "https://learn.microsoft.com/dynamics365/get-started/icons"
+    },
+    "github": {
+      "name": "GitHub Octicons",
+      "version": "9c3c9d7426881584f6f507f3f4a54aea5879648e",
+      "source": "https://github.com/primer/octicons/tree/9c3c9d7426881584f6f507f3f4a54aea5879648e",
+      "terms_source": "https://raw.githubusercontent.com/primer/octicons/9c3c9d7426881584f6f507f3f4a54aea5879648e/LICENSE",
+      "license": "MIT",
+      "license_notice": "assets/github/LICENSE.txt"
     }
   },
   "icons": {
+    "azure:ai-gateway": {
+      "label": "AI Gateway",
+      "path": "assets/az/i/c25/037838045-AI-Gateway.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/new icons/037838045-icon-service-AI-Gateway.svg",
+      "sha256": "d5177fe8fb6f0950db44da663df6821357141b2717669ee6d7b7f6ddad3fe18d"
+    },
+    "azure:ai-search": {
+      "label": "Azure AI Search",
+      "path": "assets/az/i/c01/10044-Cognitive-Search.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/ai + machine learning/10044-icon-service-Cognitive-Search.svg",
+      "sha256": "f7af1213ce089236593835cb5564d6d3f01358cba6488fe562aa8bbc8adc3b38",
+      "aliases": [
+        "Cognitive Search"
+      ]
+    },
+    "azure:api-management": {
+      "label": "Azure API Management",
+      "path": "assets/az/i/c14/10042-API-Management-Services.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/devops/10042-icon-service-API-Management-Services.svg",
+      "sha256": "cf794288575f2f7b080c50aa8319d42b02a2f2ae5351e4712c574353fc801f9a",
+      "aliases": [
+        "APIM"
+      ]
+    },
+    "azure:app-service": {
+      "label": "Azure App Service",
+      "path": "assets/az/i/c03/10035-App-Services.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/app services/10035-icon-service-App-Services.svg",
+      "sha256": "529d83fc80637a96b6d27f6cfac7536e1c5f9b1b67f58aef4e2e3d6f47fd4925"
+    },
+    "azure:application-insights": {
+      "label": "Application Insights",
+      "path": "assets/az/i/c17/00012-Application-Insights.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/devops/00012-icon-service-Application-Insights.svg",
+      "sha256": "36c73dea8b1598fbfff84890a2b409600f1339eec8c1bf1a896439e9da8f9dca"
+    },
+    "azure:azure-devops": {
+      "label": "Azure DevOps",
+      "path": "assets/az/i/c10/10261-Azure-DevOps.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/devops/10261-icon-service-Azure-DevOps.svg",
+      "sha256": "15b5068ceeb28f0f3cf566aa8cf99619f99d47059d7a91fda0ef47091a71a041"
+    },
+    "azure:blob-storage": {
+      "label": "Azure Blob Storage",
+      "path": "assets/az/i/c11/10780-Blob-Block.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/general/10780-icon-service-Blob-Block.svg",
+      "sha256": "649cdb593d0c7f56a227e4c28df40a3e5c489e303867d32502af2ee4b4865ea3",
+      "aliases": [
+        "Blob Storage"
+      ]
+    },
+    "azure:container-app-worker": {
+      "label": "Azure Container Apps worker",
+      "path": "assets/az/i/c26/02884-Worker-Container-App.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/other/02884-icon-service-Worker-Container-App.svg",
+      "sha256": "b53c7e6b7af75b25c04231a7dff85074f0c32cc1c306376350c0c8df0cb64417"
+    },
+    "azure:container-apps-environment": {
+      "label": "Azure Container Apps environment",
+      "path": "assets/az/i/c26/02989-Container-Apps-Environments.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/other/02989-icon-service-Container-Apps-Environments.svg",
+      "sha256": "3cf4ba9242e31496f778a27e92c9c2b2a09664f105c58325d5e2dcb142d3c3b9"
+    },
+    "azure:container-registry": {
+      "label": "Azure Container Registry",
+      "path": "assets/az/i/c07/10105-Container-Registries.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/containers/10105-icon-service-Container-Registries.svg",
+      "sha256": "c134b0a442f203a7eeeb6f99a1f02ed34e51373d7fca59f96c9f125874c9d7d4"
+    },
+    "azure:content-safety": {
+      "label": "Azure AI Content Safety",
+      "path": "assets/az/i/c01/03390-Content-Safety.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/ai + machine learning/03390-icon-service-Content-Safety.svg",
+      "sha256": "b684188aefa0eaacc079d7f428f32edcf560fd48bb0b572774910a5f8ff81f20"
+    },
+    "azure:cosmos-db": {
+      "label": "Azure Cosmos DB",
+      "path": "assets/az/i/c08/10121-Azure-Cosmos-DB.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/databases/10121-icon-service-Azure-Cosmos-DB.svg",
+      "sha256": "b6f1f2afac15762d1de44366d34984c5a3e6e58f94d9e81407ac01565212e8e3"
+    },
+    "azure:document-intelligence": {
+      "label": "Azure AI Document Intelligence",
+      "path": "assets/az/i/c01/00819-Form-Recognizers.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/ai + machine learning/00819-icon-service-Form-Recognizers.svg",
+      "sha256": "196e5db33e32027349ee7250df79dfaf96b65e57a30a98662e6dd08d6d0c7360",
+      "aliases": [
+        "Document Intelligence",
+        "Form Recognizer"
+      ]
+    },
+    "azure:firewall": {
+      "label": "Azure Firewall",
+      "path": "assets/az/i/c24/10084-Firewalls.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/networking/10084-icon-service-Firewalls.svg",
+      "sha256": "154c416cc15b95b7c6c1ab61a5ecb33f14845197b7d163bd9dc6f1968c14be1e"
+    },
+    "azure:foundry": {
+      "label": "Microsoft Foundry",
+      "path": "assets/az/i/c01/035746832-AI-Foundry.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/ai + machine learning/035746832-icon-service-AI-Foundry.svg",
+      "sha256": "fab039a771f72780ae34e59065d61c66a02d3c347d50923ef2956f34912ea02c",
+      "aliases": [
+        "Azure AI Foundry"
+      ]
+    },
+    "azure:foundry-agent-service": {
+      "label": "Microsoft Foundry Agent Service",
+      "path": "assets/az/i/c01/038470523-Foundry-Agent-Service.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/ai + machine learning/038470523-icon-service-Foundry-Agent-Service.svg",
+      "sha256": "aedb65eeb06c1d4f3d57568edd2e8e7205065589ae8ceba4513a2fd21b4053ca"
+    },
+    "azure:foundry-iq": {
+      "label": "Foundry IQ",
+      "path": "assets/az/i/c01/038470497-Azure-AI-Foundry-IQ.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/ai + machine learning/038470497-icon-service-Azure-AI-Foundry-IQ.svg",
+      "sha256": "245e33416ecc1c745bfff6f72ebf1ffa04cfee1cdd0c1b1b8970d0844409c9c7"
+    },
+    "azure:foundry-models": {
+      "label": "Microsoft Foundry Models",
+      "path": "assets/az/i/c01/038470614-Foundry-Models.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/ai + machine learning/038470614-icon-service-Foundry-Models.svg",
+      "sha256": "9c671f141cb0e19b62e004628183ed8711ad16ec3b2e56b14c3cd035d5fac711"
+    },
+    "azure:foundry-project": {
+      "label": "Microsoft Foundry project",
+      "path": "assets/az/i/c01/036509415-Foundry-Project.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/ai + machine learning/036509415-icon-service-Foundry-Project.svg",
+      "sha256": "152187174d7d632cd91fd7d17b37316c423e008a84a889241163af832c8c3dec"
+    },
+    "azure:functions": {
+      "label": "Azure Functions",
+      "path": "assets/az/i/c06/10029-Function-Apps.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/compute/10029-icon-service-Function-Apps.svg",
+      "sha256": "1a6c9c108d5f63f7b78bc6fbc464059acd2eaa8c1d111e9bcd28a8b2cdf470b9"
+    },
+    "azure:key-vault": {
+      "label": "Azure Key Vault",
+      "path": "assets/az/i/c27/10245-Key-Vaults.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/security/10245-icon-service-Key-Vaults.svg",
+      "sha256": "712b426f54f0fc50d0816dc79df709daa7ac5f93ccaf4e9b3527f627f6e9ad97"
+    },
+    "azure:log-analytics": {
+      "label": "Azure Log Analytics workspace",
+      "path": "assets/az/i/c17/00009-Log-Analytics-Workspaces.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/analytics/00009-icon-service-Log-Analytics-Workspaces.svg",
+      "sha256": "7a244a8d7260e84be5c904185db7b04994fe6ed345e2b224163bc5f7e3d97ce0"
+    },
+    "azure:logic-apps": {
+      "label": "Azure Logic Apps",
+      "path": "assets/az/i/c14/02631-Logic-Apps.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/integration/02631-icon-service-Logic-Apps.svg",
+      "sha256": "3390e6337469e29d755a4077b64efcf0b0269ee871113417fd4458269351b438",
+      "aliases": [
+        "Logic Apps"
+      ]
+    },
+    "azure:managed-identity": {
+      "label": "Azure managed identity",
+      "path": "assets/az/i/c13/10227-Managed-Identities.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/identity/10227-icon-service-Managed-Identities.svg",
+      "sha256": "fa2e0fb863e81d7923b5708bed196e19310867a194d23bea96dddc42e302693c",
+      "aliases": [
+        "Managed Identities"
+      ]
+    },
+    "azure:managed-redis": {
+      "label": "Azure Managed Redis",
+      "path": "assets/az/i/c08/03675-Azure-Managed-Redis.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/databases/03675-icon-service-Azure-Managed-Redis.svg",
+      "sha256": "fa4b65d5946115084be1e842ecb934ab7f01b3019a450d19640ea3c3eaf9bab0"
+    },
+    "azure:monitor": {
+      "label": "Azure Monitor",
+      "path": "assets/az/i/c17/00001-Monitor.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/management + governance/00001-icon-service-Monitor.svg",
+      "sha256": "1396f59a7d8fd7505a423842b987c9b343a092263d1ab5c7b0d94d58d8b17448"
+    },
+    "azure:openai": {
+      "label": "Azure OpenAI",
+      "path": "assets/az/i/c01/03438-Azure-OpenAI.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/ai + machine learning/03438-icon-service-Azure-OpenAI.svg",
+      "sha256": "4859f2c78b6b81acbbaf94e7348cb7dcbe97955a038be903de01cf46a7206aad"
+    },
+    "azure:private-endpoint": {
+      "label": "Azure private endpoint",
+      "path": "assets/az/i/c26/02579-Private-Endpoints.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/other/02579-icon-service-Private-Endpoints.svg",
+      "sha256": "96de0bb7f0aeb1220d0fd6d337578d5e93dca017d6ea7d42d887aa329b2fd90d"
+    },
+    "azure:service-bus": {
+      "label": "Azure Service Bus",
+      "path": "assets/az/i/c14/10836-Azure-Service-Bus.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/integration/10836-icon-service-Azure-Service-Bus.svg",
+      "sha256": "eaf42cb87aedf608f60d40b601eb86491daaa71b8eab40a935e8e7fa2e62a2cf"
+    },
+    "azure:speech": {
+      "label": "Azure AI Speech",
+      "path": "assets/az/i/c01/00797-Speech-Services.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/ai + machine learning/00797-icon-service-Speech-Services.svg",
+      "sha256": "3f758eccdf371534309a50e8688bd75e685246f80485a741588d13bef69a7eb3",
+      "aliases": [
+        "Speech Services"
+      ]
+    },
+    "azure:sql-database": {
+      "label": "Azure SQL Database",
+      "path": "assets/az/i/c08/10130-SQL-Database.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/databases/10130-icon-service-SQL-Database.svg",
+      "sha256": "a26124a2b188ccf910520c935c726f7364e0f5935d7a4319ebcab9c80a40e475"
+    },
+    "azure:storage-queue": {
+      "label": "Azure Queue Storage",
+      "path": "assets/az/i/c11/10840-Storage-Queue.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/general/10840-icon-service-Storage-Queue.svg",
+      "sha256": "1f37dad74544fe1e4d5f10d40a11e71b8026d5b11993539f9f19416224097a08",
+      "aliases": [
+        "Queue Storage"
+      ]
+    },
+    "azure:virtual-network": {
+      "label": "Azure virtual network",
+      "path": "assets/az/i/c24/10061-Virtual-Networks.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/networking/10061-icon-service-Virtual-Networks.svg",
+      "sha256": "64a5e75ecef2f9f69067faa2eb131266cb8f2858706f8ab74bfea5ad0d98b14d",
+      "aliases": [
+        "VNet"
+      ]
+    },
+    "azure:web-pubsub": {
+      "label": "Azure Web PubSub",
+      "path": "assets/az/i/c14/02987-pubsub.svg",
+      "source_family": "azure",
+      "upstream_filename": "Azure_Public_Service_Icons/Icons/integration/02987-icon-service-pubsub.svg",
+      "sha256": "2e8206f9581045e3acc350b1a80b1aca2339e6a56f741c0c37249a7a062981cc",
+      "aliases": [
+        "Web PubSub"
+      ]
+    },
+    "dynamics365:product": {
+      "label": "Microsoft Dynamics 365",
+      "path": "assets/dynamics365/i/product.svg",
+      "source_family": "dynamics365",
+      "upstream_filename": "Dynamics 365 Product Family Icons/Dynamics365_scalable.svg",
+      "sha256": "5017e931a0f5e724247a9c49e15e22bb22e252d5343e0a40f7f38366d2aeb388"
+    },
     "entra:id": {
       "label": "Microsoft Entra ID",
       "path": "assets/entra/i/id.svg",
@@ -98,6 +407,13 @@
       "upstream_filename": "eventstream_64_item.svg",
       "sha256": "3c762303d1702bc8bc1465d2429c481a1609c66e7a6b5c865a43418dbc8d71a2"
     },
+    "fabric:graph-model": {
+      "label": "Fabric graph model",
+      "path": "assets/fabric/i/graph-model.svg",
+      "source_family": "fabric",
+      "upstream_filename": "graph_model_64.svg",
+      "sha256": "d41392c5348e337aeda38a781352d50424956135a36924d72b599c7056a5d5a9"
+    },
     "fabric:kql-database": {
       "label": "KQL database",
       "path": "assets/fabric/i/kql-database.svg",
@@ -132,6 +448,20 @@
       "source_family": "fabric",
       "upstream_filename": "one_lake_48_color.svg",
       "sha256": "23fe33bcc61e703f655ac98753512a780bc2ff71d157d6c25682841ed9b6a825"
+    },
+    "fabric:ontology": {
+      "label": "Fabric ontology",
+      "path": "assets/fabric/i/ontology.svg",
+      "source_family": "fabric",
+      "upstream_filename": "ontology_64_item.svg",
+      "sha256": "4a796479fc554eb2c9ad0aab22daccd6038d9cbaf36e0a63e76dac173a9a7d89"
+    },
+    "fabric:operations-agent": {
+      "label": "Fabric operations agent",
+      "path": "assets/fabric/i/operations-agent.svg",
+      "source_family": "fabric",
+      "upstream_filename": "operations_agent_64_item.svg",
+      "sha256": "90cd5514cedb667f1b8ec7745b2a0969551fc949874e58321f3b7693d7f69fbd"
     },
     "fabric:pipeline": {
       "label": "Fabric pipeline",
@@ -195,6 +525,68 @@
       "source_family": "fabric",
       "upstream_filename": "data_warehouse_64_item.svg",
       "sha256": "fb8eee23ff1b871706800e87ec3afb4c45bab99ea99d529d3e093c6890011015"
+    },
+    "github:copilot": {
+      "label": "GitHub Copilot",
+      "path": "assets/github/i/copilot.svg",
+      "source_family": "github",
+      "upstream_filename": "icons/copilot-24.svg",
+      "sha256": "eeafb3c2f333e04ccf7d031ae215f7adafaed4c6352556b0bf79496e048bcdd7"
+    },
+    "github:github": {
+      "label": "GitHub",
+      "path": "assets/github/i/github.svg",
+      "source_family": "github",
+      "upstream_filename": "icons/mark-github-24.svg",
+      "sha256": "bce494189797623c34e39a41c2c38a132bdca23ce4e6ac06b70116ed7e91ce26"
+    },
+    "m365:bot": {
+      "label": "Microsoft 365 architecture symbol: bot",
+      "path": "assets/m365/i/bot.svg",
+      "source_family": "m365",
+      "upstream_filename": "Microsoft Blue/48x48 Dark Blue Icon/Bot.svg",
+      "sha256": "0cdd0e3888c6df1e349e1632e699059609b4c20c83174d6ee4155e5db89250d5",
+      "presentation": "generic-symbol"
+    },
+    "m365:chat": {
+      "label": "Microsoft 365 architecture symbol: chat",
+      "path": "assets/m365/i/chat.svg",
+      "source_family": "m365",
+      "upstream_filename": "Microsoft Blue/48x48 Dark Blue Icon/Chat.svg",
+      "sha256": "00467fc96bc005eee1dabd0545ab633390fb1854ffbf13c538aa041d71fb714b",
+      "presentation": "generic-symbol"
+    },
+    "m365:connected-nodes": {
+      "label": "Microsoft 365 architecture symbol: connected nodes",
+      "path": "assets/m365/i/organization.svg",
+      "source_family": "m365",
+      "upstream_filename": "Microsoft Blue/48x48 Dark Blue Icon/Organization.svg",
+      "sha256": "97d247ee12e86b72615fa53b7998cdb413849028bc85498e767dbb4e419ce691",
+      "presentation": "generic-symbol"
+    },
+    "m365:documents": {
+      "label": "Microsoft 365 architecture symbol: documents",
+      "path": "assets/m365/i/documents.svg",
+      "source_family": "m365",
+      "upstream_filename": "Microsoft Blue/48x48 Dark Blue Icon/Document Multiple.svg",
+      "sha256": "a2f0e2cef319042f2b24e54c80fdf3dc2613a995dbe3f98c0fcb0cc3b96c63a7",
+      "presentation": "generic-symbol"
+    },
+    "m365:mail": {
+      "label": "Microsoft 365 architecture symbol: mail",
+      "path": "assets/m365/i/mail.svg",
+      "source_family": "m365",
+      "upstream_filename": "Microsoft Blue/48x48 Dark Blue Icon/Mail.svg",
+      "sha256": "5218575a7f5fb85318d3e230c9429e15a47c8fd9cbf51a8f18eb9af1d9bf72d2",
+      "presentation": "generic-symbol"
+    },
+    "m365:organization": {
+      "label": "Microsoft 365 architecture symbol: organization",
+      "path": "assets/m365/i/organization.svg",
+      "source_family": "m365",
+      "upstream_filename": "Microsoft Blue/48x48 Dark Blue Icon/Organization.svg",
+      "sha256": "97d247ee12e86b72615fa53b7998cdb413849028bc85498e767dbb4e419ce691",
+      "presentation": "generic-symbol"
     },
     "power-platform:agent-365": {
       "label": "Microsoft Agent 365",
