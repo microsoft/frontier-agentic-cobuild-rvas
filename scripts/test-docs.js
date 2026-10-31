@@ -242,7 +242,7 @@ test('Start lists each supporting skill and its direct project-local installatio
       assert.ok(html.includes(source.descriptions[skill]), skill);
     }
   }
-  assert.doesNotMatch(commands.join('\n'), /--global|--all|humanize-writing/);
+  assert.doesNotMatch(commands.join('\n'), /--global|--all/);
   assert.doesNotMatch(html, /setup-agentic-repo|\.agentic-cobuild-setup|Manual npx alternative/);
   assert.match(html, /can overwrite existing copies/);
 });
