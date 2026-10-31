@@ -54,8 +54,8 @@ Missing documentation does not prove that a control or service is absent.</p>
 <p>Reuse existing capabilities where they fit. Any proposed replacement needs a
 clear requirement and a migration plan that preserves compatibility.</p>
 <h2 id="set-up-your-workspace">Set up your workspace<a class="heading-link" href="#set-up-your-workspace" aria-label="Link to Set up your workspace"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Run setup commands from your application directory unless the step says
-otherwise. Stop on errors and inspect partial files before retrying.</p>
+<p>Run commands from your application directory unless a step says otherwise.
+Stop if a command fails. Inspect the error and any partial files before retrying.</p>
 <h3 id="create-a-new-repository">Create a new repository<a class="heading-link" href="#create-a-new-repository" aria-label="Link to Create a new repository"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Skip this for an existing application. Follow its branching and approval rules
 instead.</p>
@@ -176,9 +176,8 @@ before starting AI Agent Creator or implementation.</p>
 <p>If several people hold the business context, use the
 <a href="discovery-session.html">discovery session guide</a> first. Get approval before
 recording or processing the discussion.</p>
-<p>Select <strong>AI Agent Creator</strong> from your host&#39;s skill picker or slash completion.
-Use the matching prompt below and replace the example with your application.
-If your host qualifies skill names, use the name it displays.</p>
+<p>Select <strong>AI Agent Creator</strong> from your host&#39;s skill picker or slash completion,
+using the name your host displays. Adapt one of these prompts to your application.</p>
 <h3 id="ai-agent-creator-prompts">AI Agent Creator prompts<a class="heading-link" href="#ai-agent-creator-prompts" aria-label="Link to AI Agent Creator prompts"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>For a new application:</p>
 <pre><code class="language-text">/ai-agent-creator Design an AI maintenance assistant for property managers that triages
@@ -190,9 +189,9 @@ existing enterprise identity and operating environment.
 Inspect its current stack, preserve established interfaces, and account
 for our enterprise data-access and deployment constraints.
 </code></pre>
-<p><strong>Your first milestone is confirmed discovery.</strong> Answer the creator&#39;s questions
-and agree on the outcome, first user journey, and architecture decisions before
-confirming discovery. The creator then prepares the architecture package.</p>
+<p><strong>Your first milestone is confirmed discovery.</strong> Answer the creator&#39;s questions.
+Confirm discovery once you agree on the outcome, first user journey, and
+architecture decisions. The creator then prepares the architecture package.</p>
 <style>
     .intro-diagram { container-type: inline-size; margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
     .intro-diagram .diagram-container { width: 100%; }
@@ -335,14 +334,14 @@ confirming discovery. The creator then prepares the architecture package.</p>
   </figure>
 
 <p>The creator writes the editable diagrams, architecture, specification, and
-implementation plan under <code>docs/architecture/</code>. Review the full package.
-If visual or independent review is unavailable, explicitly accept and record the
-exception.</p>
+implementation plan under <code>docs/architecture/</code>. Review the diagrams and have an
+independent reviewer check the full package before approval. If either review is
+unavailable, explicitly accept and record the exception.</p>
 <p><strong>Approval ends this workflow.</strong> Start implementation separately. Approval does
 not change code, generate infrastructure, or provision resources.</p>
 <h2 id="start-implementation-in-a-new-session">Start implementation in a new session<a class="heading-link" href="#start-implementation-in-a-new-session" aria-label="Link to Start implementation in a new session"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Choose one implementation workflow below; do not combine them. All three use
-the approved files under <code>docs/architecture/</code> as their authority.</p>
+<p>Choose one workflow; do not combine them. Each uses the approved files under
+<code>docs/architecture/</code> as its authority.</p>
 <div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
 <table>
 <thead>
@@ -385,10 +384,9 @@ actual results. Do not change an architecture decision without approval.
 Do not commit, provision, deploy, or change production data.
 </code></pre>
 <h3 id="matt-pocock-spec-and-tickets">Matt Pocock spec and tickets<a class="heading-link" href="#matt-pocock-spec-and-tickets" aria-label="Link to Matt Pocock spec and tickets"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Choose this optional workflow when several independent work items need explicit
-dependencies and local coordination. Install the Matt Pocock engineering
-workflow first if <code>/to-spec</code>, <code>/to-tickets</code>, and <code>/implement-spec</code> are not
-available. Use local Markdown tracking, not remote issues.</p>
+<p>For independent work items that need dependency tracking, install the Matt Pocock
+engineering workflow if <code>/to-spec</code>, <code>/to-tickets</code>, and <code>/implement-spec</code> are not
+available. Track the work in local Markdown, not remote issues.</p>
 <pre><code class="language-text">/to-spec Convert the approved docs/architecture/ package into one bounded local
 implementation spec. Preserve its requirement and acceptance IDs, architecture
 decisions, interfaces, authorization, cost constraints, and out-of-scope work.
@@ -405,11 +403,9 @@ approved architecture and existing contracts. Run focused and combined checks.
 Do not push, open a pull request, provision, deploy, or change production data.
 </code></pre>
 <h3 id="spec-kit">Spec Kit<a class="heading-link" href="#spec-kit" aria-label="Link to Spec Kit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Choose this optional workflow when your repository uses Spec Kit or the team
-wants its feature-specification and task lifecycle. Configure Spec Kit first,
-then run its constitution, specify, clarify when needed, plan, and tasks commands
-against the approved <code>docs/architecture/</code> package. Do not use those commands to
-replace settled architecture decisions.</p>
+<p>Configure Spec Kit, then run its constitution, specify, clarify when needed,
+plan, and tasks commands against the approved <code>docs/architecture/</code> package.
+Do not use those commands to replace settled architecture decisions.</p>
 <p>Open a new session after the feature plan and tasks are reviewed:</p>
 <pre><code class="language-text">/speckit-implement Implement only the reviewed feature tasks. Treat the
 docs/architecture/ package and its acceptance criteria as authoritative.
@@ -452,8 +448,8 @@ Supporting skill updates remain separate.</p>
 </code></pre>
 <p>VS Code users can run the plugin update action instead.</p>
 <h2 id="need-an-idea-first">Need an idea first?<a class="heading-link" href="#need-an-idea-first" aria-label="Link to Need an idea first?"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Use <strong>Idea Forge</strong> with the prompt below, then take the
-selected brief through AI Agent Creator discovery and architecture approval.</p>
+<p>Use <strong>Idea Forge</strong> to research an opportunity. Take the selected brief through
+AI Agent Creator discovery and architecture approval.</p>
 <h3 id="idea-forge-prompt">Idea Forge prompt<a class="heading-link" href="#idea-forge-prompt" aria-label="Link to Idea Forge prompt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <pre><code class="language-text">/idea-forge Find a bounded AI opportunity for [customer] in [industry].
 Research the business and publicly stated priorities on the web.

@@ -1,12 +1,10 @@
 ## Who needs to be involved
 
-Bring someone who understands the business problem and can work in the customer
-environment. Name a product owner and make technical specialists available.
-Architecture approval remains a separate step before implementation.
+Name a product owner, bring someone who understands the business problem, and
+make technical specialists available. Use the customer's approved environment.
+Approve the architecture before starting implementation separately.
 
 ## Knowledge and people
-
-The customer team needs:
 
 - A participant who can explain the users, current process, outcome, constraints,
   and first journey.
@@ -77,5 +75,5 @@ Assign each gap an owner and date. Treat unresolved access or governance as a
 blocker when it prevents safe design or verification.
 
 When the people and access are ready, use the
-[discovery session guide](discovery-session.html) to structure the initial
-customer discussion and prepare the input for AI Agent Creator.
+[discovery session guide](discovery-session.html) to run the customer discussion
+and prepare a brief for AI Agent Creator.

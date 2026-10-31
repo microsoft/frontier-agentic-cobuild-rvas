@@ -1,12 +1,12 @@
 ## What the creator can design
 
-Tell AI Agent Creator what you want a new or existing application to do.
-It helps define the first user journey and architecture. It may recommend a
-platform agent, custom application, explicit workflow, or a model call with a
+Bring the first task you want users to complete in a new or existing application.
+AI Agent Creator helps define that journey and its architecture. It may recommend
+a platform agent, custom application, explicit workflow, or a model call with a
 defined task.
 
-The plugin designs the solution; it does not implement or certify it. The
-examples below are possibilities, not customer results or deployment templates.
+The plugin designs the solution but does not implement or certify it.
+These examples are not customer results or deployment templates.
 
 ## Application families
 
@@ -118,8 +118,8 @@ expiry, and deletion.
 
 ## Choose an architecture during discovery
 
-Bring the outcome and your existing constraints; you do not need to choose a
-platform before starting. The creator compares existing capabilities with custom
+You do not need to choose a platform before discovery. Bring the outcome and
+existing constraints. The creator compares existing capabilities with custom
 execution against the first journey's requirements.
 Microsoft's [technology planning guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy)
 starts by checking whether a ready-to-use solution meets the need.
@@ -127,12 +127,6 @@ starts by checking whether a ready-to-use solution meets the need.
 Choose the user channel separately from the runtime. Keep knowledge access and
 permission to perform actions distinct. The architecture review must verify
 product fit and proposed connections, and name owners for unresolved checks.
-
-## Where this workflow stops
-
-The creator produces an approved architecture package for a separate
-implementation session. Architecture approval does not authorize implementation
-or deployment.
 
 ## Describe your first journey
 
@@ -147,3 +141,7 @@ recommending the architecture.
 
 [Set up your application workspace](start.html), then bring your own idea.
 If you are extending a system, [prepare its context](start.html#working-with-an-existing-application).
+
+Review and approve the architecture package before starting a separate
+implementation session. Architecture approval does not authorize implementation
+or deployment.

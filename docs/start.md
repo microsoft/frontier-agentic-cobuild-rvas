@@ -25,8 +25,8 @@ clear requirement and a migration plan that preserves compatibility.
 
 ## Set up your workspace
 
-Run setup commands from your application directory unless the step says
-otherwise. Stop on errors and inspect partial files before retrying.
+Run commands from your application directory unless a step says otherwise.
+Stop if a command fails. Inspect the error and any partial files before retrying.
 
 ### Create a new repository
 
@@ -97,9 +97,8 @@ If several people hold the business context, use the
 [discovery session guide](discovery-session.html) first. Get approval before
 recording or processing the discussion.
 
-Select **AI Agent Creator** from your host's skill picker or slash completion.
-Use the matching prompt below and replace the example with your application.
-If your host qualifies skill names, use the name it displays.
+Select **AI Agent Creator** from your host's skill picker or slash completion,
+using the name your host displays. Adapt one of these prompts to your application.
 
 ### AI Agent Creator prompts
 
@@ -119,24 +118,24 @@ Inspect its current stack, preserve established interfaces, and account
 for our enterprise data-access and deployment constraints.
 ```
 
-**Your first milestone is confirmed discovery.** Answer the creator's questions
-and agree on the outcome, first user journey, and architecture decisions before
-confirming discovery. The creator then prepares the architecture package.
+**Your first milestone is confirmed discovery.** Answer the creator's questions.
+Confirm discovery once you agree on the outcome, first user journey, and
+architecture decisions. The creator then prepares the architecture package.
 
 <!-- diagram: approval-handoff -->
 
 The creator writes the editable diagrams, architecture, specification, and
-implementation plan under `docs/architecture/`. Review the full package.
-If visual or independent review is unavailable, explicitly accept and record the
-exception.
+implementation plan under `docs/architecture/`. Review the diagrams and have an
+independent reviewer check the full package before approval. If either review is
+unavailable, explicitly accept and record the exception.
 
 **Approval ends this workflow.** Start implementation separately. Approval does
 not change code, generate infrastructure, or provision resources.
 
 ## Start implementation in a new session
 
-Choose one implementation workflow below; do not combine them. All three use
-the approved files under `docs/architecture/` as their authority.
+Choose one workflow; do not combine them. Each uses the approved files under
+`docs/architecture/` as its authority.
 
 | Workflow | Choose it when | Entry point |
 | --- | --- | --- |
@@ -163,10 +162,9 @@ Do not commit, provision, deploy, or change production data.
 
 ### Matt Pocock spec and tickets
 
-Choose this optional workflow when several independent work items need explicit
-dependencies and local coordination. Install the Matt Pocock engineering
-workflow first if `/to-spec`, `/to-tickets`, and `/implement-spec` are not
-available. Use local Markdown tracking, not remote issues.
+For independent work items that need dependency tracking, install the Matt Pocock
+engineering workflow if `/to-spec`, `/to-tickets`, and `/implement-spec` are not
+available. Track the work in local Markdown, not remote issues.
 
 ```text
 /to-spec Convert the approved docs/architecture/ package into one bounded local
@@ -192,11 +190,9 @@ Do not push, open a pull request, provision, deploy, or change production data.
 
 ### Spec Kit
 
-Choose this optional workflow when your repository uses Spec Kit or the team
-wants its feature-specification and task lifecycle. Configure Spec Kit first,
-then run its constitution, specify, clarify when needed, plan, and tasks commands
-against the approved `docs/architecture/` package. Do not use those commands to
-replace settled architecture decisions.
+Configure Spec Kit, then run its constitution, specify, clarify when needed,
+plan, and tasks commands against the approved `docs/architecture/` package.
+Do not use those commands to replace settled architecture decisions.
 
 Open a new session after the feature plan and tasks are reviewed:
 
@@ -262,8 +258,8 @@ VS Code users can run the plugin update action instead.
 
 ## Need an idea first?
 
-Use **Idea Forge** with the prompt below, then take the
-selected brief through AI Agent Creator discovery and architecture approval.
+Use **Idea Forge** to research an opportunity. Take the selected brief through
+AI Agent Creator discovery and architecture approval.
 
 ### Idea Forge prompt
 
