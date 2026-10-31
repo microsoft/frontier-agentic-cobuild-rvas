@@ -116,7 +116,7 @@
       </svg>
       <svg class="diagram-narrow" viewBox="0 0 336 1512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="existing-app-delta-narrow-title existing-app-delta-narrow-desc">
         <title id="existing-app-delta-narrow-title">Add a capability, preserve the application</title>
-        <desc id="existing-app-delta-narrow-desc">The case application gains an AI entry point and read-only investigation. Existing case permissions and application components stay unchanged.</desc>
+        <desc id="existing-app-delta-narrow-desc">The case application gains AI summaries and read-only investigation. Its identity service, case API contracts, and system of record stay unchanged.</desc>
         <defs>
           <marker id="existing-app-delta-narrow-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker>
         </defs>
@@ -193,7 +193,7 @@
         </g>
       </svg>
     </div>
-    <figcaption>This example adds AI summaries and investigation. Case APIs and authorization stay unchanged, as does the system of record. It is not a deployment template. Plain outlines mark unchanged components. Blue outlines mark additions or changes described in the Changes list. Specify how the application handles AI outages in the architecture package. Include regression checks and a rollback plan.</figcaption>
+    <figcaption>Case APIs, authorization, and the system of record stay unchanged. This is a conceptual example, not a deployment template. Plain outlines mark unchanged components; blue outlines mark additions or changes in the Changes list. In the architecture package, specify what happens when AI is unavailable and include regression checks and a rollback plan.</figcaption>
   </figure>
 </body>
 </html>
