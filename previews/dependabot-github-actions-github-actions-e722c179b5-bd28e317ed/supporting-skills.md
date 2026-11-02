@@ -13,7 +13,7 @@ Upstream source: [`mattpocock/skills`](https://github.com/mattpocock/skills).
 | --- | --- |
 | `grilling` | Question a plan until the decisions and assumptions are clear. |
 | `domain-modeling` | Define domain terms and record them in a glossary and architecture decisions. |
-| `wait-what` | Ask explanations to the agent on what it just said. |
+| `wait-what` | Ask the agent to explain what it just said. |
 
 ```bash
 npx --yes skills@1.7.2 add mattpocock/skills --skill grilling domain-modeling wait-what --agent github-copilot --copy --yes

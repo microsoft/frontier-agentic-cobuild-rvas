@@ -1,10 +1,10 @@
-## Use the session to collect evidence
+## Collect discovery evidence
 
 Use this session when the idea is spread across people or documents. Get approval
 for recording, transcription, storage, and AI processing before the call.
 
-Capture the intended outcome, first journey, decisions, and open questions. The
-record is evidence, not approval or authorization. Review the
+Capture the intended outcome, first journey, decisions, and open questions.
+The session record does not grant approval or authorization. Review the
 [participant requirements](participant-requirements.html) and keep the needed
 specialists reachable.
 
@@ -22,8 +22,8 @@ instead. The same question set still applies.
 
 ## Guide the discussion
 
-Use these topics as a route, not a script. Ask for concrete examples and measurable
-meaning behind words such as "fast," "secure," or "automated."
+Ask for concrete examples and measurable definitions of "fast," "secure," or
+"automated."
 
 ### 1. Outcome and reason for change
 
@@ -46,8 +46,7 @@ meaning behind words such as "fast," "secure," or "automated."
 - What requires review or approval?
 - What marks completion, and what happens when evidence is insufficient or unsafe?
 
-Keep the first journey bounded. Capture later journeys separately instead of
-combining every possible use case into the initial design.
+Keep the first journey bounded. Record later journeys separately.
 
 ### 4. Information and evidence
 
@@ -122,8 +121,6 @@ or implementation.
 Create a short, traceable brief in the customer repository. Separate confirmed
 facts, assumptions, and open questions.
 
-Use this structure:
-
 ```markdown
 # Discovery brief
 
@@ -170,8 +167,7 @@ Use this structure:
 | --- | --- | --- |
 ```
 
-Do not fill gaps with plausible answers. Leave them visible for AI Agent Creator
-to ask about.
+Leave gaps visible for AI Agent Creator to ask about; do not invent answers.
 
 ## Create the brief with WorkIQ
 
@@ -216,7 +212,7 @@ approved location.
 
 Have the customer or product owner review the brief. Keep unresolved points open.
 
-From the customer application repository, invoke AI Agent Creator with the brief:
+Open the customer application repository and invoke AI Agent Creator with the brief:
 
 ```text
 /ai-agent-creator Use @docs/discovery/discovery-brief.md as discovery evidence
@@ -229,5 +225,5 @@ requirements approval. Present the shared-understanding record and wait for
 explicit customer confirmation before architecture work begins.
 ```
 
-The brief accelerates discovery. It does not replace confirmation, architecture
-review, or package approval.
+The brief does not replace discovery confirmation, architecture review, or
+package approval.
