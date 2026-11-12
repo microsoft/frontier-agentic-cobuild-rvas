@@ -20,6 +20,9 @@ const CORE = [
     ["visuals/shared-understanding.md", "Shared understanding"],
 ];
 const VIEWABLE = new Set([".md", ".drawio", ".html", ".svg", ".png", ".jpg", ".jpeg"]);
+// Agent instructions for the prototype, not customer-facing artifacts.
+const IGNORED = new Set(["prototype/agents.md"]);
+const ignored = (rel) => IGNORED.has(rel.split(sep).join("/").toLowerCase());
 const MIME = {
     ".html": "text/html; charset=utf-8",
     ".css": "text/css; charset=utf-8",
@@ -54,7 +57,7 @@ async function listFiles(dir, base = dir) {
     for (const entry of entries) {
         const full = join(dir, entry.name);
         if (entry.isDirectory()) out.push(...(await listFiles(full, base)));
-        else if (entry.isFile() && VIEWABLE.has(extname(entry.name).toLowerCase()))
+        else if (entry.isFile() && VIEWABLE.has(extname(entry.name).toLowerCase()) && !ignored(relative(base, full)))
             out.push(relative(base, full).split(sep).join("/"));
     }
     return out;
@@ -112,7 +115,7 @@ async function handle(req, res) {
     const wsId = url.searchParams.get("ws");
     const ws = workspaces.get(wsId);
 
-    if (url.pathname === "/" || url.pathname === "/app.js" || url.pathname === "/styles.css") {
+    if (url.pathname === "/" || url.pathname === "/app.js" || url.pathname === "/styles.css" || url.pathname === "/vendor/mermaid.min.js") {
         const name = url.pathname === "/" ? "index.html" : url.pathname.slice(1);
         const body = await readFile(join(PUBLIC_DIR, name));
         return send(res, 200, body, MIME[extname(name)]);
@@ -140,7 +143,7 @@ async function handle(req, res) {
         const archRoot = resolve(ws.root, ARCH_DIR);
         const target = resolve(archRoot, url.searchParams.get("path") ?? "");
         const ext = extname(target).toLowerCase();
-        if (!inside(archRoot, target) || !VIEWABLE.has(ext)) return send(res, 404, "Not found");
+        if (!inside(archRoot, target) || !VIEWABLE.has(ext) || ignored(relative(archRoot, target))) return send(res, 404, "Not found");
         try {
             return send(res, 200, await readFile(target), MIME[ext] ?? "application/octet-stream");
         } catch {
@@ -179,7 +182,7 @@ function requireWorkspace(instanceId) {
 function normalizeArtifactPath(ws, path) {
     const archRoot = resolve(ws.root, ARCH_DIR);
     const target = resolve(archRoot, path);
-    if (!inside(archRoot, target) || !VIEWABLE.has(extname(target).toLowerCase()))
+    if (!inside(archRoot, target) || !VIEWABLE.has(extname(target).toLowerCase()) || ignored(relative(archRoot, target)))
         throw new Error(`Not a viewable file under ${ARCH_DIR}/: ${path}`);
     return relative(archRoot, target).split(sep).join("/");
 }

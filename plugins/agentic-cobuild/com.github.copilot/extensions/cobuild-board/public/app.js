@@ -68,8 +68,7 @@
         while (i < lines.length && !/^```/.test(lines[i])) body.push(lines[i++]);
         i++;
         const lang = fence[1];
-        if (lang === "mermaid") out.push(`<p class="src-label">Mermaid source</p>`);
-        out.push(`<pre><code>${esc(body.join("\n"))}</code></pre>`);
+        out.push(`<pre${lang === "mermaid" ? ' class="mermaid-src"' : ""}><code>${esc(body.join("\n"))}</code></pre>`);
         continue;
       }
 
@@ -437,6 +436,42 @@
     return r;
   }
 
+  let mermaidReady;
+  function loadMermaid() {
+    mermaidReady ??= new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = api("/vendor/mermaid.min.js");
+      s.onload = () => {
+        window.mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: "base",
+          themeVariables: { primaryColor: "#eaf2ff", primaryBorderColor: "#0960c1", primaryTextColor: "#032254", lineColor: "#0960c1", fontFamily: "Inter, system-ui, sans-serif" } });
+        resolve(window.mermaid);
+      };
+      s.onerror = () => reject(new Error("Mermaid failed to load"));
+      document.head.append(s);
+    });
+    return mermaidReady;
+  }
+
+  async function renderMermaid(root, mine) {
+    const blocks = [...root.querySelectorAll("pre.mermaid-src")];
+    if (!blocks.length) return;
+    let mermaid;
+    try { mermaid = await loadMermaid(); } catch { return; }
+    for (const [n, pre] of blocks.entries()) {
+      const source = pre.textContent;
+      try {
+        const id = `mmd-${Date.now()}-${n}`;
+        const { svg } = await mermaid.render(id, source).catch((e) => { document.getElementById(`d${id}`)?.remove(); throw e; });
+        if (mine !== state.token || !pre.isConnected) return;
+        const fig = el("figure", { class: "mermaid-fig" });
+        fig.innerHTML = svg;
+        pre.replaceWith(fig, el("details", { class: "mermaid-details" }, el("summary", {}, "Mermaid source"), el("pre", {}, el("code", {}, source))));
+      } catch (e) {
+        pre.before(el("p", { class: "src-label" }, "Could not render this diagram. Showing its Mermaid source."));
+      }
+    }
+  }
+
   const OVERVIEW = "@overview";
   const PHASES = ["Discover", "Architect", "Approve", "Handoff"];
   const PLANNED = {
@@ -501,6 +536,7 @@
         const doc = el("article", { class: "doc" });
         doc.innerHTML = markdown(text, path);
         main.replaceChildren(doc);
+        renderMermaid(doc, mine);
         main.scrollTop = scroll;
       } else if (ext === ".drawio") {
         const text = await (await fetchText(path)).text();

@@ -76,3 +76,7 @@ main { flex: 1; min-width: 0; overflow: auto; position: relative; outline: none;
 .phases { display: flex; gap: 6px; flex-wrap: wrap; margin: 16px 0; }
 .phase-step { padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; color: #4a5568; }
 .phase-step[aria-current="true"] { background: var(--heading); border-color: var(--heading); color: #fff; }
+.mermaid-fig { margin: 16px 0; overflow-x: auto; text-align: center; }
+.mermaid-fig svg { max-width: 100%; height: auto; }
+.mermaid-details { margin: 0 0 16px; font-size: 13px; }
+.mermaid-details summary { cursor: pointer; color: var(--action); }

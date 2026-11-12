@@ -20,7 +20,7 @@ application repository.
 
 `cobuild-board` is a shared screen for a live session in the GitHub Copilot
 app. It lists the architecture package under `docs/architecture/`, renders
-Markdown, `.drawio` pages, and the HTML visuals, and refreshes as the creator
+Markdown (with Mermaid diagrams), `.drawio` pages, and the HTML visuals, and refreshes as the creator
 writes files. It never writes to the repository and records no approvals: the
 files stay the source of truth, and confirmations still happen in the chat.
 
@@ -31,6 +31,8 @@ reads only files under `docs/architecture/`. The chat workflow works unchanged
 where the app or canvases are unavailable.
 
 ## Attribution
+
+The Co-build board bundles Mermaid (MIT) under `public/vendor/` to render diagrams offline; its license sits beside it.
 
 AI Agent Creator was imported from the supplied AI Application Accelerator.
 Cloud Architecture Diagram was adapted by Paolo Montagna from Thomas Thornton's
