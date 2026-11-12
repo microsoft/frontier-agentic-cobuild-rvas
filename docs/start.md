@@ -113,17 +113,20 @@ then adapt one of these prompts.
 For a new application:
 
 ```text
-/agentic-cobuild:ai-agent-creator Design an AI maintenance assistant for property managers that triages
-resident requests and prepares work orders for approval. Account for our
-existing enterprise identity and operating environment.
+/agentic-cobuild:ai-agent-creator Build a demo based on the 2025 Monza Grand Prix,
+using real OpenF1 data. The goal is to show how to combine race data and
+business knowledge to support a strategic decision: pit or stay out.
 ```
 
-For an existing application:
+For an existing application (for example, extending the race demo):
 
 ```text
-/agentic-cobuild:ai-agent-creator Add evidence-backed report summarization to this existing application.
-Inspect its current stack, preserve established interfaces, and account
-for our enterprise data-access and deployment constraints.
+/agentic-cobuild:ai-agent-creator Add a what-if comparison to the existing Monza
+race demo. Let users adjust pit-stop time loss and expected tyre pace, compare
+pit versus stay-out scenarios, and see which assumptions change the recommendation.
+Distinguish observed OpenF1 data from hypothetical inputs. Inspect the current
+stack, preserve established interfaces, and account for existing data-access
+and deployment constraints.
 ```
 
 **Your first milestone is confirmed discovery.** Answer the creator's questions.
