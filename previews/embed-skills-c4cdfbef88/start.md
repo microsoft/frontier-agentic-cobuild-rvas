@@ -167,15 +167,15 @@ Pick one workflow and don't mix them. Each treats the approved files under
 | Matt Pocock spec and tickets | You want a local spec, dependency-linked tickets, and bounded parallel delivery | `/to-spec`, `/to-tickets`, then `/implement-spec` |
 | Spec Kit | You want a constitution, feature spec, plan, and task artifacts before coding | Spec Kit's specify, plan, tasks, and implement commands |
 
+<!-- workflow -->
 ### Direct from the documents
 
-Open a new session and attach the approved architecture files. Use this path
-unless you need the extra coordination of the other two.
+Open a new session and attach the whole `docs/architecture/` folder. Use this
+path unless you need the extra coordination of the other two.
 
 ```text
-Read @docs/architecture/specification.md,
-@docs/architecture/implementation-plan.md, @docs/architecture/solution.md,
-@docs/architecture/solution.drawio, and @docs/architecture/cost-estimate.md.
+Read everything in @docs/architecture/, including the specification,
+implementation plan, solution document and diagram, and cost estimate.
 Implement the approved plan in dependency order. Treat the specification and
 its acceptance criteria as the requirements source of truth. Follow the
 approved architecture, preserve existing interfaces and authorization, and
@@ -184,6 +184,9 @@ actual results. Do not change an architecture decision without approval.
 Do not commit, provision, deploy, or change production data.
 ```
 
+<!-- workflow-end -->
+
+<!-- workflow -->
 ### Matt Pocock spec and tickets
 
 Use this for independent work items that need dependency tracking. If `/to-spec`,
@@ -212,6 +215,9 @@ approved architecture and existing contracts. Run focused and combined checks.
 Do not push, open a pull request, provision, deploy, or change production data.
 ```
 
+<!-- workflow-end -->
+
+<!-- workflow -->
 ### Spec Kit
 
 Set up Spec Kit, then run its constitution, specify, clarify (if needed), plan,
@@ -230,6 +236,8 @@ provision, deploy, or change production data.
 
 Run `/speckit-converge` after each implementation pass, and repeat until the
 feature converges or you've recorded what's blocking it.
+
+<!-- workflow-end -->
 
 Whichever workflow you use, get approval before changing an architecture decision.
 
