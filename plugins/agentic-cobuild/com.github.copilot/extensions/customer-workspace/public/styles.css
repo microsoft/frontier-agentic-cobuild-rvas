@@ -39,7 +39,7 @@ nav button {
 nav button:hover { background: var(--line); }
 nav button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 nav button[aria-current="true"] { background: var(--heading); color: #fff; }
-nav button.missing { color: #7a8396; cursor: default; }
+nav button.missing { color: #7a8396; }
 nav button.missing:hover { background: transparent; }
 nav .tag { font-size: 10px; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: var(--ok-bg); color: var(--ok-fg); white-space: nowrap; }
 nav .tag.todo { background: transparent; color: #7a8396; font-weight: 400; }
@@ -73,3 +73,6 @@ main { flex: 1; min-width: 0; overflow: auto; position: relative; outline: none;
 .diagram svg { flex: 1; width: 100%; min-height: 0; background: #fff; cursor: grab; touch-action: none; }
 .diagram svg.drag { cursor: grabbing; }
 .err { margin: 24px; padding: 12px 16px; background: #ffeadf; color: #783c23; border-radius: 6px; }
+.phases { display: flex; gap: 6px; flex-wrap: wrap; margin: 16px 0; }
+.phase-step { padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; color: #4a5568; }
+.phase-step[aria-current="true"] { background: var(--heading); border-color: var(--heading); color: #fff; }

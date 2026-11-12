@@ -437,6 +437,56 @@
     return r;
   }
 
+  const OVERVIEW = "@overview";
+  const PHASES = ["Discover", "Architect", "Approve", "Handoff"];
+  const PLANNED = {
+    "visuals/shared-understanding.md": ["Discover", "The gate visuals and plain-language record of what the session agreed. The creator writes it before you confirm the shared understanding."],
+    "solution.drawio": ["Architect", "The editable architecture diagram, one page per view. It is reviewed in a diagram gate before approval."],
+    "solution.md": ["Architect", "The solution design: outcome, first journey, assumptions, components and trust boundary."],
+    "specification.md": ["Architect", "Numbered requirements and acceptance criteria that the plan and implementation trace back to."],
+    "cost-estimate.md": ["Architect", "The cost estimate with its pricing assumptions."],
+    "implementation-plan.md": ["Architect", "The delivery plan, written before architecture approval. Implementation itself starts separately."],
+  };
+
+  function showOverview() {
+    state.token++;
+    state.current = OVERVIEW;
+    renderNav();
+    const items = state.index?.items ?? [];
+    const core = items.filter((i) => i.core);
+    const done = core.filter((i) => i.present).length;
+    const phase = state.index?.phase;
+    const wrap = el("article", { class: "doc" },
+      el("h1", {}, "Customer workspace"),
+      el("p", {}, "This screen shows the architecture package as the creator writes it into ", el("code", {}, "docs/architecture/"), ". It is read-only: confirmations and approvals happen in the chat."),
+      el("div", { class: "phases" }, ...PHASES.map((name) => el("span", { class: "phase-step", "aria-current": String(phase === name) }, name))),
+      el("p", {}, phase ? `Current phase: ${phase}${state.index.note ? ". " + state.index.note : ""}` : "No phase reported yet."),
+      el("h2", {}, `Package: ${done} of ${core.length} written`),
+      el("ul", {}, ...core.map((i) => el("li", {},
+        i.present
+          ? el("a", { href: "#", "data-artifact": i.path }, i.title)
+          : el("a", { href: "#", "data-planned": i.path }, i.title),
+        i.present ? " is written." : ` comes in ${PLANNED[i.path]?.[0] ?? "a later phase"}.`)))
+    );
+    view().replaceChildren(wrap);
+    view().scrollTop = 0;
+  }
+
+  function showPlanned(path) {
+    state.token++;
+    state.current = path;
+    renderNav();
+    const item = state.index.items.find((i) => i.path === path);
+    const [phase, what] = PLANNED[path] ?? ["a later phase", "This file is not written yet."];
+    view().replaceChildren(el("article", { class: "doc" },
+      el("h1", {}, item?.title ?? path),
+      el("p", {}, el("strong", {}, "Not written yet. "), `The creator produces it in the ${phase} phase.`),
+      el("p", {}, what),
+      el("p", {}, el("code", {}, "docs/architecture/" + path)),
+      el("p", {}, el("a", { href: "#", "data-overview": "1" }, "Back to overview"))
+    ));
+  }
+
   async function openArtifact(path, { keepScroll = false } = {}) {
     const mine = ++state.token;
     state.current = path;
@@ -471,6 +521,7 @@
     const nav = $("nav");
     const items = state.index?.items ?? [];
     nav.replaceChildren();
+    nav.append(el("button", { "aria-current": String(state.current === OVERVIEW), onclick: () => { $("follow").checked = false; showOverview(); } }, el("span", {}, "Overview")));
     const groups = [["Package", items.filter((i) => i.core)], ["Other files", items.filter((i) => !i.core)]];
     for (const [title, list] of groups) {
       if (!list.length) continue;
@@ -480,8 +531,8 @@
         const tag = !item.present ? el("span", { class: "tag todo" }, "Not yet") : fresh ? el("span", { class: "tag" }, state.seen.has(item.path) ? "Updated" : "New") : null;
         nav.append(
           el("button", {
-            class: item.present ? "" : "missing", "aria-current": String(state.current === item.path), disabled: !item.present,
-            onclick: () => { $("follow").checked = false; select(item.path); },
+            class: item.present ? "" : "missing", "aria-current": String(state.current === item.path),
+            onclick: () => { $("follow").checked = false; if (item.present) select(item.path); else showPlanned(item.path); },
           }, el("span", {}, item.title), tag)
         );
       }
@@ -507,7 +558,7 @@
       for (const i of present) state.seen.set(i.path, i.mtime);
       state.firstLoad = false;
       const start = index.focus ?? present[0]?.path;
-      if (start) select(start); else renderNav();
+      if (start) select(start); else { state.autoOverview = true; showOverview(); }
       state.lastFocus = index.focus;
       return;
     }
@@ -515,6 +566,17 @@
     if (index.focus && index.focus !== state.lastFocus) {
       state.lastFocus = index.focus;
       select(index.focus);
+      return;
+    }
+
+    if (state.autoOverview && present.length) {
+      state.autoOverview = false;
+      select(index.focus ?? present[0].path);
+      return;
+    }
+
+    if (state.current === OVERVIEW) {
+      showOverview();
       return;
     }
 
@@ -530,11 +592,13 @@
   }
 
   document.addEventListener("click", (e) => {
-    const a = e.target.closest?.("a[data-artifact]");
+    const a = e.target.closest?.("a[data-artifact], a[data-planned], a[data-overview]");
     if (!a) return;
     e.preventDefault();
     $("follow").checked = false;
-    select(a.dataset.artifact);
+    if (a.dataset.overview) showOverview();
+    else if (a.dataset.planned) showPlanned(a.dataset.planned);
+    else select(a.dataset.artifact);
   });
 
   function connect() {
