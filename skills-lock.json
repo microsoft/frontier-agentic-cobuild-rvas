@@ -1,47 +1,53 @@
 {
-  "version": 1,
+  "version": 2,
   "skills": {
     "azure-ai": {
       "source": "microsoft/azure-skills",
       "sourceType": "github",
       "skillPath": "skills/azure-ai/SKILL.md",
-      "computedHash": "59533e6163a700fc507d5072dda3e1f5b0de7d2e26694231342e0c0097c5c3cc"
+      "computedHash": "74d9f5d0a64afb50a777861a0045f0ba1521754ee8c4907b8ba3efad51f4906c"
     },
     "azure-aigateway": {
       "source": "microsoft/azure-skills",
       "sourceType": "github",
       "skillPath": "skills/azure-aigateway/SKILL.md",
-      "computedHash": "d8073cb540d8799c446148a2605965d9cd0ff2205c0fe8911c4350df499c46d5"
+      "computedHash": "0b8c4bdd15a75cd17ec3137140853b70345f461a1f1ac359842b216385936daa"
     },
     "diagram-design": {
       "source": "cathrynlavery/diagram-design",
       "sourceType": "github",
       "skillPath": "skills/diagram-design/SKILL.md",
-      "computedHash": "60a5683c454680790701665621d37e7d519c971c0fade9632a396c44b005383b"
+      "computedHash": "d3efcf09fbf7fcaa92936eef653fd9594ff8a964b449579ad60053f0dba1f91c"
     },
     "excalidraw-diagram": {
       "source": "coleam00/excalidraw-diagram-skill",
       "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "fc91249969c7c1adc1f810ddfe10f18e206b78609467bb4955248e9138932e8a"
+      "computedHash": ""
     },
     "humanize-content": {
       "source": "olivomarco/ai-dev-skills",
       "sourceType": "github",
       "skillPath": "skills/humanize-content/SKILL.md",
-      "computedHash": "9e447a0797333938b3f755f55aee6db6243459f5bed3d26f838fe26904f2a8b0"
+      "computedHash": "410d65f7dfe9156f3a02c9019b68fefc490fc7aa9a2dc7e4cf468f8ed1df8e43"
     },
     "microsoft-foundry": {
       "source": "microsoft/azure-skills",
       "sourceType": "github",
       "skillPath": "skills/microsoft-foundry/SKILL.md",
-      "computedHash": "4b073fc7e2aab20462aa5b3b83e874b0ef4ac8ee2c190a0d7a3ad795a53bcb44"
+      "computedHash": "622764fab70fa78815b3f4aabe3b9b01038d2836ecb10e46d9519a35f762e97d"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/skill-creator/SKILL.md",
+      "computedHash": "2d7f889e6ae93c6c27d699856942c336b5b8644537496987d5571043d059b1dc"
     },
     "writing-for-agents": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/productivity/writing-for-agents/SKILL.md",
-      "computedHash": "95da47fc97af998e85b7d7e6d57b3ac76727c1e290cfe9ea09005aacb826959f"
+      "computedHash": "e79a2476b2417b228922453478d9505a6b9af19f3a412e560728ce62ed3555ca"
     }
   }
 }
