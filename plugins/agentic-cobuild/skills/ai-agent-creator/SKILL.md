@@ -14,14 +14,19 @@ docs/architecture/
   specification.md
   implementation-plan.md
   cost-estimate.md
+  visuals/
+    shared-understanding.md
+    <view>.html
 ```
 
 The diagram shows boundaries; `solution.md` owns design decisions;
 `specification.md` owns requirements and acceptance criteria; the plan owns later
 delivery work; `cost-estimate.md` owns consumption quantities, pricing evidence,
-calculations, and totals. Link these records rather than duplicating their content.
+calculations, and totals. `visuals/` holds the confirmed discovery views and
+scenarios. Link these records rather than duplicating their content.
 
-**Prerequisite:** install the upstream `wireframer` skill from
+**Prerequisite:** install the upstream `diagram-design` skill from
+`cathrynlavery/diagram-design` and the `wireframer` skill from
 `agilek/wireframer-skill` before starting this workflow. The setup guide owns the
 supporting-skill installation commands.
 
@@ -87,8 +92,9 @@ and discovery completion criterion.
 3. **Resolve:** load `grilling` for an open frontier. Ask the whole answerable
    frontier through the question form tool. When enough prerequisites are known,
    present concrete target-architecture options with a recommendation, meaningful
-   alternatives, and a visible custom-answer path. End the turn after each round;
-   recompute only after the user's answers.
+   alternatives, and a visible custom-answer path. Add a draft sketch when the
+   [visuals contract](references/shared-understanding-visuals.md) calls for one.
+   End the turn after each round; recompute only after the user's answers.
 4. **Model and compare:** load `domain-modeling` when resolved terminology changes;
    update `CONTEXT.md` and offer ADRs for consequential trade-offs. Apply the
    discovery contract's agent-intent test and use the
@@ -97,7 +103,9 @@ and discovery completion criterion.
    target architecture during discovery; do not replace that proposal with an
    abstract request to delegate selection. Reopen any newly exposed frontier.
 5. **Confirm:** once the frontier is empty, present the discovery contract's
-   shared-understanding record, ask for confirmation, and end the turn.
+   shared-understanding record with its
+   [gate visuals](references/shared-understanding-visuals.md#gate-visuals),
+   ask for confirmation of both, and end the turn.
 
 When a recommendation needs current product facts, read the
 [evidence contract](references/microsoft-learn-evidence.md) and verify those facts
@@ -157,6 +165,8 @@ explicitly delegated lower-level decisions.
    current baseline. Run architecture quality's
    [integration reconciliation gate](references/architecture-quality.md#integration-reconciliation-gate),
    including the final named-entity audit against the RFP and specification.
+   Play back each confirmed scenario through the selected components per the
+   [visuals contract](references/shared-understanding-visuals.md#carry-forward-into-the-package).
    Resolve conflicts and every architecture-changing choice.
    Keep only delivery parameters that preserve the selected topology as owned
    deferrals. Record blocked or unavailable diagram evidence exactly. Mark the

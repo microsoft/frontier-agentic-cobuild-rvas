@@ -273,6 +273,21 @@ test('Start shows the inventory runtime requirement before supporting-skill comm
   assert.doesNotMatch(html, /<!-- supporting-runtime -->/);
 });
 
+test('Start installs diagram-design before discovery and explains the gate visuals', () => {
+  const html = renderPage(pages.find((page) => page.slug === 'start'));
+  const source = inventory.sources.find((source) => source.repository === 'cathrynlavery/diagram-design');
+  const command = `npx --yes ${inventory.installer} add https://github.com/${source.repository}/tree/${source.commit} --skill diagram-design --agent ${inventory.agent} --copy --yes`;
+  const discovery = html.indexOf('id="describe-what-you-want-to-build"');
+  const visuals = html.indexOf('id="review-what-the-creator-understood"');
+  const prototype = html.indexOf('id="optional-final-wireframe"');
+  assert.ok(html.indexOf(command) >= 0 && html.indexOf(command) < discovery);
+  assert.ok(discovery < visuals && visuals < prototype);
+  const section = html.slice(visuals, prototype);
+  assert.match(section, /docs\/architecture\/visuals\/shared-understanding\.md/);
+  assert.match(section, /Render\s+Mermaid Diagram/);
+  assert.match(section, /acceptance criteria/);
+});
+
 test('Start installs Wireframer before discovery and offers its prototype before separate implementation', () => {
   const html = renderPage(pages.find((page) => page.slug === 'start'));
   const source = inventory.sources.find((source) => source.repository === 'agilek/wireframer-skill');

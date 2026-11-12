@@ -42,6 +42,20 @@ Pinned commit: `233c51fc11c73d459be46e099e417ebaf3d20a26`.
 npx --yes skills@1.7.2 add https://github.com/microsoft/azure-skills/tree/233c51fc11c73d459be46e099e417ebaf3d20a26 --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
 ```
 
+### Skills from cathrynlavery/diagram-design
+
+Upstream source: [`cathrynlavery/diagram-design`](https://github.com/cathrynlavery/diagram-design/tree/f2496acbde9f45ccb55c24d4f75210c8a1355df8).
+
+Pinned commit: `f2496acbde9f45ccb55c24d4f75210c8a1355df8`.
+
+| Skill | What it does |
+| --- | --- |
+| `diagram-design` | Render the discovery swimlane, domain map, lifecycle, and scenario views as HTML diagrams. |
+
+```bash
+npx --yes skills@1.7.2 add https://github.com/cathrynlavery/diagram-design/tree/f2496acbde9f45ccb55c24d4f75210c8a1355df8 --skill diagram-design --agent github-copilot --copy --yes
+```
+
 ### Skills from agilek/wireframer-skill
 
 Upstream source: [`agilek/wireframer-skill`](https://github.com/agilek/wireframer-skill/tree/22ed714abb486d923bcf4d21498fbbeabc9f4fb3).

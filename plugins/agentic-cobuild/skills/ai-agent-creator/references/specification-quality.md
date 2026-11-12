@@ -101,6 +101,10 @@ Include a traceability table:
 | --- | --- | --- | --- | --- |
 | FR/TR/NFR IDs | AC IDs | Component or boundary in the diagram/record | Phase in implementation-plan.md | Confirmed source or owned unresolved check |
 
+Cite the confirmed scenario IDs (`SC-###`) from
+`docs/architecture/visuals/shared-understanding.md` in the acceptance criteria
+that cover them; every in-scope scenario needs at least one `AC-` ID.
+
 Every in-scope requirement needs acceptance coverage and a design/delivery mapping,
 or an explicit owned deferral with impact. Every planned phase traces to the
 specification. Cross-link `solution.md` and `implementation-plan.md`; link existing

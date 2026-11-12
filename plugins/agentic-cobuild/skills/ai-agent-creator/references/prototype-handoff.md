@@ -8,6 +8,8 @@ remain authoritative; the prototype illustrates them rather than changing them.
 Load the installed `wireframer` skill from `agilek/wireframer-skill`. Pass the
 confirmed actors, channel, first journey, relevant requirement and acceptance IDs,
 and required review, error, and empty states from the architecture package.
+Make the confirmed scenarios (`SC-###` in `docs/architecture/visuals/`)
+clickable paths, and label each path with its scenario ID.
 For an existing or platform-managed interface, illustrate that experience rather
 than proposing a new production channel. A background-only journey can show
 its agreed inputs and outputs without adding a user interface to the architecture.

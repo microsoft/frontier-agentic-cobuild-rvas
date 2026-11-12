@@ -6,7 +6,11 @@
     {
       "repository": "mattpocock/skills",
       "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
-      "skills": ["grilling", "domain-modeling", "wait-what"],
+      "skills": [
+        "grilling",
+        "domain-modeling",
+        "wait-what"
+      ],
       "descriptions": {
         "grilling": "Question a plan until the decisions and assumptions are clear.",
         "domain-modeling": "Define domain terms and record them in a glossary and architecture decisions.",
@@ -16,7 +20,16 @@
     {
       "repository": "microsoft/azure-skills",
       "commit": "233c51fc11c73d459be46e099e417ebaf3d20a26",
-      "skills": ["discover-azure-skills", "azure-enterprise-infra-planner", "microsoft-foundry", "azure-ai", "foundry-iq", "entra-agent-id", "entra-app-registration", "azure-aigateway"],
+      "skills": [
+        "discover-azure-skills",
+        "azure-enterprise-infra-planner",
+        "microsoft-foundry",
+        "azure-ai",
+        "foundry-iq",
+        "entra-agent-id",
+        "entra-app-registration",
+        "azure-aigateway"
+      ],
       "descriptions": {
         "discover-azure-skills": "Find additional Azure skills for a task in the upstream catalog.",
         "azure-enterprise-infra-planner": "Plan enterprise Azure infrastructure and generate Bicep or Terraform.",
@@ -29,9 +42,21 @@
       }
     },
     {
+      "repository": "cathrynlavery/diagram-design",
+      "commit": "f2496acbde9f45ccb55c24d4f75210c8a1355df8",
+      "skills": [
+        "diagram-design"
+      ],
+      "descriptions": {
+        "diagram-design": "Render the discovery swimlane, domain map, lifecycle, and scenario views as HTML diagrams."
+      }
+    },
+    {
       "repository": "agilek/wireframer-skill",
       "commit": "22ed714abb486d923bcf4d21498fbbeabc9f4fb3",
-      "skills": ["wireframer"],
+      "skills": [
+        "wireframer"
+      ],
       "descriptions": {
         "wireframer": "Create an optional clickable, low-fidelity prototype after the architecture package is complete."
       }

@@ -1245,6 +1245,66 @@
         "Once the package is complete, the response asks the explicit final opt-in and waits rather than relying on this earlier request.",
         "The response preserves the separately initiated production implementation boundary."
       ]
+    },
+    {
+      "id": 87,
+      "prompt": "The discovery frontier for our resident-request triage assistant is now empty. Summarize what you understood so I can confirm it.",
+      "expected_output": "The creator presents the text record together with the gate visuals: a lane-based swimlane with numbered steps, a scenario pack with SC IDs covering success, ambiguous input, a rejected action, and a dependency failure, plus conditional views only when their conditions hold. It saves the Mermaid source and asks for one confirmation.",
+      "files": [],
+      "expectations": [
+        "The response presents the shared-understanding record and a swimlane with user, AI, deterministic-system, approver, and external-system lanes and numbered steps.",
+        "The response includes scenarios with stable SC IDs covering success, ambiguous input, a rejected or prohibited action, and a dependency failure, each citing swimlane steps.",
+        "The response writes the Mermaid source to docs/architecture/visuals/shared-understanding.md and gives the file paths.",
+        "The response asks for one confirmation of the record and visuals together and ends the turn without starting architecture."
+      ]
+    },
+    {
+      "id": 88,
+      "prompt": "Discovery is complete for a nightly batch job that classifies invoices with one model call. It has no approvals, waits, or retries, and we agreed only two domain terms. Show me the shared understanding.",
+      "expected_output": "The creator includes the always-required swimlane and scenario pack but skips the lifecycle state diagram and the domain map, stating the reason for each in one line.",
+      "files": [],
+      "expectations": [
+        "The response includes the swimlane and the scenario pack.",
+        "The response skips the lifecycle state diagram because no business object waits, needs approval, retries, or has distinct terminal outcomes, and says so.",
+        "The response skips the domain map because fewer than three related terms were agreed, and says so.",
+        "The response does not invent states, terms, or steps that the record does not contain."
+      ]
+    },
+    {
+      "id": 89,
+      "prompt": "Your swimlane is wrong: the AI never sends the work order to the contractor. A facilities coordinator approves and sends it.",
+      "expected_output": "The creator treats the correction as a change to the shared-understanding record, updates the record, swimlane, affected scenarios, and rendered view together, and asks for confirmation again.",
+      "files": [],
+      "expectations": [
+        "The response moves the send step from the AI lane to a human approver lane for the facilities coordinator.",
+        "The response updates the text record, the Mermaid source, and any affected scenarios consistently.",
+        "The response re-renders the changed view or reports a render blocker.",
+        "The response asks for confirmation again rather than proceeding to architecture."
+      ]
+    },
+    {
+      "id": 90,
+      "prompt": "The diagram-design skill is not installed in this workspace. Discovery is otherwise complete; show me the shared understanding.",
+      "expected_output": "The creator keeps the Mermaid source and in-reply visuals, reports the diagram-design rendering blocker in one line, and still presents the gate for confirmation without installing the skill or adding a stop.",
+      "files": [],
+      "expectations": [
+        "The response writes the Mermaid source file and shows the visuals in the reply.",
+        "The response reports that diagram-design is unavailable and records it as a render blocker.",
+        "The response does not install diagram-design silently or substitute another rendering skill.",
+        "The response proceeds to the normal shared-understanding confirmation request."
+      ]
+    },
+    {
+      "id": 91,
+      "prompt": "Discovery was confirmed with scenarios SC-001 to SC-004. Write the specification.",
+      "expected_output": "The creator maps every in-scope scenario to at least one acceptance criterion and plays the scenarios back through the selected components during reconciliation.",
+      "files": [],
+      "expectations": [
+        "Every in-scope SC ID is cited by at least one AC ID in specification.md.",
+        "Each AC that covers a scenario keeps observable input, action, and result or rejection behavior.",
+        "During reconciliation, each scenario is played back through the selected components, and a scenario that cannot complete is fixed or recorded as an owned deferral.",
+        "The four draw.io views remain the only architecture diagrams."
+      ]
     }
   ]
 }

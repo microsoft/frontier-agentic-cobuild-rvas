@@ -80,9 +80,10 @@ copilot plugin list
 <p>Open Extensions, search for <code>@agentPlugins</code>, install <strong>Agentic Co-build</strong>, and
 enable it for the application workspace.</p>
 <h3 id="install-the-supporting-skills">Install the supporting skills<a class="heading-link" href="#install-the-supporting-skills" aria-label="Link to Install the supporting skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>All supporting skills below are required, including <code>wireframer</code> from
-<code>agilek/wireframer-skill</code>. Run every installation command before starting
-discovery. Creating the final prototype is optional; installing its skill is not.</p>
+<p>All supporting skills below are required, including <code>diagram-design</code> from
+<code>cathrynlavery/diagram-design</code> and <code>wireframer</code> from <code>agilek/wireframer-skill</code>.
+Run every installation command before starting discovery. Creating the final
+prototype is optional; installing its skill is not.</p>
 <p>Use Node.js 22.20.0 or newer to run the installation commands below.</p>
 <p>Each command installs project-local copies from a full upstream commit SHA, not a
 moving branch, and can overwrite existing copies. The installer version is pinned
@@ -166,6 +167,27 @@ the pinned installation path.</p>
 </div>
 <pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/microsoft/azure-skills/tree/233c51fc11c73d459be46e099e417ebaf3d20a26 --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
 </code></pre>
+<h3 id="skills-from-cathrynlaverydiagram-design">Skills from cathrynlavery/diagram-design<a class="heading-link" href="#skills-from-cathrynlaverydiagram-design" aria-label="Link to Skills from cathrynlavery/diagram-design"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Upstream source: <a href="https://github.com/cathrynlavery/diagram-design/tree/f2496acbde9f45ccb55c24d4f75210c8a1355df8"><code>cathrynlavery/diagram-design</code></a>.</p>
+<p>Pinned commit: <code>f2496acbde9f45ccb55c24d4f75210c8a1355df8</code>.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>diagram-design</code></td>
+<td>Render the discovery swimlane, domain map, lifecycle, and scenario views as HTML diagrams.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/cathrynlavery/diagram-design/tree/f2496acbde9f45ccb55c24d4f75210c8a1355df8 --skill diagram-design --agent github-copilot --copy --yes
+</code></pre>
 <h3 id="skills-from-agilekwireframer-skill">Skills from agilek/wireframer-skill<a class="heading-link" href="#skills-from-agilekwireframer-skill" aria-label="Link to Skills from agilek/wireframer-skill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Upstream source: <a href="https://github.com/agilek/wireframer-skill/tree/22ed714abb486d923bcf4d21498fbbeabc9f4fb3"><code>agilek/wireframer-skill</code></a>.</p>
 <p>Pinned commit: <code>22ed714abb486d923bcf4d21498fbbeabc9f4fb3</code>.</p>
@@ -222,6 +244,24 @@ for our enterprise data-access and deployment constraints.
 <p><strong>Your first milestone is confirmed discovery.</strong> Answer the creator&#39;s questions.
 Confirm discovery once you agree on the outcome, first user journey, and
 architecture decisions. The creator then prepares the architecture package.</p>
+<h3 id="review-what-the-creator-understood">Review what the creator understood<a class="heading-link" href="#review-what-the-creator-understood" aria-label="Link to Review what the creator understood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Before you confirm discovery, the creator shows its understanding as diagrams as
+well as text:</p>
+<ul>
+<li>a swimlane of the first journey, showing which steps the user, the AI, the
+deterministic system, approvers, and external systems own;</li>
+<li>a map of the agreed domain terms, when there are enough to relate;</li>
+<li>the lifecycle of a business object, when it waits, needs approval, or retries;</li>
+<li>scenarios for success, ambiguous input, a rejected action, and a dependency
+failure.</li>
+</ul>
+<p>It saves the Mermaid source in <code>docs/architecture/visuals/shared-understanding.md</code>
+and renders each view as HTML beside it with <code>diagram-design</code>. Open the HTML files
+in a browser from either host. In VS Code 1.109 or later, enable the <strong>Render
+Mermaid Diagram</strong> chat tool to see the diagrams inline as well.
+Correct anything that looks wrong: a change to a diagram is a change to the
+record. The confirmed scenarios become acceptance criteria in the specification
+and clickable paths in the optional prototype.</p>
 <style>
     .intro-diagram { container-type: inline-size; margin: 32px 0; max-width: 100%; min-width: 0; color: #47494e; font-family: "Inter", "Segoe UI", sans-serif; }
     .intro-diagram .diagram-container { width: 100%; }

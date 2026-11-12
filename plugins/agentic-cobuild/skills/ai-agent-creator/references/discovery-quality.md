@@ -213,10 +213,13 @@ Constraints:
 Enterprise starting point:
 Assumptions:
 Explicit deferrals and impact:
+Visuals: swimlane steps, domain map, lifecycle state, scenarios SC-### (paths)
 ```
 
-Ask the user to confirm the record and end the turn. Architecture becomes eligible
-only when a later user turn explicitly confirms it. The original request, silence,
+Present the gate visuals under the
+[shared-understanding visuals](shared-understanding-visuals.md) contract with
+this record. Ask the user to confirm the record and end the turn. Architecture
+becomes eligible only when a later user turn explicitly confirms it. The original request, silence,
 batch execution, or the accelerator's own confidence cannot cross this gate.
 After confirmation, use the record as the
 [specification baseline](specification-quality.md). Keep unresolved decisions
@@ -241,4 +244,6 @@ Discovery is complete when:
 - the boundary ladder is compared against the actual first journey;
 - agent-intent prompts receive the full agent-intent test;
 - the shared-understanding record contains no hidden execution-model assumption;
+- the gate visuals match the record, and each is rendered or has a recorded
+  blocker;
 - a later user turn explicitly confirms the record.

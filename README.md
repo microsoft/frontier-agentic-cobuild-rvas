@@ -60,10 +60,16 @@ docs/architecture/
   specification.md
   implementation-plan.md
   cost-estimate.md
+  visuals/
 ```
 
-After these files are complete and reconciled, the creator asks whether you want
-a final clickable wireframe prototype in the same session. If you accept, it
+`visuals/` holds the swimlane, domain map, lifecycle, and scenarios you confirm
+at the end of discovery, as Mermaid source and HTML rendered with the required
+upstream `diagram-design` skill.
+
+After the five architecture files are complete and reconciled, the creator asks
+whether you want a final clickable wireframe prototype in the same session. If
+you accept, it
 uses the required upstream `wireframer` skill from `agilek/wireframer-skill`
 and writes the mock-data prototype under `docs/architecture/prototype/`.
 

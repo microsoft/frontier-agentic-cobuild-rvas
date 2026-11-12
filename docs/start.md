@@ -65,9 +65,10 @@ enable it for the application workspace.
 
 ### Install the supporting skills
 
-All supporting skills below are required, including `wireframer` from
-`agilek/wireframer-skill`. Run every installation command before starting
-discovery. Creating the final prototype is optional; installing its skill is not.
+All supporting skills below are required, including `diagram-design` from
+`cathrynlavery/diagram-design` and `wireframer` from `agilek/wireframer-skill`.
+Run every installation command before starting discovery. Creating the final
+prototype is optional; installing its skill is not.
 
 <!-- supporting-runtime -->
 
@@ -130,6 +131,26 @@ for our enterprise data-access and deployment constraints.
 **Your first milestone is confirmed discovery.** Answer the creator's questions.
 Confirm discovery once you agree on the outcome, first user journey, and
 architecture decisions. The creator then prepares the architecture package.
+
+### Review what the creator understood
+
+Before you confirm discovery, the creator shows its understanding as diagrams as
+well as text:
+
+- a swimlane of the first journey, showing which steps the user, the AI, the
+  deterministic system, approvers, and external systems own;
+- a map of the agreed domain terms, when there are enough to relate;
+- the lifecycle of a business object, when it waits, needs approval, or retries;
+- scenarios for success, ambiguous input, a rejected action, and a dependency
+  failure.
+
+It saves the Mermaid source in `docs/architecture/visuals/shared-understanding.md`
+and renders each view as HTML beside it with `diagram-design`. Open the HTML files
+in a browser from either host. In VS Code 1.109 or later, enable the **Render
+Mermaid Diagram** chat tool to see the diagrams inline as well.
+Correct anything that looks wrong: a change to a diagram is a change to the
+record. The confirmed scenarios become acceptance criteria in the specification
+and clickable paths in the optional prototype.
 
 <!-- diagram: approval-handoff -->
 
