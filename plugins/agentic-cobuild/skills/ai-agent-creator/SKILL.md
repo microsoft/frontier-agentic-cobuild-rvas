@@ -1,6 +1,6 @@
 ---
 name: ai-agent-creator
-description: "Architecture-first Microsoft-cloud AI design for new applications, platform-managed agents, or AI capabilities in existing systems. Use when discovery, a functional/technical specification, editable draw.io views, AI token and platform-consumption estimates, cost scenarios, and an implementation plan must precede code. Produces a mandatory cost-estimate.md for every confirmed architecture. Ends with a reconciled architecture-package handoff; standalone SDK help, existing-agent operations, implementation, deployment, and troubleshooting use other workflows."
+description: "Architecture-first Microsoft-cloud AI design for new applications, platform-managed agents, or AI capabilities in existing systems. Use when discovery, a functional/technical specification, editable draw.io views, AI token and platform-consumption estimates, cost scenarios, and an implementation plan must precede code. Produces a mandatory cost-estimate.md for every confirmed architecture. Offers an optional wireframe prototype after package completion, then hands off; standalone SDK help, existing-agent operations, implementation, deployment, and troubleshooting use other workflows."
 ---
 
 # AI Agent Creator
@@ -21,7 +21,12 @@ The diagram shows boundaries; `solution.md` owns design decisions;
 delivery work; `cost-estimate.md` owns consumption quantities, pricing evidence,
 calculations, and totals. Link these records rather than duplicating their content.
 
-**Planning boundary:** change only domain records and the architecture package.
+**Prerequisite:** install the upstream `wireframer` skill from
+`agilek/wireframer-skill` before starting this workflow. The setup guide owns the
+supporting-skill installation commands.
+
+**Planning boundary:** change only domain records and the architecture package,
+plus the isolated prototype explicitly authorized in step 3.
 Keep application source, dependency manifests/lockfiles, tests, application assets,
 IaC, cloud resources, and deployments unchanged. Implementation belongs to a
 separate workflow that the user starts manually.
@@ -57,7 +62,9 @@ Approval applies to the current baseline, not to later material changes.
 | The discovery frontier is open or shared-understanding confirmation is missing | Discover |
 | A later user turn explicitly confirmed the shared-understanding record | Architect |
 | The five artifacts are ready but bounded pricing has not run | Run the cost-estimation consultation, reconcile, and complete the package |
-| The current, complete package is reconciled | Hand off and stop; request acceptance only when the user or governance process explicitly requires it |
+| The current, complete package is reconciled and no prototype choice is recorded | Offer the optional prototype in step 3 |
+| The user explicitly accepted the prototype offer | Complete step 3 in this session, then hand off |
+| The prototype is complete, declined, or blocked | Hand off and stop; request package acceptance only when the user or governance process explicitly requires it |
 | Material scope or design changed after confirmation/approval | Preserve history; return to the affected discovery or package-review gate |
 
 The initial request, silence, batch execution, and the agent's own summary are
@@ -146,14 +153,14 @@ explicitly delegated lower-level decisions.
    multi-turn review. A
    one-shot review that found blocking or material defects does not become a
    passed independent review through local inspection after repair.
-8. **Reconcile and hand off:** check all five artifacts against their contracts and the
+8. **Reconcile:** check all five artifacts against their contracts and the
    current baseline. Run architecture quality's
    [integration reconciliation gate](references/architecture-quality.md#integration-reconciliation-gate),
    including the final named-entity audit against the RFP and specification.
    Resolve conflicts and every architecture-changing choice.
    Keep only delivery parameters that preserve the selected topology as owned
    deferrals. Record blocked or unavailable diagram evidence exactly. Mark the
-   package exactly `Ready for review` and present the handoff without asking for
+   package exactly `Ready for review` and present it without asking for
    confirmation unless the user explicitly requested formal acceptance or an
    unresolved material decision truly requires their choice. Do not use
    `Awaiting approval` or `Ready for approval` for ordinary completion. If formal
@@ -165,12 +172,32 @@ for, review status is recorded, the bounded pricing consultation has completed o
 recorded a concrete blocker, and package status is `Ready for review` or explicitly
 accepted.
 
-## 3. Hand off and stop
+## 3. Offer the final wireframe prototype
+
+Enter only after all five artifacts are created and reconciled, pricing is
+accounted for, and the diagram review gate is satisfied or its exception recorded.
+In the same session, explicitly ask through the question form tool:
+"Would you like a clickable, low-fidelity wireframe prototype of the confirmed
+user journey now?" Offer Yes and No, then wait. Package approval, an earlier
+prototype request, and "continue" do not replace this final opt-in.
+
+Record the choice in the existing lifecycle record. A decline leaves the five-file
+package complete. On explicit acceptance, read
+[prototype handoff](references/prototype-handoff.md) and invoke the installed
+`wireframer` skill from `agilek/wireframer-skill` within that bounded scope.
+If it is unavailable, report the missing prerequisite and record a prototype
+blocker rather than substituting another skill or installing it silently.
+
+**Complete when:** the explicit choice is recorded and the prototype is complete,
+declined, or blocked. Resume from that record rather than repeating the offer.
+
+## 4. Hand off and stop
 
 Record the package revision, status, and any explicit architecture-only acceptance
 in the lifecycle record and specification.
 Report the five paths, including the cost estimate and its pricing status, current
 package/review status, remaining work and owners,
+the prototype choice and any output path, preview instructions, or blocker,
 and the separately initiated workflow needed for delivery. Name later specialists
 without invoking them.
 

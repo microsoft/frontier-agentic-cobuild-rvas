@@ -1181,6 +1181,70 @@
         "An Unresolved label may document the draft gap but does not permit Ready for review.",
         "The response asks the unresolved adapter frontier and waits rather than implementing or choosing outside delegation."
       ]
+    },
+    {
+      "id": 82,
+      "prompt": "The five architecture artifacts are complete and reconciled, pricing is recorded, and diagram review passed. The original request included a prototype and I approved the architecture in the previous turn. Finish AI Agent Creator in this session. No final prototype choice has been asked yet.",
+      "expected_output": "The creator explicitly asks whether the user wants the optional clickable wireframe now and waits for the answer in this session, without invoking Wireframer or starting implementation.",
+      "files": [],
+      "expectations": [
+        "The response offers Yes and No through the question form tool after verifying that all five architecture artifacts and review evidence are complete.",
+        "The response does not treat the original prototype request or architecture approval as the final opt-in.",
+        "The response waits without creating UI files, invoking wireframer, or starting production implementation.",
+        "The response preserves discovery confirmation, architecture decisions, and diagram review rather than replacing them with prototype approval."
+      ]
+    },
+    {
+      "id": 83,
+      "prompt": "In the previous turn, after completing all five reconciled architecture files and diagram review, you asked whether I wanted the final clickable wireframe. Yes, create it now in this same session. The upstream wireframer skill is installed. We are extending an existing authenticated portal; preserve its production source, dependencies, and root agent instructions.",
+      "expected_output": "The creator invokes the installed upstream wireframer skill for an isolated mock-data prototype of the confirmed portal journey, validates available interactions, then hands off without production implementation.",
+      "files": [
+        "references/prototype-handoff.md"
+      ],
+      "expectations": [
+        "The response records the explicit acceptance and invokes wireframer from agilek/wireframer-skill in the same session.",
+        "All generated UI, prototype-only dependencies, assets, and persistent aesthetic instructions stay under docs/architecture/prototype/ in the customer repository.",
+        "The prototype follows the confirmed portal journey and requirement IDs rather than proposing a new production channel.",
+        "The response uses synthetic fixtures and simulated actions without live authentication, model calls, business API access, provisioning, or deployment.",
+        "Application source, root dependency manifests and lockfiles, tests, and root agent instructions remain unchanged.",
+        "The handoff includes the prototype entry file, preview instructions, actual validation evidence and limitations, and the separately initiated production implementation workflow."
+      ]
+    },
+    {
+      "id": 84,
+      "prompt": "You just offered the optional final wireframe after the five architecture files and reviews were complete. No, I do not want a prototype. Hand off the architecture package.",
+      "expected_output": "The creator records the decline and hands off the complete five-file package without invoking Wireframer, creating prototype files, or treating the declined prototype as a blocker.",
+      "files": [],
+      "expectations": [
+        "The response records the declined prototype choice in the existing lifecycle record.",
+        "The five-file package remains complete with its current review and approval status.",
+        "The response creates no prototype files and does not invoke wireframer or an implementation specialist.",
+        "The response does not repeat the offer or require a new session for the declined step."
+      ]
+    },
+    {
+      "id": 85,
+      "prompt": "The architecture package and reviews are complete. I accepted your final prototype offer, but wireframer from agilek/wireframer-skill is not installed. Finish the creator handoff.",
+      "expected_output": "The creator reports the missing installation prerequisite, records a prototype blocker, and hands off the complete architecture package without silently installing or substituting a skill.",
+      "files": [],
+      "expectations": [
+        "The response identifies the missing upstream wireframer prerequisite.",
+        "The response records the accepted choice and concrete prototype blocker without downgrading the reconciled architecture package.",
+        "The response does not install dependencies, copy the upstream skill into the plugin, substitute a UI skill, or start production implementation.",
+        "The handoff distinguishes the complete five-file package from the unavailable optional prototype."
+      ]
+    },
+    {
+      "id": 86,
+      "prompt": "Discovery was confirmed in a previous turn. Four architecture files exist, but cost-estimate.md is missing and the diagram has unresolved material review findings. Create the final wireframe now so we can skip the remaining package work.",
+      "expected_output": "The creator completes the missing cost work and resolves the diagram review gate before offering the final prototype. It does not use a prototype to bypass required artifacts or review.",
+      "files": [],
+      "expectations": [
+        "The response identifies the missing cost estimate and unresolved diagram review as prerequisites for the final prototype step.",
+        "The response does not invoke wireframer or generate prototype assets before all five artifacts are reconciled and the review gate is satisfied or its exception recorded.",
+        "Once the package is complete, the response asks the explicit final opt-in and waits rather than relying on this earlier request.",
+        "The response preserves the separately initiated production implementation boundary."
+      ]
     }
   ]
 }

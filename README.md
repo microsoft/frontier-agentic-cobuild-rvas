@@ -48,6 +48,8 @@ copies, and a failed install may leave partial files.
 Select `ai-agent-creator` from your host's skill picker or slash completion and
 describe the intended application. Plugin skill names may be qualified by the host;
 use the name it displays rather than guessing a prefix.
+Use **Claude Opus 5.5** for the full creator session and implementation, as
+required by the [Start guide](docs/start.md#check-the-workspace).
 
 The creator writes:
 
@@ -57,10 +59,17 @@ docs/architecture/
   solution.md
   specification.md
   implementation-plan.md
+  cost-estimate.md
 ```
 
-**Architecture approval finishes the creator workflow.** Start implementation in
-a new session with the current specification, architecture, and plan attached.
+After these files are complete and reconciled, the creator asks whether you want
+a final clickable wireframe prototype in the same session. If you accept, it
+uses the required upstream `wireframer` skill from `agilek/wireframer-skill`
+and writes the mock-data prototype under `docs/architecture/prototype/`.
+
+**The creator stops after architecture handoff and the prototype choice.**
+Approve the architecture, then start implementation in a new session with the
+current specification, architecture, and plan attached.
 Validate acceptance criteria and resolve implementation and security-review
 findings before deployment. The [Start guide](docs/start.md) provides the handoff
 prompt and separate instructions for both hosts.

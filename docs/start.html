@@ -80,12 +80,17 @@ copilot plugin list
 <p>Open Extensions, search for <code>@agentPlugins</code>, install <strong>Agentic Co-build</strong>, and
 enable it for the application workspace.</p>
 <h3 id="install-the-supporting-skills">Install the supporting skills<a class="heading-link" href="#install-the-supporting-skills" aria-label="Link to Install the supporting skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>All supporting skills below are required. Run every installation command before
-starting discovery.</p>
+<p>All supporting skills below are required, including <code>wireframer</code> from
+<code>agilek/wireframer-skill</code>. Run every installation command before starting
+discovery. Creating the final prototype is optional; installing its skill is not.</p>
 <p>Use Node.js 22.20.0 or newer to run the installation commands below.</p>
-<p>Each command installs project-local copies from its upstream repository and can overwrite existing copies.</p>
+<p>Each command installs project-local copies from a full upstream commit SHA, not a
+moving branch, and can overwrite existing copies. The installer version is pinned
+too. Rerun these commands to keep the selected versions; <code>npx skills update</code> is not
+the pinned installation path.</p>
 <h3 id="skills-from-mattpocockskills">Skills from mattpocock/skills<a class="heading-link" href="#skills-from-mattpocockskills" aria-label="Link to Skills from mattpocock/skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Upstream source: <a href="https://github.com/mattpocock/skills"><code>mattpocock/skills</code></a>.</p>
+<p>Upstream source: <a href="https://github.com/mattpocock/skills/tree/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"><code>mattpocock/skills</code></a>.</p>
+<p>Pinned commit: <code>4ae2317ddb22b046e26455e4f9c9b3aaaf62212d</code>.</p>
 <div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
 <table>
 <thead>
@@ -110,10 +115,11 @@ starting discovery.</p>
 </tbody>
 </table>
 </div>
-<pre><code class="language-bash">npx --yes skills@1.7.2 add mattpocock/skills --skill grilling domain-modeling wait-what --agent github-copilot --copy --yes
+<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/mattpocock/skills/tree/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d --skill grilling domain-modeling wait-what --agent github-copilot --copy --yes
 </code></pre>
 <h3 id="skills-from-microsoftazure-skills">Skills from microsoft/azure-skills<a class="heading-link" href="#skills-from-microsoftazure-skills" aria-label="Link to Skills from microsoft/azure-skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Upstream source: <a href="https://github.com/microsoft/azure-skills"><code>microsoft/azure-skills</code></a>.</p>
+<p>Upstream source: <a href="https://github.com/microsoft/azure-skills/tree/233c51fc11c73d459be46e099e417ebaf3d20a26"><code>microsoft/azure-skills</code></a>.</p>
+<p>Pinned commit: <code>233c51fc11c73d459be46e099e417ebaf3d20a26</code>.</p>
 <div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
 <table>
 <thead>
@@ -158,7 +164,28 @@ starting discovery.</p>
 </tbody>
 </table>
 </div>
-<pre><code class="language-bash">npx --yes skills@1.7.2 add microsoft/azure-skills --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
+<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/microsoft/azure-skills/tree/233c51fc11c73d459be46e099e417ebaf3d20a26 --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
+</code></pre>
+<h3 id="skills-from-agilekwireframer-skill">Skills from agilek/wireframer-skill<a class="heading-link" href="#skills-from-agilekwireframer-skill" aria-label="Link to Skills from agilek/wireframer-skill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Upstream source: <a href="https://github.com/agilek/wireframer-skill/tree/22ed714abb486d923bcf4d21498fbbeabc9f4fb3"><code>agilek/wireframer-skill</code></a>.</p>
+<p>Pinned commit: <code>22ed714abb486d923bcf4d21498fbbeabc9f4fb3</code>.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wireframer</code></td>
+<td>Create an optional clickable, low-fidelity prototype after the architecture package is complete.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/agilek/wireframer-skill/tree/22ed714abb486d923bcf4d21498fbbeabc9f4fb3 --skill wireframer --agent github-copilot --copy --yes
 </code></pre>
 <p>If an install fails, inspect the error, skill directories, and <code>skills-lock.json</code>
 before retrying. Preserve existing skills instead of deleting them to bypass a
@@ -170,8 +197,11 @@ the MCP server list.</p>
 are available, along with the supporting skills you installed and the
 <strong>Microsoft Learn</strong> MCP server. If anything is missing, check the installation
 error and reload the host before continuing.</p>
-<p><strong>Recommended model: Claude Opus 5.5.</strong> Select it in your host&#39;s model picker
-before starting AI Agent Creator or implementation.</p>
+<p><strong>Required model: Claude Opus 5.5 (Opus 5.5).</strong> Use it for the full AI Agent
+Creator session, including the optional Wireframer step, and for implementation.
+Select it in VS Code&#39;s model picker. In Copilot CLI, select it with:</p>
+<pre><code class="language-text">/model claude-opus-5.5
+</code></pre>
 <h2 id="describe-what-you-want-to-build">Describe what you want to build<a class="heading-link" href="#describe-what-you-want-to-build" aria-label="Link to Describe what you want to build"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>If several people hold the business context, use the
 <a href="discovery-session.html">discovery session guide</a> first. Get approval before
@@ -333,12 +363,22 @@ architecture decisions. The creator then prepares the architecture package.</p>
     <figcaption>Confirm discovery before the creator prepares the package. Before you approve it, review the diagrams and have an independent reviewer check the complete package. If either review is unavailable, record and explicitly accept a manual-review exception. Approval ends the creator workflow. You start implementation in a separate session.</figcaption>
   </figure>
 
-<p>The creator writes the editable diagrams, architecture, specification, and
-implementation plan under <code>docs/architecture/</code>. Review the diagrams and have an
-independent reviewer check the full package before approval. If either review is
-unavailable, explicitly accept and record the exception.</p>
-<p><strong>Approval ends this workflow.</strong> Start implementation separately. Approval does
-not change code, generate infrastructure, or provision resources.</p>
+<p>The creator writes the editable diagrams, architecture, specification,
+implementation plan, and cost estimate under <code>docs/architecture/</code>. Review the
+diagrams and have an independent reviewer check the full package before approval.
+If either review is unavailable, explicitly accept and record the exception.</p>
+<h3 id="optional-final-wireframe">Optional final wireframe<a class="heading-link" href="#optional-final-wireframe" aria-label="Link to Optional final wireframe"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>After all five architecture files are complete and reconciled, the creator
+explicitly asks whether you want a clickable, low-fidelity prototype. Answer in
+the same session. If you say yes, it uses the installed <code>wireframer</code> skill to
+illustrate the confirmed journey under <code>docs/architecture/prototype/</code>, with
+synthetic data and simulated actions. If you say no, the architecture package
+remains complete.</p>
+<p>The prototype is not production implementation and does not connect to live
+systems. Review it alongside the architecture package.</p>
+<p><strong>Approval ends this workflow.</strong> The optional prototype does not authorize
+delivery. Start implementation separately; approval does not change application
+code, generate infrastructure, or provision resources.</p>
 <h2 id="start-implementation-in-a-new-session">Start implementation in a new session<a class="heading-link" href="#start-implementation-in-a-new-session" aria-label="Link to Start implementation in a new session"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Choose one workflow; do not combine them. Each uses the approved files under
 <code>docs/architecture/</code> as its authority.</p>

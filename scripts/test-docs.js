@@ -222,8 +222,8 @@ test('generated reading pages and manual commands match their current sources', 
     assert.doesNotMatch(html, /{{page-|<!-- (?:guide-body|guide-navigation|primary-links|page-heading|page-lede) -->/);
   }
   assert.equal(fs.readFileSync(path.join(ROOT, 'docs/supporting-skills.md'), 'utf8'), supportingMarkdown());
-  for (const { repository, skills } of inventory.sources) {
-    assert.ok(supportingMarkdown().includes(`${repository} --skill ${skills.join(' ')}`));
+  for (const { repository, commit, skills } of inventory.sources) {
+    assert.ok(supportingMarkdown().includes(`https://github.com/${repository}/tree/${commit} --skill ${skills.join(' ')}`));
   }
 });
 
@@ -233,7 +233,11 @@ test('Start lists each supporting skill and its direct project-local installatio
   const commands = [...markdown.matchAll(/```bash\n([^\n]+)\n```/g)].map((match) => match[1]);
   assert.equal(commands.length, inventory.sources.length);
   for (const [index, source] of inventory.sources.entries()) {
-    assert.equal(commands[index], `npx --yes ${inventory.installer} add ${source.repository} --skill ${source.skills.join(' ')} --agent ${inventory.agent} --copy --yes`);
+    assert.match(source.commit, /^[0-9a-f]{40}$/);
+    const url = `https://github.com/${source.repository}/tree/${source.commit}`;
+    assert.equal(commands[index], `npx --yes ${inventory.installer} add ${url} --skill ${source.skills.join(' ')} --agent ${inventory.agent} --copy --yes`);
+    assert.ok(markdown.includes(`Pinned commit: \`${source.commit}\``));
+    assert.ok(html.includes(`href="${url}"`));
     assert.deepEqual(Object.keys(source.descriptions).sort(), source.skills.slice().sort());
     for (const skill of source.skills) {
       assert.ok(source.descriptions[skill].trim(), skill);
@@ -247,6 +251,19 @@ test('Start lists each supporting skill and its direct project-local installatio
   assert.match(html, /can overwrite existing copies/);
 });
 
+test('supporting-skill generation rejects missing, abbreviated, or moving commit refs', () => {
+  const source = inventory.sources[0];
+  const original = source.commit;
+  try {
+    for (const commit of [undefined, '', original.slice(0, 7), 'main']) {
+      source.commit = commit;
+      assert.throws(() => supportingMarkdown(), /Missing or invalid full commit SHA/);
+    }
+  } finally {
+    source.commit = original;
+  }
+});
+
 test('Start shows the inventory runtime requirement before supporting-skill commands', () => {
   const html = renderPage(pages.find((page) => page.slug === 'start'));
   const requirement = `Use Node.js ${inventory.minimumNode} or newer`;
@@ -254,6 +271,36 @@ test('Start shows the inventory runtime requirement before supporting-skill comm
   assert.ok(position >= 0);
   assert.ok(position < html.indexOf(`npx --yes ${inventory.installer} add`));
   assert.doesNotMatch(html, /<!-- supporting-runtime -->/);
+});
+
+test('Start installs Wireframer before discovery and offers its prototype before separate implementation', () => {
+  const html = renderPage(pages.find((page) => page.slug === 'start'));
+  const source = inventory.sources.find((source) => source.repository === 'agilek/wireframer-skill');
+  const command = `npx --yes ${inventory.installer} add https://github.com/${source.repository}/tree/${source.commit} --skill wireframer --agent ${inventory.agent} --copy --yes`;
+  const installation = html.indexOf(command);
+  const discovery = html.indexOf('id="describe-what-you-want-to-build"');
+  const prototype = html.indexOf('id="optional-final-wireframe"');
+  const implementation = html.indexOf('id="start-implementation-in-a-new-session"');
+  assert.ok(installation >= 0 && installation < discovery);
+  assert.ok(discovery < prototype && prototype < implementation);
+  const offer = html.slice(prototype, implementation);
+  assert.match(offer, /all five architecture files are complete and reconciled/);
+  assert.match(offer, /explicitly asks/);
+  assert.match(offer, /same session/);
+  assert.match(offer, /docs\/architecture\/prototype\//);
+  assert.match(offer, /If you say no, the architecture package\s+remains complete/);
+  assert.match(offer, /does not authorize\s+delivery/);
+});
+
+test('website requires Opus 5.5 before the creator session and documents CLI selection', () => {
+  const html = renderPage(pages.find((page) => page.slug === 'start'));
+  const requirement = html.indexOf('Required model: Claude Opus 5.5');
+  assert.ok(requirement >= 0 && requirement < html.indexOf('id="describe-what-you-want-to-build"'));
+  assert.match(html, /full AI Agent\s+Creator session, including the optional Wireframer step/);
+  assert.match(html, /\/model claude-opus-5\.5/);
+  assert.doesNotMatch(html, /Recommended model/);
+  const requirements = renderPage(pages.find((page) => page.slug === 'participant-requirements'));
+  assert.match(requirements, /Claude Opus 5\.5, the required model/);
 });
 
 test('Start leads from setup to discovery before implementation and later references', () => {
@@ -273,7 +320,7 @@ test('Start leads from setup to discovery before implementation and later refere
   assert.doesNotMatch(installation, /<details\b|<summary\b/);
   assert.match(installation, /All supporting skills below are required/);
   for (const source of inventory.sources) {
-    assert.ok(installation.includes(`${source.repository} --skill`), source.repository);
+    assert.ok(installation.includes(`${source.repository}/tree/${source.commit} --skill`), source.repository);
   }
   assert.ok(installation.indexOf('can overwrite existing copies') < installation.indexOf(`npx --yes ${inventory.installer} add`));
   const approval = html.indexOf('Approval ends this workflow.');

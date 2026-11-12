@@ -65,12 +65,16 @@ enable it for the application workspace.
 
 ### Install the supporting skills
 
-All supporting skills below are required. Run every installation command before
-starting discovery.
+All supporting skills below are required, including `wireframer` from
+`agilek/wireframer-skill`. Run every installation command before starting
+discovery. Creating the final prototype is optional; installing its skill is not.
 
 <!-- supporting-runtime -->
 
-Each command installs project-local copies from its upstream repository and can overwrite existing copies.
+Each command installs project-local copies from a full upstream commit SHA, not a
+moving branch, and can overwrite existing copies. The installer version is pinned
+too. Rerun these commands to keep the selected versions; `npx skills update` is not
+the pinned installation path.
 
 <!-- upstream-commands -->
 
@@ -88,8 +92,13 @@ are available, along with the supporting skills you installed and the
 **Microsoft Learn** MCP server. If anything is missing, check the installation
 error and reload the host before continuing.
 
-**Recommended model: Claude Opus 5.5.** Select it in your host's model picker
-before starting AI Agent Creator or implementation.
+**Required model: Claude Opus 5.5 (Opus 5.5).** Use it for the full AI Agent
+Creator session, including the optional Wireframer step, and for implementation.
+Select it in VS Code's model picker. In Copilot CLI, select it with:
+
+```text
+/model claude-opus-5.5
+```
 
 ## Describe what you want to build
 
@@ -124,13 +133,26 @@ architecture decisions. The creator then prepares the architecture package.
 
 <!-- diagram: approval-handoff -->
 
-The creator writes the editable diagrams, architecture, specification, and
-implementation plan under `docs/architecture/`. Review the diagrams and have an
-independent reviewer check the full package before approval. If either review is
-unavailable, explicitly accept and record the exception.
+The creator writes the editable diagrams, architecture, specification,
+implementation plan, and cost estimate under `docs/architecture/`. Review the
+diagrams and have an independent reviewer check the full package before approval.
+If either review is unavailable, explicitly accept and record the exception.
 
-**Approval ends this workflow.** Start implementation separately. Approval does
-not change code, generate infrastructure, or provision resources.
+### Optional final wireframe
+
+After all five architecture files are complete and reconciled, the creator
+explicitly asks whether you want a clickable, low-fidelity prototype. Answer in
+the same session. If you say yes, it uses the installed `wireframer` skill to
+illustrate the confirmed journey under `docs/architecture/prototype/`, with
+synthetic data and simulated actions. If you say no, the architecture package
+remains complete.
+
+The prototype is not production implementation and does not connect to live
+systems. Review it alongside the architecture package.
+
+**Approval ends this workflow.** The optional prototype does not authorize
+delivery. Start implementation separately; approval does not change application
+code, generate infrastructure, or provision resources.
 
 ## Start implementation in a new session
 

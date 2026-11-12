@@ -55,17 +55,23 @@ const pages = [
 ];
 
 function supportingMarkdown() {
-  const sections = inventory.sources.map((source) =>
-    `### Skills from ${source.repository}\n\n` +
-    `Upstream source: [\`${source.repository}\`](https://github.com/${source.repository}).\n\n` +
+  const sections = inventory.sources.map((source) => {
+    if (!/^[0-9a-f]{40}$/.test(source.commit)) {
+      throw new Error(`Missing or invalid full commit SHA for supporting source ${source.repository}.`);
+    }
+    const url = `https://github.com/${source.repository}/tree/${source.commit}`;
+    return `### Skills from ${source.repository}\n\n` +
+    `Upstream source: [\`${source.repository}\`](${url}).\n\n` +
+    `Pinned commit: \`${source.commit}\`.\n\n` +
     '| Skill | What it does |\n| --- | --- |\n' +
     source.skills.map((skill) => {
       const description = source.descriptions[skill];
       if (!description) throw new Error(`Missing description for supporting skill ${skill}.`);
       return `| \`${skill}\` | ${description} |`;
     }).join('\n') + '\n\n```bash\n' +
-    `npx --yes ${inventory.installer} add ${source.repository} --skill ${source.skills.join(' ')} --agent ${inventory.agent} --copy --yes\n` +
-    '```\n');
+    `npx --yes ${inventory.installer} add ${url} --skill ${source.skills.join(' ')} --agent ${inventory.agent} --copy --yes\n` +
+    '```\n';
+  });
   return '# Supporting skills\n\n' +
     '<!-- Generated from scripts/agentic-skills.json by npm run build. -->\n\n' +
     `Run these commands from your application directory with Node.js ${inventory.minimumNode} or newer.\n` +

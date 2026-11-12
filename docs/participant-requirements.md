@@ -20,6 +20,8 @@ Use an approved workstation with:
 
 - GitHub Copilot CLI or VS Code with GitHub Copilot, with permission to enable
   the plugin and skills.
+- Access to Claude Opus 5.5, the required model for the creator, optional
+  prototype, and implementation sessions in the [Start guide](start.html).
 - Git access and support for the customer's review and delivery process.
 - The runtimes listed in the [Start guide](start.html).
 - Network access to approved package sources, documentation, Git, and development

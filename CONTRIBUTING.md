@@ -33,6 +33,10 @@ descriptions and commands from the install inventory. Commit generated HTML and
 
 Plugin skills live only under `plugins/agentic-cobuild/skills/`. Keep third-party
 dependencies in `scripts/agentic-skills.json`, not in the plugin.
+Each source must specify a full 40-character `commit` SHA. To update a dependency,
+review the upstream change, replace its SHA in the inventory, rebuild the docs,
+and test the generated installation command in a disposable application directory.
+Keep the installer version pinned as well.
 
 ### Intro figures
 

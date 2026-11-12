@@ -7,7 +7,9 @@ Review the selected skills and inspect existing installations before running the
 
 ### Skills from mattpocock/skills
 
-Upstream source: [`mattpocock/skills`](https://github.com/mattpocock/skills).
+Upstream source: [`mattpocock/skills`](https://github.com/mattpocock/skills/tree/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d).
+
+Pinned commit: `4ae2317ddb22b046e26455e4f9c9b3aaaf62212d`.
 
 | Skill | What it does |
 | --- | --- |
@@ -16,12 +18,14 @@ Upstream source: [`mattpocock/skills`](https://github.com/mattpocock/skills).
 | `wait-what` | Ask the agent to explain what it just said. |
 
 ```bash
-npx --yes skills@1.7.2 add mattpocock/skills --skill grilling domain-modeling wait-what --agent github-copilot --copy --yes
+npx --yes skills@1.7.2 add https://github.com/mattpocock/skills/tree/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d --skill grilling domain-modeling wait-what --agent github-copilot --copy --yes
 ```
 
 ### Skills from microsoft/azure-skills
 
-Upstream source: [`microsoft/azure-skills`](https://github.com/microsoft/azure-skills).
+Upstream source: [`microsoft/azure-skills`](https://github.com/microsoft/azure-skills/tree/233c51fc11c73d459be46e099e417ebaf3d20a26).
+
+Pinned commit: `233c51fc11c73d459be46e099e417ebaf3d20a26`.
 
 | Skill | What it does |
 | --- | --- |
@@ -35,5 +39,19 @@ Upstream source: [`microsoft/azure-skills`](https://github.com/microsoft/azure-s
 | `azure-aigateway` | Configure Azure API Management policies for AI models, MCP tools, and agents. |
 
 ```bash
-npx --yes skills@1.7.2 add microsoft/azure-skills --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
+npx --yes skills@1.7.2 add https://github.com/microsoft/azure-skills/tree/233c51fc11c73d459be46e099e417ebaf3d20a26 --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
+```
+
+### Skills from agilek/wireframer-skill
+
+Upstream source: [`agilek/wireframer-skill`](https://github.com/agilek/wireframer-skill/tree/22ed714abb486d923bcf4d21498fbbeabc9f4fb3).
+
+Pinned commit: `22ed714abb486d923bcf4d21498fbbeabc9f4fb3`.
+
+| Skill | What it does |
+| --- | --- |
+| `wireframer` | Create an optional clickable, low-fidelity prototype after the architecture package is complete. |
+
+```bash
+npx --yes skills@1.7.2 add https://github.com/agilek/wireframer-skill/tree/22ed714abb486d923bcf4d21498fbbeabc9f4fb3 --skill wireframer --agent github-copilot --copy --yes
 ```
