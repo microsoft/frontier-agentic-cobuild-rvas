@@ -80,7 +80,11 @@ function renderPage(page) {
       `<section class="application-family" aria-labelledby="${id}">\n` +
       `<div class="application-family-copy">${copy}</div>\n${diagram}\n</section>`
   );
-  const body = embedDiagrams(content);
+  const collapsible = content.replace(
+    /<!-- workflow -->\s*(<h3[^>]*>[\s\S]*?<\/h3>)([\s\S]*?)<!-- workflow-end -->/g,
+    (_, heading, rest) => `<details class="workflow">\n<summary>${heading}</summary>\n${rest}</details>`
+  );
+  const body = embedDiagrams(collapsible);
   const pageLinks = page.slug === 'start' ? '' : '<div class="guide-pages">\n' +
     pages.filter((candidate) => candidate.slug !== 'start').map((candidate) =>
       `<a href="${candidate.slug}.html"${candidate.slug === page.slug ? ' aria-current="page"' : ''}>${candidate.navigationLabel}</a>`

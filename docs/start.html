@@ -318,12 +318,13 @@ generate infrastructure, or provision resources.</p>
 </tbody>
 </table>
 </div>
-<h3 id="direct-from-the-documents">Direct from the documents<a class="heading-link" href="#direct-from-the-documents" aria-label="Link to Direct from the documents"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Open a new session and attach the approved architecture files. Use this path
-unless you need the extra coordination of the other two.</p>
-<pre><code class="language-text">Read @docs/architecture/specification.md,
-@docs/architecture/implementation-plan.md, @docs/architecture/solution.md,
-@docs/architecture/solution.drawio, and @docs/architecture/cost-estimate.md.
+<details class="workflow">
+<summary><h3 id="direct-from-the-documents">Direct from the documents<a class="heading-link" href="#direct-from-the-documents" aria-label="Link to Direct from the documents"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3></summary>
+
+<p>Open a new session and attach the whole <code>docs/architecture/</code> folder. Use this
+path unless you need the extra coordination of the other two.</p>
+<pre><code class="language-text">Read everything in @docs/architecture/, including the specification,
+implementation plan, solution document and diagram, and cost estimate.
 Implement the approved plan in dependency order. Treat the specification and
 its acceptance criteria as the requirements source of truth. Follow the
 approved architecture, preserve existing interfaces and authorization, and
@@ -331,7 +332,11 @@ add focused tests for changed behavior. Run the relevant checks and report
 actual results. Do not change an architecture decision without approval.
 Do not commit, provision, deploy, or change production data.
 </code></pre>
-<h3 id="matt-pocock-spec-and-tickets">Matt Pocock spec and tickets<a class="heading-link" href="#matt-pocock-spec-and-tickets" aria-label="Link to Matt Pocock spec and tickets"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+</details>
+
+<details class="workflow">
+<summary><h3 id="matt-pocock-spec-and-tickets">Matt Pocock spec and tickets<a class="heading-link" href="#matt-pocock-spec-and-tickets" aria-label="Link to Matt Pocock spec and tickets"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3></summary>
+
 <p>Use this for independent work items that need dependency tracking. If <code>/to-spec</code>,
 <code>/to-tickets</code>, and <code>/implement-spec</code> aren&#39;t available, install the Matt Pocock
 engineering workflow. Tickets live in local Markdown, not remote issues.</p>
@@ -350,7 +355,11 @@ with the current source and the full docs/architecture/ package. Preserve the
 approved architecture and existing contracts. Run focused and combined checks.
 Do not push, open a pull request, provision, deploy, or change production data.
 </code></pre>
-<h3 id="spec-kit">Spec Kit<a class="heading-link" href="#spec-kit" aria-label="Link to Spec Kit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+</details>
+
+<details class="workflow">
+<summary><h3 id="spec-kit">Spec Kit<a class="heading-link" href="#spec-kit" aria-label="Link to Spec Kit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3></summary>
+
 <p>Set up Spec Kit, then run its constitution, specify, clarify (if needed), plan,
 and tasks commands against the approved <code>docs/architecture/</code> package. Don&#39;t let
 them overturn decisions that are already settled.</p>
@@ -363,6 +372,8 @@ provision, deploy, or change production data.
 </code></pre>
 <p>Run <code>/speckit-converge</code> after each implementation pass, and repeat until the
 feature converges or you&#39;ve recorded what&#39;s blocking it.</p>
+</details>
+
 <p>Whichever workflow you use, get approval before changing an architecture decision.</p>
 <p>Once targeted checks pass, run the <a href="#review-prompts">implementation and security reviews</a>,
 fix what they find, and rerun the affected tests. If the review tools aren&#39;t
