@@ -41,69 +41,69 @@
 </nav>
       <article class="guide-body">
         <h2 id="who-needs-to-be-involved">Who needs to be involved<a class="heading-link" href="#who-needs-to-be-involved" aria-label="Link to Who needs to be involved"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Name a product owner, bring someone who understands the business problem, and
-make technical specialists available. Use the customer&#39;s approved environment.
-Approve the architecture before starting implementation separately.</p>
+<p>You need a product owner, someone who understands the business problem, and
+technical specialists you can reach. Work in the customer&#39;s approved
+environment, and approve the architecture before starting implementation.</p>
 <h2 id="knowledge-and-people">Knowledge and people<a class="heading-link" href="#knowledge-and-people" aria-label="Link to Knowledge and people"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <ul>
-<li>A participant who can explain the users, current process, outcome, constraints,
-and first journey.</li>
-<li>Owners for the systems, data sources, and interfaces the solution may use.</li>
-<li>Reachable specialists for identity, networking, security, data, Azure, and
+<li>Someone who can explain the users, the current process, the outcome, the
+constraints, and the first journey.</li>
+<li>Owners for the systems, data sources, and interfaces the solution will use.</li>
+<li>Specialists you can reach for identity, networking, security, data, Azure, and
 platform standards.</li>
-<li>Named approvers for data access, architecture, repository changes, resources,
-and deployment.</li>
+<li>Approvers for data access, architecture, repository changes, resources, and
+deployment.</li>
 </ul>
 <h2 id="workstation-and-engineering-tools">Workstation and engineering tools<a class="heading-link" href="#workstation-and-engineering-tools" aria-label="Link to Workstation and engineering tools"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Use an approved workstation with:</p>
 <ul>
-<li>GitHub Copilot CLI or VS Code with GitHub Copilot, with permission to enable
-the plugin and skills.</li>
-<li>Access to Claude Opus 5.5, the required model for the creator, optional
-prototype, and implementation sessions in the <a href="start.html">Start guide</a>.</li>
-<li>Git access and support for the customer&#39;s review and delivery process.</li>
+<li>GitHub Copilot CLI, or VS Code with GitHub Copilot, and permission to enable
+plugins and skills.</li>
+<li>Claude Opus 5.5, the model the <a href="start.html">Start guide</a> requires for the
+creator, the optional prototype, and implementation.</li>
+<li>Git, and the customer&#39;s review and delivery process.</li>
 <li>The runtimes listed in the <a href="start.html">Start guide</a>.</li>
-<li>Network access to approved package sources, documentation, Git, and development
-systems.</li>
+<li>Network access to approved package sources, documentation, Git, and
+development systems.</li>
 </ul>
 <p>Use synthetic or approved test data during discovery and early implementation.
-Do not make production data or broad production access a co-build prerequisite.</p>
+Production data and broad production access aren&#39;t prerequisites.</p>
 <h2 id="repository-and-delivery-access">Repository and delivery access<a class="heading-link" href="#repository-and-delivery-access" aria-label="Link to Repository and delivery access"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Provide an approved Git repository and enough access to:</p>
+<p>You need an approved Git repository and enough access to:</p>
 <ul>
-<li>clone the repository and create a working branch;</li>
-<li>push changes and open a pull request;</li>
-<li>run or request the required CI/CD pipelines; and</li>
-<li>follow branch protection, review, secret-management, and release controls.</li>
+<li>clone it and create a branch;</li>
+<li>push changes and open a pull request; and</li>
+<li>run, or ask someone to run, the CI/CD pipelines.</li>
 </ul>
-<p>Assign someone else to prepare repositories or pipelines when needed.</p>
+<p>Branch protection, review, secret management, and release controls still apply.
+If you can&#39;t set up repositories or pipelines yourself, ask someone who can.</p>
 <h2 id="customer-systems-and-test-access">Customer systems and test access<a class="heading-link" href="#customer-systems-and-test-access" aria-label="Link to Customer systems and test access"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>For each integration, name the owner, interface, test environment,
-authentication, and approval path. Provide schemas or representative inputs.</p>
-<p>Discovery does not require live credentials. Implementation needs approved
-non-production access and secret storage. Record blocked access instead of
-guessing interfaces or using unapproved credentials.</p>
+authentication method, and who approves access. Provide schemas or sample inputs.</p>
+<p>Discovery doesn&#39;t need live credentials. Implementation needs non-production
+access and a place to store secrets. If access is blocked, write that down. Don&#39;t
+guess at interfaces or borrow credentials.</p>
 <h2 id="azure-access-for-deployment">Azure access for deployment<a class="heading-link" href="#azure-access-for-deployment" aria-label="Link to Azure access for deployment"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Provide deployment access at the narrowest useful scope. <strong>Contributor</strong> is a
-common starting point for resource management, but the required role depends on
+<p>Grant deployment access at the narrowest useful scope. <strong>Contributor</strong> is a
+common starting point for managing resources, but the role you need depends on
 the architecture and policy.</p>
-<p>Contributor cannot create role assignments. Arrange an approved identity with
-the required permission when deployment grants access to another identity. See
+<p>Contributor can&#39;t create role assignments. If deployment grants access to
+another identity, arrange an approved identity that can. See
 <a href="https://learn.microsoft.com/azure/role-based-access-control/rbac-and-directory-admin-roles#azure-roles">Azure roles and permissions</a>.</p>
-<p>Check providers, policy, quota, regions, networking, naming, and tagging before
-deployment. Use the customer&#39;s landing zone and change process.</p>
+<p>Before deploying, check resource providers, policy, quota, regions, networking,
+naming, and tagging. Use the customer&#39;s landing zone and change process.</p>
 <h2 id="readiness-check">Readiness check<a class="heading-link" href="#readiness-check" aria-label="Link to Readiness check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Before the first working session, confirm that:</p>
 <ul>
 <li>the business participant, product owner, and technical contacts are named;</li>
-<li>the workstation can reach the required tools and repositories;</li>
-<li>the source repository and delivery path are ready;</li>
-<li>integration information and representative test inputs are available; and</li>
-<li>the Azure deployment scope, approver, and access path are understood.</li>
+<li>the workstation can reach the tools and repositories;</li>
+<li>the repository and delivery path are ready;</li>
+<li>integration details and sample test inputs are available; and</li>
+<li>you know the Azure deployment scope, who approves it, and how access works.</li>
 </ul>
-<p>Assign each gap an owner and date. Treat unresolved access or governance as a
-blocker when it prevents safe design or verification.</p>
-<p>When the people and access are ready, use the
+<p>Give each gap an owner and a date. If missing access or approvals stop you from
+designing or testing safely, treat that as a blocker.</p>
+<p>When people and access are ready, use the
 <a href="discovery-session.html">discovery session guide</a> to run the customer discussion
 and prepare a brief for AI Agent Creator.</p>
 

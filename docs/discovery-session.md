@@ -1,29 +1,30 @@
 ## Collect discovery evidence
 
-Use this session when the idea is spread across people or documents. Get approval
-for recording, transcription, storage, and AI processing before the call.
+Use this session when the idea is spread across several people or documents.
+Get approval for recording, transcription, storage, and AI processing before
+the call.
 
-Capture the intended outcome, first journey, decisions, and open questions.
-The session record does not grant approval or authorization. Review the
-[participant requirements](participant-requirements.html) and keep the needed
-specialists reachable.
+Capture the intended outcome, the first journey, decisions, and open questions.
+A recording isn't an approval. Review the
+[participant requirements](participant-requirements.html) and keep the
+specialists you need within reach.
 
 ## Prepare the call
 
 Before recording starts:
 
-- state the purpose and how the transcript will be used;
-- agree who can access the files, where they are stored, and when they are deleted;
-- tell participants not to share live secrets; and
-- open the approved repository, diagrams, process records, and sample inputs.
+- say why you're recording and how the transcript will be used;
+- agree who can access the files, where they're stored, and when they're deleted;
+- ask participants not to share live secrets; and
+- open the repository, diagrams, process records, and sample inputs.
 
-If the customer cannot approve recording or AI processing, take structured notes
-instead. The same question set still applies.
+If the customer can't approve recording or AI processing, take notes. The
+questions are the same.
 
 ## Guide the discussion
 
-Ask for concrete examples and measurable definitions of "fast," "secure," or
-"automated."
+Ask for concrete examples. What does "fast," "secure," or "automated" mean in
+numbers?
 
 ### 1. Outcome and reason for change
 
@@ -46,7 +47,7 @@ Ask for concrete examples and measurable definitions of "fast," "secure," or
 - What requires review or approval?
 - What marks completion, and what happens when evidence is insufficient or unsafe?
 
-Keep the first journey bounded. Record later journeys separately.
+Keep the first journey small. Note later journeys separately.
 
 ### 4. Information and evidence
 
@@ -55,8 +56,9 @@ Keep the first journey bounded. Record later journeys separately.
 - Are citations or an audit trail required?
 - What representative inputs can the team provide?
 
-Distinguish business knowledge from conversation history and long-term memory.
-Ask what the solution may retain, for how long, and who can delete or correct it.
+Business knowledge, conversation history, and long-term memory are different
+things. Ask what the solution may keep, for how long, and who can correct or
+delete it.
 
 ### 5. Systems and integrations
 
@@ -65,8 +67,8 @@ Ask what the solution may retain, for how long, and who can delete or correct it
 - What identities and authentication methods apply?
 - Who owns documentation, test access, and approval?
 
-Record names and owners. Do not guess interfaces, credentials, or product support
-from the conversation.
+Write down names and owners. Don't guess at interfaces, credentials, or what a
+product supports.
 
 ### 6. Agent behavior, actions, and approvals
 
@@ -75,9 +77,9 @@ from the conversation.
 - Which actions require confirmation or business approval?
 - What limits and failure behavior apply?
 
-The session may reveal that a search experience, model call, or fixed workflow
-fits better than an agent. Capture the journey first and let architecture discovery
-test the execution model.
+You may find that search, a single model call, or a fixed workflow fits better
+than an agent. Capture the journey first. Architecture discovery will test the
+execution model.
 
 ### 7. Identity, security, and data rules
 
@@ -86,8 +88,8 @@ test the execution model.
 - What sensitive information and handling rules apply?
 - Who approves the security and compliance design?
 
-Capture the customer's existing controls. The co-build should fit them rather
-than invent a parallel access model.
+Record the customer's existing controls. The co-build should fit them, not
+invent a parallel access model.
 
 ### 8. Experience and channels
 
@@ -112,14 +114,14 @@ Use ranges when exact numbers are unavailable. Mark estimates as assumptions.
 - Who approves access, architecture, resources, and deployment?
 - Who owns the solution, and what evidence supports acceptance?
 
-End by reading back the intended outcome, first journey, boundaries, decisions,
-and open questions. Assign an owner to every question that could block architecture
-or implementation.
+End by reading back the outcome, first journey, boundaries, decisions, and open
+questions. Give every question that could block architecture or implementation
+an owner.
 
 ## Capture a discovery brief
 
-Create a short, traceable brief in the customer repository. Separate confirmed
-facts, assumptions, and open questions.
+Write a short brief in the customer repository. Keep confirmed facts,
+assumptions, and open questions apart, and note where each statement came from.
 
 ```markdown
 # Discovery brief
@@ -167,12 +169,12 @@ facts, assumptions, and open questions.
 | --- | --- | --- |
 ```
 
-Leave gaps visible for AI Agent Creator to ask about; do not invent answers.
+Leave gaps empty so AI Agent Creator asks about them. Don't fill them with guesses.
 
 ## Create the brief with WorkIQ
 
-Use WorkIQ when the signed-in user can access the meeting through the customer's
-Microsoft 365 environment. Availability depends on tenant policy and permissions.
+Use WorkIQ if the signed-in user can open the meeting in the customer's
+Microsoft 365 environment. Tenant policy and permissions decide whether that works.
 
 Provide the brief template above and identify the meeting:
 
@@ -187,12 +189,12 @@ as architecture approval.
 ```
 
 Check the result against the meeting, then save the corrected brief as
-`docs/discovery/discovery-brief.md` when policy allows.
+`docs/discovery/discovery-brief.md` if policy allows.
 
 ## Create the brief from a transcript
 
-If WorkIQ is unavailable, attach the approved transcript and provide the brief
-template above:
+If WorkIQ isn't available, attach the approved transcript and the brief template
+above:
 
 ```text
 Read the attached customer discovery transcript and prepare
@@ -205,14 +207,14 @@ where available. Do not propose an architecture yet and do not treat the
 transcript as customer approval.
 ```
 
-Remove off-topic or restricted content. Keep the original transcript in its
-approved location.
+Remove anything off-topic or restricted. Leave the original transcript where
+it's approved to live.
 
 ## Start AI Agent Creator
 
-Have the customer or product owner review the brief. Keep unresolved points open.
-
-Open the customer application repository and invoke AI Agent Creator with the brief:
+Have the customer or product owner review the brief, and leave unresolved points
+open. Then open the customer's application repository and give the brief to AI
+Agent Creator:
 
 ```text
 /agentic-cobuild:ai-agent-creator Use @docs/discovery/discovery-brief.md as discovery evidence
@@ -225,5 +227,5 @@ requirements approval. Present the shared-understanding record and wait for
 explicit customer confirmation before architecture work begins.
 ```
 
-The brief does not replace discovery confirmation, architecture review, or
+The brief doesn't replace discovery confirmation, architecture review, or
 package approval.

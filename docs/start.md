@@ -2,36 +2,35 @@ Already installed the plugin and supporting skills? [Start discovery](#describe-
 
 ## Before you start
 
-Work in the application repository, not this tooling repository. Check the
+Work in your application's repository, not this one. Check the
 [participant requirements](participant-requirements.html), use an approved
-workspace, and identify the people who can approve access and architecture.
+workspace, and know who can approve access and architecture.
 
 ### Working with an existing application?
 
-Open its repository and point the creator to approved architecture or operating
-records stored elsewhere. Bring:
+Open its repository, and tell the creator where any architecture or operating
+records live if they're stored elsewhere. Bring:
 
-- The current user journey and the one addition you want to make.
-- Existing API contracts and data sources, with their owners and access boundaries.
-- Behavior and interfaces that must stay unchanged, including authorization.
-- Deployment constraints, regression checks, and rollback ownership.
+- The current user journey and the one thing you want to add.
+- Existing API contracts and data sources, with their owners and access limits.
+- What must not change, including authorization.
+- Deployment constraints, regression checks, and who owns rollback.
 
-Use synthetic inputs until customer-data access is agreed. Describe how the
-application should behave when AI is unavailable or evidence is insufficient.
-Missing documentation does not prove that a control or service is absent.
+Use synthetic inputs until you've agreed access to customer data. Say how the
+application should behave when AI is unavailable or the evidence isn't enough.
+Missing documentation doesn't mean a control or service doesn't exist.
 
-Reuse existing capabilities where they fit. Any proposed replacement needs a
-clear requirement and a migration plan that preserves compatibility.
+Reuse what already works. Replace something only for a clear reason, with a
+migration plan that keeps it compatible.
 
 ## Set up your workspace
 
 Run commands from your application directory unless a step says otherwise.
-Stop if a command fails. Inspect the error and any partial files before retrying.
+If a command fails, read the error and check for partial files before retrying.
 
 ### Create a new repository
 
-Skip this for an existing application. Follow its branching and approval rules
-instead.
+Skip this for an existing application and follow its branching rules.
 
 ```bash
 mkdir my-ai-app
@@ -65,37 +64,36 @@ enable it for the application workspace.
 
 ### Install the supporting skills
 
-All supporting skills below are required, including `diagram-design` from
-`cathrynlavery/diagram-design` and `wireframer` from `agilek/wireframer-skill`.
-Run every installation command before starting discovery. Creating the final
-prototype is optional; installing its skill is not.
+Install all of the supporting skills below before starting discovery, including
+`diagram-design` from `cathrynlavery/diagram-design` and `wireframer` from
+`agilek/wireframer-skill`. The final prototype is optional, but its skill still
+needs to be installed.
 
 <!-- supporting-runtime -->
 
-Each command installs project-local copies from a full upstream commit SHA, not a
-moving branch, and can overwrite existing copies. The installer version is pinned
-too. Rerun these commands to keep the selected versions; `npx skills update` is not
-the pinned installation path.
+Each command installs project-local copies pinned to a full upstream commit SHA,
+not a moving branch, and can overwrite existing copies. The installer version is
+pinned too. To keep these versions, rerun the commands. Don't use
+`npx skills update`.
 
 <!-- upstream-commands -->
 
-If an install fails, inspect the error, skill directories, and `skills-lock.json`
-before retrying. Preserve existing skills instead of deleting them to bypass a
-conflict. Installing a skill does not authorize cloud changes or commits.
+If an install fails, look at the error, the skill directories, and
+`skills-lock.json` before retrying. Don't delete existing skills to get around a
+conflict.
 
 ### Check the workspace
 
 In CLI, use `/skills` and `/mcp`. In VS Code, use **Chat: Configure Skills** and
 the MCP server list.
 
-Check that **AI Agent Creator**, **Idea Forge**, and **Cloud Architecture Diagram**
-are available, along with the supporting skills you installed and the
-**Microsoft Learn** MCP server. If anything is missing, check the installation
-error and reload the host before continuing.
+You should see **AI Agent Creator**, **Idea Forge**, **Cloud Architecture
+Diagram**, the supporting skills you installed, and the **Microsoft Learn** MCP
+server. If something is missing, check the install error and reload your host.
 
-**Required model: Claude Opus 5.5 (Opus 5.5).** Use it for the full AI Agent
-Creator session, including the optional Wireframer step, and for implementation.
-Select it in VS Code's model picker. In Copilot CLI, select it with:
+**Use Claude Opus 5.5** for the whole AI Agent Creator session, including the
+optional wireframe, and for implementation. In VS Code, pick it in the model
+picker. In Copilot CLI, run:
 
 ```text
 /model claude-opus-5.5
@@ -103,12 +101,12 @@ Select it in VS Code's model picker. In Copilot CLI, select it with:
 
 ## Describe what you want to build
 
-If several people hold the business context, use the
-[discovery session guide](discovery-session.html) first. Get approval before
+If the business context is spread across several people, run the
+[discovery session guide](discovery-session.html) first, and get approval before
 recording or processing the discussion.
 
 Select **AI Agent Creator** from your host's skill picker or slash completion,
-using the name your host displays. Adapt one of these prompts to your application.
+then adapt one of these prompts.
 
 ### AI Agent Creator prompts
 
@@ -129,35 +127,34 @@ for our enterprise data-access and deployment constraints.
 ```
 
 **Your first milestone is confirmed discovery.** Answer the creator's questions.
-Confirm discovery once you agree on the outcome, first user journey, and
-architecture decisions. The creator then prepares the architecture package.
+When you agree on the outcome, the first user journey, and the architecture
+decisions, confirm discovery. The creator then prepares the architecture package.
 
 ### Review what the creator understood
 
-Before you confirm discovery, the creator shows its understanding as diagrams as
-well as text:
+Before you confirm discovery, the creator shows what it understood, as diagrams
+and text:
 
-- a swimlane of the first journey, showing which steps the user, the AI, the
-  deterministic system, approvers, and external systems own;
-- a map of the agreed domain terms, when there are enough to relate;
-- the lifecycle of a business object, when it waits, needs approval, or retries;
-- scenarios for success, ambiguous input, a rejected action, and a dependency
-  failure.
+- a swimlane of the first journey, showing which steps belong to the user, the
+  AI, fixed system logic, approvers, and external systems;
+- a map of the agreed domain terms, if there are enough to relate;
+- the lifecycle of a business object that waits, needs approval, or retries;
+- scenarios for success, ambiguous input, a rejected action, and a failed
+  dependency.
 
 It saves the Mermaid source in `docs/architecture/visuals/shared-understanding.md`
 and renders each view as HTML beside it with `diagram-design`. Open the HTML files
 in a browser from either host. In VS Code 1.109 or later, enable the **Render
 Mermaid Diagram** chat tool to see the diagrams inline as well.
-Correct anything that looks wrong: a change to a diagram is a change to the
-record. The confirmed scenarios become acceptance criteria in the specification
+Correct anything that looks wrong. Changing a diagram changes the record. The confirmed scenarios become acceptance criteria in the specification
 and clickable paths in the optional prototype.
 
 <!-- diagram: approval-handoff -->
 
 The creator writes the editable diagrams, architecture, specification,
 implementation plan, and cost estimate under `docs/architecture/`. Review the
-diagrams and have an independent reviewer check the full package before approval.
-If either review is unavailable, explicitly accept and record the exception.
+diagrams, and have someone else review the whole package before you approve it.
+If you can't do either, say so and record the exception.
 
 ### Optional final wireframe
 
@@ -168,17 +165,17 @@ illustrate the confirmed journey under `docs/architecture/prototype/`, with
 synthetic data and simulated actions. If you say no, the architecture package
 remains complete.
 
-The prototype is not production implementation and does not connect to live
-systems. Review it alongside the architecture package.
+The prototype isn't a production implementation and doesn't connect to live
+systems. Review it with the architecture package.
 
 **Approval ends this workflow.** The optional prototype does not authorize
-delivery. Start implementation separately; approval does not change application
-code, generate infrastructure, or provision resources.
+delivery. Start implementation separately. Approval doesn't change your code,
+generate infrastructure, or provision resources.
 
 ## Start implementation in a new session
 
-Choose one workflow; do not combine them. Each uses the approved files under
-`docs/architecture/` as its authority.
+Pick one workflow and don't mix them. Each treats the approved files under
+`docs/architecture/` as the source of truth.
 
 | Workflow | Choose it when | Entry point |
 | --- | --- | --- |
@@ -189,7 +186,7 @@ Choose one workflow; do not combine them. Each uses the approved files under
 ### Direct from the documents
 
 Open a new session and attach the approved architecture files. Use this path
-unless the work needs the extra coordination provided by the other workflows.
+unless you need the extra coordination of the other two.
 
 ```text
 Read @docs/architecture/specification.md,
@@ -205,9 +202,9 @@ Do not commit, provision, deploy, or change production data.
 
 ### Matt Pocock spec and tickets
 
-For independent work items that need dependency tracking, install the Matt Pocock
-engineering workflow if `/to-spec`, `/to-tickets`, and `/implement-spec` are not
-available. Track the work in local Markdown, not remote issues.
+Use this for independent work items that need dependency tracking. If `/to-spec`,
+`/to-tickets`, and `/implement-spec` aren't available, install the Matt Pocock
+engineering workflow. Tickets live in local Markdown, not remote issues.
 
 ```text
 /to-spec Convert the approved docs/architecture/ package into one bounded local
@@ -233,9 +230,9 @@ Do not push, open a pull request, provision, deploy, or change production data.
 
 ### Spec Kit
 
-Configure Spec Kit, then run its constitution, specify, clarify when needed,
-plan, and tasks commands against the approved `docs/architecture/` package.
-Do not use those commands to replace settled architecture decisions.
+Set up Spec Kit, then run its constitution, specify, clarify (if needed), plan,
+and tasks commands against the approved `docs/architecture/` package. Don't let
+them overturn decisions that are already settled.
 
 Open a new session after the feature plan and tasks are reviewed:
 
@@ -247,21 +244,20 @@ constraints. Run the documented tests and record actual results. Do not commit,
 provision, deploy, or change production data.
 ```
 
-Use `/speckit-converge` after each implementation pass. Repeat implementation
-and convergence until the feature is converged or the remaining blocker is
-recorded.
+Run `/speckit-converge` after each implementation pass, and repeat until the
+feature converges or you've recorded what's blocking it.
 
-Get approval before changing an architecture decision, whichever workflow you use.
+Whichever workflow you use, get approval before changing an architecture decision.
 
-After targeted checks pass, run the [implementation and security reviews](#review-prompts).
-Resolve findings and rerun affected tests. If review tooling is unavailable,
-assign a human reviewer and record the gap.
+Once targeted checks pass, run the [implementation and security reviews](#review-prompts),
+fix what they find, and rerun the affected tests. If the review tools aren't
+available, ask a person to review and note that.
 
 The operating team still owns production acceptance and rollback.
 
 ## Command and prompt reference
 
-Use these commands after implementation or when maintaining an existing setup.
+Use these after implementation, or to maintain an existing setup.
 
 ### Review prompts
 
@@ -290,8 +286,8 @@ finding.
 
 ### Update the plugin
 
-Each teammate manages the plugin in their own host. Review updates before use.
-Supporting skill updates remain separate.
+Each teammate updates the plugin in their own host. Review updates before you
+use them. Supporting skills update separately.
 
 ```bash
 copilot plugin update agentic-cobuild
@@ -301,8 +297,8 @@ VS Code users can run the plugin update action instead.
 
 ## Need an idea first?
 
-Use **Idea Forge** to research an opportunity. Take the selected brief through
-AI Agent Creator discovery and architecture approval.
+Use **Idea Forge** to research an opportunity, then take the brief you pick
+through AI Agent Creator discovery and architecture approval.
 
 ### Idea Forge prompt
 

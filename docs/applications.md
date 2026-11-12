@@ -1,25 +1,25 @@
 ## What the creator can design
 
-Bring the first task you want users to complete in a new or existing application.
-AI Agent Creator helps define that journey and its architecture. It may recommend
-a platform agent, custom application, explicit workflow, or a model call with a
-defined task.
+Bring the first task you want users to complete, in a new or existing
+application. AI Agent Creator defines that journey and designs the architecture.
+It might recommend a platform agent, a custom app, a fixed workflow, or a single
+model call.
 
-The plugin designs the solution but does not implement or certify it.
-These examples are not customer results or deployment templates.
+It designs the solution. It doesn't build it. The examples below are
+illustrations, not customer results or deployment templates.
 
 ## Application families
 
-The products shown are examples. Discovery must verify product fit, connections,
-availability, and release status.
+The products shown are examples. Discovery checks whether they fit, connect to
+your systems, and are available to you.
 
 <!-- application-family -->
 
 ### Knowledge assistants
 
-Help users find permitted information and cite its source. Define source
-ownership, permissions, freshness, and what happens when evidence conflicts or
-is missing. A fixed lookup may not need an agent loop.
+Help users find information they're allowed to see, and cite where it came from.
+Decide who owns each source, how fresh it must be, and what happens when sources
+conflict or have nothing to say. A fixed lookup may not need an agent.
 
 <div class="family-product-example">
 <span>Example options</span>
@@ -33,9 +33,9 @@ is missing. A fixed lookup may not need an agent loop.
 
 ### Agents that use business tools
 
-Investigate a task and prepare or perform approved operations. Define read-only
-access, approval boundaries, authorization, and retry behavior that prevents
-duplicate business actions.
+Investigate a task, then prepare or perform approved operations. Decide what is
+read-only, what needs approval, who is authorized, and how retries avoid doing
+the same business action twice.
 
 <div class="family-product-example">
 <span>Example options</span>
@@ -49,9 +49,9 @@ duplicate business actions.
 
 ### Document and media processing
 
-Turn incoming material into structured results. Define the output schema,
-review threshold, correction path, and downstream handoff. This may be a fixed
-pipeline with no conversational interface.
+Turn incoming files into structured results. Decide the output schema, when a
+person reviews, how errors get corrected, and where results go next. This is
+often a fixed pipeline with no chat interface.
 
 <div class="family-product-example">
 <span>Example options</span>
@@ -65,9 +65,9 @@ pipeline with no conversational interface.
 
 ### Voice and audiovisual experiences
 
-Use speech or audiovisual presentation when the task requires it. Define
-interruptions, corrections, exit paths, privacy, and accessibility. An avatar
-or generated video alone does not require an agent.
+Use speech or video when the task needs it. Decide how users interrupt, correct
+or leave, and cover privacy and accessibility. An avatar or generated video
+doesn't make something an agent.
 
 <div class="family-product-example">
 <span>Example options</span>
@@ -81,8 +81,9 @@ or generated video alone does not require an agent.
 
 ### Background workflows
 
-Respond to events or process jobs without a chat interface. Define who owns job
-state, how work resumes, which branches stay fixed, and when investigation stops.
+Respond to events or process jobs with no chat interface. Decide who owns job
+state, how work resumes after a failure, which steps stay fixed, and when the
+system stops investigating.
 
 <div class="family-product-example">
 <span>Example options</span>
@@ -96,11 +97,11 @@ state, how work resumes, which branches stay fixed, and when investigation stops
 
 ### Coordinated specialist agents
 
-Split responsibilities only when one agent cannot meet the requirement reliably.
-Define handoffs, access boundaries, shared state, conflict handling, and failure
-behavior. Coordination adds overhead.
-Microsoft's [orchestration guidance](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
-recommends the lowest complexity that meets the requirement.
+Split the work across agents only when one agent can't do it reliably.
+Coordination costs something, so decide up front how agents hand off work, what
+each can access, what state they share, and what happens when they disagree or
+fail. Microsoft's [orchestration guidance](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
+recommends the simplest design that meets the requirement.
 
 <div class="family-product-example">
 <span>Example options</span>
@@ -112,21 +113,21 @@ recommends the lowest complexity that meets the requirement.
 
 ## Capabilities you can combine
 
-Families can overlap. Add persistent memory, multiple agents, or personalization
-only when the journey needs them. Define ownership, permissions, provenance,
-expiry, and deletion.
+Families overlap. Add memory, multiple agents, or personalization only when the
+journey needs them, and decide who owns what's stored, who can see it, and when
+it expires or gets deleted.
 
 ## Choose an architecture during discovery
 
-You do not need to choose a platform before discovery. Bring the outcome and
-existing constraints. The creator compares existing capabilities with custom
-execution against the first journey's requirements.
-Microsoft's [technology planning guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy)
-starts by checking whether a ready-to-use solution meets the need.
+Don't pick a platform before discovery. Bring the outcome and your constraints.
+The creator weighs what you already have against custom code for your first
+journey. Microsoft's [technology planning guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy)
+also starts by asking whether a ready-made solution meets the need.
 
-Choose the user channel separately from the runtime. Keep knowledge access and
-permission to perform actions distinct. The architecture review must verify
-product fit and proposed connections, and name owners for unresolved checks.
+Treat the user channel and the runtime as separate choices, and keep access to
+knowledge separate from permission to act. The architecture review confirms the
+products fit and the connections work, and names an owner for anything still
+unchecked.
 
 ## Describe your first journey
 
@@ -142,6 +143,6 @@ recommending the architecture.
 [Set up your application workspace](start.html), then bring your own idea.
 If you are extending a system, [prepare its context](start.html#working-with-an-existing-application).
 
-Review and approve the architecture package before starting a separate
-implementation session. Architecture approval does not authorize implementation
-or deployment.
+Review and approve the architecture package, then start implementation in a
+separate session. Approving the architecture doesn't authorize building or
+deploying anything.

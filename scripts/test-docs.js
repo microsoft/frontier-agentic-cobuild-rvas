@@ -309,13 +309,13 @@ test('Start installs Wireframer before discovery and offers its prototype before
 
 test('website requires Opus 5.5 before the creator session and documents CLI selection', () => {
   const html = renderPage(pages.find((page) => page.slug === 'start'));
-  const requirement = html.indexOf('Required model: Claude Opus 5.5');
+  const requirement = html.indexOf('Use Claude Opus 5.5');
   assert.ok(requirement >= 0 && requirement < html.indexOf('id="describe-what-you-want-to-build"'));
-  assert.match(html, /full AI Agent\s+Creator session, including the optional Wireframer step/);
+  assert.match(html, /whole AI Agent\s+Creator session, including the\s+optional wireframe/);
   assert.match(html, /\/model claude-opus-5\.5/);
   assert.doesNotMatch(html, /Recommended model/);
   const requirements = renderPage(pages.find((page) => page.slug === 'participant-requirements'));
-  assert.match(requirements, /Claude Opus 5\.5, the required model/);
+  assert.match(requirements, /Claude Opus 5\.5, the model the/);
 });
 
 test('Start leads from setup to discovery before implementation and later references', () => {
@@ -333,7 +333,7 @@ test('Start leads from setup to discovery before implementation and later refere
   assert.ok(html.indexOf('href="#describe-what-you-want-to-build">Start discovery') < steps[0]);
   const installation = html.slice(steps[3], steps[4]);
   assert.doesNotMatch(installation, /<details\b|<summary\b/);
-  assert.match(installation, /All supporting skills below are required/);
+  assert.match(installation, /Install all of the supporting skills below/);
   for (const source of inventory.sources) {
     assert.ok(installation.includes(`${source.repository}/tree/${source.commit} --skill`), source.repository);
   }
