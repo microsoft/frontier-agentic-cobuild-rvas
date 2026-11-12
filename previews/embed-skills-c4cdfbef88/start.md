@@ -114,6 +114,22 @@ and deployment constraints.
 When you agree on the outcome, the first user journey, and the architecture
 decisions, confirm discovery. The creator then prepares the architecture package.
 
+### Work in the shared canvas
+
+In the GitHub Copilot app, you can follow the session on a shared screen. Ask:
+
+```text
+Open the Co-build board canvas.
+```
+
+The canvas lists the architecture package and shows each file as the creator
+writes it: Markdown, the HTML diagrams, and the `.drawio` pages. The creator
+points it at the file to review next, and it shows the current phase. The canvas
+is read-only. You still confirm and approve in the chat.
+
+Canvases are experimental, and the plugin works the same without one. If you
+don't see it, update the plugin and turn on experimental features.
+
 ### Review what the creator understood
 
 Before you confirm discovery, the creator shows what it understood, as diagrams
