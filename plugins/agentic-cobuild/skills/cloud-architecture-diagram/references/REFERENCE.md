@@ -6,38 +6,39 @@ Adapted by Paolo Montagna from original work by Thomas Thornton.
 
 ## Local first
 
-- `../assets/az/i`: 714 bundled Microsoft Azure SVGs. Paths use compact category
+- `../assets/az/i`: 710 bundled Microsoft Azure SVGs. Paths use compact category
   codes and omit the redundant `icon-service-` filename prefix to keep Windows
   checkouts portable; each filename retains its original numeric identifier and
   searchable service name.
-- `microsoft-icon-catalog.json`: 78 exact entries covering Azure, Fabric, Power
+- `microsoft-icon-catalog.json`: 672 exact entries covering Azure, Fabric, Power
   Platform, Entra, Dynamics 365, GitHub and generic Microsoft 365 symbols.
-  The Azure entries pin existing files; 11 additional SVGs extend the snapshot.
+  Every bundled Azure SVG has a catalog ID (`azure:<slug>`), with the common
+  services (storage, networking, data, AI, security, monitoring, compute)
+  carrying product labels and aliases such as `Cosmos DB` or `AKS`. Portal
+  glyphs keep their file-name label, for example `Search glyph`.
+  Azure artwork has no Container Apps application, Voice Live, Purview or
+  Durable Task icon, so those stay labelled boxes in the coverage file.
+  The Azure entries pin retained files; additional SVGs extend the snapshot.
   The catalog records labels,
   upstream filenames, source versions, archive fingerprints, and per-icon hashes.
   Family namespaces prevent semantic collisions such as Microsoft Fabric versus
   Azure Service Fabric and Power BI versus Power BI Embedded.
-- `azure2-complete-catalog.txt`: supplied inventory of 714 paths matching that
+- `azure2-complete-catalog.txt`: curated inventory of 710 paths matching that
   local icon set. Despite its inherited filename, these numbered/hyphenated
   paths are **not verified jgraph Azure2 web library paths**. Do not prepend
   `img/lib/azure2/` to them. Resolve against the bundled Icons directory.
-- `aws4-complete-catalog.txt`: 1,037 supplied AWS4 stencil style names. The first
-  line is a generation summary, not a shape. Match `shape=mxgraph.aws4.*` lines.
-  These are names, not bundled AWS artwork or stencil definitions.
 
-Use `find`/filename globbing against the absolute loaded skill directory for
-Azure; use `grep -i "lambda" "$SKILL_DIR/references/aws4-complete-catalog.txt"`
-for AWS. Use `resolve_icon(SKILL_DIR, "fabric:lakehouse")` for the exact Microsoft
-catalog. Catalogs are snapshots, not proof that the installed renderer supports
-every entry.
+For Microsoft and GitHub icon lookup, follow the authoritative procedure in
+[builder-api.md#icons](builder-api.md#icons).
+Catalogs are snapshots, not proof that the installed renderer supports every
+entry.
 
 ## Embedding and rendering
 
-Use `svg_data_uri(find_icon(...))` from the builder to embed an Azure icon with
+Embed the SVG path returned by the catalog procedure with `svg_data_uri(path)`:
 `image=data:image/svg+xml,<percent-encoded-svg>;`. Do not put a bare local path,
 URL, or `img/lib/...` in an otherwise standalone artifact.
 
-Use `svg_data_uri(resolve_icon(...))` for the exact catalog.
 `resolve_icon` verifies the catalog schema, exact ID, safe local path, file
 existence, and recorded SHA-256 before returning an SVG.
 
@@ -45,13 +46,6 @@ draw.io styles use semicolons as separators. Canonical `;base64` data URIs break
 that grammar; the builder uses percent-encoded SVG and draw.io's PNG comma form
 `data:image/png,<base64>`. These are draw.io image values, not a general browser
 data-URI API. Verify the requested renderer.
-
-AWS4 uses **stencils**, not `image=img/lib/aws4/...`. Look up the exact case-sensitive
-shape name. Example: `shape=mxgraph.aws4.lambda;fillColor=#ED7100;`.
-The target editor must have the AWS4 library. For strict standalone rendering
-without that library, use clearly labelled generic shapes with user agreement
-or separately approved embedded artwork. Do not invent a stencil or claim the
-catalog contains the SVGs.
 
 Use category colors consistently (compute orange, networking purple, storage
 green, security red) but prefer readability and accurate labels over decoration.
@@ -63,11 +57,10 @@ Plain flow diagrams can skip cloud icons entirely.
 to candidate components and records non-product presentations. It is an icon
 coverage contract, not a requirement to deploy every listed component.
 
-Call `resolve_component_icon(SKILL_DIR, name_or_id)` for a named component.
-It accepts exact IDs, canonical labels and explicit aliases, without fuzzy
-matching. For example, `Azure AI Search` resolves the existing
-`Cognitive-Search` file, and `Document Intelligence` resolves `Form-Recognizers`.
-Unknown names fail explicitly; ambiguous names require a canonical ID.
+The [builder lookup procedure](builder-api.md#icons) accepts exact IDs, canonical
+labels and explicit aliases, without fuzzy matching. For example, `Azure AI
+Search` resolves the existing `Cognitive-Search` file, and `Document Intelligence`
+resolves `Form-Recognizers`.
 
 The result contains `id`, `label`, `icon_id`, `presentation` and `path`.
 Non-product component mappings also carry a `reason`:
@@ -86,34 +79,47 @@ Content Understanding uses an explicit generic document symbol; Voice Live is a
 labelled box; Speech avatar and Copilot SDK use labelled family artwork.
 Container Apps application, worker and environment mappings remain distinct.
 
-For a selected architecture, resolve every named component and integration, not
-only those in its card. Report gaps and agree a labelled fallback; missing
-artwork never removes a component or selects a different architecture. Offline
+### GitHub component identity
+
+The pack includes GitHub's mark, Copilot, workflow, repository, package,
+Codespaces, and Dependabot Octicons. Resolve GitHub Actions with `github:actions`,
+GitHub repositories with `github:repository`, and GitHub Packages with
+`github:packages`. Their workflow/repository/package glyphs are explicitly
+generic symbols from GitHub's icon set, not separate product logos.
+`github:copilot-sdk` retains its Copilot family-icon disclosure.
+
+Keep GitHub labels and artwork on GitHub components. `azure:azure-devops` is a
+separate mapping, used only when Azure DevOps is explicitly requested; it is
+never a substitute for GitHub or GitHub Actions.
+
+When artwork is used, resolve every component that needs it, not only those in
+the selected card. Account for all other components with labelled shapes.
+Report gaps and agree a labelled fallback; missing artwork never removes a
+component or selects a different architecture. Offline
 tests validate each mapping, alias and embedded SVG. Repository tests require
 coverage entries for every creator pattern and runtime card.
 
 ## Optional public GitHub search / refresh
 
-These helpers perform outbound HTTPS only with explicit `--allow-network`.
-They request public jgraph resources; they do not receive architecture files
+This helper performs outbound HTTPS only with explicit `--allow-network`.
+It requests public jgraph resources; it does not receive architecture files
 or need credentials. Review organization network policy first.
 
 ```bash
 python3 "$SKILL_DIR/scripts/search_azure2_icons_github.py" --allow-network --search gateway
-python3 "$SKILL_DIR/scripts/search_aws4_icons_github.py" --allow-network --search lambda
 ```
 
 Azure searches the jgraph `dev` tree and emits relative web-library SVG paths,
 not the bundled Microsoft filename inventory. `--validate` checks public image
-URLs and returns failure if any URL check fails. AWS parses `aws4.xml` and emits
-stencil names. No matches, malformed/truncated data, HTTP failures, and invalid
+URLs and returns failure if any URL check fails.
+No matches, malformed/truncated data, HTTP failures, and invalid
 parameters return a nonzero status; never fabricate output when GitHub fails.
 
 For a separate reviewed catalog update, use `--max-results 9999` and capture
 stdout to a **new candidate file outside the installed skill**. Check the exit
 code before using it; shell redirection can create an empty/partial file on
 failure. Record the actual upstream revision and retrieval date before a
-maintainer replaces any catalog. Neither script rewrites installed files.
+maintainer replaces any catalog. The script does not rewrite installed files.
 Never replace the bundled Azure inventory with web-library paths without
 updating its documented meaning and tests.
 
@@ -127,9 +133,9 @@ updating its documented meaning and tests.
   fragments, not executable complete diagrams or real customer topology.
 
 Example requests: "Diagram the Azure components in my approved input with private
-endpoints distinguished from managed services"; "Show the AWS VPC tiers and
-confirmed egress paths"; "Show our confirmed Azure-AWS connection and identity
-flow". Do not assume VPN/ExpressRoute/Direct Connect are interchangeable or present.
+endpoints distinguished from managed services"; "Show the confirmed GitHub
+Actions build and approval flow into Azure"; "Show the Microsoft Entra login
+interaction with the API". Use only supplied connectivity and identity facts.
 
 ## Source and asset terms
 
@@ -140,7 +146,7 @@ MIT license does not replace them.
 
 ### Microsoft Azure artwork
 
-The 714 SVG icons remain byte-for-byte as supplied. Their current official terms
+The 710 retained SVG icons remain byte-for-byte as supplied. Their official terms
 are published at `https://learn.microsoft.com/azure/architecture/icons/`. They
 are not MIT-licensed by this import.
 
@@ -222,17 +228,19 @@ permit architectural diagrams, training materials and documentation, including
 copying, distribution and display for those uses. Preserve the icon, proportions
 and nearby product name; do not use it to identify another product.
 
-The GitHub and Copilot SVGs come unchanged from the pinned `primer/octicons`
+The seven GitHub SVGs come unchanged from the pinned `primer/octicons`
 revision recorded in the catalog. Retain `assets/github/LICENSE.txt` (MIT).
-These identify GitHub products; the Copilot SDK mapping uses the Copilot family
-icon, not dedicated SDK artwork. Trademarks remain with their owners.
+The mark and named capability glyphs identify GitHub responsibilities; generic
+workflow, repository, and package symbols retain explicit disclosures. The
+Copilot SDK mapping uses the Copilot family icon, not dedicated SDK artwork.
+Trademarks remain with their owners.
 
 The added Fabric ontology, graph model and operations-agent SVGs come from the
-same MIT-licensed Fabric package as the existing subset. The original Azure
-snapshot and its source fingerprint remain unchanged; exact Azure catalog
-entries are verified against the V24 archive recorded in the catalog.
+same MIT-licensed Fabric package as the existing subset. Retained Azure files
+keep their original per-file fingerprints; the source manifest records the
+retained subset. Exact Azure catalog entries are verified against the V24
+archive recorded in the catalog.
 
-The supplied AWS catalog contains stencil names, not artwork or libraries.
 The Azure catalog is the local Microsoft inventory despite its inherited
 `azure2` filename. Names and refresh scripts grant no rights to third-party
 logos or fetched jgraph assets. The repository/plugin MIT license does not
@@ -241,8 +249,11 @@ supersede these asset terms.
 ### Import adaptations
 
 - Renamed the skill to describe its architecture deliverable; retained Azure,
-  AWS/multicloud, auth/API, and pipeline guidance and repaired service/subnet
+  Microsoft ecosystem, auth/API, and pipeline guidance and repaired service/subnet
   distinctions, XML examples, and icon advice.
+- Limited the pack to Microsoft and GitHub, with Azure DevOps available only
+  when explicitly requested. Removed competing-provider material and third-party
+  product/device artwork, and added separately mapped GitHub capability glyphs.
 - Replaced mandatory hosted MCP use with local standard-library generation and
   explicit consent for hosted content transmission. No hosted service or
   dependencies are installed automatically.

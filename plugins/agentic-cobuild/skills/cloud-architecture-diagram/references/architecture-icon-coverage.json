@@ -15,6 +15,20 @@
       "presentation": "generic-symbol",
       "reason": "No dedicated product artwork in the verified Azure package. The document symbol represents processing, not a Microsoft product logo; preserve the service label and non-document modalities in the diagram."
     },
+    "azure:durable-task": {
+      "label": "Durable Task",
+      "aliases": ["Durable Functions", "Durable Task Scheduler", "Durable Task Framework"],
+      "icon_id": null,
+      "presentation": "labelled-box",
+      "reason": "The Azure package has no Durable Task artwork. Show it as a labelled orchestration boundary on its host (Azure Functions, Container Apps or App Service) rather than substituting the Functions icon."
+    },
+    "azure:purview": {
+      "label": "Microsoft Purview",
+      "aliases": ["Purview"],
+      "icon_id": null,
+      "presentation": "labelled-box",
+      "reason": "The Azure package has no Microsoft Purview artwork. Use a labelled card and keep its role (classification, sensitivity labels, data governance) explicit."
+    },
     "azure:voice-live": {
       "label": "Azure Voice Live",
       "aliases": ["Voice Live"],
@@ -35,6 +49,26 @@
       "icon_id": null,
       "presentation": "labelled-box",
       "reason": "Show IQ as a labelled capability boundary containing its selected ontology, data agent, graph or semantic-model items. Do not equate the whole boundary with one item."
+    },
+    "github:actions": {
+      "label": "GitHub Actions",
+      "aliases": ["GitHub Actions workflow", "GitHub workflows"],
+      "icon_id": "github:workflow",
+      "presentation": "generic-symbol",
+      "reason": "The official GitHub workflow Octicon identifies a workflow, not a dedicated Actions product logo. Keep the GitHub Actions label and confirmed runner responsibilities; never substitute Azure DevOps artwork."
+    },
+    "github:repository": {
+      "label": "GitHub repository",
+      "aliases": ["GitHub repo", "GitHub repositories"],
+      "icon_id": "github:repo",
+      "presentation": "generic-symbol",
+      "reason": "The official GitHub repository Octicon identifies the repository responsibility, not a separate hosting product logo. Preserve the GitHub repository label."
+    },
+    "github:packages": {
+      "label": "GitHub Packages",
+      "icon_id": "github:package",
+      "presentation": "generic-symbol",
+      "reason": "The official GitHub package Octicon represents packages, not a dedicated registry product logo. Preserve the GitHub Packages label and confirmed package flow."
     },
     "github:copilot-sdk": {
       "label": "GitHub Copilot SDK",

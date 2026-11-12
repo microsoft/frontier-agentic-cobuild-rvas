@@ -13,7 +13,7 @@ Usage
     d.edge(api, db, "TDS 1433")
     d.save("out/architecture.drawio")
 
-Optional export + trim (see SKILL.md "Local export and optional trimming"):
+Optional export + trim (see references/export-and-checks.md):
     drawio -x -f png -s 2 --border 10 -o out/architecture.png out/architecture.drawio
     python trim_png.py out/architecture.png
 
@@ -139,6 +139,34 @@ def resolve_component_icon(skill_dir: str, name: str) -> dict:
             raise ValueError(f"generic symbol cannot be product artwork for {key!r}")
     return {"id": key, **entry,
             "path": resolve_icon(root, icon_id) if icon_id is not None else None}
+
+
+def search_icons(skill_dir: str, query: str, limit: int = 15) -> list[dict]:
+    """List catalog and coverage candidates whose ID, label or alias contains `query`.
+
+    Discovery only: it never picks an icon. Feed a returned `id` to
+    resolve_component_icon.
+    """
+    if not isinstance(query, str) or not query.strip():
+        raise ValueError("icon search query is required")
+    if not isinstance(limit, int) or limit < 1:
+        raise ValueError("limit must be a positive integer")
+    root = Path(skill_dir).resolve()
+    catalog = json.loads((root / "references/microsoft-icon-catalog.json").read_text(encoding="utf-8"))
+    coverage = json.loads((root / "references/architecture-icon-coverage.json").read_text(encoding="utf-8"))
+    entries = {key: {"label": entry["label"], "aliases": entry.get("aliases", []),
+                     "presentation": entry.get("presentation", "product-icon")}
+               for key, entry in catalog["icons"].items()}
+    entries.update({key: {"label": entry["label"], "aliases": entry.get("aliases", []),
+                          "presentation": entry["presentation"]}
+                    for key, entry in coverage["components"].items()})
+    needle = query.strip().casefold()
+    found = [
+        {"id": key, "label": entry["label"], "presentation": entry["presentation"]}
+        for key, entry in sorted(entries.items())
+        if any(needle in value.casefold() for value in (key, entry["label"], *entry["aliases"]))
+    ]
+    return found[:limit]
 
 
 def svg_data_uri(path: str) -> str:

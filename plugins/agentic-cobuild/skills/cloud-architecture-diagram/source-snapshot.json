@@ -2,8 +2,9 @@
   "source_name": "drawio-mcp-diagramming",
   "source_version": "1.0.0",
   "source_last_updated": "2026-05-19",
+  "snapshot_scope": "Retained import manifest; the adapted Azure inventory hash reflects the bundled subset. Additional artwork is tracked in microsoft-icon-catalog.json.",
   "snapshot_algorithm": "SHA-256 of UTF-8 concatenation of sorted lines: <file sha256>  <relative POSIX path>\\n; excludes __pycache__",
-  "snapshot_sha256": "df8ac37c6c854e6372e6cd0b288a9e0d3615b11c749c14ac97e3739b755ab918",
+  "snapshot_sha256": "d8a6345042acb7b4773947d719c123bcc68ed633e0fcccb5318ffe4a72cd8c55",
   "archive_sha256": "c9d797272f00a736497f3998693a3100e112725f6b0aab2617afed01b0fe0768",
   "files": [
     {
@@ -565,10 +566,6 @@
     {
       "path": "assets/az/i/c08/02827-Azure-Database-PostgreSQL-Server-Group.svg",
       "sha256": "f8a66f5ef6e0d8a9e37b314424f798b5a8d046505cf898d345e1680edfaf6efd"
-    },
-    {
-      "path": "assets/az/i/c08/03490-Oracle-Database.svg",
-      "sha256": "f5216b8e4f0b791e8be27015c8b8773765937c5f2602d09db66d917a91392b75"
     },
     {
       "path": "assets/az/i/c08/03565-SQL-Database-Fleet-Manager.svg",
@@ -1395,10 +1392,6 @@
       "sha256": "d39322382b9894cee4c3608e56e44217376ac8e4fa98a5d2e9c0c7ed27155e6a"
     },
     {
-      "path": "assets/az/i/c14/10220-SendGrid-Accounts.svg",
-      "sha256": "377085985ae01b2b734d4c91960cd411c6d9202b0f8eb2671d67bcd8066e9894"
-    },
-    {
       "path": "assets/az/i/c14/10221-Event-Grid-Subscriptions.svg",
       "sha256": "d685b65f39515d1f8514dae0e773c2c4f6399b6236e88409a6e78428d67cd83a"
     },
@@ -1409,14 +1402,6 @@
     {
       "path": "assets/az/i/c14/10836-Azure-Service-Bus.svg",
       "sha256": "eaf42cb87aedf608f60d40b601eb86491daaa71b8eab40a935e8e7fa2e62a2cf"
-    },
-    {
-      "path": "assets/az/i/c15/00399-Device-Security-Apple.svg",
-      "sha256": "d9187484889d755062895dc76ef94b7804d6b6cbade23304bea718148d9012e2"
-    },
-    {
-      "path": "assets/az/i/c15/00399-Device-Security-Google.svg",
-      "sha256": "5855ea077f0030dc91885f0ab42d0023b0957886125bf1ed0d115e6e12e16f72"
     },
     {
       "path": "assets/az/i/c15/00399-Device-Security-Windows.svg",
@@ -2871,12 +2856,8 @@
       "sha256": "186bb3c06f0def33fde95f543cda865418fd105f4542f1ad60ce884d836da547"
     },
     {
-      "path": "references/aws4-complete-catalog.txt",
-      "sha256": "79f6df3258a4ca79108b71dc2f29428de02eff3fe9e81be9f94ad913f60c10d4"
-    },
-    {
       "path": "references/azure2-complete-catalog.txt",
-      "sha256": "3f32831ed23cfc5910508520c693b13db2d5de5e4cd119b6b67d5ead18265efb"
+      "sha256": "b27b500ca3dc704c21aca1d22624711b011ab2e73f5a0f1be1c1a3840b0dda13"
     },
     {
       "path": "references/layout-antipatterns.md",
@@ -2893,10 +2874,6 @@
     {
       "path": "scripts/drawio_builder.py",
       "sha256": "093632fbe6d499a1dea1eac835775f3153fd8a188b69804594d287a35ff69735"
-    },
-    {
-      "path": "scripts/search_aws4_icons_github.py",
-      "sha256": "84c3c40d8a341fb709f2fa56aaf93fd8623a23a1945f6863ce7676c092b9e805"
     },
     {
       "path": "scripts/search_azure2_icons_github.py",

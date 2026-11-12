@@ -1,8 +1,8 @@
 ---
 name: cloud-architecture-diagram
-description: Create, edit, or troubleshoot Azure-first architecture diagrams as editable draw.io files, with AWS and multicloud topology support and identity, API, and CI/CD flow diagrams. Use for architecture visualization, network boundaries, interaction flows, or missing diagram icons. Not for deploying infrastructure, live cloud discovery, security certification, or unrelated charts.
+description: Create, edit, or review Azure and Microsoft ecosystem architecture, GitHub CI/CD, and auth/API diagrams as editable draw.io files; resolve Microsoft and GitHub icons. Use for architecture visualization, diagram critique, or missing icons. Azure DevOps only when explicitly requested. Not for competing-cloud architecture, deployment, live discovery, security certification, or unrelated charts.
 metadata:
-  version: "1.0.1"
+  version: "1.1.0"
   contributors:
     - Paolo Montagna (adapter)
     - Marco Olivo (adapter)
@@ -19,119 +19,140 @@ Further adaptation by Marco Olivo. See
 [source and asset terms](references/REFERENCE.md#source-and-asset-terms) for
 provenance and the separate artwork restrictions.
 
-Create accurate, readable diagrams from facts the user supplies. Azure is the
-default cloud when specified by the brief, not permission to assume an unknown
-provider. AWS, multicloud, auth/API flows, and CI/CD workflows are also supported.
-The name describes the outcome; **draw.io remains the editable file format and
-optional editor/renderer**, not a technology-independent runtime.
+Create accurate, readable diagrams from facts the user supplies. The supported
+scope is Azure, the Microsoft ecosystem, and GitHub; confirm the actual products
+rather than inferring them. Azure DevOps is supported only when explicitly
+requested. Keep GitHub names and artwork distinct from Azure DevOps; a GitHub
+repository, Actions workflow, or Copilot component keeps its own identity.
+The name describes the outcome;
+**draw.io is the editable file format and optional editor/renderer**, not a
+technology-independent runtime.
 
 ## Inputs and outputs
 
-Establish the provider(s), components and relationships, verified network/service
-deployment model, audience/detail level, desired format, and writable output
-directory. For edits, identify the existing `.drawio` and any generator, requested
-changes, and which file is authoritative. Read only user-authorized inputs.
+Establish the components and relationships, audience/detail level, and desired
+format. For Azure topology, also establish the verified network/service
+deployment model. For artifact writes, establish a writable
+output directory. For edits or reviews, identify the existing `.drawio`, any
+generator, the requested scope, and which file is authoritative. Read only
+user-authorized inputs.
 
-If architecture facts or permissions are missing, report the specific gaps.
-Ask for them when interactive; otherwise provide a clearly labelled incomplete
-draft only if enough facts exist, with unknowns explicit. Never invent resources,
-CIDRs, ports, redundancy, private access, or credentials. A synthetic example is
-not a discovered customer architecture.
+When architecture facts or permissions are missing, report the specific gaps. Ask
+for them when interactive; otherwise deliver a clearly labelled incomplete draft
+when enough facts exist, with unknowns explicit. Take resources, CIDRs, ports,
+redundancy, private access and credentials from the user's facts. A synthetic
+example is not a discovered customer architecture.
 
-Outputs are an editable `.drawio`, optionally a user-owned Python generator, and
-requested PNG/SVG/PDF exports when an approved renderer is available. Report file
-paths, assumptions, source facts, missing components/icons, and the exact review
-status. XML validation is not evidence of visual correctness or cloud security.
+Creation and editing produce an editable `.drawio`, optionally a user-owned
+Python generator, and requested PNG/SVG/PDF exports when an approved renderer is
+available. Review-only work produces findings without modifying the source.
+Report file paths, assumptions, source facts, missing components/icons, and the
+exact review status. XML validation is not evidence of visual correctness or
+cloud security.
 
-Do not use this skill to provision infrastructure, enumerate live subscriptions,
-deploy services, certify security/compliance, or create unrelated statistical
-charts. Explain that distinction without accessing cloud accounts.
+Out of scope: provisioning infrastructure, enumerating live subscriptions,
+deploying services, certifying security/compliance, competing-cloud or
+competing-product architecture, and unrelated statistical charts. Explain the
+scope gap without accessing cloud accounts, relabelling a competing product as
+Azure, or silently dropping a supplied component.
 
 ## Tools, permissions, and privacy
 
 | Capability | Prerequisites and access |
 |---|---|
 | Local `.drawio` generation (default) | Python 3.10+ standard library; read access to this skill and approved inputs, write access to the requested output directory. No network, credentials, MCP, or Python package required. |
-| Local rendering | Separately installed, organization-approved draw.io desktop CLI; local executable/display support appropriate to the platform (Linux Electron may require an existing display or approved virtual display). No automatic installs, servers, sandbox disabling, or deployment. |
-| Independent review | A read-only `explore` subagent that can inspect the generated `.drawio` and any local PNG/SVG exports. The reviewer receives only user-approved local artifact paths and architecture facts; it does not edit files or access cloud accounts. |
-| Optional PNG trim | Pillow from [requirements.txt](requirements.txt), installed explicitly in an approved isolated environment. Modifies the selected PNG in place; preserve a copy when needed. |
-| Optional hosted MCP | Organization-approved `https://mcp.draw.io/mcp` and discovered `drawio/create_diagram` capability; network access and any authentication required by that approved service/client. Inspect its current tool schema rather than assuming arguments. |
-| Optional catalog refresh | Explicit `--allow-network`; HTTPS to public GitHub API/raw endpoints. No token is required by these scripts; rate limits or access failures are reported. This is a separate human-reviewed refresh, not a normal diagram step. |
+| Local rendering | Separately installed, organization-approved draw.io desktop CLI; local executable/display support appropriate to the platform (Linux Electron may need an existing display or approved virtual display). Export commands are in [export-and-checks.md](references/export-and-checks.md). |
+| Independent review | A read-only `explore` subagent that inspects the generated `.drawio` and any local PNG/SVG exports. It receives only user-approved local artifact paths and architecture facts, edits nothing, and has no cloud access. |
+| Optional PNG trim | Pillow from [requirements.txt](requirements.txt), installed explicitly in an approved isolated environment. Modifies the selected PNG in place; keep a copy when needed. |
+| Optional hosted MCP | Organization-approved `https://mcp.draw.io/mcp` and discovered `drawio/create_diagram` capability; network access and any authentication that service requires. Inspect its current tool schema for arguments. |
+| Optional catalog refresh | Offline comparison against a supplied icon pack; the public GitHub search helper separately requires explicit `--allow-network`, HTTPS, and no token. Maintainers review candidates outside the installed skill; this is not a normal diagram step. |
 
-Do not add MCP configuration to Baseline, change shared runtime configuration,
-or silently install dependencies. Before any hosted MCP call or browser upload,
-obtain organization approval **and explicit user consent to transmit the exact
-diagram content**, including embedded images and labels. Never automatically send
-customer architecture, secrets, tokens, internal identifiers, or source files.
-Redact sensitive details and confirm the approved payload; never include real
-tokens in auth-flow examples. Approval to diagram locally is not upload consent.
+Keep MCP configuration out of Baseline, shared runtime configuration unchanged,
+and dependency installs explicit. Hosted MCP calls and browser uploads need
+organization approval **and explicit user consent to transmit the exact diagram
+content**, including embedded images and labels. Customer architecture, secrets,
+tokens, internal identifiers and source files stay local unless the user approves
+the redacted payload. Auth-flow examples use placeholder tokens. Approval to
+diagram locally is not upload consent.
 
-If MCP is unavailable or not approved, use local XML generation and explicitly
-say hosted editing is unavailable/not used. If rendering/export is unavailable,
-deliver only the local `.drawio` with **not visually reviewed; export not produced**.
-Do not claim the missing live capability succeeded or silently substitute a hosted
-renderer.
+When MCP is unavailable or not approved, generate XML locally and say hosted
+editing was not used. When rendering or export is unavailable, deliver the local
+`.drawio` marked **not visually reviewed; export not produced**, and report the
+missing capability as missing. Distinguish an unavailable renderer from rendering
+that was not requested or was prohibited; neither requires a renderer probe.
 
 ## Locate installed resources
 
 Resolve `SKILL_DIR` to the **absolute directory of this loaded SKILL.md**, not the
 repository cwd or a guessed installation path. All references, scripts, and assets
-below are relative to that directory. Treat the installed skill as read-only.
-Write generators, exports, and refresh candidates only to the user's output area.
+below are relative to that directory. Treat the installed skill as read-only and
+write generators, exports, and refresh candidates to the user's output area.
 
 ## Workflow
 
-1. Confirm inputs, scope, privacy, and architecture facts. For existing diagrams,
-   preserve unrelated pages, IDs, layout, and edits; work on a copy unless overwrite
-   is authorized. The builder creates new files, with one or more pages; it is not
-   an existing-file editor or synchronizer. Do not regenerate an existing diagram
-   from an incomplete description.
-   Account for every named external system and channel in the supplied scope or
-   integration ledger. A destination does not establish its adapter. Show missing
-   mechanisms as unresolved draft facts and request the architectural decision;
-   preserve confirmed identities, permissions, ownership and trust boundaries.
-2. Choose topology or temporal flow. Read
-   [topology-patterns.md](references/topology-patterns.md) for deployment boundaries,
-   Azure/AWS examples, and auth/API/pipeline patterns.
-3. Look up icons **locally** under the
-   [coverage contract](references/REFERENCE.md#creator-component-coverage).
-   Resolve named components with `resolve_component_icon`; it returns an exact
-   catalog icon, an explicit family/generic symbol, or a labelled-box mapping.
-   Keep its canonical label and report non-product mappings. Check the selected
-   creator pattern/runtime in `references/architecture-icon-coverage.json`;
-   these are coverage candidates, not a required service composition.
-   Use `resolve_icon` for exact family-qualified IDs such as `azure:ai-search`,
-   `fabric:ontology`, `power-platform:copilot-studio`, and `entra:workload-id`.
-   Search remaining Azure filenames under `assets/az/i` or AWS stencil names in
-   `references/aws4-complete-catalog.txt`. Unknown components are explicit errors:
-   propose a labelled shape and record the coverage gap instead of substituting
-   another product or dropping the component. Do not fetch artwork per invocation.
-4. Build with [scripts/drawio_builder.py](scripts/drawio_builder.py), using arithmetic
-   spacing and embedded local SVGs. Generic shapes require no image lookup.
-   Keep facts separate from layout choices. Frames use absolute coordinates and
+Choose the branch before taking action:
+
+| Request | Route |
+|---|---|
+| Create | Follow steps 1-8. |
+| Edit | Confirm the authoritative input in step 1, change only the requested content on an authorized copy, then follow steps 5-8. Use steps 2-4 only for new or changed content. |
+| Review only | Confirm the supplied artifacts and review scope, then follow steps 5-8 without rebuilding or repairing the source. Use existing exports; create an export only when requested and permitted. Return findings and proposed repairs, not edits. |
+| Icon lookup only | Follow the icon procedure in step 3 and return the mapping or coverage gap; no diagram or review gate is needed. |
+
+1. **Confirm** inputs, scope, privacy, and architecture facts. For existing
+   diagrams, work on a copy unless overwrite is authorized, and preserve unrelated
+   pages, IDs, layout, and edits. The builder creates new files with one or more
+   pages; it neither edits nor synchronizes an existing file, so rebuild an
+   existing diagram only from a complete description. Account for every named
+   external system and channel in the supplied scope or integration ledger. A
+   destination does not establish its adapter: show a missing mechanism as an
+   unresolved draft fact and request the architectural decision. Preserve
+   confirmed identities, permissions, ownership and trust boundaries.
+2. **Choose** the topology or temporal flow from
+   [topology-patterns.md](references/topology-patterns.md): deployment boundaries,
+   Azure examples, and auth/API/pipeline patterns.
+3. **Resolve icons locally when artwork is used.** Plain flows and diagrams
+   using only labelled generic shapes skip catalog lookup. For Microsoft or GitHub
+   artwork, follow [builder-api.md#icons](references/builder-api.md#icons), the
+   authoritative lookup procedure. Done when every component using artwork has a
+   `resolve_component_icon` result (exact icon, family/generic symbol, or labelled
+   box) or a recorded coverage gap. Keep its canonical label and report non-product
+   mappings. Every bundled Azure SVG has an `azure:<slug>` catalog ID; GitHub
+   artwork uses separate `github:*` IDs.
+   Check the selected creator pattern or runtime in
+   `references/architecture-icon-coverage.json`; those are coverage candidates, not
+   a required service composition. An unknown component is an explicit
+   error: propose a labelled shape and record the gap, so the diagram never shows
+   another product's icon or drops the component. Artwork comes from the bundled
+   catalog, never from per-invocation fetches.
+4. **Build** with [scripts/drawio_builder.py](scripts/drawio_builder.py), using
+   arithmetic spacing and embedded local SVGs; generic shapes need no image lookup.
+   Lay out per [design-conventions.md](references/design-conventions.md). Keep
+   facts separate from layout choices. Frames use absolute coordinates and
    `parent="1"`: visual nesting is not semantic mxGraph grouping.
-5. Save and run the builder's `validate_file` on the XML. Check unique page IDs,
-   page-local cell IDs and parent/edge references, `as="geometry"`, correct page
-   dimensions, labels, and standalone images.
-   See [standalone-file-requirements.md](references/standalone-file-requirements.md).
-   On any helper exception, report the failing input/path and cause; correct it
-   before continuing. Do not hide malformed input, missing files, or write failures.
-6. If requested and available, render locally and inspect the export. Use
-   [layout-antipatterns.md](references/layout-antipatterns.md) for overlap repair.
-   Iterate only on user-owned artifacts. If the renderer is missing, stop the
-   export step and report the limitation without uploading anywhere.
-7. Run the bounded independent critique in
-   [review-contract.md](references/review-contract.md) after local validation and
-   the rendering attempt. Use one read-only reviewer for semantic, cross-page, and
-   visual defects. Repair blocking and material findings, then send one targeted
-   recheck to that same reviewer when multi-turn review is available. Stop when no
-   blocking or material finding remains, or after two repair passes. Before
-   stopping, account for every critique category as passed, finding,
-   non-applicable, or blocked. Record residual findings instead of starting a
-   fresh critique cycle.
-8. Deliver paths and review status. Retain the generator with its generated file
-   if requested; warn that regeneration replaces hand edits. Do not commit files
-   automatically.
+5. **Validate** the saved XML with the builder's `validate_file`. Done when page
+   IDs are unique, cell IDs and parent/edge references resolve page-locally,
+   `as="geometry"` is present, page dimensions, labels and standalone images are
+   correct. See [standalone-file-requirements.md](references/standalone-file-requirements.md).
+   On any helper exception, report the failing input/path and cause, and correct it
+   before continuing when editing is authorized. In review-only work, record a
+   source defect as a finding and continue only the checks supported by the
+   available evidence; preserve the supplied file.
+6. **Render** locally when requested and available, then inspect the export; repair
+   overlaps with [layout-antipatterns.md](references/layout-antipatterns.md),
+   iterating on user-owned artifacts only when editing is authorized. Record
+   rendering as **not requested**, **prohibited**, **unavailable** (including a
+   failed export and its cause), or **completed** with inspected export paths.
+   Only requested, permitted rendering warrants a capability check or attempt.
+7. **Critique** independently per [review-contract.md](references/review-contract.md),
+   after validation and the rendering decision. Done when every critique category
+   is recorded as passed, finding, non-applicable, or blocked, and no blocking or
+   material finding remains, two repair passes have completed, or the review-only
+   report is complete. The contract defines gate outcomes, the reviewer, the
+   recheck and the report.
+8. **Deliver** paths and review status. Keep the generator beside its generated
+   file when requested, and warn that regeneration replaces hand edits. Leave the
+   commit to the user.
 
 ### Minimal local generator
 
@@ -159,98 +180,11 @@ d.edge(ai, fabric, "Grounded data request (example)", sx=1, sy=0.5, tx=0, ty=0.5
 d.save(sys.argv[2])
 ```
 
-Available helpers: `banner`, `container`, `sub`, `note`, `icon`, `card`, `stage`,
-`decision`, `terminator`, `edge`, and `box`/`raw` for custom styles.
-Labels are plain text (including `<`, `&`, and line breaks), not HTML.
-Build vertices before their edges. Both coordinates of each anchor are required,
-in 0..1; waypoints and geometry must be finite. Nonpositive sizes are rejected.
-`find_icon` returns the first lexically sorted matching filename; inspect the
-returned filename and use a more specific fragment when multiple services match.
-Use `resolve_icon` for the exact Microsoft product catalog; it rejects unknown IDs,
-unsafe paths, and changed icon bytes rather than falling back to a similar service.
-Use `resolve_component_icon(SKILL_DIR, "Teams")` for the coverage mapping. Its
-`path` is an SVG path or `None` for a labelled box; `label`, `presentation` and
-`reason` distinguish product artwork from a family icon or generic symbol.
-Render a missing path as a labelled card, not a missing-image placeholder.
+Further references, read when the branch applies:
 
-### Multiple pages and saved-file validation
-
-Create a `Diagram` for each view, then import and call
-`save_diagrams([context, components, data_flow, deployment], output_path)` to write
-one `.drawio` in that order. Page names become page IDs and must be unique.
-Cell IDs may repeat across pages; references must resolve within their own page.
-`Diagram.save` uses the same writer for a single page.
-
-Import and call `validate_file(output_path)` after saving or making targeted edits.
-It returns the parsed XML root after checking the uncompressed builder format,
-page dimensions, base cells, references, geometry, and embedded images.
-Check expected page names/order and architecture meaning separately. Compressed
-editor files require an explicit conversion on a copy before this validator can
-read them. The writer replaces its destination; it does not merge existing pages
-or preserve hand edits.
-
-### Local export and optional trimming
-
-Run the installed executable using absolute paths, for example:
-
-```bash
-drawio -x -f png -s 2 --border 10 -o "$OUTPUT_DIR/architecture.png" "$OUTPUT_DIR/architecture.drawio"
-python3 "$SKILL_DIR/scripts/trim_png.py" --pad 14 "$OUTPUT_DIR/architecture.png"
-```
-
-Set both variables to actual approved absolute directories. `-f svg` or `-f pdf`
-selects other formats. Do not pass `--no-sandbox`. If Electron/display support
-is unavailable, report that prerequisite; do not launch background display
-servers or relax protections automatically. Check process exit status and a new,
-nonempty, decodable export; a stale existing file is not success.
-
-Trim only when desired for a uniform-border PNG, not where deliberate page
-layout must be preserved. Trimming composites transparency onto `--bg R,G,B`
-(white by default), crops only the exported page border, and reapplies `--pad`.
-It does not edit the source service icons. Blank images, bad PNGs, missing
-Pillow, and invalid parameters fail explicitly.
-
-### Visual and semantic review
-
-- Preserve each page's declared purpose. Repeated entities are useful only when
-  the page shows a different concern; repeated meaning is duplication.
-- Trace important flows end to end. The direction, caller, authorization owner,
-  and state transition must agree with the confirmed facts and with every other
-  page where the flow appears.
-- Keep actors behind an interaction boundary. A person reaches a store, queue,
-  model, or managed service through the confirmed channel or application path.
-- Distinguish proposal from execution. A model or agent can propose a tool
-  operation; trusted application code authorizes and executes it.
-- Prefer 3-4 zones, a left-to-right main path, 50-70 px service icons with nearby
-  full service names, and labels at least 13 px. Do not distort, crop, flip, or
-  rotate Microsoft icons or use them to represent your own service.
-- Use thick VNet/VPC frames and dashed subnet frames only where confirmed.
-  PaaS services and their private endpoints are distinct; a private endpoint
-  does not move the managed service into the subnet.
-- Label flows with known protocols/ports or explicit unknowns. Reserve red for
-  failure/denial, use blue for primary traffic and dashed lines for secondary
-  flows, and explain conventions in a legend.
-- Pin anchors and route parallel edges through separate corridors. A simplified
-  trunk must be labelled as an aggregate flow, not imply that a subnet is an
-  application endpoint. Never remove meaningful flows merely to reduce clutter.
-- Number temporal steps and show known failure paths. Use static connectors by
-  default. Apply `flowAnimation=1` only when requested; actual animation support
-  varies by viewer/exporter and must be checked, not promised. PNG/PDF are static.
-- Inspect for overlapping labels, crossed icons, clipping, and wrong/missing
-  images in the requested renderer. If inspection was impossible, state it.
-- Record the independent critique, targeted recheck, repairs, stop reason, and
-  residual limitations. Local self-review alone is not the independent gate.
-
-## Offline checks
-
-Resolve `SKILL_DIR` as above, then run from any directory (no network or customer data):
-
-```bash
-python3 -B -m unittest discover -s "$SKILL_DIR/tests" -v
-```
-
-The tests include a copied installed-like skill imported from an unrelated cwd.
-Pillow tests require the optional requirement; missing Pillow is reported as
-skipped, not passed. [evals/evals.json](evals/evals.json) contains synthetic
-instruction scenarios; these are not a live benchmark. The pinned creator's
-`claude -p` description evaluator is not Copilot-compatible and is not run here.
+- Shape helpers, icon lookup, multi-page save and `validate_file`:
+  [builder-api.md](references/builder-api.md).
+- Export, PNG trim, offline tests, Azure catalog refresh:
+  [export-and-checks.md](references/export-and-checks.md).
+- Icon sources, licences and the optional public GitHub search:
+  [REFERENCE.md](references/REFERENCE.md).

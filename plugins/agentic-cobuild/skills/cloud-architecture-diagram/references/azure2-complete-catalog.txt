@@ -1,4 +1,4 @@
-Matched 714 icons (showing 714)
+Matched 710 icons (showing 710)
 c01/00028-Batch-AI.svg
 c01/00030-Machine-Learning-Studio-(Classic)-Web-Services.svg
 c01/00031-Genomics.svg
@@ -138,7 +138,6 @@ c08/02390-Azure-SQL.svg
 c08/02392-SSIS-Lift-And-Shift-IR.svg
 c08/02750-Azure-SQL-Edge.svg
 c08/02827-Azure-Database-PostgreSQL-Server-Group.svg
-c08/03490-Oracle-Database.svg
 c08/03565-SQL-Database-Fleet-Manager.svg
 c08/035656437-Azure-DocumentDB.svg
 c08/03675-Azure-Managed-Redis.svg
@@ -345,12 +344,9 @@ c14/10215-Event-Grid-Domains.svg
 c14/10216-Azure-Data-Catalog.svg
 c14/10218-Integration-Accounts.svg
 c14/10219-App-Configuration.svg
-c14/10220-SendGrid-Accounts.svg
 c14/10221-Event-Grid-Subscriptions.svg
 c14/10363-Logic-Apps-Custom-Connector.svg
 c14/10836-Azure-Service-Bus.svg
-c15/00399-Device-Security-Apple.svg
-c15/00399-Device-Security-Google.svg
 c15/00399-Device-Security-Windows.svg
 c15/029797391-Engage-Center-Connect.svg
 c15/10329-Intune.svg

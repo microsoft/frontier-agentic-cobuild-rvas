@@ -39,7 +39,6 @@ def load_helper(name):
 builder = load_helper("drawio_builder")
 trim_png = load_helper("trim_png")
 azure = load_helper("search_azure2_icons_github")
-aws = load_helper("search_aws4_icons_github")
 HAS_PILLOW = importlib.util.find_spec("PIL") is not None
 
 
@@ -284,6 +283,89 @@ class BuilderTests(OfflineCase):
                 uri = builder.svg_data_uri(path)
                 self.assertEqual(unquote(uri.split(",", 1)[1]).encode(), path.read_bytes())
 
+    def test_every_bundled_azure_icon_is_catalogued_and_common_names_resolve(self):
+        catalog = json.loads(MICROSOFT_CATALOG.read_text())["icons"]
+        catalogued = {e["sha256"] for k, e in catalog.items() if k.startswith("azure:")}
+        lines = (SKILL / "references" / "azure2-complete-catalog.txt").read_text().splitlines()[1:]
+        missing = [l for l in lines if hashlib.sha256((ICONS / l).read_bytes()).hexdigest() not in catalogued]
+        self.assertEqual(missing, [])
+        for name, key in (
+            ("Cosmos DB", "azure:cosmos-db"), ("Key Vault", "azure:key-vault"),
+            ("Event Grid", "azure:event-grid"), ("Azure Storage", "azure:storage-account"),
+            ("AKS", "azure:aks"), ("Foundry Agent Service", "azure:foundry-agent-service"),
+            ("Private DNS zone", "azure:dns-zone"),
+        ):
+            with self.subTest(name=name):
+                result = builder.resolve_component_icon(SKILL, name)
+                self.assertEqual((result["id"], result["presentation"]), (key, "product-icon"))
+        for name in ("Purview", "Durable Functions"):
+            with self.subTest(name=name):
+                self.assertEqual(builder.resolve_component_icon(SKILL, name)["presentation"], "labelled-box")
+
+    def test_search_icons_lists_candidates_without_choosing(self):
+        ids = {hit["id"] for hit in builder.search_icons(SKILL, "gateway", limit=100)}
+        self.assertTrue({"azure:application-gateway", "azure:api-management"} & ids)
+        self.assertEqual(builder.search_icons(SKILL, "purview")[0]["presentation"], "labelled-box")
+        self.assertEqual(builder.search_icons(SKILL, "no such synthetic service"), [])
+        self.assertEqual(len(builder.search_icons(SKILL, "azure", limit=3)), 3)
+        for query, limit in (("", 5), ("azure", 0)):
+            with self.subTest(query=query), self.assertRaises(ValueError):
+                builder.search_icons(SKILL, query, limit)
+
+    def test_refresh_catalog_restores_missing_entry_from_pack(self):
+        refresh = load_helper("refresh_azure_catalog")
+        catalog = json.loads(MICROSOFT_CATALOG.read_text())
+        removed = catalog["icons"].pop("azure:search")
+        pack = self.out / "pack" / "general"
+        pack.mkdir(parents=True)
+        shutil.copy(SKILL / removed["path"], pack / "10834-icon-service-Search.svg")
+        report = refresh.compare(self.out / "pack", catalog)
+        self.assertEqual(list(report["uncatalogued"].values()), ["c11/10834-Search.svg"])
+        self.assertEqual(report["not_bundled"], {})
+        self.assertEqual(refresh.add_entries(catalog, report), ["azure:search"])
+        restored = catalog["icons"]["azure:search"]
+        self.assertEqual(restored["sha256"], removed["sha256"])
+        self.assertEqual(restored["upstream_filename"], removed["upstream_filename"])
+        with self.assertRaises(FileNotFoundError):
+            refresh.compare(self.out / "missing", catalog)
+
+    def test_github_components_embed_own_artwork_without_devops_substitution(self):
+        names = {
+            "GitHub": ("github:github", "github:github", "product-icon"),
+            "GitHub Copilot": ("github:copilot", "github:copilot", "product-icon"),
+            "GitHub Actions": ("github:actions", "github:workflow", "generic-symbol"),
+            "GitHub repository": ("github:repository", "github:repo", "generic-symbol"),
+            "GitHub Packages": ("github:packages", "github:package", "generic-symbol"),
+            "GitHub Codespaces": ("github:codespaces", "github:codespaces", "product-icon"),
+            "GitHub Dependabot": ("github:dependabot", "github:dependabot", "product-icon"),
+        }
+        diagram = builder.Diagram("GitHub components", 1200, 400)
+        for index, (name, expected) in enumerate(names.items()):
+            with self.subTest(component=name):
+                result = builder.resolve_component_icon(SKILL, name)
+                self.assertEqual((result["id"], result["icon_id"], result["presentation"]), expected)
+                self.assertTrue(Path(result["path"]).is_relative_to(SKILL / "assets/github/i"))
+                if result["presentation"] == "generic-symbol":
+                    self.assertTrue(result["reason"])
+                uri = builder.svg_data_uri(result["path"])
+                self.assertEqual(unquote(uri.split(",", 1)[1]).encode(), Path(result["path"]).read_bytes())
+                diagram.icon(40 + index * 160, 140, name, uri)
+        root = self.save(diagram)
+        self.assert_structure(root)
+        self.assertEqual(len(root.findall(".//mxCell[@vertex='1']")), len(names))
+        devops = builder.resolve_component_icon(SKILL, "Azure DevOps")
+        self.assertEqual(devops["id"], "azure:azure-devops")
+        self.assertTrue(Path(devops["path"]).is_relative_to(ICONS))
+        self.assertNotEqual(devops["path"], builder.resolve_component_icon(SKILL, "GitHub Actions")["path"])
+
+    def test_competing_products_have_no_catalog_mapping(self):
+        for name in ("AWS", "Amazon S3", "Google Cloud", "Oracle Database", "SendGrid Accounts",
+                     "Device Security Apple", "Device Security Google"):
+            with self.subTest(component=name):
+                with self.assertRaises(FileNotFoundError):
+                    builder.resolve_component_icon(SKILL, name)
+                self.assertEqual(builder.search_icons(SKILL, name), [])
+
     def test_component_names_resolve_legacy_azure_files_without_fuzzy_search(self):
         for names, filename in (
             (("Azure AI Search", "Cognitive Search", "azure:ai-search"), "10044-Cognitive-Search.svg"),
@@ -456,7 +538,7 @@ class BuilderTests(OfflineCase):
 
     def test_every_bundled_svg_embeds_unchanged(self):
         paths = list(ICONS.rglob("*.svg"))
-        self.assertEqual(len(paths), 714)
+        self.assertEqual(len(paths), 710)
         for path in paths:
             with self.subTest(icon=path.name):
                 uri = builder.svg_data_uri(path)
@@ -466,7 +548,7 @@ class BuilderTests(OfflineCase):
     def test_topology_reference_snippets_generate_valid_artifacts(self):
         text = (SKILL / "references" / "topology-patterns.md").read_text()
         snippets = re.findall(r"```python\n(.*?)```", text, re.S)
-        self.assertEqual(len(snippets), 2)
+        self.assertEqual(len(snippets), 1)
         for index, snippet in enumerate(snippets):
             scope = {"Diagram": builder.Diagram}
             exec(compile(snippet, "synthetic-reference-example", "exec"), scope)
@@ -490,6 +572,9 @@ from drawio_builder import resolve_component_icon
 assert resolve_component_icon(skill_dir, "Teams")["presentation"] == "generic-symbol"
 assert resolve_component_icon(skill_dir, "Azure AI Search")["path"].endswith("10044-Cognitive-Search.svg")
 assert resolve_component_icon(skill_dir, "Voice Live")["path"] is None
+assert resolve_component_icon(skill_dir, "GitHub Actions")["path"].endswith("assets/github/i/workflow.svg")
+assert resolve_component_icon(skill_dir, "GitHub")["path"].endswith("assets/github/i/github.svg")
+assert resolve_component_icon(skill_dir, "Azure DevOps")["id"] == "azure:azure-devops"
 """
         generator = cwd / "synthetic_generator.py"
         generator.write_text(snippet)
@@ -512,6 +597,76 @@ assert resolve_component_icon(skill_dir, "Voice Live")["path"] is None
         self.assertFalse(list(installed.rglob("__pycache__")))
 
 
+class CatalogRefreshTests(OfflineCase):
+    def setUp(self):
+        super().setUp()
+        self.refresh = load_helper("refresh_azure_catalog")
+        installed = self.out / "installed"
+        icons = installed / "assets" / "az" / "i"
+        icons.mkdir(parents=True)
+        (icons / "100-Synthetic.svg").write_text(SVG)
+        references = installed / "references"
+        references.mkdir()
+        self.catalog = references / "microsoft-icon-catalog.json"
+        self.catalog.write_text(json.dumps({"schema_version": 1, "icons": {}}))
+        inventory = references / "azure2-complete-catalog.txt"
+        inventory.write_text("Synthetic inventory\n100-Synthetic.svg\n")
+        self.pack = self.out / "pack"
+        self.pack.mkdir()
+        (self.pack / "100-icon-service-Synthetic.svg").write_text(SVG)
+        constants = patch.multiple(self.refresh, SKILL=installed, CATALOG=self.catalog,
+                                   INVENTORY=inventory, ICONS=icons)
+        constants.start()
+        self.addCleanup(constants.stop)
+
+    def invoke(self, *args):
+        with redirect_stdout(io.StringIO()) as stdout, redirect_stderr(io.StringIO()) as stderr:
+            status = self.refresh.main(["--pack-dir", str(self.pack), *map(str, args)])
+        return status, stdout.getvalue(), stderr.getvalue()
+
+    def test_candidate_output_preserves_installed_catalog_and_existing_candidate(self):
+        original = self.catalog.read_bytes()
+        output = self.out / "candidate.json"
+        status, stdout, stderr = self.invoke("--output", output)
+        self.assertEqual(status, 0, stderr)
+        self.assertIn("wrote candidate", stdout)
+        candidate = json.loads(output.read_text())
+        self.assertEqual(candidate["icons"]["azure:synthetic"]["sha256"],
+                         hashlib.sha256(SVG.encode()).hexdigest())
+        self.assertEqual(self.catalog.read_bytes(), original)
+        existing = output.read_bytes()
+        status, _, stderr = self.invoke("--output", output)
+        self.assertEqual(status, 1)
+        self.assertIn("ERROR", stderr.upper())
+        self.assertEqual(output.read_bytes(), existing)
+        self.assertEqual(self.catalog.read_bytes(), original)
+
+    def test_candidate_output_rejects_installed_paths_and_symlinked_directories(self):
+        original = self.catalog.read_bytes()
+        link = self.out / "linked-references"
+        link.symlink_to(self.catalog.parent, target_is_directory=True)
+        for output in (self.catalog, self.catalog.parent / "candidate.json", link / "candidate.json"):
+            with self.subTest(output=output):
+                status, _, stderr = self.invoke("--output", output)
+                self.assertEqual(status, 1)
+                self.assertIn("outside the installed skill", stderr)
+                self.assertEqual(self.catalog.read_bytes(), original)
+        self.assertFalse((self.catalog.parent / "candidate.json").exists())
+
+    def test_refresh_is_read_only_unless_destination_is_selected(self):
+        original = self.catalog.read_bytes()
+        status, stdout, stderr = self.invoke()
+        self.assertEqual(status, 0, stderr)
+        self.assertIn("uncatalogued bundled icons: 1", stdout)
+        self.assertEqual(self.catalog.read_bytes(), original)
+        status, _, stderr = self.invoke("--write")
+        self.assertEqual(status, 0, stderr)
+        self.assertIn("azure:synthetic", json.loads(self.catalog.read_text())["icons"])
+        with self.assertRaises(SystemExit) as result:
+            self.invoke("--write", "--output", self.out / "candidate.json")
+        self.assertEqual(result.exception.code, 2)
+
+
 class RefreshTests(OfflineCase):
     def invoke(self, module, args):
         with patch.object(sys, "argv", [module.__name__, *args]), \
@@ -520,19 +675,15 @@ class RefreshTests(OfflineCase):
         return status, stdout.getvalue(), stderr.getvalue()
 
     def test_refresh_requires_explicit_network_opt_in(self):
-        for module in (azure, aws):
-            with self.subTest(module=module.__name__), redirect_stderr(io.StringIO()), \
-                    self.assertRaises(SystemExit) as result:
-                self.invoke(module, [])
-            self.assertEqual(result.exception.code, 2)
+        with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as result:
+            self.invoke(azure, [])
+        self.assertEqual(result.exception.code, 2)
 
     def test_invalid_limits_rejected_before_network(self):
-        for module in (azure, aws):
-            for limit in ("0", "-1"):
-                with self.subTest(module=module.__name__, limit=limit), \
-                        self.assertRaises(SystemExit) as result:
-                    self.invoke(module, ["--allow-network", "--max-results", limit])
-                self.assertEqual(result.exception.code, 2)
+        for limit in ("0", "-1"):
+            with self.subTest(limit=limit), self.assertRaises(SystemExit) as result:
+                self.invoke(azure, ["--allow-network", "--max-results", limit])
+            self.assertEqual(result.exception.code, 2)
 
     def test_azure_extract_filter_and_sort(self):
         payload = {"tree": [{"path": azure.PATH_PREFIX + "Compute/VM.svg"},
@@ -588,38 +739,6 @@ class RefreshTests(OfflineCase):
         self.assertIsNone(status)
         self.assertIn("synthetic failure", error)
         self.assertEqual([call.args[0].method for call in request.call_args_list], ["HEAD", "GET"])
-
-    def test_aws_xml_parsing_filtering_and_styles(self):
-        xml = """<shapes name="mxgraph.aws4"><shape name='lambda'/>
-                 <shape name="API Gateway"/><shape name="lambda"/></shapes>"""
-        names = aws.extract_shape_names(xml)
-        self.assertEqual(names, ["API Gateway", "lambda"])
-        self.assertEqual(aws.filter_names(names, ["LAMBDA"]), ["lambda"])
-        self.assertEqual(aws.name_to_style(names[0]), "shape=mxgraph.aws4.API_Gateway")
-        with patch.object(aws, "fetch_stencil", return_value=xml):
-            status, output, _ = self.invoke(aws, ["--allow-network", "--search", "lambda", "--verbose"])
-        self.assertEqual(status, 0)
-        self.assertIn("shape=mxgraph.aws4.lambda", output)
-
-    def test_aws_invalid_xml_or_empty_results_fail(self):
-        for xml in ("broken", "<shapes/>", '<shapes name="mxgraph.aws4"><shape/></shapes>',
-                    '<shapes name="mxgraph.aws4"><shape name="a;bad"/></shapes>',
-                    '<shapes name="mxgraph.aws4"/>'):
-            with self.subTest(xml=xml), patch.object(aws, "fetch_stencil", return_value=xml):
-                status, _, error = self.invoke(aws, ["--allow-network"])
-                self.assertEqual(status, 1)
-                self.assertIn("ERROR", error)
-
-    def test_aws_fetch_failure_or_no_matches_fail(self):
-        with patch.object(aws, "fetch_stencil", side_effect=urllib.error.URLError("synthetic failure")):
-            status, _, error = self.invoke(aws, ["--allow-network"])
-        self.assertEqual(status, 1)
-        self.assertIn("synthetic failure", error)
-        with patch.object(aws, "fetch_stencil", return_value='<shapes name="mxgraph.aws4"><shape name="lambda"/></shapes>'):
-            status, output, _ = self.invoke(aws, ["--allow-network", "--search", "missing"])
-        self.assertEqual(status, 1)
-        self.assertIn("No matches", output)
-
 
 class TrimCliTests(OfflineCase):
     def invoke(self, *args, no_site=False):
@@ -720,7 +839,7 @@ class PackageTests(OfflineCase):
     def test_source_fingerprint_and_preserved_assets(self):
         record = json.loads((SKILL / "source-snapshot.json").read_text())
         files = record["files"]
-        self.assertEqual(len(files), 725)
+        self.assertEqual(len(files), 719)
         self.assertEqual([entry["path"] for entry in files], sorted(entry["path"] for entry in files))
         manifest = "".join(entry["sha256"] + "  " + entry["path"] + "\n" for entry in files)
         self.assertEqual(hashlib.sha256(manifest.encode()).hexdigest(), record["snapshot_sha256"])
@@ -731,13 +850,18 @@ class PackageTests(OfflineCase):
 
     def test_catalog_counts_and_local_azure_paths(self):
         azure_lines = (SKILL / "references" / "azure2-complete-catalog.txt").read_text().splitlines()[1:]
-        aws_lines = (SKILL / "references" / "aws4-complete-catalog.txt").read_text().splitlines()[1:]
-        self.assertEqual(len(azure_lines), 714)
+        self.assertEqual(len(azure_lines), 710)
         self.assertTrue(all((ICONS / line).is_file() for line in azure_lines))
         self.assertLessEqual(max(len(line) for line in azure_lines), 70)
         self.assertTrue(all("icon-service-" not in line for line in azure_lines))
-        self.assertEqual(len(aws_lines), 1037)
-        self.assertTrue(all(line.startswith("shape=mxgraph.aws4.") for line in aws_lines))
+
+    def test_pack_excludes_competing_provider_resources(self):
+        removed = re.compile(r"aws4|amazon|google|oracle|sendgrid|device-security-apple", re.I)
+        for path in SKILL.rglob("*"):
+            with self.subTest(path=path):
+                self.assertIsNone(removed.search(path.name))
+        for path in SKILL.rglob("*.md"):
+            self.assertNotRegex(path.read_text(), r"(?i)\b(?:AWS|Amazon|GCP|Google Cloud|multicloud)\b")
 
     def test_microsoft_catalog_sources_and_notices(self):
         catalog = json.loads(MICROSOFT_CATALOG.read_text())
@@ -784,7 +908,17 @@ class PackageTests(OfflineCase):
         for case in cases:
             self.assertTrue({"id", "prompt", "expected_output", "files", "expectations"} <= case.keys())
             self.assertTrue(case["prompt"] and case["expected_output"])
-            self.assertEqual(case["files"], [])
+            self.assertIsInstance(case["files"], list)
+            self.assertEqual(len(case["files"]), len(set(case["files"])))
+            for relative in case["files"]:
+                with self.subTest(case=case["id"], file=relative):
+                    self.assertIsInstance(relative, str)
+                    self.assertFalse(Path(relative).is_absolute())
+                    path = (SKILL / relative).resolve()
+                    self.assertTrue(path.is_relative_to(SKILL.resolve()))
+                    self.assertTrue(path.is_file())
+            referenced = re.findall(r"\bevals/files/[A-Za-z0-9_./-]+", case["prompt"])
+            self.assertTrue(set(referenced) <= set(case["files"]))
             self.assertTrue(all(isinstance(item, str) and item for item in case["expectations"]))
 
     def test_skill_contract_and_no_machine_paths(self):

@@ -11,20 +11,21 @@
         "Separates the private endpoint from the managed Azure SQL service.",
         "Generated mxfile contains a root, base cells, unique IDs, valid references, and geometry attributes.",
         "Embeds any Azure icons without local or remote image references.",
-        "Runs an independent read-only subagent review of the draw.io source and reports that rendering was unavailable.",
+        "Runs an independent read-only subagent review of the draw.io source and reports rendering as prohibited by the user, without probing or invoking a renderer.",
         "Does not invent CIDRs or claim visual review."
       ]
     },
     {
       "id": 2,
-      "prompt": "Draw a synthetic AWS app in a VPC calling S3, plus an Azure API Management service calling that app through an already configured HTTPS endpoint. We need an offline draw.io file, and the renderer has no AWS stencil library. Do not infer a private cross-cloud connection.",
-      "expected_output": "A multicloud editable diagram using labelled generic AWS shapes and embedded Azure icons, showing only the specified HTTPS connection and S3 outside the VPC.",
+      "prompt": "Draw a synthetic GitHub repository -> GitHub Actions build -> GitHub Packages -> Azure Container Apps deployment flow. The deployment uses an already configured identity; its details are intentionally outside this view. Use bundled GitHub artwork and embedded Azure icons, keep the supplied product names, and do not render or deploy anything. Azure DevOps is not part of this solution.",
+      "expected_output": "An offline editable GitHub-to-Azure flow with separately mapped GitHub repository, Actions and Packages symbols, no Azure DevOps substitution, and no inferred identity or networking.",
       "files": [],
       "expectations": [
-        "Uses generic labelled AWS shapes rather than unresolved AWS4 stencils.",
-        "Does not invent VPN, ExpressRoute, Direct Connect, identity federation, or private connectivity.",
-        "Shows S3 outside the VPC and does not assume an S3 access path.",
-        "Does not claim the AWS catalog embeds artwork."
+        "Resolves github:repository, github:actions and github:packages to bundled GitHub Octicons and discloses their generic-symbol presentations.",
+        "Retains the GitHub labels without using Azure DevOps artwork, stages, or mentions as substitutes.",
+        "Uses the explicit Azure Container Apps labelled-box fallback rather than a different Azure hosting icon.",
+        "Preserves the supplied build, package and deployment flow without inventing identity configuration or network connectivity.",
+        "Reports rendering as prohibited and performs no deployment."
       ]
     },
     {
@@ -37,6 +38,7 @@
         "Marks manual approval explicitly and does not execute a deployment.",
         "Uses an independent read-only subagent to review overlaps, connector routing, labels, spacing, and flow direction before delivery.",
         "Skips icon catalogs where not needed.",
+        "Labels approval and test transitions with their actions or decisions, without adding protocol or port placeholders.",
         "Does not add animation or unmentioned staging/rollback steps."
       ]
     },
@@ -114,7 +116,7 @@
       "id": 10,
       "prompt": "Review the uncompressed draw.io XML fixture at evals/files/semantic-cross-page-review.xml after generation. Perform a review-only pass, apply diminishing returns, and do not edit the file. The diagram is synthetic; no supporting architecture record or renderer is available.",
       "expected_output": "A bounded independent critique identifies the semantic direction, actor-boundary, tool-execution ownership, and page-duplication defects, then stops without editing or launching repeated fresh reviews.",
-      "files": [],
+      "files": ["evals/files/semantic-cross-page-review.xml"],
       "expectations": [
         "Classifies the reversed ingestion direction as blocking or material and cites the affected Context labels.",
         "Reports that the reviewer needs a visible interaction surface instead of direct database access.",
@@ -123,7 +125,7 @@
         "Separates semantic, cross-page, and visual findings.",
         "Makes no edits during the critique.",
         "Uses one critic and at most one targeted same-critic recheck rather than launching fresh open-ended review cycles.",
-        "Stops when only cosmetic findings remain or after the repair-pass ceiling."
+        "Stops after the review-only report with zero repair passes, without entering the repair loop."
       ]
     },
     {
@@ -167,6 +169,65 @@
         "Voice Live remains a labelled component; Speech avatar and Copilot SDK use labelled family artwork, not invented dedicated icons.",
         "Content Understanding uses its explicit generic-symbol mapping without being renamed Document Intelligence.",
         "The response reports non-product presentations, keeps every confirmed integration and trust boundary, and makes no network artwork requests."
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "Review only the gate outcome of this synthetic diagram report; do not generate or edit any artifacts. An independent reviewer has completed every applicable check, including rendered visual review. Two repair passes are complete. One material finding remains: the approval and rejection edge labels overlap, making the decision ambiguous. No blocking findings or missing evidence remain. The author says the repair limit means the review should pass. Report the gate result and stop reason.",
+      "expected_output": "A failed gate because the material finding remains; the repair ceiling ends repairs without converting the result to passed. No source edits or fresh repair cycle.",
+      "files": [],
+      "expectations": [
+        "Reports the gate as failed rather than passed or blocked.",
+        "Identifies the unresolved material finding and the two-pass repair ceiling as distinct from the gate result.",
+        "Performs no generation, rendering, edits, or additional repair cycle."
+      ]
+    },
+    {
+      "id": 15,
+      "prompt": "Create a synthetic local editable pipeline diagram: source -> build -> tests -> manual approval -> production. Failed tests notify the developer. Use generic labelled shapes, save output/pipeline.drawio, and keep the generator beside it. Do not render, use the network, install tools, or look up product icons. All process facts are supplied; there are no cloud resources or network connections to document.",
+      "expected_output": "An editable local pipeline with numbered stages, a test failure notification branch and manual approval, no catalog lookup or invented protocol/port labels, and rendering reported as prohibited rather than unavailable.",
+      "files": [],
+      "expectations": [
+        "Generates a structurally valid editable draw.io and a reusable generator.",
+        "Uses generic labelled shapes without icon catalog lookup.",
+        "Preserves the test failure branch and manual approval without adding process stages.",
+        "Labels logical transitions with actions or decisions rather than protocol or port placeholders.",
+        "Reports rendering as prohibited without probing a renderer or claiming visual review.",
+        "Reports independent review separately, including a blocked gate if no reviewer is available."
+      ]
+    },
+    {
+      "id": 16,
+      "prompt": "Use this skill to draw and choose service icons for a competing cloud platform. No Azure, Microsoft, or GitHub components are in scope. This is a non-interactive request; do not redesign the solution.",
+      "expected_output": "A clear scope-gap report rather than a competing-platform diagram, invented Azure equivalent, or fetched third-party logo.",
+      "files": [],
+      "expectations": [
+        "Explains that competing-cloud architecture is outside this skill.",
+        "Does not generate a competing-provider diagram or fetch its artwork.",
+        "Does not relabel or replace the supplied architecture with Azure components."
+      ]
+    },
+    {
+      "id": 17,
+      "prompt": "Resolve local artwork for GitHub, GitHub Copilot, GitHub Actions, GitHub repository, GitHub Packages, GitHub Codespaces and GitHub Dependabot. Return icon mappings only, with no network calls or diagram generation. Azure DevOps was not requested.",
+      "expected_output": "Seven correct GitHub-family mappings to bundled artwork, with explicit generic-symbol disclosures for Actions, repository and Packages, and no Azure DevOps substitution.",
+      "files": [],
+      "expectations": [
+        "Resolves all seven names to github:* entries with existing local SVG paths.",
+        "Reports Actions as github:actions using github:workflow, repository as github:repository using github:repo, and Packages as github:packages using github:package.",
+        "Discloses generic symbols rather than claiming dedicated Actions, repository or Packages product logos.",
+        "Uses neither Azure DevOps artwork nor a hosted icon lookup."
+      ]
+    },
+    {
+      "id": 18,
+      "prompt": "Resolve local artwork for an explicitly requested Azure DevOps component alongside a GitHub Actions workflow. Return mappings only. Both are part of the confirmed solution, with different owners; preserve their identities.",
+      "expected_output": "Separate Azure DevOps and GitHub Actions mappings, with each original product label retained.",
+      "files": [],
+      "expectations": [
+        "Resolves Azure DevOps to azure:azure-devops only because it was explicitly requested.",
+        "Resolves GitHub Actions independently to github:actions and its GitHub workflow symbol.",
+        "Does not merge the products, substitute one icon for the other, or change ownership."
       ]
     }
   ]

@@ -2,24 +2,22 @@
 
 Imported layout guidance, adapted for local artifacts. Examples are schematic
 fragments, not complete executable XML or evidence about a customer's deployment.
-Covers both Azure and AWS diagrams. Resolve paths from the loaded skill directory.
+Covers Azure and Microsoft ecosystem diagrams. Resolve paths from the loaded skill directory.
 
 ---
 
 ## Common Root Causes of Cluttered Diagrams
 
-Eight issues frequently compound to make lines and labels unreadable:
+Six issues frequently compound to make lines and labels unreadable:
 
 | # | Problem | Symptom |
 |---|---------|---------|
 | 1 | Repeated identical label on 3+ edges from the same hub node | Labels stacked on top of each other at the source exit |
 | 2 | 3+ dashed lines leaving the same node face within 20px | Lines rendered as one thick bar |
 | 3 | Azure Monitor placed inside a VNet/subnet container | Architecturally incorrect and visually clutters private network |
-| 4 | CloudWatch placed inside a VPC/subnet container | Architecturally incorrect — CloudWatch is a regional managed service |
-| 5 | Decorative resource icon free-floating inside a container, overlapping service icons | Icon covers service icon |
-| 6 | Two services sharing one subnet with exits on the same face | Shared corridor, all edges stacked |
-| 7 | All `mxCell` elements on one line | Any patch edit fails context match |
-| 8 | Using `image=img/lib/aws4/...` style for AWS4 shapes | AWS4 icons are stencils — must use `shape=mxgraph.aws4.*` |
+| 4 | Decorative resource icon free-floating inside a container, overlapping service icons | Icon covers service icon |
+| 5 | Two services sharing one subnet with exits on the same face | Shared corridor, all edges stacked |
+| 6 | All `mxCell` elements on one line | Any patch edit fails context match |
 
 ---
 
@@ -110,47 +108,6 @@ Azure Monitor, Log Analytics Workspace, and Microsoft Sentinel are **not VNet re
 service outside the VNet. DNS placement depends on the actual deployment:
 distinguish a resolver endpoint from an Azure Private DNS zone.
 
-### AWS: CloudWatch placed inside a VPC/subnet
-
-CloudWatch, AWS Config, CloudTrail, and similar managed observability services are **regional services**, not VPC-resident resources. Place them outside the VPC boundary in an "AWS Managed Services" or "Observability" zone.
-
-```
-WRONG layout:
-  ┌─────────────────────────────────────────────┐
-  │ VPC                                         │
-  │  ┌──────────────────┐                       │
-  │  │ Private Subnet   │                       │
-  │  │  [EC2]  [RDS]    │                       │
-  │  └──────────────────┘                       │
-  │  [CloudWatch]  ← WRONG: CloudWatch inside VPC│
-  └─────────────────────────────────────────────┘
-
-CORRECT layout:
-  ┌─────────────────────────────────────────────┐   [CloudWatch] ──→ [S3 Logs] ──→ [Athena]
-  │ VPC                                         │       ↑
-  │  ┌──────────────────┐                       │   dashed telemetry edge exits VPC boundary
-  │  │ Private Subnet   │                       │
-  │  │  [EC2]  [RDS]    │                       │
-  │  └──────────────────┘                       │
-  └─────────────────────────────────────────────┘
-```
-
-### AWS: Wrong icon style for AWS4 shapes
-
-AWS4 icons are stencil-based and must **not** be referenced as SVG image paths.
-
-```xml
-<!-- BAD: AWS4 has no SVG files at img/lib/aws4/ -->
-<mxCell style="image;aspect=fixed;html=1;image=img/lib/aws4/compute/Lambda.svg;"/>
-
-<!-- GOOD: Use stencil shape notation -->
-<mxCell style="shape=mxgraph.aws4.lambda;fillColor=#ED7100;fontColor=#ffffff;strokeColor=none;html=1;" vertex="1">
-  <mxGeometry x="300" y="400" width="64" height="64" as="geometry"/>
-</mxCell>
-```
-
-Always grep `references/aws4-complete-catalog.txt` for the exact shape name before adding an AWS icon.
-
 ### Decorative icon positioning
 
 Icons such as the Virtual Network icon (`networking/Virtual_Networks.svg`) used as a visual label companion should be anchored to a fixed corner of their parent container — typically top-right. Without anchoring, draw.io renders them at the computed top-left of the container where they land on top of subnet boxes or service icons.
@@ -198,14 +155,7 @@ When generating `mxGraphModel` XML, always emit one `mxCell` per line with child
 - [ ] Decorative network/resource icons are corner-anchored, not free-floating
 - [ ] Standalone Azure icons use embedded data URIs from the bundled builder, not remote/library paths
 
-**AWS-specific:**
-- [ ] CloudWatch / CloudTrail / Config are **outside** any VPC or subnet container
-- [ ] AWS icons use `shape=mxgraph.aws4.<name>` style (not `image=img/lib/aws4/...`)
-- [ ] Shape names verified against `references/aws4-complete-catalog.txt` before use
-- [ ] fillColor matches AWS service category colour conventions
-
 The historical `img/lib/azure2/...` snippets illustrate layout only. For portable
-artifacts use the bundled Microsoft icons as encoded images. AWS stencils still
-require the editor's AWS4 library; generic labelled shapes are the offline option
-when that library is unavailable. Neither XML parsing nor this checklist replaces
+artifacts use the bundled Microsoft and GitHub icons as encoded images.
+Neither XML parsing nor this checklist replaces
 visual inspection in an approved renderer.

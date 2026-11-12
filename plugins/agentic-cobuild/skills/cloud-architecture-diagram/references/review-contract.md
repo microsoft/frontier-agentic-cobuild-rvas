@@ -1,7 +1,12 @@
 # Bounded independent critique
 
-Read this contract after structural validation and the rendering attempt. It
-owns the independent review gate for generated and edited diagrams.
+Read this contract after structural validation and the rendering decision. It
+owns the independent review gate for generated, edited, and review-only diagrams.
+For review-only work, inspect the supplied artifacts and report findings without
+editing or entering the repair loop.
+When asked only to interpret a completed review report, apply the gate-result
+rules to its recorded evidence; distinguish that decision from new artifact
+validation or inspection.
 
 ## Critic input
 
@@ -88,14 +93,16 @@ The critique covers:
 - Grouping, service placement, icons, and trust boundaries are not misleading.
 - The rendered output and source XML agree.
 
-When rendering is unavailable, review XML, geometry, labels, routing, semantics,
-and cross-page consistency. Record pixel-level visual review as unavailable.
+When no rendered evidence is supplied or produced, review XML, geometry, labels,
+routing, semantics, and cross-page consistency. Record pixel-level visual review
+as blocked, with the rendering status from step 6 of `SKILL.md`.
 
 ## Report structure
 
 Use this structure:
 
-1. **Gate result:** passed, failed, or blocked.
+1. **Gate result and scope:** passed, failed, or blocked; state whether the scope
+   includes rendered visual review or source/geometry review only.
 2. **Coverage:** one compact table that accounts for semantic integrity,
    cross-page consistency, and visual integrity.
 3. **Findings:** blocking, material, then cosmetic, with page and exact
@@ -107,6 +114,9 @@ Use this structure:
    renderer status, and unavailable evidence.
 
 ## Repair and recheck
+
+Apply this section only when editing is authorized. A review-only report lists
+proposed repairs, records zero repair passes, and stops after the critique.
 
 Repair every blocking finding and each material finding that affects meaning or
 readability. Cosmetic findings do not justify a repair cycle by themselves.
@@ -129,5 +139,14 @@ Stop when:
 
 At the stop, verify that every critique category has a recorded status. Then
 record the critique result, repairs, recheck result, residual findings, renderer
-limitation, and stop reason. An unresolved blocking finding prevents a passed
-review. An unavailable reviewer leaves the independent gate blocked.
+limitation, and stop reason. Determine the gate result in this order:
+
+- **Failed:** any unresolved blocking or material finding remains, including
+  after the two-pass ceiling. The ceiling ends repairs, not the failure.
+- **Blocked:** no such finding is established, but the independent reviewer or
+  evidence required for the declared scope is unavailable.
+- **Passed:** all applicable checks within the declared scope are supported and
+  no blocking or material finding remains. Cosmetic findings may remain.
+
+A source/geometry-only pass does not imply a rendered visual pass. Report
+pixel-level checks separately as blocked when rendered evidence is absent.
