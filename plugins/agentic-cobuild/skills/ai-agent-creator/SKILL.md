@@ -25,10 +25,8 @@ delivery work; `cost-estimate.md` owns consumption quantities, pricing evidence,
 calculations, and totals. `visuals/` holds the confirmed discovery views and
 scenarios. Link these records rather than duplicating their content.
 
-**Prerequisite:** install the upstream `diagram-design` skill from
-`cathrynlavery/diagram-design` and the `wireframer` skill from
-`agilek/wireframer-skill` before starting this workflow. The setup guide owns the
-supporting-skill installation commands.
+**Bundled skills:** this plugin ships `diagram-design`, `wireframer`, and
+`cost-estimation`; no separate installation is needed.
 
 **Planning boundary:** change only domain records and the architecture package,
 plus the isolated prototype explicitly authorized in step 3.
@@ -193,8 +191,8 @@ prototype request, and "continue" do not replace this final opt-in.
 
 Record the choice in the existing lifecycle record. A decline leaves the five-file
 package complete. On explicit acceptance, read
-[prototype handoff](references/prototype-handoff.md) and invoke the installed
-`wireframer` skill from `agilek/wireframer-skill` within that bounded scope.
+[prototype handoff](references/prototype-handoff.md) and invoke the bundled
+`wireframer` skill within that bounded scope.
 If it is unavailable, report the missing prerequisite and record a prototype
 blocker rather than substituting another skill or installing it silently.
 

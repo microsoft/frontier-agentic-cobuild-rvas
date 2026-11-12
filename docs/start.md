@@ -1,4 +1,4 @@
-Already installed the plugin and supporting skills? [Start discovery](#describe-what-you-want-to-build).
+Already installed the plugin? [Start discovery](#describe-what-you-want-to-build).
 
 ## Before you start
 
@@ -62,34 +62,15 @@ For VS Code, add the marketplace without replacing existing entries:
 Open Extensions, search for `@agentPlugins`, install **Agentic Co-build**, and
 enable it for the application workspace.
 
-### Install the supporting skills
-
-Install all of the supporting skills below before starting discovery, including
-`diagram-design` from `cathrynlavery/diagram-design` and `wireframer` from
-`agilek/wireframer-skill`. The final prototype is optional, but its skill still
-needs to be installed.
-
-<!-- supporting-runtime -->
-
-Each command installs project-local copies pinned to a full upstream commit SHA,
-not a moving branch, and can overwrite existing copies. The installer version is
-pinned too. To keep these versions, rerun the commands. Don't use
-`npx skills update`.
-
-<!-- upstream-commands -->
-
-If an install fails, look at the error, the skill directories, and
-`skills-lock.json` before retrying. Don't delete existing skills to get around a
-conflict.
-
 ### Check the workspace
 
 In CLI, use `/skills` and `/mcp`. In VS Code, use **Chat: Configure Skills** and
 the MCP server list.
 
 You should see **AI Agent Creator**, **Idea Forge**, **Cloud Architecture
-Diagram**, the supporting skills you installed, and the **Microsoft Learn** MCP
-server. If something is missing, check the install error and reload your host.
+Diagram**, **Diagram Design**, **Wireframer**, **Cost Estimation**, **Grilling**,
+**Domain Modeling**, **Wait What**, and the **Microsoft Learn** MCP server.
+If something is missing, reload your host and reinstall the plugin.
 
 **Use Claude Opus 5.5** for the whole AI Agent Creator session, including the
 optional wireframe, and for implementation. In VS Code, pick it in the model
@@ -163,7 +144,7 @@ If you can't do either, say so and record the exception.
 
 After all five architecture files are complete and reconciled, the creator
 explicitly asks whether you want a clickable, low-fidelity prototype. Answer in
-the same session. If you say yes, it uses the installed `wireframer` skill to
+the same session. If you say yes, it uses the bundled `wireframer` skill to
 illustrate the confirmed journey under `docs/architecture/prototype/`, with
 synthetic data and simulated actions. If you say no, the architecture package
 remains complete.
@@ -290,7 +271,7 @@ finding.
 ### Update the plugin
 
 Each teammate updates the plugin in their own host. Review updates before you
-use them. Supporting skills update separately.
+use them.
 
 ```bash
 copilot plugin update agentic-cobuild

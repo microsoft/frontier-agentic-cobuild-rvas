@@ -28,13 +28,13 @@
     <section class="hero guide-hero">
       <div class="wrap">
         <h1>Start in <span>your repository.</span></h1>
-        <p class="lede">Install the plugin and supporting skills. Approve the architecture before starting implementation in a separate session.</p>
+        <p class="lede">Install the plugin. Approve the architecture before starting implementation in a separate session.</p>
       </div>
     </section>
     <div class="wrap guide-layout">
 
       <article class="guide-body">
-        <p>Already installed the plugin and supporting skills? <a href="#describe-what-you-want-to-build">Start discovery</a>.</p>
+        <p>Already installed the plugin? <a href="#describe-what-you-want-to-build">Start discovery</a>.</p>
 <h2 id="before-you-start">Before you start<a class="heading-link" href="#before-you-start" aria-label="Link to Before you start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Work in your application&#39;s repository, not this one. Check the
 <a href="participant-requirements.html">participant requirements</a>, use an approved
@@ -78,145 +78,13 @@ copilot plugin list
 </code></pre>
 <p>Open Extensions, search for <code>@agentPlugins</code>, install <strong>Agentic Co-build</strong>, and
 enable it for the application workspace.</p>
-<h3 id="install-the-supporting-skills">Install the supporting skills<a class="heading-link" href="#install-the-supporting-skills" aria-label="Link to Install the supporting skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Install all of the supporting skills below before starting discovery, including
-<code>diagram-design</code> from <code>cathrynlavery/diagram-design</code> and <code>wireframer</code> from
-<code>agilek/wireframer-skill</code>. The final prototype is optional, but its skill still
-needs to be installed.</p>
-<p>Use Node.js 22.20.0 or newer to run the installation commands below.</p>
-<p>Each command installs project-local copies pinned to a full upstream commit SHA,
-not a moving branch, and can overwrite existing copies. The installer version is
-pinned too. To keep these versions, rerun the commands. Don&#39;t use
-<code>npx skills update</code>.</p>
-<h3 id="skills-from-mattpocockskills">Skills from mattpocock/skills<a class="heading-link" href="#skills-from-mattpocockskills" aria-label="Link to Skills from mattpocock/skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Upstream source: <a href="https://github.com/mattpocock/skills/tree/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"><code>mattpocock/skills</code></a>.</p>
-<p>Pinned commit: <code>4ae2317ddb22b046e26455e4f9c9b3aaaf62212d</code>.</p>
-<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
-<table>
-<thead>
-<tr>
-<th>Skill</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>grilling</code></td>
-<td>Question a plan until the decisions and assumptions are clear.</td>
-</tr>
-<tr>
-<td><code>domain-modeling</code></td>
-<td>Define domain terms and record them in a glossary and architecture decisions.</td>
-</tr>
-<tr>
-<td><code>wait-what</code></td>
-<td>Ask the agent to explain what it just said.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/mattpocock/skills/tree/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d --skill grilling domain-modeling wait-what --agent github-copilot --copy --yes
-</code></pre>
-<h3 id="skills-from-microsoftazure-skills">Skills from microsoft/azure-skills<a class="heading-link" href="#skills-from-microsoftazure-skills" aria-label="Link to Skills from microsoft/azure-skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Upstream source: <a href="https://github.com/microsoft/azure-skills/tree/233c51fc11c73d459be46e099e417ebaf3d20a26"><code>microsoft/azure-skills</code></a>.</p>
-<p>Pinned commit: <code>233c51fc11c73d459be46e099e417ebaf3d20a26</code>.</p>
-<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
-<table>
-<thead>
-<tr>
-<th>Skill</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>discover-azure-skills</code></td>
-<td>Find additional Azure skills for a task in the upstream catalog.</td>
-</tr>
-<tr>
-<td><code>azure-enterprise-infra-planner</code></td>
-<td>Plan enterprise Azure infrastructure and generate Bicep or Terraform.</td>
-</tr>
-<tr>
-<td><code>microsoft-foundry</code></td>
-<td>Build and manage Foundry agents, models, and resources, including deployment and evaluation.</td>
-</tr>
-<tr>
-<td><code>azure-ai</code></td>
-<td>Work with Azure AI Search, Speech, OpenAI, and Document Intelligence.</td>
-</tr>
-<tr>
-<td><code>foundry-iq</code></td>
-<td>Create or troubleshoot Foundry IQ knowledge bases and connect them to agents.</td>
-</tr>
-<tr>
-<td><code>entra-agent-id</code></td>
-<td>Configure identities and authentication for AI agents through Microsoft Entra Agent ID.</td>
-</tr>
-<tr>
-<td><code>entra-app-registration</code></td>
-<td>Register Microsoft Entra applications and configure OAuth and MSAL authentication.</td>
-</tr>
-<tr>
-<td><code>azure-aigateway</code></td>
-<td>Configure Azure API Management policies for AI models, MCP tools, and agents.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/microsoft/azure-skills/tree/233c51fc11c73d459be46e099e417ebaf3d20a26 --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
-</code></pre>
-<h3 id="skills-from-cathrynlaverydiagram-design">Skills from cathrynlavery/diagram-design<a class="heading-link" href="#skills-from-cathrynlaverydiagram-design" aria-label="Link to Skills from cathrynlavery/diagram-design"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Upstream source: <a href="https://github.com/cathrynlavery/diagram-design/tree/f2496acbde9f45ccb55c24d4f75210c8a1355df8"><code>cathrynlavery/diagram-design</code></a>.</p>
-<p>Pinned commit: <code>f2496acbde9f45ccb55c24d4f75210c8a1355df8</code>.</p>
-<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
-<table>
-<thead>
-<tr>
-<th>Skill</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>diagram-design</code></td>
-<td>Render the discovery swimlane, domain map, lifecycle, and scenario views as HTML diagrams.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/cathrynlavery/diagram-design/tree/f2496acbde9f45ccb55c24d4f75210c8a1355df8 --skill diagram-design --agent github-copilot --copy --yes
-</code></pre>
-<h3 id="skills-from-agilekwireframer-skill">Skills from agilek/wireframer-skill<a class="heading-link" href="#skills-from-agilekwireframer-skill" aria-label="Link to Skills from agilek/wireframer-skill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Upstream source: <a href="https://github.com/agilek/wireframer-skill/tree/22ed714abb486d923bcf4d21498fbbeabc9f4fb3"><code>agilek/wireframer-skill</code></a>.</p>
-<p>Pinned commit: <code>22ed714abb486d923bcf4d21498fbbeabc9f4fb3</code>.</p>
-<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
-<table>
-<thead>
-<tr>
-<th>Skill</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>wireframer</code></td>
-<td>Create an optional clickable, low-fidelity prototype after the architecture package is complete.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/agilek/wireframer-skill/tree/22ed714abb486d923bcf4d21498fbbeabc9f4fb3 --skill wireframer --agent github-copilot --copy --yes
-</code></pre>
-<p>If an install fails, look at the error, the skill directories, and
-<code>skills-lock.json</code> before retrying. Don&#39;t delete existing skills to get around a
-conflict.</p>
 <h3 id="check-the-workspace">Check the workspace<a class="heading-link" href="#check-the-workspace" aria-label="Link to Check the workspace"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>In CLI, use <code>/skills</code> and <code>/mcp</code>. In VS Code, use <strong>Chat: Configure Skills</strong> and
 the MCP server list.</p>
 <p>You should see <strong>AI Agent Creator</strong>, <strong>Idea Forge</strong>, <strong>Cloud Architecture
-Diagram</strong>, the supporting skills you installed, and the <strong>Microsoft Learn</strong> MCP
-server. If something is missing, check the install error and reload your host.</p>
+Diagram</strong>, <strong>Diagram Design</strong>, <strong>Wireframer</strong>, <strong>Cost Estimation</strong>, <strong>Grilling</strong>,
+<strong>Domain Modeling</strong>, <strong>Wait What</strong>, and the <strong>Microsoft Learn</strong> MCP server.
+If something is missing, reload your host and reinstall the plugin.</p>
 <p><strong>Use Claude Opus 5.5</strong> for the whole AI Agent Creator session, including the
 optional wireframe, and for implementation. In VS Code, pick it in the model
 picker. In Copilot CLI, run:</p>
@@ -410,7 +278,7 @@ If you can&#39;t do either, say so and record the exception.</p>
 <h3 id="optional-final-wireframe">Optional final wireframe<a class="heading-link" href="#optional-final-wireframe" aria-label="Link to Optional final wireframe"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>After all five architecture files are complete and reconciled, the creator
 explicitly asks whether you want a clickable, low-fidelity prototype. Answer in
-the same session. If you say yes, it uses the installed <code>wireframer</code> skill to
+the same session. If you say yes, it uses the bundled <code>wireframer</code> skill to
 illustrate the confirmed journey under <code>docs/architecture/prototype/</code>, with
 synthetic data and simulated actions. If you say no, the architecture package
 remains complete.</p>
@@ -522,7 +390,7 @@ finding.
 </code></pre>
 <h3 id="update-the-plugin">Update the plugin<a class="heading-link" href="#update-the-plugin" aria-label="Link to Update the plugin"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Each teammate updates the plugin in their own host. Review updates before you
-use them. Supporting skills update separately.</p>
+use them.</p>
 <pre><code class="language-bash">copilot plugin update agentic-cobuild
 </code></pre>
 <p>VS Code users can run the plugin update action instead.</p>
