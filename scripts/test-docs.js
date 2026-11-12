@@ -194,6 +194,19 @@ test('plugin and marketplace resolve the same complete portable package', () => 
   assert.equal(mcp.mcpServers['microsoft-learn'].type, 'streamable-http');
 });
 
+test('customer workspace canvas ships inside the plugin and parses', () => {
+  const directory = path.join(ROOT, 'plugins/agentic-cobuild/com.github.copilot/extensions/customer-workspace');
+  for (const file of ['extension.mjs', 'public/index.html', 'public/app.js', 'public/styles.css']) {
+    assert.ok(fs.existsSync(path.join(directory, file)), file);
+  }
+  const server = fs.readFileSync(path.join(directory, 'extension.mjs'), 'utf8');
+  assert.match(server, /id: "customer-workspace"/);
+  assert.match(server, /listen\(0, "127\.0\.0\.1"/);
+  assert.doesNotMatch(server, /\b(writeFile|appendFile|rm|unlink)\b/);
+  require('node:child_process').execFileSync(process.execPath, ['--check', path.join(directory, 'public/app.js')]);
+  require('node:child_process').execFileSync(process.execPath, ['--check', path.join(directory, 'extension.mjs')]);
+});
+
 test('diagram icon coverage accounts for every creator architecture card', () => {
   const skills = path.join(ROOT, 'plugins/agentic-cobuild/skills');
   const patterns = path.join(skills, 'ai-agent-creator/references/azure-patterns');

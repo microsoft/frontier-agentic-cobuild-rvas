@@ -55,6 +55,22 @@ Keep dense technical artifacts exact: schemas, identifiers, tables, evidence
 citations, and code/API names. Simplify the surrounding sentences, not these
 terms.
 
+## Live customer workspace
+
+When the host lists the `customer-workspace` canvas (check with
+`list_canvas_capabilities`), open it once at the start of discovery. Then, as
+you work:
+
+- Call `set_status` with the current phase and a one-line note.
+- Call `show_artifact` for the file the user should look at, such as the gate
+  visuals before the shared-understanding confirmation, and `solution.drawio`
+  before the diagram review.
+
+The canvas only displays files in `docs/architecture/`; it updates itself when
+they change. It never records a confirmation or approval. Those stay in the chat
+and the lifecycle record. If the canvas is unavailable, continue in chat; the
+workflow does not depend on it.
+
 ## Resume from evidence
 
 Inspect the conversation and existing records before selecting the next step.

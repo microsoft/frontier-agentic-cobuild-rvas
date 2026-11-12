@@ -4,8 +4,9 @@ The package contains nine skills: `ai-agent-creator`,
 `cloud-architecture-diagram`, and `idea-forge`, plus the bundled MIT-licensed
 `cost-estimation`, `diagram-design`, `wireframer`, `grilling`, `domain-modeling`,
 and `wait-what`.
-It also supplies public Microsoft Learn documentation MCP. It contains no hooks,
-live-cloud connections, or application scaffold.
+It also supplies public Microsoft Learn documentation MCP and one canvas,
+`customer-workspace` (see below). It contains no hooks, live-cloud connections,
+or application scaffold.
 
 Install it through the marketplace in this repository. Follow the
 [Start guide](../../docs/start.md) to work in your own application repository.
@@ -14,6 +15,20 @@ The plugin bundles every skill it needs; there is nothing else to install.
 The creator stops at architecture approval. Implementation starts separately.
 Plugin files are read-only inputs; generated architecture records belong in the
 application repository.
+
+## Customer workspace canvas
+
+`customer-workspace` is a shared screen for a live session in the GitHub Copilot
+app. It lists the architecture package under `docs/architecture/`, renders
+Markdown, `.drawio` pages, and the HTML visuals, and refreshes as the creator
+writes files. It never writes to the repository and records no approvals: the
+files stay the source of truth, and confirmations still happen in the chat.
+
+Canvases are experimental, and the extension ships at
+`com.github.copilot/extensions/customer-workspace/`. The extension serves the
+view from a local port on `127.0.0.1`, protected by a per-process token, and
+reads only files under `docs/architecture/`. The chat workflow works unchanged
+where the app or canvases are unavailable.
 
 ## Attribution
 
