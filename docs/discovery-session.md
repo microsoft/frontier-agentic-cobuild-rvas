@@ -215,7 +215,7 @@ Have the customer or product owner review the brief. Keep unresolved points open
 Open the customer application repository and invoke AI Agent Creator with the brief:
 
 ```text
-/ai-agent-creator Use @docs/discovery/discovery-brief.md as discovery evidence
+/agentic-cobuild:ai-agent-creator Use @docs/discovery/discovery-brief.md as discovery evidence
 for the application we want to design. Inspect this repository and preserve its
 existing constraints.
 

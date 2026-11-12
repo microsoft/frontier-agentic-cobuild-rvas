@@ -51,7 +51,7 @@ test('copying preserves the exact command and announces its destination', async 
   for (const [language, command, destination] of [
     ['bash', 'git init\n', /terminal/],
     ['json', '{\n  "existing": true\n}\n', /existing settings/],
-    ['text', '/ai-agent-creator Design an application.\n', /application workspace/],
+    ['text', '/agentic-cobuild:ai-agent-creator Design an application.\n', /application workspace/],
     ['text', 'Implement the attached plan.\n', /new session.*approved architecture files/],
   ]) {
     let copied;

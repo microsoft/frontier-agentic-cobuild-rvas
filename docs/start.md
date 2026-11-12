@@ -115,7 +115,7 @@ using the name your host displays. Adapt one of these prompts to your applicatio
 For a new application:
 
 ```text
-/ai-agent-creator Design an AI maintenance assistant for property managers that triages
+/agentic-cobuild:ai-agent-creator Design an AI maintenance assistant for property managers that triages
 resident requests and prepares work orders for approval. Account for our
 existing enterprise identity and operating environment.
 ```
@@ -123,7 +123,7 @@ existing enterprise identity and operating environment.
 For an existing application:
 
 ```text
-/ai-agent-creator Add evidence-backed report summarization to this existing application.
+/agentic-cobuild:ai-agent-creator Add evidence-backed report summarization to this existing application.
 Inspect its current stack, preserve established interfaces, and account
 for our enterprise data-access and deployment constraints.
 ```
