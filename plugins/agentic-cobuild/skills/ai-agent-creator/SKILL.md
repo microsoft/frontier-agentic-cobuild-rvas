@@ -55,9 +55,9 @@ Keep dense technical artifacts exact: schemas, identifiers, tables, evidence
 citations, and code/API names. Simplify the surrounding sentences, not these
 terms.
 
-## Live customer workspace
+## Live Co-build board
 
-When the host lists the `customer-workspace` canvas (check with
+When the host lists the `cobuild-board` canvas (check with
 `list_canvas_capabilities`), open it once at the start of discovery. Then, as
 you work:
 

@@ -457,7 +457,7 @@
     const done = core.filter((i) => i.present).length;
     const phase = state.index?.phase;
     const wrap = el("article", { class: "doc" },
-      el("h1", {}, "Customer workspace"),
+      el("h1", {}, "Co-build board"),
       el("p", {}, "This screen shows the architecture package as the creator writes it into ", el("code", {}, "docs/architecture/"), ". It is read-only: confirmations and approvals happen in the chat."),
       el("div", { class: "phases" }, ...PHASES.map((name) => el("span", { class: "phase-step", "aria-current": String(phase === name) }, name))),
       el("p", {}, phase ? `Current phase: ${phase}${state.index.note ? ". " + state.index.note : ""}` : "No phase reported yet."),

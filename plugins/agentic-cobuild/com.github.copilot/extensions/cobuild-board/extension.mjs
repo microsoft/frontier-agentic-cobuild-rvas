@@ -172,7 +172,7 @@ async function ensureServer() {
 
 function requireWorkspace(instanceId) {
     const ws = workspaces.get(instanceId);
-    if (!ws) throw new Error("Open the Customer workspace canvas first.");
+    if (!ws) throw new Error("Open the Co-build board canvas first.");
     return ws;
 }
 
@@ -185,8 +185,8 @@ function normalizeArtifactPath(ws, path) {
 }
 
 const workspaceCanvas = createCanvas({
-    id: "customer-workspace",
-    displayName: "Customer workspace",
+    id: "cobuild-board",
+    displayName: "Co-build board",
     description:
         "Shared screen for a customer co-build session: architecture package artifacts from docs/architecture/, updated live.",
     inputSchema: {
@@ -255,7 +255,7 @@ const workspaceCanvas = createCanvas({
         const query = new URLSearchParams({ t: token, ws: instanceId });
         return {
             url: `http://127.0.0.1:${serverPort}/?${query}`,
-            title: "Customer workspace",
+            title: "Co-build board",
         };
     },
     onClose: ({ instanceId }) => {

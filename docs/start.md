@@ -119,7 +119,7 @@ decisions, confirm discovery. The creator then prepares the architecture package
 In the GitHub Copilot app, you can follow the session on a shared screen. Ask:
 
 ```text
-Open the Customer workspace canvas.
+Open the Co-build board canvas.
 ```
 
 The canvas lists the architecture package and shows each file as the creator
