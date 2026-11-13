@@ -13,6 +13,9 @@ permissions:
   issues: read
   actions: read
 
+engine:
+  id: copilot
+  copilot-sdk: true
 
 tools:
   cache-memory: true
