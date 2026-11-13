@@ -28,13 +28,13 @@
     <section class="hero guide-hero">
       <div class="wrap">
         <h1>Start in <span>your repository.</span></h1>
-        <p class="lede">Install the plugin and supporting skills. Approve the architecture before starting implementation in a separate session.</p>
+        <p class="lede">Install the plugin. Approve the architecture before starting implementation in a separate session.</p>
       </div>
     </section>
     <div class="wrap guide-layout">
 
       <article class="guide-body">
-        <p>Already installed the plugin and supporting skills? <a href="#describe-what-you-want-to-build">Start discovery</a>.</p>
+        <p>Already installed the plugin? <a href="#describe-what-you-want-to-build">Start discovery</a>.</p>
 <h2 id="before-you-start">Before you start<a class="heading-link" href="#before-you-start" aria-label="Link to Before you start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Work in your application&#39;s repository, not this one. Check the
 <a href="participant-requirements.html">participant requirements</a>, use an approved
@@ -78,145 +78,13 @@ copilot plugin list
 </code></pre>
 <p>Open Extensions, search for <code>@agentPlugins</code>, install <strong>Agentic Co-build</strong>, and
 enable it for the application workspace.</p>
-<h3 id="install-the-supporting-skills">Install the supporting skills<a class="heading-link" href="#install-the-supporting-skills" aria-label="Link to Install the supporting skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Install all of the supporting skills below before starting discovery, including
-<code>diagram-design</code> from <code>cathrynlavery/diagram-design</code> and <code>wireframer</code> from
-<code>agilek/wireframer-skill</code>. The final prototype is optional, but its skill still
-needs to be installed.</p>
-<p>Use Node.js 22.20.0 or newer to run the installation commands below.</p>
-<p>Each command installs project-local copies pinned to a full upstream commit SHA,
-not a moving branch, and can overwrite existing copies. The installer version is
-pinned too. To keep these versions, rerun the commands. Don&#39;t use
-<code>npx skills update</code>.</p>
-<h3 id="skills-from-mattpocockskills">Skills from mattpocock/skills<a class="heading-link" href="#skills-from-mattpocockskills" aria-label="Link to Skills from mattpocock/skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Upstream source: <a href="https://github.com/mattpocock/skills/tree/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"><code>mattpocock/skills</code></a>.</p>
-<p>Pinned commit: <code>4ae2317ddb22b046e26455e4f9c9b3aaaf62212d</code>.</p>
-<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
-<table>
-<thead>
-<tr>
-<th>Skill</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>grilling</code></td>
-<td>Question a plan until the decisions and assumptions are clear.</td>
-</tr>
-<tr>
-<td><code>domain-modeling</code></td>
-<td>Define domain terms and record them in a glossary and architecture decisions.</td>
-</tr>
-<tr>
-<td><code>wait-what</code></td>
-<td>Ask the agent to explain what it just said.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/mattpocock/skills/tree/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d --skill grilling domain-modeling wait-what --agent github-copilot --copy --yes
-</code></pre>
-<h3 id="skills-from-microsoftazure-skills">Skills from microsoft/azure-skills<a class="heading-link" href="#skills-from-microsoftazure-skills" aria-label="Link to Skills from microsoft/azure-skills"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Upstream source: <a href="https://github.com/microsoft/azure-skills/tree/233c51fc11c73d459be46e099e417ebaf3d20a26"><code>microsoft/azure-skills</code></a>.</p>
-<p>Pinned commit: <code>233c51fc11c73d459be46e099e417ebaf3d20a26</code>.</p>
-<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
-<table>
-<thead>
-<tr>
-<th>Skill</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>discover-azure-skills</code></td>
-<td>Find additional Azure skills for a task in the upstream catalog.</td>
-</tr>
-<tr>
-<td><code>azure-enterprise-infra-planner</code></td>
-<td>Plan enterprise Azure infrastructure and generate Bicep or Terraform.</td>
-</tr>
-<tr>
-<td><code>microsoft-foundry</code></td>
-<td>Build and manage Foundry agents, models, and resources, including deployment and evaluation.</td>
-</tr>
-<tr>
-<td><code>azure-ai</code></td>
-<td>Work with Azure AI Search, Speech, OpenAI, and Document Intelligence.</td>
-</tr>
-<tr>
-<td><code>foundry-iq</code></td>
-<td>Create or troubleshoot Foundry IQ knowledge bases and connect them to agents.</td>
-</tr>
-<tr>
-<td><code>entra-agent-id</code></td>
-<td>Configure identities and authentication for AI agents through Microsoft Entra Agent ID.</td>
-</tr>
-<tr>
-<td><code>entra-app-registration</code></td>
-<td>Register Microsoft Entra applications and configure OAuth and MSAL authentication.</td>
-</tr>
-<tr>
-<td><code>azure-aigateway</code></td>
-<td>Configure Azure API Management policies for AI models, MCP tools, and agents.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/microsoft/azure-skills/tree/233c51fc11c73d459be46e099e417ebaf3d20a26 --skill discover-azure-skills azure-enterprise-infra-planner microsoft-foundry azure-ai foundry-iq entra-agent-id entra-app-registration azure-aigateway --agent github-copilot --copy --yes
-</code></pre>
-<h3 id="skills-from-cathrynlaverydiagram-design">Skills from cathrynlavery/diagram-design<a class="heading-link" href="#skills-from-cathrynlaverydiagram-design" aria-label="Link to Skills from cathrynlavery/diagram-design"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Upstream source: <a href="https://github.com/cathrynlavery/diagram-design/tree/f2496acbde9f45ccb55c24d4f75210c8a1355df8"><code>cathrynlavery/diagram-design</code></a>.</p>
-<p>Pinned commit: <code>f2496acbde9f45ccb55c24d4f75210c8a1355df8</code>.</p>
-<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
-<table>
-<thead>
-<tr>
-<th>Skill</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>diagram-design</code></td>
-<td>Render the discovery swimlane, domain map, lifecycle, and scenario views as HTML diagrams.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/cathrynlavery/diagram-design/tree/f2496acbde9f45ccb55c24d4f75210c8a1355df8 --skill diagram-design --agent github-copilot --copy --yes
-</code></pre>
-<h3 id="skills-from-agilekwireframer-skill">Skills from agilek/wireframer-skill<a class="heading-link" href="#skills-from-agilekwireframer-skill" aria-label="Link to Skills from agilek/wireframer-skill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Upstream source: <a href="https://github.com/agilek/wireframer-skill/tree/22ed714abb486d923bcf4d21498fbbeabc9f4fb3"><code>agilek/wireframer-skill</code></a>.</p>
-<p>Pinned commit: <code>22ed714abb486d923bcf4d21498fbbeabc9f4fb3</code>.</p>
-<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
-<table>
-<thead>
-<tr>
-<th>Skill</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>wireframer</code></td>
-<td>Create an optional clickable, low-fidelity prototype after the architecture package is complete.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<pre><code class="language-bash">npx --yes skills@1.7.2 add https://github.com/agilek/wireframer-skill/tree/22ed714abb486d923bcf4d21498fbbeabc9f4fb3 --skill wireframer --agent github-copilot --copy --yes
-</code></pre>
-<p>If an install fails, look at the error, the skill directories, and
-<code>skills-lock.json</code> before retrying. Don&#39;t delete existing skills to get around a
-conflict.</p>
 <h3 id="check-the-workspace">Check the workspace<a class="heading-link" href="#check-the-workspace" aria-label="Link to Check the workspace"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>In CLI, use <code>/skills</code> and <code>/mcp</code>. In VS Code, use <strong>Chat: Configure Skills</strong> and
 the MCP server list.</p>
 <p>You should see <strong>AI Agent Creator</strong>, <strong>Idea Forge</strong>, <strong>Cloud Architecture
-Diagram</strong>, the supporting skills you installed, and the <strong>Microsoft Learn</strong> MCP
-server. If something is missing, check the install error and reload your host.</p>
+Diagram</strong>, <strong>Diagram Design</strong>, <strong>Wireframer</strong>, <strong>Cost Estimation</strong>, <strong>Grilling</strong>,
+<strong>Domain Modeling</strong>, <strong>Wait What</strong>, and the <strong>Microsoft Learn</strong> MCP server.
+If something is missing, reload your host and reinstall the plugin.</p>
 <p><strong>Use Claude Opus 5.5</strong> for the whole AI Agent Creator session, including the
 optional wireframe, and for implementation. In VS Code, pick it in the model
 picker. In Copilot CLI, run:</p>
@@ -245,6 +113,16 @@ and deployment constraints.
 <p><strong>Your first milestone is confirmed discovery.</strong> Answer the creator&#39;s questions.
 When you agree on the outcome, the first user journey, and the architecture
 decisions, confirm discovery. The creator then prepares the architecture package.</p>
+<h3 id="work-in-the-shared-canvas">Work in the shared canvas<a class="heading-link" href="#work-in-the-shared-canvas" aria-label="Link to Work in the shared canvas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>In the GitHub Copilot app, you can follow the session on a shared screen. Ask:</p>
+<pre><code class="language-text">Open the Co-build board canvas.
+</code></pre>
+<p>The canvas lists the architecture package and shows each file as the creator
+writes it: Markdown, the HTML diagrams, and the <code>.drawio</code> pages. The creator
+points it at the file to review next, and it shows the current phase. The canvas
+is read-only. You still confirm and approve in the chat.</p>
+<p>Canvases are experimental, and the plugin works the same without one. If you
+don&#39;t see it, update the plugin and turn on experimental features.</p>
 <h3 id="review-what-the-creator-understood">Review what the creator understood<a class="heading-link" href="#review-what-the-creator-understood" aria-label="Link to Review what the creator understood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Before you confirm discovery, the creator shows what it understood, as diagrams
 and text:</p>
@@ -410,7 +288,7 @@ If you can&#39;t do either, say so and record the exception.</p>
 <h3 id="optional-final-wireframe">Optional final wireframe<a class="heading-link" href="#optional-final-wireframe" aria-label="Link to Optional final wireframe"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>After all five architecture files are complete and reconciled, the creator
 explicitly asks whether you want a clickable, low-fidelity prototype. Answer in
-the same session. If you say yes, it uses the installed <code>wireframer</code> skill to
+the same session. If you say yes, it uses the bundled <code>wireframer</code> skill to
 illustrate the confirmed journey under <code>docs/architecture/prototype/</code>, with
 synthetic data and simulated actions. If you say no, the architecture package
 remains complete.</p>
@@ -420,8 +298,9 @@ systems. Review it with the architecture package.</p>
 delivery. Start implementation separately. Approval doesn&#39;t change your code,
 generate infrastructure, or provision resources.</p>
 <h2 id="start-implementation-in-a-new-session">Start implementation in a new session<a class="heading-link" href="#start-implementation-in-a-new-session" aria-label="Link to Start implementation in a new session"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Pick one workflow and don&#39;t mix them. Each treats the approved files under
-<code>docs/architecture/</code> as the source of truth.</p>
+<p>Pick one workflow and don&#39;t mix them. Each considers the approved files under
+<code>docs/architecture/</code> as the source of truth. Below are 3 different development workflows
+that you can pick from (or you can bring your own).</p>
 <div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
 <table>
 <thead>
@@ -450,12 +329,13 @@ generate infrastructure, or provision resources.</p>
 </tbody>
 </table>
 </div>
-<h3 id="direct-from-the-documents">Direct from the documents<a class="heading-link" href="#direct-from-the-documents" aria-label="Link to Direct from the documents"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Open a new session and attach the approved architecture files. Use this path
-unless you need the extra coordination of the other two.</p>
-<pre><code class="language-text">Read @docs/architecture/specification.md,
-@docs/architecture/implementation-plan.md, @docs/architecture/solution.md,
-@docs/architecture/solution.drawio, and @docs/architecture/cost-estimate.md.
+<details class="workflow">
+<summary><h3 id="direct-from-the-documents">Direct from the documents<a class="heading-link" href="#direct-from-the-documents" aria-label="Link to Direct from the documents"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3></summary>
+
+<p>Open a new session and attach the whole <code>docs/architecture/</code> folder. Use this
+path unless you need the extra coordination of the other two.</p>
+<pre><code class="language-text">Read everything in @docs/architecture/, including the specification,
+implementation plan, solution document and diagram, and cost estimate.
 Implement the approved plan in dependency order. Treat the specification and
 its acceptance criteria as the requirements source of truth. Follow the
 approved architecture, preserve existing interfaces and authorization, and
@@ -463,7 +343,11 @@ add focused tests for changed behavior. Run the relevant checks and report
 actual results. Do not change an architecture decision without approval.
 Do not commit, provision, deploy, or change production data.
 </code></pre>
-<h3 id="matt-pocock-spec-and-tickets">Matt Pocock spec and tickets<a class="heading-link" href="#matt-pocock-spec-and-tickets" aria-label="Link to Matt Pocock spec and tickets"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+</details>
+
+<details class="workflow">
+<summary><h3 id="matt-pocock-spec-and-tickets">Matt Pocock spec and tickets<a class="heading-link" href="#matt-pocock-spec-and-tickets" aria-label="Link to Matt Pocock spec and tickets"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3></summary>
+
 <p>Use this for independent work items that need dependency tracking. If <code>/to-spec</code>,
 <code>/to-tickets</code>, and <code>/implement-spec</code> aren&#39;t available, install the Matt Pocock
 engineering workflow. Tickets live in local Markdown, not remote issues.</p>
@@ -482,7 +366,11 @@ with the current source and the full docs/architecture/ package. Preserve the
 approved architecture and existing contracts. Run focused and combined checks.
 Do not push, open a pull request, provision, deploy, or change production data.
 </code></pre>
-<h3 id="spec-kit">Spec Kit<a class="heading-link" href="#spec-kit" aria-label="Link to Spec Kit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+</details>
+
+<details class="workflow">
+<summary><h3 id="spec-kit">Spec Kit<a class="heading-link" href="#spec-kit" aria-label="Link to Spec Kit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3></summary>
+
 <p>Set up Spec Kit, then run its constitution, specify, clarify (if needed), plan,
 and tasks commands against the approved <code>docs/architecture/</code> package. Don&#39;t let
 them overturn decisions that are already settled.</p>
@@ -495,6 +383,8 @@ provision, deploy, or change production data.
 </code></pre>
 <p>Run <code>/speckit-converge</code> after each implementation pass, and repeat until the
 feature converges or you&#39;ve recorded what&#39;s blocking it.</p>
+</details>
+
 <p>Whichever workflow you use, get approval before changing an architecture decision.</p>
 <p>Once targeted checks pass, run the <a href="#review-prompts">implementation and security reviews</a>,
 fix what they find, and rerun the affected tests. If the review tools aren&#39;t
@@ -522,7 +412,7 @@ finding.
 </code></pre>
 <h3 id="update-the-plugin">Update the plugin<a class="heading-link" href="#update-the-plugin" aria-label="Link to Update the plugin"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Each teammate updates the plugin in their own host. Review updates before you
-use them. Supporting skills update separately.</p>
+use them.</p>
 <pre><code class="language-bash">copilot plugin update agentic-cobuild
 </code></pre>
 <p>VS Code users can run the plugin update action instead.</p>

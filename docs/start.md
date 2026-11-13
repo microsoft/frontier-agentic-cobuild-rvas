@@ -1,4 +1,4 @@
-Already installed the plugin and supporting skills? [Start discovery](#describe-what-you-want-to-build).
+Already installed the plugin? [Start discovery](#describe-what-you-want-to-build).
 
 ## Before you start
 
@@ -62,34 +62,15 @@ For VS Code, add the marketplace without replacing existing entries:
 Open Extensions, search for `@agentPlugins`, install **Agentic Co-build**, and
 enable it for the application workspace.
 
-### Install the supporting skills
-
-Install all of the supporting skills below before starting discovery, including
-`diagram-design` from `cathrynlavery/diagram-design` and `wireframer` from
-`agilek/wireframer-skill`. The final prototype is optional, but its skill still
-needs to be installed.
-
-<!-- supporting-runtime -->
-
-Each command installs project-local copies pinned to a full upstream commit SHA,
-not a moving branch, and can overwrite existing copies. The installer version is
-pinned too. To keep these versions, rerun the commands. Don't use
-`npx skills update`.
-
-<!-- upstream-commands -->
-
-If an install fails, look at the error, the skill directories, and
-`skills-lock.json` before retrying. Don't delete existing skills to get around a
-conflict.
-
 ### Check the workspace
 
 In CLI, use `/skills` and `/mcp`. In VS Code, use **Chat: Configure Skills** and
 the MCP server list.
 
 You should see **AI Agent Creator**, **Idea Forge**, **Cloud Architecture
-Diagram**, the supporting skills you installed, and the **Microsoft Learn** MCP
-server. If something is missing, check the install error and reload your host.
+Diagram**, **Diagram Design**, **Wireframer**, **Cost Estimation**, **Grilling**,
+**Domain Modeling**, **Wait What**, and the **Microsoft Learn** MCP server.
+If something is missing, reload your host and reinstall the plugin.
 
 **Use Claude Opus 5.5** for the whole AI Agent Creator session, including the
 optional wireframe, and for implementation. In VS Code, pick it in the model
@@ -133,6 +114,22 @@ and deployment constraints.
 When you agree on the outcome, the first user journey, and the architecture
 decisions, confirm discovery. The creator then prepares the architecture package.
 
+### Work in the shared canvas
+
+In the GitHub Copilot app, you can follow the session on a shared screen. Ask:
+
+```text
+Open the Co-build board canvas.
+```
+
+The canvas lists the architecture package and shows each file as the creator
+writes it: Markdown, the HTML diagrams, and the `.drawio` pages. The creator
+points it at the file to review next, and it shows the current phase. The canvas
+is read-only. You still confirm and approve in the chat.
+
+Canvases are experimental, and the plugin works the same without one. If you
+don't see it, update the plugin and turn on experimental features.
+
 ### Review what the creator understood
 
 Before you confirm discovery, the creator shows what it understood, as diagrams
@@ -163,7 +160,7 @@ If you can't do either, say so and record the exception.
 
 After all five architecture files are complete and reconciled, the creator
 explicitly asks whether you want a clickable, low-fidelity prototype. Answer in
-the same session. If you say yes, it uses the installed `wireframer` skill to
+the same session. If you say yes, it uses the bundled `wireframer` skill to
 illustrate the confirmed journey under `docs/architecture/prototype/`, with
 synthetic data and simulated actions. If you say no, the architecture package
 remains complete.
@@ -177,8 +174,9 @@ generate infrastructure, or provision resources.
 
 ## Start implementation in a new session
 
-Pick one workflow and don't mix them. Each treats the approved files under
-`docs/architecture/` as the source of truth.
+Pick one workflow and don't mix them. Each considers the approved files under
+`docs/architecture/` as the source of truth. Below are 3 different development workflows
+that you can pick from (or you can bring your own).
 
 | Workflow | Choose it when | Entry point |
 | --- | --- | --- |
@@ -186,15 +184,15 @@ Pick one workflow and don't mix them. Each treats the approved files under
 | Matt Pocock spec and tickets | You want a local spec, dependency-linked tickets, and bounded parallel delivery | `/to-spec`, `/to-tickets`, then `/implement-spec` |
 | Spec Kit | You want a constitution, feature spec, plan, and task artifacts before coding | Spec Kit's specify, plan, tasks, and implement commands |
 
+<!-- workflow -->
 ### Direct from the documents
 
-Open a new session and attach the approved architecture files. Use this path
-unless you need the extra coordination of the other two.
+Open a new session and attach the whole `docs/architecture/` folder. Use this
+path unless you need the extra coordination of the other two.
 
 ```text
-Read @docs/architecture/specification.md,
-@docs/architecture/implementation-plan.md, @docs/architecture/solution.md,
-@docs/architecture/solution.drawio, and @docs/architecture/cost-estimate.md.
+Read everything in @docs/architecture/, including the specification,
+implementation plan, solution document and diagram, and cost estimate.
 Implement the approved plan in dependency order. Treat the specification and
 its acceptance criteria as the requirements source of truth. Follow the
 approved architecture, preserve existing interfaces and authorization, and
@@ -203,6 +201,9 @@ actual results. Do not change an architecture decision without approval.
 Do not commit, provision, deploy, or change production data.
 ```
 
+<!-- workflow-end -->
+
+<!-- workflow -->
 ### Matt Pocock spec and tickets
 
 Use this for independent work items that need dependency tracking. If `/to-spec`,
@@ -231,6 +232,9 @@ approved architecture and existing contracts. Run focused and combined checks.
 Do not push, open a pull request, provision, deploy, or change production data.
 ```
 
+<!-- workflow-end -->
+
+<!-- workflow -->
 ### Spec Kit
 
 Set up Spec Kit, then run its constitution, specify, clarify (if needed), plan,
@@ -249,6 +253,8 @@ provision, deploy, or change production data.
 
 Run `/speckit-converge` after each implementation pass, and repeat until the
 feature converges or you've recorded what's blocking it.
+
+<!-- workflow-end -->
 
 Whichever workflow you use, get approval before changing an architecture decision.
 
@@ -290,7 +296,7 @@ finding.
 ### Update the plugin
 
 Each teammate updates the plugin in their own host. Review updates before you
-use them. Supporting skills update separately.
+use them.
 
 ```bash
 copilot plugin update agentic-cobuild

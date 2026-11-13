@@ -17,9 +17,9 @@ after the user confirms findings. Read the
 | Source | Check |
 | --- | --- |
 | `plugins/agentic-cobuild/skills/` | References, approval gates, resource paths, and current product guidance |
-| `scripts/agentic-skills.json`, `docs/build.js` | Upstream selectors, skill descriptions, runtime requirements, and generated command flags |
+| `docs/build.js` | Page metadata and generated reading pages |
 | `docs/start.md`, `docs/index.html` | Installation and handoff instructions |
-| `docs/start.html`, `docs/supporting-skills.md` | Generated consistency; fix sources and rebuild |
+| `docs/start.html` | Generated consistency; fix sources and rebuild |
 | `README.md`, `CONTRIBUTING.md`, `PRODUCT.md` | Cross-links and claims |
 | `.github/skills/` | Maintainer guidance and references |
 

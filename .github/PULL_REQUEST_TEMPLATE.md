@@ -21,7 +21,6 @@ Describe the change and why it is needed.
 - [ ] cloud-architecture-diagram
 - [ ] idea-forge
 - [ ] Documentation site
-- [ ] Dependency inventory (`scripts/agentic-skills.json`)
 - [ ] Cross-cutting / repo-wide
 
 ## Notes for reviewers

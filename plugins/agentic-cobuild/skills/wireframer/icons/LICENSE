@@ -1,0 +1,7 @@
+MIT License
+
+Icons from react-doodle-icons by Mike Acler (https://github.com/agilek/react-doodle-icons,
+commit 43a217f4dc56db621764f2f17a5755f4706b47ec), converted from React components to
+standalone SVG files with fill="currentColor". The upstream repository declares the
+MIT license in package.json and README.md ("MIT License - feel free to use these icons
+in your personal and commercial projects.") but ships no separate LICENSE file.

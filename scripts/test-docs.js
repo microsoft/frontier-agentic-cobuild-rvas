@@ -6,8 +6,7 @@ const path = require('node:path');
 const test = require('node:test');
 const vm = require('node:vm');
 const { audit, sourceDocs, checkLink } = require('./audit-docs');
-const { pages, renderIndex, renderPage, supportingMarkdown } = require('../docs/build');
-const inventory = require('./agentic-skills.json');
+const { pages, renderIndex, renderPage } = require('../docs/build');
 const ROOT = path.resolve(__dirname, '..');
 
 function guideInteraction(language, command, writeText) {
@@ -184,7 +183,8 @@ test('plugin and marketplace resolve the same complete portable package', () => 
   assert.equal(metadata.version, plugin.version);
   assert.equal(metadata.repository, 'https://github.com/microsoft/frontier-agentic-cobuild-rvas');
   const skills = fs.readdirSync(path.join(directory, 'skills')).sort();
-  assert.deepEqual(skills, ['ai-agent-creator', 'cloud-architecture-diagram', 'idea-forge']);
+  assert.deepEqual(skills, ['ai-agent-creator', 'cloud-architecture-diagram', 'cost-estimation', 'diagram-design', 'domain-modeling',
+    'grilling', 'idea-forge', 'wait-what', 'wireframer']);
   for (const skill of skills) {
     assert.match(fs.readFileSync(path.join(directory, 'skills', skill, 'SKILL.md'), 'utf8'),
       new RegExp(`^name: ${skill}$`, 'm'));
@@ -192,6 +192,19 @@ test('plugin and marketplace resolve the same complete portable package', () => 
   const mcp = JSON.parse(fs.readFileSync(path.join(directory, 'mcp.json')));
   assert.deepEqual(Object.keys(mcp.mcpServers), ['microsoft-learn']);
   assert.equal(mcp.mcpServers['microsoft-learn'].type, 'streamable-http');
+});
+
+test('Co-build board canvas ships inside the plugin and parses', () => {
+  const directory = path.join(ROOT, 'plugins/agentic-cobuild/com.github.copilot/extensions/cobuild-board');
+  for (const file of ['extension.mjs', 'public/index.html', 'public/app.js', 'public/styles.css']) {
+    assert.ok(fs.existsSync(path.join(directory, file)), file);
+  }
+  const server = fs.readFileSync(path.join(directory, 'extension.mjs'), 'utf8');
+  assert.match(server, /id: "cobuild-board"/);
+  assert.match(server, /listen\(0, "127\.0\.0\.1"/);
+  assert.doesNotMatch(server, /\b(writeFile|appendFile|rm|unlink)\b/);
+  require('node:child_process').execFileSync(process.execPath, ['--check', path.join(directory, 'public/app.js')]);
+  require('node:child_process').execFileSync(process.execPath, ['--check', path.join(directory, 'extension.mjs')]);
 });
 
 test('diagram icon coverage accounts for every creator architecture card', () => {
@@ -221,83 +234,20 @@ test('generated reading pages and manual commands match their current sources', 
     assert.equal(html, renderPage(page), page.slug);
     assert.doesNotMatch(html, /{{page-|<!-- (?:guide-body|guide-navigation|primary-links|page-heading|page-lede) -->/);
   }
-  assert.equal(fs.readFileSync(path.join(ROOT, 'docs/supporting-skills.md'), 'utf8'), supportingMarkdown());
-  for (const { repository, commit, skills } of inventory.sources) {
-    assert.ok(supportingMarkdown().includes(`https://github.com/${repository}/tree/${commit} --skill ${skills.join(' ')}`));
-  }
 });
 
-test('Start lists each supporting skill and its direct project-local installation command', () => {
-  const markdown = supportingMarkdown();
+test('Start explains the gate visuals and the optional wireframe without extra installs', () => {
   const html = renderPage(pages.find((page) => page.slug === 'start'));
-  const commands = [...markdown.matchAll(/```bash\n([^\n]+)\n```/g)].map((match) => match[1]);
-  assert.equal(commands.length, inventory.sources.length);
-  for (const [index, source] of inventory.sources.entries()) {
-    assert.match(source.commit, /^[0-9a-f]{40}$/);
-    const url = `https://github.com/${source.repository}/tree/${source.commit}`;
-    assert.equal(commands[index], `npx --yes ${inventory.installer} add ${url} --skill ${source.skills.join(' ')} --agent ${inventory.agent} --copy --yes`);
-    assert.ok(markdown.includes(`Pinned commit: \`${source.commit}\``));
-    assert.ok(html.includes(`href="${url}"`));
-    assert.deepEqual(Object.keys(source.descriptions).sort(), source.skills.slice().sort());
-    for (const skill of source.skills) {
-      assert.ok(source.descriptions[skill].trim(), skill);
-      assert.ok(markdown.includes(`| \`${skill}\` | ${source.descriptions[skill]} |`), skill);
-      assert.ok(html.includes(`<td><code>${skill}</code></td>`), skill);
-      assert.ok(html.includes(source.descriptions[skill]), skill);
-    }
-  }
-  assert.doesNotMatch(commands.join('\n'), /--global|--all/);
-  assert.doesNotMatch(html, /setup-agentic-repo|\.agentic-cobuild-setup|Manual npx alternative/);
-  assert.match(html, /can overwrite existing copies/);
-});
-
-test('supporting-skill generation rejects missing, abbreviated, or moving commit refs', () => {
-  const source = inventory.sources[0];
-  const original = source.commit;
-  try {
-    for (const commit of [undefined, '', original.slice(0, 7), 'main']) {
-      source.commit = commit;
-      assert.throws(() => supportingMarkdown(), /Missing or invalid full commit SHA/);
-    }
-  } finally {
-    source.commit = original;
-  }
-});
-
-test('Start shows the inventory runtime requirement before supporting-skill commands', () => {
-  const html = renderPage(pages.find((page) => page.slug === 'start'));
-  const requirement = `Use Node.js ${inventory.minimumNode} or newer`;
-  const position = html.indexOf(requirement);
-  assert.ok(position >= 0);
-  assert.ok(position < html.indexOf(`npx --yes ${inventory.installer} add`));
-  assert.doesNotMatch(html, /<!-- supporting-runtime -->/);
-});
-
-test('Start installs diagram-design before discovery and explains the gate visuals', () => {
-  const html = renderPage(pages.find((page) => page.slug === 'start'));
-  const source = inventory.sources.find((source) => source.repository === 'cathrynlavery/diagram-design');
-  const command = `npx --yes ${inventory.installer} add https://github.com/${source.repository}/tree/${source.commit} --skill diagram-design --agent ${inventory.agent} --copy --yes`;
   const discovery = html.indexOf('id="describe-what-you-want-to-build"');
   const visuals = html.indexOf('id="review-what-the-creator-understood"');
   const prototype = html.indexOf('id="optional-final-wireframe"');
-  assert.ok(html.indexOf(command) >= 0 && html.indexOf(command) < discovery);
-  assert.ok(discovery < visuals && visuals < prototype);
+  const implementation = html.indexOf('id="start-implementation-in-a-new-session"');
+  assert.ok(discovery < visuals && visuals < prototype && prototype < implementation);
+  assert.doesNotMatch(html, /npx --yes skills@|Install the supporting skills|cathrynlavery\/diagram-design|agilek\/wireframer-skill|mattpocock\/skills/);
   const section = html.slice(visuals, prototype);
   assert.match(section, /docs\/architecture\/visuals\/shared-understanding\.md/);
   assert.match(section, /Render\s+Mermaid Diagram/);
   assert.match(section, /acceptance criteria/);
-});
-
-test('Start installs Wireframer before discovery and offers its prototype before separate implementation', () => {
-  const html = renderPage(pages.find((page) => page.slug === 'start'));
-  const source = inventory.sources.find((source) => source.repository === 'agilek/wireframer-skill');
-  const command = `npx --yes ${inventory.installer} add https://github.com/${source.repository}/tree/${source.commit} --skill wireframer --agent ${inventory.agent} --copy --yes`;
-  const installation = html.indexOf(command);
-  const discovery = html.indexOf('id="describe-what-you-want-to-build"');
-  const prototype = html.indexOf('id="optional-final-wireframe"');
-  const implementation = html.indexOf('id="start-implementation-in-a-new-session"');
-  assert.ok(installation >= 0 && installation < discovery);
-  assert.ok(discovery < prototype && prototype < implementation);
   const offer = html.slice(prototype, implementation);
   assert.match(offer, /all five architecture files are complete and reconciled/);
   assert.match(offer, /explicitly asks/);
@@ -305,6 +255,18 @@ test('Start installs Wireframer before discovery and offers its prototype before
   assert.match(offer, /docs\/architecture\/prototype\//);
   assert.match(offer, /If you say no, the architecture package\s+remains complete/);
   assert.match(offer, /does not authorize\s+delivery/);
+});
+
+test('bundled third-party skills ship with their upstream licenses and credits', () => {
+  const skills = path.join(ROOT, 'plugins/agentic-cobuild/skills');
+  for (const name of ['grilling', 'domain-modeling', 'wait-what', 'diagram-design', 'wireframer', 'cost-estimation']) {
+    assert.ok(fs.existsSync(path.join(skills, name, 'SKILL.md')), name);
+  }
+  for (const name of ['grilling', 'domain-modeling', 'wait-what', 'diagram-design', 'wireframer', 'cost-estimation']) {
+    assert.ok(fs.existsSync(path.join(skills, name, 'LICENSE')), `${name} license`);
+  }
+  const readme = fs.readFileSync(path.join(ROOT, 'plugins/agentic-cobuild/README.md'), 'utf8');
+  for (const credit of ['Matt Pocock', 'Cathryn Lavery', 'agilek', 'Microsoft Corporation']) assert.ok(readme.includes(credit), credit);
 });
 
 test('website requires Opus 5.5 before the creator session and documents CLI selection', () => {
@@ -322,7 +284,7 @@ test('Start leads from setup to discovery before implementation and later refere
   const html = renderPage(pages.find((page) => page.slug === 'start'));
   const steps = [
     'set-up-your-workspace', 'create-a-new-repository', 'install-the-plugin',
-    'install-the-supporting-skills', 'check-the-workspace',
+    'check-the-workspace',
     'describe-what-you-want-to-build', 'ai-agent-creator-prompts',
     'start-implementation-in-a-new-session', 'direct-from-the-documents',
     'matt-pocock-spec-and-tickets', 'spec-kit',
@@ -331,15 +293,8 @@ test('Start leads from setup to discovery before implementation and later refere
   assert.ok(steps.every((position) => position >= 0));
   assert.deepEqual(steps, steps.slice().sort((a, b) => a - b));
   assert.ok(html.indexOf('href="#describe-what-you-want-to-build">Start discovery') < steps[0]);
-  const installation = html.slice(steps[3], steps[4]);
-  assert.doesNotMatch(installation, /<details\b|<summary\b/);
-  assert.match(installation, /Install all of the supporting skills below/);
-  for (const source of inventory.sources) {
-    assert.ok(installation.includes(`${source.repository}/tree/${source.commit} --skill`), source.repository);
-  }
-  assert.ok(installation.indexOf('can overwrite existing copies') < installation.indexOf(`npx --yes ${inventory.installer} add`));
   const approval = html.indexOf('Approval ends this workflow.');
-  assert.ok(approval > steps[6] && approval < steps[7]);
+  assert.ok(approval > steps[5] && approval < steps[6]);
   assert.match(html, /Your first milestone is confirmed discovery/);
 });
 
@@ -426,12 +381,6 @@ test('source and generated documentation links resolve', () => {
   const files = sourceDocs().concat(['index.html', ...pages.map((page) => `${page.slug}.html`)]
     .map((name) => path.join(ROOT, 'docs', name)));
   assert.deepEqual(audit(files), []);
-});
-
-test('supporting-skill tables retain semantics inside a keyboard-accessible scroll region', () => {
-  const html = renderPage(pages.find((page) => page.slug === 'start'));
-  assert.match(html, /<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">\s*<table>\s*<thead>/);
-  assert.match(html, /<\/thead>\s*<tbody>[\s\S]*<\/tbody>\s*<\/table>\s*<\/div>/);
 });
 
 test('link audit reports broken files and anchors', () => {
