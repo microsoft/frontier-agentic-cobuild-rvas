@@ -174,8 +174,9 @@ generate infrastructure, or provision resources.
 
 ## Start implementation in a new session
 
-Pick one workflow and don't mix them. Each treats the approved files under
-`docs/architecture/` as the source of truth.
+Pick one workflow and don't mix them. Each considers the approved files under
+`docs/architecture/` as the source of truth. Below are 3 different development workflows
+that you can pick from (or you can bring your own).
 
 | Workflow | Choose it when | Entry point |
 | --- | --- | --- |
