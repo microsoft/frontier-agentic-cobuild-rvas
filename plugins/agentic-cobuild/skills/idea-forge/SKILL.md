@@ -100,9 +100,10 @@ own chapter**, grouped by audience and ordered by rank:
 ```markdown
 ### <Rank>. <Outcome-first idea name> (<Internal|External>, <Simple|Medium|Complex>)
 
-<Business description: 2-3 short paragraphs of prose. Who has the problem and what
-it costs them today, what the agent does for them, and how the work changes. Written
-as a business case a sponsor could read aloud; tie it to the cited observation.>
+<Business description, always three short paragraphs separated by blank lines:
+1. Who has the problem and what it costs them today, tied to the cited observation.
+2. What the agent does, as a sequence a sponsor could picture.
+3. How the work changes, and what stays with a person.>
 
 - **Target user:** role that benefits
 - **Business outcome (hypothesis):** observable improvement to measure

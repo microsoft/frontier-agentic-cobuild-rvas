@@ -7,13 +7,14 @@
       "expected_output": "Cited research summary, overview tables, one chapter per idea with prose business description plus bullets, internal and external groups, agentic ideas only; stops for user selection.",
       "files": [],
       "assertions": [
-        "Output contains a cited research summary with sources that name publication dates or mark them unavailable",
-        "Ideas are split into Internal and External groups, each with at most 2 Simple, 2 Medium, 1 Complex",
-        "Each idea has its own heading chapter, not only a table row",
-        "Each idea chapter opens with at least two sentences of prose before a bulleted list",
-        "Each bulleted list includes target user, business outcome, why an agent, first proof, evidence and fit, complexity, key uncertainty",
-        "No idea is a developer workflow (code generation, review, testing, migration) for the customer's engineers",
-        "Each idea's 'why an agent' names decisions, tools or sources, and actions rather than a single summarisation or Q&A call",
+        "Every idea has an overview-table row and its own heading chapter; the chapter count equals the overview row count",
+        "Every idea chapter opens with three short prose paragraphs (problem and cost, what the agent does, how the work changes) before any bullet",
+        "The prose names who has the problem, what it costs them today, what the agent does, and how the work changes; it is not a restated bullet list",
+        "Every chapter bulleted list has labelled bullets for target user, business outcome, why an agent, first proof, evidence and fit, complexity, key uncertainty",
+        "Every 'why an agent' bullet names at least one decision the agent makes and at least one tool, data source, or action; none describes a single summarisation or Q&A call",
+        "No idea is a developer workflow (code generation, review, testing, migration, engineering docs) that GitHub Copilot serves, and deterministic automation is listed outside the idea count",
+        "Output contains a cited research summary and every customer or industry claim has a source",
+        "Internal and External groups each have at most 2 Simple, 2 Medium, 1 Complex, and any unsupported slot is explained",
         "Business outcomes are labelled as hypotheses and contain no invented customer metrics or ROI",
         "Output asks the user to select an idea and does not produce the unapproved brief yet"
       ]
@@ -24,11 +25,14 @@
       "expected_output": "Ideas grounded in public evidence, focused on agentic business apps, honouring the user-provided pain as context not fact, with fewer ideas where evidence is thin and explained gaps.",
       "files": [],
       "assertions": [
+        "Every idea has an overview-table row and its own heading chapter; the chapter count equals the overview row count",
+        "Every idea chapter opens with three short prose paragraphs (problem and cost, what the agent does, how the work changes) before any bullet",
+        "The prose names who has the problem, what it costs them today, what the agent does, and how the work changes; it is not a restated bullet list",
+        "Every chapter bulleted list has labelled bullets for target user, business outcome, why an agent, first proof, evidence and fit, complexity, key uncertainty",
+        "Every 'why an agent' bullet names at least one decision the agent makes and at least one tool, data source, or action; none describes a single summarisation or Q&A call",
+        "No idea is a developer workflow (code generation, review, testing, migration, engineering docs) that GitHub Copilot serves, and deterministic automation is listed outside the idea count",
         "SME loan onboarding is treated as user-provided context, not cited as a verified public fact",
-        "No idea targets software developers or engineering workflows",
         "Any unsupported complexity slot is explicitly explained with the missing evidence",
-        "Each idea has a prose business description followed by a bulleted list",
-        "Deterministic automation candidates, if mentioned, are listed separately and not counted as ideas",
         "Output waits for the user to select an idea"
       ]
     },
@@ -54,6 +58,23 @@
         "Recommends invoking ai-agent-creator with the use case",
         "Does not run web research or produce idea tables",
         "Stops after the recommendation"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Customer is Atlassian (collaboration and developer software, global). We want AI ideas for them. Their engineers already live in GitHub Copilot and Rovo Dev, so I'd rather not see another coding assistant.",
+      "expected_output": "Agentic ideas for Atlassian's business users, customers, and operations, with no engineering-productivity ideas; chapters with prose and bullets.",
+      "files": [],
+      "assertions": [
+        "Every idea has an overview-table row and its own heading chapter; the chapter count equals the overview row count",
+        "Every idea chapter opens with three short prose paragraphs (problem and cost, what the agent does, how the work changes) before any bullet",
+        "The prose names who has the problem, what it costs them today, what the agent does, and how the work changes; it is not a restated bullet list",
+        "Every chapter bulleted list has labelled bullets for target user, business outcome, why an agent, first proof, evidence and fit, complexity, key uncertainty",
+        "Every 'why an agent' bullet names at least one decision the agent makes and at least one tool, data source, or action; none describes a single summarisation or Q&A call",
+        "No idea is a developer workflow (code generation, review, testing, migration, engineering docs) that GitHub Copilot serves, and deterministic automation is listed outside the idea count",
+        "Output states that developer-productivity ideas were excluded and why",
+        "Ideas serve non-engineering roles (for example support, sales, finance, customers' team leads) or customers' business workflows, not Atlassian's software engineers",
+        "Output asks the user to select an idea and does not produce the unapproved brief yet"
       ]
     }
   ]
