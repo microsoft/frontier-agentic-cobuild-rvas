@@ -25,10 +25,8 @@ delivery work; `cost-estimate.md` owns consumption quantities, pricing evidence,
 calculations, and totals. `visuals/` holds the confirmed discovery views and
 scenarios. Link these records rather than duplicating their content.
 
-**Prerequisite:** install the upstream `diagram-design` skill from
-`cathrynlavery/diagram-design` and the `wireframer` skill from
-`agilek/wireframer-skill` before starting this workflow. The setup guide owns the
-supporting-skill installation commands.
+**Bundled skills:** this plugin ships `diagram-design`, `wireframer`, and
+`cost-estimation`; no separate installation is needed.
 
 **Planning boundary:** change only domain records and the architecture package,
 plus the isolated prototype explicitly authorized in step 3.
@@ -56,6 +54,22 @@ repository's ubiquitous language: read `CONTEXT.md` and `docs/adr/` per
 Keep dense technical artifacts exact: schemas, identifiers, tables, evidence
 citations, and code/API names. Simplify the surrounding sentences, not these
 terms.
+
+## Live Co-build board
+
+When the host lists the `cobuild-board` canvas (check with
+`list_canvas_capabilities`), open it once at the start of discovery. Then, as
+you work:
+
+- Call `set_status` with the current phase and a one-line note.
+- Call `show_artifact` for the file the user should look at, such as the gate
+  visuals before the shared-understanding confirmation, and `solution.drawio`
+  before the diagram review.
+
+The canvas only displays files in `docs/architecture/`; it updates itself when
+they change. It never records a confirmation or approval. Those stay in the chat
+and the lifecycle record. If the canvas is unavailable, continue in chat; the
+workflow does not depend on it.
 
 ## Resume from evidence
 
@@ -193,8 +207,8 @@ prototype request, and "continue" do not replace this final opt-in.
 
 Record the choice in the existing lifecycle record. A decline leaves the five-file
 package complete. On explicit acceptance, read
-[prototype handoff](references/prototype-handoff.md) and invoke the installed
-`wireframer` skill from `agilek/wireframer-skill` within that bounded scope.
+[prototype handoff](references/prototype-handoff.md) and invoke the bundled
+`wireframer` skill within that bounded scope.
 If it is unavailable, report the missing prerequisite and record a prototype
 blocker rather than substituting another skill or installing it silently.
 

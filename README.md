@@ -7,7 +7,6 @@ before implementation begins.
 
 [Start guide](https://microsoft.github.io/frontier-agentic-cobuild-rvas/start.html)
 | [Guide source](docs/start.md)
-| [Supporting skill commands](docs/supporting-skills.md)
 
 [What can you build?](docs/applications.md)
 | [Architecture choices](docs/applications.md#choose-an-architecture-during-discovery)
@@ -29,13 +28,6 @@ For VS Code Copilot, add `microsoft/frontier-agentic-cobuild-rvas` to
 `chat.plugins.marketplaces`, then install **Agentic Co-build** from the Agent
 Plugins view. Enable `chat.plugins.enabled` if needed. Manage the plugin in the
 interface where you installed it.
-
-**Install supporting skills in the application repository.** The
-[Start guide](docs/start.md#install-the-supporting-skills) lists every selected
-skill, its purpose, and the direct `npx` commands. Use Node.js 22.20 or newer,
-Git, and npx. No Bash wrapper or tooling-repository clone is needed.
-Review existing skills before installing; the commands can overwrite selected
-copies, and a failed install may leave partial files.
 
 ## Use it in your application workspace
 
@@ -65,12 +57,12 @@ docs/architecture/
 
 `visuals/` holds the swimlane, domain map, lifecycle, and scenarios you confirm
 at the end of discovery, as Mermaid source and HTML rendered with the required
-upstream `diagram-design` skill.
+bundled `diagram-design` skill.
 
 After the five architecture files are complete and reconciled, the creator asks
 whether you want a final clickable wireframe prototype in the same session. If
 you accept, it
-uses the required upstream `wireframer` skill from `agilek/wireframer-skill`
+uses the bundled `wireframer` skill
 and writes the mock-data prototype under `docs/architecture/prototype/`.
 
 **The creator stops after architecture handoff and the prototype choice.**
@@ -87,8 +79,8 @@ accept a manual-review exception. XML validation alone is not visual approval.
 ## Maintain this repository
 
 This is the tooling and documentation repository, not the customer's application.
-The three bundled skills live under `plugins/agentic-cobuild/skills/`. Third-party
-dependencies are selected in `scripts/agentic-skills.json`, not copied into the plugin.
+The bundled skills live under `plugins/agentic-cobuild/skills/`. Third-party skills
+are copied there unmodified, with their licenses and credits.
 
 ```bash
 npm run build
@@ -96,8 +88,7 @@ npm test
 npm run test:diagrams
 ```
 
-Commit generated Overview and reading-page HTML and `docs/supporting-skills.md`
-with their sources.
+Commit generated Overview and reading-page HTML with their sources.
 See [Contributing](CONTRIBUTING.md) for installation checks and publishing setup.
 
 The repository's MIT license does not replace the diagram assets'

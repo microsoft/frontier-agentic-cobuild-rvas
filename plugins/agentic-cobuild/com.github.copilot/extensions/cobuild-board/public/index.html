@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Co-build board</title>
+<link rel="stylesheet" id="css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">Co-build board</div>
+  <span id="phase" class="phase" hidden></span>
+  <span id="note" class="note"></span>
+  <label class="follow"><input type="checkbox" id="follow" checked> Follow newest</label>
+  <span id="live" class="live" title="Connection to the session">Connecting</span>
+</header>
+<div class="body">
+  <nav id="nav" aria-label="Architecture artifacts"></nav>
+  <main id="view" tabindex="-1"><p class="empty">Waiting for the first artifact in <code>docs/architecture/</code>.</p></main>
+</div>
+<script>
+  // Carry the session token and workspace id onto the asset URLs.
+  const q = location.search;
+  document.getElementById("css").href = "/styles.css" + q;
+  const s = document.createElement("script");
+  s.src = "/app.js" + q;
+  document.body.append(s);
+</script>
+</body>
+</html>

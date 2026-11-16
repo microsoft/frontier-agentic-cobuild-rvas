@@ -1,12 +1,11 @@
 # Workspace instructions
 
-This repository maintains the Agentic Co-build plugin, dependency inventory, and
-documentation site. Customer application code and architecture artifacts belong
+This repository maintains the Agentic Co-build plugin and documentation site. Customer application code and architecture artifacts belong
 in the customer's selected repository.
 
-The three bundled skill bodies live under `plugins/agentic-cobuild/skills/`.
-Select third-party dependencies in `scripts/agentic-skills.json`; install them
-from their upstream sources instead of copying them into this plugin.
+The bundled skill bodies live under `plugins/agentic-cobuild/skills/`.
+Third-party skills are bundled unmodified from a pinned upstream commit, with
+their licenses and credits in `plugins/agentic-cobuild/README.md`.
 
 Preserve the creator's discovery confirmation, architecture approval, diagram
 review gates, and separately initiated implementation handoff.
@@ -17,5 +16,4 @@ Use verified signatures and run the applicable tests.
 
 Write for competent engineers. Lead with the outcome, keep wording concrete, and
 retain the RVAP/RVAS brand. Do not add verification-date banners or invented
-customer evidence. Keep the setup guide generated from its Markdown source and
-the upstream inventory.
+customer evidence. Keep the setup guide generated from its Markdown source.

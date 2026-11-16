@@ -18,6 +18,10 @@ if: ${{ github.event.workflow_run.conclusion == 'failure' }}
 
 permissions: read-all
 
+engine:
+  id: copilot
+  copilot-sdk: true
+
 network: defaults
 
 safe-outputs:

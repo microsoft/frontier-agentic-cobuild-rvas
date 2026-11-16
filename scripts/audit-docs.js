@@ -19,10 +19,12 @@ function walk(directory, predicate, files = []) {
   return files;
 }
 
+const VENDORED = /[\\/]skills[\\/](?:diagram-design|wireframer|grilling|domain-modeling|wait-what)[\\/]/;
+
 function sourceDocs() {
   return ['README.md', 'CONTRIBUTING.md', 'PRODUCT.md', 'DESIGN.md'].map((name) => path.join(ROOT, name))
     .concat(walk(path.join(ROOT, 'docs'), (file) => file.endsWith('.md')))
-    .concat(walk(path.join(ROOT, 'plugins'), (file) => file.endsWith('.md')));
+    .concat(walk(path.join(ROOT, 'plugins'), (file) => file.endsWith('.md') && !VENDORED.test(file)));
 }
 
 function slug(text) {

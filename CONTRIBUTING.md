@@ -27,16 +27,13 @@ npm run test:diagrams
 The build renders Overview from `docs/index.template.html`. It renders the Start
 guide and four explanatory pages from Markdown through `docs/start.template.html`.
 Page metadata and Start's setup section links live in `docs/build.js`. Learn pages
-use page tabs without a section menu. The build also generates supporting skill
-descriptions and commands from the install inventory. Commit generated HTML and
-`docs/supporting-skills.md` with their sources.
+use page tabs without a section menu. Commit generated HTML with its sources.
 
-Plugin skills live only under `plugins/agentic-cobuild/skills/`. Keep third-party
-dependencies in `scripts/agentic-skills.json`, not in the plugin.
-Each source must specify a full 40-character `commit` SHA. To update a dependency,
-review the upstream change, replace its SHA in the inventory, rebuild the docs,
-and test the generated installation command in a disposable application directory.
-Keep the installer version pinned as well.
+Plugin skills live only under `plugins/agentic-cobuild/skills/`. Third-party skills
+are copied there unmodified from a pinned upstream commit, with their LICENSE files.
+Record the author, source, commit, and license in the table in
+`plugins/agentic-cobuild/README.md`. To update one, review the upstream change,
+replace the copy, and update the pinned commit in that table.
 
 ### Intro figures
 

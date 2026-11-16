@@ -4,7 +4,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const marked = require('./assets/js/marked.min.js');
-const inventory = require('../scripts/agentic-skills.json');
 
 function embedDiagrams(content) {
   return content.replace(/<!-- diagram: ([a-z0-9-]+) -->/g, (_, name) => {
@@ -26,7 +25,7 @@ const pages = [
     title: 'Start',
     description: 'Install Agentic Co-build in Copilot CLI or VS Code and design your own AI application in your repository.',
     heading: 'Start in <span>your repository.</span>',
-    lede: 'Install the plugin and supporting skills. Approve the architecture before starting implementation in a separate session.',
+    lede: 'Install the plugin. Approve the architecture before starting implementation in a separate session.',
   },
   {
     slug: 'applications',
@@ -54,35 +53,8 @@ const pages = [
   },
 ];
 
-function supportingMarkdown() {
-  const sections = inventory.sources.map((source) => {
-    if (!/^[0-9a-f]{40}$/.test(source.commit)) {
-      throw new Error(`Missing or invalid full commit SHA for supporting source ${source.repository}.`);
-    }
-    const url = `https://github.com/${source.repository}/tree/${source.commit}`;
-    return `### Skills from ${source.repository}\n\n` +
-    `Upstream source: [\`${source.repository}\`](${url}).\n\n` +
-    `Pinned commit: \`${source.commit}\`.\n\n` +
-    '| Skill | What it does |\n| --- | --- |\n' +
-    source.skills.map((skill) => {
-      const description = source.descriptions[skill];
-      if (!description) throw new Error(`Missing description for supporting skill ${skill}.`);
-      return `| \`${skill}\` | ${description} |`;
-    }).join('\n') + '\n\n```bash\n' +
-    `npx --yes ${inventory.installer} add ${url} --skill ${source.skills.join(' ')} --agent ${inventory.agent} --copy --yes\n` +
-    '```\n';
-  });
-  return '# Supporting skills\n\n' +
-    '<!-- Generated from scripts/agentic-skills.json by npm run build. -->\n\n' +
-    `Run these commands from your application directory with Node.js ${inventory.minimumNode} or newer.\n` +
-    'Review the selected skills and inspect existing installations before running these commands.\n\n' +
-    sections.join('\n');
-}
-
 function renderPage(page) {
-  const markdown = fs.readFileSync(path.join(__dirname, `${page.slug}.md`), 'utf8')
-    .replace('<!-- supporting-runtime -->', `Use Node.js ${inventory.minimumNode} or newer to run the installation commands below.`)
-    .replace('<!-- upstream-commands -->', supportingMarkdown().replace(/^# Supporting skills[\s\S]*?(?=### )/, ''));
+  const markdown = fs.readFileSync(path.join(__dirname, `${page.slug}.md`), 'utf8');
   const renderer = new marked.Renderer();
   const anchors = new Set();
   renderer.heading = (text, level, raw) => {
@@ -108,7 +80,11 @@ function renderPage(page) {
       `<section class="application-family" aria-labelledby="${id}">\n` +
       `<div class="application-family-copy">${copy}</div>\n${diagram}\n</section>`
   );
-  const body = embedDiagrams(content);
+  const collapsible = content.replace(
+    /<!-- workflow -->\s*(<h3[^>]*>[\s\S]*?<\/h3>)([\s\S]*?)<!-- workflow-end -->/g,
+    (_, heading, rest) => `<details class="workflow">\n<summary>${heading}</summary>\n${rest}</details>`
+  );
+  const body = embedDiagrams(collapsible);
   const pageLinks = page.slug === 'start' ? '' : '<div class="guide-pages">\n' +
     pages.filter((candidate) => candidate.slug !== 'start').map((candidate) =>
       `<a href="${candidate.slug}.html"${candidate.slug === page.slug ? ' aria-current="page"' : ''}>${candidate.navigationLabel}</a>`
@@ -135,12 +111,11 @@ function renderGuide() {
 
 function build() {
   fs.writeFileSync(path.join(__dirname, 'index.html'), renderIndex());
-  fs.writeFileSync(path.join(__dirname, 'supporting-skills.md'), supportingMarkdown());
   for (const page of pages) {
     fs.writeFileSync(path.join(__dirname, `${page.slug}.html`), renderPage(page));
   }
-  console.log(`Built Overview, ${pages.length} reading pages, and supporting skill commands.`);
+  console.log(`Built Overview, ${pages.length} reading pages.`);
 }
 
 if (require.main === module) build();
-module.exports = { build, pages, renderIndex, renderPage, renderGuide, supportingMarkdown };
+module.exports = { build, pages, renderIndex, renderPage, renderGuide };

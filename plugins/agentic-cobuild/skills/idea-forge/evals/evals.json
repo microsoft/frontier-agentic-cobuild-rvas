@@ -1,0 +1,81 @@
+{
+  "skill_name": "idea-forge",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We're meeting Maersk next week (shipping and logistics, global). I need a set of AI ideas we could prototype together. Nothing specific in mind yet.",
+      "expected_output": "Cited research summary, overview tables, one chapter per idea with prose business description plus bullets, internal and external groups, agentic ideas only; stops for user selection.",
+      "files": [],
+      "assertions": [
+        "Every idea has an overview-table row and its own heading chapter; the chapter count equals the overview row count",
+        "Every idea chapter opens with three short prose paragraphs (problem and cost, what the agent does, how the work changes) before any bullet",
+        "The prose names who has the problem, what it costs them today, what the agent does, and how the work changes; it is not a restated bullet list",
+        "Every chapter bulleted list has labelled bullets for target user, business outcome, why an agent, first proof, evidence and fit, complexity, key uncertainty",
+        "Every 'why an agent' bullet names at least one decision the agent makes and at least one tool, data source, or action; none describes a single summarisation or Q&A call",
+        "No idea is a developer workflow (code generation, review, testing, migration, engineering docs) that GitHub Copilot serves, and deterministic automation is listed outside the idea count",
+        "Output contains a cited research summary and every customer or industry claim has a source",
+        "Internal and External groups each have at most 2 Simple, 2 Medium, 1 Complex, and any unsupported slot is explained",
+        "Business outcomes are labelled as hypotheses and contain no invented customer metrics or ROI",
+        "Output asks the user to select an idea and does not produce the unapproved brief yet"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Customer is a mid-size regional bank in Germany, Volksbank Mittelhessen. Their dev team already uses GitHub Copilot, so skip anything about developer productivity. Known pain: slow SME loan onboarding. Give me ideas.",
+      "expected_output": "Ideas grounded in public evidence, focused on agentic business apps, honouring the user-provided pain as context not fact, with fewer ideas where evidence is thin and explained gaps.",
+      "files": [],
+      "assertions": [
+        "Every idea has an overview-table row and its own heading chapter; the chapter count equals the overview row count",
+        "Every idea chapter opens with three short prose paragraphs (problem and cost, what the agent does, how the work changes) before any bullet",
+        "The prose names who has the problem, what it costs them today, what the agent does, and how the work changes; it is not a restated bullet list",
+        "Every chapter bulleted list has labelled bullets for target user, business outcome, why an agent, first proof, evidence and fit, complexity, key uncertainty",
+        "Every 'why an agent' bullet names at least one decision the agent makes and at least one tool, data source, or action; none describes a single summarisation or Q&A call",
+        "No idea is a developer workflow (code generation, review, testing, migration, engineering docs) that GitHub Copilot serves, and deterministic automation is listed outside the idea count",
+        "SME loan onboarding is treated as user-provided context, not cited as a verified public fact",
+        "Any unsupported complexity slot is explicitly explained with the missing evidence",
+        "Output waits for the user to select an idea"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We picked idea #2 from your earlier list for Contoso Energy: an agent that triages grid outage reports and drafts customer updates. Prepare the next step.",
+      "expected_output": "Unapproved idea brief with all nine fields; instructs the user to invoke ai-agent-creator; no architecture chosen, no auto-invocation.",
+      "files": [],
+      "assertions": [
+        "Output is labelled 'Unapproved idea brief'",
+        "Brief addresses all nine fields: outcome and user, evidence, first journey, data and systems, existing environment, constraints, safe representative input, acceptance starter, open questions",
+        "Unknown facts are marked as unknown rather than invented",
+        "User is told to invoke ai-agent-creator in their application repository",
+        "No architecture, platform, or implementation tasks are selected"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "We want an agent for Fabrikam Retail that answers invoice-status questions from suppliers via the ERP. Scope is clear: read-only, one ERP, supplier email channel.",
+      "expected_output": "Recognises a bounded use case, recommends invoking ai-agent-creator, and stops without running research.",
+      "files": [],
+      "assertions": [
+        "Recommends invoking ai-agent-creator with the use case",
+        "Does not run web research or produce idea tables",
+        "Stops after the recommendation"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Customer is Atlassian (collaboration and developer software, global). We want AI ideas for them. Their engineers already live in GitHub Copilot and Rovo Dev, so I'd rather not see another coding assistant.",
+      "expected_output": "Agentic ideas for Atlassian's business users, customers, and operations, with no engineering-productivity ideas; chapters with prose and bullets.",
+      "files": [],
+      "assertions": [
+        "Every idea has an overview-table row and its own heading chapter; the chapter count equals the overview row count",
+        "Every idea chapter opens with three short prose paragraphs (problem and cost, what the agent does, how the work changes) before any bullet",
+        "The prose names who has the problem, what it costs them today, what the agent does, and how the work changes; it is not a restated bullet list",
+        "Every chapter bulleted list has labelled bullets for target user, business outcome, why an agent, first proof, evidence and fit, complexity, key uncertainty",
+        "Every 'why an agent' bullet names at least one decision the agent makes and at least one tool, data source, or action; none describes a single summarisation or Q&A call",
+        "No idea is a developer workflow (code generation, review, testing, migration, engineering docs) that GitHub Copilot serves, and deterministic automation is listed outside the idea count",
+        "Output states that developer-productivity ideas were excluded and why",
+        "Ideas serve non-engineering roles (for example support, sales, finance, customers' team leads) or customers' business workflows, not Atlassian's software engineers",
+        "Output asks the user to select an idea and does not produce the unapproved brief yet"
+      ]
+    }
+  ]
+}

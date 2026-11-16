@@ -178,3 +178,12 @@ img { max-width: 100%; }
   .guide-body td, .guide-body th { padding: 10px 8px; }
   .guide-table table:has(th:nth-child(3)) { min-width: 36rem; }
 }
+
+.workflow { border: 1px solid var(--c-line); border-radius: 8px; margin: 16px auto; padding: 0 20px; }
+.workflow > summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 12px; min-height: 44px; }
+.workflow > summary::-webkit-details-marker { display: none; }
+.workflow > summary::before { content: ""; flex: 0 0 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .15s; }
+.workflow[open] > summary::before { transform: rotate(45deg); }
+.workflow > summary h3 { margin: 12px 0; flex: 1; }
+.workflow[open] { padding-bottom: 8px; }
+@media (prefers-reduced-motion: reduce) { .workflow > summary::before { transition: none; } }

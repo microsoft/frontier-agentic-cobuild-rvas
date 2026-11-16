@@ -17,7 +17,6 @@ verified or refuted claim.
 - Check the Node requirement against the installer package.
 - Test empty and existing workspaces, conflicts, reruns, and partial failures.
 - Confirm project-only writes and preservation of instructions and MCP settings.
-- Distinguish native plugin scope from project-local supporting skills.
 
 ## Documentation and product facts
 

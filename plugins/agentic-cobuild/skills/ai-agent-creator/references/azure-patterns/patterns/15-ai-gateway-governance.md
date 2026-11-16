@@ -99,6 +99,6 @@ failure domains.
 | Enterprise agent operations recommend a managed gateway for centralized policy and traffic control | [Manage AI agents across your organization](https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/integrate-manage-operate#administration-of-ai-agents) | 2026-10-15 | Treat the gateway as a platform governance boundary with named ownership |
 | Managed identity, OAuth, content safety, backend load balancing, circuit breakers, and token telemetry are separate capabilities | [AI gateway capabilities](https://learn.microsoft.com/azure/api-management/genai-gateway-capabilities) | 2026-10-15 | Select and verify policies individually; one enabled policy does not certify the full path |
 
-During architecture, consult `azure-aigateway` only for read-only policy and
-topology guidance. Configuration, identity grants, policy deployment, testing,
+During architecture, use Microsoft Learn evidence for policy and topology.
+Configuration, identity grants, policy deployment, testing,
 and APIM provisioning belong to the later delivery workflow.
