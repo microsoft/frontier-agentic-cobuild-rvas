@@ -1,6 +1,6 @@
 ---
 name: idea-forge
-description: "Research a customer's business, industry, and publicly stated priorities on the web when the team needs AI opportunity ideas. Propose internal and external ideas by complexity and prepare a selected idea's unapproved brief for AI Agent Creator."
+description: "Research a customer's business, industry, and public priorities on the web when the team needs AI opportunity ideas. Propose internal and external agentic-application ideas by complexity, each as a business-case chapter, and prepare the selected idea's unapproved brief for AI Agent Creator."
 argument-hint: "Company name and industry; optionally region, known pain points, or existing capabilities."
 ---
 
@@ -60,33 +60,25 @@ or a revised scope, and wait. Resume research after the user responds.
 
 ## 3. Propose and rank ideas
 
-Return two compact tables: **Internal audiences** and **External audiences**.
-Classify each idea by its primary beneficiary. Internal ideas serve employees
-or internal operations; external ideas serve customers, partners, or other
-external users. Place a cross-audience idea in its primary group and name the
-secondary beneficiary rather than repeating it.
+Every idea is an **agentic application**: software where an agent reasons over a
+goal, chooses among tools or data sources, and takes or prepares multi-step actions
+for a business user, customer, or partner. Apply the **agent test** to each
+candidate: the value comes from the agent deciding what to do next, not from
+a fixed sequence or a single model call. Drop candidates that fail it:
+
+- Developer-workflow ideas (code generation, review, tests, migration, docs for the customer's engineers) that GitHub Copilot already serves.
+- Deterministic automation, reporting, or rules. Recommend these separately, outside the idea count.
+- Chat over documents with no decisions, tool use, or action.
+
+Classify each idea by its primary beneficiary: **Internal** (employees or internal
+operations) or **External** (customers, partners, other external users). Place a
+cross-audience idea in its primary group and name the secondary beneficiary.
 
 Target five distinct ideas per audience: **two Simple, two Medium, and one
-Complex**. These are per-audience caps, not quotas to fill without evidence.
-Return fewer when the research gate cannot support the mix, and explain which
-complexity slots remain unsupported and what evidence is missing.
-
-Use these columns in each table:
-
-| Column | Required content |
-| --- | --- |
-| Rank | Position within this audience |
-| Idea and target user | A short, outcome-first name and the role that benefits |
-| Business outcome | The proposed observable improvement, labelled as a hypothesis |
-| AI responsibility | The task AI performs and why it needs AI |
-| First proof | One bounded user journey and its first tangible output |
-| Evidence and fit | The cited observation and the proposed opportunity, clearly distinguished |
-| Complexity and rationale | Simple, Medium, or Complex, with the dependencies or operating risk that justify the label |
-| Key uncertainty | The assumption or scope/access decision that most affects feasibility |
-
-Rank within each audience by customer fit and an achievable first proof. Explain
-what makes each idea distinct. Where deterministic automation is sufficient,
-recommend it separately instead of counting it as an AI idea.
+Complex**. These are per-audience caps, not quotas. Return fewer when the research
+gate cannot support the mix, and explain which complexity slots are unsupported
+and what evidence is missing. Rank within each audience by customer fit and an
+achievable first proof.
 
 Classify the proposed bounded capability, not just its demonstration:
 
@@ -95,26 +87,49 @@ Classify the proposed bounded capability, not just its demonstration:
 - **Complex:** Requires broader workflow coordination, substantial data or system dependencies, or high-impact actions needing stronger controls.
 
 Use the highest complexity warranted by the dependencies or risk, and name the
-driver. These labels are relative scope assessments, not delivery estimates.
-A small first proof can test a Complex idea; name what that proof defers.
-Leave platform, UI, grounding, and autonomous execution decisions to architecture
-discovery.
+driver. Labels are relative scope, not delivery estimates. A small first proof can
+test a Complex idea; name what it defers. Leave platform, UI, grounding, and
+autonomous-execution decisions to architecture discovery.
 
-**Proposal gate:** Every retained idea passes the research gate, has all table
-fields addressed, and differs in beneficiary or workflow from the other ideas.
-Check each audience against the 2/2/1 mix and explain every unsupported slot
-before asking the user to select.
+### Output shape
+
+Open with the cited research summary, then a one-row-per-idea **overview table**
+for each audience (Rank, Idea, Target user, Complexity). Then give **each idea its
+own chapter**, grouped by audience and ordered by rank:
+
+```markdown
+### <Rank>. <Outcome-first idea name> (<Internal|External>, <Simple|Medium|Complex>)
+
+<Business description: 2-3 short paragraphs of prose. Who has the problem and what
+it costs them today, what the agent does for them, and how the work changes. Written
+as a business case a sponsor could read aloud; tie it to the cited observation.>
+
+- **Target user:** role that benefits
+- **Business outcome (hypothesis):** observable improvement to measure
+- **Why an agent:** the decisions, tools or sources, and actions that fail the "fixed sequence" test
+- **First proof:** one bounded journey and its first tangible output
+- **Evidence and fit:** cited observation, then the inferred opportunity
+- **Complexity:** label and the dependency or risk driving it
+- **Key uncertainty:** the assumption or access decision that most affects feasibility
+```
+
+Write the description as connected prose, not a restated bullet list; the bullets
+carry the checkable facts. Make each idea distinct in beneficiary or workflow, and
+state what separates it from its neighbours.
+
+**Proposal gate:** Every retained idea passes the research gate and the agent test,
+has a prose description and every bullet addressed, and differs from the others.
+Check each audience against the 2/2/1 mix and explain every unsupported slot before
+asking the user to select.
 
 ## 4. Let the user select
 
-Return the cited research summary and both tables from step 3. Recommend the
-strongest candidate overall and explain its fit. Ask the user to choose an idea, request
-shortlist details, or revise the direction, then wait. A ranking is not the user's
-approval.
+Recommend the strongest candidate overall and explain its fit. Ask the user to
+choose an idea, request deeper detail on named candidates, or revise the direction,
+then wait. A ranking is not the user's approval.
 
-If the user requests more detail, expand only the named candidates using the
-field table in step 5. Label these as candidate details and keep selection
-pending. Ask the user to select or revise, then wait.
+If the user requests more detail, expand only the named chapters using the fields
+in step 5. Label these as candidate details and keep selection pending.
 
 ## 5. Hand off the selected idea
 

@@ -1,0 +1,60 @@
+{
+  "skill_name": "idea-forge",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We're meeting Maersk next week (shipping and logistics, global). I need a set of AI ideas we could prototype together. Nothing specific in mind yet.",
+      "expected_output": "Cited research summary, overview tables, one chapter per idea with prose business description plus bullets, internal and external groups, agentic ideas only; stops for user selection.",
+      "files": [],
+      "assertions": [
+        "Output contains a cited research summary with sources that name publication dates or mark them unavailable",
+        "Ideas are split into Internal and External groups, each with at most 2 Simple, 2 Medium, 1 Complex",
+        "Each idea has its own heading chapter, not only a table row",
+        "Each idea chapter opens with at least two sentences of prose before a bulleted list",
+        "Each bulleted list includes target user, business outcome, why an agent, first proof, evidence and fit, complexity, key uncertainty",
+        "No idea is a developer workflow (code generation, review, testing, migration) for the customer's engineers",
+        "Each idea's 'why an agent' names decisions, tools or sources, and actions rather than a single summarisation or Q&A call",
+        "Business outcomes are labelled as hypotheses and contain no invented customer metrics or ROI",
+        "Output asks the user to select an idea and does not produce the unapproved brief yet"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Customer is a mid-size regional bank in Germany, Volksbank Mittelhessen. Their dev team already uses GitHub Copilot, so skip anything about developer productivity. Known pain: slow SME loan onboarding. Give me ideas.",
+      "expected_output": "Ideas grounded in public evidence, focused on agentic business apps, honouring the user-provided pain as context not fact, with fewer ideas where evidence is thin and explained gaps.",
+      "files": [],
+      "assertions": [
+        "SME loan onboarding is treated as user-provided context, not cited as a verified public fact",
+        "No idea targets software developers or engineering workflows",
+        "Any unsupported complexity slot is explicitly explained with the missing evidence",
+        "Each idea has a prose business description followed by a bulleted list",
+        "Deterministic automation candidates, if mentioned, are listed separately and not counted as ideas",
+        "Output waits for the user to select an idea"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We picked idea #2 from your earlier list for Contoso Energy: an agent that triages grid outage reports and drafts customer updates. Prepare the next step.",
+      "expected_output": "Unapproved idea brief with all nine fields; instructs the user to invoke ai-agent-creator; no architecture chosen, no auto-invocation.",
+      "files": [],
+      "assertions": [
+        "Output is labelled 'Unapproved idea brief'",
+        "Brief addresses all nine fields: outcome and user, evidence, first journey, data and systems, existing environment, constraints, safe representative input, acceptance starter, open questions",
+        "Unknown facts are marked as unknown rather than invented",
+        "User is told to invoke ai-agent-creator in their application repository",
+        "No architecture, platform, or implementation tasks are selected"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "We want an agent for Fabrikam Retail that answers invoice-status questions from suppliers via the ERP. Scope is clear: read-only, one ERP, supplier email channel.",
+      "expected_output": "Recognises a bounded use case, recommends invoking ai-agent-creator, and stops without running research.",
+      "files": [],
+      "assertions": [
+        "Recommends invoking ai-agent-creator with the use case",
+        "Does not run web research or produce idea tables",
+        "Stops after the recommendation"
+      ]
+    }
+  ]
+}
