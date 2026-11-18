@@ -135,9 +135,28 @@ Create one editable `solution.drawio` with these pages in order:
 | Page | Owns | Detail boundary |
 | --- | --- | --- |
 | **Context** | Actors, external systems, first journey, authoritative sources, and product boundary | Keep the solution as one product-level boundary or a few essential responsibilities. Leave APIs, token mechanics, stores, queues, and resource topology to later views. |
-| **Components** | Logical responsibilities, ownership, interfaces, and selected service mappings | Lead with responsibilities. Service names annotate the mapping without turning this page into deployment topology or a runtime sequence. |
+| **Components** | Logical responsibilities, ownership, interfaces, and selected service mappings | Work at C4 container level: each element is something that runs or stores data, labelled with its responsibility and, in brackets, its technology. Service names annotate the mapping without turning this page into deployment topology or a runtime sequence. |
 | **AI and data flow** | Ordered online and offline flows, prompts, grounding, proposed tool intent, trusted execution, stores, safety, approval, failure, and evaluation | Show who calls whom and what changes state. Keep resource placement and environment promotion on Deployment. |
 | **Deployment** | Resources, identities, trust and network boundaries, ingress/egress, environments, platform/workload ownership, delivery path, and operations | Map each logical responsibility to one selected physical service or named existing enterprise capability. Keep alternatives in `solution.md`, not in deployment labels. Summarize application behavior instead of repeating the complete runtime sequence. |
+
+### Supporting views
+
+The four pages stay the only pages in `solution.drawio`. Add a supporting view
+only when its condition holds, and say in one line why you skipped the others.
+Render each with `diagram-design` into `visuals/<view>.html`, link it from
+`solution.md`, and keep names and IDs identical to the draw.io pages.
+
+| View | Add when | Diagram-design type | Shows |
+| --- | --- | --- | --- |
+| **Landscape** | The capability joins an existing system estate | Architecture; the new solution is the one accent node, existing systems muted | Neighbouring systems, which the solution reads from or writes to, and owners. No internals. |
+| **Agent internals** | The agent runtime is custom code (not a Foundry prompt agent, Copilot Studio, or Logic Apps agent) | Architecture | Planner, tool router, policy and guardrail checks, memory, evaluator inside the agent container, equivalent to C4 component level. |
+| **Approval and identity sequence** | A human approval, delegated identity (on-behalf-of), or retry path changes a decision | Sequence, with `alt` frames for approval, rejection and failure | Message order, the identity each hop acts as, and where state changes. |
+| **Object lifecycle** | A business object waits, needs approval, retries, or ends in distinct outcomes | State machine (lifecycle phase map when one subject moves through 4-5 phases) | States, guards, terminal outcomes. Reuse the discovery lifecycle. |
+
+Do not draw a code-level view; implementation owns it. Supporting views need a
+structural check (every participant, state, and system exists in `solution.md`)
+and a rendered-overlap check. They do not need the independent review gate
+unless the user asks for it.
 
 Keep Context and AI/data-flow readable with neutral shapes; add service mappings
 there only when helpful. Use official Azure icons for Azure service mappings in

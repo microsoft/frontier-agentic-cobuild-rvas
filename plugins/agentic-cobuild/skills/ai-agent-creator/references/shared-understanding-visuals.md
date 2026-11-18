@@ -80,9 +80,9 @@ the record.
 - Map every in-scope scenario to at least one `AC-` ID in the
   [specification's traceability](specification-quality.md#acceptance-and-traceability).
 - Map every swimlane step to an architecture responsibility. The four draw.io
-  views stay the only architecture diagrams. Add a Mermaid sequence diagram to
-  `solution.md` only when message order across an integration changes a
-  decision.
+  pages stay the only pages in `solution.drawio`. Add the conditional
+  supporting views from architecture quality, such as the approval and identity
+  sequence, only when their condition holds.
 - During Reconcile, play back each scenario through the selected components.
   Fix a scenario that cannot complete, or record it as an owned deferral. Update
   a visual whose record changed, and re-render it.

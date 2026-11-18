@@ -1303,7 +1303,59 @@
         "Every in-scope SC ID is cited by at least one AC ID in specification.md.",
         "Each AC that covers a scenario keeps observable input, action, and result or rejection behavior.",
         "During reconciliation, each scenario is played back through the selected components, and a scenario that cannot complete is fixed or recorded as an owned deferral.",
-        "The four draw.io views remain the only architecture diagrams."
+        "The four draw.io pages remain the only pages in solution.drawio; any supporting view is a separate visuals file."
+      ]
+    },
+    {
+      "id": 92,
+      "prompt": "Confirmed discovery for a claims-triage assistant that will be added to an existing claims platform, a policy system, and a document archive. The agent runtime is a Foundry prompt agent. Discovery records no human approval, no delegated identity, and no business object with its own lifecycle. Draft the diagram package.",
+      "expected_output": "The creator produces the four draw.io pages and adds a Landscape supporting view because the capability joins an existing estate, and skips Agent internals because the runtime is a platform-managed agent.",
+      "files": [],
+      "expectations": [
+        "solution.drawio keeps exactly Context, Components, AI and data flow, and Deployment in that order.",
+        "A Landscape view is rendered with diagram-design into docs/architecture/visuals/ and linked from solution.md.",
+        "The Landscape view shows the new solution as the single accent node with existing systems muted, shows read/write direction and owners, and omits internals.",
+        "The creator states in one line that Agent internals is skipped because the runtime is a Foundry prompt agent.",
+        "Components labels each element with its responsibility and its technology.",
+        "The creator skips the Approval and identity sequence and Object lifecycle views because the discovery record has no approval, delegated identity, retry path, or stateful object, and says so in one line each."
+      ]
+    },
+    {
+      "id": 93,
+      "prompt": "Confirmed discovery for a research agent built as custom Microsoft Agent Framework code with its own planner, tool router, policy checks, memory, and evaluator. Draft the diagram package.",
+      "expected_output": "The creator adds an Agent internals supporting view at component level because the runtime is custom code, without adding a fifth page to solution.drawio.",
+      "files": [],
+      "expectations": [
+        "An Agent internals view shows planner, tool router, policy and guardrail checks, memory, and evaluator inside the agent container.",
+        "The view is rendered with diagram-design as an architecture type into docs/architecture/visuals/, not as an extra draw.io page.",
+        "Every element in the view exists in solution.md and uses the same names as the Components page.",
+        "No code-level view is drawn."
+      ]
+    },
+    {
+      "id": 94,
+      "prompt": "Confirmed discovery for an expense assistant where an agent proposes a payment, a manager approves it, and the payment API is called on behalf of the manager. A rejected approval and a payment timeout must be handled. The agent runs as a Foundry prompt agent. Draft the diagram package.",
+      "expected_output": "The creator adds an approval and identity sequence view with alt frames for approval, rejection, and failure, showing the identity each hop acts as.",
+      "files": [],
+      "expectations": [
+        "A sequence view is rendered with diagram-design into docs/architecture/visuals/ and linked from solution.md.",
+        "The view uses alt frames for approval, rejection, and the timeout or retry path.",
+        "Each hop shows the identity it acts as, including the on-behalf-of manager identity for the payment call.",
+        "Participants match the components in solution.md.",
+        "The independent review gate is not required for this view unless the user asks for it.",
+        "The creator skips Agent internals in one line because the runtime is a Foundry prompt agent."
+      ]
+    },
+    {
+      "id": 95,
+      "prompt": "Confirmed discovery for a simple FAQ chat assistant on a Copilot Studio agent with no approvals, no existing systems to integrate with, and no stateful business object. Draft the diagram package.",
+      "expected_output": "The creator produces only the four draw.io pages and records that no supporting views apply.",
+      "files": [],
+      "expectations": [
+        "No Landscape, Agent internals, sequence, or lifecycle view is created.",
+        "The creator says in one line why each supporting view was skipped.",
+        "solution.drawio keeps exactly the four ordered pages.",
+        "Supporting views are not added to make the package look more complete."
       ]
     }
   ]

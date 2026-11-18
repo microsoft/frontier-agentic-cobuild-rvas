@@ -16,7 +16,7 @@ docs/architecture/
   cost-estimate.md
   visuals/
     shared-understanding.md
-    <view>.html
+    <view>.html   # gate visuals and conditional supporting views
 ```
 
 The diagram shows boundaries; `solution.md` owns design decisions;
@@ -169,6 +169,8 @@ explicitly delegated lower-level decisions.
    component and integration names through the diagram skill's icon-coverage
    lookup; record explicit family/generic/labelled fallbacks and unknown names.
    Missing artwork never removes a component or changes a service selection.
+   Add the conditional supporting views from architecture quality only when
+   their condition holds, rendered with `diagram-design`.
    Preserve existing unrelated pages and hand edits. Treat the diagram
    specialist's independent review gate as binding. Use a reviewer mode that
    preserves context for its targeted recheck when the available tooling supports
