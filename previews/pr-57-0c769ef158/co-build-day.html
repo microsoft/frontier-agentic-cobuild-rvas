@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Run a co-build day | Agentic Co-build</title>
+  <meta name="description" content="Agenda, preparation, and facilitator notes for a one-day co-build from idea to a reviewed application on Azure." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to guide</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="index.html">Overview</a>
+<a href="why.html">Why</a>
+<a href="path.html">The path</a>
+<a href="start.html">Start</a>
+<a href="applications.html" aria-current="page">Learn</a>
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero guide-hero">
+      <div class="wrap">
+        <h1>Run a <span>co-build day.</span></h1>
+        <p class="lede">One day, one team, one use case. Teams agree on what to build in the morning and deliver it in the afternoon.</p>
+      </div>
+    </section>
+    <div class="wrap guide-layout">
+<nav class="guide-nav" aria-label="Reading navigation">
+<div class="guide-pages">
+<a href="applications.html">Application types</a>
+<a href="example.html">Worked example</a>
+<a href="co-build-day.html" aria-current="page">Co-build day</a>
+<a href="participant-requirements.html">Participant requirements</a>
+<a href="discovery-session.html">Discovery session</a>
+</div>
+</nav>
+      <article class="guide-body">
+        <p>A co-build day takes a team from an idea to a reviewed application in its own
+Azure sandbox. The morning is spent agreeing on what to build; the afternoon is
+spent delegating the build and checking the result. Each team works on one use
+case in its own repository, following <a href="path.html">the path</a>.</p>
+<h2 id="before-the-day">Before the day<a class="heading-link" href="#before-the-day" aria-label="Link to Before the day"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Ask each team for its own use case at least a week ahead. A team&#39;s own problem
+keeps people engaged, and what they build is still useful after the day. Use the
+<a href="example.html">worked example</a> only for a team that has no use case, can&#39;t use
+its data yet, or wants to learn the flow first.</p>
+<p>For each team, agree:</p>
+<ul>
+<li><strong>The use case.</strong> One user, one journey, one decision or task the app helps
+with. Small enough to build in an afternoon.</li>
+<li><strong>The people.</strong> Someone who knows the business process and can answer
+questions, someone who will use the app, and an owner who can approve the
+architecture.</li>
+<li><strong>The data.</strong> Synthetic data, or real data with written approval from its
+owner. Default to synthetic.</li>
+<li><strong>The sandbox.</strong> One Azure resource group per team, with permission to create
+Azure Container Apps and Microsoft Foundry resources, and a named person who
+approves what gets deployed.</li>
+<li><strong>The tools.</strong> GitHub Copilot with access to Claude Opus 5.5, and either the
+plugin or the skills installed. See <a href="participant-requirements.html">participant requirements</a>.</li>
+</ul>
+<p>If the business context is spread across several people, run a
+<a href="discovery-session.html">discovery session</a> before the day.</p>
+<h2 id="agenda">Agenda<a class="heading-link" href="#agenda" aria-label="Link to Agenda"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Step</th>
+<th>Band</th>
+<th>What the team has at the end</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>09:00</td>
+<td><a href="why.html">Agree before you delegate</a></td>
+<td></td>
+<td>The practice and the five questions</td>
+</tr>
+<tr>
+<td>09:30</td>
+<td><a href="path.html#00-setup">00 Setup</a></td>
+<td></td>
+<td>Tools installed, repository open</td>
+</tr>
+<tr>
+<td>09:50</td>
+<td><a href="path.html#01-discover">01 Discover</a></td>
+<td>Agree</td>
+<td>Confirmed discovery</td>
+</tr>
+<tr>
+<td>10:50</td>
+<td>Break</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>11:00</td>
+<td><a href="path.html#02-architect">02 Architect</a></td>
+<td>Agree</td>
+<td>Approved architecture package</td>
+</tr>
+<tr>
+<td>11:50</td>
+<td><a href="path.html#03-wireframe">03 Wireframe</a></td>
+<td>Agree</td>
+<td>A prototype a user has walked</td>
+</tr>
+<tr>
+<td>12:10</td>
+<td>Lunch</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>13:00</td>
+<td><a href="path.html#04-task-plan">04 Task plan</a></td>
+<td>Agree</td>
+<td>Reviewed tasks, five questions answered</td>
+</tr>
+<tr>
+<td>13:35</td>
+<td><a href="path.html#05-build">05 Build</a></td>
+<td>Delegate</td>
+<td>The first journey running locally</td>
+</tr>
+<tr>
+<td>14:50</td>
+<td>Break</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>15:00</td>
+<td><a href="path.html#06-design">06 Design</a></td>
+<td>Delegate</td>
+<td>A usable, accessible interface</td>
+</tr>
+<tr>
+<td>15:40</td>
+<td><a href="path.html#07-deploy">07 Deploy</a></td>
+<td>Delegate</td>
+<td>The app running in the team&#39;s sandbox</td>
+</tr>
+<tr>
+<td>16:15</td>
+<td><a href="path.html#08-review">08 Review</a></td>
+<td>Verify</td>
+<td>Findings fixed or accepted</td>
+</tr>
+<tr>
+<td>16:40</td>
+<td>Show and tell</td>
+<td></td>
+<td>Each team demos its journey and one thing the pictures caught</td>
+</tr>
+<tr>
+<td>17:00</td>
+<td>Close</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The morning matters most. If time runs short, cut design or deployment, not
+discovery or architecture.</p>
+<h2 id="rules-for-the-room">Rules for the room<a class="heading-link" href="#rules-for-the-room" aria-label="Link to Rules for the room"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<ul>
+<li><strong>Synthetic data</strong> unless the data owner approved real data in writing.</li>
+<li><strong>The AI suggests; a named person decides.</strong> If the app uses AI, its output
+is a proposal that a person accepts or rejects.</li>
+<li><strong>Agree before you build.</strong> No implementation before the architecture is
+approved and the five questions are all yes.</li>
+<li><strong>Deploy only to the team&#39;s sandbox</strong>, after its owner approves the resource
+list.</li>
+</ul>
+<h2 id="facilitating">Facilitating<a class="heading-link" href="#facilitating" aria-label="Link to Facilitating"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Open with the talk. Present it from the <a href="why.html">Why page</a>, or download the
+PDF there.</p>
+<p>During the morning, watch for teams that skim the creator&#39;s questions to get to
+code. Ask them to show you the swimlane and explain who does each step. If they
+can&#39;t, they aren&#39;t ready to confirm discovery.</p>
+<p>At each gate, ask who approved it. The answer should be a person in the room,
+not the agent.</p>
+<p>In the afternoon, the common failure is the agent making a decision the package
+didn&#39;t. When a team says &quot;it decided to…&quot;, send them back to agree it and update
+the specification.</p>
+<p>At show and tell, ask each team what the diagrams or the prototype caught before
+the build. That&#39;s the evidence that the practice worked.</p>
+
+      </article>
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/guide.js"></script>
+</body>
+</html>

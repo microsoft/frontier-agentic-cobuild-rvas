@@ -1,0 +1,19 @@
+<svg class="v v-loop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 540" role="img" aria-labelledby="v-loop-title v-loop-desc">
+<title id="v-loop-title">Brainstorm, agree, delegate, verify: a loop around shared understanding</title>
+<desc id="v-loop-desc">Brainstorm with agents drafts the shared understanding, made of glossary, diagrams, prototype and spec. Agree, where humans sign off on pictures, feeds it as signed off. Delegate: agents implement from the spec, reading it. Verify with tests and review, which updates it. When reality differs from the spec, the loop returns to brainstorm. Verification is increasingly automated; agreement still needs people.</desc>
+<defs>
+<marker id="v-loop-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-loop-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+</defs>
+<path d="M510 42C620 60 690 120 695 212" class="v-line" marker-end="url(#v-loop-arrow)" /><path d="M695 284C690 380 620 440 514 456" class="v-line" marker-end="url(#v-loop-arrow)" /><path d="M290 458C180 440 110 380 105 288" class="v-line" marker-end="url(#v-loop-arrow)" /><path d="M105 216C110 120 180 60 286 44" class="v-line" marker-end="url(#v-loop-arrow)" />
+<path d="M400 74V190" class="v-line v-dash" marker-end="url(#v-loop-arrow)" /><path d="M600 250H506" class="v-line v-dash" marker-end="url(#v-loop-arrow)" /><path d="M190 250H294" class="v-line v-dash" marker-end="url(#v-loop-arrow)" /><path d="M400 310V420" class="v-line v-dash" marker-end="url(#v-loop-arrow)" />
+<text x="150" y="80" class="v-cap" text-anchor="end">Reality ≠ spec</text><text x="412" y="136" class="v-cap">Drafts</text><text x="552" y="240" class="v-cap" text-anchor="middle">Signed off</text><text x="243" y="240" class="v-cap" text-anchor="middle">Updates</text><text x="412" y="370" class="v-cap">Reads spec</text>
+<rect class="v-box" x="290" y="10" width="220" height="64" rx="6" /><text x="400" y="38" class="v-title" text-anchor="middle">Brainstorm</text><text x="400" y="59" class="v-sub" text-anchor="middle">with agents</text>
+<rect class="v-focus" x="600" y="218" width="196" height="64" rx="6" /><text x="698" y="246" class="v-title v-blue-text" text-anchor="middle">Agree</text><text x="698" y="267" class="v-sub" text-anchor="middle">humans sign off on pictures</text>
+<rect class="v-box" x="290" y="422" width="220" height="64" rx="6" /><text x="400" y="450" class="v-title" text-anchor="middle">Delegate</text><text x="400" y="471" class="v-sub" text-anchor="middle">agents implement from the spec</text>
+<rect class="v-box" x="20" y="218" width="170" height="64" rx="6" /><text x="105" y="246" class="v-title" text-anchor="middle">Verify</text><text x="105" y="267" class="v-sub" text-anchor="middle">tests, review</text>
+<rect x="300" y="192" width="200" height="116" rx="10" class="v-dark" />
+<text x="400" y="234" class="v-title v-on-dark" text-anchor="middle">Shared understanding</text><text x="400" y="260" class="v-sub v-on-dark-dim" text-anchor="middle">glossary · diagrams</text><text x="400" y="280" class="v-sub v-on-dark-dim" text-anchor="middle">prototype · spec</text>
+<path d="M62 284C50 360 40 420 40 486" class="v-leader" /><circle cx="62" cy="286" r="3" class="v-dot" />
+<text x="0" y="508" class="v-call v-ink">Verification is increasingly automated.</text><text x="0" y="530" class="v-call v-ink">Agreement still needs people.</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg class="v v-prose-gaps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" role="img" aria-labelledby="v-prose-gaps-title v-prose-gaps-desc">
+<title id="v-prose-gaps-title">One specification, two different pictures</title>
+<desc id="v-prose-gaps-desc">A specification document points to two readings: what we pictured, drawn as a blue hexagon, and what the agent built, drawn as a navy triangle.</desc>
+<defs>
+<marker id="v-prose-gaps-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-prose-gaps-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+</defs>
+<path d="M10 40h160v214q-40-26-80 0t-80 0z" class="v-box" />
+<text x="90" y="74" class="v-title" text-anchor="middle">Specification</text>
+<path d="M34 100h112" class="v-text-line" /><path d="M34 122h84" class="v-text-line" /><path d="M34 144h112" class="v-text-line" /><path d="M34 166h84" class="v-text-line" /><path d="M34 188h112" class="v-text-line" />
+<path d="M184 95H238" class="v-line" marker-end="url(#v-prose-gaps-arrow)" /><path d="M184 245H238" class="v-line" marker-end="url(#v-prose-gaps-arrow)" />
+<rect x="250" y="40" width="260" height="110" rx="8" class="v-card" />
+<path d="M296 69l23 13v26l-23 13-23-13V82z" fill="#1a77e3" />
+<text x="342" y="89" class="v-big">What we</text><text x="342" y="115" class="v-big">pictured</text>
+<rect x="250" y="190" width="260" height="110" rx="8" class="v-card" />
+<path d="M296 219l26 46h-52z" fill="#032254" />
+<text x="342" y="239" class="v-big">What the</text><text x="342" y="265" class="v-big">agent built</text>
+</svg>
