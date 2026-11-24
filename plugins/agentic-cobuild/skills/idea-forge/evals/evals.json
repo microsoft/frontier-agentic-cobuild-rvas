@@ -39,23 +39,23 @@
     {
       "id": 3,
       "prompt": "We picked idea #2 from your earlier list for Contoso Energy: an agent that triages grid outage reports and drafts customer updates. Prepare the next step.",
-      "expected_output": "Unapproved idea brief with all nine fields; instructs the user to invoke ai-agent-creator; no architecture chosen, no auto-invocation.",
+      "expected_output": "Unapproved idea brief with all nine fields; instructs the user to invoke azure-solution-architect; no architecture chosen, no auto-invocation.",
       "files": [],
       "assertions": [
         "Output is labelled 'Unapproved idea brief'",
         "Brief addresses all nine fields: outcome and user, evidence, first journey, data and systems, existing environment, constraints, safe representative input, acceptance starter, open questions",
         "Unknown facts are marked as unknown rather than invented",
-        "User is told to invoke ai-agent-creator in their application repository",
+        "User is told to invoke azure-solution-architect in their application repository",
         "No architecture, platform, or implementation tasks are selected"
       ]
     },
     {
       "id": 4,
       "prompt": "We want an agent for Fabrikam Retail that answers invoice-status questions from suppliers via the ERP. Scope is clear: read-only, one ERP, supplier email channel.",
-      "expected_output": "Recognises a bounded use case, recommends invoking ai-agent-creator, and stops without running research.",
+      "expected_output": "Recognises a bounded use case, recommends invoking azure-solution-architect, and stops without running research.",
       "files": [],
       "assertions": [
-        "Recommends invoking ai-agent-creator with the use case",
+        "Recommends invoking azure-solution-architect with the use case",
         "Does not run web research or produce idea tables",
         "Stops after the recommendation"
       ]

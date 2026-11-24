@@ -1,6 +1,6 @@
 # Agentic Co-build plugin
 
-The package contains nine skills: `ai-agent-creator`,
+The package contains nine skills: `azure-solution-architect`,
 `cloud-architecture-diagram`, and `idea-forge`, plus the bundled MIT-licensed
 `cost-estimation`, `diagram-design`, `wireframer`, `grilling`, `domain-modeling`,
 and `wait-what`.
@@ -34,7 +34,8 @@ where the app or canvases are unavailable.
 
 The Co-build board bundles Mermaid (MIT) under `public/vendor/` to render diagrams offline; its license sits beside it.
 
-AI Agent Creator was imported from the supplied AI Application Accelerator.
+Azure Solution Architect, formerly AI Agent Creator, was imported from the supplied
+AI Application Accelerator and extended to cover non-AI Azure applications.
 Cloud Architecture Diagram was adapted by Paolo Montagna from Thomas Thornton's
 `drawio-mcp-diagramming`. The supplied source snapshot and attribution remain with
 the skill. Redistribution in this plugin was authorized by the repository owner.

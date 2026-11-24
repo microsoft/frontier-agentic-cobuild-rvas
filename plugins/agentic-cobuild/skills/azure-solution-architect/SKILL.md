@@ -1,0 +1,243 @@
+---
+name: azure-solution-architect
+description: "Architecture-first design for any Azure application: web apps and APIs, microservices, event-driven integration, multitenant SaaS, durable workflows, data processing, modernization of existing systems, and AI or agent capabilities in any of them. Use when discovery, a functional/technical specification, editable draw.io views, a cost estimate, and an implementation plan must precede code. Produces a mandatory cost-estimate.md for every confirmed architecture. Offers an optional wireframe prototype for human-facing journeys after package completion, then hands off; standalone SDK help, existing-resource operations, implementation, deployment, and troubleshooting use other workflows."
+---
+
+# Azure Solution Architect
+
+Produce a reconciled architecture package under `docs/architecture/`:
+
+```text
+docs/architecture/
+  solution.drawio
+  solution.md
+  specification.md
+  implementation-plan.md
+  cost-estimate.md
+  visuals/
+    shared-understanding.md
+    <view>.html   # gate visuals and conditional supporting views
+```
+
+The diagram shows boundaries; `solution.md` owns design decisions;
+`specification.md` owns requirements and acceptance criteria; the plan owns later
+delivery work; `cost-estimate.md` owns consumption quantities, pricing evidence,
+calculations, and totals. `visuals/` holds the confirmed discovery views and
+scenarios. Link these records rather than duplicating their content.
+
+**Bundled skills:** this plugin ships `diagram-design`, `wireframer`, and
+`cost-estimation`; no separate installation is needed.
+
+**Planning boundary:** change only domain records and the architecture package,
+plus the isolated prototype explicitly authorized in step 3.
+Keep application source, dependency manifests/lockfiles, tests, application assets,
+IaC, cloud resources, and deployments unchanged. Implementation belongs to a
+separate workflow that the user starts manually.
+
+Use read-only evidence and already-available validation tools. Keep delivery-tool
+installation, extension setup, authentication, and environment preparation in
+the later workflow that needs them.
+
+## Voice
+
+Use this voice for every user-facing moment: discovery questions,
+recommendations, shared-understanding summaries, decision requests,
+status/handoff reports, and conversational explanations.
+
+Give brief context before asking or stating anything. Write in ASD-STE100
+Simplified Technical English: active voice, short sentences, one idea per
+sentence. Put dense examples and alternatives in short bullet lists. Use the
+repository's ubiquitous language: read `CONTEXT.md` and `docs/adr/` per
+`docs/agents/domain.md`. If the repository instead defines `GLOSSARY.md` or
+`GLOSSARY-MAP.md`, follow those.
+
+Keep dense technical artifacts exact: schemas, identifiers, tables, evidence
+citations, and code/API names. Simplify the surrounding sentences, not these
+terms.
+
+## Live Co-build board
+
+When the host lists the `cobuild-board` canvas (check with
+`list_canvas_capabilities`), open it once at the start of discovery. Then, as
+you work:
+
+- Call `set_status` with the current phase and a one-line note.
+- Call `show_artifact` for the file the user should look at, such as the gate
+  visuals before the shared-understanding confirmation, and `solution.drawio`
+  before the diagram review.
+
+The canvas only displays files in `docs/architecture/`; it updates itself when
+they change. It never records a confirmation or approval. Those stay in the chat
+and the lifecycle record. If the canvas is unavailable, continue in chat; the
+workflow does not depend on it.
+
+## Resume from evidence
+
+Inspect the conversation and existing records before selecting the next step.
+Approval applies to the current baseline, not to later material changes.
+
+| Evidence | Next step |
+| --- | --- |
+| The discovery frontier is open or shared-understanding confirmation is missing | Discover |
+| A later user turn explicitly confirmed the shared-understanding record | Architect |
+| The five artifacts are ready but bounded pricing has not run | Run the cost-estimation consultation, reconcile, and complete the package |
+| The current, complete package is reconciled and no prototype choice is recorded | Offer the optional prototype in step 3 |
+| The user explicitly accepted the prototype offer | Complete step 3 in this session, then hand off |
+| The prototype is complete, declined, blocked, or not applicable | Hand off and stop; request package acceptance only when the user or governance process explicitly requires it |
+| Material scope or design changed after confirmation/approval | Preserve history; return to the affected discovery or package-review gate |
+
+The initial request, silence, batch execution, and the agent's own summary are
+not confirmation of an unresolved discovery or architecture decision. Do not turn
+ordinary package completion into a confirmation gate. Use `Ready for review` as
+the reconciled terminal status unless explicit acceptance was requested and
+obtained; do not default to `Awaiting approval` or `Ready for approval`.
+
+## 1. Discover
+
+Read [discovery quality](references/discovery-quality.md) before the first
+question; it owns the frontier, decision statuses, boundary ladder, shared record,
+and discovery completion criterion.
+
+1. **Inspect:** classify the workspace as empty, existing application/platform
+   configuration, or architecture-only. Reuse repository and enterprise facts;
+   an empty repository does not establish an empty enterprise estate.
+2. **Frame:** identify the outcome, actor or calling system, candidate journey,
+   and workload shape. Open the discovery contract's AI branch only when a step
+   benefits from AI or the user names it; *agent*, *copilot*, and *assistant*
+   are intent signals, not runtime decisions.
+3. **Resolve:** load `grilling` for an open frontier. Ask the whole answerable
+   frontier through the question form tool. When enough prerequisites are known,
+   present concrete target-architecture options with a recommendation, meaningful
+   alternatives, and a visible custom-answer path. Add a draft sketch when the
+   [visuals contract](references/shared-understanding-visuals.md) calls for one.
+   End the turn after each round; recompute only after the user's answers.
+4. **Model and compare:** load `domain-modeling` when resolved terminology changes;
+   update `CONTEXT.md` and offer ADRs for consequential trade-offs. Use the
+   [application selection guide](references/application-patterns/README.md)
+   when style, compute, data, or messaging choices become answerable. When the
+   AI branch is open, apply its [agent-intent test](references/ai-patterns/README.md#agent-intent-test),
+   [selection matrix](references/ai-patterns/runtimes/README.md), and
+   [model selection](references/ai-patterns/model-selection.md). Research and propose the coherent
+   target architecture during discovery; do not replace that proposal with an
+   abstract request to delegate selection. Reopen any newly exposed frontier.
+5. **Confirm:** once the frontier is empty, present the discovery contract's
+   shared-understanding record with its
+   [gate visuals](references/shared-understanding-visuals.md#gate-visuals),
+   ask for confirmation of both, and end the turn.
+
+When a recommendation needs current product facts, read the
+[evidence contract](references/microsoft-learn-evidence.md) and verify those facts
+before presenting the recommendation.
+
+**Complete when:** the discovery contract's criteria hold and a later user turn
+explicitly confirms its record. That record becomes the specification baseline.
+
+## 2. Architect
+
+Enter only from confirmed discovery. Design responsibilities before service
+mappings; preserve the confirmed target architecture, custom choices, and any
+explicitly delegated lower-level decisions.
+
+1. **Select:** read the
+   [application selection guide](references/application-patterns/README.md)
+   and follow its sequence: style, compute, data, messaging, cross-cutting, then
+   workload cards. When the AI branch is open, read the
+   [AI branch entry](references/ai-patterns/README.md) for AI cards, runtime
+   recipes, and model selection on top of that shape. Load only matching branches.
+2. **Verify:** use the [evidence contract](references/microsoft-learn-evidence.md)
+   for decision-bearing product claims and compatibility gates. Consult
+   [specialist routing](references/specialist-routing.md) only for the selected
+   branches; specialists remain inside the approval boundary.
+3. **Specify:** read [specification quality](references/specification-quality.md).
+   Start or update the one specification from confirmed discovery, then complete
+   its technical coverage and traceability alongside the design and plan.
+4. **Record:** read [architecture quality](references/architecture-quality.md).
+   Write `solution.md` using its structure, decision coverage, and diagram views.
+5. **Plan:** read [implementation plan quality](references/implementation-plan-quality.md).
+   Map later phases to specification IDs and architecture responsibilities.
+   Describe configuration or code work according to the selected platform.
+6. **Estimate:** read [cost and consumption estimate quality](references/cost-estimation-quality.md).
+   Load `cost-estimation` as a bounded pricing consultation, then write
+   `cost-estimate.md` for every confirmed architecture. Model infrastructure
+   and usage meters, and, when the AI branch is open, token or platform
+   consumption, multi-agent amplification, and retrieval/tool/media units, with
+   low/expected/high scenarios. Execute every pricing step
+   supported by the confirmed model, platform, region, currency, and usage evidence
+   before final reconciliation. Merge specialist results into the required
+   modernization document structure rather than substituting a shorter report.
+   Ask only for the minimum missing details needed to disambiguate a meter,
+   preferably in one consolidated cost-input round. Use verified prices when
+   available and explicit attempted-source/tool `Not calculated` blockers when
+   they are not.
+7. **Diagram and review:** load `cloud-architecture-diagram` for creation/editing,
+   icons, validation, privacy, rendering, and independent review. Use the four
+   views and acceptance contract in architecture quality. Preserve confirmed
+   component and integration names through the diagram skill's icon-coverage
+   lookup; record explicit family/generic/labelled fallbacks and unknown names.
+   Missing artwork never removes a component or changes a service selection.
+   Add the conditional supporting views from architecture quality only when
+   their condition holds, rendered with `diagram-design`.
+   Preserve existing unrelated pages and hand edits. Treat the diagram
+   specialist's independent review gate as binding. Use a reviewer mode that
+   preserves context for its targeted recheck when the available tooling supports
+   multi-turn review. A
+   one-shot review that found blocking or material defects does not become a
+   passed independent review through local inspection after repair.
+8. **Reconcile:** check all five artifacts against their contracts and the
+   current baseline. Run architecture quality's
+   [integration reconciliation gate](references/architecture-quality.md#integration-reconciliation-gate),
+   including the final named-entity audit against the RFP and specification.
+   Play back each confirmed scenario through the selected components per the
+   [visuals contract](references/shared-understanding-visuals.md#carry-forward-into-the-package).
+   Resolve conflicts and every architecture-changing choice.
+   Keep only delivery parameters that preserve the selected topology as owned
+   deferrals. Record blocked or unavailable diagram evidence exactly. Mark the
+   package exactly `Ready for review` and present it without asking for
+   confirmation unless the user explicitly requested formal acceptance or an
+   unresolved material decision truly requires their choice. Do not use
+   `Awaiting approval` or `Ready for approval` for ordinary completion. If formal
+   acceptance is required, ask once after all five artifacts and the pricing
+   attempt are complete; never reopen acceptance merely because cost was deferred.
+
+**Complete when:** all five artifacts exist and agree, every contract is accounted
+for, review status is recorded, the bounded pricing consultation has completed or
+recorded a concrete blocker, and package status is `Ready for review` or explicitly
+accepted.
+
+## 3. Offer the final wireframe prototype
+
+Enter only after all five artifacts are created and reconciled, pricing is
+accounted for, and the diagram review gate is satisfied or its exception recorded.
+When the confirmed journey has no human-facing experience (headless API,
+event processing, batch), record `Prototype: not applicable (headless)` and go
+to step 4. Otherwise, in the same session, explicitly ask through the question
+form tool: "Would you like a clickable, low-fidelity wireframe prototype of the
+confirmed user journey now?" Offer Yes and No, then wait. Package approval, an earlier
+prototype request, and "continue" do not replace this final opt-in.
+
+Record the choice in the existing lifecycle record. A decline leaves the five-file
+package complete. On explicit acceptance, read
+[prototype handoff](references/prototype-handoff.md) and invoke the bundled
+`wireframer` skill within that bounded scope.
+If it is unavailable, report the missing prerequisite and record a prototype
+blocker rather than substituting another skill or installing it silently.
+
+**Complete when:** the explicit choice is recorded and the prototype is complete,
+declined, blocked, or not applicable. Resume from that record rather than repeating the offer.
+
+## 4. Hand off and stop
+
+Record the package revision, status, and any explicit architecture-only acceptance
+in the lifecycle record and specification.
+Report the five paths, including the cost estimate and its pricing status, current
+package/review status, remaining work and owners,
+the prototype choice and any output path, preview instructions, or blocker,
+and the separately initiated workflow needed for delivery. Name later specialists
+without invoking them.
+
+Stop after handoff. Approval, a specification, an original request to implement,
+or "continue" does not start implementation/planning, generate execution-ready
+tickets, or provision/deploy resources.
+
+**Complete when:** the reconciled package is handed off, later owners are clear,
+and the planning boundary remains intact.

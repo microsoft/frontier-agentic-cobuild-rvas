@@ -129,7 +129,7 @@ class BuilderTests(OfflineCase):
         self.assertEqual((self.out / "first.drawio").read_bytes(), (self.out / "second.drawio").read_bytes())
 
     def test_four_page_document_with_page_local_ids_and_embedded_icons(self):
-        names = ["Context", "Components", "AI and data flow", "Deployment"]
+        names = ["Context", "Components", "Runtime and data flow", "Deployment"]
         pages = []
         for name in names:
             d = builder.Diagram(name, 1000, 600)

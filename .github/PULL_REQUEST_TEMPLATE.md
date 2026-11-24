@@ -17,7 +17,7 @@ Describe the change and why it is needed.
 - [ ] Verified in GitHub Actions
 
 ## Area affected
-- [ ] ai-agent-creator
+- [ ] azure-solution-architect
 - [ ] cloud-architecture-diagram
 - [ ] idea-forge
 - [ ] Documentation site
