@@ -1,0 +1,13 @@
+From: alex.pendry@example.invalid
+To: claims@harbourline.invalid
+Subject: Damage to my property
+Date: 19/01/2026 01:27
+
+Dear Sir or Madam,
+
+I am Alex Pendry, policy POL-004379. I live at 41 Orchard Close, Mistlecombe.
+A large pine fell in the garden and is blocking the entrance.
+Thank you.
+Alex Pendry
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

@@ -1,15 +1,19 @@
 ## What the creator can design
 
 Bring the first task you want users to complete, in a new or existing
-application. AI Agent Creator defines that journey and designs the architecture.
-It might recommend a platform agent, a custom app, a fixed workflow, or a single
-model call.
+application. Azure Solution Architect defines that journey and designs the architecture.
+The app doesn't need AI. The creator compares plain code with no model, a fixed
+workflow, a single model call, and an agent, and recommends the simplest one
+that does the job.
 
-It designs the solution. It doesn't build it. The examples below are
-illustrations, not customer results or deployment templates.
+Whatever you build, the [path](path.html) is the same: agree on it, delegate the
+build, verify the result. The examples below are illustrations, not customer
+results or deployment templates.
 
 ## Application families
 
+These families are the shapes AI applications usually take. If your app
+doesn't use AI, skip to [describe your first journey](#describe-your-first-journey).
 The products shown are examples. Discovery checks whether they fit, connect to
 your systems, and are available to you.
 
@@ -134,7 +138,7 @@ unchecked.
 Tell the creator who will use the application and what their first task is:
 
 ```text
-/agentic-cobuild:ai-agent-creator Design a maintenance assistant for property managers. Help them investigate
+/agentic-cobuild:azure-solution-architect Design a maintenance assistant for property managers. Help them investigate
 resident requests and prepare a work order for approval. Reuse our existing
 identity and service system. Compare an agent with a simpler workflow before
 recommending the architecture.
@@ -143,6 +147,6 @@ recommending the architecture.
 [Set up your application workspace](start.html), then bring your own idea.
 If you are extending a system, [prepare its context](start.html#working-with-an-existing-application).
 
-Review and approve the architecture package, then start implementation in a
-separate session. Approving the architecture doesn't authorize building or
-deploying anything.
+Review and approve the architecture package, then follow the rest of the
+[path](path.html) in a separate session. Approving the architecture doesn't
+authorize building or deploying anything.

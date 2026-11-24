@@ -1,0 +1,13 @@
+From: dana.hethering@example.invalid
+To: claims@harbourline.invalid
+Subject: Damage to my property
+Date: 19/01/2026 00:00
+
+Dear Sir or Madam,
+
+I am Dana Hethering, policy POL-003255. I live at 165 Sea View Avenue, Greywick Sands.
+A supporting wall gave way and we are afraid to go into the house.
+Kind regards,
+Dana Hethering
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

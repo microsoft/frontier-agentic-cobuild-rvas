@@ -2,14 +2,14 @@
   "name": "agentic-cobuild",
   "owner": { "name": "Microsoft" },
   "metadata": {
-    "description": "Design and build your own AI application with Agentic Co-build.",
-    "version": "1.3.0"
+    "description": "Agree before you delegate: take any application from idea to a reviewed build on Azure with Agentic Co-build.",
+    "version": "2.0.0"
   },
   "plugins": [
     {
       "name": "agentic-cobuild",
-      "description": "Find an AI opportunity, define its architecture, and hand off an approved implementation plan.",
-      "version": "1.3.0",
+      "description": "Agree on what to build with diagrams and a prototype, then hand an approved architecture package to your build workflow.",
+      "version": "2.0.0",
       "source": "./plugins/agentic-cobuild"
     }
   ]

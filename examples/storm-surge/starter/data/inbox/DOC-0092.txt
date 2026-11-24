@@ -1,0 +1,13 @@
+From: esme.tregarth@example.invalid
+To: claims@harbourline.invalid
+Subject: Damage to my property
+Date: 18/01/2026 22:11
+
+Good morning,
+
+I am Esme Tregarth, I have a policy with you. I live at 153 Station Road, Kestrel Bay.
+Water is seeping through the bedroom walls, the ceiling is stained and dripping. There is a power line down by the front door.
+Regards,
+Esme Tregarth
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

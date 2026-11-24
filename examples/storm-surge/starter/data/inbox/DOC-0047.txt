@@ -1,0 +1,13 @@
+From: bram.eastaugh@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 18/01/2026 23:14
+
+Good morning,
+
+I am Bram Eastaugh, policy policy no. 2807. I live at 90 Coast Road, Corran Quay.
+A heavy branch fell on the parked car and dented the bonnet and windscreen.
+Please treat this as urgent.
+Bram Eastaugh
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

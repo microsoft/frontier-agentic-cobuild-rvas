@@ -1,0 +1,22 @@
+From: claims@northlight-brokers.invalid
+To: claims@harbourline.invalid
+Subject: Batch of 4 storm claims - Northlight Brokers
+Date: 19/01/2026 22:18
+
+Hello,
+
+Please find below 4 claims from our clients (BRK-02). Policy numbers are as the clients gave them.
+
+1. Tamsin Abernott | Policy: not given | Address: 140 Sea View Avenue, Brackenholt | Damage: fallen tree | Loss: 18/01/2026 20:59
+   Notes: A big tree came down on the house and broke the eaves. We can smell gas.
+2. Quinn Saltash | Policy: POL-004336 | Address: Wrenmouth | Damage: water ingress | Loss: 18/01/2026 21:37
+   Notes: Water is coming in through the windows and the living room ceiling, the floor is soaked.
+3. Elin Fairley | Policy: POL-003103 | Address: 119 Station Road, Wrenmouth | Damage: fallen tree | Loss: 19/01/2026 10:14
+   Notes: A big tree came down on the house and broke the eaves.
+4. Bram Abernott | Policy: POL-002920 | Address: 54 Mill Lane, Brackenholt | Damage: fallen tree | Loss: 19/01/2026 09:40
+   Notes: A large pine fell in the garden and is blocking the entrance.
+
+Regards,
+Northlight Brokers
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

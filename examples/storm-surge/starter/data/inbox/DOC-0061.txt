@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 19/01/2026 01:49
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Nolan Abernott. Une grosse branche est tombée sur la voiture garée et a cassé le pare-brise.
+Agent: Can you give me the policy number or the address?
+Caller: The policy is POL-001326. I live at 40 Lighthouse Road, Halvering.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

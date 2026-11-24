@@ -1,0 +1,10 @@
+From: operations@ashdown-glass-ltd.invalid
+To: assistance@harbourline.invalid
+Subject: Availability - Ashdown Glass Ltd
+Date: 20/01/2026 02:31
+
+Provider PRV-014 (Ashdown Glass Ltd).
+Roads are open again. We can now do 3 jobs per day.
+Regards
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

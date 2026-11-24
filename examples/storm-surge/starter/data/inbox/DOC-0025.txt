@@ -1,0 +1,13 @@
+From: ada.coombe@example.invalid
+To: claims@harbourline.invalid
+Subject: Claim report
+Date: 19/01/2026 00:28
+
+Good morning,
+
+I am Ada Coombe, policy POL-002686. I live at 154 Station Road, Dunlowe.
+L'entrepôt est inondé, nous avons perdu du stock. The house is not safe to sleep in tonight. There is a small child in the house.
+Thank you.
+Ada Coombe
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

@@ -1,7 +1,9 @@
 # Workspace instructions
 
 This repository maintains the Agentic Co-build plugin and documentation site. Customer application code and architecture artifacts belong
-in the customer's selected repository.
+in the customer's selected repository. The one exception is the fictional
+worked example under `examples/`, which uses synthetic data and no customer
+names.
 
 The bundled skill bodies live under `plugins/agentic-cobuild/skills/`.
 Third-party skills are bundled unmodified from a pinned upstream commit, with

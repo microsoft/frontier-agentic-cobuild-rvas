@@ -1,0 +1,22 @@
+From: claims@calder-mutual-agency.invalid
+To: claims@harbourline.invalid
+Subject: Batch of 4 storm claims - Calder Mutual Agency
+Date: 19/01/2026 14:50
+
+Hello,
+
+Please find below 4 claims from our clients (BRK-05). Policy numbers are as the clients gave them.
+
+1. Elin Fairley | Policy: POL-003103 | Address: 119 Sattion Road, Wrenmouth | Damage: fallen tree | Loss: 19/01/2026 10:14
+   Notes: A big tree came down on the house and broke the eaves.
+2. Ines Rendle | Policy: POL-003766 | Address: 8 School Lane, Halvering | Damage: roof damage | Loss: 18/01/2026 22:22
+   Notes: Several roof tiles blew off and part of the roof is open to the sky.
+3. Bram Eastaugh | Policy: not given | Address: 90 Coast Road, Corran Quay | Damage: vehicle damage | Loss: 18/01/2026 19:19
+   Notes: A heavy branch fell on the parked car and dented the bonnet and windscreen.
+4. Tamsin Elsworth | Policy: POL-003405 | Address: Corran Quay | Damage: water ingress | Loss: 18/01/2026 16:07
+   Notes: Water is coming in through the windows and the living room ceiling, the floor is soaked.
+
+Regards,
+Calder Mutual Agency
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

@@ -1,0 +1,13 @@
+From: bea.tregarth@example.invalid
+To: claims@harbourline.invalid
+Subject: Storm damage
+Date: 18/01/2026 22:09
+
+Good morning,
+
+I am Bea Tregarth, policy POL-004355. I live at Brackenholt.
+The glass in the balcony door shattered. We cannot stay at home tonight.
+Please treat this as urgent.
+Bea Tregarth
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

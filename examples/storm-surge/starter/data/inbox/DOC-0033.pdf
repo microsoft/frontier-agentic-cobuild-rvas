@@ -1,0 +1,85 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 712 >>
+stream
+BT
+/F2 15 Tf
+56 790 Td (Claim report) Tj
+ET
+0.6 w 56 780 m 539 780 l S
+BT
+/F1 10.5 Tf
+56 755 Td (STORM DAMAGE CLAIM FORM) Tj
+ET
+BT
+/F1 10.5 Tf
+56 725 Td (Policyholder: Ulric Lowther) Tj
+ET
+BT
+/F1 10.5 Tf
+56 710 Td (Policy number: POL-004410) Tj
+ET
+BT
+/F1 10.5 Tf
+56 695 Td (Risk address: Port Calder) Tj
+ET
+BT
+/F1 10.5 Tf
+56 680 Td (Date/time of loss: 18/01/2026 21:27) Tj
+ET
+BT
+/F1 10.5 Tf
+56 665 Td (Damage type: vehicle damage) Tj
+ET
+BT
+/F1 10.5 Tf
+56 635 Td (Description:) Tj
+ET
+BT
+/F1 10.5 Tf
+56 620 Td (A roof tile fell on the car and smashed the rear window.) Tj
+ET
+BT
+/F1 10.5 Tf
+56 590 Td (Risk to people: NO Home uninhabitable: NO) Tj
+ET
+BT
+/F1 7 Tf
+56 40 Td (SYNTHETIC DATA - HACKATHON EXERCISE) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Title (Claim report) /Producer (Harbourline synthetic data generator) >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000218 00000 n 
+0000000320 00000 n 
+0000001083 00000 n 
+0000001219 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R /Info 7 0 R >>
+startxref
+1311
+%%EOF

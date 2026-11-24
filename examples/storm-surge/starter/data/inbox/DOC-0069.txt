@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 19/01/2026 00:46
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Kira Kettering. Several roof tiles blew off [inaudible] part of the roof is open to the sky.
+Agent: Can you give me the policy number or the address?
+Caller: The policy is POL-009403. I live at 27 Mill Lane, Dunlowe.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

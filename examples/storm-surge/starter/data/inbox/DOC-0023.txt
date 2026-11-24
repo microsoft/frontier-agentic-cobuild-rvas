@@ -1,0 +1,13 @@
+From: jonah.carrow@example.invalid
+To: claims@harbourline.invalid
+Subject: Please help
+Date: 18/01/2026 20:33
+
+Dear Sir or Madam,
+
+I am Jonah Carrow, I have a policy with you. I live at 21 Market Street, Tidesend.
+A heavy branch fell on the parked car and dented the bonnet and windscreen.
+Kind regards,
+Jonah Carrow
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

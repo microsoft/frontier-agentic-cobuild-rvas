@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 18/01/2026 22:23
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Yara Northey. The roof gave way in one corner and water is getting into the loft.
+Agent: Can you give me the policy number or the address?
+Caller: I don't have the policy to hand. I live at Brackenholt.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

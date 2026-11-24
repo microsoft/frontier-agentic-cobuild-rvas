@@ -1,0 +1,10 @@
+From: operations@quarrie-glass-ltd.invalid
+To: assistance@harbourline.invalid
+Subject: Availability - Quarrie Glass Ltd
+Date: 19/01/2026 15:07
+
+Provider PRV-013 (Quarrie Glass Ltd).
+We have added crews: we can now do 5 jobs per day.
+Regards
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

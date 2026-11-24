@@ -1,0 +1,13 @@
+From: bram.saltash@example.invalid
+To: claims@harbourline.invalid
+Subject: Damage to my property
+Date: 19/01/2026 11:59
+
+Hello,
+
+I am Bram Saltash, policy POL-002498. I live at 170 Mill Lane, Brackenholt.
+A supporting wall gave way and we are afraid to go into the house. We cannot stay at home tonight.
+Kind regards,
+Bram Saltash
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

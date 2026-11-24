@@ -3,15 +3,19 @@
   "version": "1.0.0",
   "description": "Agentic Co-build plugin, repository setup, and documentation",
   "scripts": {
-    "test": "node --test scripts/test-docs.js",
+    "test": "node --test scripts/test-docs.js scripts/test-slides.js",
     "test:diagrams": "python3 -B -m unittest discover -s plugins/agentic-cobuild/skills/cloud-architecture-diagram/tests",
     "audit:docs": "node scripts/audit-docs.js",
     "audit:docs:source": "node scripts/audit-docs.js --source",
     "audit:docs:generated": "node scripts/audit-docs.js --generated",
-    "build": "node docs/build.js && npm run audit:docs"
+    "build": "node docs/build.js && npm run audit:docs",
+    "export:slides": "node scripts/export-slides-pdf.js"
   },
   "engines": {
     "node": ">=22.20.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "playwright-core": "1.65.0"
+  }
 }

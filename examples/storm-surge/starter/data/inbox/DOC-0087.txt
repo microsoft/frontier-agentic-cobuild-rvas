@@ -1,0 +1,13 @@
+From: zane.rendle@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 19/01/2026 06:41
+
+Dear Sir or Madam,
+
+I am Zane Rendle, policy POL-001615. I live at 40 Market Street, Port Calder.
+The strong wind lifted part of the roof and there are tiles all over the garden.
+Regards,
+Zane Rendle
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

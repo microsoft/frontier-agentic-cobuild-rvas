@@ -78,4 +78,4 @@ designing or testing safely, treat that as a blocker.
 
 When people and access are ready, use the
 [discovery session guide](discovery-session.html) to run the customer discussion
-and prepare a brief for AI Agent Creator.
+and prepare a brief for Azure Solution Architect.

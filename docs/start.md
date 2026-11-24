@@ -1,5 +1,10 @@
 Already installed the plugin? [Start discovery](#describe-what-you-want-to-build).
 
+This page takes you through setup, discovery, architecture, and the optional
+wireframe: steps 00 to 03 of [the path](path.html). Bring your own use case. If
+you don't have one, [find an idea](#need-an-idea-first) or use the
+[worked example](example.html).
+
 ## Before you start
 
 Work in your application's repository, not this one. Check the
@@ -33,8 +38,8 @@ If a command fails, read the error and check for partial files before retrying.
 Skip this for an existing application and follow its branching rules.
 
 ```bash
-mkdir my-ai-app
-cd my-ai-app
+mkdir my-app
+cd my-app
 git init
 ```
 
@@ -62,17 +67,58 @@ For VS Code, add the marketplace without replacing existing entries:
 Open Extensions, search for `@agentPlugins`, install **Agentic Co-build**, and
 enable it for the application workspace.
 
+### Or install the skills by hand
+
+Use this if your host or organisation doesn't allow plugins, or you want only
+some of the skills. You get the same skills and MCP server, but not the
+Co-build board canvas, and you update them yourself.
+
+Add the skills to your repository with the [`skills` CLI](https://github.com/vercel-labs/skills)
+(Node.js 22 or later). It works the same in PowerShell and Bash:
+
+```bash
+npx skills add https://github.com/microsoft/frontier-agentic-cobuild-rvas/tree/main/plugins/agentic-cobuild/skills -a github-copilot
+```
+
+It asks which skills to install and copies them to `.agents/skills/`, which
+Copilot CLI and VS Code both read. Add `--list` to see the nine skills first, or
+`-s azure-solution-architect` to pick one. Run `npx skills update` to update them.
+
+Then add the Microsoft Learn MCP server. For Copilot CLI:
+
+```bash
+copilot mcp add --transport http microsoft-learn https://learn.microsoft.com/api/mcp
+```
+
+For VS Code, add it to `.vscode/mcp.json` in your repository:
+
+```json
+{
+  "servers": {
+    "microsoft-learn": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
+
+Later steps need more tools. Each [step of the path](path.html) lists what to
+install when you reach it: Spec Kit for the task plan, Impeccable for design,
+and the Azure CLI and Azure Developer CLI for deployment.
+
 ### Check the workspace
 
 In CLI, use `/skills` and `/mcp`. In VS Code, use **Chat: Configure Skills** and
 the MCP server list.
 
-You should see **AI Agent Creator**, **Idea Forge**, **Cloud Architecture
+You should see **Azure Solution Architect**, **Idea Forge**, **Cloud Architecture
 Diagram**, **Diagram Design**, **Wireframer**, **Cost Estimation**, **Grilling**,
 **Domain Modeling**, **Wait What**, and the **Microsoft Learn** MCP server.
-If something is missing, reload your host and reinstall the plugin.
+If something is missing, reload your host, then reinstall the plugin or rerun
+`npx skills add`.
 
-**Use Claude Opus 5.5** for the whole AI Agent Creator session, including the
+**Use Claude Opus 5.5** for the whole Azure Solution Architect session, including the
 optional wireframe, and for implementation. In VS Code, pick it in the model
 picker. In Copilot CLI, run:
 
@@ -86,15 +132,15 @@ If the business context is spread across several people, run the
 [discovery session guide](discovery-session.html) first, and get approval before
 recording or processing the discussion.
 
-Select **AI Agent Creator** from your host's skill picker or slash completion,
+Select **Azure Solution Architect** from your host's skill picker or slash completion,
 then adapt one of these prompts.
 
-### AI Agent Creator prompts
+### Azure Solution Architect prompts
 
 For a new application:
 
 ```text
-/agentic-cobuild:ai-agent-creator Build a demo based on the 2025 Monza Grand Prix,
+/agentic-cobuild:azure-solution-architect Build a demo based on the 2025 Monza Grand Prix,
 using real OpenF1 data. The goal is to show how to combine race data and
 business knowledge to support a strategic decision: pit or stay out.
 ```
@@ -102,7 +148,7 @@ business knowledge to support a strategic decision: pit or stay out.
 For an existing application (for example, extending the race demo):
 
 ```text
-/agentic-cobuild:ai-agent-creator Add a what-if comparison to the existing Monza
+/agentic-cobuild:azure-solution-architect Add a what-if comparison to the existing Monza
 race demo. Let users adjust pit-stop time loss and expected tyre pace, compare
 pit versus stay-out scenarios, and see which assumptions change the recommendation.
 Distinguish observed OpenF1 data from hypothetical inputs. Inspect the current
@@ -307,7 +353,8 @@ VS Code users can run the plugin update action instead.
 ## Need an idea first?
 
 Use **Idea Forge** to research an opportunity, then take the brief you pick
-through AI Agent Creator discovery and architecture approval.
+through Azure Solution Architect discovery and architecture approval. To learn the flow
+on a prepared scenario with synthetic data, use the [worked example](example.html).
 
 ### Idea Forge prompt
 

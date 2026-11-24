@@ -1,0 +1,13 @@
+From: wyn.hethering@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 19/01/2026 03:34
+
+Good evening,
+
+I am Wyn Hethering, policy POL-003641. I live at 13 Orchard Close, Brackenholt.
+A roof tile fell on the car and smashed the rear window.
+I look forward to hearing from you.
+Wyn Hethering
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

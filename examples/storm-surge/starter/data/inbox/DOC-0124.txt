@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 19/01/2026 16:28
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Rosa Tregarth. The warehouse flooded, we lost stock and the electrical board is at risk.
+Agent: Can you give me the policy number or the address?
+Caller: The policy is POL-001472. I live at 21 High Street, Tidesend.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

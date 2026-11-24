@@ -1,0 +1,13 @@
+From: kira.coombe@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 19/01/2026 10:04
+
+Good evening,
+
+I am Kira Coombe, policy POL-000476. I live at 207 Lighthouse Road, Halvering.
+A living room window broke in the wind and there is glass on the floor.
+Please treat this as urgent.
+Kira Coombe
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

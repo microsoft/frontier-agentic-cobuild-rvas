@@ -24,6 +24,7 @@ const VENDORED = /[\\/]skills[\\/](?:diagram-design|wireframer|grilling|domain-m
 function sourceDocs() {
   return ['README.md', 'CONTRIBUTING.md', 'PRODUCT.md', 'DESIGN.md'].map((name) => path.join(ROOT, name))
     .concat(walk(path.join(ROOT, 'docs'), (file) => file.endsWith('.md')))
+    .concat(fs.existsSync(path.join(ROOT, 'examples')) ? walk(path.join(ROOT, 'examples'), (file) => file.endsWith('.md')) : [])
     .concat(walk(path.join(ROOT, 'plugins'), (file) => file.endsWith('.md') && !VENDORED.test(file)));
 }
 
@@ -74,7 +75,7 @@ function audit(files) {
 }
 
 function run(mode) {
-  const html = ['index.html', ...pages.map((page) => `${page.slug}.html`)].map((name) => path.join(ROOT, 'docs', name));
+  const html = ['index.html', 'why.html', ...pages.map((page) => `${page.slug}.html`)].map((name) => path.join(ROOT, 'docs', name));
   const files = mode === '--generated' ? html : mode === '--source' ? sourceDocs() : sourceDocs().concat(html);
   const failures = audit(files);
   if (failures.length) {

@@ -1,0 +1,13 @@
+From: maren.tregarth@example.invalid
+To: claims@harbourline.invalid
+Subject: Claim report
+Date: 20/01/2026 05:02
+
+Good evening,
+
+I am Maren Tregarth, policy POL-003177. I live at 200 Coast Raod, Greywick Sands.
+A large pine fell in the garden and is blocking the entrance.
+I look forward to hearing from you.
+Maren Tregarth
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

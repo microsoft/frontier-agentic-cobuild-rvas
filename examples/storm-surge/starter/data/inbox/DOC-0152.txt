@@ -1,0 +1,13 @@
+From: felix.saltash@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 19/01/2026 16:26
+
+Hello,
+
+I am Felix Saltash, I have a policy with you. I live at 149 Church Lane, Skellby.
+The glass in the balcony door shattered. We cannot stay at home tonight.
+Kind regards,
+Felix Saltash
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 18/01/2026 17:40
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Rosa Tregarth. Water is coming in through the windows and the living room ceiling, the floor is soaked.
+Agent: Can you give me the policy number or the address?
+Caller: The poll a see is POL-004179. I live at Port Calder.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

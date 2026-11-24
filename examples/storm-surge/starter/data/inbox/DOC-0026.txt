@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 19/01/2026 00:37
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Bea Carrow. The strong wind lifted part of the roof and there are tiles all over the garden.
+Agent: Can you give me the policy number or the address?
+Caller: I don't have the policy to hand. I live at 76 Sea View Avenue, Tidesend.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

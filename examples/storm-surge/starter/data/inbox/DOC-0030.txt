@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 18/01/2026 18:38
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Zane Underhay. The basement [inaudible] garage are flooded with about 40 cm of water.
+Agent: Can you give me the policy number or the address?
+Caller: The poll a see is POL-000795. I live at 23 Sea View Avenue, Brackenholt.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

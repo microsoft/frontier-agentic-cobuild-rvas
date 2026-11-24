@@ -1,0 +1,13 @@
+From: dana.zennor@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 18/01/2026 18:08
+
+Dear Sir or Madam,
+
+I am Dana Zennor, policy POL-001927. I live at 151 Market Street, Halvering.
+A tree fell on the boundary wall and part of the garage roof.
+Kind regards,
+Dana Zennor
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

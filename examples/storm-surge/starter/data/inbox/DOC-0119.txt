@@ -1,0 +1,13 @@
+From: wyn.wickham@example.invalid
+To: claims@harbourline.invalid
+Subject: Storm damage
+Date: 19/01/2026 02:55
+
+Good evening,
+
+I am Wyn Wickham, I have a policy with you. I live at Skellby.
+The basement and garage are flooded with about 40 cm of water.
+Regards,
+Wyn Wickham
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

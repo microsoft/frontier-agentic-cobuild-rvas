@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 19/01/2026 06:45
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Wyn Garroway. The glass in the balcony door shattered.
+Agent: Can you give me the policy number or the address?
+Caller: The poll a see is POL-002685. I live at 49 Coast Road, Saltmere.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

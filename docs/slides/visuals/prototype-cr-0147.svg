@@ -1,0 +1,56 @@
+<svg class="v v-prototype-cr-0147" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460" role="img" aria-labelledby="v-prototype-cr-0147-title v-prototype-cr-0147-desc">
+<title id="v-prototype-cr-0147-title">Throwaway prototype of the contract manager review screen for change request CR-0147</title>
+<desc id="v-prototype-cr-0147-desc">Sketchy low-fidelity wireframe of contracts.example/change-requests/CR-0147: Change request CR-0147, Bridge deck resurfacing, Lot 3, status Awaiting site inspection. Request: contractor Lot 3 contractor, amount 48,200 euros, reason unforeseen rebar corrosion under deck, evidence three photos. AI pre-assessment, a suggestion, not a decision: clause 12.3 covers unforeseen structural conditions (check); lot budget remaining 112,000 euros (check); warning: cumulative changes 17 percent of contract value, re-tender review at 20 percent; missing: inspector site report. Each line links to the clause, ledger entry or document it was checked against. Buttons: Request more info, Send to site inspection, and Approve, which is disabled and enabled after inspection. Markers 1 to 3 point to the Approve button, the cumulative-changes warning and the AI panel heading.</desc>
+<defs>
+<marker id="v-prototype-cr-0147-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-prototype-cr-0147-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+<filter id="v-prototype-cr-0147-wobble" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" /><feDisplacementMap in="SourceGraphic" scale="3.2" /></filter>
+</defs>
+<g filter="url(#v-prototype-cr-0147-wobble)">
+<rect x="4" y="4" width="812" height="452" rx="10" class="w-frame" />
+<path d="M4 40H816M4 92H816M4 388H816M344 108V372" class="w-line" />
+<circle cx="24" cy="22" r="6" class="w-line" /><circle cx="42" cy="22" r="6" class="w-line" /><circle cx="60" cy="22" r="6" class="w-line" />
+<rect x="80" y="11" width="330" height="22" rx="11" class="w-line" />
+<rect x="636" y="55" width="164" height="26" rx="13" class="w-pill" />
+<rect x="24" y="284" width="96" height="64" class="w-photo" /><path d="M24 284l96 64M120 284l-96 64" class="w-faint" /><rect x="128" y="284" width="96" height="64" class="w-photo" /><path d="M128 284l96 64M224 284l-96 64" class="w-faint" /><rect x="232" y="284" width="96" height="64" class="w-photo" /><path d="M232 284l96 64M328 284l-96 64" class="w-faint" />
+<rect x="358" y="106" width="446" height="268" rx="6" class="w-panel" />
+<path d="M374 146H788M374 187H788M374 225H788M374 271H788M374 311H788" class="w-faint" />
+<rect x="440" y="398" width="120" height="30" rx="5" class="w-line" />
+<rect x="572" y="398" width="148" height="30" rx="5" class="w-solid" />
+<rect x="732" y="398" width="72" height="30" rx="5" class="w-disabled" />
+</g>
+<text x="94" y="26" class="w-mono">contracts.example/change-requests/CR-0147</text>
+<text x="24" y="72" class="w-h">Change request CR-0147 · Bridge deck resurfacing, Lot 3</text>
+<text x="718" y="72" class="w-small" text-anchor="middle">Awaiting site inspection</text>
+<text x="24" y="124" class="w-h2">Request</text>
+<text x="24" y="148" class="w-cap">Contractor</text>
+<text x="24" y="166" class="w-text">Lot 3 contractor</text>
+<text x="24" y="190" class="w-cap">Amount</text>
+<text x="24" y="208" class="w-text w-strong">€48,200</text>
+<text x="24" y="232" class="w-cap">Reason</text>
+<text x="24" y="250" class="w-text">Unforeseen rebar corrosion under deck</text>
+<text x="24" y="274" class="w-cap">Evidence</text>
+<text x="72" y="364" class="w-tiny" text-anchor="middle">photo</text>
+<text x="176" y="364" class="w-tiny" text-anchor="middle">photo</text>
+<text x="280" y="364" class="w-tiny" text-anchor="middle">photo</text>
+<text x="376" y="132" class="w-h3">AI pre-assessment — a suggestion, not a decision</text>
+<circle cx="392" cy="167" r="9" class="w-ok" /><path d="M388 167l3 3 5-6" class="w-ok" />
+<text x="412" y="171.5" class="w-text">Clause 12.3 covers unforeseen structural conditions</text>
+<circle cx="392" cy="206" r="9" class="w-ok" /><path d="M388 206l3 3 5-6" class="w-ok" />
+<text x="412" y="210.5" class="w-text">Lot budget remaining: €112,000</text>
+<rect x="366" y="228" width="430" height="40" rx="4" class="w-warn-bg" />
+<path d="M392 240l10 18h-20z" class="w-warn" /><path d="M392 246v6M392 255v.5" class="w-warn" />
+<text x="412" y="244" class="w-text w-warn-text">Cumulative changes: 17% of contract value</text>
+<text x="412" y="261" class="w-text w-warn-text">(re-tender review at 20%)</text>
+<circle cx="392" cy="291" r="9" class="w-warn" /><path d="M388 287l8 8M396 287l-8 8" class="w-warn" />
+<text x="412" y="295.5" class="w-text w-strong w-warn-text">Missing: inspector site report</text>
+<text x="376" y="342" class="w-tiny w-italic">Each line links to the clause, ledger entry</text>
+<text x="376" y="356" class="w-tiny w-italic">or document it was checked against.</text>
+<text x="500" y="418" class="w-button" text-anchor="middle">Request more info</text>
+<text x="646" y="418" class="w-button w-on-solid" text-anchor="middle">Send to site inspection</text>
+<text x="768" y="418" class="w-button w-disabled-text" text-anchor="middle">Approve</text>
+<text x="804" y="446" class="w-tiny w-italic" text-anchor="end">enabled after inspection</text>
+<circle cx="804" cy="396" r="11" class="w-marker" /><text x="804" y="400.5" class="w-marker-text" text-anchor="middle">1</text>
+<circle cx="796" cy="248" r="11" class="w-marker" /><text x="796" y="252.5" class="w-marker-text" text-anchor="middle">2</text>
+<circle cx="790" cy="128" r="11" class="w-marker" /><text x="790" y="132.5" class="w-marker-text" text-anchor="middle">3</text>
+</svg>

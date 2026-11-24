@@ -1,0 +1,13 @@
+From: lewis.garroway@example.invalid
+To: claims@harbourline.invalid
+Subject: Please help
+Date: 19/01/2026 15:01
+
+Hello,
+
+I am Lewis Garroway, policy POL-003676. I live at Mistlecombe.
+Water is seeping through the bedroom walls, the ceiling is stained and dripping.
+Regards,
+Lewis Garroway
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

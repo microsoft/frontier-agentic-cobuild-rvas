@@ -1,0 +1,10 @@
+From: operations@ashdown-roofing-ltd.invalid
+To: assistance@harbourline.invalid
+Subject: Availability - Ashdown Roofing Ltd
+Date: 19/01/2026 10:04
+
+Provider PRV-025 (Ashdown Roofing Ltd).
+Our workshop has no power and no road access. We are unavailable until further notice.
+Regards
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

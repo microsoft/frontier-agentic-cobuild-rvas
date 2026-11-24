@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 19/01/2026 17:42
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Cleo Jessop. A roof tile fell on the car and smashed the rear window.
+Agent: Can you give me the policy number or the address?
+Caller: The policy is POL-002492. I live at 97 Market Street, Corran Quay.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE
