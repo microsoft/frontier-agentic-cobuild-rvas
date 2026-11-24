@@ -140,21 +140,23 @@ then adapt one of these prompts.
 For a new application:
 
 ```text
-/agentic-cobuild:azure-solution-architect Build a demo based on the 2025 Monza Grand Prix,
-using real OpenF1 data. The goal is to show how to combine race data and
-business knowledge to support a strategic decision: pit or stay out.
+/agentic-cobuild:azure-solution-architect Build an app for [who] that helps them
+[decision or task]. Today they [how it works now and what goes wrong]. The data
+comes from [sources], and [who] owns it. It must not [boundary, for example
+contact customers or change records without approval].
 ```
 
-For an existing application (for example, extending the race demo):
+For an existing application:
 
 ```text
-/agentic-cobuild:azure-solution-architect Add a what-if comparison to the existing Monza
-race demo. Let users adjust pit-stop time loss and expected tyre pace, compare
-pit versus stay-out scenarios, and see which assumptions change the recommendation.
-Distinguish observed OpenF1 data from hypothetical inputs. Inspect the current
-stack, preserve established interfaces, and account for existing data-access
-and deployment constraints.
+/agentic-cobuild:azure-solution-architect Add [capability] to [application] so
+that [who] can [decision or task]. Inspect the current stack, preserve
+established interfaces, and account for existing data-access and deployment
+constraints.
 ```
+
+No use case of your own? The [worked example](example.html) ships a seed prompt
+and synthetic data.
 
 **Your first milestone is confirmed discovery.** Answer the creator's questions.
 When you agree on the outcome, the first user journey, and the architecture
