@@ -180,6 +180,12 @@ img { max-width: 100%; }
 .step > a:hover .step-name { color: var(--c-action); text-decoration: underline; text-underline-offset: 0.2em; }
 .step-gate { display: flex; align-items: flex-start; gap: 5px; margin-top: 12px; padding: 6px 8px; border-radius: 6px; background: var(--c-heading); color: #fff; font-size: 0.75rem; font-weight: 600; line-height: 1.4; }
 .step-gate svg { flex: 0 0 14px; margin-top: 2px; }
+@media (min-width: 961px) {
+  .band ol { grid-template-rows: auto 1fr; }
+  .step { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 0; }
+  .step > a { align-self: start; align-content: start; }
+  .step-gate { align-self: start; width: calc(100% + 6px); box-sizing: border-box; padding: 6px; gap: 4px; font-size: 0.7rem; overflow-wrap: anywhere; }
+}
 @media (min-width: 961px) and (max-width: 1240px) {
   .stepper { grid-template-columns: repeat(5, minmax(0, 1fr)); row-gap: 40px; }
   .band-agree { grid-column: 2 / 6; }

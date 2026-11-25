@@ -16,15 +16,13 @@ test('why.html is generated from the deck source', () => {
   assert.equal(why, build.renderWhy(), 'Run `node docs/build.js` to regenerate why.html.');
 });
 
-test('the deck has 16 titled slides, readable without JavaScript', () => {
-  assert.equal(slides.length, 16);
+test('the deck has 17 titled slides with speaker notes', () => {
+  assert.equal(slides.length, 17);
   for (const slide of slides) {
     assert.ok(slide.title, `slide ${slide.number} has no title`);
     assert.ok(slide.notesHtml.trim(), `slide ${slide.number} has no speaker notes`);
     assert.match(why, new RegExp(`<section class="deck-entry" id="slide-${slide.number}"`));
   }
-  // Present mode is the only JS-dependent part; the read view must not be hidden.
-  assert.doesNotMatch(why, /<div class="deck"[^>]*hidden/);
 });
 
 test('the PDF has one page per slide and matches the current source', () => {
