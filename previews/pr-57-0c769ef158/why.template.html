@@ -4,13 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Why: Agree before you delegate | Agentic Co-build</title>
-  <meta name="description" content="The Agree before you delegate talk: why AI coding agents need visible, checkable agreement on what to build, with slides, speaker notes and a PDF." />
+  <meta name="description" content="The Agree before you delegate talk: why AI coding agents need visible, checkable agreement on what to build, with the slides and a PDF." />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/slides.css" />
   <link rel="icon" href="assets/img/logo-mark.png" />
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to slides</a>
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
@@ -30,13 +30,24 @@
         <div class="why-actions">
           <div class="present-action" data-present-action hidden>
             <button class="btn btn-primary" type="button" data-present="1">Present the slides</button>
-            <p class="present-hint">Press <kbd>N</kbd> for speaker notes, <kbd>F</kbd> for full screen</p>
+            <p class="present-hint">Press <kbd>J</kbd> and <kbd>K</kbd> to move, <kbd>N</kbd> for speaker notes, <kbd>F</kbd> for full screen</p>
           </div>
           <a class="btn btn-secondary" href="assets/slides/agree-before-you-delegate.pdf">Download the PDF <span class="btn-meta">({{pdf-label}})</span></a>
         </div>
-        <p class="why-meta">{{slide-count}} slides, each followed by the speaker notes.</p>
+        <p class="why-meta">{{slide-count}} slides, with speaker notes in present mode.</p>
       </div>
     </section>
+    <article class="wrap guide-body why-article">
+      <h2>Prompting is fast. Agreeing is the work.</h2>
+      <p>Agents made code cheaper to write. They didn't make it cheaper to know what to write. Without agreement up front, an agent builds the most plausible reading of the brief, and the team finds the gap after the build. Barry Boehm showed in 1981 that errors cost more the later they surface. Agents get you to that late stage in hours.</p>
+      <h2>Pure vibe coding</h2>
+      <p>Kai Lentit's sketch <a href="https://youtu.be/_2C2CNmK7dQ">Senior Engineer tries Vibe Coding</a> (6 minutes) exaggerates for laughs, but the failures are familiar. The agent ignores written rules, changes things nobody asked for, and the bill keeps growing. Nobody agreed what done looks like, so there is nothing to check the output against.</p>
+      <h2>Plan mode helps, but a plan is still prose</h2>
+      <p>Net Ninja's <a href="https://youtu.be/fxgsyY_t82Q">Using Plan Mode</a> (5 minutes) shows the better version. The agent asks clarifying questions and writes a task list before it builds. Then the presenter skips reading the plan, approves it, and the agent carries on in autopilot. For a small quiz feature that is fine, and he says plan mode is overkill for a change that narrow. For a real system, nobody can check a long plan, and approving it is not agreement.</p>
+      <h2>Approve something people can challenge</h2>
+      <p>Diagrams, wireframes and a task plan can be looked at, questioned and corrected before any code exists. C4 models, UML, swimlanes and wireframes come from fifty years of software engineering. We don't invent a new way to agree. Agents let us produce the established ones in minutes. We reinvent everything to reinvent nothing.</p>
+      <p>The slides walk through the argument and a worked example. Present them from the buttons above, or download the PDF.</p>
+    </article>
     <div class="wrap deck-wrap">
       <!-- deck -->
     </div>

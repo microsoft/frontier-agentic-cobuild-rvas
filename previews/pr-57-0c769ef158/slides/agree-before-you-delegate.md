@@ -143,6 +143,41 @@ Source: 'Agree before you delegate'.
 
 ---
 
+<!-- slide: id=plan-mode layout=compare -->
+
+Why a plan is not enough
+
+## Prompting and planning both end in prose
+
+::: cols
+::: col
+### Vibe coding
+
+Prompt, run, patch
+
+**Rules ignored, scope drifts, the bill grows**
+:::
+::: col
+### Plan mode
+
+The agent plans first
+
+**Better, but the plan is a wall of text**
+:::
+:::
+
+::: band
+Humans must not approve a wall of text.
+:::
+
+Notes:
+
+Two videos make this concrete. The first is Kai Lentit's 'Senior Engineer tries Vibe Coding', a comedy sketch. Played for laughs, it lists the failures we see in earnest: rules the agent ignores, changes nobody asked for, a bill that keeps growing, and no shared picture of what was meant. The second is Net Ninja's 'Using Plan Mode' for the GitHub Copilot app. It is a fair tutorial, and plan mode is a real step forward: the agent asks clarifying questions and writes a task list before it builds. But look at what the human receives. A long markdown plan. The presenter says he isn't going to read all of it out, approves it, and the agent goes on in autopilot. That is our point. A wall of text can't be checked, so approving it isn't agreement. The agreement that matters is in artefacts people can look at and challenge, and software engineering defined those over fifty years: diagrams, a shared vocabulary, wireframes, a task plan. So what do we ask people to approve instead? The next slides answer that.
+
+Sources: Kai Lentit, 'Senior Engineer tries Vibe Coding' (https://youtu.be/_2C2CNmK7dQ); Net Ninja, 'GitHub Copilot App Tutorial #8 - Using Plan Mode' (https://youtu.be/fxgsyY_t82Q).
+
+---
+
 <!-- slide: id=practice layout=principles -->
 
 The practice
@@ -153,6 +188,12 @@ The practice
 Reach visible, checkable agreement on what to build before handing implementation to agents.
 :::
 
+::: band
+C4, UML, wireframes: fifty years of practice.
+
+We reinvent everything to reinvent nothing.
+:::
+
 1. Pictures before prose
 2. Agree progressively, in order
 3. Engineers act as the stakeholder
@@ -160,7 +201,7 @@ Reach visible, checkable agreement on what to build before handing implementatio
 
 Notes:
 
-We use the phrase 'agree before you delegate' for a simple practice: reach visible, checkable agreement on what to build before handing implementation to agents. Visible means people can look at it. Checkable means someone can say 'that's wrong' before any code exists. The practice rests on four principles. First, pictures before prose. Second, agree progressively, in order. Third, engineers act as the stakeholder when they commission work from agents. Fourth, agreement stays with people, even as verification becomes more automated. These are techniques software engineering already has. What has changed is that agents make skipping them riskier, and producing them quicker.
+We use the phrase 'agree before you delegate' for a simple practice: reach visible, checkable agreement on what to build before handing implementation to agents. Visible means people can look at it. Checkable means someone can say 'that's wrong' before any code exists. The practice rests on four principles. First, pictures before prose. Second, agree progressively, in order. Third, engineers act as the stakeholder when they commission work from agents. Fourth, agreement stays with people, even as verification becomes more automated. These are techniques software engineering already has: C4, UML, wireframes and more, refined over fifty years. We don't invent a new way to agree; agents let us reuse the old ones quickly. In short, we reinvent everything to reinvent nothing. What has changed is that agents make skipping them riskier, and producing them quicker.
 
 Source: 'Agree before you delegate'.
 
