@@ -128,8 +128,8 @@
     var onControl = t && t.closest && t.closest('button, a, [tabindex]:not(#deck)');
     var key = event.key;
     var handled = true;
-    if (key === 'ArrowRight' || key === 'PageDown' || (key === ' ' && !onControl && !event.shiftKey)) show(current + 1);
-    else if (key === 'ArrowLeft' || key === 'PageUp' || (key === ' ' && !onControl && event.shiftKey)) show(current - 1);
+    if (key === 'ArrowRight' || key === 'PageDown' || key === 'j' || key === 'J' || (key === ' ' && !onControl && !event.shiftKey)) show(current + 1);
+    else if (key === 'ArrowLeft' || key === 'PageUp' || key === 'k' || key === 'K' || (key === ' ' && !onControl && event.shiftKey)) show(current - 1);
     else if (key === 'Home') show(1);
     else if (key === 'End') show(total);
     else if (key === 'n' || key === 'N') toggleNotes();
