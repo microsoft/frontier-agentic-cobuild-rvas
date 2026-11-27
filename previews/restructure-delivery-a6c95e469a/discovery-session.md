@@ -70,8 +70,9 @@ delete it.
 Write down names and owners. Don't guess at interfaces, credentials, or what a
 product supports.
 
-### 6. Agent behavior, actions, and approvals
+### 6. Automation, actions, and approvals
 
+- Which steps should the solution automate, and which stay with people?
 - Where does choosing the next step add value, and which steps stay fixed?
 - What may the solution propose or execute?
 - Which actions require confirmation or business approval?
@@ -213,8 +214,8 @@ it's approved to live.
 ## Start Azure Solution Architect
 
 Have the customer or product owner review the brief, and leave unresolved points
-open. Then open the customer's application repository and give the brief to AI
-Agent Creator:
+open. Then open the customer's application repository and give the brief to Azure
+Solution Architect:
 
 ```text
 /agentic-cobuild:azure-solution-architect Use @docs/discovery/discovery-brief.md as discovery evidence

@@ -69,6 +69,23 @@ an answer straight away.
 
 <!-- application-family -->
 
+### Durable business workflows
+
+Run a process that spans minutes to months, with waits, approvals, timers, and
+retries: onboarding, claims, procurement. Decide who owns the process state,
+how it resumes after a failure, and how completed steps get undone when a later
+one is rejected.
+
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based workflows that people maintain in a visual designer.</small></div>
+<div><a href="https://learn.microsoft.com/azure/azure-functions/durable/durable-functions-overview"><img src="assets/icons/microsoft/functions.svg" alt="" width="32" height="32" />Azure Functions with Durable Functions</a><small>Code-defined workflows with persisted state and recovery.</small></div>
+</div>
+
+<!-- diagram: family-durable -->
+
+<!-- application-family -->
+
 ### Batch and data processing
 
 Move and reshape data on a schedule: nightly imports and exports, pipelines
@@ -173,22 +190,6 @@ doesn't make something an agent.
 
 <!-- application-family -->
 
-### Background workflows
-
-Respond to events or process jobs with no chat interface. Decide who owns job
-state, how work resumes after a failure, which steps stay fixed, and when the
-system stops investigating.
-
-<div class="family-product-example">
-<span>Example options</span>
-<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based workflows with explicit steps.</small></div>
-<div><a href="https://learn.microsoft.com/azure/azure-functions/durable/durable-functions-overview"><img src="assets/icons/microsoft/functions.svg" alt="" width="32" height="32" />Azure Functions with Durable Functions</a><small>Code-defined workflows with persisted state and recovery.</small></div>
-</div>
-
-<!-- diagram: family-background -->
-
-<!-- application-family -->
-
 ### Coordinated specialist agents
 
 Split the work across agents only when one agent can't do it reliably.
@@ -204,3 +205,8 @@ recommends the simplest design that meets the requirement.
 </div>
 
 <!-- diagram: family-specialists -->
+
+## Bring your own idea
+
+[Start](start.html) sets up your workspace and takes your idea to an approved
+architecture.

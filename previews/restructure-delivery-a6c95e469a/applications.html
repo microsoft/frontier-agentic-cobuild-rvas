@@ -171,6 +171,44 @@ an answer straight away.</p>
   </figure>
 </section>
 
+<section class="application-family" aria-labelledby="durable-business-workflows">
+<div class="application-family-copy"><h3 id="durable-business-workflows">Durable business workflows<a class="heading-link" href="#durable-business-workflows" aria-label="Link to Durable business workflows"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Run a process that spans minutes to months, with waits, approvals, timers, and
+retries: onboarding, claims, procurement. Decide who owns the process state,
+how it resumes after a failure, and how completed steps get undone when a later
+one is rejected.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based workflows that people maintain in a visual designer.</small></div>
+<div><a href="https://learn.microsoft.com/azure/azure-functions/durable/durable-functions-overview"><img src="assets/icons/microsoft/functions.svg" alt="" width="32" height="32" />Azure Functions with Durable Functions</a><small>Code-defined workflows with persisted state and recovery.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="durable">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 264" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-durable-title family-durable-desc">
+        <title id="family-durable-title">Wait for approval without losing progress</title>
+        <desc id="family-durable-desc">A request starts a business process. The process saves its state while it waits for approval. It then resumes, or undoes completed steps if the request is rejected.</desc>
+        <defs><marker id="family-durable-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-durable-arrow)" />
+        <path class="family-edge" d="M180 168 V200" marker-end="url(#family-durable-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">A request starts the process</text></g>
+        <g><rect class="family-focus" x="24" y="96" width="312" height="72" rx="6" /><text x="44" y="124">Wait for approval</text><text class="family-detail" x="44" y="152">Save the process state</text></g>
+        <g><rect class="family-node" x="24" y="200" width="312" height="56" rx="6" /><text x="44" y="236">Resume or undo the steps</text></g>
+      </svg>
+    </div>
+    <figcaption>The process can wait for days with nobody online. Failed steps retry, and a rejection undoes the work already done.</figcaption>
+  </figure>
+</section>
+
 <section class="application-family" aria-labelledby="batch-and-data-processing">
 <div class="application-family-copy"><h3 id="batch-and-data-processing">Batch and data processing<a class="heading-link" href="#batch-and-data-processing" aria-label="Link to Batch and data processing"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Move and reshape data on a schedule: nightly imports and exports, pipelines
@@ -407,45 +445,6 @@ doesn&#39;t make something an agent.</p>
   </figure>
 </section>
 
-<section class="application-family" aria-labelledby="background-workflows">
-<div class="application-family-copy"><h3 id="background-workflows">Background workflows<a class="heading-link" href="#background-workflows" aria-label="Link to Background workflows"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Respond to events or process jobs with no chat interface. Decide who owns job
-state, how work resumes after a failure, which steps stay fixed, and when the
-system stops investigating.</p>
-<div class="family-product-example">
-<span>Example options</span>
-<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based workflows with explicit steps.</small></div>
-<div><a href="https://learn.microsoft.com/azure/azure-functions/durable/durable-functions-overview"><img src="assets/icons/microsoft/functions.svg" alt="" width="32" height="32" />Azure Functions with Durable Functions</a><small>Code-defined workflows with persisted state and recovery.</small></div>
-</div></div>
-<style>
-    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
-    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
-    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
-    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
-    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
-    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
-    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
-    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
-  </style>
-<figure class="intro-diagram" data-family="background">
-    <div class="diagram-container">
-      <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-background-title family-background-desc">
-        <title id="family-background-title">Save job state while waiting for approval</title>
-        <desc id="family-background-desc">An event starts a job that gathers evidence. The job saves its state while it waits for approval. It resumes only after approval.</desc>
-        <defs><marker id="family-background-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
-        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-background-arrow)" />
-        <path class="family-edge" d="M180 152 V184" marker-end="url(#family-background-arrow)" />
-        <path class="family-edge" d="M180 256 V296" stroke-dasharray="5 4" marker-end="url(#family-background-arrow)" />
-        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">An event starts a job</text></g>
-        <g><rect class="family-node" x="24" y="96" width="312" height="56" rx="6" /><text x="44" y="132">Gather evidence</text></g>
-        <g><rect class="family-focus" x="24" y="184" width="312" height="72" rx="6" /><text x="44" y="212">Wait for the owner's approval</text><text class="family-detail" x="44" y="240">Save the job's state</text></g>
-        <g><rect class="family-node" x="24" y="296" width="312" height="56" rx="6" /><text x="44" y="332">Resume after approval</text></g>
-      </svg>
-    </div>
-    <figcaption>The job can wait without an open chat. Stop the proposed action if the owner rejects it. Define how the job recovers from failures.</figcaption>
-  </figure>
-</section>
-
 <section class="application-family" aria-labelledby="coordinated-specialist-agents">
 <div class="application-family-copy"><h3 id="coordinated-specialist-agents">Coordinated specialist agents<a class="heading-link" href="#coordinated-specialist-agents" aria-label="Link to Coordinated specialist agents"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Split the work across agents only when one agent can&#39;t do it reliably.
@@ -487,6 +486,10 @@ recommends the simplest design that meets the requirement.</p>
     <figcaption>This example gives each specialist separate tools and permissions. The coordinator must resolve conflicting results. Consequential actions need approval.</figcaption>
   </figure>
 </section>
+
+<h2 id="bring-your-own-idea">Bring your own idea<a class="heading-link" href="#bring-your-own-idea" aria-label="Link to Bring your own idea"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p><a href="start.html">Start</a> sets up your workspace and takes your idea to an approved
+architecture.</p>
 
       </article>
     </div>
