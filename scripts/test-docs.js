@@ -430,3 +430,9 @@ test('retired application material is absent from source and publishing', () => 
     assert.doesNotMatch(fs.readFileSync(path.join(ROOT, file), 'utf8'), /use-case-mapper|scenarios\/|validate:scenarios|test:scenarios/);
   }
 });
+
+test('Pages production deployment excludes pull request events', () => {
+  const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/deploy-pages.yml'), 'utf8');
+  assert.match(workflow, /build-production:\s*\n\s+if: github\.event_name != 'pull_request' && github\.ref == 'refs\/heads\/main'/);
+  assert.match(workflow, /deploy-production:\s*\n\s+needs: build-production\s*\n\s+if: github\.event_name != 'pull_request' && github\.ref == 'refs\/heads\/main'/);
+});

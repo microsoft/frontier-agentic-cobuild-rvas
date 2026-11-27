@@ -70,7 +70,7 @@ jobs:
             'docs/*.html')"
 
   build-production:
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout production source
@@ -118,7 +118,7 @@ jobs:
 
   deploy-production:
     needs: build-production
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       pages: write
