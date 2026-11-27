@@ -1,7 +1,3 @@
-Your own use case gives you a better day: the people who know the process are in
-the room, and the app is still useful afterwards. Storm Surge lets you practise
-[the path](path.html) on a realistic problem before you try it on real work.
-
 ## The scenario
 
 Storm Brenna has hit the Calder Coast. Harbourline Insurance receives claims and

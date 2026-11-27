@@ -242,7 +242,7 @@ test('Start explains the gate visuals and the optional wireframe without extra i
   const discovery = html.indexOf('id="describe-what-you-want-to-build"');
   const visuals = html.indexOf('id="review-what-the-creator-understood"');
   const prototype = html.indexOf('id="optional-final-wireframe"');
-  const implementation = html.indexOf('id="start-implementation-in-a-new-session"');
+  const implementation = html.indexOf('id="next-the-task-plan"');
   assert.ok(discovery < visuals && visuals < prototype && prototype < implementation);
   assert.doesNotMatch(html, /npx --yes skills@|Install the supporting skills|cathrynlavery\/diagram-design|agilek\/wireframer-skill|mattpocock\/skills/);
   const section = html.slice(visuals, prototype);
@@ -255,7 +255,7 @@ test('Start explains the gate visuals and the optional wireframe without extra i
   assert.match(offer, /same session/);
   assert.match(offer, /docs\/architecture\/prototype\//);
   assert.match(offer, /If you say no, the architecture package\s+remains complete/);
-  assert.match(offer, /does not authorize\s+delivery/);
+  assert.match(offer, /do not authorize\s+delivery/);
 });
 
 test('bundled third-party skills ship with their upstream licenses and credits', () => {
@@ -278,18 +278,17 @@ test('website requires Opus 5.5 before the creator session and documents CLI sel
   assert.match(html, /\/model claude-opus-5\.5/);
   assert.doesNotMatch(html, /Recommended model/);
   const requirements = renderPage(pages.find((page) => page.slug === 'participant-requirements'));
-  assert.match(requirements, /Claude Opus 5\.5, the model the/);
+  assert.doesNotMatch(requirements, /Claude Opus/);
+  assert.match(requirements, /the model the <a href="start.html#check-the-workspace">Start guide/);
 });
 
-test('Start leads from setup to discovery before implementation and later references', () => {
+test('Start leads from setup through discovery to the task plan handoff', () => {
   const html = renderPage(pages.find((page) => page.slug === 'start'));
   const steps = [
     'set-up-your-workspace', 'create-a-new-repository', 'install-the-plugin',
     'check-the-workspace',
     'describe-what-you-want-to-build', 'azure-solution-architect-prompts',
-    'start-implementation-in-a-new-session', 'direct-from-the-documents',
-    'matt-pocock-spec-and-tickets', 'spec-kit',
-    'command-and-prompt-reference', 'review-prompts', 'update-the-plugin',
+    'next-the-task-plan', 'need-an-idea-first',
   ].map((id) => html.indexOf(`id="${id}"`));
   assert.ok(steps.every((position) => position >= 0));
   assert.deepEqual(steps, steps.slice().sort((a, b) => a - b));
@@ -297,6 +296,11 @@ test('Start leads from setup to discovery before implementation and later refere
   const approval = html.indexOf('Approval ends this workflow.');
   assert.ok(approval > steps[5] && approval < steps[6]);
   assert.match(html, /Your first milestone is confirmed discovery/);
+  assert.doesNotMatch(html, /\/security-review|direct-from-the-documents|matt-pocock/);
+  const path = renderPage(pages.find((page) => page.slug === 'path'));
+  const review = path.slice(path.indexOf('id="08-review"'));
+  assert.match(review, /\/review Review the staged/);
+  assert.match(review, /\/security-review Analyze/);
 });
 
 test('intro diagrams embed accessible wide and narrow layouts without fixed-width scrolling', () => {

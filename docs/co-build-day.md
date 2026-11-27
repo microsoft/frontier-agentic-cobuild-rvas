@@ -22,8 +22,9 @@ For each team, agree:
 - **The sandbox.** One Azure resource group per team, with permission to create
   Azure Container Apps and Microsoft Foundry resources, and a named person who
   approves what gets deployed.
-- **The tools.** GitHub Copilot with access to Claude Opus 5.5, and either the
-  plugin or the skills installed. See [participant requirements](participant-requirements.html).
+- **The tools.** GitHub Copilot with the model and plugin or skills listed in
+  [Start](start.html#set-up-your-workspace). See
+  [participant requirements](participant-requirements.html).
 
 If the business context is spread across several people, run a
 [discovery session](discovery-session.html) before the day.

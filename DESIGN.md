@@ -39,8 +39,9 @@ existing-application preparation sits in Start, where the reader needs it.
 Prose stays at reading width; diagrams use the full content width.
 Start opens directly into the setup steps, without section navigation or the
 Learn page tabs. Returning users can jump to discovery. Setup leads to the first
-Azure Solution Architect conversation; implementation and review prompts follow the
-architecture approval boundary. Headings and prose share one 47.5rem column;
+Azure Solution Architect conversation and ends at architecture approval, with a
+link to the task plan on the path; the path holds the implementation and review
+prompts. Headings and prose share one 47.5rem column;
 subsections use spacing rather than full-width divider lines. Page tabs stay on
 one row and scroll horizontally when the viewport cannot contain them. Command
 blocks wrap to their available width. Maintain visible keyboard focus and

@@ -37,9 +37,8 @@ it, and the decision or task it helps with. Name what is out of scope and any
 data the app must not touch.]
 ```
 
-Answer the creator's questions. Before you confirm, it shows what it
-understood: a swimlane of the first journey, the domain terms, the lifecycle of
-any object that waits or needs approval, and success and failure scenarios.
+Answer the creator's questions. Before you confirm, it shows
+[what it understood](start.html#review-what-the-creator-understood) as diagrams.
 Correct the pictures, not just the prose.
 
 **Done when** the swimlane shows who does each step (person, AI, or fixed
@@ -189,9 +188,32 @@ Check what was built against what you agreed, before anyone relies on it.
 **About 25 minutes · `/review`, `/security-review`.** Find what the build got
 wrong.
 
-Run the [review prompts](start.html#review-prompts) on the implementation, and
-save the findings to `docs/review-findings.md`. If the app calls a model, also
-try a prompt-injection input and record what happened.
+Run both reviews on the implementation and save the findings to
+`docs/review-findings.md`. If the app calls a model, also try a prompt-injection
+input and record what happened.
+
+Implementation review:
+
+```text
+/review Review the staged and unstaged implementation against
+@docs/architecture/specification.md,
+@docs/architecture/implementation-plan.md, and
+@docs/architecture/solution.md. Identify unmet or partially met acceptance
+criteria, skipped or out-of-order plan steps, architecture deviations,
+regressions, and missing tests. Rank findings by severity and include file and
+line references.
+```
+
+Security review:
+
+```text
+/security-review Analyze the staged and unstaged implementation for exploitable
+security vulnerabilities, insecure defaults, authorization or data-isolation
+failures, secret exposure, injection risks, unsafe external interactions, and
+dependency or configuration weaknesses. Rank findings by severity and confidence,
+include file and line references, and recommend the smallest safe fix for each
+finding.
+```
 
 **Done when** every finding is fixed or accepted, and the affected tests pass
 again.
