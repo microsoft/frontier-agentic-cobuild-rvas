@@ -355,7 +355,7 @@ test('home stepper links every step to its section on the path, with labelled ga
 test('each application family pairs its explanation with an accessible conceptual diagram', () => {
   const html = renderPage(pages.find((page) => page.slug === 'applications'));
   const families = [...html.matchAll(/<section class="application-family" aria-labelledby="([^"]+)">([\s\S]*?)<\/section>/g)];
-  assert.equal(families.length, 6);
+  assert.equal(families.length, 11);
   for (const family of families) {
     const [, id, content] = family;
     assert.ok(content.includes(`<div class="application-family-copy"><h3 id="${id}">`), id);
@@ -378,6 +378,9 @@ test('each application family pairs its explanation with an accessible conceptua
   assert.equal(ids.length, new Set(ids).size);
   assert.doesNotMatch(html, /<!-- application-family -->|<!-- diagram: family-/);
   assert.match(html, /Microsoft Copilot Studio/);
+  assert.ok(html.indexOf('id="application-shapes"') < html.indexOf('id="web-apps-and-apis"'));
+  assert.ok(html.indexOf('id="modernize-an-existing-application"') < html.indexOf('id="ai-capabilities-you-can-add"'));
+  assert.ok(html.indexOf('id="ai-capabilities-you-can-add"') < html.indexOf('id="knowledge-assistants"'));
 });
 
 test('architecture snapshots retain identical content and topology across layouts', () => {
