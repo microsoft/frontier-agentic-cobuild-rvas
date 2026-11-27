@@ -10,7 +10,8 @@ the five ready-to-delegate questions. Its primary action is "Use it on my app";
 "Run a co-build day" is a white-outlined secondary button. The worked example
 is a text link, because teams should bring their own use case first.
 Navigation and supporting surfaces use a pale-blue tint; reading-page headers
-use a slightly stronger blue wash. Navy marks the selected page and table headers.
+use a slightly stronger blue wash. Navy marks the selected page, table headers,
+and the full-width footer that closes every page.
 Links use a darker blue for readable contrast. Body content stays white except
 for the alternating application-family bands described below. Diagrams stay
 white. Reserve pale green for successful copying and warm peach for copy
@@ -78,7 +79,10 @@ hosting choices.
 
 Primary navigation is Overview, Why, The path, Start, Learn, and GitHub. The
 path page is one reading page with a section per step: time and tool, a prompt
-written for the reader's own use case, a "done when" line, and the gate.
+written for the reader's own use case, a "done when" line, and the gate. Step
+numerals in headings are RVAP Blue. The "done when" line sits on a pale-blue
+panel. Each gate is a Deep Navy panel with a check icon, matching the homepage
+stepper's gates. The build adds these classes, so the Markdown stays plain.
 
 The Why page renders the "Agree before you delegate" talk from
 `docs/slides/agree-before-you-delegate.md`. It reads as stacked 16:9 slides with

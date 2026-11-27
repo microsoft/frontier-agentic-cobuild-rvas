@@ -118,12 +118,16 @@ function renderPage(page) {
       '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">' +
       '<path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" />' +
       '</svg></a>';
-    return `<h${level} id="${id}">${text}${permalink}</h${level}>\n`;
+    const numbered = text.replace(/^(\d{2}) /, '<span class="heading-num">$1</span> ');
+    return `<h${level} id="${id}">${numbered}${permalink}</h${level}>\n`;
   };
   renderer.table = (header, body) =>
     '<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">\n' +
     `<table>\n<thead>\n${header}</thead>\n<tbody>\n${body}</tbody>\n</table>\n</div>\n`;
-  const content = marked.parse(markdown, { renderer }).replace(
+  const content = marked.parse(markdown, { renderer })
+    .replace(/<p><strong>Gate:/g, '<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate:')
+    .replace(/<p><strong>Done when<\/strong>/g, '<p class="done-note"><strong>Done when</strong>')
+    .replace(
     /<!-- application-family -->\s*(<h3 id="([^"]+)">[\s\S]*?)\s*(<!-- diagram: family-[a-z-]+ -->)/g,
     (_, copy, id, diagram) =>
       `<section class="application-family" aria-labelledby="${id}">\n` +
