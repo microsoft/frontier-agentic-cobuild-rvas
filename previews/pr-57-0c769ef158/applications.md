@@ -204,39 +204,3 @@ recommends the simplest design that meets the requirement.
 </div>
 
 <!-- diagram: family-specialists -->
-
-## Capabilities you can combine
-
-Shapes and AI capabilities combine. Add memory, multiple agents, or personalization only when the
-journey needs them, and decide who owns what's stored, who can see it, and when
-it expires or gets deleted.
-
-## Choose an architecture during discovery
-
-Don't pick a platform before discovery. Bring the outcome and your constraints.
-The creator weighs what you already have against custom code for your first
-journey. Microsoft's [technology planning guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy)
-also starts by asking whether a ready-made solution meets the need.
-
-Treat the user channel and the runtime as separate choices, and keep access to
-knowledge separate from permission to act. The architecture review confirms the
-products fit and the connections work, and names an owner for anything still
-unchecked.
-
-## Describe your first journey
-
-Tell the creator who will use the application and what their first task is:
-
-```text
-/agentic-cobuild:azure-solution-architect Design a maintenance assistant for property managers. Help them investigate
-resident requests and prepare a work order for approval. Reuse our existing
-identity and service system. Compare an agent with a simpler workflow before
-recommending the architecture.
-```
-
-[Set up your application workspace](start.html), then bring your own idea.
-If you are extending a system, [prepare its context](start.html#working-with-an-existing-application).
-
-Review and approve the architecture package, then follow the rest of the
-[path](path.html) in a separate session. Approving the architecture doesn't
-authorize building or deploying anything.
