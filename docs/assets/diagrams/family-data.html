@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Validate data in layers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet" />
+  <style data-diagram-style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <figure class="intro-diagram" data-family="data">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 352" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-data-title family-data-desc">
+        <title id="family-data-title">Validate data in layers</title>
+        <desc id="family-data-desc">A schedule starts a run that ingests raw data. The run validates and transforms the data in layers, then publishes it for reports and applications.</desc>
+        <defs><marker id="family-data-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-data-arrow)" />
+        <path class="family-edge" d="M180 152 V184" marker-end="url(#family-data-arrow)" />
+        <path class="family-edge" d="M180 256 V288" marker-end="url(#family-data-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">A schedule starts the run</text></g>
+        <g><rect class="family-node" x="24" y="96" width="312" height="56" rx="6" /><text x="44" y="132">Ingest raw data</text></g>
+        <g><rect class="family-focus" x="24" y="184" width="312" height="72" rx="6" /><text x="44" y="212">Validate and transform</text><text class="family-detail" x="44" y="240">Record quality results</text></g>
+        <g><rect class="family-node" x="24" y="288" width="312" height="56" rx="6" /><text x="44" y="324">Publish for reporting</text></g>
+      </svg>
+    </div>
+    <figcaption>Make each run safe to repeat. Users never wait on this path, and analytics copies are never write targets.</figcaption>
+  </figure>
+</body>
+</html>

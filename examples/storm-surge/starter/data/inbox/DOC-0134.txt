@@ -1,0 +1,13 @@
+From: rosa.vosper@example.invalid
+To: claims@harbourline.invalid
+Subject: Please help
+Date: 19/01/2026 15:38
+
+Good evening,
+
+I am Rosa Vosper, I have a policy with you. I live at 82 Market Street, Saltmere.
+Rain got in through the shutter box and soaked the wooden floor.
+Regards,
+Rosa Vosper
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

@@ -1,0 +1,26 @@
+{
+  "name": "Storm Surge Response Board starter",
+  "build": { "dockerfile": "Dockerfile" },
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-python.python",
+        "ms-azuretools.vscode-bicep",
+        "ms-azuretools.vscode-docker",
+        "hediet.vscode-drawio"
+      ],
+      "settings": {
+        "chat.plugins.enabled": true,
+        "chat.plugins.marketplaces": ["microsoft/frontier-agentic-cobuild-rvas"]
+      }
+    }
+  },
+  "forwardPorts": [8000],
+  "postCreateCommand": "python3 --version && az version --query '\"azure-cli\"' && azd version && copilot --version && specify version || true"
+}

@@ -1,0 +1,13 @@
+From: silas.daventry@example.invalid
+To: claims@harbourline.invalid
+Subject: Claim report
+Date: 19/01/2026 01:40
+
+Good morning,
+
+I am Silas Daventry, policy POL-000186. I live at Tidesend.
+The strong wind lifted part of the roof and there are tiles all over the garden.
+Regards,
+Silas Daventry
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

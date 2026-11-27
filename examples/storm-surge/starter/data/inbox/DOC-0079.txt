@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 19/01/2026 06:23
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Maren Bellweather. The glass in the balcony door shattered. Elderly people live here.
+Agent: Can you give me the policy number or the address?
+Caller: The poll a see is POL-000992. I live at 137 Station Road, Skellby.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

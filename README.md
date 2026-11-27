@@ -1,18 +1,24 @@
 # Agentic Co-build
 
-**Design and build your own AI application in your own repository.** Bring a new
-idea or a capability you want to add to an existing application. The Agentic
-Co-build plugin helps you define the requirements and approve the architecture
-before implementation begins.
+**Agree before you delegate.** Agents made code cheaper to produce. They didn't
+make understanding cheaper. Agentic Co-build takes any application, with or
+without AI, from idea to a reviewed build on Azure, in your own repository:
+your team agrees on what to build with diagrams and a prototype, agents build
+it, and you check the result.
 
-[Start guide](https://microsoft.github.io/frontier-agentic-cobuild-rvas/start.html)
-| [Guide source](docs/start.md)
+[Portal](https://microsoft.github.io/frontier-agentic-cobuild-rvas/)
+| [Start](docs/start.md)
+| [The path, steps 00–08](docs/path.md)
+| [Why: the talk](docs/slides/agree-before-you-delegate.md)
+| [Run a co-build day](docs/co-build-day.md)
 
 [What can you build?](docs/applications.md)
-| [Architecture choices](docs/applications.md#choose-an-architecture-during-discovery)
-| [Existing application preparation](docs/start.md#working-with-an-existing-application)
+| [Worked example](docs/example.md)
 | [Participant requirements](docs/participant-requirements.md)
 | [Discovery session guide](docs/discovery-session.md)
+
+Bring your own use case. The [worked example](examples/storm-surge/) is for
+teams that have none yet, can't use their data, or want to learn the flow first.
 
 ## Install the plugin
 
@@ -29,15 +35,19 @@ For VS Code Copilot, add `microsoft/frontier-agentic-cobuild-rvas` to
 Plugins view. Enable `chat.plugins.enabled` if needed. Manage the plugin in the
 interface where you installed it.
 
+Can't use plugins? Install the skills with `npx skills add` and add the
+Microsoft Learn MCP server yourself. See
+[install the skills by hand](docs/start.md#or-install-the-skills-by-hand).
+
 ## Use it in your application workspace
 
 | Skill | When to use it |
 | --- | --- |
-| **AI Agent Creator** (`ai-agent-creator`) | You know what you want to build or evolve. It interviews you and produces the architecture package. |
+| **Azure Solution Architect** (`azure-solution-architect`) | You know what you want to build or evolve. It interviews you and produces the architecture package. |
 | **Idea Forge** (`idea-forge`) | You know the customer and industry but need an evidence-backed idea first. |
 | **Cloud Architecture Diagram** (`cloud-architecture-diagram`) | The creator uses it for editable diagrams with local assets and explicit review gates. |
 
-Select `ai-agent-creator` from your host's skill picker or slash completion and
+Select `azure-solution-architect` from your host's skill picker or slash completion and
 describe the intended application. Plugin skill names may be qualified by the host;
 use the name it displays rather than guessing a prefix.
 Use **Claude Opus 5.5** for the full creator session and implementation, as
@@ -88,7 +98,9 @@ npm test
 npm run test:diagrams
 ```
 
-Commit generated Overview and reading-page HTML with their sources.
+Commit generated Overview and reading-page HTML with their sources. After you
+change the slides under `docs/slides/`, run `npm run export:slides` and commit
+the regenerated PDF.
 See [Contributing](CONTRIBUTING.md) for installation checks and publishing setup.
 
 The repository's MIT license does not replace the diagram assets'

@@ -1,0 +1,13 @@
+<svg class="v v-title-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 300" role="img" aria-labelledby="v-title-mark-title v-title-mark-desc">
+<title id="v-title-mark-title">Two overlapping circles</title>
+<desc id="v-title-mark-desc">Two blue circles overlap; the shared area between them is dark navy with a white dot at its centre, standing for shared understanding.</desc>
+<defs>
+<marker id="v-title-mark-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-title-mark-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+</defs>
+<clipPath id="v-title-mark-clip"><circle cx="150" cy="150" r="130" /></clipPath>
+<circle cx="150" cy="150" r="130" fill="#1a77e3" />
+<circle cx="290" cy="150" r="130" fill="#a9cbf5" />
+<circle cx="290" cy="150" r="130" fill="#032254" clip-path="url(#v-title-mark-clip)" />
+<circle cx="220" cy="150" r="9" fill="#fff" />
+</svg>

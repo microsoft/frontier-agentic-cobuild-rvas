@@ -1,0 +1,13 @@
+From: wyn.wickham@example.invalid
+To: claims@harbourline.invalid
+Subject: Claim report
+Date: 18/01/2026 21:48
+
+Dear Sir or Madam,
+
+I am Wyn Wickham, policy POL-002330. I live at 105 Orchard Close, Skellby.
+The basement and garage are flooded with about 40 cm of water.
+Thank you.
+Wyn Wickham
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

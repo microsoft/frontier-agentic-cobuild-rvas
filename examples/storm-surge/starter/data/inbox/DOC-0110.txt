@@ -1,0 +1,13 @@
+From: dermot.hethering@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 19/01/2026 07:01
+
+Good morning,
+
+I am Dermot Hethering, I have a policy with you. I live at 106 School Lane, Halvering.
+A tree fell on the boundary wall and part of the garage roof.
+I look forward to hearing from you.
+Dermot Hethering
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

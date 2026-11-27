@@ -1,0 +1,13 @@
+From: esme.quarrie@example.invalid
+To: claims@harbourline.invalid
+Subject: Damage to my property
+Date: 18/01/2026 19:26
+
+Hello,
+
+I am Esme Quarrie, policy POL-001703. I live at 121 High Street, Port Calder.
+The glass in the balcony door shattered. There is a power line down by the front door.
+I look forward to hearing from you.
+Esme Quarrie
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

@@ -50,7 +50,7 @@ test('copying preserves the exact command and announces its destination', async 
   for (const [language, command, destination] of [
     ['bash', 'git init\n', /terminal/],
     ['json', '{\n  "existing": true\n}\n', /existing settings/],
-    ['text', '/agentic-cobuild:ai-agent-creator Design an application.\n', /application workspace/],
+    ['text', '/agentic-cobuild:azure-solution-architect Design an application.\n', /application workspace/],
     ['text', 'Implement the attached plan.\n', /new session.*approved architecture files/],
   ]) {
     let copied;
@@ -183,7 +183,7 @@ test('plugin and marketplace resolve the same complete portable package', () => 
   assert.equal(metadata.version, plugin.version);
   assert.equal(metadata.repository, 'https://github.com/microsoft/frontier-agentic-cobuild-rvas');
   const skills = fs.readdirSync(path.join(directory, 'skills')).sort();
-  assert.deepEqual(skills, ['ai-agent-creator', 'cloud-architecture-diagram', 'cost-estimation', 'diagram-design', 'domain-modeling',
+  assert.deepEqual(skills, ['azure-solution-architect', 'cloud-architecture-diagram', 'cost-estimation', 'diagram-design', 'domain-modeling',
     'grilling', 'idea-forge', 'wait-what', 'wireframer']);
   for (const skill of skills) {
     assert.match(fs.readFileSync(path.join(directory, 'skills', skill, 'SKILL.md'), 'utf8'),
@@ -209,13 +209,14 @@ test('Co-build board canvas ships inside the plugin and parses', () => {
 
 test('diagram icon coverage accounts for every creator architecture card', () => {
   const skills = path.join(ROOT, 'plugins/agentic-cobuild/skills');
-  const patterns = path.join(skills, 'ai-agent-creator/references/azure-patterns');
+  const references = path.join(skills, 'azure-solution-architect/references');
   const coverage = JSON.parse(fs.readFileSync(
     path.join(skills, 'cloud-architecture-diagram/references/architecture-icon-coverage.json'), 'utf8'));
-  const cards = ['patterns', 'runtimes'].flatMap((directory) =>
-    fs.readdirSync(path.join(patterns, directory))
-      .filter((name) => name.endsWith('.md') && name !== 'README.md')
-      .map((name) => `${directory}/${name}`)).sort();
+  const cards = [['ai-patterns', 'patterns'], ['ai-patterns', 'runtimes'], ['application-patterns', 'workloads']]
+    .flatMap(([branch, directory]) =>
+      fs.readdirSync(path.join(references, branch, directory))
+        .filter((name) => name.endsWith('.md') && name !== 'README.md')
+        .map((name) => `${directory}/${name}`)).sort();
   assert.deepEqual(Object.keys(coverage.architectures).sort(), cards);
   const catalog = JSON.parse(fs.readFileSync(
     path.join(skills, 'cloud-architecture-diagram/references/microsoft-icon-catalog.json'), 'utf8'));
@@ -241,7 +242,7 @@ test('Start explains the gate visuals and the optional wireframe without extra i
   const discovery = html.indexOf('id="describe-what-you-want-to-build"');
   const visuals = html.indexOf('id="review-what-the-creator-understood"');
   const prototype = html.indexOf('id="optional-final-wireframe"');
-  const implementation = html.indexOf('id="start-implementation-in-a-new-session"');
+  const implementation = html.indexOf('id="next-the-task-plan"');
   assert.ok(discovery < visuals && visuals < prototype && prototype < implementation);
   assert.doesNotMatch(html, /npx --yes skills@|Install the supporting skills|cathrynlavery\/diagram-design|agilek\/wireframer-skill|mattpocock\/skills/);
   const section = html.slice(visuals, prototype);
@@ -254,7 +255,7 @@ test('Start explains the gate visuals and the optional wireframe without extra i
   assert.match(offer, /same session/);
   assert.match(offer, /docs\/architecture\/prototype\//);
   assert.match(offer, /If you say no, the architecture package\s+remains complete/);
-  assert.match(offer, /does not authorize\s+delivery/);
+  assert.match(offer, /do not authorize\s+delivery/);
 });
 
 test('bundled third-party skills ship with their upstream licenses and credits', () => {
@@ -273,22 +274,21 @@ test('website requires Opus 5.5 before the creator session and documents CLI sel
   const html = renderPage(pages.find((page) => page.slug === 'start'));
   const requirement = html.indexOf('Use Claude Opus 5.5');
   assert.ok(requirement >= 0 && requirement < html.indexOf('id="describe-what-you-want-to-build"'));
-  assert.match(html, /whole AI Agent\s+Creator session, including the\s+optional wireframe/);
+  assert.match(html, /whole Azure Solution\s+Architect session, including the\s+optional wireframe/);
   assert.match(html, /\/model claude-opus-5\.5/);
   assert.doesNotMatch(html, /Recommended model/);
   const requirements = renderPage(pages.find((page) => page.slug === 'participant-requirements'));
-  assert.match(requirements, /Claude Opus 5\.5, the model the/);
+  assert.doesNotMatch(requirements, /Claude Opus/);
+  assert.match(requirements, /the model the <a href="start.html#check-the-workspace">Start guide/);
 });
 
-test('Start leads from setup to discovery before implementation and later references', () => {
+test('Start leads from setup through discovery to the task plan handoff', () => {
   const html = renderPage(pages.find((page) => page.slug === 'start'));
   const steps = [
     'set-up-your-workspace', 'create-a-new-repository', 'install-the-plugin',
     'check-the-workspace',
-    'describe-what-you-want-to-build', 'ai-agent-creator-prompts',
-    'start-implementation-in-a-new-session', 'direct-from-the-documents',
-    'matt-pocock-spec-and-tickets', 'spec-kit',
-    'command-and-prompt-reference', 'review-prompts', 'update-the-plugin',
+    'describe-what-you-want-to-build', 'azure-solution-architect-prompts',
+    'next-the-task-plan', 'need-an-idea-first',
   ].map((id) => html.indexOf(`id="${id}"`));
   assert.ok(steps.every((position) => position >= 0));
   assert.deepEqual(steps, steps.slice().sort((a, b) => a - b));
@@ -296,11 +296,15 @@ test('Start leads from setup to discovery before implementation and later refere
   const approval = html.indexOf('Approval ends this workflow.');
   assert.ok(approval > steps[5] && approval < steps[6]);
   assert.match(html, /Your first milestone is confirmed discovery/);
+  assert.doesNotMatch(html, /\/security-review|direct-from-the-documents|matt-pocock/);
+  const path = renderPage(pages.find((page) => page.slug === 'path'));
+  const review = path.slice(path.indexOf('id="08-review"'));
+  assert.match(review, /\/review Review the staged/);
+  assert.match(review, /\/security-review Analyze/);
 });
 
 test('intro diagrams embed accessible wide and narrow layouts without fixed-width scrolling', () => {
   const figures = [
-    [renderIndex(), 'approval-handoff'],
     [renderPage(pages.find((page) => page.slug === 'start')), 'approval-handoff'],
   ];
   for (const [html, name] of figures) {
@@ -318,19 +322,21 @@ test('intro diagrams embed accessible wide and narrow layouts without fixed-widt
   }
 });
 
-test('Learn pages show page tabs while Start opens directly into its content', () => {
+test('Learn pages show page tabs while Start and the path open directly into their content', () => {
+  const learn = pages.filter((page) => page.section === 'learn');
   for (const page of pages) {
     const html = renderPage(page);
     assert.match(html, /class="wrap guide-layout"/);
     assert.doesNotMatch(html, /guide-contents|guide-section-links|On this page/);
     assert.doesNotMatch(html, /href="(?:architecture-options|existing-applications)\.html/);
-    if (page.slug === 'start') {
+    assert.equal([...html.matchAll(/aria-current="page"/g)].length, page.section === 'learn' ? 2 : 1, page.slug);
+    if (page.section !== 'learn') {
       assert.doesNotMatch(html, /class="guide-nav"/);
       assert.doesNotMatch(html, /class="guide-pages"/);
-      assert.match(html, /href="start.html" aria-current="page">Start/);
+      assert.match(html, new RegExp(`href="${page.slug}.html" aria-current="page">`));
     } else {
       const tabs = html.match(/<div class="guide-pages">([\s\S]*?)<\/div>/)[1];
-      assert.equal([...tabs.matchAll(/<a /g)].length, pages.length - 1);
+      assert.equal([...tabs.matchAll(/<a /g)].length, learn.length);
       assert.ok(html.indexOf('class="guide-pages"') < html.indexOf('<article'));
       assert.match(html, /href="applications.html" aria-current="page">Learn/);
       assert.ok(html.includes(`href="${page.slug}.html" aria-current="page">${page.navigationLabel}</a>`));
@@ -338,10 +344,22 @@ test('Learn pages show page tabs while Start opens directly into its content', (
   }
 });
 
+test('home stepper links every step to its section on the path, with labelled gates', () => {
+  const html = renderIndex();
+  const path = renderPage(pages.find((page) => page.slug === 'path'));
+  const steps = [...html.matchAll(/<a href="path\.html#(\d\d-[a-z-]+)"><span class="step-num">(\d\d)<\/span>/g)];
+  assert.deepEqual(steps.map((step) => step[2]), ['00', '01', '02', '03', '04', '05', '06', '07', '08']);
+  for (const [, anchor] of steps) assert.ok(path.includes(`id="${anchor}"`), anchor);
+  assert.equal([...html.matchAll(/class="step-gate">[\s\S]*?You approve: [a-z ]+<\/span>/g)].length, 6);
+  for (const band of ['Agree', 'Delegate', 'Verify']) assert.match(html, new RegExp(`<strong>${band}</strong>`));
+  assert.match(html, /href="start.html">Use it on my app/);
+  assert.match(html, /href="co-build-day.html">Run a co-build day/);
+});
+
 test('each application family pairs its explanation with an accessible conceptual diagram', () => {
   const html = renderPage(pages.find((page) => page.slug === 'applications'));
   const families = [...html.matchAll(/<section class="application-family" aria-labelledby="([^"]+)">([\s\S]*?)<\/section>/g)];
-  assert.equal(families.length, 6);
+  assert.equal(families.length, 11);
   for (const family of families) {
     const [, id, content] = family;
     assert.ok(content.includes(`<div class="application-family-copy"><h3 id="${id}">`), id);
@@ -364,6 +382,9 @@ test('each application family pairs its explanation with an accessible conceptua
   assert.equal(ids.length, new Set(ids).size);
   assert.doesNotMatch(html, /<!-- application-family -->|<!-- diagram: family-/);
   assert.match(html, /Microsoft Copilot Studio/);
+  assert.ok(html.indexOf('id="application-shapes"') < html.indexOf('id="web-apps-and-apis"'));
+  assert.ok(html.indexOf('id="modernize-an-existing-application"') < html.indexOf('id="ai-capabilities-you-can-add"'));
+  assert.ok(html.indexOf('id="ai-capabilities-you-can-add"') < html.indexOf('id="knowledge-assistants"'));
 });
 
 test('architecture snapshots retain identical content and topology across layouts', () => {
@@ -378,7 +399,7 @@ test('architecture snapshots retain identical content and topology across layout
 });
 
 test('source and generated documentation links resolve', () => {
-  const files = sourceDocs().concat(['index.html', ...pages.map((page) => `${page.slug}.html`)]
+  const files = sourceDocs().concat(['index.html', 'why.html', ...pages.map((page) => `${page.slug}.html`)]
     .map((name) => path.join(ROOT, 'docs', name)));
   assert.deepEqual(audit(files), []);
 });

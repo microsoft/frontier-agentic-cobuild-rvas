@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 18/01/2026 19:13
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Dana Rendle. Rain got in through the shutter box and soaked the wooden floor.
+Agent: Can you give me the policy number or the address?
+Caller: I don't have the policy to hand. I live at 116 Mill Lane, Kestrel Bay.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

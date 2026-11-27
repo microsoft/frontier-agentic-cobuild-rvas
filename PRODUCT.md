@@ -8,21 +8,31 @@ web
 
 ## Users
 
-Customer technical teams and their advisers building a new AI application or
-adding an AI capability to an existing system. Delivery teams use the same
-architecture package to agree scope and acceptance.
+Customer technical teams and their advisers building a new application, or
+changing an existing one, with GitHub Copilot. The application may or may not
+use AI. Facilitators use the portal to run a one-day co-build; delivery teams use
+the same architecture package to agree scope and acceptance.
 
 ## Product Purpose
 
-Agentic Co-build provides an installable agent plugin that bundles every skill it needs.
-The user works in their own repository. AI Agent Creator owns discovery and
-architecture approval; implementation starts in a separate session.
+Agentic Co-build teaches and supports one practice: agree before you delegate.
+The portal covers the full path from idea to a reviewed build on Azure, steps 00
+to 08 in three bands: Agree (discover, architect, wireframe, task plan), Delegate
+(build, design, deploy), and Verify (review). Each gate is a decision a person
+makes.
+
+The installable plugin bundles the skills for the Agree band. Azure Solution
+Architect owns discovery and architecture approval; implementation starts in a separate
+session with the team's chosen workflow. The user works in their own repository.
 
 ## Positioning
 
-Lead with **build or evolve your own AI application**. The primary action opens
-the setup guide. Idea Forge is optional preparation for users who need a bounded,
-evidence-backed idea first.
+Lead with **Agree before you delegate**: agents made code cheaper to produce,
+not understanding. Two primary actions: use it on your own app (Start) and run a
+co-build day. Always prefer the user's own use case. Idea Forge helps users who
+need an idea; the Storm Surge worked example is for teams that have no use case,
+can't use their data yet, or want to learn the flow first. The "Agree before you
+delegate" talk is published as HTML slides with a PDF, and explains why.
 
 ## Operating Context
 
@@ -33,8 +43,10 @@ Keep the tooling repository separate from the user's application workspace.
 
 ## Capabilities and Constraints
 
-Bundle AI Agent Creator, Cloud Architecture Diagram, Idea Forge, and the MIT-licensed
-third-party skills they rely on. Supply
+Bundle Azure Solution Architect, Cloud Architecture Diagram, Idea Forge, and the MIT-licensed
+third-party skills they rely on, installable as a plugin or with the `skills`
+CLI. Later steps use GitHub Spec Kit, Impeccable, the Azure CLI, and the Azure
+Developer CLI, which users install when they reach them. Supply
 documentation-only Microsoft Learn MCP. Preserve discovery confirmation and
 complete-package approval, including explicit diagram-review exceptions.
 
@@ -50,7 +62,8 @@ a catalog. Use plain, outcome-first language.
 ## Evidence on Hand
 
 The bundled skills, their contracts and local diagram assets, upstream
-attributions, and validation results. Do not invent customer
+attributions, validation results, the author's talk, and the fictional worked
+example under `examples/storm-surge/`. Do not invent customer
 evidence, readiness claims, or guarantees about model behavior.
 
 ## Product Principles

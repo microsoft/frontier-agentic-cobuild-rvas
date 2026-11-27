@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 18/01/2026 18:59
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Orla Tregarth. A living room window broke in the wind and there is glass on the floor. There is a small child in the house.
+Agent: Can you give me the policy number or the address?
+Caller: The policy is POL-001024. I live at 94 High Street, Port Calder.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

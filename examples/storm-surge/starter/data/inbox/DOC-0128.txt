@@ -1,0 +1,13 @@
+From: esme.tregarth@example.invalid
+To: claims@harbourline.invalid
+Subject: Claim report
+Date: 19/01/2026 07:48
+
+Dear Sir or Madam,
+
+I am Esme Tregarth, policy POL-004224. I live at 211 Lighthouse Road, Saltmere.
+The strong wind lifted part of the roof and there are tiles all over the garden.
+Please treat this as urgent.
+Esme Tregarth
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

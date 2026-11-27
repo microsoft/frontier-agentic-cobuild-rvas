@@ -1,0 +1,10 @@
+From: operations@garroway-pumping-ltd.invalid
+To: assistance@harbourline.invalid
+Subject: Availability - Garroway Pumping Ltd
+Date: 19/01/2026 08:35
+
+Provider PRV-010 (Garroway Pumping Ltd).
+Our workshop has no power and no road access. We are unavailable until further notice.
+Regards
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

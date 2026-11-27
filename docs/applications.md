@@ -1,17 +1,128 @@
 ## What the creator can design
 
 Bring the first task you want users to complete, in a new or existing
-application. AI Agent Creator defines that journey and designs the architecture.
-It might recommend a platform agent, a custom app, a fixed workflow, or a single
-model call.
+application. Azure Solution Architect defines that journey and designs the architecture.
+The app doesn't need AI. The creator compares plain code with no model, a fixed
+workflow, a single model call, and an agent, and recommends the simplest one
+that does the job.
 
-It designs the solution. It doesn't build it. The examples below are
-illustrations, not customer results or deployment templates.
+Whatever you build, the [path](path.html) is the same: agree on it, delegate the
+build, verify the result. The examples below are illustrations, not customer
+results or deployment templates.
 
-## Application families
+## Application shapes
 
-The products shown are examples. Discovery checks whether they fit, connect to
-your systems, and are available to you.
+Most applications take one of these shapes, and many combine several. None needs
+AI. The products shown are examples. Discovery checks whether they fit, connect
+to your systems, and are available to you.
+
+<!-- application-family -->
+
+### Web apps and APIs
+
+Let users or other systems create, read, and update business records: portals,
+line-of-business apps, back-office tools, public APIs. Decide who signs in, what
+each role may change, and what happens when a request starts work that takes
+longer than the call.
+
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/app-service/overview"><img src="assets/icons/microsoft/app-service.svg" alt="" width="32" height="32" />Azure App Service</a><small>Managed hosting for web apps and APIs, from code or a container.</small></div>
+<div><a href="https://learn.microsoft.com/azure/azure-sql/database/sql-database-paas-overview"><img src="assets/icons/microsoft/sql-database.svg" alt="" width="32" height="32" />Azure SQL Database</a><small>A managed relational store for transactions and reporting on operational data.</small></div>
+</div>
+
+<!-- diagram: family-web -->
+
+<!-- application-family -->
+
+### Microservices
+
+Split a large domain into services that separate teams deploy and scale on
+their own. Decide where each boundary sits, which service owns which data, and
+how services stay consistent without sharing a database. If one team owns the
+product, a modular monolith is cheaper to run.
+
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/container-apps/overview"><img src="assets/icons/microsoft/container-apps.svg" alt="" width="32" height="32" />Azure Container Apps</a><small>Containerized services without managing Kubernetes.</small></div>
+<div><a href="https://learn.microsoft.com/azure/aks/what-is-aks"><img src="assets/icons/microsoft/aks.svg" alt="" width="32" height="32" />Azure Kubernetes Service</a><small>A managed cluster, when you need Kubernetes APIs or cluster-level control.</small></div>
+</div>
+
+<!-- diagram: family-microservices -->
+
+<!-- application-family -->
+
+### Event-driven integration
+
+React to business events such as an order placed, a file arrived, or a status
+changed. Decide who owns each event schema, how consumers handle the same event
+twice, and where failed events go. Use a synchronous API when the caller needs
+an answer straight away.
+
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/event-grid/overview"><img src="assets/icons/microsoft/event-grid.svg" alt="" width="32" height="32" />Azure Event Grid</a><small>Push notifications about state changes to many subscribers.</small></div>
+<div><a href="https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview"><img src="assets/icons/microsoft/service-bus.svg" alt="" width="32" height="32" />Azure Service Bus</a><small>Business messages and work queues with ordering, retries, and dead-lettering.</small></div>
+</div>
+
+<!-- diagram: family-events -->
+
+<!-- application-family -->
+
+### Durable business workflows
+
+Run a process that spans minutes to months, with waits, approvals, timers, and
+retries: onboarding, claims, procurement. Decide who owns the process state,
+how it resumes after a failure, and how completed steps get undone when a later
+one is rejected.
+
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based workflows that people maintain in a visual designer.</small></div>
+<div><a href="https://learn.microsoft.com/azure/azure-functions/durable/durable-functions-overview"><img src="assets/icons/microsoft/functions.svg" alt="" width="32" height="32" />Azure Functions with Durable Functions</a><small>Code-defined workflows with persisted state and recovery.</small></div>
+</div>
+
+<!-- diagram: family-durable -->
+
+<!-- application-family -->
+
+### Batch and data processing
+
+Move and reshape data on a schedule: nightly imports and exports, pipelines
+into analytics, reporting. Decide which system holds the record for each
+dataset, who may use each layer, and how a failed run restarts without
+duplicating data.
+
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/data-factory/introduction"><img src="assets/icons/microsoft/data-factory.svg" alt="" width="32" height="32" />Azure Data Factory</a><small>Scheduled pipelines that copy and transform data across sources.</small></div>
+<div><a href="https://learn.microsoft.com/fabric/fundamentals/microsoft-fabric-overview"><img src="assets/icons/microsoft/fabric.svg" alt="" width="32" height="32" />Microsoft Fabric</a><small>Pipelines, a lakehouse, and reporting on one analytics platform.</small></div>
+</div>
+
+<!-- diagram: family-data -->
+
+<!-- application-family -->
+
+### Modernize an existing application
+
+Extend, move, or gradually replace a system you already run. Decide what to
+keep, which part moves first, and how data stays in sync while old and new run
+side by side. Microsoft's [Strangler Fig pattern](https://learn.microsoft.com/azure/architecture/patterns/strangler-fig)
+replaces a system one route at a time.
+
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/migrate/migrate-services-overview"><img src="assets/icons/microsoft/azure-migrate.svg" alt="" width="32" height="32" />Azure Migrate</a><small>Discover and assess what runs today before you plan the move.</small></div>
+<div><a href="https://learn.microsoft.com/azure/api-management/api-management-key-concepts"><img src="assets/icons/microsoft/api-management.svg" alt="" width="32" height="32" />Azure API Management</a><small>A front door that routes each API to the legacy or the new implementation.</small></div>
+</div>
+
+<!-- diagram: family-modernize -->
+
+## AI capabilities you can add
+
+Add AI to any shape above when the journey needs it. These are the forms it
+usually takes. The creator still compares each one with plain code and a fixed
+workflow first.
 
 <!-- application-family -->
 
@@ -79,22 +190,6 @@ doesn't make something an agent.
 
 <!-- application-family -->
 
-### Background workflows
-
-Respond to events or process jobs with no chat interface. Decide who owns job
-state, how work resumes after a failure, which steps stay fixed, and when the
-system stops investigating.
-
-<div class="family-product-example">
-<span>Example options</span>
-<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based workflows with explicit steps.</small></div>
-<div><a href="https://learn.microsoft.com/azure/azure-functions/durable/durable-functions-overview"><img src="assets/icons/microsoft/functions.svg" alt="" width="32" height="32" />Azure Functions with Durable Functions</a><small>Code-defined workflows with persisted state and recovery.</small></div>
-</div>
-
-<!-- diagram: family-background -->
-
-<!-- application-family -->
-
 ### Coordinated specialist agents
 
 Split the work across agents only when one agent can't do it reliably.
@@ -111,38 +206,7 @@ recommends the simplest design that meets the requirement.
 
 <!-- diagram: family-specialists -->
 
-## Capabilities you can combine
+## Bring your own idea
 
-Families overlap. Add memory, multiple agents, or personalization only when the
-journey needs them, and decide who owns what's stored, who can see it, and when
-it expires or gets deleted.
-
-## Choose an architecture during discovery
-
-Don't pick a platform before discovery. Bring the outcome and your constraints.
-The creator weighs what you already have against custom code for your first
-journey. Microsoft's [technology planning guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy)
-also starts by asking whether a ready-made solution meets the need.
-
-Treat the user channel and the runtime as separate choices, and keep access to
-knowledge separate from permission to act. The architecture review confirms the
-products fit and the connections work, and names an owner for anything still
-unchecked.
-
-## Describe your first journey
-
-Tell the creator who will use the application and what their first task is:
-
-```text
-/agentic-cobuild:ai-agent-creator Design a maintenance assistant for property managers. Help them investigate
-resident requests and prepare a work order for approval. Reuse our existing
-identity and service system. Compare an agent with a simpler workflow before
-recommending the architecture.
-```
-
-[Set up your application workspace](start.html), then bring your own idea.
-If you are extending a system, [prepare its context](start.html#working-with-an-existing-application).
-
-Review and approve the architecture package, then start implementation in a
-separate session. Approving the architecture doesn't authorize building or
-deploying anything.
+[Start](start.html) sets up your workspace and takes your idea to an approved
+architecture.

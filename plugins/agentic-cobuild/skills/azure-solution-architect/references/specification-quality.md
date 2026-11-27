@@ -1,0 +1,126 @@
+# Functional and technical specification contract
+
+Synthesize `docs/architecture/specification.md` directly under this contract as
+part of the architecture package.
+This path is the selected architecture artifact, not an issue-tracker publication.
+Preserve existing content and use one authoritative specification at this path.
+
+## Lifecycle and boundary
+
+Start from the explicitly confirmed discovery record, then complete the document
+with architecture decisions and acceptance traceability before package handoff.
+Use **Draft - architecture package** while work is in progress and **Ready for
+review** when reconciled. Record any explicit acceptance and date with scope
+**architecture handoff only; implementation not started**. Do not use `Awaiting
+approval` or `Ready for approval` unless the user explicitly requested a formal
+acceptance gate.
+
+Approval of a previous revision does not approve new requirements or decisions.
+Mark materially changed content pending review and use the existing discovery
+or architecture approval gate as appropriate. Do not add a separate spec gate.
+Decisions beyond a user's delegation scope return to the discovery frontier.
+
+Keep the skill's approval boundary: this document authorizes architecture
+handoff only.
+
+## Required structure
+
+```markdown
+# Functional and technical specification
+
+## Status and approval scope
+## Problem Statement
+## Solution
+## User Stories and functional requirements
+## Technical requirements and constraints
+### External integrations and channels
+## Implementation Decisions
+## Testing Decisions and acceptance criteria
+## Traceability
+## Out of Scope
+## Assumptions and deferred decisions
+## Further Notes
+```
+
+Populate sections from confirmed decisions and verified evidence, not a generic
+checklist of invented requirements. Mark genuinely inapplicable concerns with a
+reason. Defer only delivery parameters that cannot change the selected service
+family, topology, ownership, or trust boundary.
+
+## Functional coverage
+
+- State the outcome, actors/roles, scope, first journey, and relevant follow-ups.
+- Number user stories and give requirements stable IDs such as `FR-001`.
+  Cover each agreed in-scope behavior, not an arbitrary story count.
+- Describe inputs, outputs, business state transitions, validation, permissions,
+  approval and publication rules, failure/uncertainty behavior, and prohibited
+  actions where relevant.
+- When the AI branch is open, separate AI interpretation, planning, and typed
+  decisions (with thresholds and abstention) from deterministic business behavior.
+- Identify approved data sources and systems of record, access boundaries, data
+  lifecycle, and observable success criteria.
+
+## Technical coverage
+
+- Use IDs such as `TR-001` for technical requirements and `NFR-001` for quality
+  requirements. Distinguish requirements/constraints from selected solutions.
+- Record architecture style, platform, channel or headless entry point,
+  responsibility ownership, compute, data stores, and messaging; when the AI
+  branch is open, also runtime/framework, model class and inference boundary,
+  grounding, and tools.
+- Record availability, recovery (RTO/RPO), scale, latency, and tenancy
+  requirements as `NFR` IDs that the architecture traces.
+- Describe integration and data contracts, identity/authorization, security and
+  network boundaries, persistence, audit, observability, and operational lifecycle.
+- Under External integrations and channels, maintain the authoritative package
+  copy of the confirmed discovery
+  [integration ledger](discovery-quality.md#external-integrations-and-channels).
+  Retain its IDs, source references, exclusions, permissions, owners and
+  compatibility gates. Link requirements, acceptance criteria and adapter
+  decisions; keep decision rationale in `solution.md`.
+- Cover scale, latency, availability, recovery, retention, cost and deployment
+  constraints only to the level confirmed or explicitly deferred. Link cost and
+  consumption requirements to `cost-estimate.md` and its measurement gates.
+- Preserve confirmed brownfield constraints and managed-platform choices; mark
+  custom code and resources non-applicable when configuration meets requirements.
+- In Implementation Decisions, summarize confirmed/delegated choices and link
+  authoritative decisions in `solution.md`, existing ADRs or `CONTEXT.md`.
+  Avoid duplicate decision narratives, fragile source-file paths, and code.
+- Name one selected production service or existing enterprise capability for
+  each deployable responsibility. Do not encode unresolved alternatives with
+  `or`, slash-separated product names, or "candidate" mappings.
+- Separate verified product evidence, workload assumptions and owned compatibility
+  checks. Keep missing package versions, schemas, numeric targets, capabilities
+  and enterprise standards unresolved rather than filling them by inference.
+
+## Acceptance and traceability
+
+Give acceptance criteria stable IDs such as `AC-001`; express observable
+input/action/result or rejection behavior. Test external contracts at the highest
+practical seam and reference existing test prior art when available. Describe
+later tests here while leaving application test files and execution unchanged.
+
+Include a traceability table:
+
+| Requirement IDs | Acceptance IDs | Architecture responsibility | Delivery phase | Evidence or deferral |
+| --- | --- | --- | --- | --- |
+| FR/TR/NFR IDs | AC IDs | Component or boundary in the diagram/record | Phase in implementation-plan.md | Confirmed source or owned unresolved check |
+
+Cite the confirmed scenario IDs (`SC-###`) from
+`docs/architecture/visuals/shared-understanding.md` in the acceptance criteria
+that cover them; every in-scope scenario needs at least one `AC-` ID.
+
+Every in-scope requirement needs acceptance coverage and a design/delivery mapping,
+or an explicit owned deferral with impact. Every planned phase traces to the
+specification. Cross-link `solution.md` and `implementation-plan.md`; link existing
+`CONTEXT.md`/ADRs rather than copying their definitions.
+
+## Completion criterion
+
+The specification is complete when functional and technical coverage reflects
+confirmed scope; IDs and acceptance/design/phase links are consistent; no
+architecture-changing choice remains deferred; remaining delivery parameters
+have owners; every integration passes the
+[reconciliation gate](architecture-quality.md#integration-reconciliation-gate);
+all five package artifacts agree; and package status belongs to
+the current baseline without authorizing implementation.

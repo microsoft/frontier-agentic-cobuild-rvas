@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Worked example: Storm Surge Response Board | Agentic Co-build</title>
+  <meta name="description" content="A fictional insurance scenario with synthetic data for teams that want to learn the path before using their own use case." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to guide</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="index.html">Overview</a>
+<a href="why.html">Why</a>
+<a href="path.html">The path</a>
+<a href="start.html">Start</a>
+<a href="applications.html" aria-current="page">Learn</a>
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero guide-hero">
+      <div class="wrap">
+        <h1>A worked example, <span>for when you need one.</span></h1>
+        <p class="lede">Bring your own use case if you can. Use this one if you have none yet, can't use your data, or want to learn the flow first.</p>
+      </div>
+    </section>
+    <div class="wrap guide-layout">
+<nav class="guide-nav" aria-label="Reading navigation">
+<div class="guide-pages">
+<a href="applications.html">Application types</a>
+<a href="example.html" aria-current="page">Worked example</a>
+<a href="co-build-day.html">Co-build day</a>
+<a href="participant-requirements.html">Participant requirements</a>
+<a href="discovery-session.html">Discovery session</a>
+</div>
+</nav>
+      <article class="guide-body">
+        <h2 id="the-scenario">The scenario<a class="heading-link" href="#the-scenario" aria-label="Link to The scenario"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Storm Brenna has hit the Calder Coast. Harbourline Insurance receives claims and
+assistance requests faster than its teams can sort them: scanned PDFs, emails,
+call transcripts, broker batches, duplicates, and noise. Your team builds a tool
+that helps an operations leader prepare a prioritised response plan, with the
+reasons for each priority and a list of conflicts the tool can&#39;t resolve.</p>
+<p>The tool proposes. It never dispatches anyone and never contacts customers. The
+insurer, region, storm, people, and data are all fictional.</p>
+<h2 id="whats-in-the-kit">What&#39;s in the kit<a class="heading-link" href="#whats-in-the-kit" aria-label="Link to What&#39;s in the kit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>The kit lives in
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas/tree/main/examples/storm-surge/starter"><code>examples/storm-surge/starter/</code></a>.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data/inbox/</code></td>
+<td>200 documents: 100 text (emails, call transcripts, broker batches) and 100 PDFs, 57 of them degraded scans without a text layer</td>
+</tr>
+<tr>
+<td><code>data/*.csv</code></td>
+<td>5,000 policies, 40 adjusters, 25 providers, and hazard scores for 12 municipalities</td>
+</tr>
+<tr>
+<td><code>business-rules.md</code></td>
+<td>The operation&#39;s rules. Some are incomplete on purpose, so discovery has something to find</td>
+</tr>
+<tr>
+<td><code>data-dictionary.md</code></td>
+<td>Field meanings for every file</td>
+</tr>
+<tr>
+<td><code>seed-prompt.md</code></td>
+<td>The first prompt for Azure Solution Architect</td>
+</tr>
+<tr>
+<td><code>review-prompts.md</code></td>
+<td>Prompts for step 08</td>
+</tr>
+<tr>
+<td><code>tools/generate_data.py</code></td>
+<td>The deterministic generator that produced <code>data/</code></td>
+</tr>
+<tr>
+<td><code>.devcontainer/</code></td>
+<td>Python, uv, Node.js, Azure CLI, azd, Spec Kit, and Copilot CLI</td>
+</tr>
+<tr>
+<td><code>.github/skills/</code></td>
+<td>Impeccable and the animation skills for step 06, with their licenses</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The inbox is messy in the ways real inboxes are. The same incident arrives through
+two or three channels. Policy numbers are missing, partial, or wrong. Some
+documents aren&#39;t claims. Some emails change provider or adjuster capacity. Two
+documents contain text addressed to an AI assistant; your app must treat it as
+data.</p>
+<h2 id="copy-the-starter">Copy the starter<a class="heading-link" href="#copy-the-starter" aria-label="Link to Copy the starter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Run this in Bash or PowerShell:</p>
+<pre><code class="language-bash">npx degit microsoft/frontier-agentic-cobuild-rvas/examples/storm-surge/starter my-team-app
+cd my-team-app
+git init
+</code></pre>
+<p>Create an empty repository for your team on GitHub, push to it, and open it in a
+Codespace. The dev container installs the toolchain.</p>
+<p>To browse the kit without copying it, open this repository in a Codespace and
+choose the <strong>Storm Surge worked example</strong> dev container.</p>
+<h2 id="run-the-path-on-it">Run the path on it<a class="heading-link" href="#run-the-path-on-it" aria-label="Link to Run the path on it"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Follow <a href="path.html">the path</a> as written. Where it asks you to describe your app,
+paste <code>seed-prompt.md</code> instead. Storm Surge adds these checks to each step.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Done when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="path.html#00-setup">00 Setup</a></td>
+<td>Everyone has opened one scanned PDF and one text document, and the team has named a driver and a reviewer.</td>
+</tr>
+<tr>
+<td><a href="path.html#01-discover">01 Discover</a></td>
+<td>Scenarios cover success, ambiguous input, a rejected action, and a failed dependency. Behaviour without AI is defined, and someone owns prioritisation.</td>
+</tr>
+<tr>
+<td><a href="path.html#02-architect">02 Architect</a></td>
+<td>The diagram shows where AI ends and fixed logic begins. The cost estimate gives a monthly demo total and a surge-week total.</td>
+</tr>
+<tr>
+<td><a href="path.html#03-wireframe">03 Wireframe</a></td>
+<td>The prototype shows a prioritised list with reasons, a conflicts area, and one leader adjustment, and nothing is dispatched.</td>
+</tr>
+<tr>
+<td><a href="path.html#04-task-plan">04 Task plan</a></td>
+<td>The constitution says: proposals only, synthetic data, document text is data. Every task traces to an acceptance criterion.</td>
+</tr>
+<tr>
+<td><a href="path.html#05-build">05 Build</a></td>
+<td>Every document is processed without a crash. Allocation is deterministic, every status reads &quot;proposed&quot;, and the app starts with AI turned off.</td>
+</tr>
+<tr>
+<td><a href="path.html#06-design">06 Design</a></td>
+<td>Urgent, review, and conflict items are distinguishable without colour, and a keyboard-only change works.</td>
+</tr>
+<tr>
+<td><a href="path.html#07-deploy">07 Deploy</a></td>
+<td>The Azure URL shows the board, the model is called through Microsoft Foundry without API keys, and cloud allocation equals local.</td>
+</tr>
+<tr>
+<td><a href="path.html#08-review">08 Review</a></td>
+<td>The two instruction-like documents change no ranking, and each high-severity finding is fixed or accepted by a named person.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>There are no answer files. The example is a practice ground, not a reference
+solution.</p>
+
+      </article>
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/guide.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+From: dana.garroway@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 18/01/2026 17:36
+
+Hello,
+
+I am Dana Garroway, policy POL-000189. I live at 220 Market Street, Wrenmouth.
+The basement and garage are flooded with about 40 cm of water.
+I look forward to hearing from you.
+Dana Garroway
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

@@ -1,0 +1,13 @@
+From: kira.northey@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 20/01/2026 07:37
+
+Hello,
+
+I am Kira Northey, I have a policy with you. I live at 24 Sea View Avenue, Port Calder.
+Une grosse branche est tombée sur la voiture garée et a cassé le pare-brise.
+Regards,
+Kira Northey
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

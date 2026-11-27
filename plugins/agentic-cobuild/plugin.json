@@ -1,11 +1,11 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "agentic-cobuild",
-  "version": "1.3.0",
-  "description": "Architecture-first AI co-building, with public-source idea discovery and editable architecture diagrams.",
+  "version": "2.0.0",
+  "description": "Agree before you delegate: discovery, editable architecture diagrams, cost estimates, and a clickable prototype for any application, approved before the build starts.",
   "author": { "name": "Microsoft" },
   "homepage": "https://microsoft.github.io/frontier-agentic-cobuild-rvas/",
   "repository": "https://github.com/microsoft/frontier-agentic-cobuild-rvas",
   "license": "MIT",
-  "keywords": ["architecture", "ai", "agents", "co-build"]
+  "keywords": ["architecture", "azure", "applications", "ai", "agents", "co-build"]
 }

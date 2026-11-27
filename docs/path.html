@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The path | Agentic Co-build</title>
+  <meta name="description" content="Nine steps from idea to a reviewed application on Azure: agree on what to build, delegate the build, verify the result." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to guide</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="index.html">Overview</a>
+<a href="why.html">Why</a>
+<a href="path.html" aria-current="page">The path</a>
+<a href="start.html">Start</a>
+<a href="applications.html">Learn</a>
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero guide-hero">
+      <div class="wrap">
+        <h1>From idea to Azure, <span>with an agent at your side.</span></h1>
+        <p class="lede">Nine steps in three bands. You agree on what to build, delegate the build, and verify the result. Each gate is a decision a person makes.</p>
+      </div>
+    </section>
+    <div class="wrap guide-layout">
+
+      <article class="guide-body">
+        <p>Bring your own use case. Each step below works on your application; the
+<a href="example.html">worked example</a> is there if you don&#39;t have one yet.</p>
+<div class="guide-table" role="region" aria-label="Scrollable table" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>Band</th>
+<th>Steps</th>
+<th>What you do</th>
+<th>You leave with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agree</td>
+<td>01–04</td>
+<td>Decide what to build, with pictures before prose</td>
+<td>A confirmed discovery, an approved architecture package, a walked prototype, a reviewed task plan</td>
+</tr>
+<tr>
+<td>Delegate</td>
+<td>05–07</td>
+<td>Let agents build from the agreed artefacts</td>
+<td>Working code, a designed interface, a deployment in your sandbox</td>
+</tr>
+<tr>
+<td>Verify</td>
+<td>08</td>
+<td>Check the result against what you agreed</td>
+<td>Review findings, each fixed or accepted by a named person</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A gate is a decision a person makes. The agent drafts and checks; it doesn&#39;t
+approve. Times are what a team needs on a co-build day with a bounded use case.</p>
+<h2 id="00-setup"><span class="heading-num">00</span> Setup<a class="heading-link" href="#00-setup" aria-label="Link to 00 Setup"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p><strong>About 20 minutes.</strong> Install the tools and open your repository.</p>
+<p>Follow <a href="start.html#set-up-your-workspace">Start</a>: install the Agentic Co-build
+plugin, or add the skills and the Microsoft Learn MCP server by hand. Select
+Claude Opus 5.5.</p>
+<p class="done-note"><strong>Done when</strong> <code>/skills</code> lists Azure Solution Architect and <code>/mcp</code> lists Microsoft
+Learn.</p>
+<h2 id="agree">Agree<a class="heading-link" href="#agree" aria-label="Link to Agree"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Four steps narrow what you could build down to what you will build. Each one
+removes a wrong reading before it reaches code.</p>
+<h3 id="01-discover"><span class="heading-num">01</span> Discover<a class="heading-link" href="#01-discover" aria-label="Link to 01 Discover"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p><strong>About 60 minutes · Azure Solution Architect.</strong> Agree on the problem, the people, and
+the first journey.</p>
+<pre><code class="language-text">/agentic-cobuild:azure-solution-architect [What you want to build or change, who uses
+it, and the decision or task it helps with. Name what is out of scope and any
+data the app must not touch.]
+</code></pre>
+<p>Answer the creator&#39;s questions. Before you confirm, it shows
+<a href="start.html#review-what-the-creator-understood">what it understood</a> as diagrams.
+Correct the pictures, not just the prose.</p>
+<p class="done-note"><strong>Done when</strong> the swimlane shows who does each step (person, AI, or fixed
+system logic) and everyone in the room reads the terms the same way.</p>
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: discovery confirmed.</strong> You tell the creator the outcome, journey, and
+decisions are right.</p>
+<h3 id="02-architect"><span class="heading-num">02</span> Architect<a class="heading-link" href="#02-architect" aria-label="Link to 02 Architect"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p><strong>About 50 minutes · Azure Solution Architect, Cloud Architecture Diagram, Cost
+Estimation.</strong> Agree on the system boundary, its parts, and what it costs.</p>
+<p>The creator continues in the same session. It writes the architecture package
+under <code>docs/architecture/</code>: <code>solution.drawio</code>, <code>solution.md</code>,
+<code>specification.md</code>, <code>implementation-plan.md</code>, and <code>cost-estimate.md</code>. Review the
+diagrams first, then the specification&#39;s acceptance criteria.</p>
+<p class="done-note"><strong>Done when</strong> you can point to the system boundary, each external system has an
+owner, and every acceptance criterion is testable.</p>
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: architecture approved.</strong> Someone other than the author reviews the
+package before you approve it. If nobody can, record the exception.</p>
+<h3 id="03-wireframe"><span class="heading-num">03</span> Wireframe<a class="heading-link" href="#03-wireframe" aria-label="Link to 03 Wireframe"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p><strong>About 20 minutes · Wireframer.</strong> Try the journey before anyone builds it.</p>
+<p>When the package is complete, the creator asks whether you want a clickable
+prototype. Say yes. It writes a throwaway prototype under
+<code>docs/architecture/prototype/</code> with synthetic data.</p>
+<p class="done-note"><strong>Done when</strong> someone who will use the app has clicked through the main path and
+one failure path, and you&#39;ve written down what surprised them.</p>
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: journey walked.</strong> If the prototype surfaced a new requirement, update the
+specification before you go on.</p>
+<h3 id="04-task-plan"><span class="heading-num">04</span> Task plan<a class="heading-link" href="#04-task-plan" aria-label="Link to 04 Task plan"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p><strong>About 35 minutes · GitHub Spec Kit.</strong> Turn the agreed package into tasks an
+agent can follow.</p>
+<p>Open a new session. Install Spec Kit if you haven&#39;t
+(<code>uv tool install specify-cli</code>, Python 3.11 or later), then initialise it in your
+repository on a new branch:</p>
+<pre><code class="language-bash">git switch -c feature/first-journey
+specify init --here --integration copilot
+</code></pre>
+<p>In the chat, run <code>/speckit-constitution</code>, <code>/speckit-specify</code>, <code>/speckit-plan</code>,
+and <code>/speckit-tasks</code> in that order, and review each result before the next.
+Point each one at
+<code>docs/architecture/</code> and tell it not to reopen settled decisions.</p>
+<p class="done-note"><strong>Done when</strong> every task links to an acceptance criterion, and the five
+questions below are all yes.</p>
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: ready to delegate.</strong> Answer these as a team:</p>
+<ol>
+<li>Can we draw the system boundary?</li>
+<li>Can we walk the main and failure paths?</li>
+<li>Do we use one word for one meaning?</li>
+<li>Have future users tried a prototype?</li>
+<li>Did we agree in order?</li>
+</ol>
+<p>If any answer is no, the work isn&#39;t ready for an agent. Go back to the step
+that answers it.</p>
+<h2 id="delegate">Delegate<a class="heading-link" href="#delegate" aria-label="Link to Delegate"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Agents build from what you agreed. You watch for drift and keep the
+artefacts current.</p>
+<h3 id="05-build"><span class="heading-num">05</span> Build<a class="heading-link" href="#05-build" aria-label="Link to 05 Build"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p><strong>About 75 minutes · Spec Kit implement.</strong> Let the agent build the first
+journey.</p>
+<pre><code class="language-text">/speckit-implement Implement only the reviewed tasks. Treat docs/architecture/
+and its acceptance criteria as authoritative. Preserve the approved
+architecture and interfaces. Use synthetic data. Run the tests and report the
+actual results. Do not commit, provision, or deploy.
+</code></pre>
+<p>Run <code>/speckit-converge</code> after each pass, and repeat implement and converge
+until it reports <code>Converged</code>.</p>
+<p class="done-note"><strong>Done when</strong> the first journey runs locally end to end and its acceptance
+tests pass.</p>
+<p>If the build needs a decision the package doesn&#39;t make, stop and agree it.
+Don&#39;t let the agent pick.</p>
+<h3 id="06-design"><span class="heading-num">06</span> Design<a class="heading-link" href="#06-design" aria-label="Link to 06 Design"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p><strong>About 40 minutes · Impeccable.</strong> Make the interface usable, accessible, and
+on brand.</p>
+<p>Install the <a href="https://github.com/pbakaus/impeccable">Impeccable</a> skill if you
+don&#39;t have it, then describe your product and its users so it designs for them:</p>
+<pre><code class="language-text">/impeccable critique the main journey, then polish it. Keep the behaviour and
+the acceptance tests unchanged.
+</code></pre>
+<p class="done-note"><strong>Done when</strong> the main journey passes a keyboard-only walk-through and the
+acceptance tests still pass.</p>
+<h3 id="07-deploy"><span class="heading-num">07</span> Deploy<a class="heading-link" href="#07-deploy" aria-label="Link to 07 Deploy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p><strong>About 35 minutes · Azure, Microsoft Foundry.</strong> Run the same app in your
+sandbox subscription.</p>
+<p>You need the <a href="https://learn.microsoft.com/cli/azure/install-azure-cli">Azure CLI</a>
+and the <a href="https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd">Azure Developer CLI</a>.
+Ask the agent to propose the deployment before it creates anything:</p>
+<pre><code class="language-text">Propose how to deploy this app to Azure Container Apps in resource group
+[your sandbox resource group], following docs/architecture/solution.md. Use a
+managed identity for every Azure service the app calls, including Microsoft
+Foundry, with no keys in code or configuration. List the resources, roles, and
+estimated monthly cost. Wait for my approval before provisioning.
+</code></pre>
+<p>The app should use the same credential code locally and in Azure. See
+<a href="https://learn.microsoft.com/azure/foundry/foundry-models/how-to/configure-entra-id">keyless authentication with Microsoft Entra ID</a>
+for the Foundry role assignment.</p>
+<p class="done-note"><strong>Done when</strong> the deployed app passes the same acceptance tests as the local
+one.</p>
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: owner approves resources.</strong> The person who owns the subscription
+approves the resource list and cost before the agent provisions.</p>
+<h2 id="verify">Verify<a class="heading-link" href="#verify" aria-label="Link to Verify"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Check what was built against what you agreed, before anyone relies on it.</p>
+<h3 id="08-review"><span class="heading-num">08</span> Review<a class="heading-link" href="#08-review" aria-label="Link to 08 Review"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p><strong>About 25 minutes · <code>/review</code>, <code>/security-review</code>.</strong> Find what the build got
+wrong.</p>
+<p>Run both reviews on the implementation and save the findings to
+<code>docs/review-findings.md</code>. If the app calls a model, also try a prompt-injection
+input and record what happened.</p>
+<p>Implementation review:</p>
+<pre><code class="language-text">/review Review the staged and unstaged implementation against
+@docs/architecture/specification.md,
+@docs/architecture/implementation-plan.md, and
+@docs/architecture/solution.md. Identify unmet or partially met acceptance
+criteria, skipped or out-of-order plan steps, architecture deviations,
+regressions, and missing tests. Rank findings by severity and include file and
+line references.
+</code></pre>
+<p>Security review:</p>
+<pre><code class="language-text">/security-review Analyze the staged and unstaged implementation for exploitable
+security vulnerabilities, insecure defaults, authorization or data-isolation
+failures, secret exposure, injection risks, unsafe external interactions, and
+dependency or configuration weaknesses. Rank findings by severity and confidence,
+include file and line references, and recommend the smallest safe fix for each
+finding.
+</code></pre>
+<p class="done-note"><strong>Done when</strong> every finding is fixed or accepted, and the affected tests pass
+again.</p>
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: findings resolved.</strong> A named person fixes or accepts each finding.
+Production acceptance and rollback stay with the team that operates the app.</p>
+<p>When reality doesn&#39;t match the specification, go back to the step that
+agreed it. That loop is the practice: brainstorm, agree, delegate, verify.
+<a href="why.html">Why it works</a>.</p>
+
+      </article>
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/guide.js"></script>
+</body>
+</html>

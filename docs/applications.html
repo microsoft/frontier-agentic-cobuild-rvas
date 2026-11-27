@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>What can you build? | Agentic Co-build</title>
-  <meta name="description" content="Explore AI applications you can design with Agentic Co-build, including changes to existing systems." />
+  <meta name="description" content="Applications you can design with Agentic Co-build, with or without AI, including changes to existing systems." />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="icon" href="assets/img/logo-mark.png" />
 </head>
@@ -15,8 +15,10 @@
       <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
       <nav id="navLinks" class="nav-links" aria-label="Primary">
         <a href="index.html">Overview</a>
-<a href="applications.html" aria-current="page">Learn</a>
+<a href="why.html">Why</a>
+<a href="path.html">The path</a>
 <a href="start.html">Start</a>
+<a href="applications.html" aria-current="page">Learn</a>
 <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
       </nav>
       <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
@@ -28,13 +30,15 @@
     <section class="hero guide-hero">
       <div class="wrap">
         <h1>What can <span>you build?</span></h1>
-        <p class="lede">Design a new AI application or add a capability to an existing system.</p>
+        <p class="lede">A new application or a change to an existing one. AI is one option, not a requirement.</p>
       </div>
     </section>
     <div class="wrap guide-layout">
 <nav class="guide-nav" aria-label="Reading navigation">
 <div class="guide-pages">
 <a href="applications.html" aria-current="page">Application types</a>
+<a href="example.html">Worked example</a>
+<a href="co-build-day.html">Co-build day</a>
 <a href="participant-requirements.html">Participant requirements</a>
 <a href="discovery-session.html">Discovery session</a>
 </div>
@@ -42,14 +46,251 @@
       <article class="guide-body">
         <h2 id="what-the-creator-can-design">What the creator can design<a class="heading-link" href="#what-the-creator-can-design" aria-label="Link to What the creator can design"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Bring the first task you want users to complete, in a new or existing
-application. AI Agent Creator defines that journey and designs the architecture.
-It might recommend a platform agent, a custom app, a fixed workflow, or a single
-model call.</p>
-<p>It designs the solution. It doesn&#39;t build it. The examples below are
-illustrations, not customer results or deployment templates.</p>
-<h2 id="application-families">Application families<a class="heading-link" href="#application-families" aria-label="Link to Application families"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>The products shown are examples. Discovery checks whether they fit, connect to
-your systems, and are available to you.</p>
+application. Azure Solution Architect defines that journey and designs the architecture.
+The app doesn&#39;t need AI. The creator compares plain code with no model, a fixed
+workflow, a single model call, and an agent, and recommends the simplest one
+that does the job.</p>
+<p>Whatever you build, the <a href="path.html">path</a> is the same: agree on it, delegate the
+build, verify the result. The examples below are illustrations, not customer
+results or deployment templates.</p>
+<h2 id="application-shapes">Application shapes<a class="heading-link" href="#application-shapes" aria-label="Link to Application shapes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Most applications take one of these shapes, and many combine several. None needs
+AI. The products shown are examples. Discovery checks whether they fit, connect
+to your systems, and are available to you.</p>
+<section class="application-family" aria-labelledby="web-apps-and-apis">
+<div class="application-family-copy"><h3 id="web-apps-and-apis">Web apps and APIs<a class="heading-link" href="#web-apps-and-apis" aria-label="Link to Web apps and APIs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Let users or other systems create, read, and update business records: portals,
+line-of-business apps, back-office tools, public APIs. Decide who signs in, what
+each role may change, and what happens when a request starts work that takes
+longer than the call.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/app-service/overview"><img src="assets/icons/microsoft/app-service.svg" alt="" width="32" height="32" />Azure App Service</a><small>Managed hosting for web apps and APIs, from code or a container.</small></div>
+<div><a href="https://learn.microsoft.com/azure/azure-sql/database/sql-database-paas-overview"><img src="assets/icons/microsoft/sql-database.svg" alt="" width="32" height="32" />Azure SQL Database</a><small>A managed relational store for transactions and reporting on operational data.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="web">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 264" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-web-title family-web-desc">
+        <title id="family-web-title">Check every change before saving it</title>
+        <desc id="family-web-desc">A user submits a change. The API checks identity and business rules before it writes. The record is saved and the user sees the result.</desc>
+        <defs><marker id="family-web-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-web-arrow)" />
+        <path class="family-edge" d="M180 168 V200" marker-end="url(#family-web-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">A user submits a change</text></g>
+        <g><rect class="family-focus" x="24" y="96" width="312" height="72" rx="6" /><text x="44" y="124">Check the user and the rules</text><text class="family-detail" x="44" y="152">Authorize every operation</text></g>
+        <g><rect class="family-node" x="24" y="200" width="312" height="56" rx="6" /><text x="44" y="236">Save the business record</text></g>
+      </svg>
+    </div>
+    <figcaption>Most line-of-business apps need nothing more. Add a queue when a request starts work that outlives the call.</figcaption>
+  </figure>
+</section>
+
+<section class="application-family" aria-labelledby="microservices">
+<div class="application-family-copy"><h3 id="microservices">Microservices<a class="heading-link" href="#microservices" aria-label="Link to Microservices"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Split a large domain into services that separate teams deploy and scale on
+their own. Decide where each boundary sits, which service owns which data, and
+how services stay consistent without sharing a database. If one team owns the
+product, a modular monolith is cheaper to run.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/container-apps/overview"><img src="assets/icons/microsoft/container-apps.svg" alt="" width="32" height="32" />Azure Container Apps</a><small>Containerized services without managing Kubernetes.</small></div>
+<div><a href="https://learn.microsoft.com/azure/aks/what-is-aks"><img src="assets/icons/microsoft/aks.svg" alt="" width="32" height="32" />Azure Kubernetes Service</a><small>A managed cluster, when you need Kubernetes APIs or cluster-level control.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="microservices">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 264" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-microservices-title family-microservices-desc">
+        <title id="family-microservices-title">Each service owns its data</title>
+        <desc id="family-microservices-desc">A request enters through a gateway. The owning service handles it and writes only to its own store. Other services react to the events it publishes.</desc>
+        <defs><marker id="family-microservices-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-microservices-arrow)" />
+        <path class="family-edge" d="M180 168 V200" marker-end="url(#family-microservices-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">A request enters the gateway</text></g>
+        <g><rect class="family-focus" x="24" y="96" width="312" height="72" rx="6" /><text x="44" y="124">The owning service acts</text><text class="family-detail" x="44" y="152">Only it writes to its store</text></g>
+        <g><rect class="family-node" x="24" y="200" width="312" height="56" rx="6" /><text x="44" y="236">Others react to its events</text></g>
+      </svg>
+    </div>
+    <figcaption>Split only when separate teams ship independently. A modular monolith gives the same separation with less to run.</figcaption>
+  </figure>
+</section>
+
+<section class="application-family" aria-labelledby="event-driven-integration">
+<div class="application-family-copy"><h3 id="event-driven-integration">Event-driven integration<a class="heading-link" href="#event-driven-integration" aria-label="Link to Event-driven integration"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>React to business events such as an order placed, a file arrived, or a status
+changed. Decide who owns each event schema, how consumers handle the same event
+twice, and where failed events go. Use a synchronous API when the caller needs
+an answer straight away.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/event-grid/overview"><img src="assets/icons/microsoft/event-grid.svg" alt="" width="32" height="32" />Azure Event Grid</a><small>Push notifications about state changes to many subscribers.</small></div>
+<div><a href="https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview"><img src="assets/icons/microsoft/service-bus.svg" alt="" width="32" height="32" />Azure Service Bus</a><small>Business messages and work queues with ordering, retries, and dead-lettering.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="events">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-events-title family-events-desc">
+        <title id="family-events-title">Publish once, react independently</title>
+        <desc id="family-events-desc">A business event is published once under a documented schema. Each consumer reacts on its own and handles repeated deliveries.</desc>
+        <defs><marker id="family-events-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-events-arrow)" />
+        <path class="family-edge" d="M180 168 V200" marker-end="url(#family-events-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">An order is placed</text></g>
+        <g><rect class="family-focus" x="24" y="96" width="312" height="72" rx="6" /><text x="44" y="124">Publish the event</text><text class="family-detail" x="44" y="152">Follow a documented schema</text></g>
+        <g><rect class="family-focus" x="24" y="200" width="312" height="72" rx="6" /><text x="44" y="228">Each consumer reacts</text><text class="family-detail" x="44" y="256">Handle repeated deliveries</text></g>
+      </svg>
+    </div>
+    <figcaption>Delivery is at least once. Use a synchronous API when the caller needs an answer now.</figcaption>
+  </figure>
+</section>
+
+<section class="application-family" aria-labelledby="durable-business-workflows">
+<div class="application-family-copy"><h3 id="durable-business-workflows">Durable business workflows<a class="heading-link" href="#durable-business-workflows" aria-label="Link to Durable business workflows"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Run a process that spans minutes to months, with waits, approvals, timers, and
+retries: onboarding, claims, procurement. Decide who owns the process state,
+how it resumes after a failure, and how completed steps get undone when a later
+one is rejected.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based workflows that people maintain in a visual designer.</small></div>
+<div><a href="https://learn.microsoft.com/azure/azure-functions/durable/durable-functions-overview"><img src="assets/icons/microsoft/functions.svg" alt="" width="32" height="32" />Azure Functions with Durable Functions</a><small>Code-defined workflows with persisted state and recovery.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="durable">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 264" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-durable-title family-durable-desc">
+        <title id="family-durable-title">Wait for approval without losing progress</title>
+        <desc id="family-durable-desc">A request starts a business process. The process saves its state while it waits for approval. It then resumes, or undoes completed steps if the request is rejected.</desc>
+        <defs><marker id="family-durable-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-durable-arrow)" />
+        <path class="family-edge" d="M180 168 V200" marker-end="url(#family-durable-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">A request starts the process</text></g>
+        <g><rect class="family-focus" x="24" y="96" width="312" height="72" rx="6" /><text x="44" y="124">Wait for approval</text><text class="family-detail" x="44" y="152">Save the process state</text></g>
+        <g><rect class="family-node" x="24" y="200" width="312" height="56" rx="6" /><text x="44" y="236">Resume or undo the steps</text></g>
+      </svg>
+    </div>
+    <figcaption>The process can wait for days with nobody online. Failed steps retry, and a rejection undoes the work already done.</figcaption>
+  </figure>
+</section>
+
+<section class="application-family" aria-labelledby="batch-and-data-processing">
+<div class="application-family-copy"><h3 id="batch-and-data-processing">Batch and data processing<a class="heading-link" href="#batch-and-data-processing" aria-label="Link to Batch and data processing"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Move and reshape data on a schedule: nightly imports and exports, pipelines
+into analytics, reporting. Decide which system holds the record for each
+dataset, who may use each layer, and how a failed run restarts without
+duplicating data.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/data-factory/introduction"><img src="assets/icons/microsoft/data-factory.svg" alt="" width="32" height="32" />Azure Data Factory</a><small>Scheduled pipelines that copy and transform data across sources.</small></div>
+<div><a href="https://learn.microsoft.com/fabric/fundamentals/microsoft-fabric-overview"><img src="assets/icons/microsoft/fabric.svg" alt="" width="32" height="32" />Microsoft Fabric</a><small>Pipelines, a lakehouse, and reporting on one analytics platform.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="data">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 352" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-data-title family-data-desc">
+        <title id="family-data-title">Validate data in layers</title>
+        <desc id="family-data-desc">A schedule starts a run that ingests raw data. The run validates and transforms the data in layers, then publishes it for reports and applications.</desc>
+        <defs><marker id="family-data-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-data-arrow)" />
+        <path class="family-edge" d="M180 152 V184" marker-end="url(#family-data-arrow)" />
+        <path class="family-edge" d="M180 256 V288" marker-end="url(#family-data-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">A schedule starts the run</text></g>
+        <g><rect class="family-node" x="24" y="96" width="312" height="56" rx="6" /><text x="44" y="132">Ingest raw data</text></g>
+        <g><rect class="family-focus" x="24" y="184" width="312" height="72" rx="6" /><text x="44" y="212">Validate and transform</text><text class="family-detail" x="44" y="240">Record quality results</text></g>
+        <g><rect class="family-node" x="24" y="288" width="312" height="56" rx="6" /><text x="44" y="324">Publish for reporting</text></g>
+      </svg>
+    </div>
+    <figcaption>Make each run safe to repeat. Users never wait on this path, and analytics copies are never write targets.</figcaption>
+  </figure>
+</section>
+
+<section class="application-family" aria-labelledby="modernize-an-existing-application">
+<div class="application-family-copy"><h3 id="modernize-an-existing-application">Modernize an existing application<a class="heading-link" href="#modernize-an-existing-application" aria-label="Link to Modernize an existing application"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<p>Extend, move, or gradually replace a system you already run. Decide what to
+keep, which part moves first, and how data stays in sync while old and new run
+side by side. Microsoft&#39;s <a href="https://learn.microsoft.com/azure/architecture/patterns/strangler-fig">Strangler Fig pattern</a>
+replaces a system one route at a time.</p>
+<div class="family-product-example">
+<span>Example options</span>
+<div><a href="https://learn.microsoft.com/azure/migrate/migrate-services-overview"><img src="assets/icons/microsoft/azure-migrate.svg" alt="" width="32" height="32" />Azure Migrate</a><small>Discover and assess what runs today before you plan the move.</small></div>
+<div><a href="https://learn.microsoft.com/azure/api-management/api-management-key-concepts"><img src="assets/icons/microsoft/api-management.svg" alt="" width="32" height="32" />Azure API Management</a><small>A front door that routes each API to the legacy or the new implementation.</small></div>
+</div></div>
+<style>
+    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
+    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
+    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
+    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
+    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
+    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
+    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
+    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
+  </style>
+<figure class="intro-diagram" data-family="modernize">
+    <div class="diagram-container">
+      <svg viewBox="0 0 360 264" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-modernize-title family-modernize-desc">
+        <title id="family-modernize-title">Move traffic one route at a time</title>
+        <desc id="family-modernize-desc">Clients call a single front door. It routes each request to the legacy system or the new component. The legacy part is retired once its traffic has moved.</desc>
+        <defs><marker id="family-modernize-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
+        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-modernize-arrow)" />
+        <path class="family-edge" d="M180 168 V200" marker-end="url(#family-modernize-arrow)" />
+        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">Clients call one front door</text></g>
+        <g><rect class="family-focus" x="24" y="96" width="312" height="72" rx="6" /><text x="44" y="124">Route each request</text><text class="family-detail" x="44" y="152">Legacy or new, per route</text></g>
+        <g><rect class="family-node" x="24" y="200" width="312" height="56" rx="6" /><text x="44" y="236">Retire each legacy route</text></g>
+      </svg>
+    </div>
+    <figcaption>Avoid a big-bang rewrite unless the system is small and well understood. Keep new code free of legacy data models.</figcaption>
+  </figure>
+</section>
+
+<h2 id="ai-capabilities-you-can-add">AI capabilities you can add<a class="heading-link" href="#ai-capabilities-you-can-add" aria-label="Link to AI capabilities you can add"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p>Add AI to any shape above when the journey needs it. These are the forms it
+usually takes. The creator still compares each one with plain code and a fixed
+workflow first.</p>
 <section class="application-family" aria-labelledby="knowledge-assistants">
 <div class="application-family-copy"><h3 id="knowledge-assistants">Knowledge assistants<a class="heading-link" href="#knowledge-assistants" aria-label="Link to Knowledge assistants"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Help users find information they&#39;re allowed to see, and cite where it came from.
@@ -204,45 +445,6 @@ doesn&#39;t make something an agent.</p>
   </figure>
 </section>
 
-<section class="application-family" aria-labelledby="background-workflows">
-<div class="application-family-copy"><h3 id="background-workflows">Background workflows<a class="heading-link" href="#background-workflows" aria-label="Link to Background workflows"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
-<p>Respond to events or process jobs with no chat interface. Decide who owns job
-state, how work resumes after a failure, which steps stay fixed, and when the
-system stops investigating.</p>
-<div class="family-product-example">
-<span>Example options</span>
-<div><a href="https://learn.microsoft.com/azure/logic-apps/logic-apps-overview"><img src="assets/icons/microsoft/logic-apps.svg" alt="" width="32" height="32" />Azure Logic Apps</a><small>Connector-based workflows with explicit steps.</small></div>
-<div><a href="https://learn.microsoft.com/azure/azure-functions/durable/durable-functions-overview"><img src="assets/icons/microsoft/functions.svg" alt="" width="32" height="32" />Azure Functions with Durable Functions</a><small>Code-defined workflows with persisted state and recovery.</small></div>
-</div></div>
-<style>
-    .intro-diagram[data-family] { max-width: 400px; min-width: 0; margin: 0; font-family: "Inter", "Segoe UI", sans-serif; }
-    .intro-diagram[data-family] svg { display: block; width: 100%; height: auto; background: #fff; }
-    .intro-diagram[data-family] text { fill: #032254; font-family: "Inter", "Segoe UI", sans-serif; font-size: 18px; font-weight: 600; }
-    .intro-diagram[data-family] .family-detail { fill: #47494e; font-size: 16px; font-weight: 400; }
-    .intro-diagram[data-family] .family-node { fill: #fff; stroke: #032254; stroke-width: 1.5; }
-    .intro-diagram[data-family] .family-focus { fill: #f5f8fe; stroke: #1a77e3; stroke-width: 2; }
-    .intro-diagram[data-family] .family-edge { fill: none; stroke: #47494e; stroke-width: 1.5; }
-    .intro-diagram[data-family] figcaption { margin-top: 12px; color: #47494e; font-size: 14px; line-height: 1.6; }
-  </style>
-<figure class="intro-diagram" data-family="background">
-    <div class="diagram-container">
-      <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="family-background-title family-background-desc">
-        <title id="family-background-title">Save job state while waiting for approval</title>
-        <desc id="family-background-desc">An event starts a job that gathers evidence. The job saves its state while it waits for approval. It resumes only after approval.</desc>
-        <defs><marker id="family-background-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#47494e" /></marker></defs>
-        <path class="family-edge" d="M180 64 V96" marker-end="url(#family-background-arrow)" />
-        <path class="family-edge" d="M180 152 V184" marker-end="url(#family-background-arrow)" />
-        <path class="family-edge" d="M180 256 V296" stroke-dasharray="5 4" marker-end="url(#family-background-arrow)" />
-        <g><rect class="family-node" x="24" y="8" width="312" height="56" rx="6" /><text x="44" y="44">An event starts a job</text></g>
-        <g><rect class="family-node" x="24" y="96" width="312" height="56" rx="6" /><text x="44" y="132">Gather evidence</text></g>
-        <g><rect class="family-focus" x="24" y="184" width="312" height="72" rx="6" /><text x="44" y="212">Wait for the owner's approval</text><text class="family-detail" x="44" y="240">Save the job's state</text></g>
-        <g><rect class="family-node" x="24" y="296" width="312" height="56" rx="6" /><text x="44" y="332">Resume after approval</text></g>
-      </svg>
-    </div>
-    <figcaption>The job can wait without an open chat. Stop the proposed action if the owner rejects it. Define how the job recovers from failures.</figcaption>
-  </figure>
-</section>
-
 <section class="application-family" aria-labelledby="coordinated-specialist-agents">
 <div class="application-family-copy"><h3 id="coordinated-specialist-agents">Coordinated specialist agents<a class="heading-link" href="#coordinated-specialist-agents" aria-label="Link to Coordinated specialist agents"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p>Split the work across agents only when one agent can&#39;t do it reliably.
@@ -285,31 +487,9 @@ recommends the simplest design that meets the requirement.</p>
   </figure>
 </section>
 
-<h2 id="capabilities-you-can-combine">Capabilities you can combine<a class="heading-link" href="#capabilities-you-can-combine" aria-label="Link to Capabilities you can combine"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Families overlap. Add memory, multiple agents, or personalization only when the
-journey needs them, and decide who owns what&#39;s stored, who can see it, and when
-it expires or gets deleted.</p>
-<h2 id="choose-an-architecture-during-discovery">Choose an architecture during discovery<a class="heading-link" href="#choose-an-architecture-during-discovery" aria-label="Link to Choose an architecture during discovery"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Don&#39;t pick a platform before discovery. Bring the outcome and your constraints.
-The creator weighs what you already have against custom code for your first
-journey. Microsoft&#39;s <a href="https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/technology-solutions-plan-strategy">technology planning guidance</a>
-also starts by asking whether a ready-made solution meets the need.</p>
-<p>Treat the user channel and the runtime as separate choices, and keep access to
-knowledge separate from permission to act. The architecture review confirms the
-products fit and the connections work, and names an owner for anything still
-unchecked.</p>
-<h2 id="describe-your-first-journey">Describe your first journey<a class="heading-link" href="#describe-your-first-journey" aria-label="Link to Describe your first journey"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
-<p>Tell the creator who will use the application and what their first task is:</p>
-<pre><code class="language-text">/agentic-cobuild:ai-agent-creator Design a maintenance assistant for property managers. Help them investigate
-resident requests and prepare a work order for approval. Reuse our existing
-identity and service system. Compare an agent with a simpler workflow before
-recommending the architecture.
-</code></pre>
-<p><a href="start.html">Set up your application workspace</a>, then bring your own idea.
-If you are extending a system, <a href="start.html#working-with-an-existing-application">prepare its context</a>.</p>
-<p>Review and approve the architecture package, then start implementation in a
-separate session. Approving the architecture doesn&#39;t authorize building or
-deploying anything.</p>
+<h2 id="bring-your-own-idea">Bring your own idea<a class="heading-link" href="#bring-your-own-idea" aria-label="Link to Bring your own idea"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<p><a href="start.html">Start</a> sets up your workspace and takes your idea to an approved
+architecture.</p>
 
       </article>
     </div>

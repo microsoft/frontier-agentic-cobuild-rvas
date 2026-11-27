@@ -1,0 +1,13 @@
+From: vera.dunmore@example.invalid
+To: claims@harbourline.invalid
+Subject: Please help
+Date: 19/01/2026 04:55
+
+Good morning,
+
+I am Vera Dunmore, policy POL-004455. I live at 237 Market Srteet, Port Calder.
+The ground floor flooded, water came up from the street and into the house.
+I look forward to hearing from you.
+Vera Dunmore
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

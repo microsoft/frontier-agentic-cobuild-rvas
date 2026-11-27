@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Why: Agree before you delegate | Agentic Co-build</title>
+  <meta name="description" content="The Agree before you delegate talk: why AI coding agents need visible, checkable agreement on what to build, with the slides and a PDF." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/slides.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <!-- primary-links -->
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero guide-hero why-hero">
+      <div class="wrap">
+        <h1>Agree before you <span>delegate.</span></h1>
+        <p class="lede">Agents made code cheaper to produce. They didn't make understanding cheaper. This talk explains why, and what to do about it.</p>
+        <div class="why-actions">
+          <div class="present-action" data-present-action hidden>
+            <button class="btn btn-primary" type="button" data-present="1">Present the slides</button>
+            <p class="present-hint">Press <kbd>J</kbd> and <kbd>K</kbd> to move, <kbd>N</kbd> for speaker notes, <kbd>F</kbd> for full screen</p>
+          </div>
+          <a class="btn btn-secondary" href="assets/slides/agree-before-you-delegate.pdf">Download the PDF <span class="btn-meta">({{pdf-label}})</span></a>
+        </div>
+        <p class="why-meta">{{slide-count}} slides, with speaker notes in present mode.</p>
+      </div>
+    </section>
+    <article class="wrap guide-body why-article">
+      <h2>Prompting is fast. Agreeing is the work.</h2>
+      <p>Without agreement up front, an agent builds the most plausible reading of the brief, and the team finds the gap after the build. Barry Boehm showed in 1981 that errors cost more the later they surface. Agents get you to that late stage in hours.</p>
+      <h2>Pure vibe coding</h2>
+      <p>Kai Lentit's sketch <a href="https://youtu.be/_2C2CNmK7dQ">Senior Engineer tries Vibe Coding</a> (6 minutes) exaggerates for laughs, but the failures are familiar: ignored rules, unrequested changes, a growing bill. Nobody agreed what done looks like, so there is nothing to check the output against.</p>
+      <h2>Plan mode helps, but a plan is still prose</h2>
+      <p>Net Ninja's <a href="https://youtu.be/fxgsyY_t82Q">Using Plan Mode</a> (5 minutes) shows the better version: the agent asks questions and writes a plan first. The presenter then approves it without reading it. That's fine for a small feature. For a real system, nobody can check a long plan, and approving it is not agreement.</p>
+      <h2>Approve something people can challenge</h2>
+      <p>Diagrams, wireframes and a task plan can be looked at, questioned and corrected before any code exists. C4 models, UML, swimlanes and wireframes come from fifty years of software engineering. We don't invent a new way to agree. Agents let us produce the established ones in minutes. We reinvent everything to reinvent nothing.</p>
+      <p>The slides walk through the argument and a worked example. Present them from the buttons above, or download the PDF.</p>
+    </article>
+    <div class="wrap deck-wrap">
+      <!-- deck -->
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/slides.js"></script>
+</body>
+</html>

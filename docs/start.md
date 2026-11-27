@@ -1,5 +1,10 @@
 Already installed the plugin? [Start discovery](#describe-what-you-want-to-build).
 
+This page takes you through setup, discovery, architecture, and the optional
+wireframe: steps 00 to 03 of [the path](path.html). Bring your own use case. If
+you don't have one, [find an idea](#need-an-idea-first) or use the
+[worked example](example.html).
+
 ## Before you start
 
 Work in your application's repository, not this one. Check the
@@ -33,8 +38,8 @@ If a command fails, read the error and check for partial files before retrying.
 Skip this for an existing application and follow its branching rules.
 
 ```bash
-mkdir my-ai-app
-cd my-ai-app
+mkdir my-app
+cd my-app
 git init
 ```
 
@@ -47,6 +52,9 @@ copilot plugin marketplace add microsoft/frontier-agentic-cobuild-rvas
 copilot plugin install agentic-cobuild@agentic-cobuild
 copilot plugin list
 ```
+
+Update it later with `copilot plugin update agentic-cobuild`. In VS Code, run the
+plugin update action.
 
 For VS Code, add the marketplace without replacing existing entries:
 
@@ -62,17 +70,58 @@ For VS Code, add the marketplace without replacing existing entries:
 Open Extensions, search for `@agentPlugins`, install **Agentic Co-build**, and
 enable it for the application workspace.
 
+### Or install the skills by hand
+
+Use this if your host or organisation doesn't allow plugins, or you want only
+some of the skills. You get the same skills and MCP server, but not the
+Co-build board canvas, and you update them yourself.
+
+Add the skills to your repository with the [`skills` CLI](https://github.com/vercel-labs/skills)
+(Node.js 22 or later). It works the same in PowerShell and Bash:
+
+```bash
+npx skills add https://github.com/microsoft/frontier-agentic-cobuild-rvas/tree/main/plugins/agentic-cobuild/skills -a github-copilot
+```
+
+It asks which skills to install and copies them to `.agents/skills/`, which
+Copilot CLI and VS Code both read. Add `--list` to see the nine skills first, or
+`-s azure-solution-architect` to pick one. Run `npx skills update` to update them.
+
+Then add the Microsoft Learn MCP server. For Copilot CLI:
+
+```bash
+copilot mcp add --transport http microsoft-learn https://learn.microsoft.com/api/mcp
+```
+
+For VS Code, add it to `.vscode/mcp.json` in your repository:
+
+```json
+{
+  "servers": {
+    "microsoft-learn": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
+
+Later steps need more tools. Each [step of the path](path.html) lists what to
+install when you reach it: Spec Kit for the task plan, Impeccable for design,
+and the Azure CLI and Azure Developer CLI for deployment.
+
 ### Check the workspace
 
 In CLI, use `/skills` and `/mcp`. In VS Code, use **Chat: Configure Skills** and
 the MCP server list.
 
-You should see **AI Agent Creator**, **Idea Forge**, **Cloud Architecture
+You should see **Azure Solution Architect**, **Idea Forge**, **Cloud Architecture
 Diagram**, **Diagram Design**, **Wireframer**, **Cost Estimation**, **Grilling**,
 **Domain Modeling**, **Wait What**, and the **Microsoft Learn** MCP server.
-If something is missing, reload your host and reinstall the plugin.
+If something is missing, reload your host, then reinstall the plugin or rerun
+`npx skills add`.
 
-**Use Claude Opus 5.5** for the whole AI Agent Creator session, including the
+**Use Claude Opus 5.5** for the whole Azure Solution Architect session, including the
 optional wireframe, and for implementation. In VS Code, pick it in the model
 picker. In Copilot CLI, run:
 
@@ -86,28 +135,27 @@ If the business context is spread across several people, run the
 [discovery session guide](discovery-session.html) first, and get approval before
 recording or processing the discussion.
 
-Select **AI Agent Creator** from your host's skill picker or slash completion,
+Select **Azure Solution Architect** from your host's skill picker or slash completion,
 then adapt one of these prompts.
 
-### AI Agent Creator prompts
+### Azure Solution Architect prompts
 
 For a new application:
 
 ```text
-/agentic-cobuild:ai-agent-creator Build a demo based on the 2025 Monza Grand Prix,
-using real OpenF1 data. The goal is to show how to combine race data and
-business knowledge to support a strategic decision: pit or stay out.
+/agentic-cobuild:azure-solution-architect Build an app for [who] that helps them
+[decision or task]. Today they [how it works now and what goes wrong]. The data
+comes from [sources], and [who] owns it. It must not [boundary, for example
+contact customers or change records without approval].
 ```
 
-For an existing application (for example, extending the race demo):
+For an existing application:
 
 ```text
-/agentic-cobuild:ai-agent-creator Add a what-if comparison to the existing Monza
-race demo. Let users adjust pit-stop time loss and expected tyre pace, compare
-pit versus stay-out scenarios, and see which assumptions change the recommendation.
-Distinguish observed OpenF1 data from hypothetical inputs. Inspect the current
-stack, preserve established interfaces, and account for existing data-access
-and deployment constraints.
+/agentic-cobuild:azure-solution-architect Add [capability] to [application] so
+that [who] can [decision or task]. Inspect the current stack, preserve
+established interfaces, and account for existing data-access and deployment
+constraints.
 ```
 
 **Your first milestone is confirmed discovery.** Answer the creator's questions.
@@ -116,19 +164,10 @@ decisions, confirm discovery. The creator then prepares the architecture package
 
 ### Work in the shared canvas
 
-In the GitHub Copilot app, you can follow the session on a shared screen. Ask:
-
-```text
-Open the Co-build board canvas.
-```
-
-The canvas lists the architecture package and shows each file as the creator
-writes it: Markdown, the HTML diagrams, and the `.drawio` pages. The creator
-points it at the file to review next, and it shows the current phase. The canvas
-is read-only. You still confirm and approve in the chat.
-
-Canvases are experimental, and the plugin works the same without one. If you
-don't see it, update the plugin and turn on experimental features.
+In the GitHub Copilot app, ask `Open the Co-build board canvas.` to follow the
+architecture package on a shared screen as the creator writes it. The canvas is
+read-only and experimental: you still confirm and approve in the chat, and the
+plugin works the same without it.
 
 ### Review what the creator understood
 
@@ -168,146 +207,19 @@ remains complete.
 The prototype isn't a production implementation and doesn't connect to live
 systems. Review it with the architecture package.
 
-**Approval ends this workflow.** The optional prototype does not authorize
-delivery. Start implementation separately. Approval doesn't change your code,
-generate infrastructure, or provision resources.
+**Approval ends this workflow.** The approval and the prototype do not authorize
+delivery. Nothing is built or provisioned until you start the next step.
 
-## Start implementation in a new session
+## Next: the task plan
 
-Pick one workflow and don't mix them. Each considers the approved files under
-`docs/architecture/` as the source of truth. Below are 3 different development workflows
-that you can pick from (or you can bring your own).
-
-| Workflow | Choose it when | Entry point |
-| --- | --- | --- |
-| Direct from the documents | You want the shortest path from an approved package to working code | Direct prompt |
-| Matt Pocock spec and tickets | You want a local spec, dependency-linked tickets, and bounded parallel delivery | `/to-spec`, `/to-tickets`, then `/implement-spec` |
-| Spec Kit | You want a constitution, feature spec, plan, and task artifacts before coding | Spec Kit's specify, plan, tasks, and implement commands |
-
-<!-- workflow -->
-### Direct from the documents
-
-Open a new session and attach the whole `docs/architecture/` folder. Use this
-path unless you need the extra coordination of the other two.
-
-```text
-Read everything in @docs/architecture/, including the specification,
-implementation plan, solution document and diagram, and cost estimate.
-Implement the approved plan in dependency order. Treat the specification and
-its acceptance criteria as the requirements source of truth. Follow the
-approved architecture, preserve existing interfaces and authorization, and
-add focused tests for changed behavior. Run the relevant checks and report
-actual results. Do not change an architecture decision without approval.
-Do not commit, provision, deploy, or change production data.
-```
-
-<!-- workflow-end -->
-
-<!-- workflow -->
-### Matt Pocock spec and tickets
-
-Use this for independent work items that need dependency tracking. If `/to-spec`,
-`/to-tickets`, and `/implement-spec` aren't available, install the Matt Pocock
-engineering workflow. Tickets live in local Markdown, not remote issues.
-
-```text
-/to-spec Convert the approved docs/architecture/ package into one bounded local
-implementation spec. Preserve its requirement and acceptance IDs, architecture
-decisions, interfaces, authorization, cost constraints, and out-of-scope work.
-Do not implement yet.
-```
-
-```text
-/to-tickets Break the local spec into dependency-linked, testable tickets.
-Keep every ticket linked to the original acceptance criteria. Show the proposed
-breakdown before writing it. Do not publish remote issues or implement yet.
-```
-
-Open a new session for delivery:
-
-```text
-/implement-spec Implement the approved local spec and tickets. Reconcile them
-with the current source and the full docs/architecture/ package. Preserve the
-approved architecture and existing contracts. Run focused and combined checks.
-Do not push, open a pull request, provision, deploy, or change production data.
-```
-
-<!-- workflow-end -->
-
-<!-- workflow -->
-### Spec Kit
-
-Set up Spec Kit, then run its constitution, specify, clarify (if needed), plan,
-and tasks commands against the approved `docs/architecture/` package. Don't let
-them overturn decisions that are already settled.
-
-Open a new session after the feature plan and tasks are reviewed:
-
-```text
-/speckit-implement Implement only the reviewed feature tasks. Treat the
-docs/architecture/ package and its acceptance criteria as authoritative.
-Preserve the approved architecture, interfaces, authorization, and cost
-constraints. Run the documented tests and record actual results. Do not commit,
-provision, deploy, or change production data.
-```
-
-Run `/speckit-converge` after each implementation pass, and repeat until the
-feature converges or you've recorded what's blocking it.
-
-<!-- workflow-end -->
-
-Whichever workflow you use, get approval before changing an architecture decision.
-
-Once targeted checks pass, run the [implementation and security reviews](#review-prompts),
-fix what they find, and rerun the affected tests. If the review tools aren't
-available, ask a person to review and note that.
-
-The operating team still owns production acceptance and rollback.
-
-## Command and prompt reference
-
-Use these after implementation, or to maintain an existing setup.
-
-### Review prompts
-
-Implementation review:
-
-```text
-/review Review the staged and unstaged implementation against
-@docs/architecture/specification.md,
-@docs/architecture/implementation-plan.md, and
-@docs/architecture/solution.md. Identify unmet or partially met acceptance
-criteria, skipped or out-of-order plan steps, architecture deviations,
-regressions, and missing tests. Rank findings by severity and include file and
-line references.
-```
-
-Security review:
-
-```text
-/security-review Analyze the staged and unstaged implementation for exploitable
-security vulnerabilities, insecure defaults, authorization or data-isolation
-failures, secret exposure, injection risks, unsafe external interactions, and
-dependency or configuration weaknesses. Rank findings by severity and confidence,
-include file and line references, and recommend the smallest safe fix for each
-finding.
-```
-
-### Update the plugin
-
-Each teammate updates the plugin in their own host. Review updates before you
-use them.
-
-```bash
-copilot plugin update agentic-cobuild
-```
-
-VS Code users can run the plugin update action instead.
+Open a new session and continue with [step 04 of the path](path.html#04-task-plan).
+GitHub Spec Kit turns the approved package into tasks an agent can build from.
 
 ## Need an idea first?
 
 Use **Idea Forge** to research an opportunity, then take the brief you pick
-through AI Agent Creator discovery and architecture approval.
+through Azure Solution Architect discovery and architecture approval. To learn the flow
+on a prepared scenario with synthetic data, use the [worked example](example.html).
 
 ### Idea Forge prompt
 
@@ -315,6 +227,3 @@ through AI Agent Creator discovery and architecture approval.
 /idea-forge Find a bounded AI opportunity for [customer] in [industry].
 Research the business and publicly stated priorities on the web.
 ```
-
-See the [plugin source](https://github.com/microsoft/frontier-agentic-cobuild-rvas/tree/main/plugins/agentic-cobuild)
-and the [diagram asset terms](https://github.com/microsoft/frontier-agentic-cobuild-rvas/blob/main/plugins/agentic-cobuild/skills/cloud-architecture-diagram/references/REFERENCE.md).

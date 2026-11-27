@@ -42,3 +42,5 @@ node_modules/*
 
 # Graphify
 graphify-out/
+
+examples/storm-surge/.scratch/

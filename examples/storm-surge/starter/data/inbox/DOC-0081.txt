@@ -1,0 +1,13 @@
+From: quinn.wickham@example.invalid
+To: claims@harbourline.invalid
+Subject: Damage to my property
+Date: 18/01/2026 20:08
+
+Hello,
+
+I am Quinn Wickham, policy POL-000381. I live at 105 Marke tStreet, Greywick Sands.
+The strong wind lifted part of the roof and there are tiles all over the garden.
+Regards,
+Quinn Wickham
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

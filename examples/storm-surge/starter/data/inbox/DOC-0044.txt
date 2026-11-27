@@ -1,0 +1,13 @@
+From: dana.yelland@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 19/01/2026 00:34
+
+Dear Sir or Madam,
+
+I am Dana Yelland, policy POL-000934. I live at 82 Lighthouse Road, Corran Quay.
+A heavy branch fell on the parked car and dented the bonnet and windscreen. We cannot stay at home tonight.
+Please treat this as urgent.
+Dana Yelland
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

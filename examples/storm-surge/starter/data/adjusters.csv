@@ -1,0 +1,41 @@
+adjuster_id,name,base_municipality,skills,max_visits_per_day,available_from,languages
+ADJ-001,Cleo Hethering,Kestrel Bay,large_loss,6,2026-01-19T08:00,en
+ADJ-002,Esme Coombe,Wrenmouth,roof;structural,7,2026-01-19T08:00,en
+ADJ-003,Bea Tregarth,Halvering,large_loss,7,2026-01-19T14:00,en;fr
+ADJ-004,Bram Eastaugh,Skellby,motor,5,2026-01-19T14:00,en
+ADJ-005,Greta Carrow,Port Calder,motor;water,6,2026-01-19T08:00,en
+ADJ-006,Cleo Abernott,Saltmere,large_loss;motor;structural,7,2026-01-19T08:00,en
+ADJ-007,Ada Eastaugh,Dunlowe,large_loss;roof,7,2026-01-19T14:00,en;fr
+ADJ-008,Hollis Dunmore,Mistlecombe,large_loss;water,5,2026-01-19T08:00,en
+ADJ-009,Jonah Eastaugh,Tidesend,structural,8,2026-01-19T14:00,en
+ADJ-010,Hollis Fairley,Brackenholt,roof;structural;water,8,2026-01-19T08:00,en
+ADJ-011,Dermot Northey,Corran Quay,large_loss;roof,7,2026-01-19T08:00,en
+ADJ-012,Dana Elsworth,Greywick Sands,roof;water,7,2026-01-19T08:00,en
+ADJ-013,Felix Hethering,Halvering,large_loss,7,2026-01-19T08:00,en
+ADJ-014,Bea Saltash,Skellby,roof,5,2026-01-20T08:00,en
+ADJ-015,Wyn Northey,Skellby,large_loss;water,5,2026-01-20T08:00,en
+ADJ-016,Jonah Ashdown,Brackenholt,roof;structural;water,7,2026-01-19T08:00,en
+ADJ-017,Jonah Coombe,Tidesend,large_loss;water,7,2026-01-19T14:00,en
+ADJ-018,Felix Hethering,Kestrel Bay,roof,8,2026-01-19T14:00,en;fr
+ADJ-019,Alex Ilsley,Brackenholt,large_loss;structural,7,2026-01-19T08:00,en
+ADJ-020,Felix Zennor,Saltmere,water,5,2026-01-19T08:00,en
+ADJ-021,Tamsin Quarrie,Port Calder,motor;structural,6,2026-01-19T08:00,en
+ADJ-022,Ada Bellweather,Halvering,large_loss;roof,6,2026-01-20T08:00,en
+ADJ-023,Jonah Yelland,Greywick Sands,large_loss;structural,8,2026-01-20T08:00,en
+ADJ-024,Hollis Eastaugh,Tidesend,large_loss,5,2026-01-19T14:00,en
+ADJ-025,Bram Garroway,Saltmere,roof,8,2026-01-20T08:00,en
+ADJ-026,Lewis Hethering,Saltmere,large_loss;motor;roof,6,2026-01-19T14:00,en;fr
+ADJ-027,Orla Zennor,Corran Quay,roof,8,2026-01-19T14:00,en
+ADJ-028,Vera Ashdown,Kestrel Bay,motor;roof,6,2026-01-19T14:00,en
+ADJ-029,Dermot Lowther,Brackenholt,water,6,2026-01-19T08:00,en
+ADJ-030,Wyn Quarrie,Saltmere,structural;water,6,2026-01-19T14:00,en
+ADJ-031,Yara Quarrie,Dunlowe,large_loss,6,2026-01-19T08:00,en
+ADJ-032,Greta Eastaugh,Brackenholt,large_loss;structural,6,2026-01-20T08:00,en
+ADJ-033,Silas Kettering,Saltmere,motor;roof,6,2026-01-19T08:00,en
+ADJ-034,Ines Elsworth,Halvering,motor;water,6,2026-01-19T14:00,en;fr
+ADJ-035,Piers Bellweather,Kestrel Bay,roof;structural,5,2026-01-20T08:00,en;fr
+ADJ-036,Esme Lowther,Dunlowe,large_loss;motor;water,6,2026-01-19T08:00,en
+ADJ-037,Esme Vosper,Saltmere,large_loss;roof,6,2026-01-19T08:00,en
+ADJ-038,Bram Brierley,Skellby,water,7,2026-01-19T08:00,en
+ADJ-039,Hollis Garroway,Skellby,large_loss,7,2026-01-19T08:00,en
+ADJ-040,Tamsin Daventry,Corran Quay,water,5,2026-01-20T08:00,en

@@ -1,0 +1,13 @@
+From: rosa.abernott@example.invalid
+To: claims@harbourline.invalid
+Subject: Claim report
+Date: 19/01/2026 02:38
+
+Good morning,
+
+I am Rosa Abernott, policy POL-003729. I live at 220 Church Lane, Dunlowe.
+A large pine fell in the garden and is blocking the entrance.
+Please treat this as urgent.
+Rosa Abernott
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

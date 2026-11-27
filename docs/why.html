@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Why: Agree before you delegate | Agentic Co-build</title>
+  <meta name="description" content="The Agree before you delegate talk: why AI coding agents need visible, checkable agreement on what to build, with the slides and a PDF." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/slides.css" />
+  <link rel="icon" href="assets/img/logo-mark.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><img src="assets/img/logo-full.png" alt="Real Value Acceleration Program home" /></a>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="index.html">Overview</a>
+<a href="why.html" aria-current="page">Why</a>
+<a href="path.html">The path</a>
+<a href="start.html">Start</a>
+<a href="applications.html">Learn</a>
+<a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">GitHub</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero guide-hero why-hero">
+      <div class="wrap">
+        <h1>Agree before you <span>delegate.</span></h1>
+        <p class="lede">Agents made code cheaper to produce. They didn't make understanding cheaper. This talk explains why, and what to do about it.</p>
+        <div class="why-actions">
+          <div class="present-action" data-present-action hidden>
+            <button class="btn btn-primary" type="button" data-present="1">Present the slides</button>
+            <p class="present-hint">Press <kbd>J</kbd> and <kbd>K</kbd> to move, <kbd>N</kbd> for speaker notes, <kbd>F</kbd> for full screen</p>
+          </div>
+          <a class="btn btn-secondary" href="assets/slides/agree-before-you-delegate.pdf">Download the PDF <span class="btn-meta">(PDF, 417 KB)</span></a>
+        </div>
+        <p class="why-meta">17 slides, with speaker notes in present mode.</p>
+      </div>
+    </section>
+    <article class="wrap guide-body why-article">
+      <h2>Prompting is fast. Agreeing is the work.</h2>
+      <p>Without agreement up front, an agent builds the most plausible reading of the brief, and the team finds the gap after the build. Barry Boehm showed in 1981 that errors cost more the later they surface. Agents get you to that late stage in hours.</p>
+      <h2>Pure vibe coding</h2>
+      <p>Kai Lentit's sketch <a href="https://youtu.be/_2C2CNmK7dQ">Senior Engineer tries Vibe Coding</a> (6 minutes) exaggerates for laughs, but the failures are familiar: ignored rules, unrequested changes, a growing bill. Nobody agreed what done looks like, so there is nothing to check the output against.</p>
+      <h2>Plan mode helps, but a plan is still prose</h2>
+      <p>Net Ninja's <a href="https://youtu.be/fxgsyY_t82Q">Using Plan Mode</a> (5 minutes) shows the better version: the agent asks questions and writes a plan first. The presenter then approves it without reading it. That's fine for a small feature. For a real system, nobody can check a long plan, and approving it is not agreement.</p>
+      <h2>Approve something people can challenge</h2>
+      <p>Diagrams, wireframes and a task plan can be looked at, questioned and corrected before any code exists. C4 models, UML, swimlanes and wireframes come from fifty years of software engineering. We don't invent a new way to agree. Agents let us produce the established ones in minutes. We reinvent everything to reinvent nothing.</p>
+      <p>The slides walk through the argument and a worked example. Present them from the buttons above, or download the PDF.</p>
+    </article>
+    <div class="wrap deck-wrap">
+      <div class="deck" id="deck" data-total="17">
+<section class="deck-entry" id="slide-1" data-slide-id="title" aria-labelledby="slide-1-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--title">
+<h2 class="slide-title" id="slide-1-title">Agree before you <span>delegate</span></h2>
+<p>Shared understanding in AI-assisted software delivery</p>
+<div class="slide-visual" data-visual="title-mark">
+<svg class="v v-title-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 300" role="img" aria-labelledby="v-title-mark-title v-title-mark-desc">
+<title id="v-title-mark-title">Two overlapping circles</title>
+<desc id="v-title-mark-desc">Two blue circles overlap; the shared area between them is dark navy with a white dot at its centre, standing for shared understanding.</desc>
+<defs>
+<marker id="v-title-mark-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-title-mark-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+</defs>
+<clipPath id="v-title-mark-clip"><circle cx="150" cy="150" r="130" /></clipPath>
+<circle cx="150" cy="150" r="130" fill="#1a77e3" />
+<circle cx="290" cy="150" r="130" fill="#a9cbf5" />
+<circle cx="290" cy="150" r="130" fill="#032254" clip-path="url(#v-title-mark-clip)" />
+<circle cx="220" cy="150" r="9" fill="#fff" />
+</svg>
+</div>
+
+
+<img class="slide-logo" src="assets/img/logo-full.png" alt="Real Value Acceleration Program" />
+<div class="slide-foot"><span>Agree before you delegate</span><span>1 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-1-notes">Speaker notes <span class="visually-hidden">for slide 1 of 17</span></h3>
+<button class="present-from" type="button" data-present="1" hidden>Present from slide 1</button>
+</div>
+<p>Thank you for having me. Over the next thirty minutes I want to talk about a pattern we see as teams adopt AI coding agents. Agents are getting very good at turning a specification into working software, often in hours. What they can&#39;t do is tell us whether we asked for the right thing. So the argument today is simple: before we delegate work to agents, we need visible, checkable agreement on what to build. The material draws on established work by Fred Brooks, Barry Boehm, Eric Evans and Simon Brown. We&#39;ll keep time for discussion at the end.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-2" data-slide-id="problem" aria-labelledby="slide-2-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--compare">
+<p class="slide-kicker">The problem</p>
+<h2 class="slide-title" id="slide-2-title">Two common ways to use agents</h2>
+<div class="cols">
+
+
+<div class="col">
+
+<h3>Assistant</h3>
+<p>Speeds up individual tasks</p>
+<p><strong>Limited gains</strong></p>
+</div>
+
+
+<div class="col">
+
+<h3>Autonomous builder</h3>
+<p>Builds a whole app from a brief</p>
+<p><strong>Fast, but the wrong thing</strong></p>
+</div>
+
+
+</div>
+
+
+
+<div class="band">
+
+<p>What both lack</p>
+<p>Agreement on what to build, before the build starts.</p>
+</div>
+<div class="slide-foot"><span>Agree before you delegate</span><span>2 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-2-notes">Speaker notes <span class="visually-hidden">for slide 2 of 17</span></h3>
+<button class="present-from" type="button" data-present="2" hidden>Present from slide 2</button>
+</div>
+<p>Most organisations we work with use agents in one of two ways. The first is as an assistant: code completion, tests, documentation. It speeds up individual tasks, and the gains are real but limited. The second is as an autonomous builder: we describe an application and the agent produces the whole thing. That is fast, but it often produces something other than what the requester meant. The two approaches look very different, yet they lack the same layer: a reliable way for the people who want a system and the agents building it to agree on what the system is before the build starts. That missing layer is the subject of this talk.</p>
+<p>Source: &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-3" data-slide-id="why-now" aria-labelledby="slide-3-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--quote">
+<p class="slide-kicker">Why now</p>
+<h2 class="slide-title" id="slide-3-title">AI moves the bottleneck</h2>
+<blockquote>
+<p>“The hardest single part of building a software system is deciding precisely what to build.”</p>
+<p>Fred Brooks, <em>No Silver Bullet</em> (1986)</p>
+</blockquote>
+<div class="stack">
+
+
+<div class="panel">
+
+<h3>Accidental complexity</h3>
+<p>Expressing the solution in code</p>
+<p><strong>Agents reduce it</strong></p>
+</div>
+
+
+<div class="panel panel-focus">
+
+<h3>Essential complexity</h3>
+<p>Understanding the problem</p>
+<p><strong>Now the bottleneck</strong></p>
+</div>
+
+
+</div>
+<div class="slide-foot"><span>Agree before you delegate</span><span>3 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-3-notes">Speaker notes <span class="visually-hidden">for slide 3 of 17</span></h3>
+<button class="present-from" type="button" data-present="3" hidden>Present from slide 3</button>
+</div>
+<p>Fred Brooks made this point in 1986, in his essay &#39;No Silver Bullet&#39;. He wrote that the hardest single part of building a software system is deciding precisely what to build. He separated essential complexity, which is understanding the problem, from accidental complexity, which is the effort of expressing a solution in code. In our experience, agents reduce accidental complexity a great deal: they write, wire and test code quickly. They don&#39;t reduce essential complexity, because that depends on knowledge of the business, its rules and its people. So the bottleneck doesn&#39;t disappear. It moves, from writing code to deciding what the code should do.</p>
+<p>Sources: Brooks, &#39;No Silver Bullet&#39; (1986); &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-4" data-slide-id="boehm" aria-labelledby="slide-4-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--visual">
+<p class="slide-kicker">Why now · Boehm, Software Engineering Economics (1981)</p>
+<h2 class="slide-title" id="slide-4-title">The later we find it, the more we redo</h2>
+<div class="slide-visual slide-visual-wide" data-visual="boehm" role="region" tabindex="0" aria-label="Time to fix a misunderstanding, by the stage where it is found">
+<svg class="v v-boehm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1152 480" role="img" aria-labelledby="v-boehm-title v-boehm-desc">
+<title id="v-boehm-title">Time to fix a misunderstanding, by the stage where it is found</title>
+<desc id="v-boehm-desc">Illustrative bar chart. Found in Q and A: minutes, change one answer. Diagram review: minutes, change one label; the second attempt caught it here. Prototype review: hours, change one screen. Built code: days, redo code, data model and plan; the first attempt caught it here and the build was discarded. In production: weeks, redo code and data and rebuild trust.</desc>
+<defs>
+<marker id="v-boehm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-boehm-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+</defs>
+<path d="M64 60V400H1152" class="v-axis" /><text x="22" y="230" class="v-cap" text-anchor="middle" transform="rotate(-90 22 230)">Time to fix</text><rect x="109" y="392" width="128" height="8" class="v-bar" /><text x="173" y="354" class="v-cap" text-anchor="middle">Minutes</text><text x="173" y="378" class="v-body" text-anchor="middle">change one answer</text><text x="173" y="430" class="v-stage" text-anchor="middle">Q&amp;A</text><rect x="326" y="382" width="128" height="18" class="v-focus" /><text x="390" y="344" class="v-cap" text-anchor="middle">Minutes</text><text x="390" y="368" class="v-body" text-anchor="middle">change one label</text><text x="390" y="292" class="v-call" text-anchor="middle">Second attempt:</text><text x="390" y="313" class="v-call" text-anchor="middle">caught here</text><text x="390" y="430" class="v-stage v-blue-text" text-anchor="middle">Diagram review</text><rect x="543" y="342" width="128" height="58" class="v-bar" /><text x="607" y="304" class="v-cap" text-anchor="middle">Hours</text><text x="607" y="328" class="v-body" text-anchor="middle">change one screen</text><text x="607" y="430" class="v-stage" text-anchor="middle">Prototype review</text><rect x="760" y="240" width="128" height="160" class="v-focus" /><text x="824" y="202" class="v-cap" text-anchor="middle">Days</text><text x="824" y="226" class="v-body" text-anchor="middle">redo code, data model, plan</text><text x="824" y="150" class="v-call" text-anchor="middle">First attempt: caught here.</text><text x="824" y="171" class="v-call" text-anchor="middle">Build discarded.</text><text x="824" y="430" class="v-stage v-blue-text" text-anchor="middle">Built code</text><rect x="977" y="100" width="128" height="300" class="v-bar" /><text x="1041" y="42" class="v-cap" text-anchor="middle">Weeks</text><text x="1041" y="66" class="v-body" text-anchor="middle">redo code and data,</text><text x="1041" y="86" class="v-body" text-anchor="middle">rebuild trust</text><text x="1041" y="430" class="v-stage" text-anchor="middle">In production</text><line x1="0" y1="446" x2="1152" y2="446" class="v-rule" /><text x="0" y="472" class="v-cap">Legend</text><rect x="70" y="460" width="22" height="16" rx="3" class="v-focus" /><text x="100" y="472.5" class="v-legend">Where the case caught it</text><rect x="290" y="460" width="22" height="16" rx="3" class="v-bar" /><text x="320" y="472.5" class="v-legend">Other stages</text><text x="1152" y="472.5" class="v-note" text-anchor="end">Illustrative figures</text>
+</svg>
+</div>
+<div class="slide-foot"><span>Agree before you delegate</span><span>4 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-4-notes">Speaker notes <span class="visually-hidden">for slide 4 of 17</span></h3>
+<button class="present-from" type="button" data-present="4" hidden>Present from slide 4</button>
+</div>
+<p>This changes where delivery risk sits. When implementation took weeks, misunderstandings surfaced along the way, in conversations, demos and code reviews. Now an agent can finish the build before anyone has looked at what it is building. Barry Boehm showed in &#39;Software Engineering Economics&#39;, published in 1981, that a requirements error costs substantially more to fix the later it is found, because each stage builds more work on top of it. The chart shows the shape of that argument. The timings are illustrative, not measured data, and the two highlighted bars refer to the fictional example coming up. Agents make the build faster. They do not make rework cheaper.</p>
+<p>Sources: Boehm (1981); figure from &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-5" data-slide-id="prose-gaps" aria-labelledby="slide-5-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--gaps">
+<p class="slide-kicker">Why a specification is not enough</p>
+<h2 class="slide-title" id="slide-5-title">Prose hides gaps</h2>
+<div class="gaps-copy">
+
+<p>Two readers can agree with every sentence and still picture different systems.</p>
+<p>An agent rarely asks. It builds the most plausible reading.</p>
+</div>
+
+
+<div class="slide-visual" data-visual="prose-gaps">
+<svg class="v v-prose-gaps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" role="img" aria-labelledby="v-prose-gaps-title v-prose-gaps-desc">
+<title id="v-prose-gaps-title">One specification, two different pictures</title>
+<desc id="v-prose-gaps-desc">A specification document points to two readings: what we pictured, drawn as a blue hexagon, and what the agent built, drawn as a navy triangle.</desc>
+<defs>
+<marker id="v-prose-gaps-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-prose-gaps-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+</defs>
+<path d="M10 40h160v214q-40-26-80 0t-80 0z" class="v-box" />
+<text x="90" y="74" class="v-title" text-anchor="middle">Specification</text>
+<path d="M34 100h112" class="v-text-line" /><path d="M34 122h84" class="v-text-line" /><path d="M34 144h112" class="v-text-line" /><path d="M34 166h84" class="v-text-line" /><path d="M34 188h112" class="v-text-line" />
+<path d="M184 95H238" class="v-line" marker-end="url(#v-prose-gaps-arrow)" /><path d="M184 245H238" class="v-line" marker-end="url(#v-prose-gaps-arrow)" />
+<rect x="250" y="40" width="260" height="110" rx="8" class="v-card" />
+<path d="M296 69l23 13v26l-23 13-23-13V82z" fill="#1a77e3" />
+<text x="342" y="89" class="v-big">What we</text><text x="342" y="115" class="v-big">pictured</text>
+<rect x="250" y="190" width="260" height="110" rx="8" class="v-card" />
+<path d="M296 219l26 46h-52z" fill="#032254" />
+<text x="342" y="239" class="v-big">What the</text><text x="342" y="265" class="v-big">agent built</text>
+</svg>
+</div>
+<div class="slide-foot"><span>Agree before you delegate</span><span>5 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-5-notes">Speaker notes <span class="visually-hidden">for slide 5 of 17</span></h3>
+<button class="present-from" type="button" data-present="5" hidden>Present from slide 5</button>
+</div>
+<p>A natural reaction is to write a better specification. Prose is good at nuance, but it is poor at exposing gaps. Two readers can agree with every sentence of a requirements document and still picture different systems, because each fills the ambiguity with their own assumptions without noticing. A colleague might stop and ask what a term means. An agent rarely does, unless our process requires it. It takes the most plausible reading and builds on it. And a longer specification doesn&#39;t solve this; it adds more text to misread. So the answer isn&#39;t more words. It&#39;s a different kind of artefact, one that people can look at and challenge.</p>
+<p>Source: &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-6" data-slide-id="plan-mode" aria-labelledby="slide-6-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--compare">
+<p class="slide-kicker">Why a plan is not enough</p>
+<h2 class="slide-title" id="slide-6-title">Prompting and planning both end in prose</h2>
+<div class="cols">
+
+
+<div class="col">
+
+<h3>Vibe coding</h3>
+<p>Prompt, run, patch</p>
+<p><strong>Rules ignored, scope drifts, the bill grows</strong></p>
+</div>
+
+
+<div class="col">
+
+<h3>Plan mode</h3>
+<p>The agent plans first</p>
+<p><strong>Better, but the plan is a wall of text</strong></p>
+</div>
+
+
+</div>
+
+
+
+<div class="band">
+
+<p>Humans must not approve a wall of text.</p>
+</div>
+<div class="slide-foot"><span>Agree before you delegate</span><span>6 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-6-notes">Speaker notes <span class="visually-hidden">for slide 6 of 17</span></h3>
+<button class="present-from" type="button" data-present="6" hidden>Present from slide 6</button>
+</div>
+<p>Two videos make this concrete. The first is Kai Lentit&#39;s &#39;Senior Engineer tries Vibe Coding&#39;, a comedy sketch. Played for laughs, it lists the failures we see in earnest: rules the agent ignores, changes nobody asked for, a bill that keeps growing, and no shared picture of what was meant. The second is Net Ninja&#39;s &#39;Using Plan Mode&#39; for the GitHub Copilot app. It is a fair tutorial, and plan mode is a real step forward: the agent asks clarifying questions and writes a task list before it builds. But look at what the human receives. A long markdown plan. The presenter says he isn&#39;t going to read all of it out, approves it, and the agent goes on in autopilot. That is our point. A wall of text can&#39;t be checked, so approving it isn&#39;t agreement. The agreement that matters is in artefacts people can look at and challenge, and software engineering defined those over fifty years: diagrams, a shared vocabulary, wireframes, a task plan. So what do we ask people to approve instead? The next slides answer that.</p>
+<p>Sources: Kai Lentit, &#39;Senior Engineer tries Vibe Coding&#39; (<a href="https://youtu.be/_2C2CNmK7dQ">https://youtu.be/_2C2CNmK7dQ</a>); Net Ninja, &#39;GitHub Copilot App Tutorial #8 - Using Plan Mode&#39; (<a href="https://youtu.be/fxgsyY_t82Q">https://youtu.be/fxgsyY_t82Q</a>).</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-7" data-slide-id="practice" aria-labelledby="slide-7-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--principles">
+<p class="slide-kicker">The practice</p>
+<h2 class="slide-title" id="slide-7-title">Agree before you delegate</h2>
+<div class="statement">
+
+<p>Reach visible, checkable agreement on what to build before handing implementation to agents.</p>
+</div>
+
+
+
+<div class="band">
+
+<p>C4, UML, wireframes: fifty years of practice.</p>
+<p>We reinvent everything to reinvent nothing.</p>
+</div>
+
+
+<ol>
+<li>Pictures before prose</li>
+<li>Agree progressively, in order</li>
+<li>Engineers act as the stakeholder</li>
+<li>Agreement stays with people</li>
+</ol>
+<div class="slide-foot"><span>Agree before you delegate</span><span>7 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-7-notes">Speaker notes <span class="visually-hidden">for slide 7 of 17</span></h3>
+<button class="present-from" type="button" data-present="7" hidden>Present from slide 7</button>
+</div>
+<p>We use the phrase &#39;agree before you delegate&#39; for a simple practice: reach visible, checkable agreement on what to build before handing implementation to agents. Visible means people can look at it. Checkable means someone can say &#39;that&#39;s wrong&#39; before any code exists. The practice rests on four principles. First, pictures before prose. Second, agree progressively, in order. Third, engineers act as the stakeholder when they commission work from agents. Fourth, agreement stays with people, even as verification becomes more automated. These are techniques software engineering already has: C4, UML, wireframes and more, refined over fifty years. We don&#39;t invent a new way to agree; agents let us reuse the old ones quickly. In short, we reinvent everything to reinvent nothing. What has changed is that agents make skipping them riskier, and producing them quicker.</p>
+<p>Source: &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-8" data-slide-id="principle-1" aria-labelledby="slide-8-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--table">
+<p class="slide-kicker">Principle 1</p>
+<h2 class="slide-title" id="slide-8-title">Pictures before prose</h2>
+<p>A diagram forces decisions that prose can leave open.</p>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>The question it answers</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C4 model <em>· Simon Brown</em></td>
+<td>What is inside, and who is outside?</td>
+</tr>
+<tr>
+<td>Sequence and swimlane diagrams</td>
+<td>Who does each step, in what order?</td>
+</tr>
+<tr>
+<td>Ubiquitous language <em>· Eric Evans</em></td>
+<td>Does one word have one meaning?</td>
+</tr>
+<tr>
+<td>State machines</td>
+<td>How does a business object change state?</td>
+</tr>
+<tr>
+<td>Wireframes and prototypes</td>
+<td>What will using it be like?</td>
+</tr>
+</tbody></table>
+<div class="slide-foot"><span>Agree before you delegate</span><span>8 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-8-notes">Speaker notes <span class="visually-hidden">for slide 8 of 17</span></h3>
+<button class="present-from" type="button" data-present="8" hidden>Present from slide 8</button>
+</div>
+<p>Software engineering has spent decades building techniques that help requesters and builders picture the same system, and each answers one question for one audience. Simon Brown&#39;s C4 model shows the system boundary, the containers inside it, and the people and systems around it. Sequence and swimlane diagrams show behaviour and who owns each step. Eric Evans&#39;s ubiquitous language, from &#39;Domain-Driven Design&#39;, keeps one word for one meaning across the business and the code. State machines show how a business object moves through approvals, waits and retries. Wireframes and prototypes show what using the system will be like. You can write &#39;the system handles requests&#39; without saying whose; you can&#39;t draw the submitter without labelling the box.</p>
+<p>Sources: Brown; Evans.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-9" data-slide-id="principle-2" aria-labelledby="slide-9-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--steps">
+<p class="slide-kicker">Principle 2</p>
+<h2 class="slide-title" id="slide-9-title">Agree progressively, in order</h2>
+<div class="slide-visual" data-visual="steps">
+<ol class="deck-steps" aria-label="Five agreement steps, then delegate">
+<li class="deck-step">
+<span class="deck-step-num" aria-hidden="true">01</span>
+<span class="deck-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6" /><path d="m15 15 5 5" /></svg></span>
+<strong class="deck-step-name">Ask</strong>
+<span class="deck-step-desc">What problem, for whom, and what is out of scope?</span>
+</li>
+<li class="deck-step">
+<span class="deck-step-num" aria-hidden="true">02</span>
+<span class="deck-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.5" /><path d="M3 20c0-3.6 2.7-6 6-6s6 2.4 6 6M15.5 4.8a3.5 3.5 0 0 1 0 6.4M18 14.5c1.9.9 3 2.9 3 5.5" /></svg></span>
+<strong class="deck-step-name">Sketch</strong>
+<span class="deck-step-desc">The first journey: who does what, person, AI or system?</span>
+</li>
+<li class="deck-step">
+<span class="deck-step-num" aria-hidden="true">03</span>
+<span class="deck-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="6" cy="5" r="2.2" /><circle cx="6" cy="19" r="2.2" /><circle cx="18" cy="11" r="2.2" /><path d="M6 7.2v9.6M6 12c0-1 1-1.5 2-1.5h7.8" /></svg></span>
+<strong class="deck-step-name">Draw</strong>
+<span class="deck-step-desc">Context, containers, deployment, data and AI flows.</span>
+</li>
+<li class="deck-step">
+<span class="deck-step-num" aria-hidden="true">04</span>
+<span class="deck-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v4h4M9 12h6M9 16h6" /></svg></span>
+<strong class="deck-step-name">Specify</strong>
+<span class="deck-step-desc">Testable behaviour and acceptance criteria.</span>
+</li>
+<li class="deck-step">
+<span class="deck-step-num" aria-hidden="true">05</span>
+<span class="deck-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="5" width="14" height="10" rx="1" /><path d="M3 19h18" /></svg></span>
+<strong class="deck-step-name">Click</strong>
+<span class="deck-step-desc">A throwaway prototype that future users can try.</span>
+</li>
+<li class="deck-step deck-step-then"><strong>Then delegate.</strong></li>
+</ol>
+</div>
+
+
+<div class="pair-copy">
+
+<p>Each step narrows the range of possible systems before the next adds detail.</p>
+<p>Skip a step, and a wrong assumption reaches code unchallenged.</p>
+</div>
+<div class="slide-foot"><span>Agree before you delegate</span><span>9 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-9-notes">Speaker notes <span class="visually-hidden">for slide 9 of 17</span></h3>
+<button class="present-from" type="button" data-present="9" hidden>Present from slide 9</button>
+</div>
+<p>Shared understanding is built in steps, and each step narrows the range of possible systems before the next one adds detail. Ask: clarify the problem, who it&#39;s for and what&#39;s out of scope. Sketch: agree a high-level plan and the first user journey, including which steps belong to a person, the AI and fixed system logic. Draw: agree the context, containers, deployment, and data and AI flows. Specify: write testable behaviour and acceptance criteria that trace back to the diagrams. Click: let future users try a throwaway, low-fidelity prototype with synthetic data. The order matters. In our example, the architect went from planning documents straight to code, so a wrong assumption reached working software unchallenged.</p>
+<p>Source: &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-10" data-slide-id="principles-3-4" aria-labelledby="slide-10-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--pair">
+<p class="slide-kicker">Principles 3 and 4</p>
+<h2 class="slide-title" id="slide-10-title">Sign-off stays with people</h2>
+<div class="cols">
+
+
+<div class="col">
+
+<p class="numeral">03</p>
+
+<h3>Engineers act as the stakeholder</h3>
+<p>Review an agent’s proposal like a supplier’s: see it, try it, then sign off.</p>
+</div>
+
+
+<div class="col">
+
+<p class="numeral">04</p>
+
+<h3>Agreement stays with people</h3>
+<p>Agents help us brainstorm and verify. Deciding what to build stays human.</p>
+</div>
+
+
+</div>
+<div class="slide-foot"><span>Agree before you delegate</span><span>10 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-10-notes">Speaker notes <span class="visually-hidden">for slide 10 of 17</span></h3>
+<button class="present-from" type="button" data-present="10" hidden>Present from slide 10</button>
+</div>
+<p>Two shifts in our role. Traditionally, developers and architects received requirements, and someone from the business signed off a mock-up or demo. When agents do more of the implementation, we are the ones commissioning the work. So we review an agent&#39;s proposal the way a business stakeholder reviews a supplier&#39;s: by looking at it and trying it, and signing off only when we can see the system we want. Second, we brainstorm with agents, agree with them and verify their work. Verification is increasingly automated, through generated tests, automated code review and agents checking agents. Deciding what is right to build, for whom and within which constraints remains a human responsibility.</p>
+<p>Source: &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-11" data-slide-id="model" aria-labelledby="slide-11-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--model">
+<p class="slide-kicker">The model</p>
+<h2 class="slide-title" id="slide-11-title">Brainstorm, agree, delegate, verify</h2>
+<div class="slide-visual" data-visual="loop">
+<svg class="v v-loop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 540" role="img" aria-labelledby="v-loop-title v-loop-desc">
+<title id="v-loop-title">Brainstorm, agree, delegate, verify: a loop around shared understanding</title>
+<desc id="v-loop-desc">Brainstorm with agents drafts the shared understanding, made of glossary, diagrams, prototype and spec. Agree, where humans sign off on pictures, feeds it as signed off. Delegate: agents implement from the spec, reading it. Verify with tests and review, which updates it. When reality differs from the spec, the loop returns to brainstorm. Verification is increasingly automated; agreement still needs people.</desc>
+<defs>
+<marker id="v-loop-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-loop-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+</defs>
+<path d="M510 42C620 60 690 120 695 212" class="v-line" marker-end="url(#v-loop-arrow)" /><path d="M695 284C690 380 620 440 514 456" class="v-line" marker-end="url(#v-loop-arrow)" /><path d="M290 458C180 440 110 380 105 288" class="v-line" marker-end="url(#v-loop-arrow)" /><path d="M105 216C110 120 180 60 286 44" class="v-line" marker-end="url(#v-loop-arrow)" />
+<path d="M400 74V190" class="v-line v-dash" marker-end="url(#v-loop-arrow)" /><path d="M600 250H506" class="v-line v-dash" marker-end="url(#v-loop-arrow)" /><path d="M190 250H294" class="v-line v-dash" marker-end="url(#v-loop-arrow)" /><path d="M400 310V420" class="v-line v-dash" marker-end="url(#v-loop-arrow)" />
+<text x="150" y="80" class="v-cap" text-anchor="end">Reality ≠ spec</text><text x="412" y="136" class="v-cap">Drafts</text><text x="552" y="240" class="v-cap" text-anchor="middle">Signed off</text><text x="243" y="240" class="v-cap" text-anchor="middle">Updates</text><text x="412" y="370" class="v-cap">Reads spec</text>
+<rect class="v-box" x="290" y="10" width="220" height="64" rx="6" /><text x="400" y="38" class="v-title" text-anchor="middle">Brainstorm</text><text x="400" y="59" class="v-sub" text-anchor="middle">with agents</text>
+<rect class="v-focus" x="600" y="218" width="196" height="64" rx="6" /><text x="698" y="246" class="v-title v-blue-text" text-anchor="middle">Agree</text><text x="698" y="267" class="v-sub" text-anchor="middle">humans sign off on pictures</text>
+<rect class="v-box" x="290" y="422" width="220" height="64" rx="6" /><text x="400" y="450" class="v-title" text-anchor="middle">Delegate</text><text x="400" y="471" class="v-sub" text-anchor="middle">agents implement from the spec</text>
+<rect class="v-box" x="20" y="218" width="170" height="64" rx="6" /><text x="105" y="246" class="v-title" text-anchor="middle">Verify</text><text x="105" y="267" class="v-sub" text-anchor="middle">tests, review</text>
+<rect x="300" y="192" width="200" height="116" rx="10" class="v-dark" />
+<text x="400" y="234" class="v-title v-on-dark" text-anchor="middle">Shared understanding</text><text x="400" y="260" class="v-sub v-on-dark-dim" text-anchor="middle">glossary · diagrams</text><text x="400" y="280" class="v-sub v-on-dark-dim" text-anchor="middle">prototype · spec</text>
+<path d="M62 284C50 360 40 420 40 486" class="v-leader" /><circle cx="62" cy="286" r="3" class="v-dot" />
+<text x="0" y="508" class="v-call v-ink">Verification is increasingly automated.</text><text x="0" y="530" class="v-call v-ink">Agreement still needs people.</text>
+</svg>
+</div>
+
+
+<div class="model-copy">
+
+<p>Once the pictures are agreed, delegation becomes lower risk.</p>
+<p>The quality of the agreed input matters more than the choice of framework.</p>
+</div>
+<div class="slide-foot"><span>Agree before you delegate</span><span>11 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-11-notes">Speaker notes <span class="visually-hidden">for slide 11 of 17</span></h3>
+<button class="present-from" type="button" data-present="11" hidden>Present from slide 11</button>
+</div>
+<p>Here is the model that ties it together. We brainstorm with agents, which drafts the shared understanding: glossary, diagrams, prototype and specification. People agree by signing off on pictures. Agents then implement from the agreed specification, and we verify their work through tests and review. When reality doesn&#39;t match the specification, we go round again. Once the pictures are agreed, delegation becomes lower risk: the specification is anchored to artefacts people have reviewed, and acceptance criteria map to scenarios they have walked through. A spec-driven development approach can then drive the agents, and the quality of the agreed input matters more than the choice of framework.</p>
+<p>Source: &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-12" data-slide-id="leaders" aria-labelledby="slide-12-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--leaders">
+<p class="slide-kicker">For engineering leaders</p>
+<h2 class="slide-title" id="slide-12-title">What changes for engineering leaders</h2>
+<ol>
+<li>Ask who has seen it, not who has read it</li>
+<li>Plan time for agreement as well as build</li>
+<li>Keep the agreed artefacts with the code</li>
+<li>Track rework as well as throughput</li>
+</ol>
+<div class="slide-foot"><span>Agree before you delegate</span><span>12 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-12-notes">Speaker notes <span class="visually-hidden">for slide 12 of 17</span></h3>
+<button class="present-from" type="button" data-present="12" hidden>Present from slide 12</button>
+</div>
+<p>Four things change for engineering leaders. First, ask who has seen it, not who has read it: sign-off on a diagram or prototype holds up better than sign-off on a document someone skimmed. Second, plan time for agreement as well as build. As agents shorten implementation, agreement takes a larger share of the schedule, so budget for it explicitly. Third, keep the agreed artefacts with the code. Versioned diagrams, glossary, specification and prototype give agents a stable source of truth, and give auditors a record of what was approved and why, which matters in regulated and public-sector work. Fourth, track rework as well as throughput. A team that ships quickly and then throws work away is not fast.</p>
+<p>Source: &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-13" data-slide-id="five-questions" aria-labelledby="slide-13-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--questions">
+<p class="slide-kicker">Getting started</p>
+<h2 class="slide-title" id="slide-13-title">Five questions before you delegate</h2>
+<ol>
+<li>Can we draw the system boundary?</li>
+<li>Can we walk the main and failure paths?</li>
+<li>Do we use one word for one meaning?</li>
+<li>Have future users tried a prototype?</li>
+<li>Did we agree in order?</li>
+</ol>
+<div class="verdict">
+
+<p>If any answer is no, the work isn’t ready for an agent.</p>
+</div>
+
+
+
+<div class="closing">
+
+<p>Agents have made code cheaper to produce.</p>
+<p>They have not made understanding cheaper.</p>
+</div>
+
+
+
+<img class="slide-logo" src="assets/img/logo-full.png" alt="Real Value Acceleration Program" />
+<div class="slide-foot"><span>Agree before you delegate</span><span>13 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-13-notes">Speaker notes <span class="visually-hidden">for slide 13 of 17</span></h3>
+<button class="present-from" type="button" data-present="13" hidden>Present from slide 13</button>
+</div>
+<p>To finish, five questions to ask before we delegate. Can we draw the system boundary and name who and what sits outside it? Can we walk through the main journey and its failure path on one page, including what happens when the AI is unavailable or unsure? Do the humans and the agent use one word for one meaning, backed by a short glossary? Have the people who will use the system tried a prototype, not just read a description of one? And did we agree in order, without skipping steps? If any answer is no, the work isn&#39;t ready for an agent. Agents have made code cheaper to produce. They have not made understanding cheaper.</p>
+<p>Source: &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-14" data-slide-id="example" aria-labelledby="slide-14-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--visual">
+<p class="slide-kicker">A fictional example · Regional public works</p>
+<h2 class="slide-title" id="slide-14-title">“Request” meant two different systems</h2>
+<div class="slide-visual slide-visual-wide" data-visual="request-two-systems" role="region" tabindex="0" aria-label="What was intended compared with what the agent built">
+<svg class="v v-request-two-systems" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1152 540" role="img" aria-labelledby="v-request-two-systems-title v-request-two-systems-desc">
+<title id="v-request-two-systems-title">What was intended compared with what the agent built</title>
+<desc id="v-request-two-systems-desc">Left, what was intended: a contractor, who builds for the department, submits through change request intake for variation orders; an AI pre-assessment reads contract, budget and procurement rules from the contract and budget system of record; the contract manager decides with site inspector evidence, updates the budget and keeps an audit log. Right, what the agent built: a citizen uses a public request portal, an open web form; an AI chatbot answers questions and routes complaints using a public map of roadworks; a works progress dashboard shows public status updates with no decision and no approver. Middle, five differences: a contractor became a citizen; a contract change request became a public enquiry form; checks against the contract became a chatbot; contract and budget records became a public map; nobody approves or rejects the request.</desc>
+<defs>
+<marker id="v-request-two-systems-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-request-two-systems-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+</defs>
+<text x="0" y="18" class="v-cap">What was intended</text><text x="0" y="44" class="v-head-text">Contractor change-request review</text><rect class="v-person" x="0" y="66" width="222" height="76" rx="6" /><rect class="v-pill" x="14" y="77" width="58" height="17" rx="3" /><text x="43" y="89.5" class="v-tag" text-anchor="middle">Person</text><text x="14" y="114" class="v-title">Contractor</text><text x="14" y="132" class="v-sub">builds for the department</text><path d="M111 142V162" class="v-line" marker-end="url(#v-request-two-systems-arrow)" /><rect class="v-box" x="0" y="164" width="222" height="76" rx="6" /><rect class="v-pill" x="14" y="175" width="44" height="17" rx="3" /><text x="36" y="187.5" class="v-tag" text-anchor="middle">Step</text><text x="14" y="212" class="v-title">Change request intake</text><text x="14" y="230" class="v-sub">variation orders</text><path d="M111 240V260" class="v-line" marker-end="url(#v-request-two-systems-arrow)" /><rect class="v-box" x="0" y="262" width="222" height="94" rx="6" /><rect class="v-pill" x="14" y="273" width="29" height="17" rx="3" /><text x="28.5" y="285.5" class="v-tag" text-anchor="middle">AI</text><text x="14" y="310" class="v-title">AI pre-assessment</text><text x="14" y="328" class="v-sub">contract · budget ·</text><text x="14" y="345" class="v-sub">procurement rules</text><path d="M111 356V376" class="v-line" marker-end="url(#v-request-two-systems-arrow)" /><rect class="v-focus" x="0" y="378" width="222" height="110" rx="6" /><rect class="v-pill-blue" x="14" y="389" width="51" height="17" rx="3" /><text x="39.5" y="401.5" class="v-tag v-tag-blue" text-anchor="middle">Human</text><text x="14" y="426" class="v-title">Contract manager decides</text><text x="14" y="444" class="v-sub">+ site inspector evidence</text><text x="14" y="461" class="v-sub">updates budget</text><text x="14" y="478" class="v-sub">audit log</text><rect class="v-ext" x="268" y="271" width="140" height="76" rx="6" /><rect class="v-pill" x="282" y="282" width="73" height="17" rx="3" /><text x="318.5" y="294.5" class="v-tag" text-anchor="middle">External</text><text x="282" y="319" class="v-title">Contract &amp; budget</text><text x="282" y="337" class="v-sub">system of record</text><path d="M268 309H224" class="v-line" marker-end="url(#v-request-two-systems-arrow)" /><text x="245" y="301" class="v-cap v-cap-xs" text-anchor="middle">Reads</text><path d="M436 0V488M736 0V488" class="v-rule" /><text x="456" y="18" class="v-cap">Where they differ</text><text x="456" y="44" class="v-head-text">Five differences</text><text x="456" y="94" class="v-num">01</text><text x="486" y="94" class="v-cap v-cap-sm">Who submits</text><text x="486" y="118" class="v-body">A contractor became</text><text x="486" y="138" class="v-body">a citizen</text><path d="M486 152H716" class="v-rule" /><text x="456" y="176" class="v-num">02</text><text x="486" y="176" class="v-cap v-cap-sm">Intake</text><text x="486" y="200" class="v-body">A contract change request</text><text x="486" y="220" class="v-body">became a public enquiry form</text><path d="M486 234H716" class="v-rule" /><text x="456" y="258" class="v-num">03</text><text x="486" y="258" class="v-cap v-cap-sm">AI step</text><text x="486" y="282" class="v-body">Checks against the contract</text><text x="486" y="302" class="v-body">became a chatbot</text><path d="M486 316H716" class="v-rule" /><text x="456" y="340" class="v-num">04</text><text x="486" y="340" class="v-cap v-cap-sm">Data</text><text x="486" y="364" class="v-body">Contract and budget records</text><text x="486" y="384" class="v-body">became a public map</text><path d="M486 398H716" class="v-rule" /><text x="456" y="422" class="v-num">05</text><text x="486" y="422" class="v-cap v-cap-sm">Decision</text><text x="486" y="446" class="v-body">Nobody approves or rejects</text><text x="486" y="466" class="v-body">the request</text><text x="756" y="18" class="v-cap">What the agent built</text><text x="756" y="44" class="v-head-text">Citizen request portal</text><rect class="v-person" x="756" y="66" width="230" height="76" rx="6" /><rect class="v-pill" x="770" y="77" width="58" height="17" rx="3" /><text x="799" y="89.5" class="v-tag" text-anchor="middle">Person</text><text x="770" y="114" class="v-title">Citizen</text><text x="770" y="132" class="v-sub">member of the public</text><path d="M871 142V162" class="v-line" marker-end="url(#v-request-two-systems-arrow)" /><rect class="v-box" x="756" y="164" width="230" height="76" rx="6" /><rect class="v-pill" x="770" y="175" width="44" height="17" rx="3" /><text x="792" y="187.5" class="v-tag" text-anchor="middle">Step</text><text x="770" y="212" class="v-title">Public request portal</text><text x="770" y="230" class="v-sub">open web form</text><path d="M871 240V260" class="v-line" marker-end="url(#v-request-two-systems-arrow)" /><rect class="v-box" x="756" y="262" width="230" height="94" rx="6" /><rect class="v-pill" x="770" y="273" width="29" height="17" rx="3" /><text x="784.5" y="285.5" class="v-tag" text-anchor="middle">AI</text><text x="770" y="310" class="v-title">AI chatbot triage</text><text x="770" y="328" class="v-sub">answers questions</text><text x="770" y="345" class="v-sub">routes complaints</text><path d="M871 356V376" class="v-line" marker-end="url(#v-request-two-systems-arrow)" /><rect class="v-focus" x="756" y="378" width="230" height="110" rx="6" /><rect class="v-pill-blue" x="770" y="389" width="44" height="17" rx="3" /><text x="792" y="401.5" class="v-tag v-tag-blue" text-anchor="middle">View</text><text x="770" y="426" class="v-title">Works progress dashboard</text><text x="770" y="444" class="v-sub">public status updates</text><text x="770" y="461" class="v-sub">no decision</text><text x="770" y="478" class="v-sub">no approver</text><rect class="v-ext" x="1016" y="271" width="136" height="76" rx="6" /><rect class="v-pill" x="1030" y="282" width="73" height="17" rx="3" /><text x="1066.5" y="294.5" class="v-tag" text-anchor="middle">External</text><text x="1030" y="319" class="v-title">Map of roadworks</text><text x="1030" y="337" class="v-sub">public map layer</text><path d="M1016 309H988" class="v-line" marker-end="url(#v-request-two-systems-arrow)" /><text x="1001" y="301" class="v-cap v-cap-xs" text-anchor="middle">Reads</text><line x1="0" y1="506" x2="1152" y2="506" class="v-rule" /><text x="0" y="532" class="v-cap">Legend</text><rect x="90" y="520" width="22" height="16" rx="3" class="v-focus" /><text x="120" y="532.5" class="v-legend">The decision step</text><rect x="270" y="520" width="22" height="16" rx="3" class="v-person" /><text x="300" y="532.5" class="v-legend">Person</text><rect x="380" y="520" width="22" height="16" rx="3" class="v-box" /><text x="410" y="532.5" class="v-legend">Step</text><rect x="480" y="520" width="22" height="16" rx="3" class="v-ext" /><text x="510" y="532.5" class="v-legend">External data</text>
+</svg>
+</div>
+<div class="slide-foot"><span>Agree before you delegate</span><span>14 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-14-notes">Speaker notes <span class="visually-hidden">for slide 14 of 17</span></h3>
+<button class="present-from" type="button" data-present="14" hidden>Present from slide 14</button>
+</div>
+<p>Here&#39;s a fictional but realistic example. An architect prepares a demo for a regional department responsible for public construction works. The goal is for AI to pre-assess contractor change requests, also called variation orders, against contract clauses, lot budgets and procurement thresholds, with a contract manager making the decision. The architect and an agent produce a full set of planning documents, which the architect reviews for a few hours and judges coherent. The agent then builds a citizen-facing portal for reporting roadworks issues. The documents use the word &#39;request&#39; throughout. The architect read it as a contractor&#39;s change request; the implementation treated it as a citizen&#39;s request. The build had to be discarded.</p>
+<p>Source: &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-15" data-slide-id="swimlane" aria-labelledby="slide-15-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--visual">
+<ol class="stage-strip" aria-label="Agreement steps"><li>Ask</li><li aria-current="step">Sketch</li><li>Draw</li><li>Specify</li><li>Click</li></ol>
+<p class="slide-kicker">In practice · Fictional example, second attempt</p>
+<h2 class="slide-title" id="slide-15-title">The swimlane shows who decides</h2>
+<div class="slide-visual slide-visual-wide" data-visual="swimlane" role="region" tabindex="0" aria-label="Swimlane: one change request from submission to decision">
+<svg class="v v-swimlane" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1152 496" role="img" aria-labelledby="v-swimlane-title v-swimlane-desc">
+<title id="v-swimlane-title">Swimlane: one change request from submission to decision</title>
+<desc id="v-swimlane-desc">Four lanes. The contractor submits a change request with drawings, photos and cost. The AI pre-assessment checks the rules, meaning clauses, budget and limits, then drafts an assessment that cites clauses and flags gaps. The site inspector verifies on site and writes a site report. The contract manager decides whether the request is within delegated authority. If yes, they approve and the budget is updated. If it is over the threshold, it escalates to the board, above the sign-off limit. If there is an evidence gap, the contractor provides more evidence to fill the flagged gaps and resubmits for a re-check.</desc>
+<defs>
+<marker id="v-swimlane-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-swimlane-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+</defs>
+<rect x="0" y="0" width="1152" height="100" class="v-lane" /><text x="18" y="54" class="v-cap">Contractor</text><rect x="0" y="100" width="1152" height="100" class="v-lane-alt" /><text x="18" y="145" class="v-cap">AI</text><text x="18" y="163" class="v-cap">pre-assessment</text><rect x="0" y="200" width="1152" height="100" class="v-lane" /><text x="18" y="245" class="v-cap">Site</text><text x="18" y="263" class="v-cap">inspector</text><rect x="0" y="300" width="1152" height="152" class="v-lane-alt" /><text x="18" y="371" class="v-cap">Contract</text><text x="18" y="389" class="v-cap">manager</text><path d="M130 0V452M0 452H1152" class="v-rule" /><path d="M360 50H390V119" class="v-line" marker-end="url(#v-swimlane-arrow)" /><path d="M760 38H420V119" class="v-line v-dash" marker-end="url(#v-swimlane-arrow)" /><text x="590" y="30" class="v-cap v-cap-sm" text-anchor="middle">Resubmits</text><path d="M450 150H478" class="v-line" marker-end="url(#v-swimlane-arrow)" /><path d="M585 179V250H628" class="v-line" marker-end="url(#v-swimlane-arrow)" /><path d="M710 279V360H768" class="v-line" marker-end="url(#v-swimlane-arrow)" /><path d="M870 310V81" class="v-line" marker-end="url(#v-swimlane-arrow)" /><text x="880" y="200" class="v-cap v-cap-sm">Evidence gap</text><path d="M970 360H998" class="v-line v-line-blue" marker-end="url(#v-swimlane-arrow-blue)" /><text x="984" y="350" class="v-cap v-cap-sm v-blue-text" text-anchor="middle">Yes</text><path d="M870 410V423H998" class="v-line" marker-end="url(#v-swimlane-arrow)" /><text x="882" y="417" class="v-cap v-cap-sm">Over threshold</text><rect class="v-box" x="150" y="21" width="210" height="58" rx="6" /><text x="255" y="46" class="v-title" text-anchor="middle">Submits change request</text><text x="255" y="67" class="v-sub" text-anchor="middle">drawings · photos · cost</text><rect class="v-box" x="250" y="121" width="200" height="58" rx="6" /><text x="350" y="146" class="v-title" text-anchor="middle">Checks the rules</text><text x="350" y="167" class="v-sub" text-anchor="middle">clauses · budget · limits</text><rect class="v-box" x="480" y="121" width="210" height="58" rx="6" /><text x="585" y="146" class="v-title" text-anchor="middle">Drafts assessment</text><text x="585" y="167" class="v-sub" text-anchor="middle">cites clauses, flags gaps</text><rect class="v-box" x="630" y="221" width="160" height="58" rx="6" /><text x="710" y="246" class="v-title" text-anchor="middle">Verifies on site</text><text x="710" y="267" class="v-sub" text-anchor="middle">site report</text><rect class="v-box" x="760" y="21" width="220" height="58" rx="6" /><text x="870" y="46" class="v-title" text-anchor="middle">Provides more evidence</text><text x="870" y="67" class="v-sub" text-anchor="middle">fills the flagged gaps</text><path d="M770 360L870 310L970 360L870 410Z" class="v-box" /><text x="870" y="356" class="v-title" text-anchor="middle">Within delegated</text><text x="870" y="376" class="v-title" text-anchor="middle">authority?</text><rect class="v-focus" x="1000" y="331" width="152" height="58" rx="6" /><text x="1076" y="356" class="v-title" text-anchor="middle">Approves</text><text x="1076" y="377" class="v-sub" text-anchor="middle">budget updated</text><rect class="v-box" x="1000" y="398" width="152" height="50" rx="6" /><text x="1076" y="419" class="v-title" text-anchor="middle">Escalates to board</text><text x="1076" y="440" class="v-sub" text-anchor="middle">above sign-off limit</text><line x1="0" y1="464" x2="1152" y2="464" class="v-rule" /><text x="0" y="490" class="v-cap">Legend</text><rect x="90" y="478" width="22" height="16" rx="3" class="v-box" /><text x="120" y="490.5" class="v-legend">Step</text><path d="M180 486l11 -8 11 8 -11 8z" class="v-box" /><text x="210" y="490.5" class="v-legend">Human decision</text><rect x="340" y="478" width="22" height="16" rx="3" class="v-focus" /><text x="370" y="490.5" class="v-legend">Desired outcome</text><path d="M510 486h26" class="v-line" marker-end="url(#v-swimlane-arrow)" /><text x="546" y="490.5" class="v-legend">Handoff</text><path d="M640 486h26" class="v-line v-dash" marker-end="url(#v-swimlane-arrow)" /><text x="676" y="490.5" class="v-legend">Loop back for re-check</text>
+</svg>
+</div>
+<div class="slide-foot"><span>Agree before you delegate</span><span>15 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-15-notes">Speaker notes <span class="visually-hidden">for slide 15 of 17</span></h3>
+<button class="present-from" type="button" data-present="15" hidden>Present from slide 15</button>
+</div>
+<p>Back to the fictional change-request example, on the second attempt. This is the Sketch step: one change request, end to end, as a swimlane. It makes responsibility explicit. The AI checks the rules and drafts an assessment, citing clauses and flagging gaps. A site inspector verifies the work on site. The contract manager makes the financial decision and escalates to the board when the request exceeds their delegated authority. Notice what the picture forces. We can&#39;t draw it without saying who submits the request, and that it&#39;s a contractor, not a citizen. The misunderstanding from the first attempt becomes visible in minutes, before any code exists.</p>
+<p>Source: &#39;Agree before you delegate&#39;; the example is fictional.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-16" data-slide-id="container-view" aria-labelledby="slide-16-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--visual">
+<ol class="stage-strip" aria-label="Agreement steps"><li>Ask</li><li>Sketch</li><li aria-current="step">Draw</li><li>Specify</li><li>Click</li></ol>
+<p class="slide-kicker">In practice · Fictional example, second attempt</p>
+<h2 class="slide-title" id="slide-16-title">The AI suggests; a named person approves</h2>
+<div class="slide-visual slide-visual-wide" data-visual="container-view" role="region" tabindex="0" aria-label="Container view of the change request review system">
+<svg class="v v-container-view" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1152 508" role="img" aria-labelledby="v-container-view-title v-container-view-desc">
+<title id="v-container-view-title">Container view of the change request review system</title>
+<desc id="v-container-view-desc">Outside the system boundary, three people: a contractor from an external firm submits; a site inspector from department staff adds evidence; a contract manager approves or rejects and decides. Inside the boundary, the web app for submit and review calls the change request API for rules and routing. The API records cases and an audit trail in the case store, checks budget in the external contract and ERP system holding clauses, budget and commitments, and asks the AI pre-assessment, which reads the external document store of drawings and site photos. The AI pre-assessment is the focal step and is annotated: the AI suggests; a named person approves.</desc>
+<defs>
+<marker id="v-container-view-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-container-view-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+</defs>
+<rect x="220" y="40" width="680" height="414" rx="10" class="v-boundary" /><rect x="232" y="32" width="250" height="16" class="v-mask" /><text x="240" y="44" class="v-cap v-cap-sm">Change request review · system</text><path d="M190 98H330V194" class="v-line" marker-end="url(#v-container-view-arrow)" /><text x="240" y="90" class="v-cap v-cap-sm">Submits</text><path d="M190 234H288" class="v-line" marker-end="url(#v-container-view-arrow)" /><text x="198" y="212" class="v-cap v-cap-sm">Adds</text><text x="198" y="226" class="v-cap v-cap-sm">evidence</text><path d="M190 370H330V274" class="v-line" marker-end="url(#v-container-view-arrow)" /><text x="240" y="362" class="v-cap v-cap-sm">Decides</text><path d="M470 234H528" class="v-line" marker-end="url(#v-container-view-arrow)" /><path d="M630 196V98H678" class="v-line" marker-end="url(#v-container-view-arrow)" /><text x="640" y="90" class="v-cap v-cap-sm">Asks</text><path d="M630 272V338" class="v-line" marker-end="url(#v-container-view-arrow)" /><text x="640" y="312" class="v-cap v-cap-sm">Records</text><path d="M880 98H928" class="v-line v-line-blue" marker-end="url(#v-container-view-arrow-blue)" /><rect x="883" y="80" width="42" height="14" class="v-mask" /><text x="904" y="90" class="v-cap v-cap-sm v-blue-text" text-anchor="middle">Reads</text><path d="M730 234H928" class="v-line v-line-blue" marker-end="url(#v-container-view-arrow-blue)" /><text x="830" y="226" class="v-cap v-cap-sm v-blue-text" text-anchor="middle">Checks budget</text><rect class="v-person" x="0" y="60" width="190" height="76" rx="6" /><rect class="v-pill" x="14" y="71" width="58" height="17" rx="3" /><text x="43" y="83.5" class="v-tag" text-anchor="middle">Person</text><text x="14" y="108" class="v-title">Contractor</text><text x="14" y="126" class="v-sub">external firm</text><rect class="v-person" x="0" y="196" width="190" height="76" rx="6" /><rect class="v-pill" x="14" y="207" width="58" height="17" rx="3" /><text x="43" y="219.5" class="v-tag" text-anchor="middle">Person</text><text x="14" y="244" class="v-title">Site inspector</text><text x="14" y="262" class="v-sub">department staff</text><rect class="v-person" x="0" y="332" width="190" height="76" rx="6" /><rect class="v-pill" x="14" y="343" width="58" height="17" rx="3" /><text x="43" y="355.5" class="v-tag" text-anchor="middle">Person</text><text x="14" y="380" class="v-title">Contract manager</text><text x="14" y="398" class="v-sub">approves or rejects</text><rect class="v-box" x="290" y="196" width="180" height="76" rx="6" /><rect class="v-pill" x="304" y="207" width="36" height="17" rx="3" /><text x="322" y="219.5" class="v-tag" text-anchor="middle">Web</text><text x="304" y="244" class="v-title">Web app</text><text x="304" y="262" class="v-sub">submit &amp; review</text><rect class="v-box" x="530" y="196" width="200" height="76" rx="6" /><rect class="v-pill" x="544" y="207" width="36" height="17" rx="3" /><text x="562" y="219.5" class="v-tag" text-anchor="middle">API</text><text x="544" y="244" class="v-title">Change request API</text><text x="544" y="262" class="v-sub">rules · routing</text><rect class="v-focus" x="680" y="60" width="200" height="76" rx="6" /><rect class="v-pill-blue" x="694" y="71" width="29" height="17" rx="3" /><text x="708.5" y="83.5" class="v-tag v-tag-blue" text-anchor="middle">AI</text><text x="694" y="108" class="v-title">AI pre-assessment</text><text x="694" y="126" class="v-sub">suggests · a person decides</text><rect class="v-store" x="530" y="340" width="200" height="76" rx="6" /><rect class="v-pill" x="544" y="351" width="51" height="17" rx="3" /><text x="569.5" y="363.5" class="v-tag" text-anchor="middle">Store</text><text x="544" y="388" class="v-title">Case store</text><text x="544" y="406" class="v-sub">cases + audit trail</text><rect class="v-ext" x="930" y="60" width="222" height="76" rx="6" /><rect class="v-pill" x="944" y="71" width="73" height="17" rx="3" /><text x="980.5" y="83.5" class="v-tag" text-anchor="middle">External</text><text x="944" y="108" class="v-title">Document store</text><text x="944" y="126" class="v-sub">drawings · site photos</text><rect class="v-ext" x="930" y="196" width="222" height="76" rx="6" /><rect class="v-pill" x="944" y="207" width="73" height="17" rx="3" /><text x="980.5" y="219.5" class="v-tag" text-anchor="middle">External</text><text x="944" y="244" class="v-title">Contract &amp; ERP system</text><text x="944" y="262" class="v-sub">clauses · budget · commitments</text><path d="M926 24C888 26 862 40 852 56" class="v-leader" /><circle cx="851" cy="59" r="3" class="v-dot" /><text x="934" y="22" class="v-call v-ink">The AI suggests.</text><text x="934" y="44" class="v-call v-ink">A named person approves.</text><line x1="0" y1="476" x2="1152" y2="476" class="v-rule" /><text x="0" y="502" class="v-cap">Legend</text><rect x="84" y="490" width="22" height="16" rx="3" class="v-person" /><text x="114" y="502.5" class="v-legend">Person</text><rect x="184" y="490" width="22" height="16" rx="3" class="v-box" /><text x="214" y="502.5" class="v-legend">Container</text><rect x="300" y="490" width="22" height="16" rx="3" class="v-store" /><text x="330" y="502.5" class="v-legend">Data store</text><rect x="416" y="490" width="22" height="16" rx="3" class="v-focus" /><text x="446" y="502.5" class="v-legend">Focal: the AI step</text><rect x="582" y="490" width="22" height="16" rx="3" class="v-ext" /><text x="612" y="502.5" class="v-legend">External system</text><path d="M730 498h26" class="v-line v-line-blue" marker-end="url(#v-container-view-arrow-blue)" /><text x="766" y="502.5" class="v-legend">Call to external system</text><rect x="952" y="490" width="22" height="16" rx="3" class="v-boundary" /><text x="982" y="502.5" class="v-legend">System boundary</text>
+</svg>
+</div>
+<div class="slide-foot"><span>Agree before you delegate</span><span>16 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-16-notes">Speaker notes <span class="visually-hidden">for slide 16 of 17</span></h3>
+<button class="present-from" type="button" data-present="16" hidden>Present from slide 16</button>
+</div>
+<p>This is the Draw step: a container view in the style of Simon Brown&#39;s C4 model. It shows where the AI sits inside the system boundary, which systems it reads, the document store and the contract and ERP system, and who works with it from outside: the contractor, the site inspector and the contract manager. The key line is the annotation on the AI component: it suggests, and a named person approves. In regulated and public-sector work, that line between suggestion and decision is what auditors and accountable managers will ask about. It is simple enough for a contract manager, an architect and a developer to say whether it&#39;s right.</p>
+<p>Sources: Brown (C4); fictional example.</p>
+</div>
+</section>
+<section class="deck-entry" id="slide-17" data-slide-id="prototype" aria-labelledby="slide-17-title">
+<div class="slide-stage">
+<div class="slide-frame">
+<div class="slide slide--prototype">
+<ol class="stage-strip" aria-label="Agreement steps"><li>Ask</li><li>Sketch</li><li>Draw</li><li>Specify</li><li aria-current="step">Click</li></ol>
+<p class="slide-kicker">In practice · Fictional example, second attempt</p>
+<h2 class="slide-title" id="slide-17-title">The prototype surfaced three requirements</h2>
+<div class="wireframe">
+
+<div class="slide-visual slide-visual-wide" data-visual="prototype-cr-0147" role="region" tabindex="0" aria-label="Throwaway prototype of the contract manager review screen for change request CR-0147">
+<svg class="v v-prototype-cr-0147" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460" role="img" aria-labelledby="v-prototype-cr-0147-title v-prototype-cr-0147-desc">
+<title id="v-prototype-cr-0147-title">Throwaway prototype of the contract manager review screen for change request CR-0147</title>
+<desc id="v-prototype-cr-0147-desc">Sketchy low-fidelity wireframe of contracts.example/change-requests/CR-0147: Change request CR-0147, Bridge deck resurfacing, Lot 3, status Awaiting site inspection. Request: contractor Lot 3 contractor, amount 48,200 euros, reason unforeseen rebar corrosion under deck, evidence three photos. AI pre-assessment, a suggestion, not a decision: clause 12.3 covers unforeseen structural conditions (check); lot budget remaining 112,000 euros (check); warning: cumulative changes 17 percent of contract value, re-tender review at 20 percent; missing: inspector site report. Each line links to the clause, ledger entry or document it was checked against. Buttons: Request more info, Send to site inspection, and Approve, which is disabled and enabled after inspection. Markers 1 to 3 point to the Approve button, the cumulative-changes warning and the AI panel heading.</desc>
+<defs>
+<marker id="v-prototype-cr-0147-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head" /></marker>
+<marker id="v-prototype-cr-0147-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="v-head-blue" /></marker>
+<filter id="v-prototype-cr-0147-wobble" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" /><feDisplacementMap in="SourceGraphic" scale="3.2" /></filter>
+</defs>
+<g filter="url(#v-prototype-cr-0147-wobble)">
+<rect x="4" y="4" width="812" height="452" rx="10" class="w-frame" />
+<path d="M4 40H816M4 92H816M4 388H816M344 108V372" class="w-line" />
+<circle cx="24" cy="22" r="6" class="w-line" /><circle cx="42" cy="22" r="6" class="w-line" /><circle cx="60" cy="22" r="6" class="w-line" />
+<rect x="80" y="11" width="330" height="22" rx="11" class="w-line" />
+<rect x="636" y="55" width="164" height="26" rx="13" class="w-pill" />
+<rect x="24" y="284" width="96" height="64" class="w-photo" /><path d="M24 284l96 64M120 284l-96 64" class="w-faint" /><rect x="128" y="284" width="96" height="64" class="w-photo" /><path d="M128 284l96 64M224 284l-96 64" class="w-faint" /><rect x="232" y="284" width="96" height="64" class="w-photo" /><path d="M232 284l96 64M328 284l-96 64" class="w-faint" />
+<rect x="358" y="106" width="446" height="268" rx="6" class="w-panel" />
+<path d="M374 146H788M374 187H788M374 225H788M374 271H788M374 311H788" class="w-faint" />
+<rect x="440" y="398" width="120" height="30" rx="5" class="w-line" />
+<rect x="572" y="398" width="148" height="30" rx="5" class="w-solid" />
+<rect x="732" y="398" width="72" height="30" rx="5" class="w-disabled" />
+</g>
+<text x="94" y="26" class="w-mono">contracts.example/change-requests/CR-0147</text>
+<text x="24" y="72" class="w-h">Change request CR-0147 · Bridge deck resurfacing, Lot 3</text>
+<text x="718" y="72" class="w-small" text-anchor="middle">Awaiting site inspection</text>
+<text x="24" y="124" class="w-h2">Request</text>
+<text x="24" y="148" class="w-cap">Contractor</text>
+<text x="24" y="166" class="w-text">Lot 3 contractor</text>
+<text x="24" y="190" class="w-cap">Amount</text>
+<text x="24" y="208" class="w-text w-strong">€48,200</text>
+<text x="24" y="232" class="w-cap">Reason</text>
+<text x="24" y="250" class="w-text">Unforeseen rebar corrosion under deck</text>
+<text x="24" y="274" class="w-cap">Evidence</text>
+<text x="72" y="364" class="w-tiny" text-anchor="middle">photo</text>
+<text x="176" y="364" class="w-tiny" text-anchor="middle">photo</text>
+<text x="280" y="364" class="w-tiny" text-anchor="middle">photo</text>
+<text x="376" y="132" class="w-h3">AI pre-assessment — a suggestion, not a decision</text>
+<circle cx="392" cy="167" r="9" class="w-ok" /><path d="M388 167l3 3 5-6" class="w-ok" />
+<text x="412" y="171.5" class="w-text">Clause 12.3 covers unforeseen structural conditions</text>
+<circle cx="392" cy="206" r="9" class="w-ok" /><path d="M388 206l3 3 5-6" class="w-ok" />
+<text x="412" y="210.5" class="w-text">Lot budget remaining: €112,000</text>
+<rect x="366" y="228" width="430" height="40" rx="4" class="w-warn-bg" />
+<path d="M392 240l10 18h-20z" class="w-warn" /><path d="M392 246v6M392 255v.5" class="w-warn" />
+<text x="412" y="244" class="w-text w-warn-text">Cumulative changes: 17% of contract value</text>
+<text x="412" y="261" class="w-text w-warn-text">(re-tender review at 20%)</text>
+<circle cx="392" cy="291" r="9" class="w-warn" /><path d="M388 287l8 8M396 287l-8 8" class="w-warn" />
+<text x="412" y="295.5" class="w-text w-strong w-warn-text">Missing: inspector site report</text>
+<text x="376" y="342" class="w-tiny w-italic">Each line links to the clause, ledger entry</text>
+<text x="376" y="356" class="w-tiny w-italic">or document it was checked against.</text>
+<text x="500" y="418" class="w-button" text-anchor="middle">Request more info</text>
+<text x="646" y="418" class="w-button w-on-solid" text-anchor="middle">Send to site inspection</text>
+<text x="768" y="418" class="w-button w-disabled-text" text-anchor="middle">Approve</text>
+<text x="804" y="446" class="w-tiny w-italic" text-anchor="end">enabled after inspection</text>
+<circle cx="804" cy="396" r="11" class="w-marker" /><text x="804" y="400.5" class="w-marker-text" text-anchor="middle">1</text>
+<circle cx="796" cy="248" r="11" class="w-marker" /><text x="796" y="252.5" class="w-marker-text" text-anchor="middle">2</text>
+<circle cx="790" cy="128" r="11" class="w-marker" /><text x="790" y="132.5" class="w-marker-text" text-anchor="middle">3</text>
+</svg>
+</div>
+
+<p>Throwaway prototype · synthetic data · fictional example</p>
+</div>
+
+
+<ol>
+<li>Approve stays disabled until the site report is attached.</li>
+<li>The cumulative-changes warning is the most important line.</li>
+<li>The AI panel says clearly that it only suggests.</li>
+</ol>
+<div class="slide-foot"><span>Agree before you delegate</span><span>17 / 17</span></div>
+</div>
+</div>
+</div>
+<div class="slide-notes">
+<div class="slide-notes-head">
+<h3 id="slide-17-notes">Speaker notes <span class="visually-hidden">for slide 17 of 17</span></h3>
+<button class="present-from" type="button" data-present="17" hidden>Present from slide 17</button>
+</div>
+<p>This is the Click step: a throwaway prototype of the contract manager&#39;s review screen, shown to the people who will use it. Reviewing it surfaced three requirements the documents didn&#39;t state. First, the Approve button must stay disabled until the inspector&#39;s site report is attached. Second, the cumulative-changes warning is the most important line on the screen, because it decides whether a re-tender review is needed. Third, the AI panel must say clearly that its output is a suggestion. None came from reading; they came from looking and trying. The amounts on screen are synthetic, and the example is fictional.</p>
+<p>Source: &#39;Agree before you delegate&#39;.</p>
+</div>
+</section>
+<div class="present-bar" hidden>
+<button class="present-button" type="button" data-action="prev" aria-label="Previous slide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6" /></svg></button>
+<p class="present-count" aria-hidden="true"><span data-role="current">1</span> / 17</p>
+<button class="present-button" type="button" data-action="next" aria-label="Next slide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6" /></svg></button>
+<span class="present-spacer"></span>
+<button class="present-button present-button-text" type="button" data-action="notes" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5" /></svg><span>Notes</span> <kbd>N</kbd></button>
+<button class="present-button present-button-text" type="button" data-action="fullscreen" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" /></svg><span>Full screen</span> <kbd>F</kbd></button>
+<button class="present-button present-button-text" type="button" data-action="exit"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18" /></svg><span>Exit</span> <kbd>Esc</kbd></button>
+</div>
+<p class="visually-hidden" id="deck-status" aria-live="polite"></p>
+</div>
+    </div>
+  </main>
+  <footer class="footer wrap">
+    <p>Agentic Co-build</p>
+    <a href="https://github.com/microsoft/frontier-agentic-cobuild-rvas">Source and contributions</a>
+  </footer>
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/slides.js"></script>
+</body>
+</html>

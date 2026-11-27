@@ -1,13 +1,13 @@
 ---
 name: idea-forge
-description: "Research a customer's business, industry, and public priorities on the web when the team needs AI opportunity ideas. Propose internal and external agentic-application ideas by complexity, each as a business-case chapter, and prepare the selected idea's unapproved brief for AI Agent Creator."
+description: "Research a customer's business, industry, and public priorities on the web when the team needs AI opportunity ideas. Propose internal and external agentic-application ideas by complexity, each as a business-case chapter, and prepare the selected idea's unapproved brief for Azure Solution Architect."
 argument-hint: "Company name and industry; optionally region, known pain points, or existing capabilities."
 ---
 
 # Idea Forge
 
 Use public evidence to help the user choose what to build. If the user already has
-a bounded use case, recommend invoking `ai-agent-creator` with it and stop.
+a bounded use case, recommend invoking `azure-solution-architect` with it and stop.
 That routing branch is complete when the recommendation is given. Otherwise,
 follow the research workflow below.
 
@@ -149,7 +149,7 @@ After the user selects an idea, prepare a brief in the conversation labelled
 | Acceptance starter | A routine case and a relevant failure, refusal, or access check for discovery to refine |
 | Open questions | The first scope decision and assumptions the customer must confirm |
 
-Tell the user to invoke `ai-agent-creator` with this brief in their application
+Tell the user to invoke `azure-solution-architect` with this brief in their application
 repository. Do not invoke it automatically, select an architecture, or create
 implementation work. The creator owns discovery confirmation and architecture
 approval.

@@ -1,0 +1,13 @@
+From: maren.kettering@example.invalid
+To: claims@harbourline.invalid
+Subject: Please help
+Date: 19/01/2026 13:44
+
+Hello,
+
+I am Maren Kettering, policy POL-002215. I live at Kestrel Bay.
+The ground floor flooded, water came up from the street and into the house.
+Regards,
+Maren Kettering
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

@@ -1,0 +1,13 @@
+From: hollis.marchbank@example.invalid
+To: claims@harbourline.invalid
+Subject: Claim report
+Date: 19/01/2026 05:33
+
+Good evening,
+
+I am Hollis Marchbank, policy POL-004443. I live at 193 Market Street, Dunlowe.
+Water is seeping through the bedroom walls, the ceiling is stained and dripping.
+I look forward to hearing from you.
+Hollis Marchbank
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

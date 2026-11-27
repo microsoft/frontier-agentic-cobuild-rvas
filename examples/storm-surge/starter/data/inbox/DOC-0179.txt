@@ -1,0 +1,11 @@
+AUTOMATIC TRANSCRIPT - CALL 20/01/2026 02:31
+(audio quality: poor)
+
+Agent: Claims line, how can I help?
+Caller: Good afternoon, my name is Kira Northey. A heavy branch fell on the parked car [inaudible] dented the bonnet and windscreen.
+Agent: Can you give me the policy number or the address?
+Caller: The policy is POL-000665. I live at 24 Sea View Avenue, Port Calder.
+Agent: Noted. Someone will be in touch.
+Caller: Thank you.
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

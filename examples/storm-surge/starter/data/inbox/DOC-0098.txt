@@ -1,0 +1,13 @@
+From: wyn.garroway@example.invalid
+To: claims@harbourline.invalid
+Subject: Claim report
+Date: 18/01/2026 23:59
+
+Good morning,
+
+I am Wyn Garroway, I have a policy with you. I live at 49 Coast Road, Saltmere.
+The glass in the balcony door shattered. Elderly people live here.
+Thank you.
+Wyn Garroway
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

@@ -17,3 +17,9 @@ governance terms.
 Apply diminishing returns: keep material only when it changes the reader's
 understanding, decision, or next action. Remove repetition, generic benefits,
 and steps or deliverables that do not help the reader act.
+
+## Examples
+
+`examples/` holds fictional worked examples with synthetic data. Never add
+customer names, customer data, or real people. Customer application code and
+architecture artifacts belong in the customer's repository.

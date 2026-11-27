@@ -1,0 +1,13 @@
+From: piers.elsworth@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 18/01/2026 21:03
+
+Dear Sir or Madam,
+
+I am Piers Elsworth, I have a policy with you. I live at 47 Coast Road, Corran Quay.
+Water is seeping through the bedroom walls, the ceiling is stained and dripping. We can smell gas.
+I look forward to hearing from you.
+Piers Elsworth
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

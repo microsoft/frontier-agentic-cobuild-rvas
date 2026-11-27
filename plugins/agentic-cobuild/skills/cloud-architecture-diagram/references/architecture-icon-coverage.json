@@ -167,12 +167,21 @@
     "patterns/13-agent-coordination.md": ["logical:agent-framework", "logical:tool", "logical:state", "logical:approval"],
     "patterns/14-durable-memory-personalization.md": ["logical:state", "azure:managed-redis", "azure:cosmos-db", "logical:approval"],
     "patterns/15-ai-gateway-governance.md": ["azure:ai-gateway", "azure:api-management", "azure:managed-identity", "azure:monitor"],
+    "patterns/16-decision-model-triage.md": ["logical:client", "azure:foundry-models", "azure:service-bus", "azure:managed-identity", "azure:application-insights"],
     "runtimes/application-hosted-agent-framework.md": ["logical:agent-framework", "azure:app-service", "azure:container-apps", "logical:state", "azure:application-insights"],
     "runtimes/copilot-sdk-runtime.md": ["github:copilot-sdk", "github:github", "azure:foundry-models", "logical:tool", "logical:state"],
     "runtimes/copilot-studio-agent.md": ["power-platform:copilot-studio", "power-platform:dataverse", "power-platform:power-automate", "m365:teams", "m365:copilot", "m365:outlook", "m365:work-iq", "fabric:iq"],
     "runtimes/durable-workflow-variant.md": ["azure:functions", "logical:agent-framework", "logical:state", "logical:approval"],
     "runtimes/foundry-hosted-agent.md": ["azure:foundry-project", "azure:foundry-agent-service", "azure:container-registry", "entra:workload-id", "logical:agent-framework", "m365:teams"],
     "runtimes/foundry-prompt-agent.md": ["azure:foundry", "azure:foundry-project", "azure:foundry-agent-service", "azure:foundry-models", "azure:foundry-iq", "logical:tool"],
-    "runtimes/logic-apps-native-agent.md": ["azure:logic-apps", "azure:foundry-models", "azure:managed-identity", "logical:tool", "logical:approval"]
+    "runtimes/logic-apps-native-agent.md": ["azure:logic-apps", "azure:foundry-models", "azure:managed-identity", "logical:tool", "logical:approval"],
+    "workloads/01-transactional-web-app.md": ["logical:client", "azure:front-door", "azure:app-service", "azure:azure-sql", "azure:managed-redis", "azure:key-vault", "azure:application-insights"],
+    "workloads/02-web-queue-worker.md": ["logical:client", "azure:app-service", "azure:service-bus", "azure:container-apps", "azure:blob-storage", "azure:application-insights"],
+    "workloads/03-microservices.md": ["logical:client", "azure:api-management", "azure:container-apps", "azure:aks", "azure:service-bus", "azure:cosmos-db", "azure:container-registry"],
+    "workloads/04-event-driven-integration.md": ["azure:event-grid", "azure:service-bus", "azure:functions", "azure:logic-apps", "azure:api-management", "azure:event-hubs"],
+    "workloads/05-multitenant-saas.md": ["logical:client", "entra:id", "azure:external-id", "azure:front-door", "azure:container-apps", "azure:azure-sql", "azure:key-vault"],
+    "workloads/06-durable-business-workflow.md": ["logical:client", "logical:approval", "azure:durable-task", "azure:functions", "azure:logic-apps", "azure:azure-sql"],
+    "workloads/07-batch-and-data-processing.md": ["azure:data-factory", "azure:data-lake-storage", "azure:databricks", "azure:azure-batch", "azure:event-hubs", "azure:stream-analytics"],
+    "workloads/08-modernize-existing-app.md": ["logical:client", "azure:front-door", "azure:app-service", "azure:container-apps", "azure:azure-sql", "azure:virtual-machine"]
   }
 }

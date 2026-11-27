@@ -5,31 +5,44 @@ hero, RVAP Blue actions, and Outfit/Inter typography. Existing logos remain the
 brand authority. Fonts are self-hosted.
 The shared navigation bar is 58px tall with a 32px-high logo on desktop and mobile.
 
-The homepage uses the RVAP navy-to-blue gradient with a pale-blue architecture
-preview. Blue file links and navy descriptions keep the package readable.
-Artifact rows gain a stronger blue tint on hover and retain visible keyboard focus.
+The homepage uses the RVAP navy-to-blue gradient with a pale-blue card holding
+the five ready-to-delegate questions. Its primary action is "Use it on my app";
+"Run a co-build day" is a white-outlined secondary button. The worked example
+is a text link, because teams should bring their own use case first.
 Navigation and supporting surfaces use a pale-blue tint; reading-page headers
-use a slightly stronger blue wash. Navy marks the selected page and table headers.
+use a slightly stronger blue wash. Navy marks the selected page, table headers,
+and the full-width footer that closes every page.
 Links use a darker blue for readable contrast. Body content stays white except
 for the alternating application-family bands described below. Diagrams stay
 white. Reserve pale green for successful copying and warm peach for copy
 failures, always paired with explicit feedback text.
 
-The homepage leads to repository setup. Its architecture-file preview describes
-the actual handoff rather than displaying a catalog. Idea Forge stays secondary
-to the known-use-case journey.
+Below the hero, the stepper shows the path, steps 00 to 08. Steps are white
+circles with an RVAP Blue outline and Deep Navy numerals, joined by a pale
+connector. Setup sits before the bands with a muted outline. Labelled Deep Navy
+brackets group the Agree (01–04), Delegate (05–07), and Verify (08) bands. Do
+not colour the bands with pillar teal or purple. A gate is a filled Deep Navy
+label with a white check and the words "You approve", so it never relies on
+colour alone. Each step links to its section on the path page. Up to 1240px the
+stepper uses two rows (setup and Agree, then Delegate and Verify); below 960px
+it turns vertical, with the connector running down the circles.
+
+The entry section offers three ways in: your own idea or app, a customer without
+an idea (Idea Forge), and the worked example. The closing section links to the
+talk and its PDF.
 
 Learn pages place one horizontal text-tab strip directly above the article,
 with a pale-blue fill and navy underline marking the current page. There is no
 section disclosure, keeping a single navigation layer before the content.
-Learn has three pages: application types, participant requirements, and the
-discovery session guide. Architecture choices sit within application types;
+Learn has five pages: application types, the worked example, the co-build day,
+participant requirements, and the discovery session guide. Architecture choices sit within application types;
 existing-application preparation sits in Start, where the reader needs it.
 Prose stays at reading width; diagrams use the full content width.
 Start opens directly into the setup steps, without section navigation or the
 Learn page tabs. Returning users can jump to discovery. Setup leads to the first
-AI Agent Creator conversation; implementation and review prompts follow the
-architecture approval boundary. Headings and prose share one 47.5rem column;
+Azure Solution Architect conversation and ends at architecture approval, with a
+link to the task plan on the path; the path holds the implementation and review
+prompts. Headings and prose share one 47.5rem column;
 subsections use spacing rather than full-width divider lines. Page tabs stay on
 one row and scroll horizontally when the viewport cannot contain them. Command
 blocks wrap to their available width. Maintain visible keyboard focus and
@@ -63,6 +76,19 @@ Each family has at most two options, with a short explanation of their roles.
 Use clearly disclosed neutral illustrations when the bundled artwork has no
 exact icon. Distinguish capabilities within one service and frameworks from
 hosting choices.
+
+Primary navigation is Overview, Why, The path, Start, Learn, and GitHub. The
+path page is one reading page with a section per step: time and tool, a prompt
+written for the reader's own use case, a "done when" line, and the gate. Step
+numerals in headings are RVAP Blue. The "done when" line sits on a pale-blue
+panel. Each gate is a Deep Navy panel with a check icon, matching the homepage
+stepper's gates. The build adds these classes, so the Markdown stays plain.
+
+The Why page renders the "Agree before you delegate" talk from
+`docs/slides/agree-before-you-delegate.md`. It reads as stacked 16:9 slides with
+the speaker notes as prose, and has a present mode and a PDF export. Slides
+use the site tokens on light surfaces, carry the RVAP logo on the title and
+closing slides, and redraw the deck's diagrams as SVG with real text.
 
 Use `docs/assets/css/styles.css` as the token and component source. The guide
 content comes from `docs/start.md`; build output is `docs/start.html`. Preserve

@@ -70,8 +70,9 @@ delete it.
 Write down names and owners. Don't guess at interfaces, credentials, or what a
 product supports.
 
-### 6. Agent behavior, actions, and approvals
+### 6. Automation, actions, and approvals
 
+- Which steps should the solution automate, and which stay with people?
 - Where does choosing the next step add value, and which steps stay fixed?
 - What may the solution propose or execute?
 - Which actions require confirmation or business approval?
@@ -169,7 +170,7 @@ assumptions, and open questions apart, and note where each statement came from.
 | --- | --- | --- |
 ```
 
-Leave gaps empty so AI Agent Creator asks about them. Don't fill them with guesses.
+Leave gaps empty so Azure Solution Architect asks about them. Don't fill them with guesses.
 
 ## Create the brief with WorkIQ
 
@@ -210,14 +211,14 @@ transcript as customer approval.
 Remove anything off-topic or restricted. Leave the original transcript where
 it's approved to live.
 
-## Start AI Agent Creator
+## Start Azure Solution Architect
 
 Have the customer or product owner review the brief, and leave unresolved points
-open. Then open the customer's application repository and give the brief to AI
-Agent Creator:
+open. Then open the customer's application repository and give the brief to Azure
+Solution Architect:
 
 ```text
-/agentic-cobuild:ai-agent-creator Use @docs/discovery/discovery-brief.md as discovery evidence
+/agentic-cobuild:azure-solution-architect Use @docs/discovery/discovery-brief.md as discovery evidence
 for the application we want to design. Inspect this repository and preserve its
 existing constraints.
 

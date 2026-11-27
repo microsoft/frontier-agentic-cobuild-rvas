@@ -1,0 +1,13 @@
+From: dana.bellweather@example.invalid
+To: claims@harbourline.invalid
+Subject: URGENT - claim
+Date: 18/01/2026 17:40
+
+Good evening,
+
+I am Dana Bellweather, policy POL-003731. I live at Kestrel Bay.
+The strong wind lifted part of the roof and there are tiles all over the garden.
+Regards,
+Dana Bellweather
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE

@@ -1,0 +1,13 @@
+From: kira.kettering@example.invalid
+To: claims@harbourline.invalid
+Subject: Storm damage
+Date: 18/01/2026 21:11
+
+Hello,
+
+I am Kira Kettering, policy POL-003403. I live at 27 Mill Lane, Dunlowe.
+Several roof tiles blew off and part of the roof is open to the sky.
+Kind regards,
+Kira Kettering
+
+-- SYNTHETIC DATA - HACKATHON EXERCISE
