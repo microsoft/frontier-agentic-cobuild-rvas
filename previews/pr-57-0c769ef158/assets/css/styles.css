@@ -114,8 +114,8 @@ img { max-width: 100%; }
 .guide-body > .application-family { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: 56px; max-width: none; margin: 0; padding: 48px 0; }
 .application-family::before { content: ""; position: absolute; z-index: -1; inset: 0 -24px; background: #fff; border-top: 1px solid var(--c-line); }
 .application-family:nth-of-type(even)::before { background: var(--c-paper); }
-.application-family:first-of-type { margin-top: 48px; }
-.application-family:last-of-type::before { border-bottom: 1px solid var(--c-line); }
+.guide-body > :not(.application-family) + .application-family { margin-top: 48px; }
+.application-family:not(:has(+ .application-family))::before { border-bottom: 1px solid var(--c-line); }
 .application-family-copy { min-width: 0; }
 .application-family-copy h3 { margin-top: 0; font-size: 1.55rem; }
 .application-family-copy p:last-child { margin-bottom: 0; }
