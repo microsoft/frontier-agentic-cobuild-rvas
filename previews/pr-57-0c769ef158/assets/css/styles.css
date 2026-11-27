@@ -31,6 +31,7 @@ a { color: var(--c-action); text-underline-offset: 0.2em; }
 a:hover { text-decoration-thickness: 2px; }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 4px; }
 ::selection { background: #bfdbfe; color: var(--c-heading); }
+html { scrollbar-color: #9fb9e0 var(--c-paper); accent-color: var(--c-action); }
 h1, h2, h3 { font-family: var(--font-display); color: var(--c-heading); line-height: 1.15; text-wrap: balance; }
 h1 { margin: 0; font-size: clamp(2.6rem, 5vw, 4.6rem); letter-spacing: -0.035em; }
 h2 { margin: 0 0 20px; font-size: clamp(1.9rem, 3vw, 2.6rem); letter-spacing: -0.025em; }
@@ -86,8 +87,10 @@ img { max-width: 100%; }
 .tool-list dt { color: var(--c-heading); font-weight: 600; font-size: 1.08rem; margin-bottom: 8px; }
 .tool-list dd { color: var(--c-dim); margin: 0; }
 .closing p { max-width: 70ch; }
-.footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding-top: 32px; padding-bottom: 32px; border-top: 1px solid var(--c-line); font-size: 0.88rem; }
-.footer p { margin: 0; color: var(--c-dim); }
+.footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-top: 40px; padding-top: 36px; padding-bottom: 36px; background: var(--c-heading); box-shadow: 0 0 0 100vmax var(--c-heading); clip-path: inset(0 -100vmax); font-size: 0.88rem; }
+.footer p { margin: 0; color: var(--c-on-dark); }
+.footer a { color: #fff; }
+.footer a:focus-visible { outline-color: #fff; }
 .guide-hero { padding: 56px 0; background: var(--c-wash); color: var(--c-heading); border-bottom: 1px solid var(--c-line); }
 .guide-hero h1 { color: var(--c-heading); font-size: clamp(2.4rem, 4vw, 3.6rem); }
 .guide-hero h1 span { color: var(--c-action); }
@@ -108,6 +111,13 @@ img { max-width: 100%; }
 .guide-body h2 { margin-top: 56px; font-size: 1.95rem; }
 .guide-body > h2:first-child { margin-top: 0; padding-top: 0; border: 0; }
 .guide-body h3 { margin-top: 32px; margin-bottom: 12px; }
+.heading-num { color: var(--c-accent); font-variant-numeric: tabular-nums; }
+.done-note { padding: 14px 18px; background: var(--c-paper); border: 1px solid var(--c-line); border-radius: 8px; }
+.done-note strong { color: var(--c-action); }
+.gate-note { position: relative; padding: 16px 20px 16px 50px; background: var(--c-heading); color: var(--c-on-dark); border-radius: 8px; }
+.gate-note strong { color: #fff; }
+.gate-note svg { position: absolute; left: 18px; top: 20px; color: #8fc0ff; }
+.gate-note a { color: #fff; }
 .heading-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin-left: 6px; vertical-align: middle; border-radius: 4px; color: var(--c-action); }
 .heading-link:hover, .heading-link:focus-visible { background: var(--c-tint); }
 .guide-body h2:target, .guide-body h3:target { text-decoration: underline; text-decoration-color: var(--c-accent); text-decoration-thickness: 2px; text-underline-offset: 6px; }

@@ -72,17 +72,17 @@
 </div>
 <p>A gate is a decision a person makes. The agent drafts and checks; it doesn&#39;t
 approve. Times are what a team needs on a co-build day with a bounded use case.</p>
-<h2 id="00-setup">00 Setup<a class="heading-link" href="#00-setup" aria-label="Link to 00 Setup"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
+<h2 id="00-setup"><span class="heading-num">00</span> Setup<a class="heading-link" href="#00-setup" aria-label="Link to 00 Setup"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p><strong>About 20 minutes.</strong> Install the tools and open your repository.</p>
 <p>Follow <a href="start.html#set-up-your-workspace">Start</a>: install the Agentic Co-build
 plugin, or add the skills and the Microsoft Learn MCP server by hand. Select
 Claude Opus 5.5.</p>
-<p><strong>Done when</strong> <code>/skills</code> lists Azure Solution Architect and <code>/mcp</code> lists Microsoft
+<p class="done-note"><strong>Done when</strong> <code>/skills</code> lists Azure Solution Architect and <code>/mcp</code> lists Microsoft
 Learn.</p>
 <h2 id="agree">Agree<a class="heading-link" href="#agree" aria-label="Link to Agree"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Four steps narrow what you could build down to what you will build. Each one
 removes a wrong reading before it reaches code.</p>
-<h3 id="01-discover">01 Discover<a class="heading-link" href="#01-discover" aria-label="Link to 01 Discover"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<h3 id="01-discover"><span class="heading-num">01</span> Discover<a class="heading-link" href="#01-discover" aria-label="Link to 01 Discover"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p><strong>About 60 minutes · Azure Solution Architect.</strong> Agree on the problem, the people, and
 the first journey.</p>
 <pre><code class="language-text">/agentic-cobuild:azure-solution-architect [What you want to build or change, who uses
@@ -92,31 +92,31 @@ data the app must not touch.]
 <p>Answer the creator&#39;s questions. Before you confirm, it shows
 <a href="start.html#review-what-the-creator-understood">what it understood</a> as diagrams.
 Correct the pictures, not just the prose.</p>
-<p><strong>Done when</strong> the swimlane shows who does each step (person, AI, or fixed
+<p class="done-note"><strong>Done when</strong> the swimlane shows who does each step (person, AI, or fixed
 system logic) and everyone in the room reads the terms the same way.</p>
-<p><strong>Gate: discovery confirmed.</strong> You tell the creator the outcome, journey, and
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: discovery confirmed.</strong> You tell the creator the outcome, journey, and
 decisions are right.</p>
-<h3 id="02-architect">02 Architect<a class="heading-link" href="#02-architect" aria-label="Link to 02 Architect"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<h3 id="02-architect"><span class="heading-num">02</span> Architect<a class="heading-link" href="#02-architect" aria-label="Link to 02 Architect"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p><strong>About 50 minutes · Azure Solution Architect, Cloud Architecture Diagram, Cost
 Estimation.</strong> Agree on the system boundary, its parts, and what it costs.</p>
 <p>The creator continues in the same session. It writes the architecture package
 under <code>docs/architecture/</code>: <code>solution.drawio</code>, <code>solution.md</code>,
 <code>specification.md</code>, <code>implementation-plan.md</code>, and <code>cost-estimate.md</code>. Review the
 diagrams first, then the specification&#39;s acceptance criteria.</p>
-<p><strong>Done when</strong> you can point to the system boundary, each external system has an
+<p class="done-note"><strong>Done when</strong> you can point to the system boundary, each external system has an
 owner, and every acceptance criterion is testable.</p>
-<p><strong>Gate: architecture approved.</strong> Someone other than the author reviews the
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: architecture approved.</strong> Someone other than the author reviews the
 package before you approve it. If nobody can, record the exception.</p>
-<h3 id="03-wireframe">03 Wireframe<a class="heading-link" href="#03-wireframe" aria-label="Link to 03 Wireframe"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<h3 id="03-wireframe"><span class="heading-num">03</span> Wireframe<a class="heading-link" href="#03-wireframe" aria-label="Link to 03 Wireframe"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p><strong>About 20 minutes · Wireframer.</strong> Try the journey before anyone builds it.</p>
 <p>When the package is complete, the creator asks whether you want a clickable
 prototype. Say yes. It writes a throwaway prototype under
 <code>docs/architecture/prototype/</code> with synthetic data.</p>
-<p><strong>Done when</strong> someone who will use the app has clicked through the main path and
+<p class="done-note"><strong>Done when</strong> someone who will use the app has clicked through the main path and
 one failure path, and you&#39;ve written down what surprised them.</p>
-<p><strong>Gate: journey walked.</strong> If the prototype surfaced a new requirement, update the
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: journey walked.</strong> If the prototype surfaced a new requirement, update the
 specification before you go on.</p>
-<h3 id="04-task-plan">04 Task plan<a class="heading-link" href="#04-task-plan" aria-label="Link to 04 Task plan"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<h3 id="04-task-plan"><span class="heading-num">04</span> Task plan<a class="heading-link" href="#04-task-plan" aria-label="Link to 04 Task plan"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p><strong>About 35 minutes · GitHub Spec Kit.</strong> Turn the agreed package into tasks an
 agent can follow.</p>
 <p>Open a new session. Install Spec Kit if you haven&#39;t
@@ -129,9 +129,9 @@ specify init --here --integration copilot
 and <code>/speckit-tasks</code> in that order, and review each result before the next.
 Point each one at
 <code>docs/architecture/</code> and tell it not to reopen settled decisions.</p>
-<p><strong>Done when</strong> every task links to an acceptance criterion, and the five
+<p class="done-note"><strong>Done when</strong> every task links to an acceptance criterion, and the five
 questions below are all yes.</p>
-<p><strong>Gate: ready to delegate.</strong> Answer these as a team:</p>
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: ready to delegate.</strong> Answer these as a team:</p>
 <ol>
 <li>Can we draw the system boundary?</li>
 <li>Can we walk the main and failure paths?</li>
@@ -144,7 +144,7 @@ that answers it.</p>
 <h2 id="delegate">Delegate<a class="heading-link" href="#delegate" aria-label="Link to Delegate"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Agents build from what you agreed. You watch for drift and keep the
 artefacts current.</p>
-<h3 id="05-build">05 Build<a class="heading-link" href="#05-build" aria-label="Link to 05 Build"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<h3 id="05-build"><span class="heading-num">05</span> Build<a class="heading-link" href="#05-build" aria-label="Link to 05 Build"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p><strong>About 75 minutes · Spec Kit implement.</strong> Let the agent build the first
 journey.</p>
 <pre><code class="language-text">/speckit-implement Implement only the reviewed tasks. Treat docs/architecture/
@@ -154,11 +154,11 @@ actual results. Do not commit, provision, or deploy.
 </code></pre>
 <p>Run <code>/speckit-converge</code> after each pass, and repeat implement and converge
 until it reports <code>Converged</code>.</p>
-<p><strong>Done when</strong> the first journey runs locally end to end and its acceptance
+<p class="done-note"><strong>Done when</strong> the first journey runs locally end to end and its acceptance
 tests pass.</p>
 <p>If the build needs a decision the package doesn&#39;t make, stop and agree it.
 Don&#39;t let the agent pick.</p>
-<h3 id="06-design">06 Design<a class="heading-link" href="#06-design" aria-label="Link to 06 Design"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<h3 id="06-design"><span class="heading-num">06</span> Design<a class="heading-link" href="#06-design" aria-label="Link to 06 Design"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p><strong>About 40 minutes · Impeccable.</strong> Make the interface usable, accessible, and
 on brand.</p>
 <p>Install the <a href="https://github.com/pbakaus/impeccable">Impeccable</a> skill if you
@@ -166,9 +166,9 @@ don&#39;t have it, then describe your product and its users so it designs for th
 <pre><code class="language-text">/impeccable critique the main journey, then polish it. Keep the behaviour and
 the acceptance tests unchanged.
 </code></pre>
-<p><strong>Done when</strong> the main journey passes a keyboard-only walk-through and the
+<p class="done-note"><strong>Done when</strong> the main journey passes a keyboard-only walk-through and the
 acceptance tests still pass.</p>
-<h3 id="07-deploy">07 Deploy<a class="heading-link" href="#07-deploy" aria-label="Link to 07 Deploy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<h3 id="07-deploy"><span class="heading-num">07</span> Deploy<a class="heading-link" href="#07-deploy" aria-label="Link to 07 Deploy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p><strong>About 35 minutes · Azure, Microsoft Foundry.</strong> Run the same app in your
 sandbox subscription.</p>
 <p>You need the <a href="https://learn.microsoft.com/cli/azure/install-azure-cli">Azure CLI</a>
@@ -183,13 +183,13 @@ estimated monthly cost. Wait for my approval before provisioning.
 <p>The app should use the same credential code locally and in Azure. See
 <a href="https://learn.microsoft.com/azure/foundry/foundry-models/how-to/configure-entra-id">keyless authentication with Microsoft Entra ID</a>
 for the Foundry role assignment.</p>
-<p><strong>Done when</strong> the deployed app passes the same acceptance tests as the local
+<p class="done-note"><strong>Done when</strong> the deployed app passes the same acceptance tests as the local
 one.</p>
-<p><strong>Gate: owner approves resources.</strong> The person who owns the subscription
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: owner approves resources.</strong> The person who owns the subscription
 approves the resource list and cost before the agent provisions.</p>
 <h2 id="verify">Verify<a class="heading-link" href="#verify" aria-label="Link to Verify"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h2>
 <p>Check what was built against what you agreed, before anyone relies on it.</p>
-<h3 id="08-review">08 Review<a class="heading-link" href="#08-review" aria-label="Link to 08 Review"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
+<h3 id="08-review"><span class="heading-num">08</span> Review<a class="heading-link" href="#08-review" aria-label="Link to 08 Review"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" /></svg></a></h3>
 <p><strong>About 25 minutes · <code>/review</code>, <code>/security-review</code>.</strong> Find what the build got
 wrong.</p>
 <p>Run both reviews on the implementation and save the findings to
@@ -212,9 +212,9 @@ dependency or configuration weaknesses. Rank findings by severity and confidence
 include file and line references, and recommend the smallest safe fix for each
 finding.
 </code></pre>
-<p><strong>Done when</strong> every finding is fixed or accepted, and the affected tests pass
+<p class="done-note"><strong>Done when</strong> every finding is fixed or accepted, and the affected tests pass
 again.</p>
-<p><strong>Gate: findings resolved.</strong> A named person fixes or accepts each finding.
+<p class="gate-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg><strong>Gate: findings resolved.</strong> A named person fixes or accepts each finding.
 Production acceptance and rollback stay with the team that operates the app.</p>
 <p>When reality doesn&#39;t match the specification, go back to the step that
 agreed it. That loop is the practice: brainstorm, agree, delegate, verify.
