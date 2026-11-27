@@ -1,11 +1,8 @@
-## Who needs to be involved
-
-You need a product owner, someone who understands the business problem, and
-technical specialists you can reach. Work in the customer's approved
-environment, and approve the architecture before starting implementation.
-
 ## Knowledge and people
 
+Work in the customer's approved environment, with these people named:
+
+- A product owner who can approve the architecture before implementation starts.
 - Someone who can explain the users, the current process, the outcome, the
   constraints, and the first journey.
 - Owners for the systems, data sources, and interfaces the solution will use.
@@ -20,10 +17,12 @@ Use an approved workstation with:
 
 - GitHub Copilot CLI, or VS Code with GitHub Copilot, and permission to enable
   plugins and skills.
-- Claude Opus 5.5, the model the [Start guide](start.html) requires for the
-  creator, the optional prototype, and implementation.
+- Access to the model the [Start guide](start.html#check-the-workspace)
+  requires for the creator, the optional prototype, and implementation.
 - Git, and the customer's review and delivery process.
-- The runtimes listed in the [Start guide](start.html).
+- Node.js 22 or later if you install the skills by hand, Python 3.11 or later
+  with uv for GitHub Spec Kit, and the Azure CLI and Azure Developer CLI for
+  deployment.
 - Network access to approved package sources, documentation, Git, and
   development systems.
 
